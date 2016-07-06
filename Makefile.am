@@ -4,9 +4,11 @@
 
 VERSION=0.1.0
 LANG1=oci
+LANG1b=oci@gascon
 LANG2=fra
 PREFIX1=$(LANG1)-$(LANG2)
 PREFIX2=$(LANG2)-$(LANG1)
+PREFIX2b=$(LANG2)-$(LANG1b)
 
 BASENAME=apertium-$(PREFIX1)
 
@@ -25,9 +27,13 @@ TARGETS_COMMON =		\
 	$(PREFIX2).prob		\
 	$(PREFIX2).rlx.bin	\
 	$(PREFIX2).autobil.bin	\
+	$(PREFIX2b).autobil.bin	\
 	$(PREFIX2).autolex.bin	\
+	$(PREFIX2b).autolex.bin	\
 	$(PREFIX2).autogen.bin	\
+	$(PREFIX2b).autogen.bin	\
 	$(PREFIX2).autopgen.bin	\
+	$(PREFIX2b).autopgen.bin	\
 	$(PREFIX2).t1x.bin	\
 	$(PREFIX2).t2x.bin	\
 	$(PREFIX2).t3x.bin
@@ -53,6 +59,9 @@ $(PREFIX1).automorf.bin: $(AP_SRC1)/$(LANG1).automorf.bin $(PREFIX1).autobil.bin
 
 
 $(PREFIX2).autogen.bin: $(AP_SRC1)/$(LANG1).autogen.bin
+	cp $< $@
+
+$(PREFIX2b).autogen.bin: $(AP_SRC1)/$(LANG1b).autogen.bin
 	cp $< $@
 
 # -------------------
@@ -94,11 +103,21 @@ $(PREFIX2).rlx.bin: $(AP_SRC2)/apertium-$(LANG2).$(LANG2).rlx
 ## Bilingual dictionaries
 ###############################################################################
 
+.deps/$(PREFIX2).dix: $(BASENAME).$(PREFIX1).dix .deps/.d
+	xsltproc --stringparam alt $(LANG1) alt.xsl $(BASENAME).$(PREFIX1).dix >$@
+
+.deps/$(PREFIX2b).dix: $(BASENAME).$(PREFIX1).dix .deps/.d
+	xsltproc --stringparam alt $(LANG1b) alt.xsl $(BASENAME).$(PREFIX1).dix >$@
+
 $(PREFIX1).autobil.bin: $(BASENAME).$(PREFIX1).dix
 	apertium-validate-dictionary $<
 	lt-comp lr $< $@
 
-$(PREFIX2).autobil.bin: $(BASENAME).$(PREFIX1).dix
+$(PREFIX2).autobil.bin: .deps/$(PREFIX2).dix .deps/.d
+	apertium-validate-dictionary $<
+	lt-comp rl $< $@
+
+$(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 	apertium-validate-dictionary $<
 	lt-comp rl $< $@
 
@@ -110,6 +129,9 @@ $(PREFIX1).autolex.bin: $(BASENAME).$(PREFIX1).lrx
 	lrx-comp $< $@
 
 $(PREFIX2).autolex.bin: $(BASENAME).$(PREFIX2).lrx
+	lrx-comp $< $@
+
+$(PREFIX2b).autolex.bin: $(BASENAME).$(PREFIX2b).lrx
 	lrx-comp $< $@
 
 ###############################################################################
@@ -149,6 +171,9 @@ $(PREFIX1).autopgen.bin: $(AP_SRC2)/$(LANG2).autopgen.bin
 	cp $< $@
 
 $(PREFIX2).autopgen.bin: $(AP_SRC1)/$(LANG1).autopgen.bin
+	cp $< $@
+
+$(PREFIX2b).autopgen.bin: $(AP_SRC1)/$(LANG1b).autopgen.bin
 	cp $< $@
 
 ###############################################################################
