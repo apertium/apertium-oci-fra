@@ -7,6 +7,7 @@ LANG1=oci
 LANG1b=oci@gascon
 LANG2=fra
 PREFIX1=$(LANG1)-$(LANG2)
+PREFIX1b=$(LANG1b)-$(LANG2)
 PREFIX2=$(LANG2)-$(LANG1)
 PREFIX2b=$(LANG2)-$(LANG1b)
 
@@ -14,10 +15,13 @@ BASENAME=apertium-$(PREFIX1)
 
 TARGETS_COMMON =		\
 	$(PREFIX1).automorf.bin	\
+	$(PREFIX1b).automorf.bin	\
 	$(PREFIX1).prob		\
 	$(PREFIX1).rlx.bin	\
 	$(PREFIX1).autobil.bin	\
+	$(PREFIX1b).autobil.bin	\
 	$(PREFIX1).autolex.bin	\
+	$(PREFIX1b).autolex.bin	\
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -51,6 +55,9 @@ TARGETS_COMMON =		\
 # -------------------
 
 $(PREFIX1).automorf.bin: $(AP_SRC1)/$(LANG1).automorf.bin $(PREFIX1).autobil.bin
+	lt-trim $^ $@
+
+$(PREFIX1b).automorf.bin: $(AP_SRC1)/$(LANG1b).automorf.bin $(PREFIX1b).autobil.bin
 	lt-trim $^ $@
 
 # -------------------
@@ -109,7 +116,11 @@ $(PREFIX2).rlx.bin: $(AP_SRC2)/apertium-$(LANG2).$(LANG2).rlx
 .deps/$(PREFIX2b).dix: $(BASENAME).$(PREFIX1).dix .deps/.d
 	xsltproc --stringparam alt $(LANG1b) alt.xsl $(BASENAME).$(PREFIX1).dix >$@
 
-$(PREFIX1).autobil.bin: $(BASENAME).$(PREFIX1).dix
+$(PREFIX1).autobil.bin: .deps/$(PREFIX2).dix .deps/.d
+	apertium-validate-dictionary $<
+	lt-comp lr $< $@
+
+$(PREFIX1b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 	apertium-validate-dictionary $<
 	lt-comp lr $< $@
 
@@ -126,6 +137,9 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ###############################################################################
 
 $(PREFIX1).autolex.bin: $(BASENAME).$(PREFIX1).lrx
+	lrx-comp $< $@
+
+$(PREFIX1b).autolex.bin: $(BASENAME).$(PREFIX1b).lrx
 	lrx-comp $< $@
 
 $(PREFIX2).autolex.bin: $(BASENAME).$(PREFIX2).lrx
