@@ -136,16 +136,24 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ## Lexical selection rules
 ###############################################################################
 
-$(PREFIX1).autolex.bin: $(BASENAME).$(PREFIX1).lrx
+.deps/%.metalrx: %.metalrx .deps/.d
+	python3 metalrx.py $< $@
+
+.deps/%.lrx: metalrx-to-lrx.xslt .deps/%.metalrx
+	xsltproc $^ > $@.tmp
+	@xmllint --format $@.tmp > $@
+	@rm $@.tmp
+
+$(PREFIX1).autolex.bin: .deps/$(BASENAME).$(PREFIX1).lrx
 	lrx-comp $< $@
 
-$(PREFIX1b).autolex.bin: $(BASENAME).$(PREFIX1b).lrx
+$(PREFIX1b).autolex.bin: .deps/$(BASENAME).$(PREFIX1b).lrx
 	lrx-comp $< $@
 
-$(PREFIX2).autolex.bin: $(BASENAME).$(PREFIX2).lrx
+$(PREFIX2).autolex.bin: .deps/$(BASENAME).$(PREFIX2).lrx
 	lrx-comp $< $@
 
-$(PREFIX2b).autolex.bin: $(BASENAME).$(PREFIX2b).lrx
+$(PREFIX2b).autolex.bin: .deps/$(BASENAME).$(PREFIX2b).lrx
 	lrx-comp $< $@
 
 ###############################################################################
@@ -195,9 +203,11 @@ $(PREFIX2b).autopgen.bin: $(AP_SRC1)/$(LANG1b).autopgen.bin
 ###############################################################################
 
 EXTRA_DIST=					\
-		$(BASENAME).$(PREFIX1).lrx	\
+		.deps/$(BASENAME).$(PREFIX1).lrx	\
+		.deps/$(BASENAME).$(PREFIX1b).lrx	\
 		$(BASENAME).$(PREFIX1).dix	\
-		$(BASENAME).$(PREFIX2).lrx	\
+		.deps/$(BASENAME).$(PREFIX2).lrx	\
+		.deps/$(BASENAME).$(PREFIX2b).lrx	\
 		$(BASENAME).$(PREFIX1).t1x	\
 		$(BASENAME).$(PREFIX1).t2x	\
 		$(BASENAME).$(PREFIX1).t3x	\
