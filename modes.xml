@@ -3,7 +3,7 @@
 
   <!-- fra → oci -->
 
-  <mode name="fra-oci" install="yes">
+  <mode name="fra-oci" install="yes" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
         <file name="fra-oci.automorf.bin"/>
@@ -42,197 +42,50 @@
     </pipeline>
   </mode>
 
-  <mode name="fra-oci-dgen" install="no">
+  <!-- oci@gascon → fra -->
+
+  <mode name="oci_gascon-fra" install="yes" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
+        <file name="oci-fra.automorf.bin"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
+        <file name="oci-fra.rlx.bin"/>
       </program>
       <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
+        <file name="oci-fra.prob"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
-        <file name="apertium-oci-fra.fra-oci.t1x"/>
-        <file name="fra-oci.t1x.bin"/>
-      </program>
-      <program name="apertium-interchunk">
-        <file name="apertium-oci-fra.fra-oci.t2x"/>
-        <file name="fra-oci.t2x.bin"/>
-      </program>
-      <program name="apertium-postchunk">
-        <file name="apertium-oci-fra.fra-oci.t3x"/>
-        <file name="fra-oci.t3x.bin"/>
-      </program>
-      <program name="lt-proc -d">
-        <file name="fra-oci.autogen.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-morph" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-disam" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-conv -a"/>
-      <program name="vislcg3 --trace --grammar">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-tagger" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-pretransfer" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-biltrans" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-lex" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
+        <file name="oci-fra.autobil.bin"/>
       </program>
       <program name="lrx-proc -m">
-        <file name="fra-oci.autolex.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-lextor" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m -t">
-        <file name="fra-oci.autolex.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-transfer" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
-      </program>
-      <program name="apertium-transfer -b -t">
-        <file name="apertium-oci-fra.fra-oci.t1x"/>
-        <file name="fra-oci.t1x.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="fra-oci-interchunk" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="fra-oci.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fra-oci.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
+        <file name="oci-fra.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
-        <file name="apertium-oci-fra.fra-oci.t1x"/>
-        <file name="fra-oci.t1x.bin"/>
+        <file name="apertium-oci-fra.oci-fra.t1x"/>
+        <file name="oci-fra.t1x.bin"/>
       </program>
       <program name="apertium-interchunk -t">
-        <file name="apertium-oci-fra.fra-oci.t2x"/>
-        <file name="fra-oci.t2x.bin"/>
+        <file name="apertium-oci-fra.oci-fra.t2x"/>
+        <file name="oci-fra.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-oci-fra.oci-fra.t3x"/>
+        <file name="oci-fra.t3x.bin"/>
+      </program>
+      <program name="lt-proc $1">
+        <file name="oci-fra.autogen.bin"/>
+      </program>
+      <program name="lt-proc -p">
+        <file name="oci-fra.autopgen.bin"/>
       </program>
     </pipeline>
   </mode>
 
-  <mode name="fra-oci-postchunk" install="no">
+  <!-- fra → oci@gascon -->
+
+  <mode name="fra-oci_gascon" install="yes" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
         <file name="fra-oci.automorf.bin"/>
@@ -245,7 +98,10 @@
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
-        <file name="fra-oci.autobil.bin"/>
+        <file name="fra-oci@gascon.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fra-oci@gascon.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-oci-fra.fra-oci.t1x"/>
@@ -258,13 +114,19 @@
       <program name="apertium-postchunk">
         <file name="apertium-oci-fra.fra-oci.t3x"/>
         <file name="fra-oci.t3x.bin"/>
+      </program>
+      <program name="lt-proc $1">
+        <file name="fra-oci@gascon.autogen.bin"/>
+      </program>
+      <program name="lt-proc -p">
+        <file name="fra-oci@gascon.autopgen.bin"/>
       </program>
     </pipeline>
   </mode>
 
   <!-- oci → fra -->
 
-  <mode name="oci-fra" install="yes">
+  <mode name="oci-fra" install="yes" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
         <file name="oci-fra.automorf.bin"/>
@@ -303,232 +165,5 @@
     </pipeline>
   </mode>
 
-  <mode name="oci-fra-dgen" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
-        <file name="apertium-oci-fra.oci-fra.t1x"/>
-        <file name="oci-fra.t1x.bin"/>
-      </program>
-      <program name="apertium-interchunk">
-        <file name="apertium-oci-fra.oci-fra.t2x"/>
-        <file name="oci-fra.t2x.bin"/>
-      </program>
-      <program name="apertium-postchunk">
-        <file name="apertium-oci-fra.oci-fra.t3x"/>
-        <file name="oci-fra.t3x.bin"/>
-      </program>
-      <program name="lt-proc -d">
-        <file name="oci-fra.autogen.bin"/>
-      </program>
-    </pipeline>
-  </mode>
+  </modes>
 
-  <mode name="oci-fra-morph" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-disam" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-conv -a"/>
-      <program name="vislcg3 --trace --grammar">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-tagger" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-pretransfer" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-biltrans" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-lex" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m -t">
-        <file name="oci-fra.autolex.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-lextor" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m -t">
-        <file name="oci-fra.autolex.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-transfer" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m">
-        <file name="oci-fra.autolex.bin"/>
-      </program>
-      <program name="apertium-transfer -b -t">
-        <file name="apertium-oci-fra.oci-fra.t1x"/>
-        <file name="oci-fra.t1x.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-interchunk" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m">
-        <file name="oci-fra.autolex.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
-        <file name="apertium-oci-fra.oci-fra.t1x"/>
-        <file name="oci-fra.t1x.bin"/>
-      </program>
-      <program name="apertium-interchunk -t">
-        <file name="apertium-oci-fra.oci-fra.t2x"/>
-        <file name="oci-fra.t2x.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-
-  <mode name="oci-fra-postchunk" install="no">
-    <pipeline>
-      <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
-      </program>
-      <program name="cg-proc -w">
-        <file name="oci-fra.rlx.bin"/>
-      </program>
-      <program name="apertium-tagger -g $2">
-        <file name="oci-fra.prob"/>
-      </program>
-      <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="oci-fra.autobil.bin"/>
-      </program>
-      <program name="lrx-proc -m">
-        <file name="oci-fra.autolex.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
-        <file name="apertium-oci-fra.oci-fra.t1x"/>
-        <file name="oci-fra.t1x.bin"/>
-      </program>
-      <program name="apertium-interchunk">
-        <file name="apertium-oci-fra.oci-fra.t2x"/>
-        <file name="oci-fra.t2x.bin"/>
-      </program>
-      <program name="apertium-postchunk">
-        <file name="apertium-oci-fra.oci-fra.t3x"/>
-        <file name="oci-fra.t3x.bin"/>
-      </program>
-    </pipeline>
-  </mode>
-</modes>
