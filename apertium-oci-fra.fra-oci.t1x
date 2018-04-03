@@ -6,6 +6,10 @@
       <cat-item tags="np.ant"/> <!--check-->
     </def-cat>
 
+    <def-cat n="adj">
+      <cat-item tags="adj.*"/>
+    </def-cat>
+
     <def-cat n="adv">
       <cat-item tags="adv.*"/>
     </def-cat>
@@ -16,14 +20,10 @@
     </def-cat>
 
 
-    <def-cat n="adj">
-      <cat-item tags="adj.*"/>
-    </def-cat>
-    
     <def-cat n="ger">
       <cat-item tags="vblex.ger"/>
     </def-cat>
-    
+
     <def-cat n="inf">
       <cat-item tags="vblex.inf"/>
     </def-cat>
@@ -34,8 +34,10 @@
     </def-cat>
 
     <def-cat n="num">
+      <cat-item tags="num"/>
       <cat-item tags="num.*"/>
     </def-cat>
+
     <def-cat n="predet">
       <cat-item tags="predet.*"/>
     </def-cat>
@@ -53,6 +55,10 @@
       <cat-item tags="vbser.*"/>
       <cat-item tags="vbhaver.*"/>
       <cat-item tags="vbmod.*"/>
+    </def-cat>
+
+    <def-cat n="rel">
+      <cat-item tags="rel.*"/>
     </def-cat>
 
     <def-cat n="sent">
@@ -115,7 +121,7 @@
       <attr-item tags="fts"/>
       <attr-item tags="imp"/>
     </def-attr>
-    
+
   </section-def-attrs>
 
   <section-def-vars>
@@ -145,13 +151,13 @@
             <lit v=""/>
           </let>
     </def-macro>
-    
+
     <def-macro n="f_concord1" npar="1">
-      
+
       <choose><!--To determine value of variables of gender and
                   number and propagate to other rules.  Variables are
                   not used again in this rule -->
-        <when> 
+        <when>
           <test>
             <equal>
               <clip pos="1" side="tl" part="gen"/>
@@ -169,9 +175,9 @@
           </test>
           <let><var n="genero"/><lit-tag v="f"/></let>
         </when>
-      </choose> 
+      </choose>
       <choose>
-        <when> 
+        <when>
           <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
@@ -180,7 +186,7 @@
           </test>
           <let><var n="numero"/><lit-tag v="sg"/></let>
         </when>
-        <when> 
+        <when>
           <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
@@ -201,7 +207,7 @@
               <lit-tag v="GD"/>
             </equal>
           </test>
-          <choose> 
+          <choose>
             <when>
               <test>
                 <equal>
@@ -219,13 +225,13 @@
       </choose>
       <choose>
         <when>
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
               <lit-tag v="ND"/>
             </equal>
           </test>
-          <choose> 
+          <choose>
             <when>
               <test>
                 <equal>
@@ -233,16 +239,16 @@
                   <lit-tag v="pl"/>
                 </equal>
               </test>
-              <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></let>                   
+              <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></let>
             </when>
             <otherwise>
               <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></let>
             </otherwise>
           </choose>
         </when>
-      </choose>    
+      </choose>
     </def-macro>
-    
+
         <def-macro n="f_concord2" npar="2">
       <choose>
         <when>
@@ -280,11 +286,11 @@
           </test>
           <let><var n="concPrimero"/><lit v="true"/></let><!-- there is gender and number agreement-->
         </when>
-        <otherwise> 
+        <otherwise>
           <let><var n="concPrimero"/><lit v="false"/></let><!-- there isn't gender and number agreement-->
         </otherwise>
       </choose>
-      
+
       <choose>
         <when>
           <test> <!-- Propagate the main parameter gender if it has been modified during the translation  -->
@@ -338,15 +344,15 @@
                     <lit v="true"/>
                   </equal>
                 </and>
-              </test>                                
+              </test>
               <let>
                 <clip pos="2" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
+                <clip pos="1" side="tl" part="gen"/>
               </let>
             </when>
           </choose>
         </when>
-      </choose>  
+      </choose>
       <choose>
         <when>
           <test> <!-- Propagate the main parameter number if it has been modified during the translation  -->
@@ -403,13 +409,13 @@
               </test>
               <let>
                 <clip pos="2" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
         </when>
       </choose>
-      
+
       <choose>
         <when>
           <test> <!-- Which is the rule general gender? -->
@@ -476,7 +482,7 @@
           </test>
           <let>
             <var n="genero"/>
-            <clip pos="1" side="sl" part="gen"/> 
+            <clip pos="1" side="sl" part="gen"/>
           </let>
         </when>
         <when>
@@ -496,7 +502,7 @@
           </test>
           <let>
             <var n="genero"/>
-            <clip pos="2" side="sl" part="gen"/> 
+            <clip pos="2" side="sl" part="gen"/>
           </let>
         </when>
         <otherwise>
@@ -511,7 +517,7 @@
 
       <choose>
         <when><!-- Which is the rule general number? -->
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
               <lit-tag v="sg"/>
@@ -575,7 +581,7 @@
           </test>
           <let>
             <var n="numero"/>
-            <clip pos="1" side="sl" part="nbr"/> 
+            <clip pos="1" side="sl" part="nbr"/>
           </let>
         </when>
         <when>
@@ -595,7 +601,7 @@
           </test>
           <let>
             <var n="numero"/>
-            <clip pos="2" side="sl" part="nbr"/> 
+            <clip pos="2" side="sl" part="nbr"/>
           </let>
         </when>
         <when>
@@ -685,11 +691,11 @@
         </when>
       </choose>
     </def-macro>
-    
-    <def-macro n="f_concord3" npar="3"> 
+
+    <def-macro n="f_concord3" npar="3">
       <choose><!-- Look whether in source language there is concordance between first and second element -->
         <when>
-          <test> 
+          <test>
             <and>
               <or>
                 <equal>
@@ -723,13 +729,13 @@
           </test>
           <let><var n="concPrimero"/><lit v="true"/></let>
         </when>
-        <otherwise> 
+        <otherwise>
           <let><var n="concPrimero"/><lit v="false"/></let>
         </otherwise>
       </choose>
       <choose><!-- Look whether in source language there is concordance between second and third element -->
         <when>
-          <test> 
+          <test>
             <and>
               <or>
                 <equal>
@@ -762,8 +768,8 @@
             </and>
           </test>
           <let><var n="concSegundo"/><lit v="true"/></let>
-        </when>         
-        <otherwise> 
+        </when>
+        <otherwise>
           <let><var n="concSegundo"/><lit v="false"/></let>
         </otherwise>
       </choose>
@@ -771,7 +777,7 @@
 
       <choose><!-- Propagate the main parameter gender if it has been modified during the translation -->
         <when>
-          <test> 
+          <test>
             <and>
               <not>
                 <equal>
@@ -825,13 +831,13 @@
               </test>
               <let>
                 <clip pos="2" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
+                <clip pos="1" side="tl" part="gen"/>
               </let>
-            </when> 
-          </choose>   
+            </when>
+          </choose>
           <choose>
             <when>
-              <test> 
+              <test>
                 <and>
                   <not>
                     <equal>
@@ -861,16 +867,16 @@
               </test>
               <let>
                 <clip pos="3" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
-              </let> 
-            </when> 
+                <clip pos="1" side="tl" part="gen"/>
+              </let>
+            </when>
           </choose>
         </when>
       </choose>
 
       <choose><!-- Propagate the main parameter number if it has been modified during the translation -->
         <when>
-          <test> 
+          <test>
             <and>
               <not>
                 <equal>
@@ -924,7 +930,7 @@
               </test>
               <let>
                 <clip pos="2" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
@@ -960,7 +966,7 @@
               </test>
               <let>
                 <clip pos="3" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
@@ -971,7 +977,7 @@
 
       <choose> <!-- Determine the rule general gender. Priority order: main, second and third element -->
         <when>
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="gen"/>
               <lit-tag v="m"/>
@@ -1041,7 +1047,7 @@
             <var n="genero"/>
             <lit-tag v="f"/>
           </let>
-        </when> 
+        </when>
         <when>
           <test>
             <and>
@@ -1059,7 +1065,7 @@
           </test>
           <let>
             <var n="genero"/>
-            <clip pos="1" side="sl" part="gen"/> 
+            <clip pos="1" side="sl" part="gen"/>
           </let>
         </when>
         <when>
@@ -1079,7 +1085,7 @@
           </test>
           <let>
             <var n="genero"/>
-            <clip pos="2" side="sl" part="gen"/> 
+            <clip pos="2" side="sl" part="gen"/>
           </let>
         </when>
         <when>
@@ -1099,9 +1105,9 @@
           </test>
           <let>
             <var n="genero"/>
-            <clip pos="3" side="sl" part="gen"/> 
+            <clip pos="3" side="sl" part="gen"/>
           </let>
-        </when>               
+        </when>
         <otherwise>
           <let>
             <var n="genero"/>
@@ -1109,10 +1115,10 @@
           </let>
         </otherwise>
       </choose>
-      
+
       <choose><!-- Determine the rule general number. Priority order: main, second and third element -->
         <when>
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
               <lit-tag v="sg"/>
@@ -1182,7 +1188,7 @@
             <var n="numero"/>
             <lit-tag v="pl"/>
           </let>
-        </when>     
+        </when>
         <when>
           <test>
             <and>
@@ -1200,7 +1206,7 @@
           </test>
           <let>
             <var n="numero"/>
-            <clip pos="1" side="sl" part="nbr"/> 
+            <clip pos="1" side="sl" part="nbr"/>
           </let>
         </when>
         <when>
@@ -1220,7 +1226,7 @@
           </test>
           <let>
             <var n="numero"/>
-            <clip pos="2" side="sl" part="nbr"/> 
+            <clip pos="2" side="sl" part="nbr"/>
           </let>
         </when>
         <when>
@@ -1240,7 +1246,7 @@
           </test>
           <let>
             <var n="numero"/>
-            <clip pos="3" side="sl" part="nbr"/> 
+            <clip pos="3" side="sl" part="nbr"/>
           </let>
         </when>
         <when>
@@ -1356,13 +1362,13 @@
             <var n="numero"/>
           </let>
         </when>
-      </choose>      
+      </choose>
     </def-macro>
-    
+
     <def-macro n="f_concord4" npar="4">
       <choose>
         <when>
-          <test> 
+          <test>
             <and>
               <or>
                 <equal>
@@ -1396,14 +1402,14 @@
           </test>
           <let><var n="concPrimero"/><lit v="true"/></let>
         </when>
-        <otherwise> 
+        <otherwise>
           <let><var n="concPrimero"/><lit v="false"/></let>
         </otherwise>
       </choose>
-      
+
       <choose>
         <when>
-          <test> 
+          <test>
             <and>
               <or>
                 <equal>
@@ -1436,7 +1442,7 @@
             </and>
           </test>
           <let><var n="concSegundo"/><lit v="true"/></let>
-        </when>         
+        </when>
         <otherwise>
           <let><var n="concSegundo"/><lit v="false"/></let>
         </otherwise>
@@ -1444,7 +1450,7 @@
 
       <choose>
         <when>
-          <test> 
+          <test>
             <and>
               <or>
                 <equal>
@@ -1477,16 +1483,16 @@
             </and>
           </test>
           <let><var n="concTercero"/><lit v="true"/></let>
-        </when>         
-        <otherwise> 
+        </when>
+        <otherwise>
           <let><var n="concTercero"/><lit v="false"/></let>
         </otherwise>
       </choose>
-      
+
 
       <choose>
         <when>
-          <test> 
+          <test>
             <and>
               <not>
                 <equal>
@@ -1540,9 +1546,9 @@
               </test>
               <let>
                 <clip pos="2" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
+                <clip pos="1" side="tl" part="gen"/>
               </let>
-            </when> 
+            </when>
           </choose>
           <choose>
             <when>
@@ -1576,13 +1582,13 @@
               </test>
               <let>
                 <clip pos="3" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
+                <clip pos="1" side="tl" part="gen"/>
               </let>
-            </when> 
-          </choose>  
+            </when>
+          </choose>
           <choose>
             <when>
-              <test>  
+              <test>
                 <and>
                   <not>
                     <equal>
@@ -1612,16 +1618,16 @@
               </test>
               <let>
                 <clip pos="4" side="tl" part="gen"/>
-                <clip pos="1" side="tl" part="gen"/> 
-              </let> 
-            </when> 
+                <clip pos="1" side="tl" part="gen"/>
+              </let>
+            </when>
           </choose>
         </when>
       </choose>
 
       <choose>
         <when>
-          <test> 
+          <test>
             <and>
               <not>
                 <equal>
@@ -1675,7 +1681,7 @@
               </test>
               <let>
                 <clip pos="2" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
@@ -1711,7 +1717,7 @@
               </test>
               <let>
                 <clip pos="3" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
@@ -1747,16 +1753,16 @@
               </test>
               <let>
                 <clip pos="4" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="nbr"/> 
+                <clip pos="1" side="tl" part="nbr"/>
               </let>
             </when>
           </choose>
         </when>
       </choose>
-      
+
       <choose>
         <when>
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="gen"/>
               <lit-tag v="m"/>
@@ -1826,7 +1832,7 @@
             <var n="genero"/>
             <lit-tag v="f"/>
           </let>
-        </when> 
+        </when>
         <when>
           <test>
             <equal>
@@ -1859,10 +1865,10 @@
         </otherwise>
 
       </choose>
-      
+
       <choose>
         <when>
-          <test> 
+          <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
               <lit-tag v="sg"/>
@@ -1956,7 +1962,7 @@
             <var n="numero"/>
             <lit-tag v="pl"/>
           </let>
-        </when> 
+        </when>
         <otherwise>
           <let>
             <var n="numero"/>
@@ -1965,7 +1971,7 @@
         </otherwise>
       </choose>
 
-      <choose> 
+      <choose>
         <when>
           <test>
             <equal>
@@ -2019,7 +2025,7 @@
             <clip pos="4" side="tl" part="gen"/>
             <var n="genero"/>
           </let>
-        </when> 
+        </when>
       </choose>
       <choose>
         <when>
@@ -2076,13 +2082,13 @@
             <var n="numero"/>
           </let>
         </when>
-      </choose>      
-    </def-macro>      
-    
+      </choose>
+    </def-macro>
+
   </section-def-macros>
 
   <section-rules>
-   
+
     <rule comment="REGLA: NOM">
       <pattern>
         <pattern-item n="nom"/>
@@ -2090,9 +2096,9 @@
       <action>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
-        </call-macro>     
-        <out>     
-          <chunk name="n">     
+        </call-macro>
+        <out>
+          <chunk name="n">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
@@ -2101,11 +2107,11 @@
             <lu>
               <clip pos="1" side="tl" part="whole"/>
             </lu>
-          </chunk>     
+          </chunk>
         </out>
       </action>
     </rule>
- 
+
     <rule comment="REGLA: ADJEC">
       <pattern>
         <pattern-item n="adjec"/>
@@ -2113,9 +2119,9 @@
       <action>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
-        </call-macro>     
-        <out>     
-          <chunk name="j">     
+        </call-macro>
+        <out>
+          <chunk name="j">
             <tags>
               <tag><lit-tag v="SA"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
@@ -2124,7 +2130,7 @@
             <lu>
               <clip pos="1" side="tl" part="whole"/>
             </lu>
-          </chunk>     
+          </chunk>
         </out>
       </action>
     </rule>
@@ -2138,9 +2144,9 @@
         <call-macro n="f_concord2">
           <with-param pos="2"/>
           <with-param pos="1"/>
-        </call-macro>     
-        <out>     
-          <chunk name="d_n">     
+        </call-macro>
+        <out>
+          <chunk name="d_n">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -2149,19 +2155,19 @@
             <lu>
               <clip pos="1" side="tl" part="whole"/>
             </lu>
-            <b pos="1"/> 
+            <b pos="1"/>
             <lu>
               <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="a_nom"/>
               <clip pos="2" side="tl" part="gen"/>
               <clip pos="2" side="tl" part="nbr"/>
-              <clip pos="2" side="tl" part="lemq"/> 
-            </lu>  
-          </chunk>     
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
         </out>
       </action>
     </rule>
-    
+
     <rule comment="REGLA: NOM ADJECTIU">
       <pattern>
         <pattern-item n="nom"/>
@@ -2171,9 +2177,9 @@
         <call-macro n="f_concord2">
           <with-param pos="1"/>
           <with-param pos="2"/>
-        </call-macro> 
-        <out>   
-          <chunk name="n_j">     
+        </call-macro>
+        <out>
+          <chunk name="n_j">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
@@ -2184,7 +2190,7 @@
                 <clip pos="1" side="tl" part="a_nom"/>
                 <clip pos="1" side="tl" part="gen"/>
                 <clip pos="1" side="tl" part="nbr"/>
-                <clip pos="1" side="tl" part="lemq"/> 
+                <clip pos="1" side="tl" part="lemq"/>
               </lu>
               <b pos="1"/>
               <lu>
@@ -2193,12 +2199,12 @@
                 <clip pos="2" side="tl" part="gen"/>
                 <clip pos="2" side="tl" part="nbr"/>
                 <clip pos="2" side="tl" part="lemq"/>
-              </lu>            
+              </lu>
             </chunk>
          </out>
       </action>
     </rule>
-     
+
     <rule comment="REGLA: DET">
        <pattern>
          <pattern-item n="det"/>
@@ -2206,7 +2212,7 @@
        <action>
          <call-macro n="f_concord1">
            <with-param pos="1"/>
-         </call-macro>     
+         </call-macro>
          <out>
            <chunk name="d">
              <tags>
@@ -2221,7 +2227,7 @@
          </out>
        </action>
     </rule>
-    
+
     <rule comment="REGLA: PRN">
        <pattern>
          <pattern-item n="prn"/>
@@ -2229,7 +2235,7 @@
        <action>
          <call-macro n="f_concord1">
            <with-param pos="1"/>
-         </call-macro>     
+         </call-macro>
          <out>
            <chunk name="p">
              <tags>
@@ -2244,8 +2250,8 @@
          </out>
        </action>
     </rule>
-    
- 
+
+
     <rule comment="REGLA: GER PRNENC">
        <pattern>
          <pattern-item n="ger"/>
@@ -2273,8 +2279,8 @@
          </out>
        </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: INF PRNENC">
        <pattern>
          <pattern-item n="inf"/>
@@ -2303,6 +2309,38 @@
        </action>
     </rule>
 
+    <rule comment="REGLA: NUMERAL">
+      <pattern>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: RELATIF">
+      <pattern>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: SENT">
       <pattern>
         <pattern-item n="sent"/>
@@ -2320,9 +2358,9 @@
         </out>
       </action>
     </rule>
-     
+
   </section-rules>
-  
+
 
 </transfer>
 
