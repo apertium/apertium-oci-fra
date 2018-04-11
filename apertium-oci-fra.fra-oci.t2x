@@ -5,6 +5,18 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SA">
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+    </def-cat>
+    <def-cat n="SV">
+      <cat-item tags="SV"/>
+      <cat-item tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser">
+      <cat-item tags="SV.vbser"/>
+      <cat-item tags="SV.vbser.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -30,6 +42,23 @@
     <rule comment="REGLA: SN">
       <pattern>
         <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SN SV_vbser SA">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SA"/>
       </pattern>
       <action>
         <out>
