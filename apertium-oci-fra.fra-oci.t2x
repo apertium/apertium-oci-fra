@@ -9,6 +9,10 @@
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
+    <def-cat n="SAdv">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+    </def-cat>
     <def-cat n="SV">
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
@@ -75,7 +79,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut">
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: la maison est grande > l-ostal es grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
@@ -125,6 +129,65 @@
         </out>
       </action>
     </rule>
+
+    <rule comment="REGLA: SN SV_vbser SAdv SA: concordance en genre entre suject et attibut: la maison est très grande > l-ostal es força grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
   </section-rules>
 </interchunk>
 

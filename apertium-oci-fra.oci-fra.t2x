@@ -5,12 +5,49 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SA">
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+    </def-cat>
+    <def-cat n="SAdv">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="SV">
+      <cat-item tags="SV"/>
+      <cat-item tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser">
+      <cat-item tags="SV.vbser"/>
+      <cat-item tags="SV.vbser.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
-    <def-attr n="a_nbr">
-      <attr-item tags="sg"/>
+    <def-attr n="chunk">
+      <attr-item tags="SN"/>
+      <attr-item tags="SV"/>
     </def-attr>
+
+    <def-attr n="gen">
+      <attr-item tags="m"/>
+      <attr-item tags="f"/>
+      <attr-item tags="mf"/>
+    </def-attr>
+
+    <def-attr n="sl_gen">
+      <attr-item tags="sl_m"/>
+      <attr-item tags="sl_f"/>
+      <attr-item tags="sl_mf"/>
+    </def-attr>
+
+    <def-attr n="nbr">
+      <attr-item tags="sg"/>
+      <attr-item tags="pl"/>
+      <attr-item tags="sp"/>
+      <attr-item tags="ND"/>
+    </def-attr>
+
   </section-def-attrs>
 
   <section-def-vars>
@@ -41,6 +78,116 @@
         </out>
       </action>
     </rule>
+
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: l'ostal es grand > la maison est grande">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: l'ostal es força grand > la maison est très grande">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
   </section-rules>
 </interchunk>
 
@@ -52,4 +199,5 @@ Resources:
     http://wiki.apertium.org/wiki/A_long_introduction_to_transfer_rules
     http://wiki.apertium.org/wiki/Transfer#Adding_structural_transfer_.28grammar.29_rules
 -->
+
 
