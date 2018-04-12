@@ -13,6 +13,10 @@
     <def-cat n="adv">
       <cat-item tags="adv"/>
     </def-cat>
+    <def-cat n="adv_preadv">
+      <cat-item tags="adv"/>
+      <cat-item tags="preadv"/>
+    </def-cat>
     <def-cat n="ne">
       <cat-item lemma="ne" tags="adv"/>
     </def-cat>
@@ -155,8 +159,6 @@
     <def-var n="numero"/>
     <def-var n="genero_sl"/>
     <def-var n="numero_sl"/>
-    <def-var n="genero_tl"/>
-    <def-var n="numero_tl"/>
     <def-var n="concDet"/>
     <def-var n="concAdj"/>
     <def-var n="concPrimero"/>
@@ -2177,6 +2179,36 @@
 
     <!-- REGLES CONCORDANÇA -->
 
+    <rule comment="REGLA: DET">
+       <pattern>
+         <pattern-item n="det"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord1">
+           <with-param pos="1"/>
+         </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="d">
+             <tags>
+               <tag><lit-tag v="SDet"/></tag>
+               <tag><clip pos="1" side="tl" part="gen"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+            </tags>
+           <lu>
+             <clip pos="1" side="tl" part="lemh"/>
+             <clip pos="1" side="tl" part="tags"/>
+             <clip pos="1" side="tl" part="lemq"/>
+           </lu>
+         </chunk>
+         </out>
+       </action>
+    </rule>
+
     <rule comment="REGLA: NOM">
       <pattern>
         <pattern-item n="nom"/>
@@ -2239,7 +2271,94 @@
       </action>
     </rule>
 
-     <rule comment="REGLA: DETERMINANT NOM">
+    <rule comment="REGLA: ADV">
+      <pattern>
+        <pattern-item n="adv_preadv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PRN">
+       <pattern>
+         <pattern-item n="prn"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord1">
+           <with-param pos="1"/>
+         </call-macro>
+         <out>
+           <chunk name="p">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+             </tags>
+           <lu>
+             <clip pos="1" side="tl" part="lemh"/>
+             <clip pos="1" side="tl" part="tags"/>
+             <clip pos="1" side="tl" part="lemq"/>
+           </lu>
+         </chunk>
+         </out>
+       </action>
+    </rule>
+
+
+    <rule comment="REGLA: VBSER">
+       <pattern>
+         <pattern-item n="vbser"/>
+       </pattern>
+       <action>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: VBNOSER">
+       <pattern>
+         <pattern-item n="vbnoser"/>
+       </pattern>
+       <action>
+         <out>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+
+    <rule comment="REGLA: DETERMINANT NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -2318,103 +2437,6 @@
          </out>
       </action>
     </rule>
-
-    <rule comment="REGLA: DET">
-       <pattern>
-         <pattern-item n="det"/>
-       </pattern>
-       <action>
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-         <out>
-           <chunk name="d">
-             <tags>
-               <tag><lit-tag v="SDet"/></tag>
-               <tag><clip pos="1" side="tl" part="gen"/></tag>
-               <tag><clip pos="1" side="tl" part="nbr"/></tag>
-               <tag><var n="genero_sl"/></tag>
-               <tag><var n="numero_sl"/></tag>
-            </tags>
-           <lu>
-             <clip pos="1" side="tl" part="lemh"/>
-             <clip pos="1" side="tl" part="tags"/>
-             <clip pos="1" side="tl" part="lemq"/>
-           </lu>
-         </chunk>
-         </out>
-       </action>
-    </rule>
-
-    <rule comment="REGLA: PRN">
-       <pattern>
-         <pattern-item n="prn"/>
-       </pattern>
-       <action>
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-         <out>
-           <chunk name="p">
-             <tags>
-               <tag><lit-tag v="SPron"/></tag>
-             </tags>
-           <lu>
-             <clip pos="1" side="tl" part="lemh"/>
-             <clip pos="1" side="tl" part="tags"/>
-             <clip pos="1" side="tl" part="lemq"/>
-           </lu>
-         </chunk>
-         </out>
-       </action>
-    </rule>
-
-
-    <rule comment="REGLA: VBSER">
-       <pattern>
-         <pattern-item n="vbser"/>
-       </pattern>
-       <action>
-         <out>
-           <chunk name="vbser">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><lit-tag v="vbser"/></tag>
-             </tags>
-             <lu>
-               <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="tags"/>
-               <clip pos="1" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-         </out>
-       </action>
-    </rule>
-
-    <rule comment="REGLA: VBNOSER">
-       <pattern>
-         <pattern-item n="vbnoser"/>
-       </pattern>
-       <action>
-         <out>
-           <chunk name="verb">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-             </tags>
-             <lu>
-               <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="tags"/>
-               <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-           </chunk>
-         </out>
-       </action>
-    </rule>
-
 
     <!-- FI REGLES CONCORDANÇA -->
 
@@ -2536,7 +2558,7 @@
           <with-param pos="1"/>
         </call-macro>
         <out>
-         <chunk name="d">
+         <chunk name="n">
            <tags>
              <tag><lit-tag v="Num"/></tag>
            </tags>
