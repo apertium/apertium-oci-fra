@@ -127,10 +127,22 @@
 
 <rules>
 
+<!-- **************** PRON **************** -->
+
+  <!-- le >> lo, o -->
+  <rule weight="0.8">
+    <match lemma="le" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="le" tags="prn.pro.*"><select lemma="o" tags="prn.pro.*"/></match>
+    <match lemma="dire" tags="vblex.*"/>
+  </rule>
+
+
 <!-- **************** N **************** -->
 
   <!-- fille >> dròlle, filh -->
-  <rule weight="0.8" v="val">
+  <rule weight="0.8">
     <match lemma="fille" tags="n.*"><select lemma="dròlle" tags="n.*"/></match>
   </rule>
   <rule weight="1.2">
