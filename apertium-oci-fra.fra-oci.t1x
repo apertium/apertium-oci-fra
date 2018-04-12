@@ -25,14 +25,6 @@
       <cat-item tags="prn.enc.*"/>
     </def-cat>
 
-    <def-cat n="ger">
-      <cat-item tags="vblex.ger"/>
-    </def-cat>
-
-    <def-cat n="inf">
-      <cat-item tags="vblex.inf"/>
-    </def-cat>
-
     <def-cat n="adjec">
       <cat-item tags="adj.*"/>
       <cat-item tags="vblex.pp.*"/>
@@ -75,6 +67,27 @@
       <cat-item tags="vblex.*"/>
       <cat-item tags="vbhaver.*"/>
       <cat-item tags="vbmod.*"/>
+    </def-cat>
+
+    <def-cat n="inf">
+      <cat-item tags="vblex.inf"/>
+      <cat-item tags="vbser.inf"/>
+      <cat-item tags="vbhaver.inf"/>
+      <cat-item tags="vbmod.inf"/>
+    </def-cat>
+
+    <def-cat n="ger">
+      <cat-item tags="vblex.ger"/>
+      <cat-item tags="vbser.ger"/>
+      <cat-item tags="vbhaver.ger"/>
+      <cat-item tags="vbmod.ger"/>
+    </def-cat>
+
+    <def-cat n="imp">
+      <cat-item tags="vblex.imp.*"/>
+      <cat-item tags="vbser.imp.*"/>
+      <cat-item tags="vbhaver.imp.*"/>
+      <cat-item tags="vbmod.imp.*"/>
     </def-cat>
 
     <def-cat n="rel">
@@ -2315,6 +2328,48 @@
     </rule>
 
 
+    <rule comment="REGLA: NUMERAL">
+      <pattern>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+         <chunk name="n">
+           <tags>
+             <tag><lit-tag v="Num"/></tag>
+           </tags>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+         </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: RELATIF">
+      <pattern>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+         <chunk name="d">
+           <tags>
+             <tag><lit-tag v="Rel"/></tag>
+           </tags>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+         </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: VBSER">
        <pattern>
          <pattern-item n="vbser"/>
@@ -2396,7 +2451,413 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADJECTIU">
+    <rule comment="REGLA: DET NOM ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="d_n_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET ADJ NOM">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="adjec"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="d_a_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET NUM NOM">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="d_num_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET NOM ADJ ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjec"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord4">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="d_n_a_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" side="tl" part="lemh"/>
+                <clip pos="4" side="tl" part="tags"/>
+                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET ADJ NOM ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="adjec"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord4">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="d_a_n_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" side="tl" part="lemh"/>
+                <clip pos="4" side="tl" part="tags"/>
+                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET NUM NOM ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord4">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="d_num_n_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" side="tl" part="lemh"/>
+                <clip pos="4" side="tl" part="tags"/>
+                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET NOM ADV ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adv_preadv"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="d_n_adv_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" side="tl" part="lemh"/>
+                <clip pos="4" side="tl" part="tags"/>
+                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET ADV ADJ NOM">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="adv_preadv"/>
+        <pattern-item n="adjec"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk name="d_adv_a_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="4" side="tl" part="gen"/></tag>
+              <tag><clip pos="4" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="tags"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" side="tl" part="lemh"/>
+                <clip pos="3" side="tl" part="tags"/>
+                <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" side="tl" part="lemh"/>
+                <clip pos="4" side="tl" part="tags"/>
+                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: NOM ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
@@ -2490,10 +2951,9 @@
        </action>
     </rule>
 
-<!--
-    <rule comment="REGLA: GER PRNENC">
+    <rule comment="REGLA: IMP PRNENC">
        <pattern>
-         <pattern-item n="ger"/>
+         <pattern-item n="imp"/>
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
@@ -2519,77 +2979,6 @@
        </action>
     </rule>
 
-
-    <rule comment="REGLA: INF PRNENC">
-       <pattern>
-         <pattern-item n="inf"/>
-         <pattern-item n="prnenc"/>
-       </pattern>
-       <action>
-         <out>
-           <chunk name="d">
-             <tags>
-               <tag><lit-tag v="SDet"/></tag>
-             </tags>
-            <mlu>
-           <lu>
-             <clip pos="1" side="tl" part="lemh"/>
-             <clip pos="1" side="tl" part="tags"/>
-             <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-            <lu>
-             <clip pos="2" side="tl" part="lemh"/>
-             <clip pos="2" side="tl" part="tags"/>
-             <clip pos="2" side="tl" part="lemq"/>
-           </lu>
-           </mlu>
-         </chunk>
-         </out>
-       </action>
-    </rule>
--->
-
-    <rule comment="REGLA: NUMERAL">
-      <pattern>
-        <pattern-item n="num"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-         <chunk name="n">
-           <tags>
-             <tag><lit-tag v="Num"/></tag>
-           </tags>
-          <lu>
-            <clip pos="1" side="tl" part="whole"/>
-          </lu>
-         </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="REGLA: RELATIF">
-      <pattern>
-        <pattern-item n="rel"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-         <chunk name="d">
-           <tags>
-             <tag><lit-tag v="Rel"/></tag>
-           </tags>
-          <lu>
-            <clip pos="1" side="tl" part="whole"/>
-          </lu>
-         </chunk>
-        </out>
-      </action>
-    </rule>
 
     <rule comment="REGLA: SENT">
       <pattern>
