@@ -32,10 +32,42 @@
       <cat-item tags="vbmod.*"/>
     </def-cat>
 
+    <def-cat n="vbser">
+      <cat-item tags="vbser.*"/>
+    </def-cat>
+
+    <def-cat n="vbaux">
+      <cat-item tags="vbser.*"/>
+      <cat-item tags="vbhaver.*"/>
+    </def-cat>
+
+    <def-cat n="vbnoser">
+      <cat-item tags="vblex.*"/>
+      <cat-item tags="vbhaver.*"/>
+      <cat-item tags="vbmod.*"/>
+    </def-cat>
+
     <def-cat n="num">
       <cat-item tags="num"/>
       <cat-item tags="num.*"/>
     </def-cat>
+
+    <def-cat n="pr">
+      <cat-item tags="pr"/>
+    </def-cat>
+
+    <def-cat n="cnjcoo">
+      <cat-item tags="cnjcoo"/>
+    </def-cat>
+
+    <def-cat n="cnjsub">
+      <cat-item tags="cnjsub"/>
+    </def-cat>
+
+    <def-cat n="cnjadv">
+      <cat-item tags="cnjadv"/>
+    </def-cat>
+
     <def-cat n="rel">
       <cat-item tags="rel.*"/>
     </def-cat>
@@ -2035,7 +2067,7 @@
 
   <section-rules>
 
-    <!-- REGLES CONCORDANÇA -->
+    <!-- REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
     <rule comment="REGLA: NOM">
       <pattern>
@@ -2092,9 +2124,14 @@
           <with-param pos="1"/>
         </call-macro>
         <out>
+         <chunk name="n">
+           <tags>
+             <tag><lit-tag v="Num"/></tag>
+           </tags>
           <lu>
             <clip pos="1" side="tl" part="whole"/>
           </lu>
+         </chunk>
         </out>
       </action>
     </rule>
@@ -2168,6 +2205,78 @@
        </action>
     </rule>
 
+    <rule comment="REGLA: PREP">
+      <pattern>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="pr">
+            <tags>
+              <tag><lit-tag v="pr"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CNJCOO">
+      <pattern>
+        <pattern-item n="cnjcoo"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cnjcoo">
+            <tags>
+              <tag><lit-tag v="cnjcoo"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CNJSUB">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cnjsub">
+            <tags>
+              <tag><lit-tag v="cnjsub"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CNJADV">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cnjadv">
+            <tags>
+              <tag><lit-tag v="cnjadv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: RELATIF">
       <pattern>
         <pattern-item n="rel"/>
@@ -2183,6 +2292,52 @@
         </out>
       </action>
     </rule>
+
+    <rule comment="REGLA: VBSER">
+       <pattern>
+         <pattern-item n="vbser"/>
+       </pattern>
+       <action>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: VBNOSER">
+       <pattern>
+         <pattern-item n="vbnoser"/>
+       </pattern>
+       <action>
+         <out>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <!-- FIN REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+
+    <!-- REGLAS CONCORDANÇA -->
 
      <rule comment="REGLA: DETERMINANT NOM">
       <pattern>
@@ -2217,7 +2372,7 @@
       </action>
     </rule>
 
-    <!-- REGLES CONCORDANÇA -->
+    <!-- FIN REGLAS CONCORDANÇA -->
 
     <rule comment="REGLA: SENT">
       <pattern>
