@@ -125,7 +125,43 @@
 	</def-macro>
   </def-macros>
 
+  <def-seqs>
+    <def-seq n="prn_moi">
+      <match lemma="moi" tags="prn.*"/>
+      <match lemma="toi" tags="prn.*"/>
+      <match lemma="lui" tags="prn.*"/>
+      <match lemma="elle" tags="prn.*"/>
+      <match lemma="soi" tags="prn.*"/>
+      <match lemma="nous" tags="prn.*"/>
+      <match lemma="vous" tags="prn.*"/>
+      <match lemma="eux" tags="prn.*"/>
+      <match lemma="il" tags="prn.*"/>
+    </def-seq>
+  </def-seqs>
 <rules>
+
+<!-- **************** ADV **************** -->
+
+  <!-- seulement >> solament, sonque -->
+  <!-- Acòrds II.21.3.10.2 -->
+  <rule weight="0.8">
+    <match lemma="seulement" tags="adv"><select lemma="solament"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="seulement" tags="adv"><select lemma="sonque"/></match>
+    <or>
+      <seq n="prn_moi"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="vblex.*"/>
+      <match tags="vbser.*"/>
+      <match tags="vbhaver.*"/>
+      <match tags="vbmod.*"/>
+    </or>
+    <match lemma="seulement" tags="adv"><select lemma="sonque"/></match>
+  </rule>
 
 <!-- **************** N **************** -->
 
