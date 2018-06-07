@@ -935,10 +935,10 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} elsif (($par_fra eq 'argent__n' || $par_fra eq 'personnel__n')
 			&& $par_oci eq 'set__n') {
-		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/><s n=\"g\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/><s n=\"sg\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'soif__n'
 			&& $par_oci eq 'set__n') {
-		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/><s n=\"g\"/></l><r>%s<s n=\"n\"/><s n=\"f\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/><s n=\"sg\"/></l><r>%s<s n=\"n\"/><s n=\"f\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'mois__n'
 			&& ($par_oci eq 'conselh__n'
 			|| $par_oci eq 'autob/ús__n'
