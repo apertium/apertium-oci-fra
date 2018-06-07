@@ -699,6 +699,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_fra eq 'débit/eur__n'
 			|| $par_fra eq 'jui/f__n'
 			|| $par_fra eq 'maire__n'
+			|| $par_fra eq 'po/ète__n'
 			|| $par_fra eq 'support/er__n'
 			|| $par_fra eq 'tur/c__n'
 			|| $par_fra eq 'vende/ur__n')
@@ -761,6 +762,33 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_fra eq 'débit/eur__n'
 			|| $par_fra eq 'jui/f__n'
 			|| $par_fra eq 'maire__n'
+			|| $par_fra eq 'po/ète__n'
+			|| $par_fra eq 'support/er__n'
+			|| $par_fra eq 'tur/c__n'
+			|| $par_fra eq 'vende/ur__n')
+		&& $par_oci eq 'espanhò/l__n') {
+		$stem_oci =~ s/l$//o;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s</l><r>%s</r></p><par n=\"l-u-n_l\"/></e>\n", $stem_oci, $stem_fra;
+	} elsif (($par_fra eq 'artiste__n' || $par_fra eq 'hébreu__n')
+		&& $par_oci eq 'espanhò/l__n') {
+		$stem_oci =~ s/l$//o;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s</l><r>%s</r></p><par n=\"l-u-n_l2\"/></e>\n", $stem_oci, $stem_fra;
+	} elsif (($par_fra eq 'affecté__n'
+			|| $par_fra eq 'administrat/eur__n'
+			|| $par_fra eq 'aïeu/l__n'
+			|| $par_fra eq 'ancien__n'
+			|| $par_fra eq 'andalou__n'
+			|| $par_fra eq 'bouch/er__n'
+			|| $par_fra eq 'buffle__n'
+			|| $par_fra eq 'causeu/r__n'
+			|| $par_fra eq 'chat__n'
+			|| $par_fra eq 'clown__n'
+			|| $par_fra eq 'colonel__n'
+			|| $par_fra eq 'commercia/l__n'
+			|| $par_fra eq 'débit/eur__n'
+			|| $par_fra eq 'jui/f__n'
+			|| $par_fra eq 'maire__n'
+			|| $par_fra eq 'po/ète__n'
 			|| $par_fra eq 'support/er__n'
 			|| $par_fra eq 'tur/c__n'
 			|| $par_fra eq 'vende/ur__n')
@@ -770,8 +798,8 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_oci eq 'monar/ca__n'
 			|| $par_oci eq 'pòrtavo/tz__n')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/></l><r>%s<s n=\"n\"/></r></p><par n=\"mf_GD\"/></e>\n", $stem_oci, $stem_fra;
-	} elsif ($par_fra eq 'artiste__n' &&
-			($par_oci eq 'agent__n'
+	} elsif (($par_fra eq 'artiste__n' || $par_fra eq 'hébreu__n')
+		&& ($par_oci eq 'agent__n'
 			|| $par_oci eq 'collèg/a__n'
 			|| $par_oci eq 'guardi/a__n'
 			|| $par_oci eq 'monar/ca__n'
@@ -781,7 +809,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"mf\"/></l><r>%s<s n=\"n\"/><s n=\"mf\"/></r></p><par n=\"sp_ND\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'ex__n' && $par_oci eq 'minjamosques__n') {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"mf\"/><s n=\"sp\"/></l><r>%s<s n=\"n\"/><s n=\"mf\"/><s n=\"sp\"/></r></p></e>\n", $stem_oci, $stem_fra;
-	} elsif ($par_fra eq 'artiste__n'
+	} elsif (($par_fra eq 'artiste__n' || $par_fra eq 'hébreu__n')
 		&& ($par_oci eq 'conselhèr__n'
 			|| $par_oci eq 'afilia/t__n'
 			|| $par_oci eq 'alcalde__n'
@@ -902,12 +930,10 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/></r></p><par n=\"sp_ND\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'mois__n' && $par_oci eq 'deluns__n') {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"m\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/></r></p></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'argent__n'
-		|| $par_fra eq 'personnel__n')
+	} elsif (($par_fra eq 'argent__n' || $par_fra eq 'personnel__n')
 			&& ($par_oci eq 'personau__n' || $par_oci eq 'persona/l__n')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'argent__n'
-		|| $par_fra eq 'personnel__n')
+	} elsif (($par_fra eq 'argent__n' || $par_fra eq 'personnel__n')
 			&& $par_oci eq 'set__n') {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/><s n=\"f\"/><s n=\"g\"/></l><r>%s<s n=\"n\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'soif__n'
