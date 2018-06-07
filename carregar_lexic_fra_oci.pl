@@ -660,6 +660,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_oci eq 'indiv/idu__n'
 			|| $par_oci eq 'joen__n'
 			|| $par_oci eq 'lo/p__n'
+			|| $par_oci eq 'mandad/ís__n'
 			|| $par_oci eq 'm/ètge__n'
 			|| $par_oci eq 'ministr/e__n'
 			|| $par_oci eq 'mon/ge__n'
@@ -678,7 +679,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/></l><r>%s<s n=\"n\"/></r></p><par n=\"anglés_anglais\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif (($par_fra eq 'admis__n' || $par_fra eq 'épou/x__n')
 			&& ($par_oci eq 'agent__n'
-			|| $par_oci eq 'colleg/a__n'
+			|| $par_oci eq 'collèg/a__n'
 			|| $par_oci eq 'guardi/a__n'
 			|| $par_oci eq 'monar/ca__n'
 			|| $par_oci eq 'pòrtavo/tz__n')) {
@@ -728,6 +729,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_oci eq 'indiv/idu__n'
 			|| $par_oci eq 'joen__n'
 			|| $par_oci eq 'lo/p__n'
+			|| $par_oci eq 'mandad/ís__n'
 			|| $par_oci eq 'm/ètge__n'
 			|| $par_oci eq 'ministr/e__n'
 			|| $par_oci eq 'mon/ge__n'
@@ -763,14 +765,14 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_fra eq 'tur/c__n'
 			|| $par_fra eq 'vende/ur__n')
 		&& ($par_oci eq 'agent__n'
-			|| $par_oci eq 'colleg/a__n'
+			|| $par_oci eq 'collèg/a__n'
 			|| $par_oci eq 'guardi/a__n'
 			|| $par_oci eq 'monar/ca__n'
 			|| $par_oci eq 'pòrtavo/tz__n')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/></l><r>%s<s n=\"n\"/></r></p><par n=\"mf_GD\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'artiste__n' &&
 			($par_oci eq 'agent__n'
-			|| $par_oci eq 'colleg/a__n'
+			|| $par_oci eq 'collèg/a__n'
 			|| $par_oci eq 'guardi/a__n'
 			|| $par_oci eq 'monar/ca__n'
 			|| $par_oci eq 'pòrtavo/tz__n')) {
@@ -807,6 +809,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_oci eq 'indiv/idu__n'
 			|| $par_oci eq 'joen__n'
 			|| $par_oci eq 'lo/p__n'
+			|| $par_oci eq 'mandad/ís__n'
 			|| $par_oci eq 'm/ètge__n'
 			|| $par_oci eq 'ministr/e__n'
 			|| $par_oci eq 'mon/ge__n'
