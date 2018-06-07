@@ -1055,6 +1055,7 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'fran/c__adj'
 		|| $par_fra eq 'mo/u__adj'
 		|| $par_fra eq 'm/ûr__adj'
+		|| $par_fra eq 'nouve/au__adj'
 		|| $par_fra eq 'publi/c__adj'
 		|| $par_fra eq 's/ec__adj'
 		|| $par_fra eq 'secr/et__adj')
@@ -1128,6 +1129,7 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'fran/c__adj'
 		|| $par_fra eq 'mo/u__adj'
 		|| $par_fra eq 'm/ûr__adj'
+		|| $par_fra eq 'nouve/au__adj'
 		|| $par_fra eq 'publi/c__adj'
 		|| $par_fra eq 's/ec__adj'
 		|| $par_fra eq 'secr/et__adj')
@@ -1158,6 +1160,7 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'fran/c__adj'
 		|| $par_fra eq 'mo/u__adj'
 		|| $par_fra eq 'm/ûr__adj'
+		|| $par_fra eq 'nouve/au__adj'
 		|| $par_fra eq 'publi/c__adj'
 		|| $par_fra eq 's/ec__adj'
 		|| $par_fra eq 'secr/et__adj')
@@ -1226,13 +1229,13 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		&& $par_oci eq 'addiciona/l_u__adj') {
 		$stem_oci =~ s/l$//o;
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s</l><r>%s</r></p><par n=\"l-u-adj_l2\"/></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'anglais__adj')
+	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj')
 		&& ($par_oci eq 'agricòl/a__adj'
 		|| $par_oci eq 'bèlg/a__adj'
 		|| $par_oci eq 'barlò/ca__adj'
 		|| $par_oci eq 'generau__adj')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/></l><r>%s<s n=\"adj\"/></r></p><par n=\"XXXanglais_esquimal\"/></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'anglais__adj')
+	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj')
 		&& ($par_oci eq 'apropria/t__adj'
 		|| $par_oci eq 'trabalhador__adj'
 		|| $par_oci eq 'ampl/e__adj'
@@ -1281,6 +1284,8 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_oci eq 'vag/ue__adj'
 		|| $par_oci eq 'vesedo/r__adj')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/></l><r>%s<s n=\"adj\"/></r></p><par n=\"anglés_anglais\"/></e>\n", $stem_oci, $stem_fra;
+	} elsif ($par_fra eq 'arrière__adj' && $par_oci eq 'post__adj') {
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/><s n=\"mf\"/><s n=\"sp\"/></l><r>%s<s n=\"adj\"/><s n=\"mf\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} elsif ($par_fra eq 'arrière__adj' && $par_oci eq 'post__adj') {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/><s n=\"mf\"/><s n=\"sp\"/></l><r>%s<s n=\"adj\"/><s n=\"mf\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
 	} else {
