@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # usage
-# carregar_lexic.pl n|adj|adv|vblex|top 0|1
+# carregar_lexic.pl n|adj|adv|vblex|pr|top 0|1
 # el segon argument indic si es generen paraules en català a partir dels fitxer d'en Jaume Ortolà
 # (per defecte 0=no)
 
@@ -21,17 +21,9 @@ my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'membre';	# paraula a debugar
 my $MOT = '';
 
-#my $MORF_TRACT = 'adj';
-#my $MORF_TRACT = 'n';
-#my $MORF_TRACT = 'adv';
-#my $MORF_TRACT = 'vblex';
-#my $MORF_TRACT = 'top';
-#my $MORF_TRACT = '';
-
-
 my $MORF_TRACT = $ARGV[0];
 unless ($MORF_TRACT) {
-	print "Error: $0 n|adj|adv|vblex\n";
+	print "Error: $0 n|adj|adv|vblex|pr\n";
 	exit 1;
 }
 
@@ -103,7 +95,7 @@ print STDERR "Error en llegir_dix_ortola fitxer $nfitx, $linia\n";
 			die "fitxer ortola $nfitx, $linia, par=$par";
 		}
 print "2. fitxer ortola $nfitx, $linia, par=$par, morf=$morf\n" if $MOT && $linia =~ /"$MOT"/o;
-		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'abbr') {
+		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr') {
 			print STDERR "llegir_dix_ortola fitxer $nfitx, línia $.: $linia - morf $morf\n";
 			next;
 		}
@@ -139,7 +131,7 @@ print "10. r_struct->{$morf}{$lemma} = $r_struct->{$morf}{$lemma}\n" if $MOT && 
 	}
 }
 
-# llegeixo el fitxer fra: n, adj, adv, abbr
+# llegeixo el fitxer fra: n, adj, adv, pr
 sub llegir_dix {
 	my ($nfitx, $fitx, $r_struct, $r_struct_prm) = @_;
 	my ($lemma, $par, $prm, $morf);
@@ -199,7 +191,7 @@ print $linia, "\n" if $MOT && $linia =~ /$MOT/o;
 		}
 
 print "2. fitxer $nfitx, $linia, par=$par, morf=$morf\n" if $MOT && $linia =~ /"$MOT"/o;
-		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'abbr') {
+		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr') {
 #			print STDERR "línia $.: $linia - morf $morf\n";
 			next;
 		}
@@ -221,7 +213,7 @@ print "r_struct_prm->{$morf}{$lemma} = $r_struct_prm->{$morf}{$lemma}\n" if $MOT
 print "4. fitxer $nfitx r_struct->{$MORF_TRACT}{$MOT} = $r_struct->{$MORF_TRACT}{$MOT}\n";
 }
 
-# llegeixo el fitxer bilingüe: n, adj, adv, abbr
+# llegeixo el fitxer bilingüe: n, adj, adv, pr
 sub llegir_bidix {
 	my ($fitx, $r_struct_rl, $r_struct_lr) = @_;
 	my ($lemma_oci, $lemma_fra, $morf, $morf2, $dir);
@@ -290,12 +282,28 @@ print "1. fitxer bidix, $linia\n" if $MOT && $linia =~ />$MOT</o;
 			$morf = 'adj';
 			$lemma_oci = $2;
 			$dir = 'rl';
+		} elsif ($linia =~ m|<e> *<p><l>([^<]*)</l> *<r>([^<]*)</r></p><par n="l-u-n_l|o
+			|| $linia =~ m|<e a=".*"> *<p><l>([^<]*)</l>.*<r>([^<]*)</r></p><par n="l-u-n_l|o) {
+			$lemma_oci = $1 . 'l';
+			$morf = 'n';
+			$lemma_oci = $2;
+			$dir = 'bi';
+		} elsif ($linia =~ m|<e r="LR".*<p><l>([^<]*)</l> *<r>([^<]*)</r></p><par n="l-u-n_l|o) {
+			$lemma_oci = $1 . 'l';
+			$morf = 'n';
+			$lemma_oci = $2;
+			$dir = 'lr';
+		} elsif ($linia =~ m|<e r="RL".*<p><l>([^<]*)</l> *<r>([^<]*)</r></p><par n="l-u-n_l|o) {
+			$lemma_oci = $1 . 'l';
+			$morf = 'n';
+			$lemma_oci = $2;
+			$dir = 'rl';
 		} elsif ($linia =~ m|<e|o && $. > 140) {
 			print STDERR "Error lectura bidix en l. $.: $linia\n";
 		} else {
 			next;
 		}
-		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'abbr') {
+		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr') {
 #			print STDERR "línia $.: $linia - morf $morf\n";
 			next;
 		}
@@ -1335,6 +1343,8 @@ print "variant_oci{$morf_oci}{$lemma_oci}{gascon} = $variant_oci{$morf_oci}{$lem
 		printf $fbi "<e$lr_rl$a><p><l>%s<s n=\"%s\"/></l><r>%s<s n=\"%s\"/></r></p></e>\n", $stem_oci, $morf_oci, $stem_fra, $morf_fra;
 	} elsif ($morf_oci eq 'adv' && $morf_fra eq 'adv') {
 		printf $fbi "<e$lr_rl$a><p><l>%s<s n=\"%s\"/></l><r>%s<s n=\"%s\"/></r></p></e>\n", $stem_oci, $morf_oci, $stem_fra, $morf_fra;
+	} elsif ($morf_oci eq 'pr' && $morf_fra eq 'pr') {
+		printf $fbi "<e$lr_rl$a><p><l>%s<s n=\"%s\"/></l><r>%s<s n=\"%s\"/></r></p></e>\n", $stem_oci, $morf_oci, $stem_fra, $morf_fra;
 	} elsif ($morf_oci eq 'n' && $morf_fra eq 'n') {
 		escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran);
 	} elsif ($morf_oci eq 'adj' && $morf_fra eq 'adj') {
@@ -1378,6 +1388,8 @@ print "5. lema_fra_existeix_o_es_pot_crear: dix_fra{$morf_fra}{$lemma_fra} = $di
 				printf $ffra "    <e lm=\"%s\"$a>        <i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'hier__adv';
 				printf $flex "$lemma_fra\n";
 				return 1;
+		} elsif ($morf_fra eq 'pr') {
+				return 0;
 		} elsif ($morf_fra eq 'adj') {
 			my $tmp = $dix_fraadj_def{$morf_fra}{$lemma_fra};
 			if ($tmp) {
@@ -1421,12 +1433,13 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 			return 0;
 		} elsif ($morf_oci eq 'n') {
 			return 0;
+		} elsif ($morf_oci eq 'pr') {
+			return 0;
 		} elsif ($morf_oci eq 'adv') {
 			my $stem_oci = $lemma_oci;
 			$stem_oci =~ s| |<b/>|og;
 			my $a = " a=\"$autor\"" if $autor;
 			printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'ager__adv';
-
 			$dix_oci{$morf_oci}{$lemma_oci} = 'ager__adv';
 		} elsif ($morf_oci eq 'vblex') {
 			return 0;
