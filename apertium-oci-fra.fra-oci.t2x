@@ -9,6 +9,12 @@
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
+    <def-cat n="SN_SA">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -17,9 +23,26 @@
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
     </def-cat>
+    <def-cat n="SV_partitiu">
+      <cat-item tags="SV.vblex.partitiu"/>
+    </def-cat>
     <def-cat n="SV_vbser">
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
+    </def-cat>
+    <def-cat n="PREP">
+      <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
+    </def-cat>
+    <def-cat n="PREP_de">
+      <cat-item tags="PREP.de"/>
+    </def-cat>
+    <def-cat n="DET">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+    </def-cat>
+    <def-cat n="DET_def">
+      <cat-item tags="Det.def.*"/>
     </def-cat>
   </section-def-cats>
 
@@ -61,6 +84,25 @@
         <lit v=""/>
       </let>
     </def-macro>
+
+    <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
+      <choose>
+        <when>
+          <test>
+            <not>
+              <equal>
+                <b pos="1"/>
+                <lit v=" "/>
+              </equal>
+            </not>
+          </test>
+          <out>
+            <b pos="1"/>
+          </out>
+        </when>
+      </choose>
+    </def-macro>
+
   </section-def-macros>
 
   <section-rules>
@@ -187,6 +229,163 @@
         </out>
       </action>
     </rule>
+
+    <!-- Regles pel partitiu -->
+
+    <rule comment="REGLA: SV PR_de DET_def SN: élimination de l'article définit du partitif: Je veux de l'eau. > Vòli d'aiga">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV SAdv PR_de DET_def SN: élimination de l'article définit du partitif: Je veux toujours de l'eau. > Vòli totjorn d'aiga">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV SAdv SAdv PR_de DET_def SN: élimination de l'article définit du partitif: Je ne veux pas toujours de l'eau. > Vòli pas totjorn d'aiga">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="5"/><with-param pos="6"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PR PR_de DET_def SN: élimination de l'article définit du partitif: avec des amis > amb d'amics">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- Fin regles pel partitiu -->
 
   </section-rules>
 </interchunk>

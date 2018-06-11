@@ -166,6 +166,14 @@
       <attr-item tags="predet"/>
     </def-attr>
 
+    <def-attr n="a_det2">
+      <attr-item tags="def"/>
+      <attr-item tags="ind"/>
+      <attr-item tags="dem"/>
+      <attr-item tags="pos"/>
+      <attr-item tags="predet"/>
+    </def-attr>
+
     <def-attr n="a_adjec">
       <attr-item tags="adj.ind"/>
       <attr-item tags="adj.sup"/>
@@ -234,6 +242,17 @@
     <def-var n="auxn"/>
     <def-var n="temp"/>
   </section-def-vars>
+
+  <section-def-lists>
+    <def-list n="verbs_amb_partitiu">
+      <list-item v="aver"/>
+      <list-item v="auer"/>
+      <list-item v="conéisser"/>
+      <list-item v="conéisher"/>
+      <list-item v="utilizar"/>
+      <list-item v="voler"/>
+    </def-list>
+  </section-def-lists>
 
   <section-def-macros>
     <def-macro n="test" npar="1">
@@ -2277,6 +2296,23 @@
       </choose>
     </def-macro>
 
+    <def-macro n="tipus_verb" npar="1"> <!-- tots els verbs passen per aqui -->
+      <choose>
+        <when>
+          <test>
+            <in caseless="yes">
+             <clip pos="1" side="tl" part="lemh"/>
+             <list n="verbs_amb_partitiu"/>
+            </in>
+          </test>
+          <let><var n="tipusverb"/><lit-tag v="partitiu"/></let>
+        </when>
+        <otherwise>
+          <let><var n="tipusverb"/><lit-tag v="normal"/></let>
+        </otherwise>
+      </choose>
+    </def-macro>
+
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
       <choose>
         <when>
@@ -2504,16 +2540,35 @@
         <pattern-item n="pr"/>
       </pattern>
       <action>
-        <out>
-          <chunk name="pr">
-            <tags>
-              <tag><lit-tag v="pr"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
+       <choose>
+          <when>
+            <test><equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="de"/></equal></test>
+            <out>
+              <chunk name="pr">
+                <tags>
+                  <tag><lit-tag v="PREP"/></tag>
+                  <tag><lit-tag v="de"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="pr">
+                <tags>
+                  <tag><lit-tag v="PREP"/></tag>
+                  <tag><lit-tag v="pr"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+       </choose>
       </action>
     </rule>
 
@@ -2621,11 +2676,15 @@
          <pattern-item n="vbnoser"/>
        </pattern>
        <action>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
          <out>
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
@@ -2655,9 +2714,10 @@
           <with-param pos="2"/>
         </call-macro>
         <out>
-          <chunk name="d_n">
+          <chunk name="det">
             <tags>
-              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -2668,7 +2728,64 @@
               <clip pos="1" side="tl" part="tags"/>
               <clip pos="1" side="tl" part="lemq"/>
             </lu>
-            <b pos="1"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="a">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
             <lu>
               <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="tags"/>
@@ -2695,7 +2812,23 @@
           <with-param pos="2"/>
         </call-macro>
         <out>
-          <chunk name="d_n_a">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -2703,12 +2836,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2741,7 +2868,23 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="d_a_n">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="a_n">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
@@ -2749,12 +2892,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2787,7 +2924,23 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="d_num_n">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="num_n">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
@@ -2795,12 +2948,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2835,7 +2982,23 @@
           <with-param pos="2"/>
         </call-macro>
         <out>
-          <chunk name="d_n_a_a">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n_a_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -2843,12 +3006,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2889,7 +3046,23 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="d_a_n_a">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="a_n_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
@@ -2897,12 +3070,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2943,7 +3110,23 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="d_num_n_a">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="num_n_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
@@ -2951,12 +3134,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -2996,7 +3173,23 @@
           <with-param pos="2"/>
         </call-macro>
         <out>
-          <chunk name="d_n_adv_a">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n_adv_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -3004,12 +3197,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -3049,7 +3236,23 @@
           <with-param pos="4"/>
         </call-macro>
         <out>
-          <chunk name="d_adv_a_n">
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="adv_a_n">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="4" side="tl" part="gen"/></tag>
@@ -3057,12 +3260,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
               <lu>
                 <clip pos="2" side="tl" part="lemh"/>
                 <clip pos="2" side="tl" part="tags"/>
@@ -3187,10 +3384,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
          <out>
            <chunk name="vbser">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3214,10 +3416,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
          <out>
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3242,10 +3449,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <call-macro n="tipus_verb">
+           <with-param pos="3"/>
+         </call-macro>
          <out>
            <chunk name="pro-vbser">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3276,10 +3488,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
          <out>
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3312,6 +3529,9 @@
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3320,6 +3540,8 @@
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3343,10 +3565,15 @@
         <call-macro n="f_concord0">
           <with-param pos="2"/>
         </call-macro>
-         <out>
+        <call-macro n="tipus_verb">
+         <with-param pos="1"/>
+        </call-macro>
+        <out>
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
@@ -3369,6 +3596,9 @@
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3377,6 +3607,8 @@
            <chunk name="pro-verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3408,6 +3640,9 @@
         <call-macro n="f_concord0">
           <with-param pos="2"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3420,6 +3655,8 @@
            <chunk name="pro-verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3450,6 +3687,9 @@
         <call-macro n="f_concord0">
           <with-param pos="2"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3462,6 +3702,8 @@
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3486,6 +3728,9 @@
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3498,6 +3743,8 @@
            <chunk name="verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -3523,6 +3770,9 @@
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -3535,6 +3785,8 @@
            <chunk name="pro-verb">
              <tags>
                <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
