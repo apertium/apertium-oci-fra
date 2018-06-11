@@ -30,6 +30,7 @@ unless ($MORF_TRACT) {
 
 #my $GEN_OCI = $ARGV[1];
 my $GEN_OCI = 0;
+#$GEN_OCI = 1 if $MORF_TRACT eq 'adv';
 
 my $AUTOR = 'capsot';
 
@@ -1104,7 +1105,6 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'annuel__adj'
 		|| $par_fra eq 'be/au__adj'
 		|| $par_fra eq 'aig/u__adj'
-		|| $par_fra eq 'bas__adj'
 		|| $par_fra eq 'br/ef__adj'
 		|| $par_fra eq 'causeu/r__adj'
 		|| $par_fra eq 'ch/er__adj'
@@ -1178,7 +1178,6 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'annuel__adj'
 		|| $par_fra eq 'be/au__adj'
 		|| $par_fra eq 'aig/u__adj'
-		|| $par_fra eq 'bas__adj'
 		|| $par_fra eq 'br/ef__adj'
 		|| $par_fra eq 'causeu/r__adj'
 		|| $par_fra eq 'ch/er__adj'
@@ -1209,7 +1208,6 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_fra eq 'annuel__adj'
 		|| $par_fra eq 'be/au__adj'
 		|| $par_fra eq 'aig/u__adj'
-		|| $par_fra eq 'bas__adj'
 		|| $par_fra eq 'br/ef__adj'
 		|| $par_fra eq 'causeu/r__adj'
 		|| $par_fra eq 'ch/er__adj'
@@ -1292,13 +1290,13 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		&& $par_oci eq 'addiciona/l_u__adj') {
 		$stem_oci =~ s/l$//o;
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s</l><r>%s</r></p><par n=\"l-u-adj_l2\"/></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj')
+	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj' || $par_fra eq 'bas__adj')
 		&& ($par_oci eq 'agricòl/a__adj'
 		|| $par_oci eq 'bèlg/a__adj'
 		|| $par_oci eq 'barlò/ca__adj'
 		|| $par_oci eq 'generau__adj')) {
 		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/></l><r>%s<s n=\"adj\"/></r></p><par n=\"XXXanglais_esquimal\"/></e>\n", $stem_oci, $stem_fra;
-	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj')
+	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj' || $par_fra eq 'bas__adj')
 		&& ($par_oci eq 'apropria/t__adj'
 		|| $par_oci eq 'trabalhador__adj'
 		|| $par_oci eq 'ampl/e__adj'
