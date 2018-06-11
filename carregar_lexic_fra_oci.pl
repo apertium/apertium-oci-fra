@@ -19,7 +19,7 @@ use utf8;
 
 my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
-my $MOT = 'Alemanha';	# paraula a debugar
+my $MOT = 'Notre-Dame';	# paraula a debugar
 my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
@@ -142,6 +142,7 @@ sub llegir_dix {
 		next if $linia =~ /r="LR"/o;
 		next if $linia =~ /<!-- .*<e/o;
 
+print "0. fitxer $nfitx, $linia\n" if $MOT && $linia =~ /"$MOT"/o;
 next if $linia !~ /$MORF_TRACT/o && $MORF_TRACT ne 'top';
 next if $linia !~ /np/o && $MORF_TRACT eq 'top';
 next if $linia =~ /alt="oci.gascon"/o;
