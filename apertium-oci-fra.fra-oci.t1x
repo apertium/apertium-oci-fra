@@ -2948,22 +2948,56 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+       <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+                <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+                <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="sp"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_det"/>
+                  <lit-tag v="3"/>
+                  <lit-tag v="4"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
         <out>
-          <chunk name="det">
-            <tags>
-              <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
-              <tag><clip pos="2" side="tl" part="gen"/></tag>
-              <tag><clip pos="2" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
           <b pos="1"/>
           <chunk name="a">
             <tags>
@@ -2975,8 +3009,101 @@
             </tags>
             <lu>
               <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="a_adjec"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET ADV ADJ">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="adv_preadv"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+       <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+                <equal><clip pos="3" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+                <equal><clip pos="3" side="tl" part="gen"/><lit-tag v="sp"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_det"/>
+                  <lit-tag v="3"/>
+                  <lit-tag v="4"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+        <out>
+          <b pos="1"/>
+          <chunk name="a">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="tags"/>
               <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="a_adjec"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="3" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>

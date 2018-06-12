@@ -121,6 +121,8 @@
       </action>
     </rule>
 
+    <!-- REGLAS PER L'ATRIBUT -->
+
     <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: la maison est grande > l-ostal es grand">
       <pattern>
         <pattern-item n="SN"/>
@@ -230,7 +232,69 @@
       </action>
     </rule>
 
-    <!-- Regles pel partitiu -->
+    <rule comment="REGLA: SN SV_vbser DET SA: concordance en genre entre suject et attibut: la maison est la grande > l-ostal es lo grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="m"/></let>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS PER L'ATRIBUT -->
+
+    <!-- REGLAS PEL PARTITIU -->
 
     <rule comment="REGLA: SV PR_de DET_def SN: élimination de l'article définit du partitif: Je veux de l'eau. > Vòli d'aiga">
       <pattern>
@@ -385,7 +449,7 @@
       </action>
     </rule>
 
-    <!-- Fin regles pel partitiu -->
+    <!-- FIN REGLAS PEL PARTITIU -->
 
   </section-rules>
 </interchunk>
