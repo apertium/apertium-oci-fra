@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # usage
-# carregar_lexic.pl n|adj|adv|vblex|pr|cnjadv|top 0|1
+# carregar_lexic.pl n|adj|adv|vblex|pr|cnjadv|top|antm|antf 0|1
 # el segon argument indic si es generen paraules en català a partir dels fitxer d'en Jaume Ortolà
 # (per defecte 0=no)
 
@@ -14,17 +14,21 @@
 # 6. autor
 # El programa genera 2 fitxers per carregar als 2 fitxers de diccionari
 
+# Com hi ha força casos en què un mateix lema és antm i antf (també cog), els carrego per separat
+# Això dóna certs maldecaps perquè en el fitxer d'entrada només tinc que són ant, sense especificació dels gènere
+
 use strict;
 use utf8;
 
 my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
-my $MOT = 'Notre-Dame';	# paraula a debugar
-my $MOT = '';
+my $MOT = 'Erik';	# paraula a debugar
+my $MOT = 'Emily';	# paraula a debugar
+#my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
 unless ($MORF_TRACT) {
-	print "Error: $0 n|adj|adv|vblex|pr|cnjadv|top\n";
+	print "Error: $0 n|adj|adv|vblex|pr|cnjadv|top|antm|antf\n";
 	exit 1;
 }
 
@@ -133,7 +137,7 @@ print "10. r_struct->{$morf}{$lemma} = $r_struct->{$morf}{$lemma}\n" if $MOT && 
 	}
 }
 
-# llegeixo el fitxer fra: n, adj, adv, pr, cnjadv, top
+# llegeixo el fitxer fra: n, adj, adv, pr, cnjadv, top, antm, antf
 sub llegir_dix {
 	my ($nfitx, $fitx, $r_struct, $r_struct_prm) = @_;
 	my ($lemma, $par, $prm, $morf);
@@ -144,8 +148,8 @@ sub llegir_dix {
 		next if $linia =~ /<!-- .*<e/o;
 
 print "0. fitxer $nfitx, $linia\n" if $MOT && $linia =~ /"$MOT"/o;
-next if $linia !~ /$MORF_TRACT/o && $MORF_TRACT ne 'top';
-next if $linia !~ /np/o && $MORF_TRACT eq 'top';
+next if $linia !~ /$MORF_TRACT/o && $MORF_TRACT ne 'top' && $MORF_TRACT ne 'antm' && $MORF_TRACT ne 'antf';
+next if $linia !~ /np/o && ($MORF_TRACT eq 'top' || $MORF_TRACT eq 'antm'  || $MORF_TRACT eq 'antf');
 next if $linia =~ /alt="oci.gascon"/o;
 next if $linia =~ /alt="oci.aran"/o;
 
@@ -193,6 +197,12 @@ print "1. fitxer $nfitx, $linia\n" if $MOT && $linia =~ /"$MOT"/o;
 				|| $par eq 'Bahamas__np' 
 				|| $par eq 'États-Unis__np') {
 					$morf = 'top'
+				} elsif ($par eq 'Abraham__np' 
+				|| $par eq 'Antoine__np') { 
+					$morf = 'antm'
+				} elsif ($par eq 'Abraham__np' 
+				|| $par eq 'Marie__np') {
+					$morf = 'antf'
 				}
 			} elsif ($nfitx eq 'oci') {
 				if ($par eq 'Aran__np' 
@@ -201,6 +211,12 @@ print "1. fitxer $nfitx, $linia\n" if $MOT && $linia =~ /"$MOT"/o;
 				|| $par eq 'Bahamas__np' 
 				|| $par eq 'Estats_Units__np') {
 					$morf = 'top'
+				} elsif ($par eq 'Abad__np' 
+				|| $par eq 'Antòni__np') {
+					$morf = 'antm'
+				} elsif ($par eq 'Abad__np' 
+				|| $par eq 'Aitana__np') {
+					$morf = 'antf'
 				}
 			}
 		}
@@ -216,7 +232,7 @@ print $linia, "\n" if $MOT && $linia =~ /$MOT/o;
 		}
 
 		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr' && $morf ne 
-'cnjadv' && $morf ne 'top') {
+'cnjadv' && $morf ne 'top' && $morf ne 'antm' && $morf ne 'antf') {
 #			print STDERR "línia $.: $linia - morf $morf\n";
 			next;
 		}
@@ -238,7 +254,7 @@ print "r_struct_prm->{$morf}{$lemma} = $r_struct_prm->{$morf}{$lemma}\n" if $MOT
 print "4. fitxer $nfitx r_struct->{$MORF_TRACT}{$MOT} = $r_struct->{$MORF_TRACT}{$MOT}\n";
 }
 
-# llegeixo el fitxer bilingüe: n, adj, adv, cnjadv, pr, top
+# llegeixo el fitxer bilingüe: n, adj, adv, cnjadv, pr, top, antm, antf
 sub llegir_bidix {
 	my ($fitx, $r_struct_rl, $r_struct_lr) = @_;
 	my ($lemma_oci, $lemma_fra, $morf, $morf2, $dir);
@@ -330,44 +346,82 @@ print "1. fitxer bidix, $linia\n" if $MOT && $linia =~ />$MOT</o;
 		}
 
 		if ($morf eq 'np') {
-		if ($linia =~ m|<e> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e vr="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
-			$lemma_oci = $1;
-			$morf = $2;
-			$lemma_fra = $3;
-			$dir = 'bi';
-		} elsif ($linia =~ m|<e r="LR"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="LR" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="LR" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="LR" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e a="[^"]*" r="LR"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e alt="[^"]*" r="LR".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="LR" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
-			$lemma_oci = $1;
-			$morf = $2;
-			$lemma_fra = $3;
-			$dir = 'lr';
-		} elsif ($linia =~ m|<e r="RL"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="RL" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="RL" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="RL" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e a="[^"]*" r="RL"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e alt="[^"]*" r="RL".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e r="RL" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
-			$lemma_oci = $1;
-			$morf = $2;
-			$lemma_fra = $2;
-			$dir = 'rl';
-		} elsif ($linia =~ m|<e|o && $. > 140) {
-			print STDERR "Error lectura np bidix en l. $.: $linia\n";
+		if ($morf eq 'antm' || $morf eq 'antf') {
+			if ($linia =~ m|<e> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e vr="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = 'ant' . $2;
+				$lemma_fra = $3;
+				$dir = 'bi';
+			} elsif ($linia =~ m|<e r="LR"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*" r="LR"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*" r="LR".*> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = 'ant' . $2;
+				$lemma_fra = $3;
+				$dir = 'lr';
+			} elsif ($linia =~ m|<e r="RL"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*" r="RL"> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*" r="RL".*> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="ant"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = 'ant' . $2;
+				$lemma_fra = $2;
+				$dir = 'rl';
+			} elsif ($linia =~ m|<e|o && $. > 140) {
+				print STDERR "Error lectura np bidix en l. $.: $linia\n";
+			} else {
+				next;
+			}
 		} else {
-			next;
+			if ($linia =~ m|<e> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e vr="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = $2;
+				$lemma_fra = $3;
+				$dir = 'bi';
+			} elsif ($linia =~ m|<e r="LR"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*" r="LR"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*" r="LR".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="LR" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = $2;
+				$lemma_fra = $3;
+				$dir = 'lr';
+			} elsif ($linia =~ m|<e r="RL"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" c="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" a="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" alt="[^"]*"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e a="[^"]*" r="RL"> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e alt="[^"]*" r="RL".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o
+				|| $linia =~ m|<e r="RL" alt="[^"]*".*> *<p><l>([^<]*)<s n="np"/><s n="([^"]*)".*<r>([^<]*)<s|o) {
+				$lemma_oci = $1;
+				$morf = $2;
+				$lemma_fra = $2;
+				$dir = 'rl';
+			} elsif ($linia =~ m|<e|o && $. > 140) {
+				print STDERR "Error lectura np bidix en l. $.: $linia\n";
+			} else {
+				next;
+			}
 		}
 		}
 
-		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr' && $morf ne 'cnjadv' && $morf ne 'top') {
+		if ($morf ne 'n' && $morf ne 'adj' && $morf ne 'adv' && $morf ne 'vblex' && $morf ne 'pr' && $morf ne 'cnjadv' && $morf ne 'top' && $morf ne 'antm' && $morf ne 'antf') {
 #			print STDERR "línia $.: $linia - morf $morf\n";
 			next;
 		}
@@ -1355,6 +1409,43 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 	}
 }
 
+sub escriure_bidix_ant {
+	my ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran) = @_;
+my $par_oci;
+
+print "escriure_bidix_ant ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran)\n" if $lemma_oci eq $MOT || $lemma_fra eq $MOT;
+#print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor)\n" if $lemma_oci eq $MOT || $lemma_fra =~ /musique/o;
+#print "dix_fra{$morf_fra}{$lemma_fra} = $dix_fra{$morf_fra}{$lemma_fra}\n";
+	my $par_fra = $dix_fra{$morf_fra}{$lemma_fra};
+	if ($lemma_fra =~ /#/o) {
+		my $x = $lemma_fra;
+		$x =~ s/#//;
+		$par_fra = $dix_fra{$morf_fra}{$x};
+	}
+	my $par_oci = $dix_oci{$morf_oci}{$lemma_oci};
+	if ($lemma_oci =~ /#/o) {
+		my $x = $lemma_oci;
+		$x =~ s/#//;
+		$par_oci = $dix_oci{$morf_oci}{$x};
+	}
+	my $a = " a=\"$autor\"" if $autor;
+	my $alt = '';
+	if ($var_oci) {
+		$alt = " alt=\"oci\"";
+	} elsif ($var_gascon) {
+		$alt = " alt=\"oci\@gascon\"";
+	} elsif ($var_aran) {
+		$alt = " alt=\"oci\@aran\"";
+	}
+	if ($par_fra eq 'Marie__np' && $par_oci eq 'Aitana__np') {
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"np\"/><s n=\"ant\"/><s n=\"f\"/><s n=\"sg\"/></l><r>%s<s n=\"np\"/><s n=\"ant\"/><s n=\"f\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
+	} elsif ($par_fra eq 'Antoine__np' && $par_oci eq 'Antòni__np') {
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"np\"/><s n=\"ant\"/><s n=\"m\"/><s n=\"sg\"/></l><r>%s<s n=\"np\"/><s n=\"ant\"/><s n=\"m\"/><s n=\"sg\"/></r></p></e>\n", $stem_oci, $stem_fra;
+	} else {
+		print STDERR "No hi ha regla per a escriure_bidix_ant: par_fra = $par_fra ($lemma_fra) par_oci = $par_oci ($lemma_oci)\n";
+	}
+}
+
 sub escriure_bidix_top {
 	my ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran) = @_;
 my $par_oci;
@@ -1426,6 +1517,10 @@ print "variant_oci{$morf_oci}{$lemma_oci}{gascon} = $variant_oci{$morf_oci}{$lem
 		escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran);
 	} elsif ($morf_oci eq 'top' && $morf_fra eq 'top') {
 		escriure_bidix_top ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran);
+	} elsif ($morf_oci eq 'antm' && $morf_fra eq 'antm') {
+		escriure_bidix_ant ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran);
+	} elsif ($morf_oci eq 'antf' && $morf_fra eq 'antf') {
+		escriure_bidix_ant ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor, $var_oci, $var_gascon, $var_aran);
 	} else {
 		print STDERR "No hi ha regla per a escriure_bidix($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra, $morf_fra, $lr_rl, $autor)\n";
 	}
@@ -1514,6 +1609,10 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 			return 0;
 		} elsif ($morf_oci eq 'top') {
 			return 0;
+		} elsif ($morf_oci eq 'antm') {
+			return 0;
+		} elsif ($morf_oci eq 'antf') {
+			return 0;
 		} elsif ($morf_oci eq 'pr') {
 			return 0;
 		} elsif ($morf_oci eq 'cnjadv') {
@@ -1555,7 +1654,7 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 	}
 
 	if (!$GEN_OCI && !$dix_oci{$morf_oci}{$lemma_oci}) {
-		print STDERR "0. Falta oci $lemma_oci <$morf_oci>: (1), l. $n_linia\n";
+		print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 		return 0;
 	}
 
@@ -1650,7 +1749,8 @@ llegir_bidix($fdixbi, \%dix_fra_oci, \%dix_oci_fra);
 my ($stem_oci, $stem_fra, $gen_oci, $gen_fra, $num_oci, $num_fra, $lemma_oci, $lemma_fra, $lemma_oci_ini, $lemma_fra_ini);
 while (my $linia = <STDIN>) {
 #print "0. l. $.: $linia\n";
-next if $linia !~ /$MORF_TRACT/o;
+next if $linia !~ /$MORF_TRACT/o && $MORF_TRACT !~ /^ant/o;
+next if $linia !~ /<ant>/o && $MORF_TRACT =~ /^ant/o;
 #print "1. l. $.: $linia\n";
 	next if $linia =~ /xxx/io;
 #print "2. l. $.: $linia\n";
@@ -1701,7 +1801,8 @@ next if $linia !~ /$MORF_TRACT/o;
 
 	my $gram_fra = $dades[2];
 print "gram_fra = $gram_fra, $linia\n" if $MOT && ($lemma_oci eq $MOT || $lemma_fra eq $MOT);
-next if $gram_fra !~ /<$MORF_TRACT>/o;
+next if $gram_fra !~ /<$MORF_TRACT>/o && $MORF_TRACT !~ /^ant/o;
+next if $gram_fra !~ /<ant>/o && $MORF_TRACT =~ /^ant/o;
 #next if $linia !~ /$MORF_TRACT/o && $MORF_TRACT ne 'top';
 #next if $linia !~ /np/o && $MORF_TRACT eq 'top';
 	$gram_fra =~ s/^ *<//og;
@@ -1751,6 +1852,7 @@ print "$linia\n" if $MOT && ($lemma_oci eq $MOT || $lemma_fra eq $MOT);
 #print "12a. $linia - stem_fra=$stem_fra, lemma_fra=$lemma_fra, gram_fra = $gram_fra\n" if $MOT && ($lemma_oci =~ /$MOT/o || $lemma_fra eq $MOT);
 			$gram_fra = 'n' if $gram_fra =~ /^n>/o;
 			$gram_fra = 'top' if $gram_fra =~ /^np><top/o;
+			$gram_fra = 'ant' if $gram_fra =~ /^np><ant/o;
 			$gram_fra = 'np' if $gram_fra =~ /^np>/o;
 		}
 
@@ -1765,6 +1867,7 @@ print "$linia\n" if $MOT && ($lemma_oci eq $MOT || $lemma_fra eq $MOT);
 				$gram_oci = $gram_oci[0] unless $gram_oci;	# potser hi ha només una definició per a totes les possibilitats
 				$gram_oci = 'n' if $gram_oci =~ /^n>/o;
 				$gram_oci = 'top' if $gram_fra =~ /^np><top/o;
+				$gram_oci = 'ant' if $gram_fra =~ /^np><ant/o;
 				$gram_oci = 'np' if $gram_oci =~ /^np>/o;
 			}
 		} else {
@@ -1772,6 +1875,29 @@ print "$linia\n" if $MOT && ($lemma_oci eq $MOT || $lemma_fra eq $MOT);
 		}
 print "12. $linia - stem_fra=$stem_fra, lemma_fra=$lemma_fra, gram_oci = $gram_oci, gram_fra = $gram_fra\n" if $MOT && ($lemma_oci =~ /$MOT/o || $lemma_fra eq $MOT);
 #print "12. $linia - stem_fra=$stem_fra, lemma_fra=$lemma_fra, gram_oci = $gram_oci, gram_fra = $gram_fra\n";
+
+		# cas especial: assigno a mà antm o antf
+		if ($MORF_TRACT eq 'antm') {
+			unless ($dix_fra{antm}{$lemma_fra}) {
+				# No és antm
+				unless ($dix_fra{antf}{$lemma_fra}) {
+					# Hi ha algun error perquè no és tampoc antf
+#					print STDERR "4. Falta fra $lemma_fra <$gram_fra> (2), l. $.\n";
+				}
+				next;
+			}
+			$gram_fra = $gram_oci = 'antm';
+		} elsif ($MORF_TRACT eq 'antf') {
+			unless ($dix_fra{antf}{$lemma_fra}) {
+				# No és antm
+				unless ($dix_fra{antm}{$lemma_fra}) {
+					# Hi ha algun error perquè no és tampoc antm
+#					print STDERR "5. Falta fra $lemma_fra <$gram_fra> (2), l. $.\n";
+				}
+				next;
+			}
+			$gram_fra = $gram_oci = 'antf';
+		}
 
 		tractar_parella ($lemma_oci, $stem_oci, $gram_oci, $lemma_fra, $stem_fra, $gram_fra, $autor, $primer, $.);
 		$primer = 0;
