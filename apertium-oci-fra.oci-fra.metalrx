@@ -263,6 +263,37 @@
     </or>
   </rule>
 
+<!-- **************** ADJ **************** -->
+
+  <!-- nòu >> nouveau, neuf -->
+  <rule weight="0.8">
+    <match lemma="nòu" tags="adj.*"><select lemma="nouveau"/></match>
+  </rule>
+
+
+<!-- **************** VBLEX **************** -->
+
+  <!-- cridar >> appeler, crier -->
+  <rule weight="0.8">
+    <match lemma="cridar" tags="vblex.*"><select lemma="appeler"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
+    <match lemma="a" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
+    <match tags="adv"/>
+    <match lemma="a" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="li" tags="prn.pro.*"/>
+    <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
+    <match lemma="li" tags="prn.enc.*"/>
+  </rule>
 
 <!-- **************** NP **************** -->
 
