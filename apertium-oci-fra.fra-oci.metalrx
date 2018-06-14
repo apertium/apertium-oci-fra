@@ -284,12 +284,28 @@
     <match lemma="serveur" tags="n.*"><select lemma="servidor"/></match>
   </rule>
 
+<!-- **************** VBLEX **************** -->
+
+  <!-- tourner >> virar, girar -->
+  <rule weight="0.8">
+    <match lemma="tourner" tags="vblex.*"><select lemma="virar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tourner" tags="vblex.*"><select lemma="tourner"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="film" tags="n.*"/>
+  </rule>
+
 <!-- **************** NP **************** -->
 
   <macro name="noms_propres" p1="Louis" p2="Loís" />
   <macro name="noms_propres" p1="Benoît" p2="Beneset" />
   <macro name="noms_propres" p1="François" p2="Francés" />
   <macro name="noms_propres" p1="Jacques" p2="Jacme" />
+  <macro name="noms_propres" p1="Anne" p2="Anna" />
   <macro name="noms_propres" p1="Catherine" p2="Catalina" />
   <macro name="noms_propres" p1="Jeanne" p2="Joana" />
   <macro name="noms_propres" p1="Auguste" p2="August" />
@@ -347,6 +363,11 @@
   <macro name="noms_propres" p1="Daniel" p2="Danièl" />
   <macro name="noms_propres" p1="Jules" p2="Juli" />
   <macro name="noms_propres" p1="Marcel" p2="Marcèl" />
+  <macro name="noms_propres" p1="Frédéric" p2="Frederic" />
+  <macro name="noms_propres" p1="Guy" p2="Gui" />
+  <macro name="noms_propres" p1="José" p2="Josèp" />
+  <macro name="noms_propres" p1="Étienne" p2="Estève" />
+  <macro name="noms_propres" p1="Raymond" p2="Raimond" />
   <macro name="noms_propres" p1="Catherine" p2="Catalina" />
   <macro name="noms_propres" p1="Catherine" p2="Catalina" />
 
