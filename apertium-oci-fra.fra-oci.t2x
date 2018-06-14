@@ -44,6 +44,24 @@
     <def-cat n="DET_def">
       <cat-item tags="Det.def.*"/>
     </def-cat>
+
+    <def-cat n="UNK">
+      <cat-item tags="unknown"/>
+    </def-cat>
+    <def-cat n="SN_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="unknown"/>
+    </def-cat>
+    <def-cat n="SN_SA_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="unknown"/>
+      <cat-item tags="unknown"/>
+      <cat-item tags="unknown.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -301,7 +319,7 @@
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="DET_def"/>
-        <pattern-item n="SN"/>
+        <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
         <out>
@@ -335,7 +353,7 @@
         <pattern-item n="SAdv"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="DET_def"/>
-        <pattern-item n="SN"/>
+        <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
         <out>
@@ -376,7 +394,7 @@
         <pattern-item n="SAdv"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="DET_def"/>
-        <pattern-item n="SN"/>
+        <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
         <out>
@@ -421,7 +439,7 @@
         <pattern-item n="PREP"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="DET_def"/>
-        <pattern-item n="SN_SA"/>
+        <pattern-item n="SN_SA_UNK"/>
       </pattern>
       <action>
         <out>
@@ -450,6 +468,17 @@
     </rule>
 
     <!-- FIN REGLAS PEL PARTITIU -->
+
+<!--
+    <rule comment="REGLA DE PROVA (posar els items que calgui per provar el match)">
+      <pattern>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+      </action>
+    </rule>
+-->
 
   </section-rules>
 </interchunk>
