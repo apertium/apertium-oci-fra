@@ -24,7 +24,7 @@ my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
 my $MOT = 'Erik';	# paraula a debugar
 my $MOT = 'Emily';	# paraula a debugar
-#my $MOT = '';
+my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
 unless ($MORF_TRACT) {
