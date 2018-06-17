@@ -35,6 +35,7 @@ unless ($MORF_TRACT) {
 #my $GEN_OCI = $ARGV[1];
 my $GEN_OCI = 0;
 #$GEN_OCI = 1 if $MORF_TRACT eq 'adv';
+$GEN_OCI = 1 if $MORF_TRACT eq 'vblex';
 
 my $AUTOR = 'capsot';
 
@@ -1624,30 +1625,46 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 			printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'ager__adv';
 			$dix_oci{$morf_oci}{$lemma_oci} = 'ager__adv';
 		} elsif ($morf_oci eq 'vblex') {
-			return 0;
-			my $a = ' a="wiktionnaire"';
+			my $a = ' a="capsot"';
 			my $stem_oci = $lemma_oci;
-			if ($lemma_oci =~ /car$/o) {
-				$stem_oci =~ s/car$//o;
-				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"abo/car__vblex\"/></e>\n",  $lemma_oci, $stem_oci;
+			if ($lemma_oci =~ /izar$/o) {
+				$stem_oci =~ s/izar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"ab/i[T]ar__vblex\" prm=\"z\"/></e>\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
-			} elsif ($lemma_oci =~ /jar$/o) {
-				$stem_oci =~ s/jar$//o;
-				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"agreu/jar__vblex\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /icar$/o) {
+				$stem_oci =~ s/icar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"revl/i[N]car__vblex\" prm=\"\"/></e>\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
-			} elsif ($lemma_oci =~ /gar$/o) {
-				$stem_oci =~ s/ar$//o;
-				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"afalag/ar__vblex\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /ejar$/o) {
+				$stem_oci =~ s/ejar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"p/e[N]jar__vblex\" prm=\"\"/></e>\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
-			} elsif ($lemma_oci =~ /çar$/o) {
-				$stem_oci =~ s/çar$//o;
-				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"abalan/çar__vblex\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /atjar$/o) {
+				$stem_oci =~ s/atjar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"encor/a[T]jar__vblex\" prm=\"t\"/></e>\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
-			} elsif ($lemma_oci =~ /ar$/o) {
-				$stem_oci =~ s/ar$//o;
-				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"abander/ar__vblex\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /iciar$/o) {
+				$stem_oci =~ s/iciar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"conc/i[L]iar__vblex\" prm=\"c\"/></e>\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
+			} elsif ($lemma_oci =~ /enciar$/o) {
+				$stem_oci =~ s/enciar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"s/e[MI]ar__vblex\" prm=\"nci\"/></e>\n",  $lemma_oci, $stem_oci;
+				$dix_oci{$morf_oci}{$lemma_oci} = 1;
+			} elsif ($lemma_oci =~ /onar$/o) {
+				$stem_oci =~ s/onar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"aband/o[N]ar__vblex\" prm=\"n\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /elar$/o) {
+				$stem_oci =~ s/elar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"cap/e[R]ar__vblex\" prm=\"l\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /ular$/o) {
+				$stem_oci =~ s/ular$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"ab/u[S]ar__vblex\" prm=\"l\"/></e>\n",  $lemma_oci, $stem_oci;
+			} elsif ($lemma_oci =~ /ausar$/o) {
+				$stem_oci =~ s/ausar$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"c/a[NT]ar__vblex\" prm=\"us\"/></e>\n",  $lemma_oci, $stem_oci;
 			} else {
+				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		}
