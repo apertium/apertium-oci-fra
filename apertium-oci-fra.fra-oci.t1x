@@ -86,6 +86,12 @@
     <def-cat n="estceque">
       <cat-item lemma="est-ce que" tags="prn.*"/>
     </def-cat>
+    <def-cat n="ce">
+      <cat-item lemma="rien" tags="prn.*"/>
+    </def-cat>
+    <def-cat n="ça">
+      <cat-item lemma="rien" tags="prn.*"/>
+    </def-cat>
 
     <def-cat n="num">
       <cat-item tags="num"/>
@@ -309,6 +315,7 @@
 
   <section-def-lists>
     <def-list n="verbs_amb_partitiu">
+      <list-item v="èsser"/>
       <list-item v="aver"/>
       <list-item v="auer"/>
       <list-item v="conéisser"/>
@@ -2940,11 +2947,15 @@
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
          <out>
            <chunk name="vbser">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
+               <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
@@ -6712,6 +6723,45 @@
     </rule>
 
   <!-- FIN REGLAS EN TRAIN DE --> 
+
+  <!-- REGLAS C'EST --> 
+
+    <rule comment="REGLA: CE VBSER: ce fut > foguèt">
+       <pattern>
+         <pattern-item n="ce"/>
+         <pattern-item n="vbser"/>
+       </pattern>
+       <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="2" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+  <!-- FIN REGLAS C'EST --> 
 
   <!-- REGLAS VBMOD + PRO + VBMOD --> 
 
