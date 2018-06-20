@@ -140,6 +140,13 @@
   </def-seqs>
 <rules>
 
+<!-- **************** REL **************** -->
+
+  <!-- qui >> que -->
+  <rule weight="0.8">
+    <match lemma="qui" tags="rel.*"><select lemma="que" tags="rel.*"/></match>
+  </rule>
+
 <!-- **************** ADV **************** -->
 
   <!-- seulement >> solament, sonque -->
@@ -277,6 +284,26 @@
   </rule>
   <rule weight="0.8">
     <match lemma="prix" tags="n.*"><select lemma="prèmi" tags="n"/></match>
+  </rule>
+
+  <!-- siège >> sèti, sètge, banc -->
+  <rule weight="0.8">
+    <match lemma="siège" tags="n.*"><select lemma="sèti,"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
+    <match lemma="de" tags="pr"/>
+    <or><match tags="np.loc"/><match tags="np.top.*"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="ville" tags="n.*"/>
+      <match lemma="château" tags="n.*"/>
+      <match lemma="forteresse" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- serveur >> servidor, garçon -->

@@ -270,6 +270,58 @@
     <match lemma="nòu" tags="adj.*"><select lemma="nouveau"/></match>
   </rule>
 
+  <!-- franc >> franc, franc_peuple -->
+  <rule weight="0.8">
+    <match lemma="franc" tags="adj.*"><select lemma="franc"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="pòble" tags="n.*"/>
+      <match lemma="rei" tags="n.*"/>
+      <match lemma="cap" tags="n.*"/>
+      <match lemma="capdill" tags="n.*"/> <!-- TRADUIR -->
+      <match lemma="soldat" tags="n.*"/>
+      <match lemma="armada" tags="n.*"/>
+      <match lemma="costuma" tags="n.*"/>
+      <match lemma="religion" tags="n.*"/>
+    </or>
+    <match lemma="franc" tags="adj.*"><select lemma="franc_peuple"/></match>
+  </rule>
+
+
+<!-- **************** N **************** -->
+
+  <!-- franc >> franc, Franc_peuple -->
+  <rule weight="0.8">
+    <match lemma="franc" tags="n.*"><select lemma="Franc_peuple"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or><match tags="num"/><match tags="num.*"/></or>
+    <match lemma="franc" tags="n.*"><select lemma="franc"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="franc" tags="n.*"><select lemma="franc"/></match>
+    <or>
+      <match lemma="francés" tags="adj.*"/>
+      <match lemma="bèlga" tags="adj.*"/>
+      <match lemma="soís" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="mièg" tags="adj.*"/>
+      <match lemma="mila" tags="n.*"/>
+      <match lemma="milièr" tags="n.*"/>
+      <match lemma="milion" tags="n.*"/>
+      <match lemma="million" tags="n.*"/>
+      <match lemma="miliard" tags="n.*"/>
+      <match lemma="bilion" tags="n.*"/>
+      <match lemma="billion" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="franc" tags="n.*"><select lemma="franc"/></match>
+  </rule>
+
 
 <!-- **************** VBLEX **************** -->
 
