@@ -435,6 +435,7 @@
       <list-item v="arabe"/>
       <list-item v="sarrasin"/>
       <list-item v="hébreu"/>
+      <list-item v="juif"/>	<!-- ce n'est pas une langue, mais il faut enlever la majuscule, si elle existe -->
       <list-item v="berbère"/>
       <list-item v="kabyle"/>
       <list-item v="touareg"/>
@@ -5426,6 +5427,58 @@
        </action>
     </rule>
 
+    <rule comment="REGLA: PERSONNE NE VERB (personne ne dit: degun ditz pas)">
+      <pattern>
+        <pattern-item n="personne"/>
+        <pattern-item n="ne"/>
+        <pattern-item n="verbconj"/>
+      </pattern>
+      <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="prn">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="1"/>
+         </out>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="3" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="pas"/>
+               <lit-tag v="adv"/>
+             </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+    
+    
   <!-- FIN REGLAS ELISION NE -->
 
   <!-- REGLAS ELISION SUBJECTE --> 
