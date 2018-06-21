@@ -3195,11 +3195,25 @@
             </out>
           </otherwise>
         </choose>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="plus"/></equal>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="moins"/></equal>
+              </or>
+            </test>
+            <let><var n="temp"/><lit-tag v="SAcomp"/></let>
+          </when>
+          <otherwise>
+            <let><var n="temp"/><lit-tag v="SA"/></let>
+          </otherwise>
+        </choose>
         <out>
           <b pos="1"/>
           <chunk name="a">
             <tags>
-              <tag><lit-tag v="SA"/></tag>
+              <tag><var n="temp"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
               <tag><clip pos="3" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
