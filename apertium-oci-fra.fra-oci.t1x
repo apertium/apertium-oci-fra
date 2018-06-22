@@ -2598,6 +2598,17 @@
       </choose>
     </def-macro>
 
+    <def-macro n="neg_imp" npar="1"> <!-- canvia imp per prs (negació) -->
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" side="sl" part="temps"/><lit-tag v="imp"/></equal>
+          </test>
+          <let><clip pos="1" side="tl" part="temps"/><lit-tag v="prs"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
     <def-macro n="f_maj_gentilici" npar="1">
 <!-- si es tracta d'un gentilici, traiem la majúscula -->
 <!-- p1 = det, p2 = n -->
@@ -5148,6 +5159,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="2"/>
          </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="2"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -5178,6 +5192,9 @@
        </pattern>
        <action>
          <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="neg_imp">
           <with-param pos="2"/>
          </call-macro>
          <call-macro n="f_bcond">
@@ -5211,6 +5228,9 @@
        </pattern>
        <action>
          <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="neg_imp">
           <with-param pos="2"/>
          </call-macro>
          <call-macro n="f_bcond">
@@ -5255,6 +5275,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="2"/>
          </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="2"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -5294,12 +5317,15 @@
          <pattern-item n="vbser"/>
        </pattern>
        <action>
+         <call-macro n="tipus_verb">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="tipus_verb">
-           <with-param pos="3"/>
          </call-macro>
          <out>
            <chunk name="pro-vbser">
@@ -5333,12 +5359,15 @@
          <pattern-item n="vbnoser"/>
        </pattern>
        <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="tipus_verb">
-          <with-param pos="3"/>
          </call-macro>
          <out>
            <chunk name="verb">
@@ -5373,12 +5402,15 @@
          <pattern-item n="jamais"/>
        </pattern>
        <action>
+         <call-macro n="tipus_verb">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="tipus_verb">
-           <with-param pos="3"/>
          </call-macro>
          <out>
            <chunk name="pro-vbser">
@@ -5422,12 +5454,15 @@
          <pattern-item n="jamais_rien"/>
        </pattern>
        <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="neg_imp">
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="tipus_verb">
-          <with-param pos="3"/>
          </call-macro>
          <out>
            <chunk name="verb">
@@ -5524,6 +5559,9 @@
        </pattern>
        <action>
          <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="neg_imp">
           <with-param pos="2"/>
          </call-macro>
          <call-macro n="f_bcond">
