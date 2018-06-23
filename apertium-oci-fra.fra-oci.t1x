@@ -71,6 +71,9 @@
       <cat-item lemma="rien" tags="prn.*"/>
       <cat-item lemma="personne" tags="prn.*"/>
     </def-cat>
+    <def-cat n="longtemps">
+      <cat-item lemma="longtemps" tags="adv"/>
+    </def-cat>
 
     <def-cat n="prn">
       <cat-item tags="prn.*"/>
@@ -90,6 +93,12 @@
       <cat-item lemma="vous" tags="prn.tn.p2.mf.pl"/>
       <cat-item lemma="il" tags="prn.tn.p3.m.pl"/>
       <cat-item lemma="il" tags="prn.tn.p3.f.pl"/>
+    </def-cat>
+    <def-cat n="il">
+      <cat-item lemma="il" tags="prn.tn.p3.m.sg"/>
+    </def-cat>
+    <def-cat n="y">
+      <cat-item lemma="y" tags="prn.pro.adv"/>
     </def-cat>
     <def-cat n="estceque">
       <cat-item lemma="est-ce que" tags="prn.*"/>
@@ -226,12 +235,47 @@
       <cat-item tags="vbmod.pp.*"/>
     </def-cat>
 
+    <def-cat n="cm">
+      <cat-item tags="cm"/>
+    </def-cat>
     <def-cat n="sent">
       <cat-item tags="sent"/>
     </def-cat>
 
     <def-cat n="train">
       <cat-item lemma="train" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="unite_temps">
+      <cat-item lemma="seconde" tags="n.*"/>
+      <cat-item lemma="minute" tags="n.*"/>
+      <cat-item lemma="heure" tags="n.*"/>
+      <cat-item lemma="jour" tags="n.*"/>
+      <cat-item lemma="journée" tags="n.*"/>
+      <cat-item lemma="semaine" tags="n.*"/>
+      <cat-item lemma="mois" tags="n.*"/>
+      <cat-item lemma="an" tags="n.*"/>
+      <cat-item lemma="année" tags="n.*"/>
+      <cat-item lemma="lustre" tags="n.*"/>
+      <cat-item lemma="décennie" tags="n.*"/>
+      <cat-item lemma="décade" tags="n.*"/>
+      <cat-item lemma="siècle" tags="n.*"/>
+      <cat-item lemma="millénaire" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="nom_mois">
+      <cat-item lemma="janvier" tags="n.*"/>
+      <cat-item lemma="février" tags="n.*"/>
+      <cat-item lemma="mars" tags="n.*"/>
+      <cat-item lemma="avril" tags="n.*"/>
+      <cat-item lemma="mai" tags="n.*"/>
+      <cat-item lemma="juin" tags="n.*"/>
+      <cat-item lemma="juillet" tags="n.*"/>
+      <cat-item lemma="août" tags="n.*"/>
+      <cat-item lemma="septembre" tags="n.*"/>
+      <cat-item lemma="octobre" tags="n.*"/>
+      <cat-item lemma="novembre" tags="n.*"/>
+      <cat-item lemma="décembre" tags="n.*"/>
     </def-cat>
 
   </section-def-cats>
@@ -335,6 +379,21 @@
   </section-def-vars>
 
   <section-def-lists>
+    <def-list n="mois">
+      <list-item v="janvier"/>
+      <list-item v="février"/>
+      <list-item v="mars"/>
+      <list-item v="avril"/>
+      <list-item v="mai"/>
+      <list-item v="juin"/>
+      <list-item v="juillet"/>
+      <list-item v="août"/>
+      <list-item v="septembre"/>
+      <list-item v="octobre"/>
+      <list-item v="novembre"/>
+      <list-item v="décembre"/>
+    </def-list>
+
     <def-list n="verbs_amb_partitiu">
       <list-item v="èsser"/>
       <list-item v="aver"/>
@@ -2848,7 +2907,7 @@
           <with-param pos="1"/>
         </call-macro>
         <out>
-         <chunk name="n">
+         <chunk name="num">
            <tags>
              <tag><lit-tag v="Num"/></tag>
            </tags>
@@ -3405,44 +3464,85 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
         </call-macro>
-        <out>
-          <chunk name="det">
-            <tags>
-              <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
-              <tag><clip pos="2" side="tl" part="gen"/></tag>
-              <tag><clip pos="2" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-          <b pos="1"/>
-          <chunk name="num_n">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><clip pos="3" side="tl" part="gen"/></tag>
-              <tag><clip pos="3" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-              <lu>
-                <clip pos="2" side="tl" part="lemh"/>
-                <clip pos="2" side="tl" part="tags"/>
-                <clip pos="2" side="tl" part="lemq"/>
-              </lu>
-              <b pos="2"/>
-              <lu>
-                <clip pos="3" side="tl" part="lemh"/>
-                <clip pos="3" side="tl" part="tags"/>
-                <clip pos="3" side="tl" part="lemq"/>
-              </lu>
-            </chunk>
-         </out>
+        <choose>
+          <when>
+            <test>
+              <in caseless="yes">
+                <clip pos="3" side="sl" part="lem"/>
+                <list n="mois"/>
+              </in>
+            </test>
+            <out>
+              <chunk name="date">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="whole"/>
+                </lu>
+                <b pos="2"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+              <chunk name="num_n">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                  <lu>
+                    <clip pos="2" side="tl" part="lemh"/>
+                    <clip pos="2" side="tl" part="tags"/>
+                    <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+                  <b pos="2"/>
+                  <lu>
+                    <clip pos="3" side="tl" part="lemh"/>
+                    <clip pos="3" side="tl" part="tags"/>
+                    <clip pos="3" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+             </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -3927,28 +4027,65 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
-        <out>
-          <chunk name="num_n">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><clip pos="2" side="tl" part="gen"/></tag>
-              <tag><clip pos="2" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-              <lu>
-                <clip pos="1" side="tl" part="lemh"/>
-                <clip pos="1" side="tl" part="tags"/>
-                <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-              <b pos="1"/>
-              <lu>
-                <clip pos="2" side="tl" part="lemh"/>
-                <clip pos="2" side="tl" part="tags"/>
-                <clip pos="2" side="tl" part="lemq"/>
-              </lu>
-            </chunk>
-         </out>
+        <choose>
+          <when>
+            <test>
+              <in caseless="yes">
+                <clip pos="2" side="sl" part="lem"/>
+                <list n="mois"/>
+              </in>
+            </test>
+            <out>
+              <chunk name="date">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="num_n">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="tags"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                  <b pos="1"/>
+                  <lu>
+                    <clip pos="2" side="tl" part="lemh"/>
+                    <clip pos="2" side="tl" part="tags"/>
+                    <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+             </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -4405,6 +4542,324 @@
     </rule>
 
     <!-- FIN REGLAS TOP -->
+
+    <!-- REGLAS DATAS -->
+
+   <rule comment="REGLA: NUMERAL NOM NUM (20 novembre 1998: 20 de novembre de 1998)">
+      <pattern>
+        <pattern-item n="num"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <in caseless="yes">
+                <clip pos="2" side="sl" part="lem"/>
+                <list n="mois"/>
+              </in>
+            </test>
+            <out>
+              <chunk name="date">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+                <b pos="2"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+              </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="num-nom">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              <b pos="2"/>
+              <chunk name="num">
+                <tags>
+                  <tag><lit-tag v="Num"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="3" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+
+   <rule comment="REGLA: DET NUMERAL NOM NUM (le 20 novembre 1998: lo 20 de novembre de 1998)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord4">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="3"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <in caseless="yes">
+                <clip pos="3" side="sl" part="lem"/>
+                <list n="mois"/>
+              </in>
+            </test>
+            <out>
+              <chunk name="date">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="whole"/>
+                </lu>
+                <b pos="2"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+                <b pos="3"/>
+                <lu>
+                  <lit v="de"/>
+                  <lit-tag v="pr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="4" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+              </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="det">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+              <chunk name="num-nom">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="whole"/>
+                </lu>
+                <b pos="2"/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+              <b pos="3"/>
+              <chunk name="num">
+                <tags>
+                  <tag><lit-tag v="Num"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="4" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+
+    <rule comment="REGLA: il y a X temps > fa X temps">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+        <pattern-item n="num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="v">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="far"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <clip pos="3" side="tl" part="pers"/>
+              <clip pos="3" side="tl" part="nbr"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: il y a longtemps > fa temps">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+        <pattern-item n="longtemps"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="v">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="far"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <clip pos="3" side="tl" part="pers"/>
+              <clip pos="3" side="tl" part="nbr"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <get-case-from pos="3">
+                <lit v="temps"/>
+              </get-case-from>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS DATAS -->
 
     <!-- REGLAS CAMBI AUXILIAR -->
 
@@ -7331,6 +7786,24 @@
            <with-param pos="2"/>
         </call-macro>
        </action>
+    </rule>
+
+    <rule comment="REGLA: CM">
+      <pattern>
+        <pattern-item n="cm"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cm">
+            <tags>
+              <tag><lit-tag v="CM"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
     </rule>
 
     <rule comment="REGLA: SENT">
