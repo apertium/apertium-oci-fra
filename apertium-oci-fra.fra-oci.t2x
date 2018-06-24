@@ -43,6 +43,14 @@
     <def-cat n="PREP_de">
       <cat-item tags="PREP.de"/>
     </def-cat>
+    <def-cat n="SENT_PREP_CNJ_REL">
+      <cat-item tags="SENT"/>
+      <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjadv"/>
+      <cat-item tags="Rel"/>
+    </def-cat>
     <def-cat n="DET">
       <cat-item tags="Det"/>
       <cat-item tags="Det.*"/>
@@ -68,6 +76,13 @@
       <cat-item tags="unknown"/>
       <cat-item tags="unknown"/>
       <cat-item tags="unknown.*"/>
+    </def-cat>
+
+    <def-cat n="SENT">
+      <cat-item tags="SENT"/>
+    </def-cat>
+    <def-cat n="CM">
+      <cat-item tags="CM"/>
     </def-cat>
   </section-def-cats>
 
@@ -480,7 +495,7 @@
 
     <rule comment="REGLA: PR PR_de DET_def SN: élimination de l'article définit du partitif: avec des amis > amb d'amics">
       <pattern>
-        <pattern-item n="PREP"/>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="DET_def"/>
         <pattern-item n="SN_SA_UNK"/>
@@ -506,6 +521,46 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CM PR_de DET_def SN SV: élimination de l'article définit du partitif">
+      <pattern>
+        <pattern-item n="CM"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
       </action>
