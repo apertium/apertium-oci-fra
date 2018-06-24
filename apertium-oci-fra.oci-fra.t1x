@@ -111,6 +111,10 @@
       <attr-item tags="vbmod"/>
     </def-attr>
 
+    <def-attr n="a_num">
+      <attr-item tags="num"/>
+    </def-attr>
+
     <def-attr n="nbr">
       <attr-item tags="sg"/>
       <attr-item tags="pl"/>
@@ -173,11 +177,11 @@
           </let>
     </def-macro>
 
-    <def-macro n="f_concord1" npar="1">
-
-      <choose><!--To determine value of variables of gender and
-                  number and propagate to other rules.  Variables are
-                  not used again in this rule -->
+    <def-macro n="f_concord0" npar="1">
+      <choose>
+<!--To determine value of variables of gender and
+                 number and propagate to other rules.  Variables are
+                 not used again in this rule -->
         <when>
           <test>
             <equal>
@@ -185,7 +189,10 @@
               <lit-tag v="m"/>
             </equal>
           </test>
-          <let><var n="genero"/><lit-tag v="m"/></let>
+          <let>
+            <var n="genero"/>
+            <lit-tag v="m"/>
+          </let>
         </when>
         <when>
           <test>
@@ -194,7 +201,10 @@
               <lit-tag v="f"/>
             </equal>
           </test>
-          <let><var n="genero"/><lit-tag v="f"/></let>
+          <let>
+            <var n="genero"/>
+            <lit-tag v="f"/>
+          </let>
         </when>
       </choose>
       <choose>
@@ -205,7 +215,10 @@
               <lit-tag v="sg"/>
             </equal>
           </test>
-          <let><var n="numero"/><lit-tag v="sg"/></let>
+          <let>
+            <var n="numero"/>
+            <lit-tag v="sg"/>
+          </let>
         </when>
         <when>
           <test>
@@ -214,15 +227,23 @@
               <lit-tag v="pl"/>
             </equal>
           </test>
-          <let><var n="numero"/><lit-tag v="pl"/></let>
+          <let>
+            <var n="numero"/>
+            <lit-tag v="pl"/>
+          </let>
         </when>
       </choose>
+    </def-macro>
+
+    <def-macro n="f_concord1" npar="1">
+      <call-macro n="f_concord0"><with-param pos="1"/></call-macro>
       <choose>
         <when>
-          <test> <!-- If word has GD or ND, we try to assign the
-                      gender or number of the previous rule. If there is no
-                      value for the gender or number variable from previous
-                      rules, gender will be masculine and number singular.-->
+          <test>
+<!-- If word has GD or ND, we try to assign the
+              gender or number of the previous rule. If there is no
+              value for the gender or number variable from previous
+              rules, gender will be masculine and number singular.-->
             <equal>
               <clip pos="1" side="tl" part="gen"/>
               <lit-tag v="GD"/>
@@ -236,10 +257,16 @@
                   <lit-tag v="f"/>
                 </equal>
               </test>
-              <let><clip pos="1" side="tl" part="gen"/><lit-tag v="f"/></let>
+              <let>
+                <clip pos="1" side="tl" part="gen"/>
+                <lit-tag v="f"/>
+              </let>
             </when>
             <otherwise>
-              <let><clip pos="1" side="tl" part="gen"/><lit-tag v="m"/></let>
+              <let>
+                <clip pos="1" side="tl" part="gen"/>
+                <lit-tag v="m"/>
+              </let>
             </otherwise>
           </choose>
         </when>
@@ -260,10 +287,16 @@
                   <lit-tag v="pl"/>
                 </equal>
               </test>
-              <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></let>
+              <let>
+                <clip pos="1" side="tl" part="nbr"/>
+                <lit-tag v="pl"/>
+              </let>
             </when>
             <otherwise>
-              <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></let>
+              <let>
+                <clip pos="1" side="tl" part="nbr"/>
+                <lit-tag v="sg"/>
+              </let>
             </otherwise>
           </choose>
         </when>
@@ -273,7 +306,8 @@
     <def-macro n="f_concord2" npar="2">
       <choose>
         <when>
-          <test> <!-- do the main and second parameter gender agree?-->
+          <test>
+<!-- do the main and second parameter gender agree?-->
             <and>
               <or>
                 <equal>
@@ -290,7 +324,8 @@
                 </equal>
               </or>
               <or>
-                <equal> <!-- do the main and second parameter number agree?-->
+                <equal>
+<!-- do the main and second parameter number agree?-->
                   <clip pos="2" side="sl" part="nbr"/>
                   <clip pos="1" side="sl" part="nbr"/>
                 </equal>
@@ -305,16 +340,24 @@
               </or>
             </and>
           </test>
-          <let><var n="concPrimero"/><lit v="true"/></let><!-- there is gender and number agreement-->
+          <let>
+            <var n="concPrimero"/>
+            <lit v="true"/>
+          </let>
+<!-- there is gender and number agreement-->
         </when>
         <otherwise>
-          <let><var n="concPrimero"/><lit v="false"/></let><!-- there isn't gender and number agreement-->
+          <let>
+            <var n="concPrimero"/>
+            <lit v="false"/>
+          </let>
+<!-- there isn't gender and number agreement-->
         </otherwise>
       </choose>
-
       <choose>
         <when>
-          <test> <!-- Propagate the main parameter gender if it has been modified during the translation  -->
+          <test>
+<!-- Propagate the main parameter gender if it has been modified during the translation  -->
             <and>
               <not>
                 <equal>
@@ -376,7 +419,8 @@
       </choose>
       <choose>
         <when>
-          <test> <!-- Propagate the main parameter number if it has been modified during the translation  -->
+          <test>
+<!-- Propagate the main parameter number if it has been modified during the translation  -->
             <and>
               <not>
                 <equal>
@@ -436,10 +480,10 @@
           </choose>
         </when>
       </choose>
-
       <choose>
         <when>
-          <test> <!-- Which is the rule general gender? -->
+          <test>
+<!-- Which is the rule general gender? -->
             <equal>
               <clip pos="1" side="tl" part="gen"/>
               <lit-tag v="m"/>
@@ -533,11 +577,9 @@
           </let>
         </otherwise>
       </choose>
-
-
-
       <choose>
-        <when><!-- Which is the rule general number? -->
+        <when>
+<!-- Which is the rule general number? -->
           <test>
             <equal>
               <clip pos="1" side="tl" part="nbr"/>
@@ -585,6 +627,28 @@
             <lit-tag v="pl"/>
           </let>
         </when>
+
+        <when>
+          <test>
+            <and>
+            <equal>
+              <clip pos="2" side="tl" part="a_num"/>
+              <lit-tag v="num"/>
+            </equal>
+            <not>
+            <equal>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit v="1"/>
+            </equal>
+            </not>
+            </and>
+          </test>
+          <let>
+            <var n="numero"/>
+            <lit-tag v="pl"/>
+          </let>
+        </when>
+
         <when>
           <test>
             <and>
@@ -625,28 +689,6 @@
             <clip pos="2" side="sl" part="nbr"/>
           </let>
         </when>
-        <when>
-          <test>
-            <and>
-              <equal>
-                <clip pos="2" side="tl" part="nbr"/>
-                <lit-tag v="sp"/>
-              </equal>
-              <equal>
-                <clip pos="1" side="tl" part="nbr"/>
-                <lit-tag v="ND"/>
-              </equal>
-              <equal>
-                <clip pos="2" side="tl" part="a_num"/>
-                <lit-tag v="num"/>
-              </equal>
-            </and>
-          </test>
-          <let>
-            <var n="numero"/>
-            <lit-tag v="pl"/>
-          </let>
-        </when>
         <otherwise>
           <let>
             <var n="numero"/>
@@ -654,8 +696,8 @@
           </let>
         </otherwise>
       </choose>
-
-      <choose> <!-- Determine gender and number value if they are undetermined -->
+      <choose>
+<!-- Determine gender and number value if they are undetermined -->
         <when>
           <test>
             <equal>
@@ -714,7 +756,8 @@
     </def-macro>
 
     <def-macro n="f_concord3" npar="3">
-      <choose><!-- Look whether in source language there is concordance between first and second element -->
+      <choose>
+<!-- Look whether in source language there is concordance between first and second element -->
         <when>
           <test>
             <and>
@@ -748,13 +791,20 @@
               </or>
             </and>
           </test>
-          <let><var n="concPrimero"/><lit v="true"/></let>
+          <let>
+            <var n="concPrimero"/>
+            <lit v="true"/>
+          </let>
         </when>
         <otherwise>
-          <let><var n="concPrimero"/><lit v="false"/></let>
+          <let>
+            <var n="concPrimero"/>
+            <lit v="false"/>
+          </let>
         </otherwise>
       </choose>
-      <choose><!-- Look whether in source language there is concordance between second and third element -->
+      <choose>
+<!-- Look whether in source language there is concordance between second and third element -->
         <when>
           <test>
             <and>
@@ -788,15 +838,20 @@
               </or>
             </and>
           </test>
-          <let><var n="concSegundo"/><lit v="true"/></let>
+          <let>
+            <var n="concSegundo"/>
+            <lit v="true"/>
+          </let>
         </when>
         <otherwise>
-          <let><var n="concSegundo"/><lit v="false"/></let>
+          <let>
+            <var n="concSegundo"/>
+            <lit v="false"/>
+          </let>
         </otherwise>
       </choose>
-
-
-      <choose><!-- Propagate the main parameter gender if it has been modified during the translation -->
+      <choose>
+<!-- Propagate the main parameter gender if it has been modified during the translation -->
         <when>
           <test>
             <and>
@@ -894,8 +949,8 @@
           </choose>
         </when>
       </choose>
-
-      <choose><!-- Propagate the main parameter number if it has been modified during the translation -->
+      <choose>
+<!-- Propagate the main parameter number if it has been modified during the translation -->
         <when>
           <test>
             <and>
@@ -993,10 +1048,8 @@
           </choose>
         </when>
       </choose>
-
-
-
-      <choose> <!-- Determine the rule general gender. Priority order: main, second and third element -->
+      <choose>
+<!-- Determine the rule general gender. Priority order: main, second and third element -->
         <when>
           <test>
             <equal>
@@ -1136,8 +1189,8 @@
           </let>
         </otherwise>
       </choose>
-
-      <choose><!-- Determine the rule general number. Priority order: main, second and third element -->
+      <choose>
+<!-- Determine the rule general number. Priority order: main, second and third element -->
         <when>
           <test>
             <equal>
@@ -1270,28 +1323,6 @@
             <clip pos="3" side="sl" part="nbr"/>
           </let>
         </when>
-        <when>
-          <test>
-            <and>
-              <equal>
-                <clip pos="2" side="tl" part="nbr"/>
-                <lit-tag v="sp"/>
-              </equal>
-              <equal>
-                <clip pos="1" side="tl" part="nbr"/>
-                <lit-tag v="ND"/>
-              </equal>
-              <equal>
-                <clip pos="2" side="tl" part="a_num"/>
-                <lit-tag v="num"/>
-              </equal>
-            </and>
-          </test>
-          <let>
-            <var n="numero"/>
-            <lit-tag v="pl"/>
-          </let>
-        </when>
         <otherwise>
           <let>
             <var n="numero"/>
@@ -1299,8 +1330,8 @@
           </let>
         </otherwise>
       </choose>
-
-      <choose> <!-- Assign values to GD and ND -->
+      <choose>
+<!-- Assign values to GD and ND -->
         <when>
           <test>
             <equal>
@@ -1421,13 +1452,18 @@
               </or>
             </and>
           </test>
-          <let><var n="concPrimero"/><lit v="true"/></let>
+          <let>
+            <var n="concPrimero"/>
+            <lit v="true"/>
+          </let>
         </when>
         <otherwise>
-          <let><var n="concPrimero"/><lit v="false"/></let>
+          <let>
+            <var n="concPrimero"/>
+            <lit v="false"/>
+          </let>
         </otherwise>
       </choose>
-
       <choose>
         <when>
           <test>
@@ -1462,13 +1498,18 @@
               </or>
             </and>
           </test>
-          <let><var n="concSegundo"/><lit v="true"/></let>
+          <let>
+            <var n="concSegundo"/>
+            <lit v="true"/>
+          </let>
         </when>
         <otherwise>
-          <let><var n="concSegundo"/><lit v="false"/></let>
+          <let>
+            <var n="concSegundo"/>
+            <lit v="false"/>
+          </let>
         </otherwise>
       </choose>
-
       <choose>
         <when>
           <test>
@@ -1503,14 +1544,18 @@
               </or>
             </and>
           </test>
-          <let><var n="concTercero"/><lit v="true"/></let>
+          <let>
+            <var n="concTercero"/>
+            <lit v="true"/>
+          </let>
         </when>
         <otherwise>
-          <let><var n="concTercero"/><lit v="false"/></let>
+          <let>
+            <var n="concTercero"/>
+            <lit v="false"/>
+          </let>
         </otherwise>
       </choose>
-
-
       <choose>
         <when>
           <test>
@@ -1645,7 +1690,6 @@
           </choose>
         </when>
       </choose>
-
       <choose>
         <when>
           <test>
@@ -1780,7 +1824,6 @@
           </choose>
         </when>
       </choose>
-
       <choose>
         <when>
           <test>
@@ -1884,9 +1927,7 @@
             <lit-tag v="m"/>
           </let>
         </otherwise>
-
       </choose>
-
       <choose>
         <when>
           <test>
@@ -1991,7 +2032,6 @@
           </let>
         </otherwise>
       </choose>
-
       <choose>
         <when>
           <test>
