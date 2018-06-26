@@ -32,10 +32,10 @@ unless ($MORF_TRACT) {
 	exit 1;
 }
 
-#my $GEN_OCI = $ARGV[1];
-my $GEN_OCI = 0;
+my $GEN_OCI = $ARGV[1];
+#my $GEN_OCI = 0;
 #$GEN_OCI = 1 if $MORF_TRACT eq 'adv';
-$GEN_OCI = 1 if $MORF_TRACT eq 'vblex';
+#$GEN_OCI = 1 if $MORF_TRACT eq 'vblex';
 
 my $AUTOR = 'capsot';
 
@@ -279,7 +279,8 @@ print "1. fitxer bidix, $linia\n" if $MOT && $linia =~ />$MOT</o;
 		if ($linia =~ m|<e> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o
 			|| $linia =~ m|<e vr="[^"]*"> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o
 			|| $linia =~ m|<e alt="[^"]*".*> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o
-			|| $linia =~ m|<e a="[^"]*"> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o) {
+			|| $linia =~ m|<e a="[^"]*"> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o
+			|| $linia =~ m|<e a="[^"]*" alt="[^"]*".*> *<p><l>([^<]*)<s n="([^"]*)".*<r>([^<]*)<s|o) {
 			$lemma_oci = $1;
 			$morf = $2;
 			$lemma_fra = $3;
@@ -1622,8 +1623,28 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 			my $stem_oci = $lemma_oci;
 			$stem_oci =~ s| |<b/>|og;
 			my $a = " a=\"$autor\"" if $autor;
-			printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'ager__adv';
+
+			if ($lemma_oci =~ /[^b]lament$/o) {
+				$stem_oci =~ s/lament$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'accidenta/lament__adv';
+			} elsif ($lemma_oci =~ /aument$/o) {
+				$lemma_oci =~ s/aument$/alament/o;
+				$stem_oci =~ s/aument$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'accidenta/lament__adv';
+			} elsif ($lemma_oci =~ /vament$/o) {
+				$stem_oci =~ s/vament$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'acti/vament__adv';
+			} elsif ($lemma_oci =~ /uament$/o) {
+				$lemma_oci =~ s/uament$/vament/o;
+				$stem_oci =~ s/uament$//o;
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'acti/vament__adv';
+			} elsif ($lemma_oci =~ /ment$/o) {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'adequadament__adv';
+			} else {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'ager__adv';
+			}
 			$dix_oci{$morf_oci}{$lemma_oci} = 'ager__adv';
+
 		} elsif ($morf_oci eq 'vblex') {
 			my $a = ' a="capsot"';
 			my $stem_oci = $lemma_oci;
@@ -1802,6 +1823,7 @@ next if $linia !~ /<ant>/o && $MORF_TRACT =~ /^ant/o;
 	$linia =~ s|#|# |og;	# per evitar errors com "faire#pression sur"
 	$linia =~ s|' |'|og;	# coup d' État
 	$linia =~ s| +| |og;
+	$linia =~ s|  | |og;
 	$linia =~ s|’|'|og;
 
 	# arreglem majúscules
