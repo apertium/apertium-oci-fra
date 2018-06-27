@@ -39,6 +39,9 @@
     <def-cat n="advitg">
       <cat-item tags="adv.itg"/>
     </def-cat>
+    <def-cat n="preadv">
+      <cat-item tags="preadv"/>
+    </def-cat>
     <def-cat n="adv_preadv">
       <cat-item tags="adv"/>
       <cat-item tags="preadv"/>
@@ -430,10 +433,14 @@
       <list-item v="èsser"/>
       <list-item v="encontrar"/>
       <list-item v="ganhar"/>
+      <list-item v="introdusir"/>
+      <list-item v="introduire"/>
       <list-item v="mandar"/>
       <list-item v="manjar"/>
       <list-item v="manténer"/>
       <list-item v="memorizar"/>
+      <list-item v="reintrodusir"/>
+      <list-item v="reintroduire"/>
       <list-item v="rencontrar"/>
       <list-item v="tranmetre"/>
       <list-item v="televizar"/>
@@ -2873,6 +2880,33 @@
               <clip pos="1" side="tl" part="lemh"/>
               <clip pos="1" side="tl" part="tags"/>
               <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
+      <pattern>
+        <pattern-item n="preadv"/>
+        <pattern-item n="adv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="preadv_adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
