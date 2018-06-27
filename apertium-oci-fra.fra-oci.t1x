@@ -254,6 +254,12 @@
     <def-cat n="cm">
       <cat-item tags="cm"/>
     </def-cat>
+    <def-cat n="lpar">
+      <cat-item tags="lpar"/>
+    </def-cat>
+    <def-cat n="rpar">
+      <cat-item tags="rpar"/>
+    </def-cat>
     <def-cat n="sent">
       <cat-item tags="sent"/>
     </def-cat>
@@ -7973,6 +7979,78 @@
            <with-param pos="2"/>
         </call-macro>
        </action>
+    </rule>
+
+    <rule comment="REGLA: LPAR">
+      <pattern>
+        <pattern-item n="lpar"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="lpar">
+            <tags>
+              <tag><lit-tag v="LPAR"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: RPAR">
+      <pattern>
+        <pattern-item n="rpar"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="rpar">
+            <tags>
+              <tag><lit-tag v="RPAR"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CM">
+      <pattern>
+        <pattern-item n="cm"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cm">
+            <tags>
+              <tag><lit-tag v="CM"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CM">
+      <pattern>
+        <pattern-item n="cm"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="cm">
+            <tags>
+              <tag><lit-tag v="CM"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
     </rule>
 
     <rule comment="REGLA: CM">
