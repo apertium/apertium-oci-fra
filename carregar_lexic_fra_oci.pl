@@ -23,7 +23,8 @@ use utf8;
 my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
 my $MOT = 'Nacions';	# paraula a debugar
-my $MOT = '';
+my $MOT = 'Alpes-Maritimes';	# paraula a debugar
+#my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
 unless ($MORF_TRACT) {
@@ -1673,9 +1674,29 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 		if ($morf_oci eq 'adj') {
 			return 0;
 		} elsif ($morf_oci eq 'n') {
+			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'top') {
-			return 0;
+			my $stem_oci = $lemma_oci;
+			$stem_oci =~ s| |<b/>|og;
+			my $a = " a=\"$autor\"" if $autor;
+
+			if ($dix_fra{$morf_fra}{$lemma_fra} eq 'Bulgarie__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Bulgaria__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Bulgaria__np';
+			} elsif ($dix_fra{$morf_fra}{$lemma_fra} eq 'Iran__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Iran__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Iran__np';
+			} elsif ($dix_fra{$morf_fra}{$lemma_fra} eq 'Bahamas__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Bahamas__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Bahamas__np';
+			} elsif ($dix_fra{$morf_fra}{$lemma_fra} eq 'États-Unis__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Estats_Units__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Estats_Units__np';
+			} else {
+				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				return 0;
+			}
 		} elsif ($morf_oci eq 'al') {
 			my $stem_oci = $lemma_oci;
 			$stem_oci =~ s| |<b/>|og;
@@ -1697,12 +1718,16 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				return 0;
 			}
 		} elsif ($morf_oci eq 'antm') {
+			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'antf') {
+			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'pr') {
+			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'cnjadv') {
+			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'adv') {
 			my $stem_oci = $lemma_oci;
@@ -1797,6 +1822,7 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 		return 0;
 	}
 
+print "0.0.\n" if $MOT && ($lemma_oci =~ /$MOT/o || $lemma_fra =~ /$MOT/o);
 	if (exists $dix_fra_oci{$morf_fra}{$lemma_fra}) {
 		# ja existeix una traducció per al lema fra
 print "1.0.\n" if $MOT && ($lemma_oci =~ /$MOT/o || $lemma_fra =~ /$MOT/o);
