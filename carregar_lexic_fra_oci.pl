@@ -24,7 +24,7 @@ my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
 my $MOT = 'Nacions';	# paraula a debugar
 my $MOT = 'Alpes-Maritimes';	# paraula a debugar
-#my $MOT = '';
+my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
 unless ($MORF_TRACT) {
@@ -1715,14 +1715,29 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Jeux_olympiques__np';
 				$dix_oci{$morf_oci}{$lemma_oci} = 'Jeux_olympiques__n';
 			} else {
+				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		} elsif ($morf_oci eq 'antm') {
-			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
-			return 0;
+			my $stem_oci = $lemma_oci;
+			$stem_oci =~ s| |<b/>|og;
+			my $a = " a=\"$autor\"" if $autor;
+
+			if ($dix_fra{$morf_fra}{$lemma_fra} eq 'Antoine__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Antòni__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Antòni__np';
+			} else {
+				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				return 0;
+			}
 		} elsif ($morf_oci eq 'antf') {
-			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
-			return 0;
+			if ($dix_fra{$morf_fra}{$lemma_fra} eq 'Marie__np') {
+				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Aitana__np';
+				$dix_oci{$morf_oci}{$lemma_oci} = 'Aitana__np';
+			} else {
+				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				return 0;
+			}
 		} elsif ($morf_oci eq 'pr') {
 			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
