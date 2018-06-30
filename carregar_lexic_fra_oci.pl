@@ -23,7 +23,7 @@ use utf8;
 my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
 my $MOT = 'Nacions';	# paraula a debugar
-my $MOT = 'Alpes-Maritimes';	# paraula a debugar
+my $MOT = 'Nivernais';	# paraula a debugar
 my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
@@ -1670,11 +1670,16 @@ print "1. tractar_parella ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 	$lemma_oci =~ s/#//o;
 }
+	if (!$dix_fra{$morf_fra}{$lemma_fra}) {
+		print STDERR "9. Falta fra $lemma_fra <$morf_fra>, l. $n_linia\n";
+		return 0;
+	}
+
 	if ($GEN_OCI && !$dix_oci{$morf_oci}{$lemma_oci}) {
 		if ($morf_oci eq 'adj') {
 			return 0;
 		} elsif ($morf_oci eq 'n') {
-			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+			print STDERR "0a. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'top') {
 			my $stem_oci = $lemma_oci;
@@ -1694,7 +1699,7 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Estats_Units__np';
 				$dix_oci{$morf_oci}{$lemma_oci} = 'Estats_Units__np';
 			} else {
-				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				print STDERR "0b. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		} elsif ($morf_oci eq 'al') {
@@ -1715,7 +1720,7 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Jeux_olympiques__np';
 				$dix_oci{$morf_oci}{$lemma_oci} = 'Jeux_olympiques__n';
 			} else {
-				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				print STDERR "0c. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		} elsif ($morf_oci eq 'antm') {
@@ -1727,7 +1732,7 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Antòni__np';
 				$dix_oci{$morf_oci}{$lemma_oci} = 'Antòni__np';
 			} else {
-				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				print STDERR "0d. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		} elsif ($morf_oci eq 'antf') {
@@ -1735,14 +1740,14 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'Aitana__np';
 				$dix_oci{$morf_oci}{$lemma_oci} = 'Aitana__np';
 			} else {
-				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				print STDERR "0e. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		} elsif ($morf_oci eq 'pr') {
-			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+			print STDERR "0f. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'cnjadv') {
-			print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+			print STDERR "0g. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 			return 0;
 		} elsif ($morf_oci eq 'adv') {
 			my $stem_oci = $lemma_oci;
@@ -1826,14 +1831,14 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 				printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"magr/èrem__vblex\"/></e> <!-- VERIFICAR -->\n",  $lemma_oci, $stem_oci;
 				$dix_oci{$morf_oci}{$lemma_oci} = 1;
 			} else {
-				print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				print STDERR "0h. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 				return 0;
 			}
 		}
 	}
 
 	if (!$GEN_OCI && !$dix_oci{$morf_oci}{$lemma_oci}) {
-		print STDERR "0. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+		print STDERR "0z. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
 		return 0;
 	}
 
