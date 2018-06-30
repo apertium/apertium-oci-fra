@@ -24,6 +24,9 @@
       <cat-item tags="np.top.*"/>
       <cat-item tags="np.loc"/>
     </def-cat>
+    <def-cat n="npal">
+      <cat-item tags="np.al.*"/>
+    </def-cat>
 
     <def-cat n="adj">
       <cat-item tags="adj.*"/>
@@ -3300,6 +3303,54 @@
       </action>
     </rule>
 
+    <rule comment="REGLA: DET NPAL (les Calandretas > las Calandretas)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="npal"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: DET ADV ADJ">
       <pattern>
         <pattern-item n="det"/>
@@ -4195,6 +4246,39 @@
                   <clip pos="2" side="tl" part="lemh"/>
                   <clip pos="2" side="tl" part="tags"/>
                   <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <when>
+            <test>
+              <and>
+                <or>
+                  <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="siècle"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="millennaire"/></equal>
+                </or>
+                <equal><clip pos="1" side="sl" part="gen"/><lit-tag v="mf"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="n_num">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemg"/>
                 </lu>
               </chunk>
             </out>
