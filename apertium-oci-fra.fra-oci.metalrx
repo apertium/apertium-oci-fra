@@ -323,17 +323,92 @@
 
 <!-- **************** VBLEX **************** -->
 
-  <!-- tourner >> virar, girar -->
+  <!-- tourner >> virar, rodar -->
   <rule weight="0.8">
     <match lemma="tourner" tags="vblex.*"><select lemma="virar"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="tourner" tags="vblex.*"><select lemma="tourner"/></match>
+    <match lemma="tourner" tags="vblex.*"><select lemma="rodar"/></match>
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
     <match tags="det.*"/>
     <match lemma="film" tags="n.*"/>
+  </rule>
+
+  <!-- appeler >> cridar, sonar -->
+  <rule weight="0.8">
+    <match lemma="appeler" tags="vblex.*"><select lemma="cridar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.p1.*.sg"/>
+    <match lemma="appeler" tags="vblex.*.p1.sg"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.p2.*.sg"/>
+    <match lemma="appeler" tags="vblex.*.p2.sg"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.ref.p3.*.sp"/>
+    <or>
+      <match lemma="appeler" tags="vblex.*.p3.sg"><select lemma="sonar"/></match>
+      <match lemma="appeler" tags="vblex.*.p3.pl"><select lemma="sonar"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.p1.*.pl"/>
+    <match lemma="appeler" tags="vblex.*.p1.pl"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.p2.*.pl"/>
+    <match lemma="appeler" tags="vblex.*.p2.pl"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.p3.*"/>
+    <match lemma="appeler" tags="vblex.*.p3.*"><select lemma="sonar"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="np.ant"/>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="aller" tags="vblex.*.p3.sg"/>
+      <match lemma="aller" tags="vblex.*.p3.pl"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="prn.pro.ref.p3.*.sp"/>
+    <match lemma="appeler" tags="vblex.inf"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <match lemma="appeler" tags="vblex.pp.*"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="n.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adj"/>
+    </repeat>
+    <match lemma="appeler" tags="vblex.pp.*"><select lemma="sonar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="cm"/>
+      <match tags="lpar"/>
+    </or>
+    <match lemma="appeler" tags="vblex.pp.*"><select lemma="sonar"/></match>
   </rule>
 
 <!-- **************** NP **************** -->
@@ -449,6 +524,7 @@
   <macro name="noms_propres" p1="Josiane" p2="Josiana" />
   <macro name="noms_propres" p1="Rosine" p2="Rosina" />
   <macro name="noms_propres" p1="Ludivine" p2="Ludivina" />
+  <macro name="noms_propres" p1="Édouard" p2="Edoard" />
 
 </rules>
 </metalrx>
