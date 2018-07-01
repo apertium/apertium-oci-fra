@@ -8,6 +8,9 @@
     <def-cat n="detdef">
       <cat-item tags="det.def.*"/>
     </def-cat>
+    <def-cat n="ce_det">
+      <cat-item lemma="ce" tags="det.dem.*"/>
+    </def-cat>
 
     <def-cat n="predet">
       <cat-item tags="predet.*"/>
@@ -86,6 +89,12 @@
     <def-cat n="longtemps">
       <cat-item lemma="longtemps" tags="adv"/>
     </def-cat>
+    <def-cat n="ci_adv">
+      <cat-item lemma="ci" tags="adv"/>
+    </def-cat>
+    <def-cat n="la_adv">
+      <cat-item lemma="là" tags="adv"/>
+    </def-cat>
 
     <def-cat n="prn">
       <cat-item tags="prn.*"/>
@@ -108,6 +117,9 @@
     </def-cat>
     <def-cat n="il">
       <cat-item lemma="il" tags="prn.tn.p3.m.sg"/>
+    </def-cat>
+    <def-cat n="on">
+      <cat-item lemma="on" tags="prn.pro.ref.p3.mf.sp"/>
     </def-cat>
     <def-cat n="y">
       <cat-item lemma="y" tags="prn.pro.adv"/>
@@ -179,6 +191,13 @@
       <cat-item tags="vbser.*.p3.*"/>
       <cat-item tags="vbmod.*.p1.*"/>
       <cat-item tags="vbmod.*.p2.*"/>
+      <cat-item tags="vbmod.*.p3.*"/>
+    </def-cat>
+
+    <def-cat n="verbp3">
+      <cat-item tags="vblex.*.p3.*"/>
+      <cat-item tags="vbhaver.*.p3.*"/>
+      <cat-item tags="vbser.*.p3.*"/>
       <cat-item tags="vbmod.*.p3.*"/>
     </def-cat>
 
@@ -4737,6 +4756,115 @@
 
     <!-- FIN REGLAS CONCORDANÇA -->
 
+    <!-- REGLAS -CI/-LÀ -->
+
+    <rule comment="REGLA: CE NOM CI (cette fois-ci > aqueste còp)">
+      <pattern>
+        <pattern-item n="ce_det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="ci_adv"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><clip pos="1" side="tl" part="lem"/><lit v="aqueste"/></let>
+        <out>
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: CE NOM LÀ (cette fois-là > aquel còp)">
+      <pattern>
+        <pattern-item n="ce_det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="la_adv"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="det">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS -CI/-LÀ -->
+
     <!-- REGLAS TOP -->
 
     <rule comment="REGLA: DETDEF NPTOP (la France > França, les États-Unis > los Estats Units)">
@@ -6732,6 +6860,50 @@
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+    
+    
+    <rule comment="REGLA: VERBP3 ON (peut-on: se pòt)">
+      <pattern>
+        <pattern-item n="verbp3"/>
+        <pattern-item n="on"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord0">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="prn">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="se"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+            </lu>
+          </chunk>
+          <b/>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="2">
+                 <clip pos="1" side="tl" part="lemh"/>
+               </get-case-from>
                <clip pos="1" side="tl" part="tags"/>
                <clip pos="1" side="tl" part="lemq"/>
               </lu>
