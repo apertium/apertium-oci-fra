@@ -416,6 +416,7 @@
     <def-var n="numvist"/>
     <def-var n="varporque"/>
     <def-var n="tipusverb"/>
+    <def-var n="tipusdet"/>
     <def-var n="uno"/>
     <def-var n="genero"/>
     <def-var n="numero"/>
@@ -2788,6 +2789,22 @@
       </choose>
     </def-macro>
 
+    <def-macro n="tipus_det" npar="1"> <!-- tots els det passen per aqui -->
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes">
+             <clip pos="1" side="sl" part="lem"/><lit v="aucun"/>
+            </equal>
+          </test>
+          <let><var n="tipusdet"/><lit-tag v="aucun"/></let>
+        </when>
+        <otherwise>
+          <let><var n="tipusdet"/><clip pos="1" side="sl" part="a_det2"/></let>
+        </otherwise>
+      </choose>
+    </def-macro>
+
     <def-macro n="neg_imp" npar="1"> <!-- canvia imp per prs (negació) -->
       <choose>
         <when>
@@ -2859,11 +2876,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
          <out>
            <chunk name="det">
              <tags>
                <tag><lit-tag v="Det"/></tag>
-               <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+               <tag><var n="tipusdet"/></tag>
                <tag><clip pos="1" side="tl" part="gen"/></tag>
                <tag><clip pos="1" side="tl" part="nbr"/></tag>
                <tag><var n="genero_sl"/></tag>
@@ -3283,11 +3303,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -3331,6 +3354,9 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
        <choose>
           <when>
             <test>
@@ -3344,7 +3370,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3363,7 +3389,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3415,11 +3441,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -3464,6 +3493,9 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
        <choose>
           <when>
             <test>
@@ -3477,7 +3509,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="3" side="tl" part="gen"/></tag>
                   <tag><clip pos="3" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3496,7 +3528,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="3" side="tl" part="gen"/></tag>
                   <tag><clip pos="3" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3573,11 +3605,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -3631,6 +3666,9 @@
         </call-macro>
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
         </call-macro>
         <choose>
           <when>
@@ -3690,7 +3728,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3730,7 +3768,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3787,6 +3825,9 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <choose>
           <when>
             <test>
@@ -3830,7 +3871,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3889,11 +3930,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -3956,11 +4000,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4023,11 +4070,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="3"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4089,11 +4139,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4155,11 +4208,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="4"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4805,12 +4861,15 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <let><clip pos="1" side="tl" part="lem"/><lit v="aqueste"/></let>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4858,11 +4917,14 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <out>
           <chunk name="det">
             <tags>
               <tag><lit-tag v="Det"/></tag>
-              <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+              <tag><var n="tipusdet"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -5162,6 +5224,9 @@
           <with-param pos="2"/>
           <with-param pos="4"/>
         </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <choose>
           <when>
             <test>
@@ -5214,7 +5279,7 @@
               <chunk name="det">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
-                  <tag><clip pos="1" side="tl" part="a_det2"/></tag>
+                  <tag><var n="tipusdet"/></tag>
                   <tag><clip pos="3" side="tl" part="gen"/></tag>
                   <tag><clip pos="3" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>

@@ -59,6 +59,9 @@
     <def-cat n="DET_def">
       <cat-item tags="Det.def.*"/>
     </def-cat>
+    <def-cat n="DET_aucun">
+      <cat-item tags="Det.aucun.*"/>
+    </def-cat>
 
     <def-cat n="UNK">
       <cat-item tags="unknown"/>
@@ -571,6 +574,41 @@
     </rule>
 
     <!-- FIN REGLAS PEL PARTITIU -->
+
+    <!-- REGLAS PER LA NEGACION DE "NE... AUCUN (DETERMINANT)" -->
+
+    <rule comment="REGLA: SV DET_aucun la montagne la plus haute > la montanha mai nauta">
+      <pattern>
+        <pattern-item n="SV"/>
+        <pattern-item n="DET_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS DE "NE... AUCUN (DETERMINANT)" -->
 
 <!--
     <rule comment="REGLA DE PROVA (posar els items que calgui per provar el match)">
