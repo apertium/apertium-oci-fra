@@ -90,6 +90,12 @@
       <cat-item lemma="personne" tags="prn.*"/>
       <cat-item lemma="aucun" tags="prn.*"/>
     </def-cat>
+    <def-cat n="adv_rien_personne">
+      <cat-item tags="adv"/>
+      <cat-item lemma="rien" tags="prn.*"/>
+      <cat-item lemma="personne" tags="prn.*"/>
+      <cat-item lemma="aucun" tags="prn.*"/>
+    </def-cat>
     <def-cat n="longtemps">
       <cat-item lemma="longtemps" tags="adv"/>
     </def-cat>
@@ -206,6 +212,10 @@
       <cat-item tags="vbhaver.*.p3.*"/>
       <cat-item tags="vbser.*.p3.*"/>
       <cat-item tags="vbmod.*.p3.*"/>
+    </def-cat>
+    <def-cat n="devoirp3sg">
+      <cat-item lemma="devoir" tags="vblex.*.p3.sg"/>
+      <cat-item lemma="devoir" tags="vbmod.*.p3.sg"/>
     </def-cat>
 
     <def-cat n="vbser">
@@ -450,6 +460,15 @@
       <list-item v="décembre"/>
     </def-list>
 
+    <def-list n="l_jamais_plus_rien_personne">
+      <list-item v="jamais"/>
+      <list-item v="plus"/>
+      <list-item v="guère"/>
+      <list-item v="rien"/>
+      <list-item v="personne"/>
+      <list-item v="aucun"/>
+    </def-list>
+
     <def-list n="verbs_amb_partitiu">
       <list-item v="aculhir"/>
       <list-item v="acuélher"/>
@@ -457,6 +476,7 @@
       <list-item v="apondre"/>
       <list-item v="aver"/>
       <list-item v="auer"/>
+      <list-item v="acceptar"/>
       <list-item v="apelar"/>
       <list-item v="bailar"/>
       <list-item v="balhar"/>
@@ -487,6 +507,7 @@
       <list-item v="desvistar"/>
       <list-item v="dividir"/>
       <list-item v="divulgar"/>
+      <list-item v="editar"/>
       <list-item v="esperar"/>
       <list-item v="èsser"/>
       <list-item v="encontrar"/>
@@ -6575,8 +6596,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: NE VBNOSER PREP PERSONNE/RIEN > VBNOSER PAS PREP DEGUN/RES: Jean ne dit à personne > Jean ditz pas a degun">
        <pattern>
          <pattern-item n="ne"/>
@@ -6681,7 +6702,7 @@
          </out>
       </action>
     </rule>
-    
+
     <rule comment="REGLA: NE AVOIR RIEN PP > AVER PAS PP RES: Jean n'a rien dit > Jean a diz pas res">
        <pattern>
          <pattern-item n="ne"/>
@@ -6894,10 +6915,9 @@
        </action>
     </rule>
 
-    
   <!-- FIN REGLAS ELISION NE -->
 
-  <!-- REGLAS ELISION SUBJECTE --> 
+  <!-- REGLAS ELISION SUBJECTE -->
 
     <rule comment="REGLA: PRNSUBJ VERB (il arrive: arriba)">
       <pattern>
@@ -6933,8 +6953,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: VERB PRNSUBJ (penses-tu: pensas)">
       <pattern>
         <pattern-item n="verbconj"/>
@@ -6963,8 +6983,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: VERBP3 ON (peut-on: se pòt)">
       <pattern>
         <pattern-item n="verbp3"/>
@@ -7007,8 +7027,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ PRNPRO VERB (il lui dit: li ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7050,8 +7070,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: Y EN (il y en a: n'i a">
       <pattern>
         <pattern-item n="y"/>
@@ -7082,8 +7102,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ PRNPRO PRNPRO VERB (il y en a: n'i a; il le lui dit: o li ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7172,8 +7192,8 @@
          </choose>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: EST-CE QUE PRNPRO PRNSUBJ VERB (est-ce qu'il lui dit: li dits)">
       <pattern>
         <pattern-item n="estceque"/>
@@ -7220,8 +7240,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: EST-CE QUE PRNSUBJ VERB (est-ce qu'il arrive: arriba)">
       <pattern>
         <pattern-item n="estceque"/>
@@ -7261,8 +7281,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ NE VERB (il ne dit: ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7302,8 +7322,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ NE VERB JAMAIS (il ne dit jamais: ditz pas jamai)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7353,8 +7373,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ NE PRNPRO VERB (il ne lui dit: li ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7401,8 +7421,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ NE PRNPRO VERB JAMAIS (il ne lui dit jamais: li ditz pas jamai)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7459,8 +7479,8 @@
          </out>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Jean ne le lui dit pas: Jean o li diguèt pas)">
       <pattern>
         <pattern-item n="ne"/>
@@ -7549,8 +7569,8 @@
          </choose>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: NE PRNPRO PRNPRO VERB JAMAIS (n'y en a jamais: n'i a pas jamai; Jean ne le lui dit jamais: Jean o li diguèt pas jamai)">
       <pattern>
         <pattern-item n="ne"/>
@@ -7658,7 +7678,7 @@
          </choose>
       </action>
     </rule>
-    
+
 
     <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB (il n'y en a pas: n'i a pas; il ne le lui dit pas: o li diguèt pas)">
       <pattern>
@@ -7753,8 +7773,8 @@
          </choose>
       </action>
     </rule>
-    
-    
+
+
     <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB JAMAIS (il n'y en a jamais: n'i a pas jamai; il ne le lui dit jamais: o li diguèt pas jamai)">
       <pattern>
         <pattern-item n="prnsubj"/>
@@ -7867,9 +7887,358 @@
          </choose>
       </action>
     </rule>
-    
-  <!-- FIN REGLAS ELISION SUBJECTE --> 
-    
+
+  <!-- FIN REGLAS ELISION SUBJECTE -->
+
+  <!-- REGLAS REORDENACION PRONOMS -->
+
+    <rule comment="REGLA: HAVER PP PRNPRO INF (auraient pu l'imaginer: l’aurián pogut imaginar)">
+       <pattern>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pp_no_ser"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="3" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <clip pos="1" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PRNSUBJ HAVER PP PRNPRO INF (ils auraient pu l'imaginer: l’aurián pogut imaginar)">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pp_no_ser"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="f_concord0">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="4" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: HAVER ADV PP PRNPRO INF (auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
+       <pattern>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="pp_no_ser"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="4" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <clip pos="1" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PRNSUBJ HAVER ADV PP PRNPRO INF (ils auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="pp_no_ser"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="f_concord0">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="6" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="5" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: NE HAVER ADV PP PRNPRO INF (n'auraient pas pu l'imaginer: l’aurián pas pogut imaginar; n'auraient jamais pu l'imaginer: l’aurián pas jamai pogut imaginar)">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv_rien_personne"/>
+         <pattern-item n="pp_no_ser"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_verb">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+        <choose>
+          <when>
+            <test>
+              <in caseless="yes">
+                <clip pos="3" side="sl" part="lem"/>
+                <list n="l_jamais_plus_rien_personne"/>
+              </in>
+            </test>
+             <out>
+               <chunk name="pro-verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="6" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="5" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="5" side="tl" part="tags"/>
+                   <clip pos="5" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="2"/>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+                 <b/>
+                 <lu>
+                   <lit v="pas"/>
+                   <lit-tag v="adv"/>
+                 </lu>
+                 <b pos="3"/>
+                 <lu>
+                   <clip pos="3" side="tl" part="lemh"/>
+                   <clip pos="3" side="tl" part="tags"/>
+                   <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="4"/>
+                 <lu>
+                   <clip pos="4" side="tl" part="lemh"/>
+                   <clip pos="4" side="tl" part="tags"/>
+                   <clip pos="4" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="5"/>
+                 <lu>
+                   <clip pos="6" side="tl" part="lemh"/>
+                   <clip pos="6" side="tl" part="tags"/>
+                   <clip pos="6" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+          </when>
+          <otherwise>
+             <out>
+               <chunk name="pro-verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="6" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="5" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="5" side="tl" part="tags"/>
+                   <clip pos="5" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="2"/>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="3"/>
+                 <lu>
+                   <clip pos="3" side="tl" part="lemh"/>
+                   <clip pos="3" side="tl" part="tags"/>
+                   <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="4"/>
+                 <lu>
+                   <clip pos="4" side="tl" part="lemh"/>
+                   <clip pos="4" side="tl" part="tags"/>
+                   <clip pos="4" side="tl" part="lemq"/>
+                 </lu>
+                 <b pos="5"/>
+                 <lu>
+                   <clip pos="6" side="tl" part="lemh"/>
+                   <clip pos="6" side="tl" part="tags"/>
+                   <clip pos="6" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+  <!-- FIN REGLAS REORDENACION PRONOMS -->
+
+  <!-- AUTRAS REGLAS VERBALAS -->
+
     <rule comment="REGLA: IMP PRNENC">
        <pattern>
          <pattern-item n="verb"/>
@@ -7898,7 +8267,9 @@
        </action>
     </rule>
 
-  <!-- REGLAS EN TRAIN DE --> 
+  <!-- AUTRAS REGLAS VERBALAS -->
+
+  <!-- REGLAS EN TRAIN DE -->
 
     <rule comment="REGLA: être en train de inf = verb-conj: Jean est en train de dormir > Jean dòrm">
       <pattern>
@@ -8764,9 +9135,9 @@
       </action>
     </rule>
 
-  <!-- FIN REGLAS EN TRAIN DE --> 
+  <!-- FIN REGLAS EN TRAIN DE -->
 
-  <!-- REGLAS C'EST --> 
+  <!-- REGLAS C'EST -->
 
     <rule comment="REGLA: CE VBSER: ce fut > foguèt">
        <pattern>
@@ -8803,9 +9174,9 @@
        </action>
     </rule>
 
-  <!-- FIN REGLAS C'EST --> 
+  <!-- FIN REGLAS C'EST -->
 
-  <!-- REGLAS VBMOD + PRO + VBMOD --> 
+  <!-- REGLAS VBMOD + PRO + VBMOD -->
 
     <rule comment="REGLA: VBMOD PRNPRO VERB (Cet article peut se lire > Aqueste article se pòt legir)">
       <pattern>
@@ -8847,8 +9218,8 @@
          </out>
       </action>
     </rule>
-    
-    <rule comment="REGLA: PRNSUBJ VBMOD PRNPRO VERB (Cet article peut se lire > Aqueste article se pòt legir)">
+
+    <rule comment="REGLA: PRNSUBJ VBMOD PRNPRO VERB (Il peut se lire > Se pòt legir)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="vbmod"/>
@@ -8896,9 +9267,202 @@
          </out>
       </action>
     </rule>
-    
-    
-  <!-- FIN REGLAS VBMOD + PRO + VBMOD --> 
+
+    <rule comment="REGLA: ON DOIT (on doit: cal)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="devoirp3sg"/>
+      </pattern>
+      <action>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="caler"/>
+               </get-case-from>
+               <clip pos="2" side="tl" part="tags"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: ON DOIT PRNPRO VERB (On doit le lire > Lo cal legir)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="devoirp3sg"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="inf"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord0">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-vbmod-inf">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="3" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <lit v="caler"/>
+               <clip pos="2" side="tl" part="tags"/>
+              </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: ON NE DOIT PAS VERB (On ne doit pas lire > Cal pas legir)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="ne"/>
+        <pattern-item n="devoirp3sg"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="inf"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord0">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-vbmod-inf">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="caler"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: ON NE DOIT JAMAIS VERB (On ne doit jamais lire > Cal pas jamai legir)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="ne"/>
+        <pattern-item n="devoirp3sg"/>
+        <pattern-item n="jamais_plus_rien_personne"/>
+        <pattern-item n="inf"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord0">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-vbmod-inf">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="caler"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="pas"/>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+
+  <!-- FIN REGLAS VBMOD + PRO + VBMOD -->
 
     <rule comment="REGLA: EST-CE QUE > 0">
        <pattern>
