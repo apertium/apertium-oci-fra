@@ -4912,6 +4912,103 @@
       </action>
     </rule>
 
+    <rule comment="REGLA: EN NOM (en français: en francés - perquè no faci ´en francesa')">
+      <pattern>
+        <pattern-item n="enprep"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="GD"/></equal>
+            </test>
+            <let><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></let>
+          </when>
+        </choose>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="ND"/></equal>
+            </test>
+            <let><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk name="en_n">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: EN NOM ADJ">
+      <pattern>
+        <pattern-item n="enprep"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="GD"/></equal>
+            </test>
+            <let><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></let>
+          </when>
+        </choose>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="ND"/></equal>
+            </test>
+            <let><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></let>
+          </when>
+        </choose>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="en_n_adj">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN REGLAS CONCORDANÇA -->
 
     <!-- REGLAS -CI/-LÀ -->
