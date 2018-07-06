@@ -23,7 +23,7 @@ use utf8;
 my $MOT = 'cheval';	# paraula a debugar
 my $MOT = 'Allemagne';	# paraula a debugar
 my $MOT = 'Nacions';	# paraula a debugar
-my $MOT = 'Nivernais';	# paraula a debugar
+my $MOT = 'taïwanais';	# paraula a debugar
 my $MOT = '';
 
 my $MORF_TRACT = $ARGV[0];
@@ -36,6 +36,8 @@ my $GEN_OCI = $ARGV[1];
 #my $GEN_OCI = 0;
 #$GEN_OCI = 1 if $MORF_TRACT eq 'adv';
 #$GEN_OCI = 1 if $MORF_TRACT eq 'vblex';
+
+my $GEN_FRA = $ARGV[2];	# per generar fra (en casos comptats: gentilicis)
 
 my $AUTOR = 'capsot';
 
@@ -795,7 +797,7 @@ print "escriure_bidix_n ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_fra
 			|| $par_oci eq 'guardi/a__n'
 			|| $par_oci eq 'monar/ca__n'
 			|| $par_oci eq 'pòrtavo/tz__n')) {
-		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/></l><r>%s<s n=\"n\"/></r></p><par n=\"anglais_esquimalXXXX\"/></e>\n", $stem_oci, $stem_fra;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"n\"/></l><r>%s<s n=\"n\"/></r></p><par n=\"omanita_omanais\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif (($par_fra eq 'affecté__n'
 			|| $par_fra eq 'administrat/eur__n'
 			|| $par_fra eq 'aïeu/l__n'
@@ -1372,7 +1374,7 @@ print "escriure_bidix_adj ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 		|| $par_oci eq 'bèlg/a__adj'
 		|| $par_oci eq 'barlò/ca__adj'
 		|| $par_oci eq 'generau__adj')) {
-		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/></l><r>%s<s n=\"adj\"/></r></p><par n=\"XXXanglais_esquimal\"/></e>\n", $stem_oci, $stem_fra;
+		printf $fbi "<e$lr_rl$alt$a><p><l>%s<s n=\"adj\"/></l><r>%s<s n=\"adj\"/></r></p><par n=\"omanita_omanais\"/></e>\n", $stem_oci, $stem_fra;
 	} elsif (($par_fra eq 'affectueu/x__adj' || $par_fra eq 'dou/x__adj' || $par_fra eq 'vie/ux__n' || $par_fra eq 'fra/is__adj' || $par_fra eq 'anglais__adj' || $par_fra eq 'bas__adj')
 		&& ($par_oci eq 'apropria/t__adj'
 		|| $par_oci eq 'trabalhador__adj'
@@ -1670,6 +1672,60 @@ print "1. tractar_parella ($lemma_oci, $stem_oci, $morf_oci, $lemma_fra, $stem_f
 if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 	$lemma_oci =~ s/#//o;
 }
+
+	if (!$dix_fra{$morf_fra}{$lemma_fra} && $morf_fra eq 'n') {
+		# provo si es troba la paraula en majúscula (polynésien > Polynésien)
+		my $lemma_fra2 = $lemma_fra;
+		#substr ($lemma_fra2, 0, 1) =~ tr/a-zé/A'ZÉ/;
+		$lemma_fra2 = ucfirst ($lemma_fra2);
+print "77a. lemma_fra = $lemma_fra, lemma_fra2 = $lemma_fra2, dix_fra{$morf_fra}{$lemma_fra2} = $dix_fra{$morf_fra}{$lemma_fra2}\n" if $MOT && $lemma_fra eq $MOT;
+		if ($dix_fra{$morf_fra}{$lemma_fra2}) {
+$MOT = $lemma_fra2 if $MOT && $lemma_fra eq $MOT;
+			$lemma_fra = $lemma_fra2;
+			$stem_fra = ucfirst ($stem_fra);
+		}
+print "77b. lemma_fra = $lemma_fra, lemma_fra2 = $lemma_fra2\n" if $MOT && $lemma_fra eq $MOT;
+	}
+
+	if ($GEN_FRA && !$dix_fra{$morf_fra}{$lemma_fra}) {
+		my $a = " a=\"$autor\"" if $autor;
+		if ($morf_fra eq 'n') {
+			# per defecte, genero les paraules (gentilicis) en majúscules
+			$lemma_fra = ucfirst ($lemma_fra);
+			$stem_fra = ucfirst ($stem_fra);
+			if ($lemma_fra =~ /[aei]n$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'ancien__n';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'ancien__n';
+			} elsif ($lemma_fra =~ /s$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'admis__n';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'admis__n';
+			} elsif ($lemma_fra =~ /e$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'artiste__n';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'artiste__n';
+			} else {
+				print STDERR "8n. Falta fra $lemma_fra <$morf_fra>, l. $n_linia\n";
+				return 0;
+			}
+		} elsif ($morf_fra eq 'adj') {
+			if ($lemma_fra =~ /[aei]n$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'ancien__adj';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'ancien__adj';
+			} elsif ($lemma_fra =~ /s$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'anglais__adj';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'anglais__adj';
+			} elsif ($lemma_fra =~ /e$/o) {
+				printf $ffra "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_fra, $stem_fra, 'académique__adj';
+				$dix_fra{$morf_fra}{$lemma_fra} = 'académique__adj';
+			} else {
+				print STDERR "8n. Falta fra $lemma_fra <$morf_fra>, l. $n_linia\n";
+				return 0;
+			}
+		} else {
+			print STDERR "8. Falta fra $lemma_fra <$morf_fra>, l. $n_linia\n";
+			return 0;
+		}
+	}
+
 	if (!$dix_fra{$morf_fra}{$lemma_fra}) {
 		print STDERR "9. Falta fra $lemma_fra <$morf_fra>, l. $n_linia\n";
 		return 0;
@@ -1677,10 +1733,76 @@ if ($morf_oci eq 'vblex' && $lemma_oci =~ /#/o) {
 
 	if ($GEN_OCI && !$dix_oci{$morf_oci}{$lemma_oci}) {
 		if ($morf_oci eq 'adj') {
-			return 0;
+			if ($GEN_FRA) {	# cas expecional de generació
+				my $stem_oci = $lemma_oci;
+				$stem_oci =~ s| |<b/>|og;
+				my $a = " a=\"$autor\"" if $autor;
+
+				if ($lemma_oci =~ /n$/o) {
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'trabalhador__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'trabalhador__adj';
+				} elsif ($lemma_oci =~ /[ae]i$/o) {
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'trabalhador__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'trabalhador__adj';
+				} elsif ($lemma_oci =~ /è.i$/o) {
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'trabalhador__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'trabalhador__adj';
+				} elsif ($lemma_oci =~ /i$/o) {
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e> xxx\n", $lemma_oci, $stem_oci, 'generau__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'generau__adj';
+				} elsif ($lemma_oci =~ /és$/o) {
+					$stem_oci =~ s/és$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'aran/és__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'aran/és__adj';
+				} elsif ($lemma_oci =~ /a$/o) {
+					$stem_oci =~ s/a$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e> xxx\n", $lemma_oci, $stem_oci, 'agricòl/a__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'agricòl/a__adj';
+				} elsif ($lemma_oci =~ /c$/o) {
+					$stem_oci =~ s/c$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'blan/c__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'blan/c__adj';
+				} elsif ($lemma_oci =~ /u$/o) {
+					$stem_oci =~ s/u$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e> xxx\n", $lemma_oci, $stem_oci, 'europè/u__adj';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'europè/u__adj';
+				} else {
+					print STDERR "0e. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+					return 0;
+				}
+			} else {
+				print STDERR "0f. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				return 0;
+			}
 		} elsif ($morf_oci eq 'n') {
-			print STDERR "0a. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
-			return 0;
+			if ($GEN_FRA) {	# cas expecional de generació
+				my $stem_oci = $lemma_oci;
+				$stem_oci =~ s| |<b/>|og;
+				my $a = " a=\"$autor\"" if $autor;
+
+				if ($lemma_oci =~ /n$/o) {
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'conselhèr__n';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'conselhèr__n';
+				} elsif ($lemma_oci =~ /és$/o) {
+					$stem_oci =~ s/és$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'pag/és__n';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'pag/és__n';
+				} elsif ($lemma_oci =~ /a$/o) {
+					$stem_oci =~ s/as$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'guardi/a__n';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'guardi/a__n';
+				} elsif ($lemma_oci =~ /c$/o) {
+					$stem_oci =~ s/c$//o;
+					printf $foci "<e lm=\"%s\"$a><i>%s</i><par n=\"%s\"/></e>\n", $lemma_oci, $stem_oci, 'sindi/c__n';
+					$dix_oci{$morf_oci}{$lemma_oci} = 'sindi/c__n';
+				} else {
+					print STDERR "0c. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+					return 0;
+				}
+			} else {
+				print STDERR "0d. Falta oci $lemma_oci <$morf_oci> ($lemma_fra: $dix_fra{$morf_fra}{$lemma_fra}: (1), l. $n_linia\n";
+				return 0;
+			}
 		} elsif ($morf_oci eq 'top') {
 			my $stem_oci = $lemma_oci;
 			$stem_oci =~ s| |<b/>|og;
