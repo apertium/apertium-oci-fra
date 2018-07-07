@@ -250,11 +250,11 @@ clean-local:
 ###############################################################################
 
 test: all
-	echo "le chien est vert" | apertium -d . oci-fra | tee .test-mt
-	@echo "lo can es verd " > .test-ref
-	@diff .test-ref .test-mt
-#	echo "house" | apertium -d . fra-oci | tee .test-mt
-#	@echo "house" > .test-ref
+#	echo "lo can es verd" | apertium -d . oci-fra | tee .test-mt
+#	@echo "el chien est vert" > .test-ref
 #	@diff .test-ref .test-mt
+	echo "le chien est vert" | apertium -d . fra-oci | tee .test-mt
+	@echo "lo can es verd" > .test-ref
+	@diff .test-ref .test-mt
 	@rm .test-ref .test-mt
 
