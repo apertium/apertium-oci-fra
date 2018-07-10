@@ -533,8 +533,8 @@
       <list-item v="tranmetre"/>
       <list-item v="televizar"/>
       <list-item v="tuar"/>
-      <list-item v="utilizar"/>
-      <list-item v="vendre"/>
+<!--      <list-item v="utilizar"/> -->
+<!--      <list-item v="vendre"/> -->
 <!--      <list-item v="voler"/> -->
     </def-list>
 
@@ -3044,9 +3044,9 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJEC">
+    <rule comment="REGLA: ADJ">
       <pattern>
-        <pattern-item n="adjec"/>
+        <pattern-item n="adj"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -3094,6 +3094,39 @@
             </out>
           </otherwise>
         </choose>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: pp">
+      <pattern>
+        <pattern-item n="pp"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="pp">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="a_verb"/>
+              <clip pos="1" side="tl" part="temps"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
