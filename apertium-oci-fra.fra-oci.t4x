@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<transfer>
+  <section-def-cats>
+
+    <!-- this shouldn't include 'sent' or other punctuation -->
+    <def-cat n="default">
+      <cat-item tags="*"/>
+    </def-cat>
+    <def-cat n="punct">
+      <cat-item lemma="!" tags="sent"/>
+      <cat-item lemma="?" tags="sent"/>
+      <cat-item lemma=";" tags="sent"/>
+      <cat-item lemma=":" tags="sent"/>
+    </def-cat>
+  </section-def-cats>
+
+ <section-def-attrs>
+   <def-attr n="a_qst">
+     <attr-item tags="qst"/>
+   </def-attr>
+ </section-def-attrs>
+
+ <section-def-vars>
+    <def-var n="a" v="~"/>
+  </section-def-vars>
+
+  <section-rules>
+
+    <rule comment="REGLA: 1;">
+      <pattern>
+        <pattern-item n="default"/>
+        <pattern-item n="punct"/>
+      </pattern>
+      <action>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+          <lu>
+            <clip pos="2" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+  </section-rules>
+
+</transfer>

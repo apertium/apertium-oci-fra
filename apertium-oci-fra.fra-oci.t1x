@@ -419,6 +419,10 @@
       <attr-item tags="imp"/>
     </def-attr>
 
+    <def-attr n="tv">
+      <attr-item tags="tv"/>
+    </def-attr>
+
   </section-def-attrs>
 
   <section-def-vars>
@@ -531,7 +535,7 @@
       <list-item v="tuar"/>
       <list-item v="utilizar"/>
       <list-item v="vendre"/>
-      <list-item v="voler"/>
+<!--      <list-item v="voler"/> -->
     </def-list>
 
     <def-list n="lang_dial">
@@ -2849,10 +2853,15 @@
       <choose>
         <when>
           <test>
+          <or>
+            <equal>
+             <clip pos="1" side="tl" part="tv"/><lit-tag v="tv"/>
+            </equal>
             <in caseless="yes">
              <clip pos="1" side="tl" part="lemh"/>
              <list n="verbs_amb_partitiu"/>
             </in>
+          </or>
           </test>
           <let><var n="tipusverb"/><lit-tag v="partitiu"/></let>
         </when>
@@ -3348,7 +3357,10 @@
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
                <clip pos="1" side="tl" part="lemq"/>
               </lu>
            </chunk>

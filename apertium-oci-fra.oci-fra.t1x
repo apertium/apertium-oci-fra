@@ -39,7 +39,6 @@
       <cat-item tags="vblex.*"/>
       <cat-item tags="vbser.*"/>
       <cat-item tags="vbhaver.*"/>
-      <cat-item tags="vbmod.*"/>
     </def-cat>
 
     <def-cat n="vbser">
@@ -154,6 +153,7 @@
   </section-def-attrs>
 
   <section-def-vars>
+    <def-var n="lemma"/>
     <def-var n="number"/>
     <def-var n="numvist"/>
     <def-var n="varporque"/>
@@ -2321,8 +2321,10 @@
         <pattern-item n="adv_preadv"/>
       </pattern>
       <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
         <out>
-          <chunk name="adv">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="SAdv"/></tag>
             </tags>
@@ -2421,35 +2423,18 @@
         <pattern-item n="pr"/>
       </pattern>
       <action>
-       <choose>
-          <when>
-            <test><equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="de"/></equal></test>
-            <out>
-              <chunk name="pr">
-                <tags>
-                  <tag><lit-tag v="PREP"/></tag>
-                  <tag><lit-tag v="de"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-            </out>
-          </when>
-          <otherwise>
-            <out>
-              <chunk name="pr">
-                <tags>
-                  <tag><lit-tag v="PREP"/></tag>
-                  <tag><lit-tag v="pr"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-            </out>
-          </otherwise>
-       </choose>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
