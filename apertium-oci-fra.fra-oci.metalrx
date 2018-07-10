@@ -532,6 +532,21 @@
   <!-- appeler >> cridar, sonar -->
   <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="sonar" />
 
+<!-- voler >> volar / raubar -->
+
+  <rule weight="0.8">
+    <match lemma="voler" tags="vblex.*"><select lemma="volar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+  </rule>
+
 
 <!-- **************** NP **************** -->
 
