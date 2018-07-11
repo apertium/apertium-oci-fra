@@ -67,28 +67,22 @@
   </section-def-attrs>
 
   <section-def-macros>
-    <def-macro n="f_bcond" npar="2">
+    <def-macro n="f_addblank" npar="2">
       <choose>
-<!--
         <when>
           <test>
-            <equal><b pos="1"/><lit v="&quot; "/></equal>
-          </test>
-          <out>
-            <lu><lit v="&quot;"/></lu>
-          </out>
-        </when>
--->
-        <when>
-          <test>
-            <not>
-              <equal><b pos="1"/><lit v=" "/></equal>
-            </not>
+            <equal><b pos="1"/><lit v=" "/></equal>
           </test>
           <out>
             <b pos="1"/>
           </out>
         </when>
+        <otherwise>
+          <out>
+            <b pos="1"/>
+            <b/>
+          </out>
+        </otherwise>
       </choose>
     </def-macro>
   </section-def-macros>
@@ -114,7 +108,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: x : > x:">
+    <rule comment="REGLA: x: > x :">
       <pattern>
         <pattern-item n="default"/>
         <pattern-item n="punct"/>
@@ -136,7 +130,7 @@
                 <clip pos="1" side="tl" part="lemq"/>
               </lu>
             </out>
-            <call-macro n="f_bcond">
+            <call-macro n="f_addblank">
               <with-param pos="1"/>
               <with-param pos="2"/>
             </call-macro>
@@ -152,7 +146,7 @@
                 <clip pos="1" side="tl" part="whole"/>
               </lu>
             </out>
-            <call-macro n="f_bcond">
+            <call-macro n="f_addblank">
               <with-param pos="1"/>
               <with-param pos="2"/>
             </call-macro>
