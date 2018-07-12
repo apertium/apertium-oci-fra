@@ -1,22 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <postchunk>
   <section-def-cats>
+    <def-cat n="SUBJ">
+      <cat-item name="subj"/>
+    </def-cat>
+
     <def-cat n="sent">
       <cat-item name="punt"/>
     </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
+    <def-attr n="chunk">
+      <attr-item tags="SN"/>
+      <attr-item tags="SV"/>
+    </def-attr>
+
+    <def-attr n="pers">
+      <attr-item tags="p1"/>
+      <attr-item tags="p2"/>
+      <attr-item tags="p3"/>
+    </def-attr>
+
+    <def-attr n="gen">
+      <attr-item tags="m"/>
+      <attr-item tags="f"/>
+      <attr-item tags="mf"/>
+      <attr-item tags="nt"/>
+      <attr-item tags="GD"/>
+    </def-attr>
+
     <def-attr n="nbr">
       <attr-item tags="sg"/>
+      <attr-item tags="pl"/>
+      <attr-item tags="sp"/>
+      <attr-item tags="ND"/>
     </def-attr>
+
   </section-def-attrs>
+
 
   <section-def-vars>
     <def-var n="paraula"/>
   </section-def-vars>
 
+  <section-def-macros>
+    <def-macro n="subjecte" npar="1">
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+              <equal><clip pos="1" part="gen"/><lit-tag v="GD"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <equal><clip pos="1" part="gen"/><lit-tag v="GD"/></equal>
+          </test>
+          <let><clip pos="1" part="gen"/><lit-tag v="mf"/></let>
+        </when>
+      </choose>
+    </def-macro>
+  </section-def-macros>
+
   <section-rules>
+    <rule comment="CHUNK: SUBJ">
+      <pattern>
+        <pattern-item n="SUBJ"/>
+      </pattern>
+      <action>
+        <call-macro n="subjecte">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="1" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="CHUNK:">
       <pattern>
         <pattern-item n="sent"/>

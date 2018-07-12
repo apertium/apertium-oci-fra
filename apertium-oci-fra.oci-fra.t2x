@@ -9,6 +9,9 @@
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
+    <def-cat n="SPron_tn">
+      <cat-item tags="SPron.tn.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -21,6 +24,42 @@
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
     </def-cat>
+
+    <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
+      <cat-item lemma="sercj" tags="SV.*"/>
+      <cat-item lemma="verbcj" tags="SV.*"/>
+      <cat-item lemma="verbcj" tags="SVneg.*"/>
+      <cat-item lemma="aux_verb" tags="SV.*"/>
+      <cat-item lemma="aux_verb" tags="SVneg.*"/>
+      <cat-item lemma="haver_pp" tags="SV.*.*.*"/> <!-- havent acabat ... -->
+      <cat-item lemma="haver_pp" tags="SVneg.*.*.*"/> 
+      <cat-item lemma="haver_pp_enc" tags="SV.*.*.*"/> 
+      <cat-item lemma="haver_pp_enc" tags="SVneg.*.*.*"/>
+      <cat-item lemma="aux_haver_pp" tags="SV.*"/>
+      <cat-item lemma="aux_haver_pp" tags="SVneg.*"/>
+      <cat-item lemma="aux_haver_pp_enc" tags="SV.*"/>
+      <cat-item lemma="aux_haver_pp_enc" tags="SVneg.*"/>
+      <cat-item lemma="verbcj_enc" tags="SV.*"/>
+      <cat-item lemma="verbcj_enc" tags="SVneg.*"/>
+      <cat-item lemma="verbcj_ger" tags="SV.*"/>
+      <cat-item lemma="verbcj_ger_enc" tags="SV.*"/>
+      <cat-item lemma="verbcj_ger" tags="SVneg.*"/>
+      <cat-item lemma="verbcj_ger_enc" tags="SVneg.*"/>
+      <cat-item lemma="donar_per" tags="SV.*"/>
+      <cat-item lemma="donar_per" tags="SVneg.*"/>
+      <cat-item lemma="aux_donar_per" tags="SV.*"/>
+      <cat-item lemma="aux_donar_per" tags="SVneg.*"/>
+      <cat-item lemma="tohaveblex" tags="SV.*"/>
+    <!--  <cat-item lemma="be_adj" tags="SV.*"/>-->
+    </def-cat>
+
+    <def-cat n="unknown">
+      <cat-item lemma="unkwnown" tags="unknown"/>
+    </def-cat>
+
+    <def-cat n="fi_frase">
+      <cat-item tags="sent"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -29,10 +68,17 @@
       <attr-item tags="SV"/>
     </def-attr>
 
+    <def-attr n="pers">
+      <attr-item tags="p1"/>
+      <attr-item tags="p2"/>
+      <attr-item tags="p3"/>
+    </def-attr>
+
     <def-attr n="gen">
       <attr-item tags="m"/>
       <attr-item tags="f"/>
       <attr-item tags="mf"/>
+      <attr-item tags="GD"/>
     </def-attr>
 
     <def-attr n="sl_gen">
@@ -52,15 +98,113 @@
 
   <section-def-vars>
     <def-var n="number"/>
+    <def-var n="fifrase" v="yes"/>
   </section-def-vars>
 
+  <section-def-lists>
+    <def-list n="SV_personals"> 
+      <list-item v="verbcj"/>
+      <list-item v="aux_verb"/>
+      <list-item v="haver_pp"/>
+      <list-item v="haver_pp_enc"/>
+      <list-item v="aux_haver_pp"/>
+      <list-item v="aux_haver_pp_enc"/>
+      <list-item v="verbcj_enc"/>
+      <list-item v="verbcj_ger"/>
+      <list-item v="verbcj_ger_enc"/>
+      <list-item v="tohavevblex"/>
+    </def-list>
+  </section-def-lists>
+
   <section-def-macros>
-    <def-macro n="test1" npar="1">
-      <let>
-        <var n="number"/>
-        <lit v=""/>
-      </let>
-    </def-macro>
+
+  <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
+             <choose>
+               <when>
+                 <test>
+                   <not>
+                     <equal>
+                       <b pos="1"/>
+                       <lit v=" "/>
+                     </equal>
+              </not>
+                 </test>
+            <out>
+              <b pos="1"/>
+            </out>
+          </when>                 
+             </choose>
+     </def-macro>
+
+ <def-macro n="generate_subject" npar="1">  <!--ATENCIÓN: se si crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+   <choose>
+     <when>
+       <test>
+           <in caseless="yes">
+             <clip pos="1" part="lem"/>
+             <list n="SV_personals"/>
+           </in>
+       </test>
+        <choose>
+          <when>
+            <test>
+              <equal>
+                <var n="fifrase"/>
+                <lit v="yes"/>
+              </equal>
+            </test>                
+            <choose>
+              <when>
+                <test>
+                  <not>
+                    <equal>
+                      <clip pos="1" part="temps"/>
+                      <lit-tag v="imp"/>
+                    </equal>
+                  </not>
+                </test>
+                <out>
+                  <chunk>
+                    <get-case-from pos="1">
+                      <lit v="subj"/>
+                    </get-case-from>
+                    <lit-tag v="prn.subj"/>
+                    <clip pos="1" part="pers"/>
+                    <lit-tag v="GD"/>
+                    <clip pos="1" part="nbr"/>
+                    <lit v="{^"/>
+                    <get-case-from pos="1">
+                      <lit v="prpers"/>
+                    </get-case-from>
+                    <lit-tag v="prn.tn.3.4.5"/>
+                    <lit v="$}"/>
+                  </chunk>
+                  <b/>           
+                </out>
+                <choose>
+                  <when>
+                    <test>
+                      <equal>
+                        <case-of pos="1" part="lem"/>
+                        <lit v="Aa"/>
+                      </equal>
+                    </test>
+                    <modify-case>
+                      <clip pos="1" part="lem"/>
+                      <lit v="aa"/>
+                    </modify-case>
+                  </when>
+                </choose>
+              </when>
+            </choose>
+          </when>
+        </choose>
+     </when>
+   </choose>
+ </def-macro>
+
+
+
   </section-def-macros>
 
   <section-rules>
@@ -76,10 +220,25 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
       </action>
     </rule>
 
-    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: l'ostal es grand > la maison est grande">
+    <rule comment="REGLA: unknown">
+      <pattern>
+        <pattern-item n="unknown"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>          
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule> 
+
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attribut: l'ostal es grand > la maison est grande">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
@@ -127,10 +286,11 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
       </action>
     </rule>
 
-    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: l'ostal es força grand > la maison est très grande">
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attribut: l'ostal es força grand > la maison est très grande">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
@@ -185,8 +345,69 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
       </action>
     </rule>
+
+    <!-- REGLAS inclusion del pronôm subjècte -->
+
+    <rule comment="REGLA: SPron_tn SV (aquesta regla és per impedir la generació del prn.tn">
+      <pattern>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV > subjècte SV">
+      <pattern>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="generate_subject">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS inclusion del pronôm subjècte -->
+
+    <rule comment="REGLA: fi de frase">
+      <pattern>
+        <pattern-item n="fi_frase"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>          
+        <let><var n="fifrase"/><lit v="yes"/></let>
+      </action>
+    </rule> 
 
   </section-rules>
 </interchunk>
