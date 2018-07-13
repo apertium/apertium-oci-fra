@@ -53,6 +53,41 @@
     <!--  <cat-item lemma="be_adj" tags="SV.*"/>-->
     </def-cat>
 
+    <def-cat n="SDet">
+      <cat-item tags="SDet"/>
+      <cat-item tags="SDet.*"/>
+    </def-cat>
+
+    <def-cat n="SPron">
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+    </def-cat>
+
+    <def-cat n="Num">
+      <cat-item tags="Num"/>
+      <cat-item tags="Num.*"/>
+    </def-cat>
+
+    <def-cat n="cnjcoo">
+      <cat-item tags="cnjcoo"/>
+      <cat-item tags="cnjcoo.*"/>
+    </def-cat>
+
+    <def-cat n="cnjsub">
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjsub.*"/>
+    </def-cat>
+
+    <def-cat n="cnjadv">
+      <cat-item tags="cnjadv"/>
+      <cat-item tags="cnjadv.*"/>
+    </def-cat>
+
+    <def-cat n="rel">
+      <cat-item tags="rel"/>
+      <cat-item tags="rel.*"/>
+    </def-cat>
+
     <def-cat n="unknown">
       <cat-item lemma="unkwnown" tags="unknown"/>
     </def-cat>
@@ -203,14 +238,159 @@
    </choose>
  </def-macro>
 
-
-
   </section-def-macros>
 
   <section-rules>
+
+    <!-- REGLAS fifrase -->
+
+    <rule comment="REGLA: SDet">
+      <pattern>
+        <pattern-item n="SDet"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SA">
+      <pattern>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: Num">
+      <pattern>
+        <pattern-item n="Num"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="REGLA: SN">
       <pattern>
         <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SAdv">
+      <pattern>
+        <pattern-item n="SAdv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPron">
+      <pattern>
+        <pattern-item n="SPron"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: cnjcoo">
+      <pattern>
+        <pattern-item n="cnjcoo"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: cnjsub">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: cnjadv">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: rel">
+      <pattern>
+        <pattern-item n="rel"/>
       </pattern>
       <action>
         <out>
@@ -237,6 +417,24 @@
         <let><var n="fifrase"/><lit v="no"/></let>
       </action>
     </rule> 
+
+    <rule comment="REGLA: fi de frase">
+      <pattern>
+        <pattern-item n="fi_frase"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>          
+        <let><var n="fifrase"/><lit v="yes"/></let>
+      </action>
+    </rule> 
+
+    <!-- FIN REGLAS fifrase -->
+
+    <!-- REGLAS concordance en genre entre suject et attribut -->
 
     <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attribut: l'ostal es grand > la maison est grande">
       <pattern>
@@ -349,6 +547,8 @@
       </action>
     </rule>
 
+    <!-- FIN REGLAS concordance en genre entre suject et attribut -->
+
     <!-- REGLAS inclusion del pronôm subjècte -->
 
     <rule comment="REGLA: SPron_tn SV (aquesta regla és per impedir la generació del prn.tn">
@@ -376,7 +576,7 @@
 
     <rule comment="REGLA: SV > subjècte SV">
       <pattern>
-        <pattern-item n="SV"/>
+        <pattern-item n="SV_pers"/>
       </pattern>
       <action>
         <call-macro n="generate_subject">
@@ -393,21 +593,77 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS inclusion del pronôm subjècte -->
-
-    <rule comment="REGLA: fi de frase">
+    <rule comment="REGLA: cnjsub SV (que cantes -> que TU chantes)">
       <pattern>
-        <pattern-item n="fi_frase"/>
+        <pattern-item n="cnjsub"/>
+        <pattern-item n="SV_pers"/>
       </pattern>
       <action>
         <out>
           <chunk>
             <clip pos="1" part="whole"/>
           </chunk>
-        </out>          
-        <let><var n="fifrase"/><lit v="yes"/></let>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="2" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+              <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>           
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
       </action>
-    </rule> 
+    </rule>
+
+    <rule comment="REGLA: cnjadv SV (se cantes -> si TU chantes)">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="2" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+              <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>           
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- FIN REGLAS inclusion del pronôm subjècte -->
 
   </section-rules>
 </interchunk>

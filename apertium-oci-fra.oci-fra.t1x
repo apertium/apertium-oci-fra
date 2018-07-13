@@ -39,6 +39,7 @@
       <cat-item tags="vblex.*"/>
       <cat-item tags="vbser.*"/>
       <cat-item tags="vbhaver.*"/>
+      <cat-item tags="vbmod.*"/>
     </def-cat>
 
     <def-cat n="verbcj">
@@ -56,6 +57,13 @@
       <cat-item tags="vbmod.*.p3.*"/>
     </def-cat>
 
+    <def-cat n="pp">
+      <cat-item tags="vblex.pp.*"/>
+      <cat-item tags="vbser.pp.*"/>
+      <cat-item tags="vbhaver.pp.*"/>
+      <cat-item tags="vbmod.pp.*"/>
+    </def-cat>
+
     <def-cat n="vbser">
       <cat-item tags="vbser.*"/>
     </def-cat>
@@ -64,6 +72,11 @@
       <cat-item tags="vbser.*.p1.*"/>
       <cat-item tags="vbser.*.p2.*"/>
       <cat-item tags="vbser.*.p3.*"/>
+    </def-cat>
+
+    <def-cat n="vbser_inf_ger">
+      <cat-item tags="vbser.inf"/>
+      <cat-item tags="vbser.ger"/>
     </def-cat>
 
     <def-cat n="vbaux">
@@ -87,6 +100,15 @@
       <cat-item tags="vbmod.*.p1.*"/>
       <cat-item tags="vbmod.*.p2.*"/>
       <cat-item tags="vbmod.*.p3.*"/>
+    </def-cat>
+
+    <def-cat n="vbnoser_inf_ger">
+      <cat-item tags="vblex.inf"/>
+      <cat-item tags="vblex.ger"/>
+      <cat-item tags="vbhaver.inf"/>
+      <cat-item tags="vbhaver.ger"/>
+      <cat-item tags="vbmod.inf"/>
+      <cat-item tags="vbmod.ger"/>
     </def-cat>
 
     <def-cat n="num">
@@ -2400,7 +2422,7 @@
 
     <rule comment="REGLA: ADJEC">
       <pattern>
-        <pattern-item n="adjec"/>
+        <pattern-item n="adj"/>
       </pattern>
       <action>
         <call-macro n="firstWord">
@@ -2420,7 +2442,42 @@
             </tags>
             <lu>
               <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="a_adjec"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: pp">
+      <pattern>
+        <pattern-item n="pp"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>    
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="pp" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="a_verb"/>
+              <clip pos="1" side="tl" part="temps"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
               <clip pos="1" side="tl" part="lemq"/>
             </lu>
           </chunk>
@@ -2707,7 +2764,79 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: VBSER">
+    <rule comment="REGLA: VBSERinf_ger">
+       <pattern>
+         <pattern-item n="vbser_inf_ger"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>    
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>    
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: VBNOSERinf_ger">
+       <pattern>
+         <pattern-item n="vbnoser_inf_ger"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>    
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: VBSERconj">
        <pattern>
          <pattern-item n="vbser_conj"/>
        </pattern>
@@ -2744,7 +2873,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: VBNOSER">
+    <rule comment="REGLA: VBNOSERconj">
        <pattern>
          <pattern-item n="vbnoser_conj"/>
        </pattern>
@@ -2778,45 +2907,6 @@
          </out>
        </action>
     </rule>
-
-<!--
-    <rule comment="REGLA: VERB conjugat">
-      <pattern>
-        <pattern-item n="verbcj"/>
-      </pattern>
-      <action>        
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>    
-        <call-macro n="tipus_verb">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-          <chunk name="verbcj" case="caseFirstWord">
-            <tags>
-              <tag><lit-tag v="SV"/></tag>
-              <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-              <tag><var n="temps_chunk"/></tag>
-              <tag><clip pos="1" side="tl" part="pers"/></tag>
-              <tag><clip pos="1" side="tl" part="nbr"/></tag>
-              <tag><var n="lemaverb"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="a_verb"/>
-              <clip pos="1" side="tl" part="temps"/>
-              <clip pos="1" side="tl" part="pers"/>
-              <clip pos="1" side="tl" part="gen"/>
-              <clip pos="1" side="tl" part="nbr"/>
-              <clip pos="1" side="tl" part="lemq"/> 
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
-
-
 
     <!-- FIN REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
