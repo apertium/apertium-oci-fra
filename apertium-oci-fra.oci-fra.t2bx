@@ -12,6 +12,9 @@
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
     </def-cat>
+    <def-cat n="SPron_pro">
+      <cat-item tags="SPron.pro.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -40,8 +43,8 @@
       <cat-item lemma="aux_verb" tags="SV.*"/>
       <cat-item lemma="aux_verb" tags="SVneg.*"/>
       <cat-item lemma="haver_pp" tags="SV.*.*.*"/> <!-- havent acabat ... -->
-      <cat-item lemma="haver_pp" tags="SVneg.*.*.*"/> 
-      <cat-item lemma="haver_pp_enc" tags="SV.*.*.*"/> 
+      <cat-item lemma="haver_pp" tags="SVneg.*.*.*"/>
+      <cat-item lemma="haver_pp_enc" tags="SV.*.*.*"/>
       <cat-item lemma="haver_pp_enc" tags="SVneg.*.*.*"/>
       <cat-item lemma="aux_haver_pp" tags="SV.*"/>
       <cat-item lemma="aux_haver_pp" tags="SVneg.*"/>
@@ -145,7 +148,7 @@
   </section-def-vars>
 
   <section-def-lists>
-    <def-list n="SV_personals"> 
+    <def-list n="SV_personals">
       <list-item v="verbcj"/>
       <list-item v="aux_verb"/>
       <list-item v="haver_pp"/>
@@ -175,7 +178,7 @@
          <out>
            <b pos="1"/>
          </out>
-       </when>                 
+       </when>
      </choose>
     </def-macro>
 
@@ -204,7 +207,7 @@
             <lit-tag v="adv"/>
             <lit v="$}"/>
           </chunk>
-          <b/>           
+          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -240,7 +243,7 @@
             <lit-tag v="adv"/>
             <lit v="$}"/>
           </chunk>
-          <b/>           
+          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -257,6 +260,93 @@
         <out>
           <chunk>
             <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPron_pro SV pas (li cantes pas -> NE lui chantes pas)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPron_pro SV pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="jamais"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
       </action>
