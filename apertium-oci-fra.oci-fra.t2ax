@@ -56,9 +56,9 @@
     <!--  <cat-item lemma="be_adj" tags="SV.*"/>-->
     </def-cat>
 
-    <def-cat n="SDet">
-      <cat-item tags="SDet"/>
-      <cat-item tags="SDet.*"/>
+    <def-cat n="Det">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
     </def-cat>
 
     <def-cat n="SPron">
@@ -69,6 +69,10 @@
     <def-cat n="Num">
       <cat-item tags="Num"/>
       <cat-item tags="Num.*"/>
+    </def-cat>
+
+    <def-cat n="PREP">
+      <cat-item tags="PREP"/>
     </def-cat>
 
     <def-cat n="cnjcoo">
@@ -99,7 +103,7 @@
     </def-cat>
 
     <def-cat n="unknown">
-      <cat-item lemma="unkwnown" tags="unknown"/>
+      <cat-item lemma="unknown" tags="unknown"/>
     </def-cat>
 
     <def-cat n="fi_frase">
@@ -322,9 +326,9 @@
 
     <!-- REGLAS fifrase -->
 
-    <rule comment="REGLA: SDet">
+    <rule comment="REGLA: Det">
       <pattern>
-        <pattern-item n="SDet"/>
+        <pattern-item n="Det"/>
       </pattern>
       <action>
         <out>
@@ -357,6 +361,22 @@
     <rule comment="REGLA: Num">
       <pattern>
         <pattern-item n="Num"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="fifrase"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: PREP">
+      <pattern>
+        <pattern-item n="PREP"/>
       </pattern>
       <action>
         <out>
