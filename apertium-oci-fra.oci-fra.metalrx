@@ -758,12 +758,19 @@
   </rule>
   <rule weight="1.0">
     <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
     <match lemma="a" tags="pr"/>
   </rule>
-  <rule weight="1.0">
-    <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
-    <match tags="adv"/>
+  <rule weight="1.2">
+    <match lemma="cridar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
     <match lemma="a" tags="pr"/>
+    <match tags="pr"/>
+    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="li" tags="prn.pro.*"/>
