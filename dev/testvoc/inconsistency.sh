@@ -7,8 +7,11 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         lt-proc -b ../../oci-fra.autobil.bin |\
         lrx-proc -m ../../oci-fra.autolex.bin |\
         apertium-transfer -b ../../apertium-oci-fra.oci-fra.t1x  ../../oci-fra.t1x.bin |\
-        apertium-interchunk ../../apertium-oci-fra.oci-fra.t2x  ../../oci-fra.t2x.bin |\
+        apertium-interchunk ../../apertium-oci-fra.oci-fra.t2ax  ../../oci-fra.t2ax.bin |\
+        apertium-interchunk ../../apertium-oci-fra.oci-fra.t2bx  ../../oci-fra.t2bx.bin |\
+        apertium-interchunk ../../apertium-oci-fra.oci-fra.t2cx  ../../oci-fra.t2cx.bin |\
         apertium-postchunk ../../apertium-oci-fra.oci-fra.t3x  ../../oci-fra.t3x.bin |\
+        apertium-transfer -n ../../apertium-oci-fra.oci-fra.t4x  ../../oci-fra.t4x.bin |\
 	tee $TMPDIR/tmp_testvoc2.txt |\
         lt-proc -d ../../oci-fra.autogen.bin > $TMPDIR/tmp_testvoc3.txt
 paste -d _ $TMPDIR/tmp_testvoc1.txt $TMPDIR/tmp_testvoc2.txt $TMPDIR/tmp_testvoc3.txt | sed 's/\^.<sent>\$//g' | sed 's/_/   --------->  /g' | grep -v '\^@'
@@ -22,6 +25,7 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         apertium-transfer -b ../../apertium-oci-fra.fra-oci.t1x  ../../fra-oci.t1x.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x  ../../fra-oci.t2x.bin  |\
         apertium-postchunk ../../apertium-oci-fra.fra-oci.t3x  ../../fra-oci.t3x.bin  |\
+        apertium-transfer -n ../../apertium-oci-fra.fra-oci.t4x  ../../fra-oci.t4x.bin  |\
 	tee $TMPDIR/tmp_testvoc2.txt |\
         lt-proc -d ../../fra-oci.autogen.bin > $TMPDIR/tmp_testvoc3.txt
 paste -d _ $TMPDIR/tmp_testvoc1.txt $TMPDIR/tmp_testvoc2.txt $TMPDIR/tmp_testvoc3.txt | sed 's/\^.<sent>\$//g' | sed 's/_/   --------->  /g' | grep -v '\^@'
