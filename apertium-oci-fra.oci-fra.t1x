@@ -2480,10 +2480,10 @@
       <choose>
         <when>
           <test>
-        <equal> 
+        <equal>
           <var n="EOS"/>
           <lit v="true"/>
-        </equal> 
+        </equal>
           </test>
           <choose>
         <when>
@@ -2512,7 +2512,7 @@
         <lit v="Aa"/>
           </let>
         </when>
-        <otherwise> 
+        <otherwise>
           <let>
         <var n="caseFirstWord"/>
         <lit v="aa"/>
@@ -2593,29 +2593,40 @@
     <!-- REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
     <rule comment="REGLA: DET">
-       <pattern>
-         <pattern-item n="det"/>
-       </pattern>
-       <action>
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>    
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-         <out>
-           <chunk name="d" case="caseFirstWord">
-             <tags>
-               <tag><lit-tag v="SDet"/></tag>
-             </tags>
-           <lu>
-             <clip pos="1" side="tl" part="lemh"/>
-             <clip pos="1" side="tl" part="tags"/>
-             <clip pos="1" side="tl" part="lemq"/>
-           </lu>
-         </chunk>
-         </out>
-       </action>
+      <pattern>
+        <pattern-item n="det"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="tipus_det">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_concord1">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="1"/>
+       </call-macro>
+       <out>
+         <chunk name="det" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
     </rule>
 
     <rule comment="REGLA: ADJEC">
@@ -2625,8 +2636,11 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
         <out>
@@ -2657,8 +2671,11 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
         <out>
@@ -2690,7 +2707,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
@@ -2714,7 +2731,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
@@ -2742,7 +2759,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
         <out>
@@ -2768,7 +2785,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <out>
           <chunk name="preadv_adv" case="caseFirstWord">
             <tags>
@@ -2797,7 +2814,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
@@ -2830,7 +2847,7 @@
        <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
          <call-macro n="f_concord1">
            <with-param pos="1"/>
          </call-macro>
@@ -2859,7 +2876,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
         <out>
@@ -2882,7 +2899,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <out>
           <chunk name="cnjcoo" case="caseFirstWord">
             <tags>
@@ -2903,7 +2920,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <out>
           <chunk name="cnjsub" case="caseFirstWord">
             <tags>
@@ -2924,7 +2941,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <out>
           <chunk name="cnjadv" case="caseFirstWord">
             <tags>
@@ -2945,7 +2962,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
@@ -2969,10 +2986,10 @@
        <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
@@ -3006,7 +3023,7 @@
        <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
@@ -3041,10 +3058,10 @@
        <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
@@ -3078,7 +3095,7 @@
        <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
@@ -3118,7 +3135,10 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
         <call-macro n="f_concord2">
           <with-param pos="2"/>
           <with-param pos="1"/>
@@ -3131,7 +3151,28 @@
           <with-param pos="2"/>
         </call-macro>
         <out>
-          <chunk name="d_n" case="caseFirstWord">
+          <chunk name="det" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -3139,10 +3180,6 @@
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-            <b pos="1"/>
             <lu>
               <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="tags"/>
@@ -3162,7 +3199,7 @@
       <action>
         <call-macro n="firstWord">
           <with-param pos="1"/>
-        </call-macro>    
+        </call-macro>
         <choose>
           <when>
             <test>
@@ -3172,7 +3209,7 @@
                   <equal><clip pos="1" side="sl" part="lem"/><lit v=":"/></equal>
                 </or>
               </not>
-            </test>              
+            </test>
             <let><var n="EOS"/><lit v="true"/></let>
           </when>
         </choose>
