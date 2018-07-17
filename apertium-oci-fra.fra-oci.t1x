@@ -28,6 +28,7 @@
       <cat-item tags="np.loc"/>
     </def-cat>
     <def-cat n="npal">
+      <cat-item tags="np.al"/>
       <cat-item tags="np.al.*"/>
     </def-cat>
 
@@ -430,6 +431,7 @@
   </section-def-attrs>
 
   <section-def-vars>
+    <def-var n="lemma"/>
     <def-var n="number"/>
     <def-var n="numvist"/>
     <def-var n="varporque"/>
@@ -529,6 +531,7 @@
       <list-item v="manténer"/>
       <list-item v="memorizar"/>
       <list-item v="nomenar"/>
+      <list-item v="recebre"/>
       <list-item v="regropar"/>
       <list-item v="reintrodusir"/>
       <list-item v="reintroduire"/>
@@ -3141,8 +3144,9 @@
         <pattern-item n="adv_preadv"/>
       </pattern>
       <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="adv">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="SAdv"/></tag>
             </tags>
@@ -3487,7 +3491,7 @@
               <or>
                 <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
                 <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="mf"/></equal>
-                <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="sp"/></equal>
+                <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sp"/></equal>
               </or>
             </test>
             <out>
@@ -3585,7 +3589,7 @@
             </lu>
           </chunk>
           <b pos="1"/>
-          <chunk name="n">
+          <chunk name="np">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -3626,7 +3630,7 @@
               <or>
                 <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
                 <equal><clip pos="3" side="tl" part="gen"/><lit-tag v="mf"/></equal>
-                <equal><clip pos="3" side="tl" part="gen"/><lit-tag v="sp"/></equal>
+                <equal><clip pos="3" side="tl" part="nbr"/><lit-tag v="sp"/></equal>
               </or>
             </test>
             <out>
@@ -3685,7 +3689,7 @@
         </choose>
         <out>
           <b pos="1"/>
-          <chunk name="a">
+          <chunk name="adv_a">
             <tags>
               <tag><var n="temp"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
