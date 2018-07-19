@@ -521,6 +521,7 @@
       <list-item v="esperar"/>
       <list-item v="èsser"/>
       <list-item v="encontrar"/>
+      <list-item v="establir"/>
       <list-item v="evitar"/>
       <list-item v="ganhar"/>
       <list-item v="gropar"/>
@@ -5344,7 +5345,7 @@
 
     <!-- REGLAS DATAS -->
 
-   <rule comment="REGLA: NUMERAL NOM NUM (20 novembre 1998: 20 de novembre de 1998)">
+   <rule comment="REGLA: NUMERAL MOIS NUM (20 novembre 1998: 20 de novembre de 1998)">
       <pattern>
         <pattern-item n="num_premier"/>
         <pattern-item n="nom_mois"/>
@@ -5356,86 +5357,45 @@
           <with-param pos="1"/>
           <with-param pos="3"/>
         </call-macro>
-        <choose>
-          <when>
-            <test>
-              <in caseless="yes">
-                <clip pos="2" side="sl" part="lem"/>
-                <list n="mois"/>
-              </in>
-            </test>
-            <out>
-              <chunk name="data">
-                <tags>
-                  <tag><lit-tag v="SN"/></tag>
-                  <tag><clip pos="2" side="tl" part="gen"/></tag>
-                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="whole"/>
-                </lu>
-                <b pos="1"/>
-                <lu>
-                  <lit v="de"/>
-                  <lit-tag v="pr"/>
-                </lu>
-                <b/>
-                <lu>
-                  <clip pos="2" side="tl" part="lemh"/>
-                  <clip pos="2" side="tl" part="tags"/>
-                  <clip pos="2" side="tl" part="lemq"/>
-                </lu>
-                <b pos="2"/>
-                <lu>
-                  <lit v="de"/>
-                  <lit-tag v="pr"/>
-                </lu>
-                <b/>
-                <lu>
-                  <clip pos="3" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-              </out>
-          </when>
-          <otherwise>
-            <out>
-              <chunk name="num-nom">
-                <tags>
-                  <tag><lit-tag v="SN"/></tag>
-                  <tag><clip pos="2" side="tl" part="gen"/></tag>
-                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="whole"/>
-                </lu>
-                <b pos="1"/>
-                <lu>
-                  <clip pos="2" side="tl" part="lemh"/>
-                  <clip pos="2" side="tl" part="tags"/>
-                  <clip pos="2" side="tl" part="lemq"/>
-                </lu>
-              </chunk>
-              <b pos="2"/>
-              <chunk name="num">
-                <tags>
-                  <tag><lit-tag v="Num"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="3" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-            </out>
-          </otherwise>
-        </choose>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
 
-   <rule comment="REGLA: DET NUMERAL NOM NUM (le 20 novembre 1998: lo 20 de novembre de 1998)">
+   <rule comment="REGLA: DET NUMERAL MOIS NUM (le 20 novembre 1998: lo 20 de novembre de 1998)">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num_premier"/>
@@ -5452,101 +5412,80 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
-        <choose>
-          <when>
-            <test>
-              <in caseless="yes">
-                <clip pos="3" side="sl" part="lem"/>
-                <list n="mois"/>
-              </in>
-            </test>
-            <out>
-              <chunk name="data">
-                <tags>
-                  <tag><lit-tag v="SN"/></tag>
-                  <tag><clip pos="3" side="tl" part="gen"/></tag>
-                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="whole"/>
-                </lu>
-                <b pos="1"/>
-                <lu>
-                  <clip pos="2" side="tl" part="whole"/>
-                </lu>
-                <b pos="2"/>
-                <lu>
-                  <lit v="de"/>
-                  <lit-tag v="pr"/>
-                </lu>
-                <b/>
-                <lu>
-                  <clip pos="3" side="tl" part="lemh"/>
-                  <clip pos="3" side="tl" part="tags"/>
-                  <clip pos="3" side="tl" part="lemq"/>
-                </lu>
-                <b pos="3"/>
-                <lu>
-                  <lit v="de"/>
-                  <lit-tag v="pr"/>
-                </lu>
-                <b/>
-                <lu>
-                  <clip pos="4" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-              </out>
-          </when>
-          <otherwise>
-            <out>
-              <chunk name="det">
-                <tags>
-                  <tag><lit-tag v="Det"/></tag>
-                  <tag><var n="tipusdet"/></tag>
-                  <tag><clip pos="3" side="tl" part="gen"/></tag>
-                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="lemh"/>
-                  <clip pos="1" side="tl" part="tags"/>
-                  <clip pos="1" side="tl" part="lemq"/>
-                </lu>
-              </chunk>
-              <b pos="1"/>
-              <chunk name="num-nom">
-                <tags>
-                  <tag><lit-tag v="SN"/></tag>
-                  <tag><clip pos="3" side="tl" part="gen"/></tag>
-                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="2" side="tl" part="whole"/>
-                </lu>
-                <b pos="2"/>
-                <lu>
-                  <clip pos="3" side="tl" part="lemh"/>
-                  <clip pos="3" side="tl" part="tags"/>
-                  <clip pos="3" side="tl" part="lemq"/>
-                </lu>
-              </chunk>
-              <b pos="3"/>
-              <chunk name="num">
-                <tags>
-                  <tag><lit-tag v="Num"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="4" side="tl" part="whole"/>
-                </lu>
-              </chunk>
-            </out>
-          </otherwise>
-        </choose>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+   <rule comment="REGLA: MOIS NUM (en novembre 1998: en novembre de 1998)">
+      <pattern>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
