@@ -10,6 +10,12 @@
       <cat-item tags="SA.*"/>
       <cat-item tags="SAcomp.*"/>
     </def-cat>
+    <def-cat n="PP">
+      <cat-item lemma="pp" tags="SA.*"/>
+    </def-cat>
+    <def-cat n="PP_pl">
+      <cat-item lemma="pp" tags="SA.*.pl.*"/>
+    </def-cat>
     <def-cat n="SAcomp">
       <cat-item tags="SAcomp.*"/>
     </def-cat>
@@ -61,6 +67,10 @@
     </def-cat>
     <def-cat n="DET_def">
       <cat-item tags="Det.def.*"/>
+    </def-cat>
+    <def-cat n="DET_defpl">
+      <cat-item tags="Det.def.*.pl.*"/>
+      <cat-item tags="Det.def.*.pl.*"/>
     </def-cat>
     <def-cat n="DET_aucun">
       <cat-item tags="Det.aucun.*"/>
@@ -485,6 +495,93 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
           <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="5"/><with-param pos="6"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV_vbser PP PR_de DET_def SN: élimination de l'article définit du partitif: sont devenues des chansons populaires > son vengudas de cançons popularas">
+      <pattern>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="PP_pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_defpl"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV_vbser ADV PP PR_de DET_def SN: élimination de l'article définit du partitif: ne sont pas devenues des chansons populaires > son pas vengudas de cançons popularas">
+      <pattern>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_defpl"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
           <chunk>
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
