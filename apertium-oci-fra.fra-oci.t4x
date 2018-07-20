@@ -6,12 +6,17 @@
     <!-- this shouldn't include 'sent' or other punctuation -->
     <def-cat n="default">
       <cat-item tags="*"/>
+      <cat-item tags=""/>
     </def-cat>
     <def-cat n="punct">
       <cat-item lemma="!" tags="sent"/>
       <cat-item lemma="?" tags="sent"/>
       <cat-item lemma=";" tags="sent"/>
       <cat-item lemma=":" tags="sent"/>
+      <cat-item lemma="»" tags="rpar"/>
+    </def-cat>
+    <def-cat n="lpunct">
+      <cat-item lemma="«" tags="lpar"/>
     </def-cat>
     <def-cat n="tv">
       <cat-item tags="vblex.tv.*"/>
@@ -136,13 +141,56 @@
                 <clip pos="1" side="tl" part="lemq"/>
               </lu>
             </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="2" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: « x > «x">
+      <pattern>
+        <pattern-item n="lpunct"/>
+        <pattern-item n="default"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+            </out>
             <call-macro n="f_bcond">
               <with-param pos="1"/>
               <with-param pos="2"/>
             </call-macro>
             <out>
               <lu>
-                <clip pos="2" side="tl" part="whole"/>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="a_verb"/>
+                <clip pos="2" side="tl" part="temps"/>
+                <clip pos="2" side="tl" part="pers"/>
+                <clip pos="2" side="tl" part="gen"/>
+                <clip pos="2" side="tl" part="nbr"/>
+                <clip pos="2" side="tl" part="lemq"/>
               </lu>
             </out>
           </when>
@@ -163,6 +211,112 @@
             </out>
           </otherwise>
         </choose>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: « x » > «x»">
+      <pattern>
+        <pattern-item n="lpunct"/>
+        <pattern-item n="default"/>
+        <pattern-item n="punct"/>
+      </pattern>
+      <action>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="a_verb"/>
+                <clip pos="2" side="tl" part="temps"/>
+                <clip pos="2" side="tl" part="pers"/>
+                <clip pos="2" side="tl" part="gen"/>
+                <clip pos="2" side="tl" part="nbr"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="2" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="3" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: x » : > x»: (les gens ! ». > las gents!».">
+      <pattern>
+        <pattern-item n="default"/>
+        <pattern-item n="punct"/>
+        <pattern-item n="punct"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="a_verb"/>
+                <clip pos="1" side="tl" part="temps"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <clip pos="1" side="tl" part="gen"/>
+                <clip pos="1" side="tl" part="nbr"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="2" side="tl" part="whole"/>
+          </lu>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="3" side="tl" part="whole"/>
+          </lu>
+        </out>
       </action>
     </rule>
 
