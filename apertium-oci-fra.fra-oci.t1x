@@ -109,6 +109,9 @@
     <def-cat n="la_adv">
       <cat-item lemma="là" tags="adv"/>
     </def-cat>
+    <def-cat n="en_fait">
+      <cat-item lemma="en fait" tags="adv"/>
+    </def-cat>
 
     <def-cat n="prn">
       <cat-item tags="prn.*"/>
@@ -131,6 +134,10 @@
     </def-cat>
     <def-cat n="il">
       <cat-item lemma="il" tags="prn.tn.p3.m.sg"/>
+    </def-cat>
+    <def-cat n="il_elle">
+      <cat-item lemma="il" tags="prn.tn.p3.m.sg"/>
+      <cat-item lemma="il" tags="prn.tn.p3.f.sg"/>
     </def-cat>
     <def-cat n="on">
       <cat-item lemma="on" tags="prn.pro.ref.p3.mf.sp"/>
@@ -9722,6 +9729,39 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
         </call-macro>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: IL EN FAIT > en fa (pedaç per evitar il + ´en fa' (adv) ">
+       <pattern>
+         <pattern-item n="il_elle"/>
+         <pattern-item n="en_fait"/>
+       </pattern>
+       <action>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="pro-verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="en"/>
+               </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+             </lu>
+             <b/>
+             <lu>
+              <lit v="far"/>
+              <lit-tag v="vblex.pri.p3.sg"/>
+             </lu>
+           </chunk>
+         </out>
        </action>
     </rule>
 
