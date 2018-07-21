@@ -147,6 +147,10 @@
     <def-cat n="sent">
       <cat-item tags="sent"/>
     </def-cat>
+
+    <def-cat n="unknown">
+      <cat-item tags=""/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -3544,6 +3548,27 @@
     </rule>
 
     <!-- FIN REGLAS CONCORDANÇA -->
+
+    <rule comment="REGLA: UNKNOWN">
+      <pattern>
+        <pattern-item n="unknown"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+       <out>
+         <chunk name="unknown" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="unknown"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="REGLA: SENT">
       <pattern>
