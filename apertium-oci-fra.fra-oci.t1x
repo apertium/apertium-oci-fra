@@ -4617,11 +4617,9 @@
         <call-macro n="f_maj_gentilici">
           <with-param pos="2"/>
         </call-macro>
-<!--
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
--->
         <choose>
           <when>
             <test>
@@ -4665,8 +4663,6 @@
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
                   <tag><var n="numero_sl"/></tag>
-            <tag><var n="concPrimero"/></tag>
-            <tag><var n="auxg"/></tag>
                 </tags>
                   <lu>
                     <clip pos="1" side="tl" part="lemh"/>
@@ -5492,6 +5488,43 @@
             <b/>
             <lu>
               <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+   <rule comment="REGLA: EN MOIS NUM (en en novembre 1998: en novembre de 1998)">
+      <pattern>
+        <pattern-item n="enprep"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="en-data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
             </lu>
           </chunk>
         </out>
