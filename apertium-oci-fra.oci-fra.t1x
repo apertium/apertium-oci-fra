@@ -21,6 +21,7 @@
     <def-cat n="adjec">
       <cat-item tags="adj.*"/>
       <cat-item tags="vblex.pp.*"/>
+      <cat-item tags="vblex.tv.pp.*"/>
     </def-cat>
     <def-cat n="adv">
       <cat-item tags="adv.*"/>
@@ -68,11 +69,28 @@
       <cat-item tags="vbmod.*.p3.*"/>
     </def-cat>
 
+    <def-cat n="inf">
+      <cat-item tags="vblex.inf"/>
+      <cat-item tags="vblex.tv.inf"/>
+      <cat-item tags="vbser.inf"/>
+      <cat-item tags="vbhaver.inf"/>
+      <cat-item tags="vbmod.inf"/>
+    </def-cat>
+
     <def-cat n="pp">
       <cat-item tags="vblex.pp.*"/>
+      <cat-item tags="vblex.tv.pp.*"/>
       <cat-item tags="vbser.pp.*"/>
       <cat-item tags="vbhaver.pp.*"/>
       <cat-item tags="vbmod.pp.*"/>
+    </def-cat>
+
+    <def-cat n="imp">
+      <cat-item tags="vblex.imp.*"/>
+      <cat-item tags="vblex.tv.imp.*"/>
+      <cat-item tags="vbser.imp.*"/>
+      <cat-item tags="vbhaver.imp.*"/>
+      <cat-item tags="vbmod.imp.*"/>
     </def-cat>
 
     <def-cat n="vbser">
@@ -115,7 +133,9 @@
 
     <def-cat n="vbnoser_inf_ger">
       <cat-item tags="vblex.inf"/>
+      <cat-item tags="vblex.tv.inf"/>
       <cat-item tags="vblex.ger"/>
+      <cat-item tags="vblex.tv.ger"/>
       <cat-item tags="vbhaver.inf"/>
       <cat-item tags="vbhaver.ger"/>
       <cat-item tags="vbmod.inf"/>
@@ -186,6 +206,7 @@
       <attr-item tags="adj.pos"/>
       <attr-item tags="adj"/>
       <attr-item tags="vblex.pp"/>
+      <attr-item tags="vblex.tv.pp"/>
     </def-attr>
 
     <def-attr n="a_verb">
@@ -210,6 +231,7 @@
       <attr-item tags="m"/>
       <attr-item tags="mf"/>
       <attr-item tags="f"/>
+      <attr-item tags="nt"/>
       <attr-item tags="GD"/>
     </def-attr>
 
@@ -243,6 +265,22 @@
       <attr-item tags="pro"/>
     </def-attr>
 
+    <def-attr n="tipoenc_pro">
+      <attr-item tags="ref.p3.mf.sp"/>
+      <attr-item tags="p1.mf.sg"/>
+      <attr-item tags="p1.mf.pl"/>
+      <attr-item tags="p2.mf.sg"/>
+      <attr-item tags="p2.mf.pl"/>
+      <attr-item tags="p3.mf.sg"/>
+      <attr-item tags="p3.mf.pl"/>
+      <attr-item tags="p3.mf.sp"/>
+      <attr-item tags="p3.m.sg"/>
+      <attr-item tags="p3.m.pl"/>
+      <attr-item tags="p3.f.sg"/>
+      <attr-item tags="p3.f.pl"/>
+      <attr-item tags="p3.nt"/>
+      <attr-item tags="adv"/>
+    </def-attr>
   </section-def-attrs>
 
   <section-def-vars>
@@ -4080,7 +4118,7 @@
 
     <rule comment="REGLA: IMP PRNENC">
        <pattern>
-         <pattern-item n="verb"/>
+         <pattern-item n="imp"/>
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
@@ -4125,7 +4163,7 @@
 
     <rule comment="REGLA: IMP PRNENC PRNENC">
        <pattern>
-         <pattern-item n="verb"/>
+         <pattern-item n="imp"/>
          <pattern-item n="prnenc"/>
          <pattern-item n="prnenc"/>
        </pattern>
@@ -4173,6 +4211,46 @@
          </out>
        </action>
     </rule>
+
+    <rule comment="INF + ENCLÍTIC (regla per l'aranés: pensar-o > le penser)">
+      <pattern>
+        <pattern-item n="inf"/>
+        <pattern-item n="prnenc"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="pro_inf" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+              <tag><var n="tipusverb"/></tag>
+              <tag><clip pos="1" side="tl" part="temps"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit-tag v="prn.pro"/>
+              <clip pos="2" side="tl" part="tipoenc_pro"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="a_verb"/>
+              <clip pos="1" side="tl" part="temps"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+  </rule>
 
   <!-- FIN AUTRAS REGLAS VERBALAS -->
 
