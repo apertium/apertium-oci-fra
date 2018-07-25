@@ -5725,6 +5725,48 @@
        </action>
     </rule>
 
+    <rule comment="REGLA: HAVER SER_PP PP > SER + SER_PP PP: ont été codifiées > son estadas codificadas">
+       <pattern>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <lit v="èsser"/>
+               <lit-tag v="vbser"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
     <rule comment="REGLA: PRNSUBJ HAVERconj SER_PP > SER + SER_PP: j'ai été > soi estat">
        <pattern>
         <pattern-item n="prnsubj"/>
@@ -5872,6 +5914,62 @@
               </out>
             </otherwise>
          </choose>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: NE HAVER PAS SER_PP PP > SER PAS SER_PP PP: n'ont pas été codifiées > son pas estadas codificadas">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_adv_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="èsser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
        </action>
     </rule>
 
