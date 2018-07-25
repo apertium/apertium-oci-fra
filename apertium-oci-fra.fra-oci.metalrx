@@ -227,6 +227,94 @@
   </rule>
 
 
+<!-- **************** CNJSUB **************** -->
+
+  <!-- que >> que, sonque -->
+  <rule weight="0.8">
+    <match lemma="que" tags="cnjsub"><select lemma="que" tags="cnjsub"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+    <match tags="pr"/>
+    <match tags="n.*"/>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vbhaver.*"/><match tags="vbser.*"/></or>
+    <or><match tags="vblex.pp.*"/><match tags="vblex.tv.pp.*"/><match tags="vbser.pp.*"/><match tags="vbhaver.pp.*"/><match tags="vbmod.pp.*"/></or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vbhaver.*"/><match tags="vbser.*"/></or>
+    <match tags="pr"/>
+    <match tags="n.*"/>
+    <or><match tags="vblex.pp.*"/><match tags="vblex.tv.pp.*"/><match tags="vbser.pp.*"/><match tags="vbhaver.pp.*"/><match tags="vbmod.pp.*"/></or>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vbhaver.*"/><match tags="vbser.*"/></or>
+    <or><match tags="vblex.pp.*"/><match tags="vblex.tv.pp.*"/><match tags="vbser.pp.*"/><match tags="vbhaver.pp.*"/><match tags="vbmod.pp.*"/></or>
+    <match tags="pr"/>
+    <match tags="n.*"/>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <match tags="vbmod.*"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/></or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <match tags="vbmod.*"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/></or>
+    <match tags="pr"/>
+    <match tags="n.*"/>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vbhaver.*"/><match tags="vbser.*"/></or>
+    <match tags="vbmod.pp.*"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/></or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ne" tags="adv"/>
+    <or><match tags="vbhaver.*"/><match tags="vbser.*"/></or>
+    <match tags="vbmod.pp.*"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/></or>
+    <match tags="pr"/>
+    <match tags="n.*"/>
+    <match lemma="que" tags="cnjsub"><select lemma="sonque" tags="adv"/></match>
+  </rule>
+
+
 <!-- **************** ADV **************** -->
 
   <!-- seulement >> solament, sonque -->
