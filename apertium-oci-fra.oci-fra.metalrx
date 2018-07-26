@@ -155,7 +155,10 @@
           </or>
         </repeat>
         <match tags="prn.pro.ref.p3.*.sp"/>
-        <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+        <or>
+          <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.tv.inf"><select lemma="{{p3}}"/></match>
+        </or>
       </rule>
       <rule weight="1.0">
         <match tags="vbser.*"/>
@@ -230,7 +233,7 @@
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="felicitar" tags="vblex.*"/>
@@ -303,7 +306,7 @@
       <match tags="adv"/>
     </repeat>
     <or><match tags="vblex.*"/><match tags="vbmod.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="que" tags="rel.an.*"><select lemma="qui"/></match>
@@ -312,7 +315,7 @@
     </repeat>
     <match tags="prn.pro.*"/>
     <or><match tags="vblex.*"/><match tags="vbmod.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="que" tags="rel.an.*"><select lemma="qui"/></match>
@@ -322,7 +325,7 @@
     <match tags="prn.pro.*"/>
     <match tags="prn.pro.*"/>
     <or><match tags="vblex.*"/><match tags="vbmod.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="que" tags="rel.an.*"><select lemma="qui"/></match>
@@ -332,11 +335,11 @@
     <or>
       <match tags="vbser.*"/>
       <match lemma="estar" tags="vbser.*"/>
-      <match lemma="semblar" tags="vbser.*"/> <!-- CAL TRAD DEL CAT -->
-      <match lemma="venir" tags="vbser.*"/>
-      <match lemma="anar" tags="vbser.*"/>
-      <match lemma="arribar" tags="vbser.*"/>
-      <match lemma="dormir" tags="vbser.*"/>
+      <match lemma="semblar" tags="vblex.*"/> <!-- CAL TRAD DEL CAT -->
+      <match lemma="venir" tags="vblex.*"/>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="dormir" tags="vblex.*"/>
     </or>
   </rule>
 
@@ -778,7 +781,7 @@
     </repeat>
     <match lemma="a" tags="pr"/>
     <match tags="pr"/>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
     <match lemma="li" tags="prn.pro.*"/>
