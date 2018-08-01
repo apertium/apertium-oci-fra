@@ -154,6 +154,9 @@
     <def-cat n="pr">
       <cat-item tags="pr"/>
     </def-cat>
+    <def-cat n="apr">
+      <cat-item lemma="a" tags="pr"/>
+    </def-cat>
 
     <def-cat n="cnjcoo">
       <cat-item tags="cnjcoo"/>
@@ -4986,6 +4989,300 @@
     </rule>
 
     <!-- FIN REGLAS CAMBI AUXILIAR -->
+
+    <!-- REGLAS 'ES A + INF' -->
+
+    <rule comment="REGLA: SER A INF > SER + EN TRAIN DE INF: soi a parlar > suis en train de parler">
+       <pattern>
+         <pattern-item n="vbser"/>
+         <pattern-item n="apr"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <lit v="en"/>
+               <lit-tag v="pr"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="train"/>
+               <lit-tag v="n.m.sg"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="de"/>
+               <lit-tag v="pr"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: SER ADV A INF > SER + ADV EN TRAIN DE INF: soi encara a parlar > suis encore en train de parler">
+       <pattern>
+         <pattern-item n="vbser"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="apr"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="firstWord">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+         </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="1"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+         <out>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="en_train_de" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <lit v="en"/>
+               <lit-tag v="pr"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="train"/>
+               <lit-tag v="n.m.sg"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="de"/>
+               <lit-tag v="pr"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+           <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="4" side="tl" part="temps"/></tag>
+               <tag><clip pos="4" side="tl" part="pers"/></tag>
+               <tag><clip pos="4" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="REGLA: SER ADV ADV A INF > SER + ADV ADV EN TRAIN DE INF: soi pas encara a parlar > suis pas encore en train de parler">
+       <pattern>
+         <pattern-item n="vbser"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="apr"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="firstWord">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+         </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="1"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+         <out>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="3"/>
+         </call-macro>
+         <let><var n="lemma"/><clip pos="3" side="tl" part="lem"/></let>
+         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+         <out>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk name="en_train_de" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <lit v="en"/>
+               <lit-tag v="pr"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="train"/>
+               <lit-tag v="n.m.sg"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="de"/>
+               <lit-tag v="pr"/>
+             </lu>
+           </chunk>
+           <b pos="4"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+           <with-param pos="5"/>
+         </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="5" side="tl" part="temps"/></tag>
+               <tag><clip pos="5" side="tl" part="pers"/></tag>
+               <tag><clip pos="5" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <!-- FIN REGLAS 'ES A + INF' -->
 
     <!-- AUTRAS REGLAS VERBALAS -->
 
