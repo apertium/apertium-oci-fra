@@ -445,7 +445,6 @@
     <def-attr n="tv">
       <attr-item tags="tv"/>
     </def-attr>
-
   </section-def-attrs>
 
   <section-def-vars>
@@ -455,6 +454,7 @@
     <def-var n="varporque"/>
     <def-var n="tipusverb"/>
     <def-var n="tipusdet"/>
+    <def-var n="tipusprn"/>
     <def-var n="uno"/>
     <def-var n="genero"/>
     <def-var n="numero"/>
@@ -2923,6 +2923,22 @@
       </choose>
     </def-macro>
 
+    <def-macro n="tipus_prn" npar="1"> <!-- tots els prn passen per aqui -->
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes">
+             <clip pos="1" side="sl" part="lem"/><lit v="se"/>
+            </equal>
+          </test>
+          <let><var n="tipusprn"/><lit-tag v="ref"/></let>
+        </when>
+        <otherwise>
+          <let><var n="tipusverb"/><lit-tag v="normal"/></let>
+        </otherwise>
+      </choose>
+    </def-macro>
+
     <def-macro n="neg_imp" npar="1"> <!-- canvia imp per prs (negació) -->
       <choose>
         <when>
@@ -3222,6 +3238,9 @@
          <call-macro n="f_concord1">
            <with-param pos="1"/>
          </call-macro>
+         <call-macro n="tipus_prn">
+           <with-param pos="1"/>
+         </call-macro>
          <choose>
            <when>
              <test>
@@ -3235,6 +3254,7 @@
                <chunk name="prn">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
                    <clip pos="1" side="tl" part="lemh"/>
@@ -6223,7 +6243,6 @@
        </action>
     </rule>
 
-<!-- 45 -->
     <rule comment="REGLA: NE HAVER RIEN SER_PP > SER PAS SER_PP RES: n'ai rien été > soi pas estat res">
        <pattern>
          <pattern-item n="ne"/>
@@ -6322,6 +6341,7 @@
            <chunk name="prn">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
                <clip pos="3" side="tl" part="whole"/>
@@ -6331,7 +6351,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE HAVER RIEN SER_PP > SER PAS SER_PP RES: je n'ai rien été > soi pas estat">
+    <rule comment="REGLA: PRNSUBJ NE HAVER RIEN SER_PP > SER PAS SER_PP RES: je n'ai rien été > soi pas estat res">
        <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -6405,6 +6425,7 @@
            <chunk name="prn">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
                <clip pos="4" side="tl" part="whole"/>
@@ -6859,6 +6880,7 @@
            <chunk name="prn">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
                <clip pos="1" side="tl" part="lemh"/>
@@ -7300,6 +7322,7 @@
           <chunk name="prn">
             <tags>
               <tag><lit-tag v="SPron"/></tag>
+              <tag><lit-tag v="ref"/></tag>
             </tags>
             <lu>
               <get-case-from pos="1">
@@ -7384,6 +7407,7 @@
            <chunk name="pro-pro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -8719,6 +8743,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="6"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="5"/>
+        </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -8739,6 +8766,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -8788,6 +8816,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="7"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="6"/>
+        </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -8812,6 +8843,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -8994,6 +9026,9 @@
          <call-macro n="f_concord1">
            <with-param pos="2"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="2"/>
+        </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="8"/>
          </call-macro>
@@ -9005,6 +9040,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -9077,6 +9113,9 @@
          <call-macro n="f_concord1">
            <with-param pos="3"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="3"/>
+        </call-macro>
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
@@ -9095,6 +9134,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -9312,6 +9352,9 @@
          <call-macro n="f_concord1">
            <with-param pos="2"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="2"/>
+        </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="8"/>
          </call-macro>
@@ -9323,6 +9366,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
@@ -9399,6 +9443,9 @@
          <call-macro n="f_concord1">
            <with-param pos="3"/>
          </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="3"/>
+        </call-macro>
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
@@ -9417,6 +9464,7 @@
            <chunk name="prnpro">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
                <get-case-from pos="1">
