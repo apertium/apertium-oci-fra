@@ -2,7 +2,7 @@
 ## Makefile for Occitan--French
 ###############################################################################
 
-VERSION=0.1.0
+VERSION=0.2.0
 LANG1=oci
 LANG1b=oci@gascon
 LANG2=fra
