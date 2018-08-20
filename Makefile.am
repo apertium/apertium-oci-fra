@@ -2,7 +2,6 @@
 ## Makefile for Occitan--French
 ###############################################################################
 
-VERSION=0.2.0
 LANG1=oci
 LANG1b=oci@gascon
 LANG2=fra
@@ -238,7 +237,8 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX2).t2x	\
 		$(BASENAME).$(PREFIX2).t3x	\
 		$(BASENAME).$(PREFIX2).t4x	\
-		modes.xml
+		modes.xml \
+		alt.xsl
 
 ###############################################################################
 ## Installation
@@ -285,4 +285,3 @@ test: all
 	@echo "lo can es verd" > .test-ref
 	@diff .test-ref .test-mt
 	@rm .test-ref .test-mt
-

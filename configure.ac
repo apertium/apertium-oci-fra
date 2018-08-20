@@ -33,4 +33,3 @@ AP_CHECK_LING([2], [apertium-fra])
 AP_MKINCLUDE
 
 AC_OUTPUT([Makefile])
-
