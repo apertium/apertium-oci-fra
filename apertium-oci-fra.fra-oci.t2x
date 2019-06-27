@@ -220,7 +220,43 @@
 
     <!-- REGLAS PER L'ATRIBUT -->
 
-    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: la maison est grande > l-ostal es grand">
+    <rule comment="REGLA: PREP SN SV_vbser SA: aquesta regla inhibeix la concodança de les regles que segueixen si hi ha una prep al davant del subjecte putatiu">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <out>
+        <chunk>
+          <clip pos="1" part="lem"/>
+          <clip pos="1" part="tags"/>
+          <clip pos="1" part="chcontent"/>
+        </chunk>
+	<b pos="1"/>
+        <chunk>
+          <clip pos="2" part="lem"/>
+          <clip pos="2" part="tags"/>
+          <clip pos="2" part="chcontent"/>
+        </chunk>
+	<b pos="2"/>
+        <chunk>
+          <clip pos="3" part="lem"/>
+          <clip pos="3" part="tags"/>
+          <clip pos="3" part="chcontent"/>
+        </chunk>
+	<b pos="3"/>
+        <chunk>
+          <clip pos="4" part="lem"/>
+          <clip pos="4" part="tags"/>
+          <clip pos="4" part="chcontent"/>
+        </chunk>
+      </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SN SV_vbser SA: concordance en genre entre suject et attibut: la maison est grande > l'ostal es grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
@@ -271,7 +307,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SN SV_vbser SAdv SA: concordance en genre entre suject et attibut: la maison est très grande > l-ostal es força grand">
+    <rule comment="REGLA: SN SV_vbser SAdv SA: concordance en genre entre suject et attibut: la maison est très grande > l'ostal es força grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
@@ -329,7 +365,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SN SV_vbser DET SA: concordance en genre entre suject et attibut: la maison est la grande > l-ostal es lo grand">
+    <rule comment="REGLA: SN SV_vbser DET SA: concordance en genre entre suject et attibut: la maison est la grande > l'ostal es lo grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_vbser"/>
