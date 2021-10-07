@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interchunk>
+  <section-def-cats>
+    <def-cat n="SN">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+    </def-cat>
+    <def-cat n="SA">
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+    </def-cat>
+    <def-cat n="PP">
+      <cat-item lemma="pp" tags="SA.*"/>
+    </def-cat>
+    <def-cat n="PP_pl">
+      <cat-item lemma="pp" tags="SA.*.pl.*"/>
+    </def-cat>
+    <def-cat n="SAcomp">
+      <cat-item tags="SAcomp.*"/>
+    </def-cat>
+    <def-cat n="SN_SA">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+    </def-cat>
+    <def-cat n="SAdv">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="SV">
+      <cat-item tags="SV"/>
+      <cat-item tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_partitiu">
+      <cat-item tags="SV.vbser.partitiu"/>
+      <cat-item tags="SV.vblex.partitiu"/>
+    </def-cat>
+    <def-cat n="SV_vbser">
+      <cat-item tags="SV.vbser"/>
+      <cat-item tags="SV.vbser.*"/>
+    </def-cat>
+    <def-cat n="PREP">
+      <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
+    </def-cat>
+    <def-cat n="PREP_de">
+      <cat-item tags="PREP.de"/>
+    </def-cat>
+    <def-cat n="SENT_PREP_CNJ_REL">
+      <cat-item tags="SENT"/>
+      <cat-item tags="LPAR"/>
+      <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
+      <cat-item lemma="dempuèi" tags="SAdv"/>
+      <cat-item lemma="après" tags="SAdv"/>
+      <cat-item lemma="aprèp" tags="SAdv"/>
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjadv"/>
+      <cat-item tags="Rel"/>
+    </def-cat>
+    <def-cat n="DET">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+    </def-cat>
+    <def-cat n="DET_def">
+      <cat-item tags="Det.def.*"/>
+    </def-cat>
+    <def-cat n="DET_defpl">
+      <cat-item tags="Det.def.*.pl.*"/>
+      <cat-item tags="Det.def.*.pl.*"/>
+    </def-cat>
+    <def-cat n="DET_aucun">
+      <cat-item tags="Det.aucun.*"/>
+    </def-cat>
+
+    <def-cat n="UNK">
+      <cat-item tags="unknown"/>
+    </def-cat>
+    <def-cat n="SN_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="unknown"/>
+    </def-cat>
+    <def-cat n="SN_SA_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+      <cat-item tags="unknown"/>
+      <cat-item tags="unknown"/>
+      <cat-item tags="unknown.*"/>
+    </def-cat>
+
+    <def-cat n="CM">
+      <cat-item tags="CM"/>
+    </def-cat>
+    <def-cat n="LPAR">
+      <cat-item tags="LPAR"/>
+    </def-cat>
+    <def-cat n="SENT">
+      <cat-item tags="SENT"/>
+    </def-cat>
+  </section-def-cats>
+
+  <section-def-attrs>
+    <def-attr n="chunk">
+      <attr-item tags="SN"/>
+      <attr-item tags="SV"/>
+    </def-attr>
+
+    <def-attr n="gen">
+      <attr-item tags="m"/>
+      <attr-item tags="f"/>
+      <attr-item tags="mf"/>
+    </def-attr>
+
+    <def-attr n="sl_gen">
+      <attr-item tags="sl_m"/>
+      <attr-item tags="sl_f"/>
+      <attr-item tags="sl_mf"/>
+    </def-attr>
+
+    <def-attr n="nbr">
+      <attr-item tags="sg"/>
+      <attr-item tags="pl"/>
+      <attr-item tags="sp"/>
+      <attr-item tags="ND"/>
+    </def-attr>
+
+  </section-def-attrs>
+
+  <section-def-vars>
+    <def-var n="number"/>
+  </section-def-vars>
+
+  <section-def-macros>
+    <def-macro n="test1" npar="1">
+      <let>
+        <var n="number"/>
+        <lit v=""/>
+      </let>
+    </def-macro>
+
+    <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
+      <choose>
+        <when>
+          <test>
+            <not>
+              <equal>
+                <b pos="1"/>
+                <lit v=" "/>
+              </equal>
+            </not>
+          </test>
+          <out>
+            <b pos="1"/>
+          </out>
+        </when>
+      </choose>
+    </def-macro>
+
+  </section-def-macros>
+
+  <section-rules>
+
+    <!-- RÈGLAS PELS ENONCIATIUS -->
+    <rule comment="REGLA: SN">
+      <pattern>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+  </section-rules>
+</interchunk>
+
+<!--
+Resources:
+    http://wiki.apertium.org/wiki/Chunking:_A_full_example
+    http://wiki.apertium.org/wiki/Chunking
+    http://wiki.apertium.org/wiki/Apertium_New_Language_Pair_HOWTO#Transfer_rules
+    http://wiki.apertium.org/wiki/A_long_introduction_to_transfer_rules
+    http://wiki.apertium.org/wiki/Transfer#Adding_structural_transfer_.28grammar.29_rules
+-->
+

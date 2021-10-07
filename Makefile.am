@@ -42,6 +42,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).autopgen.bin	\
 	$(PREFIX2).t1x.bin	\
 	$(PREFIX2).t2x.bin	\
+	$(PREFIX2b).t2x_enon.bin	\
 	$(PREFIX2).t3x.bin	\
 	$(PREFIX2).t4x.bin
 
@@ -194,6 +195,10 @@ $(PREFIX2).t2x.bin: $(BASENAME).$(PREFIX2).t2x
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
+$(PREFIX2b).t2x_enon.bin: $(BASENAME).$(PREFIX2).t2x_enon
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
 $(PREFIX2).t3x.bin: $(BASENAME).$(PREFIX2).t3x
 	apertium-validate-postchunk $<
 	apertium-preprocess-transfer $< $@
@@ -233,6 +238,7 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).t4x	\
 		$(BASENAME).$(PREFIX2).t1x	\
 		$(BASENAME).$(PREFIX2).t2x	\
+		$(BASENAME).$(PREFIX2).t2x_enon	\
 		$(BASENAME).$(PREFIX2).t3x	\
 		$(BASENAME).$(PREFIX2).t4x	\
 		modes.xml \
@@ -255,6 +261,7 @@ apertium_oci_fra_DATA=	\
 	$(BASENAME).$(PREFIX1).t4x			\
 	$(BASENAME).$(PREFIX2).t1x			\
 	$(BASENAME).$(PREFIX2).t2x			\
+	$(BASENAME).$(PREFIX2).t2x_enon			\
 	$(BASENAME).$(PREFIX2).t3x			\
 	$(BASENAME).$(PREFIX2).t4x
 
