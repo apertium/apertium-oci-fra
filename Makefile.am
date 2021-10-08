@@ -20,7 +20,6 @@ TARGETS_COMMON =		\
 	$(PREFIX1).autobil.bin	\
 	$(PREFIX1b).autobil.bin	\
 	$(PREFIX1).autolex.bin	\
-	$(PREFIX1b).autolex.bin	\
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -35,12 +34,12 @@ TARGETS_COMMON =		\
 	$(PREFIX2).autobil.bin	\
 	$(PREFIX2b).autobil.bin	\
 	$(PREFIX2).autolex.bin	\
-	$(PREFIX2b).autolex.bin	\
 	$(PREFIX2).autogen.bin	\
 	$(PREFIX2b).autogen.bin	\
 	$(PREFIX2).autopgen.bin	\
 	$(PREFIX2b).autopgen.bin	\
 	$(PREFIX2).t1x.bin	\
+	$(PREFIX2b).t1x.bin	\
 	$(PREFIX2).t2x.bin	\
 	$(PREFIX2b).t2x_enon.bin	\
 	$(PREFIX2).t3x.bin	\
@@ -149,13 +148,7 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 $(PREFIX1).autolex.bin: .deps/$(BASENAME).$(PREFIX1).lrx
 	lrx-comp $< $@
 
-$(PREFIX1b).autolex.bin: .deps/$(BASENAME).$(PREFIX1b).lrx
-	lrx-comp $< $@
-
 $(PREFIX2).autolex.bin: .deps/$(BASENAME).$(PREFIX2).lrx
-	lrx-comp $< $@
-
-$(PREFIX2b).autolex.bin: .deps/$(BASENAME).$(PREFIX2b).lrx
 	lrx-comp $< $@
 
 ###############################################################################
@@ -186,8 +179,17 @@ $(PREFIX1).t4x.bin: $(BASENAME).$(PREFIX1).t4x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
+.deps/$(PREFIX2).t1x: $(BASENAME).$(PREFIX2).t1x
+	apertium-filter-rules oci $(BASENAME).$(PREFIX2).t1x >$@
 
-$(PREFIX2).t1x.bin: $(BASENAME).$(PREFIX2).t1x
+.deps/$(PREFIX2b).t1x: $(BASENAME).$(PREFIX2).t1x
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).t1x >$@
+
+$(PREFIX2).t1x.bin: .deps/$(PREFIX2).t1x
+	apertium-validate-transfer $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX2b).t1x.bin: .deps/$(PREFIX2b).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
@@ -226,10 +228,8 @@ $(PREFIX2b).autopgen.bin: $(AP_SRC1)/$(LANG1b).autopgen.bin
 
 EXTRA_DIST=					\
 		.deps/$(BASENAME).$(PREFIX1).lrx	\
-		.deps/$(BASENAME).$(PREFIX1b).lrx	\
 		$(BASENAME).$(PREFIX1).dix	\
 		.deps/$(BASENAME).$(PREFIX2).lrx	\
-		.deps/$(BASENAME).$(PREFIX2b).lrx	\
 		$(BASENAME).$(PREFIX1).t1x	\
 		$(BASENAME).$(PREFIX1).t2ax	\
 		$(BASENAME).$(PREFIX1).t2bx	\
