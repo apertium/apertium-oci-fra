@@ -36,7 +36,9 @@
     </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu"/>
-      <cat-item tags="SV.vblex.partitiu"/>
+      <cat-item tags="SV.vbser.partitiu"/>
+      <cat-item tags="SV.vblex.*.partitiu"/>
+      <cat-item tags="SV.vblex.*.partitiu"/>
     </def-cat>
     <def-cat n="SV_vbser">
       <cat-item tags="SV.vbser"/>
@@ -59,6 +61,9 @@
       <cat-item lemma="aprèp" tags="SAdv"/>
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjadv"/>
+      <cat-item tags="Rel"/>
+    </def-cat>
+    <def-cat n="REL">
       <cat-item tags="Rel"/>
     </def-cat>
     <def-cat n="DET">
@@ -92,7 +97,6 @@
       <cat-item tags="SAcomp.*"/>
       <cat-item tags="unknown"/>
       <cat-item tags="unknown"/>
-      <cat-item tags="unknown.*"/>
     </def-cat>
 
     <def-cat n="CM">
@@ -109,6 +113,7 @@
   <section-def-attrs>
     <def-attr n="chunk">
       <attr-item tags="SN"/>
+      <attr-item tags="SA"/>
       <attr-item tags="SV"/>
     </def-attr>
 
@@ -131,10 +136,36 @@
       <attr-item tags="ND"/>
     </def-attr>
 
+    <def-attr n="temps">
+      <attr-item tags="inf"/>
+      <attr-item tags="ger"/>
+      <attr-item tags="pp"/>
+      <attr-item tags="pri"/>
+      <attr-item tags="ifi"/>
+      <attr-item tags="pii"/>
+      <attr-item tags="fti"/>
+      <attr-item tags="cni"/>
+      <attr-item tags="prs"/>
+      <attr-item tags="pis"/>
+      <attr-item tags="fts"/>
+      <attr-item tags="imp"/>
+    </def-attr>
+
+    <def-attr n="negation">
+      <attr-item tags="negation"/>
+    </def-attr>
+
+    <def-attr n="a_sent">
+      <attr-item tags="quest"/>
+      <attr-item tags="excl"/>
+      <attr-item tags="std"/>
+    </def-attr>
+
   </section-def-attrs>
 
   <section-def-vars>
     <def-var n="number"/>
+    <def-var n="set_enonciatiu"/>
   </section-def-vars>
 
   <section-def-macros>
@@ -163,14 +194,150 @@
       </choose>
     </def-macro>
 
+    <def-macro n="escriure_enonciatiu" npar="2"><!-- par1 = vèrb; par2 = sent -->
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="2" part="lem"/><lit v="quest"/></equal>
+          </test>
+          <out>
+            <chunk>
+              <lit v="enon"/>
+              <lit-tag v="SAdv"/>
+              <lit v="{^"/>
+              <lit v="e"/>
+              <lit-tag v="adv"/>
+              <lit-tag v="enon"/>
+              <lit v="$}"/>
+            </chunk>
+            <b/>
+          </out>
+        </when>
+        <when>
+          <test>
+            <equal><clip pos="2" part="lem"/><lit v="excl"/></equal>
+          </test>
+          <out>
+            <chunk>
+              <lit v="enon"/>
+              <lit-tag v="SAdv"/>
+              <lit v="{^"/>
+              <lit v="be"/>
+              <lit-tag v="adv"/>
+              <lit-tag v="enon"/>
+              <lit v="$}"/>
+            </chunk>
+            <b/>
+          </out>
+        </when>
+        <otherwise>
+          <out>
+            <chunk>
+              <lit v="enon"/>
+              <lit-tag v="SAdv"/>
+              <lit v="{^"/>
+              <lit v="que"/>
+              <lit-tag v="adv"/>
+              <lit-tag v="enon"/>
+              <lit v="$}"/>
+            </chunk>
+            <b/>
+          </out>
+        </otherwise>
+      </choose>
+    </def-macro>
+
+    <def-macro n="apondre_enonciatiu" npar="2"><!-- par1 = vèrb; par2 = sent -->
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" part="negation"/><lit-tag v="negation"/></equal>
+          </test>
+          <let><var n="set_enonciatiu"/><lit v="non"/></let>
+        </when>
+        <when>
+          <test>
+            <or>
+              <equal><clip pos="1" part="temps"/><lit-tag v="inf"/></equal>
+              <equal><clip pos="1" part="temps"/><lit-tag v="ger"/></equal>
+              <equal><clip pos="1" part="temps"/><lit-tag v="pp"/></equal>
+              <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
+            </or>
+          </test>
+          <let><var n="set_enonciatiu"/><lit v="non"/></let>
+        </when>
+        <otherwise>
+          <let><var n="set_enonciatiu"/><lit v="oc"/></let>
+          <call-macro n="escriure_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        </otherwise>
+      </choose>
+    </def-macro>
+
   </section-def-macros>
 
   <section-rules>
 
-    <!-- RÈGLAS PELS ENONCIATIUS -->
-    <rule comment="REGLA: SN">
+    <!-- RÈGLAS PER GENERAR UN ENONCIATIU -->
+
+    <rule comment="REGLA: SV SENT">
       <pattern>
-        <pattern-item n="SN"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SV SN_SA_UNK SENT">
+      <pattern>
+        <pattern-item n="SV"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- RÈGLAS PER GENERAR PAS D'ENONCIATIU -->
+
+    <rule comment="REGLA: REL SV">
+      <pattern>
+        <pattern-item n="REL"/>
+        <pattern-item n="SV"/>
       </pattern>
       <action>
         <out>
@@ -178,6 +345,41 @@
             <clip pos="1" part="lem"/>
             <clip pos="1" part="tags"/>
             <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: REL SN SV">
+      <pattern>
+        <pattern-item n="REL"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
       </action>
