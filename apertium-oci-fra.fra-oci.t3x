@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <postchunk>
   <section-def-cats>
+    <def-cat n="enon">
+      <cat-item name="enon"/>
+    </def-cat>
+    <def-cat n="verb">
+      <cat-item name="v"/>
+      <cat-item name="vbser"/>
+      <cat-item name="verb"/>
+      <cat-item name="pro-verb"/>
+      <cat-item name="pro-pro-verb"/>
+    </def-cat>
+    <def-cat n="pronom">
+      <cat-item name="prn"/>
+    </def-cat>
     <def-cat n="sent">
       <cat-item name="punt"/>
     </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
-    <def-attr n="nbr">
-      <attr-item tags="sg"/>
+    <def-attr n="case">
+      <attr-item tags="aa"/>
+      <attr-item tags="Aa"/>
+      <attr-item tags="AA"/>
     </def-attr>
   </section-def-attrs>
 
@@ -16,12 +31,39 @@
     <def-var n="paraula"/>
   </section-def-vars>
 
+  <section-def-macros>
+    <def-macro n="change_case" npar="1">
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="0" part="case"/><lit-tag v="aa"/></equal>
+          </test>
+          <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
+        </when>
+        <when>
+          <test>
+            <equal><clip pos="0" part="case"/><lit-tag v="Aa"/></equal>
+          </test>
+          <modify-case><clip pos="1" part="lem"/><lit v="Aa"/></modify-case>
+        </when>
+        <when>
+          <test>
+            <equal><clip pos="0" part="case"/><lit-tag v="AA"/></equal>
+          </test>
+          <modify-case><clip pos="1" part="lem"/><lit v="AA"/></modify-case>
+        </when>
+      </choose>
+    </def-macro>
+  </section-def-macros>
+
   <section-rules>
-    <rule comment="CHUNK:">
+
+    <rule comment="CHUNK: enon (changing case)">
       <pattern>
-        <pattern-item n="sent"/>
+        <pattern-item n="enon"/>
       </pattern>
       <action>
+        <call-macro n="change_case"><with-param pos="1"/></call-macro>
         <out>
           <lu>
             <clip pos="1" part="whole"/>
@@ -29,6 +71,37 @@
         </out>
       </action>
     </rule>
+
+    <rule comment="CHUNK: verb (changing case)">
+      <pattern>
+        <pattern-item n="verb"/>
+      </pattern>
+      <action>
+<!--
+        <call-macro n="change_case"><with-param pos="1"/></call-macro>
+-->
+        <out>
+          <lu>
+            <clip pos="1" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="CHUNK: pronom (changing case)">
+      <pattern>
+        <pattern-item n="pronom"/>
+      </pattern>
+      <action>
+        <call-macro n="change_case"><with-param pos="1"/></call-macro>
+        <out>
+          <lu>
+            <clip pos="1" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
   </section-rules>
 </postchunk>
 
