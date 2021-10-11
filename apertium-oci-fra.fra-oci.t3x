@@ -77,14 +77,83 @@
         <pattern-item n="verb"/>
       </pattern>
       <action>
-<!--
         <call-macro n="change_case"><with-param pos="1"/></call-macro>
--->
         <out>
           <lu>
             <clip pos="1" part="whole"/>
           </lu>
         </out>
+
+        <choose>
+          <when>
+            <test>
+              <equal><lu-count/><lit v="2"/></equal>
+            </test>
+            <out>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" part="whole"/>
+              </lu>
+            </out>
+          </when>
+          <when>
+            <test>
+              <equal><lu-count/><lit v="3"/></equal>
+            </test>
+            <out>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" part="whole"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" part="whole"/>
+              </lu>
+            </out>
+          </when>
+          <when>
+            <test>
+              <equal><lu-count/><lit v="4"/></equal>
+            </test>
+            <out>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" part="whole"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" part="whole"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" part="whole"/>
+              </lu>
+            </out>
+          </when>
+          <when>
+            <test>
+              <equal><lu-count/><lit v="5"/></equal>
+            </test>
+            <out>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" part="whole"/>
+              </lu>
+              <b pos="2"/>
+              <lu>
+                <clip pos="3" part="whole"/>
+              </lu>
+              <b pos="3"/>
+              <lu>
+                <clip pos="4" part="whole"/>
+              </lu>
+              <b pos="4"/>
+              <lu>
+                <clip pos="5" part="whole"/>
+              </lu>
+            </out>
+          </when>
+        </choose>
       </action>
     </rule>
 
@@ -99,6 +168,20 @@
             <clip pos="1" part="whole"/>
           </lu>
         </out>
+
+        <choose>
+          <when>
+            <test>
+              <equal><lu-count/><lit v="2"/></equal>
+            </test>
+            <out>
+              <b pos="1"/>
+              <lu>
+                <clip pos="2" part="whole"/>
+              </lu>
+            </out>
+          </when>
+        </choose>
       </action>
     </rule>
 
