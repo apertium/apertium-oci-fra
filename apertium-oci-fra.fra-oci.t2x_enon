@@ -234,6 +234,24 @@
       <choose>
         <when>
           <test>
+            <equal><clip pos="1" part="negation"/><lit-tag v="negation"/></equal>
+          </test>
+          <out>
+            <chunk>
+              <lit v="enon"/>
+              <lit-tag v="SAdv"/>
+              <var n="case_enon"/>
+              <lit v="{^"/>
+              <lit v="ne"/>
+              <lit-tag v="adv"/>
+              <lit-tag v="enon"/>
+              <lit v="$}"/>
+            </chunk>
+            <b/>
+          </out>
+        </when>
+        <when>
+          <test>
             <equal><clip pos="2" part="lem"/><lit v="quest"/></equal>
           </test>
           <out>
@@ -292,7 +310,8 @@
           <test>
             <equal><clip pos="1" part="negation"/><lit-tag v="negation"/></equal>
           </test>
-          <let><var n="set_enonciatiu"/><lit v="non"/></let>
+          <let><var n="set_enonciatiu"/><lit v="oc"/></let>
+          <call-macro n="escriure_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
         </when>
         <when>
           <test>
