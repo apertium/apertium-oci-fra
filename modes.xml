@@ -64,7 +64,7 @@
   <mode name="oci_gascon-fra" install="no" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
-        <file name="oci-fra.automorf.bin"/>
+        <file name="oci@gascon-fra.automorf.bin"/>
       </program>
       <program name="cg-proc -w" debug-suff="disamb">
         <file name="oci-fra.rlx.bin"/>
@@ -112,12 +112,24 @@
     </pipeline>
   </mode>
 
+  <mode name="fra-oci_gascon-disam" install="no">
+    <pipeline>
+      <program name="lt-proc -w">
+        <file name="fra-oci@gascon.automorf.bin"/>
+      </program>
+      <program name="cg-conv -a -l"/>
+      <program name="vislcg3 --trace --grammar">
+        <file name="fra-oci.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
   <!-- fra → oci@gascon -->
 
   <mode name="fra-oci_gascon" install="no" gendebug="yes">
     <pipeline>
       <program name="lt-proc -w">
-        <file name="fra-oci.automorf.bin"/>
+        <file name="fra-oci@gascon.automorf.bin"/>
       </program>
       <program name="cg-proc -w" debug-suff="disamb">
         <file name="fra-oci.rlx.bin"/>
@@ -218,6 +230,18 @@
     <pipeline>
       <program name="lt-proc -w">
         <file name="oci-fra.automorf.bin"/>
+      </program>
+      <program name="cg-conv -a -l"/>
+      <program name="vislcg3 --trace --grammar">
+        <file name="oci-fra.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="oci_gascon-fra-disam" install="no">
+    <pipeline>
+      <program name="lt-proc -w">
+        <file name="oci@gascon-fra.automorf.bin"/>
       </program>
       <program name="cg-conv -a -l"/>
       <program name="vislcg3 --trace --grammar">
