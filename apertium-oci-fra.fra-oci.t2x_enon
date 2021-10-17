@@ -321,7 +321,12 @@
       <choose>
         <when>
           <test>
-            <equal><clip pos="1" part="negation"/><lit-tag v="negation"/></equal>
+            <and>
+              <equal><clip pos="1" part="negation"/><lit-tag v="negation"/></equal>
+              <not>
+                <equal><clip pos="1" part="temps"/><lit-tag v="inf"/></equal>
+              </not>
+            </and>
           </test>
           <let><var n="set_enonciatiu"/><lit v="oc"/></let>
           <call-macro n="escriure_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
