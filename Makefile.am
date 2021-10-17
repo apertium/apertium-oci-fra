@@ -37,6 +37,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2).autolex.bin	\
 	$(PREFIX2).autogen.bin	\
 	$(PREFIX2b).autogen.bin	\
+	$(PREFIX2).autoprepgen.bin	\
 	$(PREFIX2).autopgen.bin	\
 	$(PREFIX2b).autopgen.bin	\
 	$(PREFIX2).t1x.bin	\
@@ -216,6 +217,9 @@ $(PREFIX2).t4x.bin: $(BASENAME).$(PREFIX2).t4x
 ###############################################################################
 ## Postgeneration dictionaries
 ###############################################################################
+
+$(PREFIX2).autoprepgen.bin: $(AP_SRC1)/$(LANG1).autoprepgen.bin
+	cp $< $@
 
 $(PREFIX1).autopgen.bin: $(AP_SRC2)/$(LANG2).autopgen.bin
 	cp $< $@
