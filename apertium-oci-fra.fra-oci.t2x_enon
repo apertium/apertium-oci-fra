@@ -34,12 +34,6 @@
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
     </def-cat>
-    <def-cat n="SV_partitiu">
-      <cat-item tags="SV.vbser.partitiu"/>
-      <cat-item tags="SV.vbser.partitiu"/>
-      <cat-item tags="SV.vblex.*.partitiu"/>
-      <cat-item tags="SV.vblex.*.partitiu"/>
-    </def-cat>
     <def-cat n="SV_vbser">
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
@@ -87,6 +81,16 @@
       <cat-item tags="SAcomp.*"/>
       <cat-item tags="unknown"/>
     </def-cat>
+    <def-cat n="SN_SA_SAdv_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item tags="unknown"/>
+    </def-cat>
 
     <def-cat n="CM">
       <cat-item tags="CM"/>
@@ -96,6 +100,10 @@
     </def-cat>
     <def-cat n="SENT">
       <cat-item tags="SENT"/>
+    </def-cat>
+    <def-cat n="SPronPro">
+      <cat-item tags="SPron.pro"/>
+      <cat-item tags="SPron.ref"/>
     </def-cat>
 
     <def-cat n="TOT_EXCEPTE_SENT">
@@ -116,6 +124,7 @@
       <cat-item tags="SV.*"/>
 
       <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjcoo"/>
       <cat-item tags="cnjadv"/>
@@ -375,6 +384,8 @@
 
     <!-- RÈGLAS PER GENERAR UN ENONCIATIU -->
 
+    <!-- sens proclitic -->
+
     <rule comment="REGLA: SV SENT">
       <pattern>
         <pattern-item n="SV"/>
@@ -399,10 +410,10 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SV SN_SA_UNK SENT: La maison est belle. > L'ostau qu'ei beròi.">
+    <rule comment="REGLA: SV SN_SA_SAdv_UNK SENT: La maison est belle. > L'ostau qu'ei beròi.">
       <pattern>
         <pattern-item n="SV"/>
-        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SN_SA_SAdv_UNK"/>
         <pattern-item n="SENT"/>
       </pattern>
       <action>
@@ -492,7 +503,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SV Det SN_SA_UNK SENT: C'est une maison belle. > Qu'ei un ostau beròi.">
+    <rule comment="REGLA: SV Det SN_SA_SAdv_UNK SENT: C'est une maison belle. > Qu'ei un ostau beròi.">
       <pattern>
         <pattern-item n="SV"/>
         <pattern-item n="DET"/>
@@ -599,6 +610,599 @@
       </action>
     </rule>
 
+    <!-- ambe 1 proclitic -->
+
+    <rule comment="REGLA: SPronPro SV SENT">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SV SN_SA_SAdv_UNK SENT: La société caroligienne s'efface progressivement. > La societat carolingiana que s'escafa progressivament.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SN_SA_SAdv_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SV SAdv SA SENT: La famille en est très fière. > La familha que n'ei hèra fièra.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SV Det SN_SA_SAdv_UNK SENT: C'est une maison belle. > Qu'ei un ostau beròi.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SV SAdv Det SN_SA_UNK SENT: C'est toujours une maison belle. > Qu'ei totjorn un ostau beròi.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="6"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <!-- ambe 2 proclitics -->
+
+    <rule comment="REGLA: SPronPro SPronPro SV SENT">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SPronPro SV SN_SA_SAdv_UNK SENT: La société caroligienne s'efface progressivement. > La societat carolingiana que s'escafa progressivament.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SN_SA_SAdv_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SPronPro SV SAdv SA SENT: La famille en est très fière. > La familha que n'ei hèra fièra.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="6"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SPronPro SV Det SN_SA_SAdv_UNK SENT: C'est une maison belle. > Qu'ei un ostau beròi.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="6"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: SPronPro SPronPro SV SAdv Det SN_SA_UNK SENT: C'est toujours une maison belle. > Qu'ei totjorn un ostau beròi.">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="7"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+  </out>	<!-- extra blank: workaround space bug -->
+<choose>
+  <when>
+    <test>
+      <equal><var n="set_enonciatiu"/><lit v="oc"/></equal>
+    </test>
+  <out>
+    <b/>
+  </out>
+  </when>
+</choose>
+  <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
     <!-- RÈGLAS PER GENERAR PAS D'ENONCIATIU -->
 
     <rule comment="REGLA: REL_CNJ SV">
@@ -648,6 +1252,154 @@
             <clip pos="3" part="lem"/>
             <clip pos="3" part="tags"/>
             <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="non"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: REL_CNJ SPronPro SV">
+      <pattern>
+        <pattern-item n="REL_CNJ"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="non"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: REL_CNJ SN SPronPro SV">
+      <pattern>
+        <pattern-item n="REL_CNJ"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="non"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: REL_CNJ SPronSPro SPronSPro SV">
+      <pattern>
+        <pattern-item n="REL_CNJ"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="non"/></let>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: REL_CNJ SN SPronSPro SPronSPro SV">
+      <pattern>
+        <pattern-item n="REL_CNJ"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
