@@ -3216,6 +3216,28 @@
       </action>
     </rule>
 
+    <rule comment="REGLA: ADVITG">
+      <pattern>
+        <pattern-item n="advitg"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+              <tag><lit-tag v="itg"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
       <pattern>
         <pattern-item n="preadv"/>
