@@ -309,6 +309,10 @@
       <cat-item tags="vbmod.pp.*"/>
     </def-cat>
 
+    <def-cat n="ij">
+      <cat-item tags="ij"/>
+    </def-cat>
+
     <def-cat n="cm">
       <cat-item tags="cm"/>
     </def-cat>
@@ -564,6 +568,7 @@
       <list-item v="manténer"/>
       <list-item v="memorizar"/>
       <list-item v="nomenar"/>
+      <list-item v="prepausar"/>
       <list-item v="recebre"/>
       <list-item v="regropar"/>
       <list-item v="reintrodusir"/>
@@ -3582,9 +3587,9 @@
 
   <section-rules>
 
-    <!-- REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+    <!-- RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
-    <rule comment="REGLA: DET">
+    <rule comment="RÈGLA: DET">
        <pattern>
          <pattern-item n="det"/>
        </pattern>
@@ -3618,7 +3623,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NOM">
+    <rule comment="RÈGLA: NOM">
       <pattern>
         <pattern-item n="nom"/>
       </pattern>
@@ -3651,7 +3656,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NP">
+    <rule comment="RÈGLA: NP">
       <pattern>
         <pattern-item n="np"/>
       </pattern>
@@ -3681,7 +3686,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJ">
+    <rule comment="RÈGLA: ADJ">
       <pattern>
         <pattern-item n="adj"/>
       </pattern>
@@ -3734,7 +3739,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: pp">
+    <rule comment="RÈGLA: pp">
       <pattern>
         <pattern-item n="pp"/>
       </pattern>
@@ -3767,7 +3772,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADV">
+    <rule comment="RÈGLA: ADV">
       <pattern>
         <pattern-item n="adv_preadv"/>
       </pattern>
@@ -3788,7 +3793,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADVITG">
+    <rule comment="RÈGLA: ADVITG">
       <pattern>
         <pattern-item n="advitg"/>
       </pattern>
@@ -3810,7 +3815,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
+    <rule comment="RÈGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
       <pattern>
         <pattern-item n="preadv"/>
         <pattern-item n="adv"/>
@@ -3837,7 +3842,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRN">
+    <rule comment="RÈGLA: PRN">
        <pattern>
          <pattern-item n="prn"/>
        </pattern>
@@ -3876,7 +3881,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NUMERAL">
+    <rule comment="RÈGLA: NUMERAL">
       <pattern>
         <pattern-item n="num"/>
       </pattern>
@@ -3897,7 +3902,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PREP">
+    <rule comment="RÈGLA: PREP">
       <pattern>
         <pattern-item n="pr"/>
       </pattern>
@@ -3916,7 +3921,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJCOO">
+    <rule comment="RÈGLA: CNJCOO">
       <pattern>
         <pattern-item n="cnjcoo"/>
       </pattern>
@@ -3935,7 +3940,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJSUB">
+    <rule comment="RÈGLA: CNJSUB">
       <pattern>
         <pattern-item n="cnjsub"/>
       </pattern>
@@ -3954,7 +3959,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJADV">
+    <rule comment="RÈGLA: CNJADV">
       <pattern>
         <pattern-item n="cnjadv"/>
       </pattern>
@@ -3973,7 +3978,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: RELATIF">
+    <rule comment="RÈGLA: RELATIF">
       <pattern>
         <pattern-item n="rel"/>
       </pattern>
@@ -3995,7 +4000,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: VBSER">
+    <rule comment="RÈGLA: VBSER">
        <pattern>
          <pattern-item n="vbser"/>
        </pattern>
@@ -4024,7 +4029,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: VBNOSER">
+    <rule comment="RÈGLA: VBNOSER">
        <pattern>
          <pattern-item n="vbnoser"/>
        </pattern>
@@ -4053,11 +4058,29 @@
        </action>
     </rule>
 
-    <!-- FIN REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+    <rule comment="RÈGLA: IJ">
+      <pattern>
+        <pattern-item n="ij"/>
+      </pattern>
+      <action>
+        <out>
+         <chunk name="ij">
+           <tags>
+             <tag><lit-tag v="ij"/></tag>
+           </tags>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+         </chunk>
+        </out>
+      </action>
+    </rule>
 
-    <!-- REGLAS CONCORDANÇA -->
+    <!-- FIN RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
-    <rule comment="REGLA: DET NOM">
+    <!-- RÈGLAS CONCORDANÇA -->
+
+    <rule comment="RÈGLA: DET NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -4111,7 +4134,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADJ">
+    <rule comment="RÈGLA: DET ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adj"/>
@@ -4198,7 +4221,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NPAL (les Calandretas > las Calandretas)">
+    <rule comment="RÈGLA: DET NPAL (les Calandretas > las Calandretas)">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="npal"/>
@@ -4249,7 +4272,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADV ADJ">
+    <rule comment="RÈGLA: DET ADV ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adv_preadv"/>
@@ -4357,7 +4380,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADJ">
+    <rule comment="RÈGLA: DET NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -4419,7 +4442,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADJ NOM">
+    <rule comment="RÈGLA: DET ADJ NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adjec"/>
@@ -4577,7 +4600,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NUM NOM">
+    <rule comment="RÈGLA: DET NUM NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num"/>
@@ -4680,7 +4703,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADJ ADJ">
+    <rule comment="RÈGLA: DET NOM ADJ ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -4750,7 +4773,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADJ NOM ADJ">
+    <rule comment="RÈGLA: DET ADJ NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adjec"/>
@@ -4820,7 +4843,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NUM NOM ADJ">
+    <rule comment="RÈGLA: DET NUM NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num"/>
@@ -4890,7 +4913,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADV ADJ">
+    <rule comment="RÈGLA: DET NOM ADV ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -4959,7 +4982,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADV ADJ NOM">
+    <rule comment="RÈGLA: DET ADV ADJ NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adv_preadv"/>
@@ -5028,7 +5051,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PREDET DET NOM">
+    <rule comment="RÈGLA: PREDET DET NOM">
       <pattern>
         <pattern-item n="predet"/>
         <pattern-item n="det"/>
@@ -5077,7 +5100,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADJ">
+    <rule comment="RÈGLA: NOM ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
@@ -5119,7 +5142,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJ NOM">
+    <rule comment="RÈGLA: ADJ NOM">
       <pattern>
         <pattern-item n="adjec"/>
         <pattern-item n="nom"/>
@@ -5236,7 +5259,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM NOM">
+    <rule comment="RÈGLA: NUM NOM">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="nom"/>
@@ -5314,7 +5337,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADJ ADJ">
+    <rule comment="RÈGLA: NOM ADJ ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
@@ -5363,7 +5386,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJ NOM ADJ">
+    <rule comment="RÈGLA: ADJ NOM ADJ">
       <pattern>
         <pattern-item n="adjec"/>
         <pattern-item n="nom"/>
@@ -5412,7 +5435,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM NOM ADJ">
+    <rule comment="RÈGLA: NUM NOM ADJ">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="nom"/>
@@ -5461,7 +5484,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM ADJ NOM">
+    <rule comment="RÈGLA: NUM ADJ NOM">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="adjec"/>
@@ -5510,7 +5533,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADV ADJ">
+    <rule comment="RÈGLA: NOM ADV ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adv_preadv"/>
@@ -5558,7 +5581,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADV ADJ NOM">
+    <rule comment="RÈGLA: ADV ADJ NOM">
       <pattern>
         <pattern-item n="adv_preadv"/>
         <pattern-item n="adjec"/>
@@ -5606,7 +5629,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: EN NOM (en français: en francés - perquè no faci ´en francesa')">
+    <rule comment="RÈGLA: EN NOM (en français: en francés - perquè no faci ´en francesa')">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom"/>
@@ -5649,7 +5672,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: EN NOM ADJ">
+    <rule comment="RÈGLA: EN NOM ADJ">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom"/>
@@ -5703,11 +5726,11 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS CONCORDANÇA -->
+    <!-- FIN RÈGLAS CONCORDANÇA -->
 
-    <!-- REGLAS -CI/-LÀ -->
+    <!-- RÈGLAS -CI/-LÀ -->
 
-    <rule comment="REGLA: CE NOM CI (cette fois-ci > aqueste còp)">
+    <rule comment="RÈGLA: CE NOM CI (cette fois-ci > aqueste còp)">
       <pattern>
         <pattern-item n="ce_det"/>
         <pattern-item n="nom"/>
@@ -5763,7 +5786,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CE NOM LÀ (cette fois-là > aquel còp)">
+    <rule comment="RÈGLA: CE NOM LÀ (cette fois-là > aquel còp)">
       <pattern>
         <pattern-item n="ce_det"/>
         <pattern-item n="nom"/>
@@ -5818,11 +5841,11 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS -CI/-LÀ -->
+    <!-- FIN RÈGLAS -CI/-LÀ -->
 
-    <!-- REGLAS TOP -->
+    <!-- RÈGLAS TOP -->
 
-    <rule comment="REGLA: DETDEF NPTOP (la France > França, les États-Unis > los Estats Units)">
+    <rule comment="RÈGLA: DETDEF NPTOP (la France > França, les États-Unis > los Estats Units)">
       <pattern>
         <pattern-item n="detdef"/>
         <pattern-item n="nptop"/>
@@ -5887,7 +5910,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DETDEF NPTOP ADJ (la Grèce ancienne > la Grècia antica)">
+    <rule comment="RÈGLA: DETDEF NPTOP ADJ (la Grèce ancienne > la Grècia antica)">
       <pattern>
         <pattern-item n="detdef"/>
         <pattern-item n="nptop"/>
@@ -5931,7 +5954,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DETDEF ADJ NPTOP (l'ancienne Grèce > l'antica Grècia)">
+    <rule comment="RÈGLA: DETDEF ADJ NPTOP (l'ancienne Grèce > l'antica Grècia)">
       <pattern>
         <pattern-item n="detdef"/>
         <pattern-item n="adj"/>
@@ -5975,11 +5998,11 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS TOP -->
+    <!-- FIN RÈGLAS TOP -->
 
-    <!-- REGLAS DATAS -->
+    <!-- RÈGLAS DATAS -->
 
-   <rule comment="REGLA: NUMERAL MOIS NUM (20 novembre 1998: 20 de novembre de 1998)">
+   <rule comment="RÈGLA: NUMERAL MOIS NUM (20 novembre 1998: 20 de novembre de 1998)">
       <pattern>
         <pattern-item n="num_premier"/>
         <pattern-item n="nom_mois"/>
@@ -6029,7 +6052,7 @@
     </rule>
 
 
-   <rule comment="REGLA: DET NUMERAL MOIS NUM (le 20 novembre 1998: lo 20 de novembre de 1998)">
+   <rule comment="RÈGLA: DET NUMERAL MOIS NUM (le 20 novembre 1998: lo 20 de novembre de 1998)">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num_premier"/>
@@ -6088,7 +6111,7 @@
     </rule>
 
 
-   <rule comment="REGLA: MOIS NUM (en novembre 1998: en novembre de 1998)">
+   <rule comment="RÈGLA: MOIS NUM (en novembre 1998: en novembre de 1998)">
       <pattern>
         <pattern-item n="nom_mois"/>
         <pattern-item n="num"/>
@@ -6124,7 +6147,7 @@
     </rule>
 
 
-   <rule comment="REGLA: EN MOIS NUM (en en novembre 1998: en novembre de 1998)">
+   <rule comment="RÈGLA: EN MOIS NUM (en en novembre 1998: en novembre de 1998)">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom_mois"/>
@@ -6161,7 +6184,7 @@
     </rule>
 
 
-    <rule comment="REGLA: il y a X temps > fa X temps">
+    <rule comment="RÈGLA: il y a X temps > fa X temps">
       <pattern>
         <pattern-item n="il"/>
         <pattern-item n="y"/>
@@ -6219,7 +6242,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: il y a longtemps > fa temps">
+    <rule comment="RÈGLA: il y a longtemps > fa temps">
       <pattern>
         <pattern-item n="il"/>
         <pattern-item n="y"/>
@@ -6267,11 +6290,11 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS DATAS -->
+    <!-- FIN RÈGLAS DATAS -->
 
-    <!-- REGLAS CAMBI AUXILIAR -->
+    <!-- RÈGLAS CAMBI AUXILIAR -->
 
-    <rule comment="REGLA: HAVER SER_PP > SER + SER_PP: ai été > ei estat">
+    <rule comment="RÈGLA: HAVER SER_PP > SER + SER_PP: ai été > ei estat">
        <pattern>
          <pattern-item n="vbhaver"/>
          <pattern-item n="vbser_pp"/>
@@ -6353,7 +6376,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: HAVER SER_PP PP > SER + SER_PP PP: ont été codifiées > son estadas codificadas">
+    <rule comment="RÈGLA: HAVER SER_PP PP > SER + SER_PP PP: ont été codifiées > son estadas codificadas">
        <pattern>
          <pattern-item n="vbhaver"/>
          <pattern-item n="vbser_pp"/>
@@ -6397,7 +6420,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ HAVERconj SER_PP > SER + SER_PP: j'ai été > ei estat">
+    <rule comment="RÈGLA: PRNSUBJ HAVERconj SER_PP > SER + SER_PP: j'ai été > ei estat">
        <pattern>
         <pattern-item n="prnsubj"/>
          <pattern-item n="vbhaverconj"/>
@@ -6457,7 +6480,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE HAVER PAS SER_PP > SER PAS SER_PP: n'ai pas été > ei pas estat">
+    <rule comment="RÈGLA: NE HAVER PAS SER_PP > SER PAS SER_PP: n'ai pas été > ei pas estat">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -6552,7 +6575,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE HAVER PAS SER_PP PP > SER PAS SER_PP PP: n'ont pas été codifiées > son pas estadas codificadas">
+    <rule comment="RÈGLA: NE HAVER PAS SER_PP PP > SER PAS SER_PP PP: n'ont pas été codifiées > son pas estadas codificadas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -6611,7 +6634,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE HAVER PAS SER_PP > SER PAS SER_PP: je n'ai pas été > ei pas estat">
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER PAS SER_PP > SER PAS SER_PP: je n'ai pas été > ei pas estat">
        <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -6682,7 +6705,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE HAVER JAMAIS SER_PP > SER PAS JAMÈS SER_PP: n'ai jamais été > ei pas jamei estat">
+    <rule comment="RÈGLA: NE HAVER JAMAIS SER_PP > SER PAS JAMÈS SER_PP: n'ai jamais été > ei pas jamei estat">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -6782,7 +6805,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE HAVER JAMAIS SER_PP > SER PAS JAMÈS SER_PP: je n'ai jamais été > ei pas jamei estat">
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER JAMAIS SER_PP > SER PAS JAMÈS SER_PP: je n'ai jamais été > ei pas jamei estat">
        <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -6858,7 +6881,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE HAVER RIEN SER_PP > SER PAS SER_PP RES: n'ai rien été > ei pas estat arren">
+    <rule comment="RÈGLA: NE HAVER RIEN SER_PP > SER PAS SER_PP RES: n'ai rien été > ei pas estat arren">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -6970,7 +6993,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE HAVER RIEN SER_PP > SER PAS SER_PP RES: je n'ai rien été > ei pas estat arren">
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER RIEN SER_PP > SER PAS SER_PP RES: je n'ai rien été > ei pas estat arren">
        <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -7058,7 +7081,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO HAVER PAS SER_PP PP > PRNPRO SER PAS SER_PP PP: ne lui ont pas été codifiées > li son pas estadas codificadas">
+    <rule comment="RÈGLA: NE PRNPRO HAVER PAS SER_PP PP > PRNPRO SER PAS SER_PP PP: ne lui ont pas été codifiées > li son pas estadas codificadas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -7133,7 +7156,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO HAVER PAS SER_PP PP > PRNPRO SER PAS SER_PP PP: ne lui ont pas été codifiées > li son pas estadas codificadas">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO HAVER PAS SER_PP PP > PRNPRO SER PAS SER_PP PP: ne lui ont pas été codifiées > li son pas estadas codificadas">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="ne"/>
@@ -7216,11 +7239,11 @@
        </action>
     </rule>
 
-    <!-- FIN REGLAS CAMBI AUXILIAR -->
+    <!-- FIN RÈGLAS CAMBI AUXILIAR -->
 
-    <!-- REGLAS ELISION NE -->
+    <!-- RÈGLAS ELISION NE -->
 
-    <rule comment="REGLA: NE PAS INF > INF PAS: ne pas manger > manjar pas" v="oci">
+    <rule comment="RÈGLA: NE PAS INF > INF PAS: ne pas manger > manjar pas" v="oci">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="pas"/>
@@ -7260,7 +7283,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PAS INF > NON PAS INF: ne pas manger > non pas manjar" v="oci@gascon">
+    <rule comment="RÈGLA: NE PAS INF > NON PAS INF: ne pas manger > non pas manjar" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="pas"/>
@@ -7300,7 +7323,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PAS PRNPRO INF > PRNPRO INF PAS: ne pas te dire > te dire pas" v="oci">
+    <rule comment="RÈGLA: NE PAS PRNPRO INF > PRNPRO INF PAS: ne pas te dire > te dire pas" v="oci">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="pas"/>
@@ -7356,7 +7379,7 @@
     </rule>
 
 <!-- pas nécessaire
-    <rule comment="REGLA: NE PAS INF > NON PAS INF: ne pas te dire > non pas te dire" v="oci@gascon">
+    <rule comment="RÈGLA: NE PAS INF > NON PAS INF: ne pas te dire > non pas te dire" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="pas"/>
@@ -7417,7 +7440,7 @@
     </rule>
 -->
 
-    <rule comment="REGLA: NE PAS PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS: ne pas te le dire > te lo dire pas" v="oci">
+    <rule comment="RÈGLA: NE PAS PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS: ne pas te le dire > te lo dire pas" v="oci">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="pas"/>
@@ -7485,7 +7508,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE JAMAIS INF > INF PAS JAMAI: ne jamais manger > manjar pas jamai" v="oci">
+    <rule comment="RÈGLA: NE JAMAIS INF > INF PAS JAMAI: ne jamais manger > manjar pas jamai" v="oci">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="jamais_plus"/>
@@ -7529,7 +7552,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE JAMAIS INF > NON PAS JAMAI INF: ne jamais manger > non pas jamei manjar" v="oci@gascon">
+    <rule comment="RÈGLA: NE JAMAIS INF > NON PAS JAMAI INF: ne jamais manger > non pas jamei manjar" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="jamais_plus"/>
@@ -7580,7 +7603,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE VBSER > VBSER: Jean n'est pas > Jean es pas">
+    <rule comment="RÈGLA: NE VBSER > VBSER: Jean n'est pas > Jean es pas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbser"/>
@@ -7617,7 +7640,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE VBNOSER > VBNOSER: Jean ne dit pas > Jean ditz pas">
+    <rule comment="RÈGLA: NE VBNOSER > VBNOSER: Jean ne dit pas > Jean ditz pas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbnoser"/>
@@ -7654,7 +7677,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE VBSER JAMAIS > VBSER PAS JAMAI: Jean n'est jamais > Jean es pas jamai">
+    <rule comment="RÈGLA: NE VBSER JAMAIS > VBSER PAS JAMAI: Jean n'est jamais > Jean es pas jamai">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbser"/>
@@ -7701,7 +7724,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE VBNOSER JAMAIS > VBNOSER PAS JAMAI: Jean ne dit jamais > Jean ditz pas jamai">
+    <rule comment="RÈGLA: NE VBNOSER JAMAIS > VBNOSER PAS JAMAI: Jean ne dit jamais > Jean ditz pas jamai">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbnoser"/>
@@ -7748,7 +7771,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO VBSER > PRNPRO VBSER: Jean n'y est pas > Jean i es pas">
+    <rule comment="RÈGLA: NE PRNPRO VBSER > PRNPRO VBSER: Jean n'y est pas > Jean i es pas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -7795,7 +7818,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO VBNOSER > PRNPRO VBNOSER: Jean ne lui dit pas > Jean li ditz pas">
+    <rule comment="RÈGLA: NE PRNPRO VBNOSER > PRNPRO VBNOSER: Jean ne lui dit pas > Jean li ditz pas">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -7842,7 +7865,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO VBSER JAMAIS > PRNPRO VBSER PAS JAMAI: Jean n'y est jamais > Jean i es pas jamai">
+    <rule comment="RÈGLA: NE PRNPRO VBSER JAMAIS > PRNPRO VBSER PAS JAMAI: Jean n'y est jamais > Jean i es pas jamai">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -7899,7 +7922,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO VBNOSER JAMAIS > PRNPRO VBNOSER PAS JAMAI: Jean ne lui dit jamais > Jean li ditz pas jamai">
+    <rule comment="RÈGLA: NE PRNPRO VBNOSER JAMAIS > PRNPRO VBNOSER PAS JAMAI: Jean ne lui dit jamais > Jean li ditz pas jamai">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -7956,7 +7979,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PERSONNE NE VERB (personne ne dit: degun ditz pas)">
+    <rule comment="RÈGLA: PERSONNE NE VERB (personne ne dit: degun ditz pas)">
       <pattern>
         <pattern-item n="personne"/>
         <pattern-item n="ne"/>
@@ -8011,7 +8034,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NE VBNOSER PREP PERSONNE/RIEN > VBNOSER PAS PREP DEGUN/RES: Jean ne dit à personne > Jean ditz pas a degun">
+    <rule comment="RÈGLA: NE VBNOSER PREP PERSONNE/RIEN > VBNOSER PAS PREP DEGUN/RES: Jean ne dit à personne > Jean ditz pas a degun">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbnoser"/>
@@ -8063,7 +8086,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE VERB PREP PERSONNE/RIEN > VERB PAS PREP DEGUN/RES: il ne dit à personne > Jean ditz pas a degun">
+    <rule comment="RÈGLA: PRNSUBJ NE VERB PREP PERSONNE/RIEN > VERB PAS PREP DEGUN/RES: il ne dit à personne > Jean ditz pas a degun">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -8120,7 +8143,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NE AVOIR RIEN PP > AVER PAS PP RES: Jean n'a rien dit > Jean a diz pas res">
+    <rule comment="RÈGLA: NE AVOIR RIEN PP > AVER PAS PP RES: Jean n'a rien dit > Jean a diz pas res">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -8169,7 +8192,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE AVOIR RIEN PP > AVER PAS PP RES: il n'a rien dit > a diz pas res">
+    <rule comment="RÈGLA: PRNSUBJ NE AVOIR RIEN PP > AVER PAS PP RES: il n'a rien dit > a diz pas res">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="ne"/>
@@ -8223,7 +8246,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE PRNPRO AVOIR RIEN PP > PRNPRO AVER PAS PP RES: Jean ne lui a rien dit > Jean li a diz pas res">
+    <rule comment="RÈGLA: NE PRNPRO AVOIR RIEN PP > PRNPRO AVER PAS PP RES: Jean ne lui a rien dit > Jean li a diz pas res">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="prnpro"/>
@@ -8282,7 +8305,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO AVOIR RIEN PP > PRNPRO AVER PAS PP RES: il ne lui a rien dit > li a diz pas res">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO AVOIR RIEN PP > PRNPRO AVER PAS PP RES: il ne lui a rien dit > li a diz pas res">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="ne"/>
@@ -8346,11 +8369,11 @@
        </action>
     </rule>
 
-  <!-- FIN REGLAS ELISION NE -->
+  <!-- FIN RÈGLAS ELISION NE -->
 
-  <!-- REGLAS ELISION SUBJECTE -->
+  <!-- RÈGLAS ELISION SUBJECTE -->
 
-    <rule comment="REGLA: PRNSUBJ VERB (il arrive: arriba)">
+    <rule comment="RÈGLA: PRNSUBJ VERB (il arrive: arriba)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="verbconj"/>
@@ -8387,7 +8410,7 @@
     </rule>
 
 
-    <rule comment="REGLA: VERB PRNSUBJ (penses-tu: pensas)">
+    <rule comment="RÈGLA: VERB PRNSUBJ (penses-tu: pensas)">
       <pattern>
         <pattern-item n="verbconj"/>
         <pattern-item n="prnsubj"/>
@@ -8418,7 +8441,7 @@
     </rule>
 
 
-    <rule comment="REGLA: VERBP3 ON (peut-on: se pòt)">
+    <rule comment="RÈGLA: VERBP3 ON (peut-on: se pòt)">
       <pattern>
         <pattern-item n="verbp3"/>
         <pattern-item n="on"/>
@@ -8464,7 +8487,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ PRNPRO VERB (il lui dit: li ditz)">
+    <rule comment="RÈGLA: PRNSUBJ PRNPRO VERB (il lui dit: li ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="prnpro"/>
@@ -8515,7 +8538,7 @@
 
 
 <!--
-    <rule comment="REGLA: Y EN (il y en a: n'i a">
+    <rule comment="RÈGLA: Y EN (il y en a: n'i a">
       <pattern>
         <pattern-item n="y"/>
         <pattern-item n="enprn"/>
@@ -8549,7 +8572,7 @@
 -->
 
 
-    <rule comment="REGLA: PRNPRO PRNPRO (y en > n'i; le lui > o li)" v="oci">
+    <rule comment="RÈGLA: PRNPRO PRNPRO (y en > n'i; le lui > o li)" v="oci">
       <pattern>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
@@ -8641,7 +8664,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNPRO PRNPRO (y en > n'i; le lui > l'ac)" v="oci@gascon">
+    <rule comment="RÈGLA: PRNPRO PRNPRO (y en > n'i; le lui > l'ac)" v="oci@gascon">
       <pattern>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
@@ -8757,7 +8780,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ PRNPRO PRNPRO VERB (il y en a: n'i a; il le lui dit: o li ditz)" v="oci">
+    <rule comment="RÈGLA: PRNSUBJ PRNPRO PRNPRO VERB (il y en a: n'i a; il le lui dit: o li ditz)" v="oci">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="prnpro"/>
@@ -8858,7 +8881,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ PRNPRO PRNPRO VERB (il y en a: n'i a; il le lui dit: l'ac ditz)" v="oci@gascon">
+    <rule comment="RÈGLA: PRNSUBJ PRNPRO PRNPRO VERB (il y en a: n'i a; il le lui dit: l'ac ditz)" v="oci@gascon">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="prnpro"/>
@@ -8983,7 +9006,7 @@
     </rule>
 
 
-    <rule comment="REGLA: EST-CE QUE PRNPRO PRNSUBJ VERB (est-ce qu'il lui dit: li dits)">
+    <rule comment="RÈGLA: EST-CE QUE PRNPRO PRNSUBJ VERB (est-ce qu'il lui dit: li dits)">
       <pattern>
         <pattern-item n="estceque"/>
         <pattern-item n="prnsubj"/>
@@ -9038,7 +9061,7 @@
     </rule>
 
 
-    <rule comment="REGLA: EST-CE QUE PRNSUBJ VERB (est-ce qu'il arrive: arriba)">
+    <rule comment="RÈGLA: EST-CE QUE PRNSUBJ VERB (est-ce qu'il arrive: arriba)">
       <pattern>
         <pattern-item n="estceque"/>
         <pattern-item n="prnsubj"/>
@@ -9080,7 +9103,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE VERB (il ne dit: ditz)">
+    <rule comment="RÈGLA: PRNSUBJ NE VERB (il ne dit: ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -9123,7 +9146,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE VERB JAMAIS (il ne dit jamais: ditz pas jamai)">
+    <rule comment="RÈGLA: PRNSUBJ NE VERB JAMAIS (il ne dit jamais: ditz pas jamai)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -9176,7 +9199,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO VERB (il ne lui dit: li ditz)">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO VERB (il ne lui dit: li ditz)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -9232,7 +9255,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO VERB JAMAIS (il ne lui dit jamais: li ditz pas jamai)">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO VERB JAMAIS (il ne lui dit jamais: li ditz pas jamai)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -9298,7 +9321,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Jean ne le lui dit pas: Jean o li diguèt pas)" v="oci">
+    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Jean ne le lui dit pas: Jean o li diguèt pas)" v="oci">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -9401,7 +9424,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Jean ne le lui dit pas: Jean l'ac diguèt pas)" v="oci@gascon">
+    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Jean ne le lui dit pas: Jean l'ac diguèt pas)" v="oci@gascon">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -9527,7 +9550,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NE PRNPRO PRNPRO VERB JAMAIS (n'y en a jamais: n'i a pas jamai; Jean ne le lui dit jamais: Jean o li diguèt pas jamai)" v="oci">
+    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB JAMAIS (n'y en a jamais: n'i a pas jamai; Jean ne le lui dit jamais: Jean o li diguèt pas jamai)" v="oci">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -9649,7 +9672,7 @@
     </rule>
 
 
-    <rule comment="REGLA: NE PRNPRO PRNPRO VERB JAMAIS (n'y en a jamais: n'i a pas jamai; Jean ne le lui dit jamais: Jean l'ac diguèt pas jamai)" v="oci@gascon">
+    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB JAMAIS (n'y en a jamais: n'i a pas jamai; Jean ne le lui dit jamais: Jean l'ac diguèt pas jamai)" v="oci@gascon">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -9794,7 +9817,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB (il n'y en a pas: n'i a pas; il ne le lui dit pas: o li diguèt pas)" v="oci">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO PRNPRO VERB (il n'y en a pas: n'i a pas; il ne le lui dit pas: o li diguèt pas)" v="oci">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -9902,7 +9925,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB (il n'y en a pas: n'i a pas; il ne le lui dit pas: l'ac diguèt pas)" v="oci@gascon">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO PRNPRO VERB (il n'y en a pas: n'i a pas; il ne le lui dit pas: l'ac diguèt pas)" v="oci@gascon">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -10033,7 +10056,7 @@
     </rule>
 
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB JAMAIS (il n'y en a jamais: n'i a pas jamai; il ne le lui dit jamais: o li diguèt pas jamai)" v="oci">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO PRNPRO VERB JAMAIS (il n'y en a jamais: n'i a pas jamai; il ne le lui dit jamais: o li diguèt pas jamai)" v="oci">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -10159,7 +10182,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE PRNPRO PRNPRO VERB JAMAIS (il n'y en a jamais: n'i a pas jamai; il ne le lui dit jamais: l'ac diguèt pas jamai)" v="oci@gascon">
+    <rule comment="RÈGLA: PRNSUBJ NE PRNPRO PRNPRO VERB JAMAIS (il n'y en a jamais: n'i a pas jamai; il ne le lui dit jamais: l'ac diguèt pas jamai)" v="oci@gascon">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -10308,11 +10331,11 @@
       </action>
     </rule>
 
-  <!-- FIN REGLAS ELISION SUBJECTE -->
+  <!-- FIN RÈGLAS ELISION SUBJECTE -->
 
-  <!-- REGLAS REORDENACION PRONOMS -->
+  <!-- RÈGLAS REORDENACION PRONOMS -->
 
-    <rule comment="REGLA: HAVER PP PRNPRO INF (auraient pu l'imaginer: l’aurián pogut imaginar)">
+    <rule comment="RÈGLA: HAVER PP PRNPRO INF (auraient pu l'imaginer: l’aurián pogut imaginar)">
        <pattern>
          <pattern-item n="vbhaver"/>
          <pattern-item n="pp_no_ser"/>
@@ -10369,7 +10392,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ HAVER PP PRNPRO INF (ils auraient pu l'imaginer: l’aurián pogut imaginar)">
+    <rule comment="RÈGLA: PRNSUBJ HAVER PP PRNPRO INF (ils auraient pu l'imaginer: l’aurián pogut imaginar)">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="vbhaver"/>
@@ -10432,7 +10455,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: HAVER ADV PP PRNPRO INF (auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
+    <rule comment="RÈGLA: HAVER ADV PP PRNPRO INF (auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
        <pattern>
          <pattern-item n="vbhaver"/>
          <pattern-item n="adv"/>
@@ -10496,7 +10519,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ HAVER ADV PP PRNPRO INF (ils auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
+    <rule comment="RÈGLA: PRNSUBJ HAVER ADV PP PRNPRO INF (ils auraient bien pu l'imaginer: l’aurián fòrça pogut imaginar)">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="vbhaver"/>
@@ -10566,7 +10589,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NE HAVER ADV PP PRNPRO INF (n'auraient pas pu l'imaginer: l’aurián pas pogut imaginar; n'auraient jamais pu l'imaginer: l’aurián pas jamai pogut imaginar)">
+    <rule comment="RÈGLA: NE HAVER ADV PP PRNPRO INF (n'auraient pas pu l'imaginer: l’aurián pas pogut imaginar; n'auraient jamais pu l'imaginer: l’aurián pas jamai pogut imaginar)">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
@@ -10693,11 +10716,11 @@
       </action>
     </rule>
 
-  <!-- FIN REGLAS REORDENACION PRONOMS -->
+  <!-- FIN RÈGLAS REORDENACION PRONOMS -->
 
-  <!-- REGLAS EN TRAIN DE -->
+  <!-- RÈGLAS EN TRAIN DE -->
 
-    <rule comment="REGLA: être en train de inf = verb-conj: Jean est en train de dormir > Jean dòrm">
+    <rule comment="RÈGLA: être en train de inf = verb-conj: Jean est en train de dormir > Jean dòrm">
       <pattern>
         <pattern-item n="vbser"/>
         <pattern-item n="enprep"/>
@@ -10748,7 +10771,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj être en train de inf = verb-conj: il est en train de dormir > dòrm">
+    <rule comment="RÈGLA: prnsubj être en train de inf = verb-conj: il est en train de dormir > dòrm">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="vbser"/>
@@ -10807,7 +10830,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: être en train de prnpro inf = prnpro verb-conj: est en train de lui dire > li ditz">
+    <rule comment="RÈGLA: être en train de prnpro inf = prnpro verb-conj: est en train de lui dire > li ditz">
       <pattern>
         <pattern-item n="vbser"/>
         <pattern-item n="enprep"/>
@@ -10880,7 +10903,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj être en train de prnpro inf = prnpro verb-conj: il est en train de lui dire > li ditz">
+    <rule comment="RÈGLA: prnsubj être en train de prnpro inf = prnpro verb-conj: il est en train de lui dire > li ditz">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="vbser"/>
@@ -10961,7 +10984,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ne être pas en train de inf = verb-conj pas: Jean n'est pas en train de dormir > Jean dòrm pas">
+    <rule comment="RÈGLA: ne être pas en train de inf = verb-conj pas: Jean n'est pas en train de dormir > Jean dòrm pas">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="vbser"/>
@@ -11028,7 +11051,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj ne être pas en train de inf = verb-conj: il n'est pas en train de dormir > dòrm pas">
+    <rule comment="RÈGLA: prnsubj ne être pas en train de inf = verb-conj: il n'est pas en train de dormir > dòrm pas">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -11103,7 +11126,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ne prnpro être pas en train de inf = verb-conj pas: Jeaj ne lui est pas en train de dire > Jeaj ditz pas">
+    <rule comment="RÈGLA: ne prnpro être pas en train de inf = verb-conj pas: Jeaj ne lui est pas en train de dire > Jeaj ditz pas">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -11191,7 +11214,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj ne prnpro être pas en train de inf = verb-conj pas: il ne lui est pas en train de dire > li ditz pas">
+    <rule comment="RÈGLA: prnsubj ne prnpro être pas en train de inf = verb-conj pas: il ne lui est pas en train de dire > li ditz pas">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -11287,7 +11310,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ne être jamais en train de inf = verb-conj pas jamais: Jean n'est jamais en train de dormir > Jean dòrm pas jamais">
+    <rule comment="RÈGLA: ne être jamais en train de inf = verb-conj pas jamais: Jean n'est jamais en train de dormir > Jean dòrm pas jamais">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="vbser"/>
@@ -11358,7 +11381,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj ne être jamais en train de inf = verb-conj pas jamais: il n'est jamais en train de dormir > dòrm pas jamais">
+    <rule comment="RÈGLA: prnsubj ne être jamais en train de inf = verb-conj pas jamais: il n'est jamais en train de dormir > dòrm pas jamais">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -11437,7 +11460,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ne prnpro être jamais en train de inf = verb-conj pas jamais: Jean ne lui est jamais en train de dire > Jean ditz pas jamais">
+    <rule comment="RÈGLA: ne prnpro être jamais en train de inf = verb-conj pas jamais: Jean ne lui est jamais en train de dire > Jean ditz pas jamais">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -11529,7 +11552,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: prnsubj ne prnpro être jamais en train de inf = verb-conj pas jamais: il ne lui est jamais en train de dire > li ditz pas jamai">
+    <rule comment="RÈGLA: prnsubj ne prnpro être jamais en train de inf = verb-conj pas jamais: il ne lui est jamais en train de dire > li ditz pas jamai">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="ne"/>
@@ -11629,11 +11652,11 @@
       </action>
     </rule>
 
-  <!-- FIN REGLAS EN TRAIN DE -->
+  <!-- FIN RÈGLAS EN TRAIN DE -->
 
-  <!-- REGLAS NE... QUE + INF -->
+  <!-- RÈGLAS NE... QUE + INF -->
 
-    <rule comment="REGLA: NE VERB QUE INF (ne veut qu'à manger > vòl pas que manjar)">
+    <rule comment="RÈGLA: NE VERB QUE INF (ne veut qu'à manger > vòl pas que manjar)">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbnoser"/>
@@ -11688,7 +11711,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: NE VERB QUE PREP INF (ne pense qu'à manger > pensa pas qu'a manjar)">
+    <rule comment="RÈGLA: NE VERB QUE PREP INF (ne pense qu'à manger > pensa pas qu'a manjar)">
        <pattern>
          <pattern-item n="ne"/>
          <pattern-item n="vbnoser"/>
@@ -11750,7 +11773,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE VERB QUE INF (il ne veut qu'à manger > vòl pas que manjar)">
+    <rule comment="RÈGLA: PRNSUBJ NE VERB QUE INF (il ne veut qu'à manger > vòl pas que manjar)">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="ne"/>
@@ -11813,7 +11836,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ NE VERB QUE PREP INF (il ne pense qu'à manger > pensa pas qu'a manjar)">
+    <rule comment="RÈGLA: PRNSUBJ NE VERB QUE PREP INF (il ne pense qu'à manger > pensa pas qu'a manjar)">
        <pattern>
          <pattern-item n="prnsubj"/>
          <pattern-item n="ne"/>
@@ -11883,11 +11906,11 @@
        </action>
     </rule>
 
-  <!-- FIN REGLAS NE... QUE + INF -->
+  <!-- FIN RÈGLAS NE... QUE + INF -->
 
-  <!-- AUTRAS REGLAS VERBALAS -->
+  <!-- AUTRAS RÈGLAS VERBALAS -->
 
-    <rule comment="REGLA: IMP PRNENC">
+    <rule comment="RÈGLA: IMP PRNENC">
        <pattern>
          <pattern-item n="verb"/>
          <pattern-item n="prnenc"/>
@@ -11924,11 +11947,11 @@
        </action>
     </rule>
 
-  <!-- FIN AUTRAS REGLAS VERBALAS -->
+  <!-- FIN AUTRAS RÈGLAS VERBALAS -->
 
-  <!-- REGLAS C'EST -->
+  <!-- RÈGLAS C'EST -->
 
-    <rule comment="REGLA: CE VBSER: ce fut > foguèt">
+    <rule comment="RÈGLA: CE VBSER: ce fut > foguèt">
        <pattern>
          <pattern-item n="ce"/>
          <pattern-item n="vbser"/>
@@ -11964,11 +11987,11 @@
        </action>
     </rule>
 
-  <!-- FIN REGLAS C'EST -->
+  <!-- FIN RÈGLAS C'EST -->
 
-  <!-- REGLAS VBMOD + PRO + VBMOD -->
+  <!-- RÈGLAS VBMOD + PRO + VBMOD -->
 
-    <rule comment="REGLA: VBMOD PRNPRO VERB (Cet article peut se lire > Aqueste article se pòt legir)">
+    <rule comment="RÈGLA: VBMOD PRNPRO VERB (Cet article peut se lire > Aqueste article se pòt legir)">
       <pattern>
         <pattern-item n="vbmod"/>
         <pattern-item n="prnpro"/>
@@ -12016,7 +12039,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRNSUBJ VBMOD PRNPRO VERB (Il peut se lire > Se pòt legir)">
+    <rule comment="RÈGLA: PRNSUBJ VBMOD PRNPRO VERB (Il peut se lire > Se pòt legir)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="vbmod"/>
@@ -12072,7 +12095,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ON DOIT (on doit: cal)">
+    <rule comment="RÈGLA: ON DOIT (on doit: cal)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="devoirp3sg"/>
@@ -12107,7 +12130,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ON DOIT PRNPRO VERB (On doit le lire > Lo cal legir)">
+    <rule comment="RÈGLA: ON DOIT PRNPRO VERB (On doit le lire > Lo cal legir)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="devoirp3sg"/>
@@ -12162,7 +12185,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ON NE DOIT PAS VERB (On ne doit pas lire > Cal pas legir)">
+    <rule comment="RÈGLA: ON NE DOIT PAS VERB (On ne doit pas lire > Cal pas legir)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="ne"/>
@@ -12217,7 +12240,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ON NE DOIT JAMAIS VERB (On ne doit jamais lire > Cal pas jamai legir)">
+    <rule comment="RÈGLA: ON NE DOIT JAMAIS VERB (On ne doit jamais lire > Cal pas jamai legir)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="ne"/>
@@ -12277,9 +12300,9 @@
       </action>
     </rule>
 
-  <!-- FIN REGLAS VBMOD + PRO + VBMOD -->
+  <!-- FIN RÈGLAS VBMOD + PRO + VBMOD -->
 
-    <rule comment="REGLA: EST-CE QUE > 0">
+    <rule comment="RÈGLA: EST-CE QUE > 0">
        <pattern>
          <pattern-item n="estceque"/>
        </pattern>
@@ -12287,7 +12310,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: ADVITG EST-CE QUE > ADVITG">
+    <rule comment="RÈGLA: ADVITG EST-CE QUE > ADVITG">
        <pattern>
          <pattern-item n="advitg"/>
          <pattern-item n="estceque"/>
@@ -12312,7 +12335,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: IL EN FAIT > en fa (pedaç per evitar il + ´en fa' (adv) ">
+    <rule comment="RÈGLA: IL EN FAIT > en fa (pedaç per evitar il + ´en fa' (adv) ">
        <pattern>
          <pattern-item n="il_elle"/>
          <pattern-item n="en_fait"/>
@@ -12346,7 +12369,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: LPAR">
+    <rule comment="RÈGLA: LPAR">
       <pattern>
         <pattern-item n="lpar"/>
       </pattern>
@@ -12364,7 +12387,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: RPAR">
+    <rule comment="RÈGLA: RPAR">
       <pattern>
         <pattern-item n="rpar"/>
       </pattern>
@@ -12382,7 +12405,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CM">
+    <rule comment="RÈGLA: CM">
       <pattern>
         <pattern-item n="cm"/>
       </pattern>
@@ -12400,7 +12423,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SENT">
+    <rule comment="RÈGLA: SENT">
       <pattern>
         <pattern-item n="sent"/>
       </pattern>
