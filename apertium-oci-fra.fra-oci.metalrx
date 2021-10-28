@@ -637,8 +637,11 @@
   </rule>
   <rule weight="1.0">
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
-    <repeat from="0" upto="4">
-      <match tags="*"/>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="oiseau" tags="n.*"/>
@@ -696,8 +699,11 @@
       <match lemma="passager" tags="n.*"/>
       <match lemma="aérien" tags="adj.*"/>
     </or>
-    <repeat from="0" upto="4">
-      <match tags="*"/>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
   </rule>
