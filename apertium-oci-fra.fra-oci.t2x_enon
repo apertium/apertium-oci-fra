@@ -29,7 +29,6 @@
     </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
-      <cat-item tags="SAdv.*"/>
     </def-cat>
     <def-cat n="SV">
       <cat-item tags="SV"/>
@@ -47,6 +46,8 @@
       <cat-item tags="Rel"/>
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjadv"/>
+      <cat-item tags="SAdv.itg"/>
+      <cat-item tags="SPron.itg"/>
     </def-cat>
     <def-cat n="DET">
       <cat-item tags="Det"/>
@@ -123,10 +124,9 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
 <!--
--->
+
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
-<!--
 -->
 
       <cat-item tags="PREP"/>
@@ -489,7 +489,7 @@
 
     <!-- RÈGLAS PER GENERAR UN ENONCIATIU -->
 
-    <!-- sens proclitic -->
+    <!-- 1. Règles de "courte portée", qui analysent tout juste le verbe -->
 
     <rule comment="RÈGLA: SV">
       <pattern>
@@ -507,6 +507,65 @@
         <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
+
+    <rule comment="RÈGLA: SPronPro SV">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu1"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPronPro SPronPro SV">
+      <pattern>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="apondre_enonciatiu1"><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="oc"/></let>
+      </action>
+    </rule>
+
+    <!-- 2. Règles de "longue portée", qui analysent du verbe jusqu'à la fin de la phrase  -->
+
+    <!-- sens proclitic -->
 
     <rule comment="RÈGLA: SV SENT">
       <pattern>
