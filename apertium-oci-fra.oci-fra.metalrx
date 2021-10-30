@@ -204,17 +204,26 @@
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
   </rule>
 
-  <!-- el >> il(s), lui, eux -->
+  <!-- el/eth >> il(s), lui, eux -->
   <rule weight="0.8">
-    <match lemma="el" tags="prn.*"><select lemma="il"/></match>
+    <or>
+      <match lemma="el" tags="prn.*"><select lemma="il"/></match>
+      <match lemma="prneth" tags="prn.*"><select lemma="il"/></match>
+    </or>
   </rule>
   <rule weight="1.0">
     <match tags="pr"/>
-    <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+    </or>
   </rule>
   <rule weight="1.0">
     <match tags="pr"/>
-    <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    </or>
   </rule>
 
 <!-- **************** PR **************** -->
