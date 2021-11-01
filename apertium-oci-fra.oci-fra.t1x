@@ -25,12 +25,19 @@
     </def-cat>
     <def-cat n="adv">
       <cat-item tags="adv"/>
+      <cat-item tags="adv.itg"/>
+      <cat-item tags="adv.excl"/>
+    </def-cat>
+    <def-cat n="enon">
+      <cat-item tags="adv.enon"/>
     </def-cat>
     <def-cat n="preadv">
       <cat-item tags="preadv"/>
     </def-cat>
     <def-cat n="adv_preadv">
       <cat-item tags="adv"/>
+      <cat-item tags="adv.itg"/>
+      <cat-item tags="adv.excl"/>
       <cat-item tags="preadv"/>
     </def-cat>
     <def-cat n="det">
@@ -42,6 +49,9 @@
     </def-cat>
     <def-cat n="prn">
       <cat-item tags="prn.*"/>
+    </def-cat>
+    <def-cat n="prnpro">
+      <cat-item tags="prn.pro.*"/>
     </def-cat>
     <def-cat n="prnenc">
       <cat-item tags="prn.enc.*"/>
@@ -2900,9 +2910,9 @@
 
   <section-rules>
 
-    <!-- REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+    <!-- RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
-    <rule comment="REGLA: DET">
+    <rule comment="RÈGLA: DET">
       <pattern>
         <pattern-item n="det"/>
       </pattern>
@@ -2939,7 +2949,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJEC">
+    <rule comment="RÈGLA: ADJEC">
       <pattern>
         <pattern-item n="adj"/>
       </pattern>
@@ -2974,7 +2984,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: pp">
+    <rule comment="RÈGLA: pp">
       <pattern>
         <pattern-item n="pp"/>
       </pattern>
@@ -3010,7 +3020,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUMERAL">
+    <rule comment="RÈGLA: NUMERAL">
       <pattern>
         <pattern-item n="num"/>
       </pattern>
@@ -3034,7 +3044,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM">
+    <rule comment="RÈGLA: NOM">
       <pattern>
         <pattern-item n="nom"/>
       </pattern>
@@ -3062,7 +3072,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADV">
+    <rule comment="RÈGLA: ADV">
       <pattern>
         <pattern-item n="adv_preadv"/>
       </pattern>
@@ -3087,7 +3097,16 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
+    <rule comment="RÈGLA: ENON">
+      <pattern>
+        <pattern-item n="enon"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
       <pattern>
         <pattern-item n="preadv"/>
         <pattern-item n="adv"/>
@@ -3117,7 +3136,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NP">
+    <rule comment="RÈGLA: NP">
       <pattern>
         <pattern-item n="np"/>
       </pattern>
@@ -3150,7 +3169,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PRN">
+    <rule comment="RÈGLA: PRN">
        <pattern>
          <pattern-item n="prn"/>
        </pattern>
@@ -3179,7 +3198,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: PREP">
+    <rule comment="RÈGLA: PREP">
       <pattern>
         <pattern-item n="pr"/>
       </pattern>
@@ -3202,7 +3221,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJCOO">
+    <rule comment="RÈGLA: CNJCOO">
       <pattern>
         <pattern-item n="cnjcoo"/>
       </pattern>
@@ -3223,7 +3242,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJSUB">
+    <rule comment="RÈGLA: CNJSUB">
       <pattern>
         <pattern-item n="cnjsub"/>
       </pattern>
@@ -3244,7 +3263,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: CNJADV">
+    <rule comment="RÈGLA: CNJADV">
       <pattern>
         <pattern-item n="cnjadv"/>
       </pattern>
@@ -3265,7 +3284,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: RELATIF">
+    <rule comment="RÈGLA: RELATIF">
       <pattern>
         <pattern-item n="rel"/>
       </pattern>
@@ -3289,7 +3308,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: VBSERinf_ger">
+    <rule comment="RÈGLA: VBSERinf_ger">
        <pattern>
          <pattern-item n="vbser_inf_ger"/>
        </pattern>
@@ -3323,7 +3342,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: VBNOSERinf_ger">
+    <rule comment="RÈGLA: VBNOSERinf_ger">
        <pattern>
          <pattern-item n="vbnoser_inf_ger"/>
        </pattern>
@@ -3358,14 +3377,11 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: VBSERconj">
+    <rule comment="RÈGLA: VBSERconj">
        <pattern>
          <pattern-item n="vbser_conj"/>
        </pattern>
        <action>
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>
         <call-macro n="firstWord">
           <with-param pos="1"/>
         </call-macro>
@@ -3398,7 +3414,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: VBNOSERconj">
+    <rule comment="RÈGLA: VBNOSERconj">
        <pattern>
          <pattern-item n="vbnoser_conj"/>
        </pattern>
@@ -3436,11 +3452,12 @@
        </action>
     </rule>
 
-    <!-- FIN REGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+    <!-- FIN RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
-    <!-- REGLAS CONCORDANÇA -->
 
-    <rule comment="REGLA: DET NOM">
+    <!-- RÈGLAS CONCORDANÇA -->
+
+    <rule comment="RÈGLA: DET NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -3503,7 +3520,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADJ">
+    <rule comment="RÈGLA: DET ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adj"/>
@@ -3596,7 +3613,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NPAL (las Calandretas > les Calandretas)">
+    <rule comment="RÈGLA: DET NPAL (las Calandretas > les Calandretas)">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="npal"/>
@@ -3655,7 +3672,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADV ADJ">
+    <rule comment="RÈGLA: DET ADV ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adv_preadv"/>
@@ -3769,7 +3786,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADJ">
+    <rule comment="RÈGLA: DET NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -3840,7 +3857,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADJ ADJ">
+    <rule comment="RÈGLA: DET NOM ADJ ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -3919,7 +3936,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADJ NOM ADJ">
+    <rule comment="RÈGLA: DET ADJ NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adjec"/>
@@ -3998,7 +4015,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NUM NOM ADJ">
+    <rule comment="RÈGLA: DET NUM NOM ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num"/>
@@ -4077,7 +4094,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NOM ADV ADJ">
+    <rule comment="RÈGLA: DET NOM ADV ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nom"/>
@@ -4155,7 +4172,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET ADV ADJ NOM">
+    <rule comment="RÈGLA: DET ADV ADJ NOM">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="adv_preadv"/>
@@ -4233,7 +4250,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: PREDET DET NOM">
+    <rule comment="RÈGLA: PREDET DET NOM">
       <pattern>
         <pattern-item n="predet"/>
         <pattern-item n="det"/>
@@ -4286,7 +4303,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NP">
+    <rule comment="RÈGLA: DET NP">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="np"/>
@@ -4345,7 +4362,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: DET NPTOP ADJ">
+    <rule comment="RÈGLA: DET NPTOP ADJ">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="nptop"/>
@@ -4411,7 +4428,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADJ">
+    <rule comment="RÈGLA: NOM ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
@@ -4494,7 +4511,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJ NOM">
+    <rule comment="RÈGLA: ADJ NOM">
       <pattern>
         <pattern-item n="adjec"/>
         <pattern-item n="nom"/>
@@ -4538,7 +4555,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM NOM">
+    <rule comment="RÈGLA: NUM NOM">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="nom"/>
@@ -4583,7 +4600,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADJ ADJ">
+    <rule comment="RÈGLA: NOM ADJ ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
@@ -4635,7 +4652,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADJ NOM ADJ">
+    <rule comment="RÈGLA: ADJ NOM ADJ">
       <pattern>
         <pattern-item n="adjec"/>
         <pattern-item n="nom"/>
@@ -4687,7 +4704,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM NOM ADJ">
+    <rule comment="RÈGLA: NUM NOM ADJ">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="nom"/>
@@ -4739,7 +4756,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NUM ADJ NOM">
+    <rule comment="RÈGLA: NUM ADJ NOM">
       <pattern>
         <pattern-item n="num"/>
         <pattern-item n="adjec"/>
@@ -4791,7 +4808,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: NOM ADV ADJ">
+    <rule comment="RÈGLA: NOM ADV ADJ">
       <pattern>
         <pattern-item n="nom"/>
         <pattern-item n="adv_preadv"/>
@@ -4842,7 +4859,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: ADV ADJ NOM">
+    <rule comment="RÈGLA: ADV ADJ NOM">
       <pattern>
         <pattern-item n="adv_preadv"/>
         <pattern-item n="adjec"/>
@@ -4893,11 +4910,12 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS CONCORDANÇA -->
+    <!-- FIN RÈGLAS CONCORDANÇA -->
 
-    <!-- REGLAS CAMBI AUXILIAR -->
 
-    <rule comment="REGLA: SER SER_PP > HAVER + SER_PP: soi estat > ai été">
+    <!-- RÈGLAS CAMBI AUXILIAR -->
+
+    <rule comment="RÈGLA: SER SER_PP > HAVER + SER_PP: soi estat > ai été">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="vbser_pp"/>
@@ -4945,7 +4963,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: SER ADV SER_PP > HAVER + ADV SER_PP: soi pas estat > ai pas été">
+    <rule comment="RÈGLA: SER ADV SER_PP > HAVER + ADV SER_PP: soi pas estat > ai pas été">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="adv"/>
@@ -5029,7 +5047,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: SER ADV ADV SER_PP > HAVER + ADV ADV SER_PP: soi pas jamai estat > ai pas jamais été">
+    <rule comment="RÈGLA: SER ADV ADV SER_PP > HAVER + ADV ADV SER_PP: soi pas jamai estat > ai pas jamais été">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="adv"/>
@@ -5044,10 +5062,10 @@
           <with-param pos="1"/>
         </call-macro>
          <call-macro n="tipus_verb">
-          <with-param pos="3"/>
+          <with-param pos="4"/>
          </call-macro>
          <call-macro n="f_concord1">
-          <with-param pos="3"/>
+          <with-param pos="4"/>
          </call-macro>
          <out>
            <chunk namefrom="chunkname" case="caseFirstWord">
@@ -5132,23 +5150,254 @@
        </action>
     </rule>
 
-    <!-- FIN REGLAS CAMBI AUXILIAR -->
+    <!-- FIN RÈGLAS CAMBI AUXILIAR -->
 
-    <!-- REGLAS 'ES A + INF' -->
 
-    <rule comment="REGLA: SER A INF > SER + EN TRAIN DE INF: soi a parlar > suis en train de parler">
+    <!-- RÈGLAS PRONÒMS -->
+
+    <rule comment="RÈGLA: PRNPRO PRNPRO (n'i > y en ; o li > le lui)" v="oci">
+      <pattern>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="prnpro"/>
+      </pattern>
+      <action>
+         <choose>
+           <when>
+             <test>
+               <and>
+                 <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
+                 <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+               </and>
+             </test>
+             <call-macro n="firstWord">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="2" side="tl" part="pers"/></tag>
+                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="2" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="firstWord">
+               <with-param pos="1"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="2">
+                     <clip pos="1" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <call-macro n="firstWord">
+               <with-param pos="1"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="firstWord">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="2" side="tl" part="pers"/></tag>
+                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: PRNPRO PRNPRO (n'i > y en ; l'ac > le lui)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="prnpro"/>
+      </pattern>
+      <action>
+         <choose>
+           <when>
+             <test>
+               <or>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                 </and>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="vos"/></equal>
+                   </or>
+                 </and>
+               </or>
+             </test>
+             <!-- changement d'ordre CD CI -->
+             <call-macro n="firstWord">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="2" side="tl" part="pers"/></tag>
+                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="2" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="firstWord">
+               <with-param pos="1"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="2">
+                     <clip pos="1" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <call-macro n="firstWord">
+               <with-param pos="1"/>
+             </call-macro>
+             <choose>
+               <when>
+                 <test>
+                   <and>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="ac"/></equal>
+                   </and>
+                 </test>
+                 <let><clip pos="1" side="tl" part="lem"/><get-case-from pos="1"><lit v="le"/></get-case-from></let>
+                 <let><clip pos="2" side="tl" part="lem"/><get-case-from pos="1"><lit v="lui"/></get-case-from></let>
+                 <let><clip pos="2" side="tl" part="gen"/><lit-tag v="mf.sg"/></let>
+               </when>
+             </choose>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="firstWord">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="pron" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="2" side="tl" part="pers"/></tag>
+                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS PRONÒMS -->
+
+
+    <!-- RÈGLAS 'ES A + INF' -->
+
+    <rule comment="RÈGLA: SER A INF > SER + EN TRAIN DE INF: soi a parlar > suis en train de parler">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="apr"/>
          <pattern-item n="inf"/>
        </pattern>
        <action>
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_vchunk_name">
-          <with-param pos="1"/>
-        </call-macro>
+         <call-macro n="firstWord">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="1"/>
+         </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
@@ -5193,7 +5442,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: SER ADV A INF > SER + ADV EN TRAIN DE INF: soi encara a parlar > suis encore en train de parler">
+    <rule comment="RÈGLA: SER ADV A INF > SER + ADV EN TRAIN DE INF: soi encara a parlar > suis encore en train de parler">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="adv"/>
@@ -5300,7 +5549,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: SER ADV ADV A INF > SER + ADV ADV EN TRAIN DE INF: soi pas encara a parlar > suis pas encore en train de parler">
+    <rule comment="RÈGLA: SER ADV ADV A INF > SER + ADV ADV EN TRAIN DE INF: soi pas encara a parlar > suis pas encore en train de parler">
        <pattern>
          <pattern-item n="vbser"/>
          <pattern-item n="adv"/>
@@ -5426,11 +5675,12 @@
        </action>
     </rule>
 
-    <!-- FIN REGLAS 'ES A + INF' -->
+    <!-- FIN RÈGLAS 'ES A + INF' -->
 
-    <!-- AUTRAS REGLAS VERBALAS -->
 
-    <rule comment="REGLA: IMP PRNENC">
+    <!-- AUTRAS RÈGLAS VERBALAS -->
+
+    <rule comment="RÈGLA: IMP PRNENC">
        <pattern>
          <pattern-item n="imp"/>
          <pattern-item n="prnenc"/>
@@ -5475,7 +5725,7 @@
        </action>
     </rule>
 
-    <rule comment="REGLA: IMP PRNENC PRNENC">
+    <rule comment="RÈGLA: IMP PRNENC PRNENC">
        <pattern>
          <pattern-item n="imp"/>
          <pattern-item n="prnenc"/>
@@ -5566,10 +5816,10 @@
       </action>
   </rule>
 
-  <!-- FIN AUTRAS REGLAS VERBALAS -->
+  <!-- FIN AUTRAS RÈGLAS VERBALAS -->
 
 
-    <rule comment="REGLA: UNKNOWN">
+    <rule comment="RÈGLA: UNKNOWN">
       <pattern>
         <pattern-item n="unknown"/>
       </pattern>
@@ -5590,7 +5840,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SENT">
+    <rule comment="RÈGLA: SENT">
       <pattern>
         <pattern-item n="sent"/>
       </pattern>
