@@ -23,6 +23,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
+	$(PREFIX1b).t1x.bin	\
 	$(PREFIX1).t2ax.bin	\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1).t2cx.bin	\
@@ -161,7 +162,17 @@ $(PREFIX2).autolex.bin: .deps/$(BASENAME).$(PREFIX2).lrx
 ## Structural transfer rules
 ###############################################################################
 
-$(PREFIX1).t1x.bin: $(BASENAME).$(PREFIX1).t1x
+.deps/$(PREFIX1).t1x: $(BASENAME).$(PREFIX1).t1x
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t1x >$@
+
+.deps/$(PREFIX1b).t1x: $(BASENAME).$(PREFIX1).t1x
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t1x >$@
+
+$(PREFIX1).t1x.bin: .deps/$(PREFIX1).t1x
+	apertium-validate-transfer $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX1b).t1x.bin: .deps/$(PREFIX1b).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
