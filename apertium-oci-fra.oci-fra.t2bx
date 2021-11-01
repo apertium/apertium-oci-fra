@@ -188,9 +188,9 @@
 
   <section-rules>
 
-    <!-- REGLAS inclusion pronôm "ne" -->
+    <!-- RÈGLAS inclusion pronòm "ne" -->
 
-    <rule comment="REGLA: SV pas (cantes pas -> NE chantes pas)">
+    <rule comment="RÈGLA: SV pas (cantes pas -> NE chantes pas)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -225,7 +225,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SV pas jamai (cantes pas jamai -> NE chantes jamais)">
+    <rule comment="RÈGLA: SV pas jamai (cantes pas jamai -> NE chantes jamais)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -267,7 +267,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SPron_pro SV pas (li cantes pas -> NE lui chantes pas)">
+    <rule comment="RÈGLA: SPron_pro SV pas (li cantes pas -> NE lui chantes pas)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -307,7 +307,7 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: SPron_pro SV pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SV pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -354,7 +354,104 @@
       </action>
     </rule>
 
-    <!-- FIN REGLAS inclusion pronôm "ne" -->
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV pas (la li cantes pas -> NE la lui chantes pas)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV pas jamai (la li cantes pas jamai -> NE la lui chantes jamais)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="jamais"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="4"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS inclusion pronòm "ne" -->
 
   </section-rules>
 </interchunk>
