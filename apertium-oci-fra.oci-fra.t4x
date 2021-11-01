@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<transfer>
+<transfer default="lu">
   <section-def-cats>
 
     <!-- this shouldn't include 'sent' or other punctuation -->
@@ -17,6 +17,9 @@
     </def-cat>
     <def-cat n="lpunct">
       <cat-item lemma="«" tags="lpar"/>
+    </def-cat>
+    <def-cat n="ponch">
+      <cat-item lemma="." tags="sent"/>
     </def-cat>
     <def-cat n="tv">
       <cat-item tags="vblex.tv.*"/>
@@ -95,6 +98,42 @@
           <out>
             <b pos="1"/>
             <b/>
+          </out>
+        </otherwise>
+      </choose>
+    </def-macro>
+
+    <def-macro n="f_bcond" npar="2">
+      <choose>
+        <when>
+          <test>
+            <not>
+              <equal><b pos="1"/><lit v=" "/></equal>
+            </not>
+          </test>
+          <out>
+            <b pos="1"/>
+          </out>
+        </when>
+      </choose>
+    </def-macro>
+
+    <def-macro n="f_bcond_esp" npar="2">
+      <choose>
+        <when>
+          <test>
+            <or>
+              <equal><b pos="1"/><lit v="  "/></equal>
+              <equal><b pos="1"/><lit v="   "/></equal>
+            </or>
+          </test>
+          <out>
+            <b/>
+          </out>
+        </when>
+        <otherwise>
+          <out>
+            <b pos="1"/>
           </out>
         </otherwise>
       </choose>
@@ -315,6 +354,120 @@
       </action>
     </rule>
 -->
+
+<!-- PATCHES PELS BUGS DELS BLANCS -->
+
+    <rule comment="REGLA: x : > x:" v="oci@gascon">
+      <pattern>
+        <pattern-item n="default"/>
+        <pattern-item n="ponch"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="a_verb"/>
+                <clip pos="1" side="tl" part="temps"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <clip pos="1" side="tl" part="gen"/>
+                <clip pos="1" side="tl" part="nbr"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <lu>
+            <clip pos="2" side="tl" part="whole"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+<!--
+funciona pas
+(encara que li tregui un blanc, el sistema el torna a posar)
+    <rule comment="REGLA: x  x > x x (leva 1 blanc)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="default"/>
+        <pattern-item n="default"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="a_verb"/>
+                <clip pos="1" side="tl" part="temps"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <clip pos="1" side="tl" part="gen"/>
+                <clip pos="1" side="tl" part="nbr"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+        <call-macro n="f_bcond_esp">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="a_tv"/><lit-tag v="tv"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="2" side="tl" part="lemh"/>
+                <clip pos="2" side="tl" part="a_verb"/>
+                <clip pos="2" side="tl" part="temps"/>
+                <clip pos="2" side="tl" part="pers"/>
+                <clip pos="2" side="tl" part="gen"/>
+                <clip pos="2" side="tl" part="nbr"/>
+                <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <lu>
+                <clip pos="2" side="tl" part="whole"/>
+              </lu>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+-->
+
+<!-- FIN PATCHES PELS BUGS DELS BLANCS -->
 
   </section-rules>
 </transfer>

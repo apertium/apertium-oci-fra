@@ -29,6 +29,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2cx.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
+	$(PREFIX1b).t4x.bin	\
 	$(PREFIX2).automorf.bin	\
 	$(PREFIX2b).automorf.bin	\
 	$(PREFIX2).prob		\
@@ -192,7 +193,17 @@ $(PREFIX1).t3x.bin: $(BASENAME).$(PREFIX1).t3x
 	apertium-validate-postchunk $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX1).t4x.bin: $(BASENAME).$(PREFIX1).t4x
+.deps/$(PREFIX1).t4x: $(BASENAME).$(PREFIX1).t4x
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t4x >$@
+
+.deps/$(PREFIX1b).t4x: $(BASENAME).$(PREFIX1).t4x
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t4x >$@
+
+$(PREFIX1).t4x.bin: .deps/$(PREFIX1).t4x
+	apertium-validate-transfer $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX1b).t4x.bin: .deps/$(PREFIX1b).t4x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
