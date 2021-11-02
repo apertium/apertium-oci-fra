@@ -331,20 +331,19 @@
     </def-cat>
 
     <def-cat n="unite_temps">
-      <cat-item lemma="seconde" tags="n.*"/>
-      <cat-item lemma="minute" tags="n.*"/>
-      <cat-item lemma="heure" tags="n.*"/>
-      <cat-item lemma="jour" tags="n.*"/>
-      <cat-item lemma="journée" tags="n.*"/>
-      <cat-item lemma="semaine" tags="n.*"/>
-      <cat-item lemma="mois" tags="n.*"/>
+      <cat-item lemma="segonda" tags="n.*"/>
+      <cat-item lemma="minuta" tags="n.*"/>
+      <cat-item lemma="ora" tags="n.*"/>
+      <cat-item lemma="jorn" tags="n.*"/>
+      <cat-item lemma="jornada" tags="n.*"/>
+      <cat-item lemma="setmana" tags="n.*"/>
+      <cat-item lemma="mes" tags="n.*"/>
       <cat-item lemma="an" tags="n.*"/>
-      <cat-item lemma="année" tags="n.*"/>
+      <cat-item lemma="annada" tags="n.*"/>
       <cat-item lemma="lustre" tags="n.*"/>
-      <cat-item lemma="décennie" tags="n.*"/>
-      <cat-item lemma="décade" tags="n.*"/>
-      <cat-item lemma="siècle" tags="n.*"/>
-      <cat-item lemma="millénaire" tags="n.*"/>
+      <cat-item lemma="decada" tags="n.*"/>
+      <cat-item lemma="sègle" tags="n.*"/>
+      <cat-item lemma="millenari" tags="n.*"/>
     </def-cat>
 
     <def-cat n="nom_mois">
@@ -475,6 +474,7 @@
     <def-var n="concSegundo"/>
     <def-var n="concTercero"/>
     <def-var n="v_vbser"/>
+    <def-var n="v_vbfar"/>
     <def-var n="v_itg"/>
     <def-var n="auxg"/>
     <def-var n="auxn"/>
@@ -995,7 +995,7 @@
     </def-list>
 -->
 
-    <def-list n="pays">
+    <def-list n="pays">	<!-- toponymes avec déterminant en français et sans lui en occitan -->
       <list-item v="Europe"/>
       <list-item v="Asie"/>
       <list-item v="Afrique"/>
@@ -1429,6 +1429,20 @@
           <let>
             <var n="v_vbser"/>
             <lit v="estar"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_vbfar" npar="0" v="oci">
+          <let>
+            <var n="v_vbfar"/>
+            <lit v="far"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_vbfar" npar="0" v="oci@gascon">
+          <let>
+            <var n="v_vbfar"/>
+            <lit v="har"/>
           </let>
     </def-macro>
 
@@ -4001,7 +4015,7 @@
         <out>
           <chunk namefrom="lemma">
             <tags>
-              <tag><lit-tag v="Rel"/></tag>
+              <tag><lit-tag v="rel"/></tag>
             </tags>
             <lu>
               <clip pos="1" side="tl" part="whole"/>
@@ -6371,8 +6385,8 @@
           <chunk name="data">
             <tags>
               <tag><lit-tag v="SN"/></tag>
-              <tag><clip pos="2" side="tl" part="gen"/></tag>
-              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
               <tag><var n="numero_sl"/></tag>
             </tags>
@@ -6394,7 +6408,49 @@
     </rule>
 
 
-   <rule comment="RÈGLA: EN MOIS NUM (en en novembre 1998: en novembre de 1998)">
+   <rule comment="RÈGLA: DET MOIS NUM (le novembre 1998: lo novembre de 1998)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+   <rule comment="RÈGLA: EN MOIS NUM (en novembre 1998: en novembre de 1998)">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom_mois"/>
@@ -6440,6 +6496,7 @@
         <pattern-item n="unite_temps"/>
       </pattern>
       <action>
+         <call-macro n="set_vbfar"></call-macro>
         <call-macro n="tipus_verb">
          <with-param pos="2"/>
         </call-macro>
@@ -6465,7 +6522,7 @@
             </tags>
             <lu>
               <get-case-from pos="1">
-                 <lit v="far"/>
+                 <var n="v_vbfar"/>
               </get-case-from>
               <lit-tag v="vblex"/>
               <clip pos="3" side="tl" part="temps"/>
@@ -6497,6 +6554,7 @@
         <pattern-item n="longtemps"/>
       </pattern>
       <action>
+        <call-macro n="set_vbfar"></call-macro>
         <call-macro n="tipus_verb">
           <with-param pos="3"/>
         </call-macro>
@@ -6518,7 +6576,7 @@
             </tags>
             <lu>
               <get-case-from pos="1">
-                 <lit v="far"/>
+                 <var n="v_vbfar"/>
               </get-case-from>
               <lit-tag v="vblex"/>
               <clip pos="3" side="tl" part="temps"/>
@@ -12584,12 +12642,13 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: IL EN FAIT > en fa (pedaç per evitar il + ´en fa' (adv) ">
+    <rule comment="RÈGLA: IL EN FAIT > en fa (pedaç per evitar il + 'en fa' (adv) ">
        <pattern>
          <pattern-item n="il_elle"/>
          <pattern-item n="en_fait"/>
        </pattern>
        <action>
+         <call-macro n="set_vbfar"></call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -12610,7 +12669,7 @@
              </lu>
              <b/>
              <lu>
-              <lit v="far"/>
+              <var n="v_vbfar"/>
               <lit-tag v="vblex.pri.p3.sg"/>
              </lu>
            </chunk>
