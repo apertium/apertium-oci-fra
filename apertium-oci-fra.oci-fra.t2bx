@@ -65,6 +65,10 @@
       <cat-item lemma="tohaveblex" tags="SV.*"/>
     <!--  <cat-item lemma="be_adj" tags="SV.*"/>-->
     </def-cat>
+    <def-cat n="SV_inf">
+      <cat-item tags="SV.*.inf"/>
+      <cat-item tags="SV.*.inf.*"/>
+    </def-cat>
 
     <def-cat n="SDet">
       <cat-item tags="SDet"/>
@@ -190,7 +194,7 @@
 
     <!-- RÈGLAS inclusion pronòm "ne" -->
 
-    <rule comment="RÈGLA: SV pas (cantes pas -> NE chantes pas)">
+    <rule comment="RÈGLA: SV_pers pas (cantes pas -> NE chantes pas)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -225,7 +229,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV pas jamai (cantes pas jamai -> NE chantes jamais)">
+    <rule comment="RÈGLA: SV_pers pas jamai (cantes pas jamai -> NE chantes jamais)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -267,7 +271,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV pas (li cantes pas -> NE lui chantes pas)">
+    <rule comment="RÈGLA: SPron_pro SV_pers pas (li cantes pas -> NE lui chantes pas)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -307,7 +311,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SV_pers pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -354,7 +358,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV pas (la li cantes pas -> NE la lui chantes pas)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas (la li cantes pas -> NE la lui chantes pas)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -399,7 +403,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV pas jamai (la li cantes pas jamai -> NE la lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas jamai (la li cantes pas jamai -> NE la lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -446,6 +450,132 @@
         <out>
           <chunk>
             <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_inf pas (cantar pas -> NE pas chanter)">
+      <pattern>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_inf pas (li cantar pas -> NE pas lui chanter)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_inf pas (li o cantar pas -> NE pas le lui chanter)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
       </action>
