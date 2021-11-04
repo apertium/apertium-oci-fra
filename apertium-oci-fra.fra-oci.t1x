@@ -148,6 +148,9 @@
     <def-cat n="y">
       <cat-item lemma="y" tags="prn.pro.adv"/>
     </def-cat>
+    <def-cat n="celui">
+      <cat-item lemma="celui" tags="prn.tn.*"/>
+    </def-cat>
     <def-cat n="estceque">
       <cat-item lemma="est-ce que" tags="prn.*"/>
     </def-cat>
@@ -12608,6 +12611,8 @@
 
   <!-- FIN RÈGLAS VBMOD + PRO + VBMOD -->
 
+  <!-- AUTRAS RÈGLAS -->
+
     <rule comment="RÈGLA: EST-CE QUE > 0">
        <pattern>
          <pattern-item n="estceque"/>
@@ -12676,6 +12681,74 @@
            </chunk>
          </out>
        </action>
+    </rule>
+
+    <rule comment="RÈGLA: CELUI PR > CELUI PR (celui de > lo de)">
+      <pattern>
+        <pattern-item n="celui"/>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+       <call-macro n="tipus_det">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_concord1">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="1"/>
+       </call-macro>
+<!--
+       <choose>
+         <when>
+           <test>
+             <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+           </test>
+           <let><clip pos="1" side="tl" part="gen"/><clip pos="1" side="sl" part="gen"/></let>
+         </when>
+       </choose>
+       <choose>
+         <when>
+           <test>
+             <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+           </test>
+           <let><clip pos="1" side="tl" part="gen"/><var n="genero"/></let>
+         </when>
+       </choose>
+-->
+       <out>
+         <chunk name="det">
+           <tags>
+             <tag><lit-tag v="Det"/></tag>
+             <tag><lit-tag v="def"/></tag>
+             <tag><clip pos="1" side="tl" part="gen"/></tag>
+             <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             <tag><var n="genero_sl"/></tag>
+             <tag><var n="numero_sl"/></tag>
+           </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="lo"/>
+              </get-case-from>
+              <lit-tag v="det.def"/>
+              <clip pos="1" side="tl" part="gen"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
     </rule>
 
     <rule comment="RÈGLA: LPAR">
