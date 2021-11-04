@@ -6215,7 +6215,7 @@
 
     <!-- RÈGLAS PRONÒMS -->
 
-    <rule comment="RÈGLA: PRNPRO PRNPRO (n'i > y en ; o li > le lui)" v="oci">
+    <rule comment="RÈGLA: PRNPRO PRNPRO (n'i > y en ; li o > le lui, o li > le lui)" v="oci">
       <pattern>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
@@ -6223,17 +6223,50 @@
       <action>
          <choose>
            <when>
+             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter toutes -->
              <test>
-               <and>
-                 <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
-                 <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
-               </and>
+               <or>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="o"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="vos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="li"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="lor"/></equal>
+                   </or>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="li"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lor"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="vos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="o"/></equal>
+                   </or>
+                 </and>
+               </or>
              </test>
              <call-macro n="firstWord">
                <with-param pos="2"/>
              </call-macro>
              <out>
-               <chunk name="pron" case="caseFirstWord">
+               <chunk name="pronXXX" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><clip pos="2" side="tl" part="a_prn"/></tag>
@@ -6276,7 +6309,7 @@
                <with-param pos="1"/>
              </call-macro>
              <out>
-               <chunk name="pron" case="caseFirstWord">
+               <chunk name="pronYYYY" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><clip pos="1" side="tl" part="a_prn"/></tag>
