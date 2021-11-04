@@ -337,19 +337,20 @@
     </def-cat>
 
     <def-cat n="unite_temps">
-      <cat-item lemma="segonda" tags="n.*"/>
-      <cat-item lemma="minuta" tags="n.*"/>
-      <cat-item lemma="ora" tags="n.*"/>
-      <cat-item lemma="jorn" tags="n.*"/>
-      <cat-item lemma="jornada" tags="n.*"/>
-      <cat-item lemma="setmana" tags="n.*"/>
-      <cat-item lemma="mes" tags="n.*"/>
+      <cat-item lemma="seconde" tags="n.*"/>
+      <cat-item lemma="minute" tags="n.*"/>
+      <cat-item lemma="heure" tags="n.*"/>
+      <cat-item lemma="jour" tags="n.*"/>
+      <cat-item lemma="journée" tags="n.*"/>
+      <cat-item lemma="semaine" tags="n.*"/>
+      <cat-item lemma="mois" tags="n.*"/>
       <cat-item lemma="an" tags="n.*"/>
-      <cat-item lemma="annada" tags="n.*"/>
+      <cat-item lemma="année" tags="n.*"/>
       <cat-item lemma="lustre" tags="n.*"/>
-      <cat-item lemma="decada" tags="n.*"/>
-      <cat-item lemma="sègle" tags="n.*"/>
-      <cat-item lemma="millenari" tags="n.*"/>
+      <cat-item lemma="décennie" tags="n.*"/>
+      <cat-item lemma="décade" tags="n.*"/>
+      <cat-item lemma="siècle" tags="n.*"/>
+      <cat-item lemma="millénaire" tags="n.*"/>
     </def-cat>
 
     <def-cat n="nom_mois">
@@ -6494,7 +6495,7 @@
     </rule>
 
 
-    <rule comment="RÈGLA: il y a NUM temps > fa NUM temps">
+    <rule comment="RÈGLA: il y a NUM temps > fa NUM temps" v="oci">
       <pattern>
         <pattern-item n="il"/>
         <pattern-item n="y"/>
@@ -6520,12 +6521,9 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="v">
+          <chunk name="temps">
             <tags>
-              <tag><lit-tag v="SV"/></tag>
-              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
-              <tag><clip pos="3" side="tl" part="temps"/></tag>
-              <tag><var n="tipusverb"/></tag>
+              <tag><lit-tag v="SAdv"/></tag>
             </tags>
             <lu>
               <get-case-from pos="1">
@@ -6553,7 +6551,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: il y a DETIND temps > fa DETIND temps">
+    <rule comment="RÈGLA: il y a DETIND temps > fa DETIND temps" v="oci">
       <pattern>
         <pattern-item n="il"/>
         <pattern-item n="y"/>
@@ -6579,12 +6577,9 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="v">
+          <chunk name="temps">
             <tags>
-              <tag><lit-tag v="SV"/></tag>
-              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
-              <tag><clip pos="3" side="tl" part="temps"/></tag>
-              <tag><var n="tipusverb"/></tag>
+              <tag><lit-tag v="SAdv"/></tag>
             </tags>
             <lu>
               <get-case-from pos="1">
@@ -6612,7 +6607,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: il y a longtemps > fa temps">
+    <rule comment="RÈGLA: il y a longtemps > fa temps" v="oci">
       <pattern>
         <pattern-item n="il"/>
         <pattern-item n="y"/>
@@ -6633,12 +6628,9 @@
           <with-param pos="3"/>
         </call-macro>
         <out>
-          <chunk name="v">
+          <chunk name="temps">
             <tags>
-              <tag><lit-tag v="SV"/></tag>
-              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
-              <tag><clip pos="3" side="tl" part="temps"/></tag>
-              <tag><var n="tipusverb"/></tag>
+              <tag><lit-tag v="SAdv"/></tag>
             </tags>
             <lu>
               <get-case-from pos="1">
@@ -6661,7 +6653,159 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: il y a NUM temps > NUM temps a" v="oci@gascon">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+        <pattern-item n="num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="4" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: il y a DETIND temps > DETIND temps a" v="oci@gascon">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+        <pattern-item n="detind"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="4" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: il y a longtemps > bèth temps a" v="oci@gascon">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+        <pattern-item n="longtemps"/>
+      </pattern>
+      <action>
+        <call-macro n="set_vbfar"></call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="bèth"/>
+              </get-case-from>
+              <lit-tag v="adj.m.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <get-case-from pos="3">
+                <lit v="temps"/>
+              </get-case-from>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS DATAS -->
+
 
     <!-- RÈGLAS CAMBI AUXILIAR -->
 
