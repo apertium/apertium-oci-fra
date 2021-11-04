@@ -7473,6 +7473,76 @@
 
     <!-- FIN RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
+    <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: DETDEF PR > CELUI PR (lo de > celui de)">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="tipus_det">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_concord1">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="1"/>
+       </call-macro>
+       <choose>
+         <when>
+           <test>
+             <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+           </test>
+           <let><clip pos="1" side="tl" part="gen"/><clip pos="1" side="sl" part="gen"/></let>
+         </when>
+       </choose>
+       <choose>
+         <when>
+           <test>
+             <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="mf"/></equal>
+           </test>
+           <let><clip pos="1" side="tl" part="gen"/><var n="genero"/></let>
+         </when>
+       </choose>
+       <out>
+         <chunk name="pron" case="caseFirstWord">
+           <tags>
+             <tag><lit-tag v="SPron"/></tag>
+             <tag><lit-tag v="tn"/></tag>
+             <tag><clip pos="1" side="tl" part="nbr"/></tag>
+           </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="celui"/>
+              </get-case-from>
+              <lit-tag v="prn.tn"/>
+              <clip pos="1" side="tl" part="gen"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: UNKNOWN">
       <pattern>
