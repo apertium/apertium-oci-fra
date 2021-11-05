@@ -24,12 +24,16 @@ TARGETS_COMMON =		\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
 	$(PREFIX1b).t1x.bin	\
+	$(PREFIX1).t1x			\
+	$(PREFIX1b).t1x			\
 	$(PREFIX1).t2ax.bin	\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1).t2cx.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
 	$(PREFIX1b).t4x.bin	\
+	$(PREFIX1).t4x			\
+	$(PREFIX1b).t4x			\
 	$(PREFIX2).automorf.bin	\
 	$(PREFIX2b).automorf.bin	\
 	$(PREFIX2).prob		\
@@ -44,6 +48,8 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).autopgen.bin	\
 	$(PREFIX2).t1x.bin	\
 	$(PREFIX2b).t1x.bin	\
+	$(PREFIX2).t1x			\
+	$(PREFIX2b).t1x			\
 	$(PREFIX2).t2x.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
 	$(PREFIX2b).t2x_enon.bin	\
