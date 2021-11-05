@@ -163,17 +163,17 @@ $(PREFIX2).autolex.bin: .deps/$(BASENAME).$(PREFIX2).lrx
 ## Structural transfer rules
 ###############################################################################
 
-.deps/$(PREFIX1).t1x: $(BASENAME).$(PREFIX1).t1x
+$(PREFIX1).t1x: $(BASENAME).$(PREFIX1).t1x
 	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t1x >$@
 
-.deps/$(PREFIX1b).t1x: $(BASENAME).$(PREFIX1).t1x
+$(PREFIX1b).t1x: $(BASENAME).$(PREFIX1).t1x
 	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t1x >$@
 
-$(PREFIX1).t1x.bin: .deps/$(PREFIX1).t1x
+$(PREFIX1).t1x.bin: $(PREFIX1).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX1b).t1x.bin: .deps/$(PREFIX1b).t1x
+$(PREFIX1b).t1x.bin: $(PREFIX1b).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
@@ -207,17 +207,17 @@ $(PREFIX1b).t4x.bin: .deps/$(PREFIX1b).t4x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
-.deps/$(PREFIX2).t1x: $(BASENAME).$(PREFIX2).t1x
+$(PREFIX2).t1x: $(BASENAME).$(PREFIX2).t1x
 	apertium-filter-rules oci $(BASENAME).$(PREFIX2).t1x >$@
 
-.deps/$(PREFIX2b).t1x: $(BASENAME).$(PREFIX2).t1x
+$(PREFIX2b).t1x: $(BASENAME).$(PREFIX2).t1x
 	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).t1x >$@
 
-$(PREFIX2).t1x.bin: .deps/$(PREFIX2).t1x
+$(PREFIX2).t1x.bin: $(PREFIX2).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX2b).t1x.bin: .deps/$(PREFIX2b).t1x
+$(PREFIX2b).t1x.bin: $(PREFIX2b).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
