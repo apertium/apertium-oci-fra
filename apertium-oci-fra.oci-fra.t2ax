@@ -126,6 +126,13 @@
       <attr-item tags="ND"/>
     </def-attr>
 
+    <def-attr n="a_verb">
+      <attr-item tags="vblex"/>
+      <attr-item tags="vbser"/>
+      <attr-item tags="vbhaver"/>
+      <attr-item tags="vbmod"/>
+    </def-attr>
+
     <def-attr n="temps">
       <attr-item tags="inf"/>
       <attr-item tags="ger"/>
@@ -254,10 +261,13 @@
         <choose>
           <when>
             <test>
-              <equal>
-                <var n="finfrasa"/>
-                <lit v="yes"/>
-              </equal>
+              <or>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
+                  <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
+                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="y"/></equal>
+                </and>
+              </or>
             </test>
             <choose>
               <when>
