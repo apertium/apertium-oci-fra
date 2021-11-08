@@ -33,6 +33,8 @@
       <cat-item lemma="sercj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SVneg.*"/>
+      <cat-item lemma="havercj" tags="SV.*"/>
+      <cat-item lemma="havercj" tags="SVneg.*"/>
     </def-cat>
 
     <def-cat n="Det">
@@ -158,6 +160,7 @@
   <section-def-lists>
     <def-list n="SV_personals">
       <list-item v="verbcj"/>
+      <list-item v="havercj"/>
     </def-list>
   </section-def-lists>
 
@@ -264,7 +267,10 @@
               <or>
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
-                  <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit-tag v="havercj"/></equal>
+                  </or>
                   <equal caseless="yes"><clip pos="2" part="lem"/><lit v="y"/></equal>
                 </and>
               </or>

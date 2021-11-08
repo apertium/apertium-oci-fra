@@ -3366,7 +3366,17 @@
               <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p3"/> </equal>
             </or>
           </test>
-          <let><var n="chunkname"/><lit v="verbcj"/></let>
+          <choose>
+            <when>
+              <test>
+                <equal><clip pos="1" side="tl" part="lem"/><lit v="avoir"/> </equal>
+              </test>
+              <let><var n="chunkname"/><lit v="havercj"/></let>
+            </when>
+            <otherwise>
+              <let><var n="chunkname"/><lit v="verbcj"/></let>
+            </otherwise>
+          </choose>
         </when>
         <otherwise>
           <let><var n="chunkname"/><lit v="verb"/></let>
@@ -6430,8 +6440,8 @@
              <test>
                <or>
                  <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="en"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="y"/></equal>
                  </and>
                  <and>
                    <or>
@@ -7600,8 +7610,11 @@
         <call-macro n="f_canvis_temps">
           <with-param pos="1"/>
         </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
          <out>
-           <chunk name="verbcj" case="caseFirstWord">
+           <chunk namefrom="chunkname" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -7637,8 +7650,11 @@
         <call-macro n="f_canvis_temps">
           <with-param pos="1"/>
         </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
          <out>
-           <chunk name="verbcj" case="caseFirstWord">
+           <chunk namefrom="chunkname" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
