@@ -6,7 +6,7 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         apertium-pretransfer|\
         lt-proc -b ../../oci-fra.autobil.bin |\
         lrx-proc -m ../../oci-fra.autolex.bin |\
-        apertium-transfer -b ../../apertium-oci-fra.oci-fra.t1x  ../../oci-fra.t1x.bin |\
+        apertium-transfer -b ../../oci-fra.t1x  ../../oci-fra.t1x.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2ax  ../../oci-fra.t2ax.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2bx  ../../oci-fra.t2bx.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2cx  ../../oci-fra.t2cx.bin |\
@@ -22,7 +22,7 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         apertium-pretransfer|\
         lt-proc -b ../../oci@gascon-fra.autobil.bin |\
         lrx-proc -m ../../oci-fra.autolex.bin |\
-        apertium-transfer -b ../../apertium-oci-fra.oci-fra.t1x  ../../oci-fra.t1x.bin |\
+        apertium-transfer -b ../../oci@gascon-fra.t1x  ../../oci-fra.t1x.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2ax  ../../oci-fra.t2ax.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2bx  ../../oci-fra.t2bx.bin |\
         apertium-interchunk ../../apertium-oci-fra.oci-fra.t2cx  ../../oci-fra.t2cx.bin |\
@@ -38,7 +38,7 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         apertium-pretransfer|\
         lt-proc -b ../../fra-oci.autobil.bin |\
         lrx-proc -m ../../fra-oci.autolex.bin |\
-        apertium-transfer -b ../../.deps/fra-oci.t1x  ../../fra-oci.t1x.bin  |\
+        apertium-transfer -b ../../fra-oci.t1x  ../../fra-oci.t1x.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x  ../../fra-oci.t2x.bin  |\
         apertium-postchunk ../../apertium-oci-fra.fra-oci.t3x  ../../fra-oci.t3x.bin  |\
         apertium-transfer -n ../../apertium-oci-fra.fra-oci.t4x  ../../fra-oci.t4x.bin  |\
@@ -52,7 +52,7 @@ lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v 
         apertium-pretransfer|\
         lt-proc -b ../../fra-oci@gascon.autobil.bin |\
         lrx-proc -m ../../fra-oci.autolex.bin |\
-        apertium-transfer -b ../../.deps/fra-oci@gascon.t1x  ../../fra-oci@gascon.t1x.bin  |\
+        apertium-transfer -b ../../fra-oci@gascon.t1x  ../../fra-oci@gascon.t1x.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x  ../../fra-oci.t2x.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x_supersn  ../../fra-oci@gascon.t2x_supersn.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x_enon  ../../fra-oci@gascon.t2x_enon.bin  |\
