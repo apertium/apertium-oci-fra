@@ -182,17 +182,55 @@
 
   </def-macros>
 
+  <def-seqs>
+    <def-seq n="temps">
+      <match lemma="segonda" tags="n.*"/>
+      <match lemma="minuta" tags="n.*"/>
+      <match lemma="ora" tags="n.*"/>
+      <match lemma="jorn" tags="n.*"/>
+      <match lemma="setmana" tags="n.*"/>
+      <match lemma="mes" tags="n.*"/>
+      <match lemma="annada" tags="n.*"/>
+      <match lemma="lustre" tags="n.*"/>
+      <match lemma="decada" tags="n.*"/>
+      <match lemma="sègle" tags="n.*"/>
+      <match lemma="millenari" tags="n.*"/>
+    </def-seq>
+  </def-seqs>
+
 <rules>
 
 <!-- **************** PRN **************** -->
 
-  <!-- ieu >> je, moi -->
+  <!-- aquò >> cela, ce -->
   <rule weight="0.8">
-    <match lemma="ieu" tags="prn.*"><select lemma="je"/></match>
+    <match lemma="aquò" tags="prn.*"><select lemma="cela"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aquò" tags="prn.*"><select lemma="ce"/></match>
+    <match tags="vbser.*.p3.*"/>
+  </rule>
+
+  <!-- ieu/jo >> je, moi -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="je"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="je"/></match>
+    </or>
   </rule>
   <rule weight="1.0">
     <match tags="pr"/>
-    <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+    <match tags="cm"/>
   </rule>
 
   <!-- tu >> tu, toi -->
@@ -202,6 +240,10 @@
   <rule weight="1.0">
     <match tags="pr"/>
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+    <match tags="cm"/>
   </rule>
 
   <!-- el/eth >> il(s), lui, eux -->
@@ -225,19 +267,52 @@
       <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
     </or>
   </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+    </or>
+    <match tags="cm"/>
+  </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    </or>
+    <match tags="cm"/>
+  </rule>
 
 <!-- **************** PR **************** -->
 
-  <!-- per >> par, pour -->
+  <!-- per >> pour, parr -->
   <rule weight="0.8">
+    <match lemma="per" tags="pr"><select lemma="pour"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="*.pp.*"/>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
   </rule>
   <rule weight="1.0">
-    <match tags="vbser.*"/>
-    <match tags="vblex.pp.*"/>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <or>
+      <seq n="temps"/>
+      <match lemma="eurò" tags="n.*"/>
+      <match lemma="euro" tags="n.*"/>
+      <match lemma="persona" tags="n.*"/>
+      <match lemma="abitant" tags="n.*"/>
+      <match lemma="cap" tags="n.*"/>
+      <match lemma="trabalhador" tags="n.*"/>
+      <match lemma="trabalhaire" tags="n.*"/>
+      <match lemma="estatjant" tags="n.*"/>
+      <match lemma="adulte" tags="n.*"/>
+      <match lemma="enfant" tags="n.*"/>
+      <match lemma="dròlle" tags="n.*"/>
+      <match lemma="mainatge" tags="n.*"/>
+      <match lemma="professor" tags="n.*"/>
+      <match lemma="mèstre" tags="n.*"/>
+    </or>
   </rule>
-  <rule weight="2.0">
+  <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <repeat from="0" upto="2">
       <or>
@@ -246,21 +321,6 @@
       </or>
     </repeat>
     <match tags="*.inf"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="felicitar" tags="vblex.*"/>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="per" tags="pr"><select lemma="pour"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="per" tags="pr"><select lemma="pour"/></match>
-    <or>
-      <match lemma="aquò" tags="prn.*"/>
-      <match lemma="tot aquò" tags="prn.*"/>
-      <match lemma="aquerò" tags="prn.*"/>
-    </or>
   </rule>
 
 <!-- **************** REL **************** -->
