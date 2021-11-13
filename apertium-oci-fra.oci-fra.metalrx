@@ -232,6 +232,19 @@
     </or>
     <match tags="cm"/>
   </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="cm"/>
+  </rule>
 
   <!-- tu >> tu, toi -->
   <rule weight="0.8">
@@ -243,6 +256,12 @@
   </rule>
   <rule weight="0.9">
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
     <match tags="cm"/>
   </rule>
 
@@ -272,6 +291,12 @@
       <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
       <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
     </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
     <match tags="cm"/>
   </rule>
   <rule weight="0.9">
@@ -279,6 +304,12 @@
       <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
       <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
     </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
     <match tags="cm"/>
   </rule>
 
@@ -316,8 +347,8 @@
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <repeat from="0" upto="2">
       <or>
-      <match tags="adv"/>
-      <match tags="adv.enon"/>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
       </or>
     </repeat>
     <match tags="*.inf"/>
