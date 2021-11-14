@@ -840,11 +840,30 @@
     <match lemma="non" tags="adv"><select lemma="ne"/></match>
     <match lemma="pas" tags="adv"/>
   </rule>
+  <rule weight="1.0">
+    <match lemma="non" tags="adv"><select lemma="ne"/></match>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
 
   <!-- pas >> pas, non -->
   <rule weight="0.8">
     <match lemma="pas" tags="adv"><select lemma="pas"/></match>
   </rule>
+
+  <!-- plan >> beaucoup, bien -->
+  <rule weight="0.8">
+    <match lemma="plan" tags="adv"><select lemma="bien"/></match>
+  </rule>
+<!--
+  <rule weight="1.0">
+    <match lemma="plan" tags="adv"><select lemma="bien"/></match>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="plan" tags="adv"><select lemma="beaucoup"/></match>
+    <or><match tags="vblex.pp.*"/><match tags="vbser.pp.*"/><match tags="vbhaver.pp.*"/><match tags="vbmod.pp.*"/></or>
+  </rule>
+-->
 
   <!-- tant >> autant, tant -->
   <rule weight="0.8">
@@ -953,7 +972,12 @@
   </rule>
 
 
-<!-- **************** VBLEX **************** -->
+<!-- **************** V **************** -->
+
+  <!-- tornar >> revenir, rentrer -->
+  <rule weight="0.8">
+    <match lemma="tornar" tags="vblex.*"><select lemma="revenir"/></match>
+  </rule>
 
   <!-- cridar >> appeler, crier -->
   <rule weight="0.8">
