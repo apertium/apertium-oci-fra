@@ -20,6 +20,10 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="ne">
+      <cat-item lemma="ne" tags="SAdv"/>
+      <cat-item lemma="ne" tags="SAdv.*"/>
+    </def-cat>
     <def-cat n="pas">
       <cat-item lemma="pas" tags="SAdv"/>
       <cat-item lemma="pas" tags="SAdv.*"/>
@@ -223,6 +227,85 @@
   </section-def-macros>
 
   <section-rules>
+
+    <!-- RÈGLAS non inclusion advèrbi "ne" -->
+
+    <rule comment="RÈGLA: ne SV_pers (non cantes -> ne chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SPron_pro SV_pers (non li cantes -> ne lui chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SPron_pro SPron_pro SV_pers (non li o cantes -> ne le lui chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS non inclusion advèrbi "ne" -->
 
     <!-- RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
 
