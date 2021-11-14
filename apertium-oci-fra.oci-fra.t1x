@@ -179,6 +179,12 @@
       <cat-item lemma="auer" tags="vblex.*.p3.sg"/>
     </def-cat>
 
+    <def-cat n="tornar_conj">
+      <cat-item lemma="tornar" tags="vblex.*.p1.*"/>
+      <cat-item lemma="tornar" tags="vblex.*.p2.*"/>
+      <cat-item lemma="tornar" tags="vblex.*.p3.*"/>
+    </def-cat>
+
     <def-cat n="num">
       <cat-item tags="num"/>
       <cat-item tags="num.*"/>
@@ -7249,6 +7255,126 @@
 
     <!-- FIN RÈGLAS 'ES A + INF' -->
 
+    <!-- RÈGLAS 'TORNAR + INF' -->
+
+    <rule comment="RÈGLA: tornar_conj vèrb_inf > vèrb_conj à nouveau">
+       <pattern>
+         <pattern-item n="tornar_conj"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_conj adv vèrb_inf > vèrb_conj à nouveau adv">
+       <pattern>
+         <pattern-item n="tornar_conj"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+         <out>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <!-- FIN RÈGLAS 'TORNAR + INF' -->
 
     <!-- AUTRAS RÈGLAS VERBALAS -->
 
