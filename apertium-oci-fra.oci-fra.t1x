@@ -179,6 +179,12 @@
       <cat-item lemma="auer" tags="vblex.*.p3.sg"/>
     </def-cat>
 
+    <def-cat n="tornar_conj">
+      <cat-item lemma="tornar" tags="vblex.*.p1.*"/>
+      <cat-item lemma="tornar" tags="vblex.*.p2.*"/>
+      <cat-item lemma="tornar" tags="vblex.*.p3.*"/>
+    </def-cat>
+
     <def-cat n="num">
       <cat-item tags="num"/>
       <cat-item tags="num.*"/>
@@ -206,6 +212,20 @@
     </def-cat>
     <def-cat n="enpr">
       <cat-item lemma="en" tags="pr"/>
+    </def-cat>
+    <def-cat n="en_jusqua_pr">
+      <cat-item lemma="en" tags="pr"/>
+      <cat-item lemma="denquia" tags="pr"/>
+      <cat-item lemma="enquia" tags="pr"/>
+      <cat-item lemma="dinc" tags="pr"/>
+      <cat-item lemma="dinca" tags="pr"/>
+      <cat-item lemma="fins a" tags="pr"/>
+      <cat-item lemma="entrò" tags="pr"/>
+      <cat-item lemma="entrò a" tags="pr"/>
+      <cat-item lemma="dusca" tags="pr"/>
+      <cat-item lemma="duscas" tags="pr"/>
+      <cat-item lemma="jusca" tags="pr"/>
+      <cat-item lemma="juscas" tags="pr"/>
     </def-cat>
 
     <def-cat n="cnjcoo">
@@ -878,7 +898,7 @@
       <list-item v="quichua"/>
     </def-list>
 
-    <def-list n="pays">	<!-- toponymes avec déterminant en français et sans lui en occitan -->
+    <def-list n="pays">	<!-- toponymes de pays et régions avec déterminant en français et sans lui en occitan -->
       <list-item v="Europe"/>
       <list-item v="Asie"/>
       <list-item v="Afrique"/>
@@ -887,6 +907,7 @@
       <list-item v="Amérique Centrale"/>
       <list-item v="Amérique du Nord"/>
       <list-item v="Amérique du Sud"/>
+      <list-item v="Amazonie"/>
       <list-item v="Océanie"/>
       <list-item v="Eurasie"/>
       <list-item v="Pangée"/>
@@ -1298,6 +1319,65 @@
       <list-item v="Bolivie"/>
       <list-item v="Paraguay"/>
       <list-item v="Uruguay"/>
+    </def-list>
+
+    <def-list n="fleuves_rivieres">	<!-- toponymes de fleuves et rivières avec déterminant en français et sans lui en occitan -->
+      <list-item v="Allier"/>
+      <list-item v="Ardèche"/>
+      <list-item v="Aude"/>
+      <list-item v="Corrèze"/>
+      <list-item v="Creuse"/>
+      <list-item v="Dordogne"/>
+      <list-item v="Drôme"/>
+      <list-item v="Durance"/>
+      <list-item v="Eure"/>
+      <list-item v="Gard"/>
+      <list-item v="Garonne"/>
+      <list-item v="Indre"/>
+      <list-item v="Loir"/>
+      <list-item v="Lot"/>
+      <list-item v="Rhône"/>
+      <list-item v="Tarn"/>
+      <list-item v="Vézère"/>
+
+      <list-item v="Eure"/>
+      <list-item v="Loire"/>
+      <list-item v="Loiret"/>
+      <list-item v="Marne"/>
+      <list-item v="Meuse"/>
+      <list-item v="Moselle"/>
+      <list-item v="Rhin"/>
+      <list-item v="Saone"/>
+      <list-item v="Seine"/>
+      <list-item v="Tech"/>
+      <list-item v="Têt"/>
+
+      <list-item v="Amazone"/>
+      <list-item v="Brahmapoutre"/>
+      <list-item v="Colorado"/>
+      <list-item v="Congo"/>
+      <list-item v="Danube"/>
+      <list-item v="Dniepr"/>
+      <list-item v="Dniestr"/>
+      <list-item v="Don"/>
+      <list-item v="Èbre"/>
+      <list-item v="Elbe"/>
+      <list-item v="Eufrate"/>
+      <list-item v="Gange"/>
+      <list-item v="Huang He"/>
+      <list-item v="Limpopo"/>
+      <list-item v="Llobregat"/>
+      <list-item v="Niger"/>
+      <list-item v="Nil"/>
+      <list-item v="Oder"/>
+      <list-item v="Rubicon"/>
+      <list-item v="Sénégal"/>
+      <list-item v="Ter"/>
+      <list-item v="Tibre"/>
+      <list-item v="Tigre"/>
+      <list-item v="Volga"/>
+      <list-item v="Yang-Tsé"/>
+      <list-item v="Yang-Tsé-Kiang"/>
     </def-list>
 
   </section-def-lists>
@@ -3553,10 +3633,10 @@
         <choose>
           <when>
             <test>
-              <in caseless="yes">
-                <clip pos="1" side="tl" part="lem"/>
-                <list n="pays"/>
-              </in>
+              <or>
+                <in><clip pos="1" side="tl" part="lem"/><list n="pays"/></in>
+                <in><clip pos="1" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+              </or>
             </test>
             <out>
               <chunk name="det-nptop" case="caseFirstWord">
@@ -3649,7 +3729,173 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DETDEF NPTOP ADJ (la Grèce ancienne > la Grècia antica)">
+    <rule comment="RÈGLA: NPTOP ADJ (Grècia anciana > la Grèce ancienne)">
+      <pattern>
+        <pattern-item n="nptop"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <in><clip pos="1" side="tl" part="lem"/><list n="pays"/></in>
+                <in><clip pos="1" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+              </or>
+            </test>
+            <out>
+              <chunk name="det-nptop-adj" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def"/>
+                  <clip pos="1" side="tl" part="gen"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <get-case-from pos="1">
+                    <clip pos="1" side="tl" part="lemh"/>
+                  </get-case-from>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="nptop-adj" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ADJ NPTOP (anciana Grècia > la ancienne Grèce)">
+      <pattern>
+        <pattern-item n="adj"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
+                <in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+              </or>
+            </test>
+            <out>
+              <chunk name="det-adj-nptop" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def"/>
+                  <clip pos="2" side="tl" part="gen"/>
+                  <clip pos="2" side="tl" part="nbr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="adj-nptop" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETDEF NPTOP ADJ (la Grècia anciana > la Grèce ancienne)">
       <pattern>
         <pattern-item n="detdef"/>
         <pattern-item n="nptop"/>
@@ -3698,7 +3944,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DETDEF ADJ NPTOP (l'ancienne Grèce > l'antica Grècia)">
+    <rule comment="RÈGLA: DETDEF ADJ NPTOP (l'anciana Grècia > l'ancienne Grèce)">
       <pattern>
         <pattern-item n="detdef"/>
         <pattern-item n="adj"/>
@@ -3994,14 +4240,10 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: a NP (evita la generació de l'article si país f.sg)">
+    <rule comment="REGLA: en NP (evita la generació de l'article si país f.sg)">
       <pattern>
-        <pattern-item n="apr"/>
+        <pattern-item n="en_jusqua_pr"/>
         <pattern-item n="nptop"/>
-<pattern-item n="nptop"/>
-<pattern-item n="nptop"/>
-<pattern-item n="nptop"/>
-<pattern-item n="nptop"/>
       </pattern>
       <action>
        <call-macro n="firstWord">
@@ -4018,7 +4260,10 @@
             <test>
               <or>
                 <and>
-                  <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
+                  <or>
+                    <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
+                    <in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+                  </or>
                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
                 </and>
@@ -4057,7 +4302,10 @@
           <when>
             <test>
               <or>
-                <not><in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in></not>
+                <or>
+                  <not><in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in></not>
+                  <not><in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in></not>
+                </or>
                 <and>
                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
@@ -7007,6 +7255,126 @@
 
     <!-- FIN RÈGLAS 'ES A + INF' -->
 
+    <!-- RÈGLAS 'TORNAR + INF' -->
+
+    <rule comment="RÈGLA: tornar_conj vèrb_inf > vèrb_conj à nouveau">
+       <pattern>
+         <pattern-item n="tornar_conj"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_conj adv vèrb_inf > vèrb_conj à nouveau adv">
+       <pattern>
+         <pattern-item n="tornar_conj"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_vchunk_name">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+         <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+         <out>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <!-- FIN RÈGLAS 'TORNAR + INF' -->
 
     <!-- AUTRAS RÈGLAS VERBALAS -->
 

@@ -34,6 +34,13 @@
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
     </def-cat>
+    <def-cat n="SV_sans_pas">
+      <cat-item tags="SV.*.negation.sans_pas.*"/>
+    </def-cat>
+    <def-cat n="SV_inf">
+      <cat-item tags="SV.*.inf"/>
+      <cat-item tags="SV.*.inf.*"/>
+    </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu"/>
       <cat-item tags="SV.vblex.partitiu"/>
@@ -224,7 +231,7 @@
 
     <!-- RÈGLAS PER L'ATRIBUT -->
 
-    <rule comment="RÈGLA: PREP SN SV_vbser SA: aquesta regla inhibeix la concodança de les regles que segueixen si hi ha una prep al davant del subjecte putatiu">
+    <rule comment="RÈGLA: PREP SN SV_vbser SA: aquesta regla inhibeix la concodança de les regles que segueixen si hi ha una preposició al davant del subjecte putatiu">
       <pattern>
         <pattern-item n="PREP"/>
         <pattern-item n="SN"/>
@@ -715,11 +722,313 @@
 
     <!-- FIN RÈGLAS PEL PARTITIU -->
 
-    <!-- RÈGLAS PER LA NEGACION DE "NE... AUCUN (DETERMINANT)" -->
+    <!-- RÈGLAS PER LA NEGACION D'AUCUN (DETERMINANT) -->
 
-    <rule comment="RÈGLA: SV DET_aucun la montagne la plus haute > la montanha mai nauta">
+    <rule comment="RÈGLA: DET_aucun SN SV (aucune porte n'est ouverte > cap de pòrta es pas dobèrta)">
       <pattern>
-        <pattern-item n="SV"/>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN PREP SN SV (aucun joueur de France ne vient > cap de jogaire de França ven pas)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN PREP DET SN SV (aucun joueur de l'équipe ne vient > cap de jogaire de l'equipa ven pas)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN PREP DET SN PREP SN SV (aucun joueur de l'équipe de France ne vient > cap de jogaire de l'equipa de França ven pas)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN PREP DET SN PREP DET SN SV (aucun membre de la famille de mon mari ne vient > cap de membre de la familha de mon marit ven pas)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV DET_aucun (je ne vois aucun livre > vesi pas cap de libre)">
+      <pattern>
+        <pattern-item n="SV_sans_pas"/>
         <pattern-item n="DET_aucun"/>
       </pattern>
       <action>
@@ -748,7 +1057,45 @@
       </action>
     </rule>
 
-    <!-- FIN RÈGLAS DE "NE... AUCUN (DETERMINANT)" -->
+    <rule comment="RÈGLA: SV SV_inf DET_aucun (je ne veux voire aucun livre > vòli pas veire cap de libre)">
+      <pattern>
+        <pattern-item n="SV_sans_pas"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="DET_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS PER LA NEGACION D'AUCUN (DETERMINANT) -->
 
 <!--
     <rule comment="RÈGLA DE PROVA (posar els items que calgui per provar el match)">

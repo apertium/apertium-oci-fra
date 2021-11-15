@@ -13,11 +13,16 @@
       <cat-item tags="SPron.tn.*"/>
     </def-cat>
     <def-cat n="SPron_pro">
+      <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
     </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="ne">
+      <cat-item lemma="ne" tags="SAdv"/>
+      <cat-item lemma="ne" tags="SAdv.*"/>
     </def-cat>
     <def-cat n="pas">
       <cat-item lemma="pas" tags="SAdv"/>
@@ -77,10 +82,10 @@
       <cat-item tags="SV.*.inf"/>
       <cat-item tags="SV.*.inf.*"/>
     </def-cat>
-
-    <def-cat n="SDet">
-      <cat-item tags="SDet"/>
-      <cat-item tags="SDet.*"/>
+    <def-cat n="PP_Inf">
+      <cat-item lemma="pp" tags="SA.*"/>
+      <cat-item tags="SV.*.inf"/>
+      <cat-item tags="SV.*.inf.*"/>
     </def-cat>
 
     <def-cat n="SPron">
@@ -88,9 +93,29 @@
       <cat-item tags="SPron.*"/>
     </def-cat>
 
+    <def-cat n="Det">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+    </def-cat>
+
+    <def-cat n="Det_aucun">
+      <cat-item tags="Det.aucun"/>
+      <cat-item tags="Det.aucun.*"/>
+    </def-cat>
+    <def-cat n="Det_Prn_aucun">
+      <cat-item tags="Det.aucun"/>
+      <cat-item tags="Det.aucun.*"/>
+      <cat-item lemma="aucun" tags="SPron"/>
+      <cat-item lemma="aucun" tags="SPron.*"/>
+    </def-cat>
+
     <def-cat n="Num">
       <cat-item tags="Num"/>
       <cat-item tags="Num.*"/>
+    </def-cat>
+
+    <def-cat n="PREP">
+      <cat-item tags="PREP"/>
     </def-cat>
 
     <def-cat n="cnjcoo">
@@ -203,7 +228,86 @@
 
   <section-rules>
 
-    <!-- RÈGLAS inclusion pronòm "ne" -->
+    <!-- RÈGLAS non inclusion advèrbi "ne" -->
+
+    <rule comment="RÈGLA: ne SV_pers (non cantes -> ne chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SPron_pro SV_pers (non li cantes -> ne lui chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SPron_pro SPron_pro SV_pers (non li o cantes -> ne le lui chantes)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS non inclusion advèrbi "ne" -->
+
+    <!-- RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
 
     <rule comment="RÈGLA: SV_pers pas (cantes pas -> NE chantes pas)">
       <pattern>
@@ -769,7 +873,537 @@
       </action>
     </rule>
 
-    <!-- FIN RÈGLAS inclusion pronòm "ne" -->
+    <!-- FIN RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
+
+    <!-- RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
+
+    <rule comment="RÈGLA: Det_aucun SN SV_pers PAS > Det_aucun SN NE SV_pers (cap de pòrta es pas dobèrta -> aucune porte n'est ouverte)">
+      <pattern>
+        <pattern-item n="Det_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="3">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="3">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Det_aucun SN PREP SN SV_pers PAS > Det_aucun SN PREP SN NE SV_pers (cap de jogaire de França ven pas -> aucun joueur de la France ne vient)">
+      <pattern>
+        <pattern-item n="Det_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <get-case-from pos="5">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="5">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Det_aucun SN PREP Det SN SV_pers PAS > Det_aucun SN PREP Det SN NE SV_pers (cap de jogaire de l'equipa ven pas -> aucun joueur de l'équipe ne vient)">
+      <pattern>
+        <pattern-item n="Det_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="Det"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <get-case-from pos="6">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="6">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Det_aucun SN PREP Det SN PREP SN SV_pers PAS > Det_aucun SN PREP Det SN PREP SN NE SV_pers (cap de jogaire de l'equipa de França ven pas -> aucun joueur de l'équipe de France ne vient)">
+      <pattern>
+        <pattern-item n="Det_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="Det"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <get-case-from pos="8">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="8">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Det_aucun SN PREP Det SN PREP Det SN SV_pers PAS > Det_aucun SN PREP Det SN PREP Det SN NE SV_pers (cap de membre de la familha de mon marit ven pas -> aucun membre de la famille de mon mari ne vient)">
+      <pattern>
+        <pattern-item n="Det_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="Det"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="Det"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <get-case-from pos="9">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="9">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="9"/>
+          <chunk>
+            <clip pos="9" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_pers PAS Aucun > NE SV_pers Aucun (ai pas cap d'idèa -> n'ai aucune idée)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (n'ai pas cap -> n'en ai aucune)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (n'i a pas cap -> n'y en a aucune)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_pers PAS PP_Inf Aucun > NE SV_pers PP_Inf Aucun (ai pas agut cap d'idèa -> n'ai eu aucune idée ; vòli pas aver cap d'idèa)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="PP_Inf"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SV_pers PP_Inf Aucun (i a pas agut cap -> n'y a pas eu aucune">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="PP_Inf"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SPron_pro SV_pers PP_Inf Aucun (n'i a pas agut cap -> n'y en a pas eu aucune">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="PP_Inf"/>
+        <pattern-item n="Det_Prn_aucun"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
 
   </section-rules>
 </interchunk>

@@ -1002,7 +1002,7 @@
     </def-list>
 -->
 
-    <def-list n="pays">	<!-- toponymes avec déterminant en français et sans lui en occitan -->
+    <def-list n="pays">	<!-- toponymes de pays et régions avec déterminant en français et sans lui en occitan -->
       <list-item v="Europe"/>
       <list-item v="Asie"/>
       <list-item v="Afrique"/>
@@ -1011,6 +1011,7 @@
       <list-item v="Amérique Centrale"/>
       <list-item v="Amérique du Nord"/>
       <list-item v="Amérique du Sud"/>
+      <list-item v="Amazonie"/>
       <list-item v="Océanie"/>
       <list-item v="Eurasie"/>
       <list-item v="Pangée"/>
@@ -1421,6 +1422,65 @@
       <list-item v="Bolivie"/>
       <list-item v="Paraguay"/>
       <list-item v="Uruguay"/>
+    </def-list>
+
+    <def-list n="fleuves_rivieres">	<!-- toponymes de fleuves et rivières avec déterminant en français et sans lui en occitan -->
+      <list-item v="Allier"/>
+      <list-item v="Ardèche"/>
+      <list-item v="Aude"/>
+      <list-item v="Corrèze"/>
+      <list-item v="Creuse"/>
+      <list-item v="Dordogne"/>
+      <list-item v="Drôme"/>
+      <list-item v="Durance"/>
+      <list-item v="Eure"/>
+      <list-item v="Gard"/>
+      <list-item v="Garonne"/>
+      <list-item v="Indre"/>
+      <list-item v="Loir"/>
+      <list-item v="Lot"/>
+      <list-item v="Rhône"/>
+      <list-item v="Tarn"/>
+      <list-item v="Vézère"/>
+
+      <list-item v="Eure"/>
+      <list-item v="Loire"/>
+      <list-item v="Loiret"/>
+      <list-item v="Marne"/>
+      <list-item v="Meuse"/>
+      <list-item v="Moselle"/>
+      <list-item v="Rhin"/>
+      <list-item v="Saone"/>
+      <list-item v="Seine"/>
+      <list-item v="Tech"/>
+      <list-item v="Têt"/>
+
+      <list-item v="Amazone"/>
+      <list-item v="Brahmapoutre"/>
+      <list-item v="Colorado"/>
+      <list-item v="Congo"/>
+      <list-item v="Danube"/>
+      <list-item v="Dniepr"/>
+      <list-item v="Dniestr"/>
+      <list-item v="Don"/>
+      <list-item v="Èbre"/>
+      <list-item v="Elbe"/>
+      <list-item v="Eufrate"/>
+      <list-item v="Gange"/>
+      <list-item v="Huang He"/>
+      <list-item v="Limpopo"/>
+      <list-item v="Llobregat"/>
+      <list-item v="Niger"/>
+      <list-item v="Nil"/>
+      <list-item v="Oder"/>
+      <list-item v="Rubicon"/>
+      <list-item v="Sénégal"/>
+      <list-item v="Ter"/>
+      <list-item v="Tibre"/>
+      <list-item v="Tigre"/>
+      <list-item v="Volga"/>
+      <list-item v="Yang-Tsé"/>
+      <list-item v="Yang-Tsé-Kiang"/>
     </def-list>
 
   </section-def-lists>
@@ -6130,10 +6190,10 @@
         <choose>
           <when>
             <test>
-              <in>
-                <clip pos="2" side="sl" part="lem"/>
-                <list n="pays"/>
-              </in>
+              <or>
+                <in><clip pos="2" side="sl" part="lem"/><list n="pays"/></in>
+                <in><clip pos="2" side="sl" part="lem"/><list n="fleuves_rivieres"/></in>
+              </or>
             </test>
             <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
             <out>
@@ -8355,6 +8415,7 @@
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
                <tag><clip pos="2" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -8392,6 +8453,7 @@
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
                <tag><clip pos="2" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -8527,6 +8589,7 @@
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
                <tag><clip pos="3" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -8574,6 +8637,7 @@
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
                <tag><clip pos="3" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -8746,9 +8810,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9861,6 +9923,7 @@
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
                <tag><clip pos="3" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -9964,6 +10027,7 @@
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
                <tag><clip pos="4" side="tl" part="temps"/></tag>
                <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -10093,6 +10157,7 @@
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
                    <tag><clip pos="4" side="tl" part="temps"/></tag>
                    <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
@@ -10125,6 +10190,7 @@
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
                    <tag><clip pos="4" side="tl" part="temps"/></tag>
                    <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
@@ -10219,6 +10285,7 @@
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
                    <tag><clip pos="4" side="tl" part="temps"/></tag>
                    <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
@@ -10251,6 +10318,7 @@
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
                    <tag><clip pos="4" side="tl" part="temps"/></tag>
                    <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
