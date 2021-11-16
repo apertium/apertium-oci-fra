@@ -286,18 +286,31 @@
     </def-cat>
 
     <def-cat n="nom_mois">
-      <cat-item lemma="genièr" tags="n.*"/>
       <cat-item lemma="genèr" tags="n.*"/>
+      <cat-item lemma="genièr" tags="n.*"/>
+      <cat-item lemma="janvièr" tags="n.*"/>
+      <cat-item lemma="gèr" tags="n.*"/>
       <cat-item lemma="febrièr" tags="n.*"/>
+      <cat-item lemma="heurèr" tags="n.*"/>
+      <cat-item lemma="hrevèr" tags="n.*"/>
+      <cat-item lemma="herevèr" tags="n.*"/>
+      <cat-item lemma="herbèr" tags="n.*"/>
+      <cat-item lemma="hiurèr" tags="n.*"/>
       <cat-item lemma="març" tags="n.*"/>
+      <cat-item lemma="abrial" tags="n.*"/>
       <cat-item lemma="abril" tags="n.*"/>
+      <cat-item lemma="abriu" tags="n.*"/>
+      <cat-item lemma="abrieu" tags="n.*"/>
       <cat-item lemma="mai" tags="n.*"/>
       <cat-item lemma="junh" tags="n.*"/>
-      <cat-item lemma="julhet" tags="n.*"/>
       <cat-item lemma="julh" tags="n.*"/>
+      <cat-item lemma="juin" tags="n.*"/>
+      <cat-item lemma="gulh" tags="n.*"/>
+      <cat-item lemma="julhet" tags="n.*"/>
+      <cat-item lemma="gulhet" tags="n.*"/>
       <cat-item lemma="junhsèga" tags="n.*"/>
       <cat-item lemma="agost" tags="n.*"/>
-      <cat-item lemma="avost" tags="n.*"/>
+      <cat-item lemma="aost" tags="n.*"/>
       <cat-item lemma="setembre" tags="n.*"/>
       <cat-item lemma="seteme" tags="n.*"/>
       <cat-item lemma="octobre" tags="n.*"/>
@@ -305,7 +318,7 @@
       <cat-item lemma="novembre" tags="n.*"/>
       <cat-item lemma="noveme" tags="n.*"/>
       <cat-item lemma="decembre" tags="n.*"/>
-      <cat-item lemma="deseme" tags="n.*"/>
+      <cat-item lemma="deceme" tags="n.*"/>
     </def-cat>
 
     <def-cat n="num_romans"> <!-- per a reis, segles, mil·lenis -->
@@ -5935,7 +5948,7 @@
     </rule>
 
 
-   <rule comment="RÈGLA: DET NUMERAL MOIS NUM (lo 20 de novembre de 1998: le 20 novembre 1998)">
+   <rule comment="RÈGLA: DET NUMERAL DE MOIS DE NUM (lo 20 de novembre de 1998: le 20 novembre 1998)">
       <pattern>
         <pattern-item n="det"/>
         <pattern-item n="num_premier"/>
@@ -5982,6 +5995,91 @@
             <b pos="3"/>
             <lu>
               <clip pos="6" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+   <rule comment="RÈGLA: NUMERAL DE MOIS (20 de novembre: 20 novembre)">
+      <pattern>
+        <pattern-item n="num_premier"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+   <rule comment="RÈGLA: DET NUMERAL DE MOIS (lo 20 de novembre: le 20 novembre)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="num_premier"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="4" side="tl" part="gen"/></tag>
+              <tag><clip pos="4" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
