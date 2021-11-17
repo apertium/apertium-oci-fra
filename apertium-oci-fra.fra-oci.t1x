@@ -67,6 +67,7 @@
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="guère" tags="adv"/>
       <cat-item lemma="pas du tout" tags="adv"/>
+      <cat-item lemma="aucunement" tags="adv"/>
     </def-cat>
     <def-cat n="rien">
       <cat-item lemma="rien" tags="prn.*"/>
@@ -80,6 +81,7 @@
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="guère" tags="adv"/>
       <cat-item lemma="pas du tout" tags="adv"/>
+      <cat-item lemma="aucunement" tags="adv"/>
       <cat-item lemma="rien" tags="prn.*"/>
       <cat-item lemma="personne" tags="prn.*"/>
       <cat-item lemma="aucun" tags="prn.*"/>
@@ -89,6 +91,7 @@
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="guère" tags="adv"/>
       <cat-item lemma="pas du tout" tags="adv"/>
+      <cat-item lemma="aucunement" tags="adv"/>
       <cat-item lemma="rien" tags="prn.*"/>
       <cat-item lemma="aucun" tags="prn.*"/>
     </def-cat>
@@ -6170,7 +6173,115 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: PREDET CE NOM CI (tout ce jour-ci > tot aqueste jorn)">
+      <pattern>
+        <pattern-item n="predet"/>
+        <pattern-item n="ce_det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="ci_adv"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><clip pos="2" side="tl" part="lem"/><lit v="aqueste"/></let>
+        <out>
+          <chunk name="d_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREDET CE NOM LÀ (tout ce jour-là > tot aquel jorn)">
+      <pattern>
+        <pattern-item n="predet"/>
+        <pattern-item n="ce_det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="la_adv"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="d_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS -CI/-LÀ -->
+
 
     <!-- RÈGLAS TOP -->
 
