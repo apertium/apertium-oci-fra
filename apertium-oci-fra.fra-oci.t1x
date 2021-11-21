@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Ce module ajoute les 'pas' négatifs qui ne sont pas en français -->
 <transfer default="chunk">
   <section-def-cats>
     <def-cat n="det">
@@ -63,11 +64,11 @@
       <cat-item lemma="pas" tags="adv"/>
     </def-cat>
     <def-cat n="jamais_plus">
-      <cat-item lemma="jamais" tags="adv"/>
-      <cat-item lemma="plus" tags="adv"/>
-      <cat-item lemma="guère" tags="adv"/>
-      <cat-item lemma="pas du tout" tags="adv"/>
-      <cat-item lemma="aucunement" tags="adv"/>
+      <cat-item lemma="xxxxjamais" tags="adv"/>
+      <cat-item lemma="xxxxplus" tags="adv"/>
+      <cat-item lemma="xxxxguère" tags="adv"/>
+      <cat-item lemma="xxxxpas du tout" tags="adv"/>
+      <cat-item lemma="xxxxaucunement" tags="adv"/>
     </def-cat>
     <def-cat n="rien">
       <cat-item lemma="rien" tags="prn.*"/>
@@ -77,21 +78,25 @@
       <cat-item lemma="aucun" tags="prn.*"/>
     </def-cat>
     <def-cat n="jamais_plus_rien_personne">
+<!--
       <cat-item lemma="jamais" tags="adv"/>
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="guère" tags="adv"/>
       <cat-item lemma="pas du tout" tags="adv"/>
       <cat-item lemma="aucunement" tags="adv"/>
+-->
       <cat-item lemma="rien" tags="prn.*"/>
       <cat-item lemma="personne" tags="prn.*"/>
       <cat-item lemma="aucun" tags="prn.*"/>
     </def-cat>
     <def-cat n="jamais_plus_rien">
+<!--
       <cat-item lemma="jamais" tags="adv"/>
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="guère" tags="adv"/>
       <cat-item lemma="pas du tout" tags="adv"/>
       <cat-item lemma="aucunement" tags="adv"/>
+-->
       <cat-item lemma="rien" tags="prn.*"/>
       <cat-item lemma="aucun" tags="prn.*"/>
     </def-cat>
@@ -407,6 +412,13 @@
       <attr-item tags="vbhaver.pp"/>
       <attr-item tags="vbser.pp"/>
       <attr-item tags="vbmod.pp"/>
+    </def-attr>
+
+    <def-attr n="a_adv">
+      <attr-item tags="adv"/>
+      <attr-item tags="adv.itg"/>
+      <attr-item tags="adv.enon"/>
+      <attr-item tags="adv.pas_neg"/>
     </def-attr>
 
     <def-attr n="a_pron">
@@ -3553,6 +3565,152 @@
       </choose>
     </def-macro>
 
+    <def-macro n="escriure_SAdv" npar="1">
+      <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.pas_neg"/></equal>
+          </test>
+          <out>
+            <chunk namefrom="lemma">
+              <tags>
+                <tag><lit-tag v="SAdv"/></tag>
+                <tag><lit-tag v="pas_neg"/></tag>
+              </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lem"/>
+                <lit-tag v="adv"/>
+              </lu>
+            </chunk>
+          </out>
+        </when>
+        <otherwise>
+          <out>
+            <chunk namefrom="lemma">
+              <tags>
+                <tag><lit-tag v="SAdv"/></tag>
+              </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <clip pos="1" side="tl" part="tags"/>
+                <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+            </chunk>
+          </out>
+        </otherwise>
+      </choose>
+    </def-macro>
+
+    <def-macro n="escriure_prnpro_prnpro" npar="2" v="oci@gascon">
+         <choose>
+           <when>
+             <test>
+               <or>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="y"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="en"/></equal>
+                 </and>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                 </and>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ac"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                 </and>
+               </or>
+             </test>
+             <!-- changement d'ordre CD CI -->
+             <choose>
+             <when>
+               <test>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                 </and>
+               </test>
+               <let><clip pos="1" side="tl" part="lem"/><lit v="ac"/></let>
+               <let><clip pos="1" side="tl" part="gen"/><lit-tag v="nt"/></let>
+               <let><clip pos="1" side="tl" part="nbr"/><lit-tag v=""/></let>
+             </when>
+             </choose>
+             <call-macro n="tipus_prn">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="prn">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="2" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="tipus_prn">
+               <with-param pos="1"/>
+             </call-macro>
+             <out>
+               <chunk name="prn">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="2">
+                     <clip pos="1" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <call-macro n="tipus_prn">
+               <with-param pos="1"/>
+             </call-macro>
+             <out>
+               <chunk name="prn">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+             </out>
+             <call-macro n="tipus_prn">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <chunk name="prn">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+    </def-macro>
+
     <def-macro n="f_itg" npar="1">
       <choose>
         <when>
@@ -3873,19 +4031,7 @@
         <pattern-item n="adv_preadv"/>
       </pattern>
       <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="SAdv"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
+        <call-macro n="escriure_SAdv"><with-param pos="1"/></call-macro>
       </action>
     </rule>
 
@@ -5961,7 +6107,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: EN NOM (en français: en francés - perquè no faci ´en francesa')">
+    <rule comment="RÈGLA: EN NOM (en français: en francés - perquè no faci 'en francesa')">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom"/>
@@ -7106,6 +7252,115 @@
        </action>
     </rule>
 
+    <rule comment="RÈGLA: HAVER ADV SER_PP PP > SER ADV SER_PP PP: ont vraissemblament été codifiées > son versemblablament estadas codificadas">
+       <pattern>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <var n="v_vbser"/>
+               <lit-tag v="vbser"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: HAVER ADV ADV SER_PP PP > SER ADV ADV SER_PP PP: ont très vraissemblament été codifiées > son plan versemblablament estadas codificadas">
+       <pattern>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv_preadv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <var n="v_vbser"/>
+               <lit-tag v="vbser"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
     <rule comment="RÈGLA: PRNSUBJ HAVERconj SER_PP > SER + SER_PP: j'ai été > ei estat">
        <pattern>
         <pattern-item n="prnsubj"/>
@@ -7158,6 +7413,141 @@
                <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="a_verb"/>
                <clip pos="3" side="tl" part="temps"/>
+               <lit-tag v="2"/>
+               <lit-tag v="3"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ HAVERconj ADV SER_PP > SER ADV SER_PP: j'ai probablement été > ei probablament estat">
+       <pattern>
+        <pattern-item n="prnsubj"/>
+         <pattern-item n="vbhaverconj"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="3"/></call-macro>
+         <out>
+           <b pos="3"/>
+           <chunk name="pp">
+             <tags>
+               <tag><lit-tag v="SA"/></tag>
+               <tag><clip pos="4" side="tl" part="gen"/></tag>
+               <tag><clip pos="2" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="a_verb"/>
+               <clip pos="4" side="tl" part="temps"/>
+               <lit-tag v="2"/>
+               <lit-tag v="3"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ HAVERconj ADV ADV SER_PP > SER ADV ADV SER_PP: j'ai très probablement été > ei plan probablament estat">
+       <pattern>
+        <pattern-item n="prnsubj"/>
+         <pattern-item n="vbhaverconj"/>
+         <pattern-item n="adv_preadv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="3"/></call-macro>
+         <out>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <out>
+           <b pos="4"/>
+           <chunk name="pp">
+             <tags>
+               <tag><lit-tag v="SA"/></tag>
+               <tag><clip pos="5" side="tl" part="gen"/></tag>
+               <tag><clip pos="2" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="a_verb"/>
+               <clip pos="5" side="tl" part="temps"/>
                <lit-tag v="2"/>
                <lit-tag v="3"/>
              </lu>
@@ -7385,6 +7775,848 @@
                <clip pos="5" side="tl" part="temps"/>
                <lit-tag v="2"/>
                <lit-tag v="3"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE HAVER PAS ADV SER_PP > SER PAS ADV SER_PP: n'ai pas toujours été > ei pas totjorn estat">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <choose>
+            <when>
+              <test>
+                <or>
+                  <equal><clip pos="2" side="tl" part="temps"/><lit-tag v="inf"/></equal>
+                  <equal><clip pos="2" side="tl" part="temps"/><lit-tag v="ger"/></equal>
+                </or>
+              </test>
+              <out>
+                <b pos="4"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="5" side="tl" part="gen"/></tag>
+                    <tag><clip pos="5" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="5" side="tl" part="lemh"/>
+                    <clip pos="5" side="tl" part="a_verb"/>
+                    <clip pos="5" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <b pos="4"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="5" side="tl" part="gen"/></tag>
+                    <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="5" side="tl" part="lemh"/>
+                    <clip pos="5" side="tl" part="a_verb"/>
+                    <clip pos="5" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </otherwise>
+         </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE HAVER ADV ADV SER_PP > SER ADV ADV SER_PP: n'ai probablement jamais été > ei probablement jamai estat">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="3"/></call-macro>
+         <out>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <choose>
+            <when>
+              <test>
+                <or>
+                  <equal><clip pos="2" side="tl" part="temps"/><lit-tag v="inf"/></equal>
+                  <equal><clip pos="2" side="tl" part="temps"/><lit-tag v="ger"/></equal>
+                </or>
+              </test>
+              <out>
+                <b pos="4"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="5" side="tl" part="gen"/></tag>
+                    <tag><clip pos="5" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="5" side="tl" part="lemh"/>
+                    <clip pos="5" side="tl" part="a_verb"/>
+                    <clip pos="5" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <b pos="4"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="5" side="tl" part="gen"/></tag>
+                    <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="5" side="tl" part="lemh"/>
+                    <clip pos="5" side="tl" part="a_verb"/>
+                    <clip pos="5" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </otherwise>
+         </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE HAVER PAS SER_PP ADV PP > SER PAS SER_PP ADV PP: n'ont pas été toujours codifiées > son pas estadas totjorn codificadas">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="6"/>
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_adv_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE HAVER PAS ADV SER_PP PP > SER PAS ADV SER_PP PP: n'ont pas toujours été codifiées > son pas totjorn estadas codificadas">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="6"/>
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_adv_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE HAVER ADV ADV SER_PP PP > SER ADV ADV SER_PP PP: n'ont probablement jamais été mariés > son probablement jamai estats maridats">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="6"/>
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="3"/></call-macro>
+         <out>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <out>
+           <b pos="4"/>
+           <chunk name="pp">
+             <tags>
+               <tag><lit-tag v="SA"/></tag>
+               <tag><clip pos="5" side="tl" part="gen"/></tag>
+               <tag><clip pos="2" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER PAS ADV SER_PP > SER PAS ADV SER_PP: je n'ai pas toujours été > ei pas totjorn estat">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+           <b pos="4"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="5"/></call-macro>
+         <choose>
+            <when>
+              <test>
+                <or>
+                  <equal><clip pos="3" side="tl" part="temps"/><lit-tag v="inf"/></equal>
+                  <equal><clip pos="3" side="tl" part="temps"/><lit-tag v="ger"/></equal>
+                </or>
+              </test>
+              <out>
+                <b pos="5"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="6" side="tl" part="gen"/></tag>
+                    <tag><clip pos="6" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="6" side="tl" part="lemh"/>
+                    <clip pos="6" side="tl" part="a_verb"/>
+                    <clip pos="6" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <b pos="5"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="6" side="tl" part="gen"/></tag>
+                    <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="6" side="tl" part="lemh"/>
+                    <clip pos="6" side="tl" part="a_verb"/>
+                    <clip pos="6" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </otherwise>
+         </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER ADV ADV SER_PP > SER ADV ADV SER_PP: je n'ai probablement jamais été > ei probablement jamai estat">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <out>
+           <b pos="4"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="5"/></call-macro>
+         <choose>
+            <when>
+              <test>
+                <or>
+                  <equal><clip pos="3" side="tl" part="temps"/><lit-tag v="inf"/></equal>
+                  <equal><clip pos="3" side="tl" part="temps"/><lit-tag v="ger"/></equal>
+                </or>
+              </test>
+              <out>
+                <b pos="5"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="6" side="tl" part="gen"/></tag>
+                    <tag><clip pos="6" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="6" side="tl" part="lemh"/>
+                    <clip pos="6" side="tl" part="a_verb"/>
+                    <clip pos="6" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <b pos="5"/>
+                <chunk name="pp">
+                  <tags>
+                    <tag><lit-tag v="SA"/></tag>
+                    <tag><clip pos="6" side="tl" part="gen"/></tag>
+                    <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                    <tag><var n="genero_sl"/></tag>
+                    <tag><var n="numero_sl"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="6" side="tl" part="lemh"/>
+                    <clip pos="6" side="tl" part="a_verb"/>
+                    <clip pos="6" side="tl" part="temps"/>
+                    <lit-tag v="2"/>
+                    <lit-tag v="3"/>
+                  </lu>
+                </chunk>
+              </out>
+            </otherwise>
+         </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER PAS SER_PP ADV PP > SER PAS SER_PP ADV PP: elles n'ont pas été toujours codifiées > son pas estadas totjorn codificadas">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="7"/>
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_adv_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+             <b pos="6"/>
+             <lu>
+               <clip pos="7" side="tl" part="lemh"/>
+               <clip pos="7" side="tl" part="tags"/>
+               <clip pos="7" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER PAS ADV SER_PP PP > SER PAS ADV SER_PP PP: elles n'ont pas toujours été codifiées > son pas totjorn estadas codificadas">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="pas"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="7"/>
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser_adv_pp">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="4"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b pos="5"/>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+             <b pos="6"/>
+             <lu>
+               <clip pos="7" side="tl" part="lemh"/>
+               <clip pos="7" side="tl" part="tags"/>
+               <clip pos="7" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNSUBJ NE HAVER ADV ADV SER_PP PP > SER ADV ADV SER_PP PP: ils n'ont probablement jamais été mariés > son probablement jamai estats maridats">
+       <pattern>
+         <pattern-item n="prnsubj"/>
+         <pattern-item n="ne"/>
+         <pattern-item n="vbhaver"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="vbser_pp"/>
+         <pattern-item n="pp"/>
+       </pattern>
+       <action>
+         <call-macro n="set_vbser"></call-macro>
+         <call-macro n="f_concord0">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_concord2">
+          <with-param pos="7"/>
+          <with-param pos="6"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="2"/>
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><lit-tag v="normal"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="4"/></call-macro>
+         <out>
+           <b pos="4"/>
+         </out>
+         <call-macro n="escriure_SAdv"><with-param pos="5"/></call-macro>
+         <out>
+           <b pos="5"/>
+           <chunk name="pp">
+             <tags>
+               <tag><lit-tag v="SA"/></tag>
+               <tag><clip pos="6" side="tl" part="gen"/></tag>
+               <tag><clip pos="3" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="6" side="tl" part="lemh"/>
+               <clip pos="6" side="tl" part="tags"/>
+               <clip pos="6" side="tl" part="lemq"/>
+             </lu>
+             <b pos="6"/>
+             <lu>
+               <clip pos="7" side="tl" part="lemh"/>
+               <clip pos="7" side="tl" part="tags"/>
+               <clip pos="7" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -8278,68 +9510,6 @@
        </action>
     </rule>
 
-<!-- pas nécessaire
-    <rule comment="RÈGLA: NE PAS INF > NON PAS INF: ne pas te dire > non pas te dire" v="oci@gascon">
-       <pattern>
-         <pattern-item n="ne"/>
-         <pattern-item n="pas"/>
-         <pattern-item n="prnpro"/>
-         <pattern-item n="inf"/>
-       </pattern>
-       <action>
-         <call-macro n="tipus_prn">
-           <with-param pos="3"/>
-         </call-macro>
-         <call-macro n="tipus_verb">
-          <with-param pos="4"/>
-         </call-macro>
-         <out>
-           <chunk name="non_pas">
-             <tags>
-               <tag><lit-tag v="SAdv"/></tag>
-             </tags>
-             <lu>
-               <get-case-from pos="1">
-                 <lit v="non"/>
-               </get-case-from>
-               <lit-tag v="adv"/>
-             </lu>
-             <b pos="1"/>
-             <lu>
-               <clip pos="2" side="tl" part="whole"/>
-             </lu>
-           </chunk>
-           <b pos="2"/>
-           <chunk name="prnpro">
-             <tags>
-               <tag><lit-tag v="SPron"/></tag>
-               <tag><var n="tipusprn"/></tag>
-             </tags>
-             <lu>
-               <clip pos="3" side="tl" part="lemh"/>
-               <clip pos="3" side="tl" part="tags"/>
-               <clip pos="3" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-           <b pos="3"/>
-           <chunk name="v">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-               <tag><clip pos="4" side="tl" part="temps"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <lu>
-               <clip pos="4" side="tl" part="lemh"/>
-               <clip pos="4" side="tl" part="tags"/>
-               <clip pos="4" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-         </out>
-       </action>
-    </rule>
--->
-
     <rule comment="RÈGLA: NE PAS PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS: ne pas te le dire > te lo dire pas" v="oci">
        <pattern>
          <pattern-item n="ne"/>
@@ -8411,7 +9581,7 @@
     <rule comment="RÈGLA: NE JAMAIS INF > INF PAS JAMAI: ne jamais manger > manjar pas jamai" v="oci">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="jamais_plus"/>
+         <pattern-item n="adv"/>
          <pattern-item n="inf"/>
        </pattern>
        <action>
@@ -8455,7 +9625,7 @@
     <rule comment="RÈGLA: NE JAMAIS INF > NON PAS JAMAI INF: ne jamais manger > non pas jamei manjar" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="jamais_plus"/>
+         <pattern-item n="adv"/>
          <pattern-item n="inf"/>
        </pattern>
        <action>
@@ -8497,6 +9667,270 @@
                </get-case-from>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE JAMAIS PRNPRO INF > PRNPRO INF PAS JAMAIS: ne jamais te dire > te dire pas jamai" v="oci">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_prn">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="prnpro">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="3" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="v">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="4" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="pas"/>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="2" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE JAMAIS PRNPRO INF > NON PAS JAMEI PRNPRO INF: ne pas te dire > non pas jamei te dire" v="oci@gascon">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_prn">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk name="non_pas_adv">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="non"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <clip pos="2" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="prnpro">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+           <chunk name="v">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="4" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE JAMAIS PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS JAMAIS: ne jamais te le dire > te lo dire pas jamai" v="oci">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_prn">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="5"/>
+         </call-macro>
+         <call-macro n="f_bcond">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <chunk name="prnpro">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <clip pos="3" side="tl" part="lemh"/>
+               </get-case-from>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="prnpro">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+           <b pos="3"/>
+           <chunk name="v">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="5" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
+             </lu>
+             <b/>
+             <lu>
+               <lit v="pas"/>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="2" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: NE JAMAIS PRNPRO PRNPRO INF > NON PAS JAMEI PRNPRO PRNPRO INF: ne pas te le dire > non pas jamei t'ac dire" v="oci@gascon">
+       <pattern>
+         <pattern-item n="ne"/>
+         <pattern-item n="adv"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+         <call-macro n="tipus_prn">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <chunk name="non_pas_adv">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="non"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <clip pos="2" side="tl" part="whole"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <call-macro n="escriure_prnpro_prnpro">
+           <with-param pos="3"/>
+           <with-param pos="4"/>
+         </call-macro>
+         <out>
+           <b pos="4"/>
+           <chunk name="v">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="5" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -9573,112 +11007,10 @@
         <pattern-item n="prnpro"/>
       </pattern>
       <action>
-         <choose>
-           <when>
-             <test>
-               <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ac"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </or>
-             </test>
-             <!-- changement d'ordre CD CI -->
-             <choose>
-             <when>
-               <test>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </test>
-               <let><clip pos="1" side="tl" part="lem"/><lit v="ac"/></let>
-               <let><clip pos="1" side="tl" part="gen"/><lit-tag v="nt"/></let>
-               <let><clip pos="1" side="tl" part="nbr"/><lit-tag v=""/></let>
-             </when>
-             </choose>
-             <call-macro n="tipus_prn">
-               <with-param pos="2"/>
-             </call-macro>
-             <out>
-               <chunk name="prn">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-               <b pos="1"/>
-             </out>
-             <call-macro n="tipus_prn">
-               <with-param pos="1"/>
-             </call-macro>
-             <out>
-               <chunk name="prn">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <get-case-from pos="2">
-                     <clip pos="1" side="tl" part="lemh"/>
-                   </get-case-from>
-                   <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-           <otherwise>
-             <call-macro n="tipus_prn">
-               <with-param pos="1"/>
-             </call-macro>
-             <out>
-               <chunk name="prn">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
-                   <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-               <b pos="1"/>
-             </out>
-             <call-macro n="tipus_prn">
-               <with-param pos="2"/>
-             </call-macro>
-             <out>
-               <chunk name="prn">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </otherwise>
-         </choose>
+         <call-macro n="escriure_prnpro_prnpro">
+           <with-param pos="1"/>
+           <with-param pos="2"/>
+         </call-macro>
       </action>
     </rule>
 
