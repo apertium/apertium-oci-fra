@@ -21,6 +21,10 @@
     <def-cat n="tv">
       <cat-item tags="vblex.tv.*"/>
     </def-cat>
+    <def-cat n="adv_pas_neg">
+      <cat-item tags="adv.pas_neg"/>
+      <cat-item tags="adv.pas_neg.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -33,6 +37,10 @@
 
     <def-attr n="a_tv">
       <attr-item tags="tv"/>
+    </def-attr>
+
+    <def-attr n="a_pas_neg">
+      <attr-item tags="pas_neg"/>
     </def-attr>
 
     <def-attr n="nbr">
@@ -114,6 +122,20 @@
             <clip pos="1" side="tl" part="gen"/>
             <clip pos="1" side="tl" part="nbr"/>
             <clip pos="1" side="tl" part="lemq"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: adv.pas_neg > adv">
+      <pattern>
+        <pattern-item n="adv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="lemh"/>
+            <lit-tag v="adv"/>
           </lu>
         </out>
       </action>

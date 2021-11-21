@@ -24,6 +24,11 @@
     <def-cat n="tv">
       <cat-item tags="vblex.tv.*"/>
     </def-cat>
+
+    <def-cat n="adv_pas_neg">
+      <cat-item tags="adv.pas_neg"/>
+      <cat-item tags="adv.pas_neg.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -34,8 +39,20 @@
       <attr-item tags="vbmod"/>
     </def-attr>
 
+    <def-attr n="a_adv">
+      <attr-item tags="adv"/>
+      <attr-item tags="adv.itg"/>
+      <attr-item tags="adv.excl"/>
+      <attr-item tags="adv.enon"/>
+      <attr-item tags="adv.pas_neg"/>
+    </def-attr>
+
     <def-attr n="a_tv">
       <attr-item tags="tv"/>
+    </def-attr>
+
+    <def-attr n="a_pas_neg">
+      <attr-item tags="pas_neg"/>
     </def-attr>
 
     <def-attr n="nbr">
@@ -355,9 +372,25 @@
     </rule>
 -->
 
+<!-- ON ENLÈVE le tag pas_neg s'il y est encore -->
+
+    <rule comment="REGLA: pas_neg > 0">
+      <pattern>
+        <pattern-item n="adv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="lemh"/>
+            <lit-tag v="adv"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
 <!-- PATCHES PELS BUGS DELS BLANCS -->
 
-    <rule comment="REGLA: x : > x:" v="oci@gascon">
+    <rule comment="REGLA: x . > x.">
       <pattern>
         <pattern-item n="default"/>
         <pattern-item n="ponch"/>
@@ -377,6 +410,17 @@
                 <clip pos="1" side="tl" part="gen"/>
                 <clip pos="1" side="tl" part="nbr"/>
                 <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+            </out>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.pas_neg"/></equal>
+            </test>
+            <out>
+              <lu>
+                <clip pos="1" side="tl" part="lemh"/>
+                <lit-tag v="adv"/>
               </lu>
             </out>
           </when>
