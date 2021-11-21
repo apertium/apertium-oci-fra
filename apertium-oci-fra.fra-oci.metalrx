@@ -1075,6 +1075,23 @@
   </rule>
 
 
+<!-- **************** VBHAVER **************** -->
+
+  <!-- vbhaver >> être, avoir -->
+  <rule weight="0.8">
+    <match tags="vbhaver.*"><select tags="vbhaver.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbhaver.*"><select tags="vbser.*"/></match>
+    <repeat from="0" upto="3">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="être" tags="vbser.pp.*"/>
+      <match lemma="être" tags="vblex.pp.*"/>
+    </or>
+  </rule>
+
 <!-- **************** VBLEX **************** -->
 
   <!-- tourner >> virar, rodar -->

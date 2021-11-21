@@ -972,7 +972,26 @@
   </rule>
 
 
-<!-- **************** V **************** -->
+<!-- **************** VBSER **************** -->
+
+  <!-- vbser >> être, avoir -->
+  <rule weight="0.8">
+    <match tags="vbser.*"><select lemma="être"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"><select lemma="avoir"/></match>
+    <repeat from="0" upto="3">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="èsser" tags="vbser.pp.*"/>
+      <match lemma="èsser" tags="vblex.pp.*"/>
+      <match lemma="estar" tags="vbser.pp.*"/>
+      <match lemma="estar" tags="vblex.pp.*"/>
+    </or>
+  </rule>
+
+<!-- **************** VBLEX **************** -->
 
   <!-- tornar >> revenir, rentrer -->
   <rule weight="0.8">
