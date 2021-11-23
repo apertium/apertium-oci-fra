@@ -25,6 +25,12 @@
       <cat-item tags="adv.pas_neg"/>
       <cat-item tags="adv.pas_neg.*"/>
     </def-cat>
+    <def-cat n="prn_pas_neg">
+      <cat-item tags="prn.tn.nt.pas_neg"/>
+      <cat-item tags="prn.tn.f.sg.pas_neg"/>
+      <cat-item tags="prn.tn.f.sg.pas_neg"/>
+      <cat-item tags="prn.tn.mf.sg.pas_neg"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -37,6 +43,14 @@
 
     <def-attr n="a_tv">
       <attr-item tags="tv"/>
+    </def-attr>
+
+    <def-attr n="a_prn">
+      <attr-item tags="prn.tn.nt"/>
+      <attr-item tags="prn.tn.nt"/>
+      <attr-item tags="prn.tn.f.sg"/>
+      <attr-item tags="prn.tn.f.sg"/>
+      <attr-item tags="prn.tn.mf.sg"/>
     </def-attr>
 
     <def-attr n="a_pas_neg">
@@ -134,8 +148,22 @@
       <action>
         <out>
           <lu>
-            <clip pos="1" side="tl" part="lemh"/>
+            <clip pos="1" side="tl" part="lem"/>
             <lit-tag v="adv"/>
+          </lu>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: prn.pas_neg > 0">
+      <pattern>
+        <pattern-item n="prn_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <lu>
+            <clip pos="1" side="tl" part="lem"/>
+            <clip pos="1" side="tl" part="a_prn"/>
           </lu>
         </out>
       </action>
