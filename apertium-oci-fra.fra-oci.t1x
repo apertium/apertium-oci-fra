@@ -3699,6 +3699,15 @@
           <let><var n="tipusverb"/><lit-tag v="normal"/></let>
         </otherwise>
       </choose>
+      <!-- per evitar 'parle russe > parla russa' -->
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="parler"/></equal>
+          </test>
+          <let><var n="genero"/><lit-tag v="m"/></let>
+        </when>
+      </choose>
     </def-macro>
 
     <def-macro n="tipus_det" npar="1"> <!-- tots els det passen per aqui -->
@@ -6060,7 +6069,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: EN NOM (en français: en francés - perquè no faci 'en francesa')">
+    <rule comment="RÈGLA: EN NOM (en français > en francés - per evitar 'en francesa')">
       <pattern>
         <pattern-item n="enprep"/>
         <pattern-item n="nom"/>
