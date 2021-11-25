@@ -30,6 +30,13 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="SPron">
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+    </def-cat>
+    <def-cat n="SPron_neg">
+      <cat-item tags="SPron.*.pas_neg"/>
+    </def-cat>
     <def-cat n="pas_neg">
       <cat-item tags="*.pas_neg"/>
     </def-cat>
@@ -152,17 +159,10 @@
   </section-def-attrs>
 
   <section-def-vars>
-    <def-var n="number"/>
+    <def-var n="v_pron_neg" v="false"/>
   </section-def-vars>
 
   <section-def-macros>
-    <def-macro n="test1" npar="1">
-      <let>
-        <var n="number"/>
-        <lit v=""/>
-      </let>
-    </def-macro>
-
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
       <choose>
         <when>
@@ -643,6 +643,102 @@
 
     <!-- FIN RÈGLAS PER LA NEGACION D'AUCUN (DETERMINANT) -->
 
+    <!-- RÈGLAS PER LA NEGACION DELS PRONÒMS NEGATIUS -->
+
+    <rule comment="RÈGLA: SPron_neg SV (personne ne vient > degun ven pas)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg (gestion variable v_pron_neg)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+      </pattern>
+      <action>
+        <let><var n="v_pron_neg"/><lit v="true"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT (gestion variable v_pron_neg)">
+      <pattern>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <let><var n="v_pron_neg"/><lit v="false"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV (personne (...) ne vient > degun (...) ven pas)">
+      <pattern>
+        <pattern-item n="SV_sans_pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <out>
+              <b/>
+              <chunk>
+                <lit v="pas"/>
+                <lit-tag v="SAdv"/>
+                <lit v="{^"/>
+                <lit v="pas"/>
+                <lit-tag v="adv"/>
+                <lit v="$}"/>
+              </chunk>
+            </out>
+            <let><var n="v_pron_neg"/><lit v="false"/></let>
+          </when>
+        </choose>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS PER LA NEGACION DELS PRONÒMS NEGATIUS -->
 <!--
     <rule comment="RÈGLA DE PROVA (posar els items que calgui per provar el match)">
       <pattern>
