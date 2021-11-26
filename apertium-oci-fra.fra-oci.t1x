@@ -3700,12 +3700,14 @@
         </otherwise>
       </choose>
       <!-- per evitar 'parle russe > parla russa' -->
+      <!-- per evitar 'parlent français > parlan franceses' -->
       <choose>
         <when>
           <test>
             <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="parler"/></equal>
           </test>
           <let><var n="genero"/><lit-tag v="m"/></let>
+          <let><var n="numero"/><lit-tag v="sg"/></let>
         </when>
       </choose>
     </def-macro>
