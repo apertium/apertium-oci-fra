@@ -46,6 +46,9 @@
       <cat-item tags="adv.excl"/>
       <cat-item tags="preadv"/>
     </def-cat>
+    <def-cat n="pas_adv">
+      <cat-item lemma="pas" tags="adv"/>
+    </def-cat>
     <def-cat n="det">
       <cat-item tags="det.*"/>
       <cat-item tags="predet.*"/>
@@ -183,6 +186,10 @@
       <cat-item lemma="tornar" tags="vblex.*.p1.*"/>
       <cat-item lemma="tornar" tags="vblex.*.p2.*"/>
       <cat-item lemma="tornar" tags="vblex.*.p3.*"/>
+    </def-cat>
+    <def-cat n="tornar_inf_ger">
+      <cat-item lemma="tornar" tags="vblex.inf"/>
+      <cat-item lemma="tornar" tags="vblex.ger"/>
     </def-cat>
 
     <def-cat n="num">
@@ -929,6 +936,7 @@
       <list-item v="Tasmanie"/>
       <list-item v="Nouvelle-Galles du Sud"/>
       <list-item v="Queensland"/>
+      <list-item v="Victoria"/>
       <list-item v="Nouvelle-Zélande"/>
       <list-item v="Timor"/>
       <list-item v="Timor oriental"/>
@@ -7446,15 +7454,8 @@
                <clip pos="1" side="tl" part="nbr"/>
                <clip pos="3" side="tl" part="lemq"/>
               </lu>
-              <b pos="1"/>
-              <lu>
-                <get-case-from pos="2">
-                   <lit v="à nouveau"/>
-                </get-case-from>
-                <lit-tag v="adv"/>
-              </lu>
            </chunk>
-           <b pos="2"/>
+           <b pos="1"/>
          </out>
          <call-macro n="firstWord">
            <with-param pos="2"/>
@@ -7470,6 +7471,191 @@
                <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><lit v="à nouveau"/></let>
+         <out>
+           <b pos="2"/>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_inf_ger vèrb_inf > vèrb_inf_ger à nouveau">
+       <pattern>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_inf_ger pas vèrb_inf > ne pas vèrb_inf_ger à nouveau">
+       <pattern>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="pas_adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="ne"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <get-case-from pos="3">
+                 <lit v="à nouveau"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: prnpro tornar_inf_ger pas vèrb_inf > ne pas prnpro vèrb_inf_ger à nouveau (de se tornar pas presentar > de ne pas se présenter à nouveau)">
+       <pattern>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="pas_adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><clip pos="2" side="tl" part="pers"/></tag>
+               <tag><clip pos="2" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="ne"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <clip pos="1" side="tl" part="lem"/>
+               </get-case-from>
+               <clip pos="1" side="tl" part="tags"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="a_verb"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="gen"/>
+               <clip pos="2" side="tl" part="nbr"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <get-case-from pos="3">
+                 <lit v="à nouveau"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
              </lu>
            </chunk>
          </out>
