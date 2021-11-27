@@ -30,6 +30,17 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="pas">
+      <cat-item lemma="pas" tags="SAdv"/>
+      <cat-item lemma="pas" tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="SA_SAdv">
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+    </def-cat>
     <def-cat n="SPron">
       <cat-item tags="SPron"/>
       <cat-item tags="SPron.*"/>
@@ -159,7 +170,7 @@
   </section-def-attrs>
 
   <section-def-vars>
-    <def-var n="v_pron_neg" v="false"/>
+    <def-var n="v_det_pron_neg" v="false"/>
   </section-def-vars>
 
   <section-def-macros>
@@ -217,10 +228,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_negation SAdv pas_neg > pas SAdv pas_neg">
+    <rule comment="RÈGLA: SV_negation SA_SAdv pas_neg > pas SA_SAdv pas_neg (je n'en ai eu aucune > n'ai pas agut cap)">
       <pattern>
         <pattern-item n="SV_negation"/>
-        <pattern-item n="SAdv"/>
+        <pattern-item n="SA_SAdv"/>
         <pattern-item n="pas_neg"/>
       </pattern>
       <action>
@@ -308,269 +319,20 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP SN SV (aucun joueur de France ne vient > cap de jogaire de França ven pas)">
+    <rule comment="RÈGLA: DET_aucun (gestion variable v_det_pron_neg)">
       <pattern>
         <pattern-item n="DET_aucun"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="SV_sans_pas"/>
       </pattern>
       <action>
+        <let><var n="v_det_pron_neg"/><lit v="true"/></let>
         <out>
           <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <lit v="pas"/>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <lit v="pas"/>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
+            <clip pos="1" part="whole"/>
           </chunk>
         </out>
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP DET SN SV (aucun joueur de l'équipe ne vient > cap de jogaire de l'equipa ven pas)">
-      <pattern>
-        <pattern-item n="DET_aucun"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="DET"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="SV_sans_pas"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-          <b pos="5"/>
-          <chunk>
-            <clip pos="6" part="lem"/>
-            <clip pos="6" part="tags"/>
-            <clip pos="6" part="chcontent"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <lit v="pas"/>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <lit v="pas"/>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: DET_aucun SN PREP DET SN PREP SN SV (aucun joueur de l'équipe de France ne vient > cap de jogaire de l'equipa de França ven pas)">
-      <pattern>
-        <pattern-item n="DET_aucun"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="DET"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="SV_sans_pas"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-          <b pos="5"/>
-          <chunk>
-            <clip pos="6" part="lem"/>
-            <clip pos="6" part="tags"/>
-            <clip pos="6" part="chcontent"/>
-          </chunk>
-          <b pos="6"/>
-          <chunk>
-            <clip pos="7" part="lem"/>
-            <clip pos="7" part="tags"/>
-            <clip pos="7" part="chcontent"/>
-          </chunk>
-          <b pos="7"/>
-          <chunk>
-            <clip pos="8" part="lem"/>
-            <clip pos="8" part="tags"/>
-            <clip pos="8" part="chcontent"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <lit v="pas"/>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <lit v="pas"/>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: DET_aucun SN PREP DET SN PREP DET SN SV (aucun membre de la famille de mon mari ne vient > cap de membre de la familha de mon marit ven pas)">
-      <pattern>
-        <pattern-item n="DET_aucun"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="DET"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP"/>
-        <pattern-item n="DET"/>
-        <pattern-item n="SN"/>
-        <pattern-item n="SV_sans_pas"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-          <b pos="5"/>
-          <chunk>
-            <clip pos="6" part="lem"/>
-            <clip pos="6" part="tags"/>
-            <clip pos="6" part="chcontent"/>
-          </chunk>
-          <b pos="6"/>
-          <chunk>
-            <clip pos="7" part="lem"/>
-            <clip pos="7" part="tags"/>
-            <clip pos="7" part="chcontent"/>
-          </chunk>
-          <b pos="7"/>
-          <chunk>
-            <clip pos="8" part="lem"/>
-            <clip pos="8" part="tags"/>
-            <clip pos="8" part="chcontent"/>
-          </chunk>
-          <b pos="8"/>
-          <chunk>
-            <clip pos="9" part="lem"/>
-            <clip pos="9" part="tags"/>
-            <clip pos="9" part="chcontent"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <lit v="pas"/>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <lit v="pas"/>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
 
     <rule comment="RÈGLA: SV DET_aucun (je ne vois aucun livre > vesi pas cap de libre)">
       <pattern>
@@ -676,12 +438,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg (gestion variable v_pron_neg)">
+    <rule comment="RÈGLA: SPron_neg (gestion variable v_det_pron_neg)">
       <pattern>
         <pattern-item n="SPron_neg"/>
       </pattern>
       <action>
-        <let><var n="v_pron_neg"/><lit v="true"/></let>
+        <let><var n="v_det_pron_neg"/><lit v="true"/></let>
         <out>
           <chunk>
             <clip pos="1" part="whole"/>
@@ -690,12 +452,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SENT (gestion variable v_pron_neg)">
+    <rule comment="RÈGLA: SENT (gestion variable v_det_pron_neg)">
       <pattern>
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <let><var n="v_pron_neg"/><lit v="false"/></let>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
         <out>
           <chunk>
             <clip pos="1" part="whole"/>
@@ -719,7 +481,7 @@
         <choose>
           <when>
             <test>
-              <equal><var n="v_pron_neg"/><lit v="true"/></equal>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
             </test>
             <out>
               <b/>
@@ -732,9 +494,31 @@
                 <lit v="$}"/>
               </chunk>
             </out>
-            <let><var n="v_pron_neg"/><lit v="false"/></let>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
           </when>
         </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV pas (per evitar 'pas pas', p.ex.: personne qui ne parle pas russe ne viendra *> degun que parla pas pas rus vendrà">
+      <pattern>
+        <pattern-item n="SV_sans_pas"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
       </action>
     </rule>
 
