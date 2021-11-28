@@ -32,19 +32,9 @@
       <cat-item lemma="plus" tags="SAdv"/>
       <cat-item lemma="plus" tags="SAdv.*"/>
     </def-cat>
-    <def-cat n="jamais">
-      <cat-item lemma="jamais" tags="SAdv"/>
-      <cat-item lemma="jamais" tags="SAdv.*"/>
-      <cat-item lemma="plus jamais" tags="SAdv"/>
-      <cat-item lemma="plus jamais" tags="SAdv.*"/>
-      <cat-item lemma="jamais plus" tags="SAdv"/>
-      <cat-item lemma="jamais plus" tags="SAdv.*"/>
-      <cat-item lemma="pas du tout" tags="SAdv"/>
-      <cat-item lemma="pas du tout" tags="SAdv.*"/>
-      <cat-item lemma="aucunement" tags="SAdv"/>
-      <cat-item lemma="aucunement" tags="SAdv.*"/>
-      <cat-item lemma="guère" tags="SAdv"/>
-      <cat-item lemma="guère" tags="SAdv.*"/>
+    <def-cat n="SAdv_pas_neg">
+      <cat-item tags="SAdv.pas_neg"/>
+      <cat-item tags="SAdv.pas_neg.*"/>
     </def-cat>
     <def-cat n="SV">
       <cat-item tags="SV"/>
@@ -352,11 +342,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers pas jamai (cantes pas jamai -> NE chantes jamais)">
+    <rule comment="RÈGLA: SV_pers SAdv_pas_neg (cantes jamei -> NE chantes jamais)">
       <pattern>
         <pattern-item n="SV_pers"/>
-        <pattern-item n="pas"/>
-        <pattern-item n="jamais"/>
+        <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
         <out>
@@ -381,14 +370,8 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
           <b pos="1"/>
-        </out>
-        <call-macro n="f_bcond">
-          <with-param pos="2"/>
-          <with-param pos="3"/>
-        </call-macro>
-        <out>
           <chunk>
-            <clip pos="3" part="whole"/>
+            <clip pos="2" part="whole"/>
           </chunk>
         </out>
       </action>
@@ -434,12 +417,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers pas jamai (li cantes pas jamai -> NE lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SV_pers SAdv_pas_neg (li cantes jamei -> NE lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
-        <pattern-item n="pas"/>
-        <pattern-item n="jamais"/>
+        <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
         <out>
@@ -468,14 +450,8 @@
             <clip pos="2" part="whole"/>
           </chunk>
           <b pos="2"/>
-        </out>
-        <call-macro n="f_bcond">
-          <with-param pos="3"/>
-          <with-param pos="4"/>
-        </call-macro>
-        <out>
           <chunk>
-            <clip pos="4" part="whole"/>
+            <clip pos="3" part="whole"/>
           </chunk>
         </out>
       </action>
@@ -526,13 +502,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas jamai (la li cantes pas jamai -> NE la lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers SAdv_pas_neg (l'ac cantes jamei -> NE la lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
-        <pattern-item n="pas"/>
-        <pattern-item n="jamais"/>
+        <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
         <out>
@@ -565,14 +540,8 @@
             <clip pos="3" part="whole"/>
           </chunk>
           <b pos="3"/>
-        </out>
-        <call-macro n="f_bcond">
-          <with-param pos="4"/>
-          <with-param pos="5"/>
-        </call-macro>
-        <out>
           <chunk>
-            <clip pos="5" part="whole"/>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
       </action>
@@ -884,6 +853,147 @@
     <!-- FIN RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
 
     <!-- RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
+
+    <rule comment="RÈGLA: SV_pers pas SAdv_pas_neg (cantes pas jamai -> NE chantes jamais)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers pas SAdv_pas_neg (li cantes pas jamai -> NE lui chantes jamais)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas SAdv_pas_neg (la li cantes pas jamai -> NE la lui chantes jamais)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond">
+          <with-param pos="4"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: Det_aucun SN SV_pers PAS > Det_aucun SN NE SV_pers (cap de pòrta es pas dobèrta -> aucune porte n'est ouverte)">
       <pattern>
