@@ -440,7 +440,7 @@
 
     <!-- RÈGLAS PEL PARTITIU -->
 
-    <rule comment="RÈGLA: SV PR_de DET_def SN: élimination de l'article définit du partitif: Je veux de l'eau. > Vòli d'aiga">
+    <rule comment="RÈGLA: SV PR_de DET_def SN: Je veux de l'eau. > Vòli d'aiga">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="PREP_de"/>
@@ -473,7 +473,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV SAdv PR_de DET_def SN: élimination de l'article définit du partitif: Je veux toujours de l'eau. > Vòli totjorn d'aiga">
+    <rule comment="RÈGLA: SV SAdv PR_de DET_def SN: Je veux toujours de l'eau. > Vòli totjorn d'aiga">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="SAdv"/>
@@ -513,7 +513,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV SAdv SAdv PR_de DET_def SN: élimination de l'article définit du partitif: Je ne veux pas toujours de l'eau. > Vòli pas totjorn d'aiga">
+    <rule comment="RÈGLA: SV SAdv SAdv PR_de DET_def SN: Je ne veux pas toujours de l'eau. > Vòli pas totjorn d'aiga">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="SAdv"/>
@@ -560,7 +560,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser PP PR_de DET_def SN: élimination de l'article définit du partitif: sont devenues des chansons populaires > son vengudas de cançons popularas">
+    <rule comment="RÈGLA: SV_vbser PP PR_de DET_def SN: sont devenues des chansons populaires > son vengudas de cançons popularas">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="PP_pl"/>
@@ -600,7 +600,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser ADV PP PR_de DET_def SN: élimination de l'article définit du partitif: ne sont pas devenues des chansons populaires > son pas vengudas de cançons popularas">
+    <rule comment="RÈGLA: SV_vbser ADV PP PR_de DET_def SN: ne sont pas devenues des chansons populaires > son pas vengudas de cançons popularas">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="SAdv"/>
@@ -647,7 +647,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: PR PR_de DET_def SN: élimination de l'article définit du partitif: avec des amis > amb d'amics">
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN: avec des amis > amb d'amics">
       <pattern>
         <pattern-item n="SENT_PREP_CNJ_REL"/>
         <pattern-item n="PREP_de"/>
@@ -679,6 +679,48 @@
         </out>
       </action>
     </rule>
+
+<!-- trop de problèmes à cause de SAdv + PR_de qui sont en fait des locutions prépositives
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL SAdv PR_de DET_def SN: avec toujours des amis > amb totjorn d'amics">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+-->
 
     <rule comment="RÈGLA: CM PR_de DET_def SN SV: élimination de l'article définit du partitif">
       <pattern>
