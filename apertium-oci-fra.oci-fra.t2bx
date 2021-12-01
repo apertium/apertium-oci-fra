@@ -20,7 +20,7 @@
       <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
     </def-cat>
-    <def-cat n="SPron_pas_neg">
+    <def-cat n="SPron_neg">
       <cat-item tags="SPron.*.pas_neg"/>
       <cat-item tags="SPron.*.pas_neg.*"/>
     </def-cat>
@@ -99,7 +99,7 @@
       <cat-item tags="Det.*"/>
     </def-cat>
 
-    <def-cat n="Det_pas_neg">
+    <def-cat n="DET_aucun">
       <cat-item tags="Det.aucun"/>
       <cat-item tags="Det.aucun.*"/>
     </def-cat>
@@ -143,7 +143,7 @@
       <cat-item lemma="unkwnown" tags="unknown"/>
     </def-cat>
 
-    <def-cat n="fi_frase">
+    <def-cat n="SENT">
       <cat-item tags="sent"/>
     </def-cat>
   </section-def-cats>
@@ -183,8 +183,7 @@
   </section-def-attrs>
 
   <section-def-vars>
-    <def-var n="number"/>
-    <def-var n="fifrase" v="yes"/>
+    <def-var n="v_det_pron_neg" v="false"/>
   </section-def-vars>
 
   <section-def-lists>
@@ -308,9 +307,9 @@
 
     <!-- FIN RÈGLAS non inclusion advèrbi "ne" -->
 
-    <!-- RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
+    <!-- RÈGLAS inclusion advèrbi "ne" ambe possible eliminacion de "pas" -->
 
-    <rule comment="RÈGLA: SV_pers pas (cantes pas -> NE chantes pas)">
+    <rule comment="RÈGLA: SV_pers pas (cantes pas -> NE chantes pas ; degun (...) ven pas > personne (...) ne vient)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -337,46 +336,27 @@
             <clip pos="1" part="tags"/>
             <clip pos="1" part="chcontent"/>
           </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
         </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: SV_pers SAdv_pas_neg (cantes jamei -> NE chantes jamais)">
-      <pattern>
-        <pattern-item n="SV_pers"/>
-        <pattern-item n="SAdv_pas_neg"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <get-case-from pos="2">
-              <clip pos="1" part="lem"/>
-            </get-case-from>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond">
+              <with-param pos="1"/>
+              <with-param pos="2"/>
+            </call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -412,51 +392,27 @@
           <chunk>
             <clip pos="2" part="whole"/>
           </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
         </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: SPron_pro SV_pers SAdv_pas_neg (li cantes jamei -> NE lui chantes jamais)">
-      <pattern>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-        <pattern-item n="SAdv_pas_neg"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <get-case-from pos="2">
-              <clip pos="1" part="lem"/>
-            </get-case-from>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond">
+              <with-param pos="2"/>
+              <with-param pos="3"/>
+            </call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -497,11 +453,108 @@
           <chunk>
             <clip pos="3" part="whole"/>
           </chunk>
-          <b pos="3"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond">
+              <with-param pos="3"/>
+              <with-param pos="4"/>
+            </call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS inclusion advèrbi "ne" ambe possible eliminacion de "pas" -->
+
+    <!-- RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
+
+    <rule comment="RÈGLA: SV_pers SAdv_pas_neg (cantes jamei -> NE chantes jamais)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
           <chunk>
-            <clip pos="4" part="whole"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
           </chunk>
         </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers SAdv_pas_neg (li cantes jamei -> NE lui chantes jamais)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
       </action>
     </rule>
 
@@ -547,6 +600,7 @@
             <clip pos="4" part="whole"/>
           </chunk>
         </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
       </action>
     </rule>
 
@@ -896,6 +950,7 @@
             <clip pos="3" part="whole"/>
           </chunk>
         </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
       </action>
     </rule>
 
@@ -943,6 +998,7 @@
             <clip pos="4" part="whole"/>
           </chunk>
         </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
       </action>
     </rule>
 
@@ -995,12 +1051,55 @@
             <clip pos="5" part="whole"/>
           </chunk>
         </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
       </action>
     </rule>
 
-    <rule comment="RÈGLA: Det_pas_neg SN SV_pers PAS > Det_pas_neg SN NE SV_pers (cap de pòrta es pas dobèrta -> aucune porte n'est ouverte)">
+    <rule comment="RÈGLA: DET_aucun (gestion variable v_det_pron_neg)">
       <pattern>
-        <pattern-item n="Det_pas_neg"/>
+        <pattern-item n="DET_aucun"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="true"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="true"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN SV_pers PAS > DET_aucun SN NE SV_pers (cap de pòrta es pas dobèrta -> aucune porte n'est ouverte)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1035,9 +1134,9 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: Det_pas_neg SN PREP SN SV_pers PAS > Det_pas_neg SN PREP SN NE SV_pers (cap de jogaire de França ven pas -> aucun joueur de la France ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP SN SV_pers PAS > DET_aucun SN PREP SN NE SV_pers (cap de jogaire de França ven pas -> aucun joueur de la France ne vient)">
       <pattern>
-        <pattern-item n="Det_pas_neg"/>
+        <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
         <pattern-item n="PREP"/>
         <pattern-item n="SN"/>
@@ -1082,9 +1181,9 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: Det_pas_neg SN PREP Det SN SV_pers PAS > Det_pas_neg SN PREP Det SN NE SV_pers (cap de jogaire de l'equipa ven pas -> aucun joueur de l'équipe ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN NE SV_pers (cap de jogaire de l'equipa ven pas -> aucun joueur de l'équipe ne vient)">
       <pattern>
-        <pattern-item n="Det_pas_neg"/>
+        <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
         <pattern-item n="PREP"/>
         <pattern-item n="Det"/>
@@ -1134,9 +1233,9 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: Det_pas_neg SN PREP Det SN PREP SN SV_pers PAS > Det_pas_neg SN PREP Det SN PREP SN NE SV_pers (cap de jogaire de l'equipa de França ven pas -> aucun joueur de l'équipe de France ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP SN SV_pers PAS > DET_aucun SN PREP Det SN PREP SN NE SV_pers (cap de jogaire de l'equipa de França ven pas -> aucun joueur de l'équipe de France ne vient)">
       <pattern>
-        <pattern-item n="Det_pas_neg"/>
+        <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
         <pattern-item n="PREP"/>
         <pattern-item n="Det"/>
@@ -1196,9 +1295,9 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: Det_pas_neg SN PREP Det SN PREP Det SN SV_pers PAS > Det_pas_neg SN PREP Det SN PREP Det SN NE SV_pers (cap de membre de la familha de mon marit ven pas -> aucun membre de la famille de mon mari ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN PREP Det SN NE SV_pers (cap de membre de la familha de mon marit ven pas -> aucun membre de la famille de mon mari ne vient)">
       <pattern>
-        <pattern-item n="Det_pas_neg"/>
+        <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
         <pattern-item n="PREP"/>
         <pattern-item n="Det"/>
