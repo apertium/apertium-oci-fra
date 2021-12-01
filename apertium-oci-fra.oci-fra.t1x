@@ -46,6 +46,9 @@
       <cat-item tags="adv.excl"/>
       <cat-item tags="preadv"/>
     </def-cat>
+    <def-cat n="pas_adv">
+      <cat-item lemma="pas" tags="adv"/>
+    </def-cat>
     <def-cat n="det">
       <cat-item tags="det.*"/>
       <cat-item tags="predet.*"/>
@@ -184,6 +187,10 @@
       <cat-item lemma="tornar" tags="vblex.*.p2.*"/>
       <cat-item lemma="tornar" tags="vblex.*.p3.*"/>
     </def-cat>
+    <def-cat n="tornar_inf_ger">
+      <cat-item lemma="tornar" tags="vblex.inf"/>
+      <cat-item lemma="tornar" tags="vblex.ger"/>
+    </def-cat>
 
     <def-cat n="num">
       <cat-item tags="num"/>
@@ -263,6 +270,16 @@
 
     <def-cat n="unknown">
       <cat-item tags=""/>
+    </def-cat>
+
+    <def-cat n="radio_tv">
+      <cat-item lemma="ràdio" tags="n.*"/>
+      <cat-item lemma="radiò" tags="n.*"/>
+      <cat-item lemma="telè" tags="n.*"/>
+      <cat-item lemma="tele" tags="n.*"/>
+      <cat-item lemma="television" tags="n.*"/>
+      <cat-item lemma="canal" tags="n.*"/>
+      <cat-item lemma="TV" tags="np.*"/>
     </def-cat>
 
     <def-cat n="temps_n">
@@ -544,6 +561,12 @@
     <def-attr n="a_prn">
       <attr-item tags="tn"/>
       <attr-item tags="pro"/>
+      <attr-item tags="enc"/>
+      <attr-item tags="itg"/>
+    </def-attr>
+
+    <def-attr n="a_pas_neg">
+      <attr-item tags="pas_neg"/>
     </def-attr>
 
     <def-attr n="tipoenc_pro">
@@ -929,6 +952,7 @@
       <list-item v="Tasmanie"/>
       <list-item v="Nouvelle-Galles du Sud"/>
       <list-item v="Queensland"/>
+      <list-item v="Victoria"/>
       <list-item v="Nouvelle-Zélande"/>
       <list-item v="Timor"/>
       <list-item v="Timor oriental"/>
@@ -949,7 +973,7 @@
       <list-item v="Andalousie"/>
       <list-item v="Extrémadure"/>
       <list-item v="Aragon"/>
-<!--      <list-item v="Asturies"/> -->
+      <list-item v="Asturies"/>
       <list-item v="Galice"/>
       <list-item v="Pays Basque"/>
       <list-item v="Andorre"/>
@@ -959,21 +983,25 @@
       <list-item v="Finistère"/>
       <list-item v="Normandie"/>
       <list-item v="Gascogne"/>
+      <list-item v="Gironde"/>
+      <list-item v="Landes"/>
       <list-item v="Béarn"/>
+      <list-item v="Armagnac"/>
+      <list-item v="Bigorre"/>
       <list-item v="Comminges"/>
       <list-item v="Aran"/>
       <list-item v="Aquitaine"/>
       <list-item v="Nouvelle-Aquitaine"/>
-<!--      <list-item v="Gironde"/> -->
+      <list-item v="Lot-et-Garonne"/>
       <list-item v="Auvergne"/>
-<!--      <list-item v="Limousin"/> -->
+      <list-item v="Limousin"/>
       <list-item v="Provence"/>
       <list-item v="Vaucluse"/>
       <list-item v="Savoie"/>
       <list-item v="Drôme"/>
       <list-item v="Allier"/>
       <list-item v="Ardèche"/>
-<!--      <list-item v="Vivarais"/> -->
+      <list-item v="Vivarais"/>
       <list-item v="Var"/>
       <list-item v="Bourgogne"/>
       <list-item v="Lorraine"/>
@@ -1083,16 +1111,16 @@
       <list-item v="Hongrie"/>
       <list-item v="Autriche"/>
       <list-item v="Suisse"/>
-<!--      <list-item v="Valais"/> -->
+      <list-item v="Valais"/>
       <list-item v="Tessin"/>
       <list-item v="Italie"/>
       <list-item v="Ligurie"/>
-<!--      <list-item v="Piémont"/> -->
+      <list-item v="Piémont"/>
       <list-item v="Lombardie"/>
       <list-item v="Émilie-Romagne"/>
       <list-item v="Émilie"/>
       <list-item v="Romagne"/>
-<!--      <list-item v="Toscane"/> -->
+      <list-item v="Toscane"/>
       <list-item v="Campanie"/>
       <list-item v="Calabre"/>
       <list-item v="Sardaigne"/>
@@ -1121,15 +1149,15 @@
       <list-item v="Grèce"/>
       <list-item v="Thessalie"/>
       <list-item v="Étolie"/>
-<!--      <list-item v="Épire"/> -->
+      <list-item v="Épire"/>
       <list-item v="Béotie"/>
       <list-item v="Arcadie"/>
       <list-item v="Laconie"/>
       <list-item v="Messénie"/>
       <list-item v="Argolide"/>
       <list-item v="Achaïe"/>
-<!--      <list-item v="Attique"/> -->
-<!--      <list-item v="Élide"/> -->
+      <list-item v="Attique"/>
+      <list-item v="Élide"/>
       <list-item v="Ukraine"/>
       <list-item v="Crimée"/>
       <list-item v="Galicie"/>
@@ -1164,22 +1192,22 @@
       <list-item v="Arabie saoudite"/>
       <list-item v="Jordanie"/>
       <list-item v="Syrie"/>
-<!--      <list-item v="Liban"/> -->
-<!--      <list-item v="Yémen"/> -->
+      <list-item v="Liban"/>
+      <list-item v="Yémen"/>
       <list-item v="Koweït"/>
       <list-item v="Qatar"/>
-<!--      <list-item v="Émirats arabes unis"/> -->
+      <list-item v="Émirats arabes unis"/>
       <list-item v="Afghanistan"/>
       <list-item v="Pakistan"/>
       <list-item v="Baloutchistan"/>
       <list-item v="Sind"/>
-      <!-- <list-item v="Inde"/> -->
-      <!-- <list-item v="Gujarat"/> -->
+      <list-item v="Inde"/>
+      <list-item v="Gujarat"/>
       <list-item v="Maharashtra"/>
       <list-item v="Bengale"/>
-      <!-- <list-item v="Népal"/> -->
-      <!-- <list-item v="Boutan"/> -->
-      <!-- <list-item v="Tibet"/> -->
+      <list-item v="Népal"/>
+      <list-item v="Boutan"/>
+      <list-item v="Tibet"/>
       <list-item v="Chine"/>
       <list-item v="Mongolie"/>
       <list-item v="Mandchourie"/>
@@ -1189,7 +1217,7 @@
       <list-item v="Corée"/>
       <list-item v="Corée du Nord"/>
       <list-item v="Corée du Sud"/>
-      <!-- <list-item v="Japon"/> -->
+      <list-item v="Japon"/>
       <list-item v="Viêtnam"/>
       <list-item v="Tonkin"/>
       <list-item v="Annam"/>
@@ -1209,7 +1237,7 @@
       <list-item v="Sri Lanka"/>
       <list-item v="Marroc"/>
       <list-item v="Numidie"/>
-<!--      <list-item v="Canaries"/> -->
+      <list-item v="Canaries"/>
       <list-item v="Mauritanie"/>
       <list-item v="Algérie"/>
       <list-item v="Tunisie"/>
@@ -1235,7 +1263,7 @@
       <list-item v="Guinée-Bissau"/>
       <list-item v="Guinée équatoriale"/>
       <list-item v="Bénin"/>
-<!--      <list-item v="Cameroun"/> -->
+      <list-item v="Cameroun"/>
       <list-item v="Gabon"/>
       <list-item v="Éthiopie"/>
       <list-item v="Tigré"/>
@@ -1263,10 +1291,10 @@
       <list-item v="Angola"/>
       <list-item v="Mozambique"/>
       <list-item v="Groenland"/>
-<!--      <list-item v="Canada"/> -->
+      <list-item v="Canada"/>
       <list-item v="Manitoba"/>
       <list-item v="Ontario"/>
-<!--      <list-item v="Québec"/> -->
+      <list-item v="Québec"/>
       <list-item v="Nouveau-Brunswick"/>
       <list-item v="Saskatchewan"/>
       <list-item v="Nouvelle-Orléans"/>
@@ -4206,6 +4234,46 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: radio NPTOP (Radio Gasconha > Radio Gascogne)">
+      <pattern>
+        <pattern-item n="radio_tv"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="npal" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="REGLA: lpar NP rpar">
       <pattern>
         <pattern-item n="lpar"/>
@@ -6650,6 +6718,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="2" side="tl" part="lemh"/>
@@ -6735,6 +6804,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="2" side="tl" part="lemh"/>
@@ -6753,6 +6823,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="3" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="3" side="tl" part="lemh"/>
@@ -7162,6 +7233,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="2" side="tl" part="lemh"/>
@@ -7270,6 +7342,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="2" side="tl" part="lemh"/>
@@ -7288,6 +7361,7 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="3" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="3" side="tl" part="lemh"/>
@@ -7442,15 +7516,8 @@
                <clip pos="1" side="tl" part="nbr"/>
                <clip pos="3" side="tl" part="lemq"/>
               </lu>
-              <b pos="1"/>
-              <lu>
-                <get-case-from pos="2">
-                   <lit v="à nouveau"/>
-                </get-case-from>
-                <lit-tag v="adv"/>
-              </lu>
            </chunk>
-           <b pos="2"/>
+           <b pos="1"/>
          </out>
          <call-macro n="firstWord">
            <with-param pos="2"/>
@@ -7461,11 +7528,197 @@
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
+               <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
              </tags>
              <lu>
                <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <let><var n="lemma"/><lit v="à nouveau"/></let>
+         <out>
+           <b pos="2"/>
+           <chunk namefrom="lemma" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SAdv"/></tag>
+             </tags>
+             <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_inf_ger vèrb_inf > vèrb_inf_ger à nouveau">
+       <pattern>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+              <b pos="1"/>
+              <lu>
+                <get-case-from pos="2">
+                   <lit v="à nouveau"/>
+                </get-case-from>
+                <lit-tag v="adv"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: tornar_inf_ger pas vèrb_inf > ne pas vèrb_inf_ger à nouveau">
+       <pattern>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="pas_adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="ne"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="gen"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <get-case-from pos="3">
+                 <lit v="à nouveau"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: prnpro tornar_inf_ger pas vèrb_inf > ne pas prnpro vèrb_inf_ger à nouveau (de se tornar pas presentar > de ne pas se présenter à nouveau)">
+       <pattern>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="tornar_inf_ger"/>
+         <pattern-item n="pas_adv"/>
+         <pattern-item n="inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+        </call-macro>
+         <out>
+           <chunk name="verbinf_ger" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><clip pos="2" side="tl" part="pers"/></tag>
+               <tag><clip pos="2" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <lit v="ne"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b/>
+             <lu>
+               <get-case-from pos="2">
+                 <lit v="pas"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <get-case-from pos="2">
+                 <clip pos="1" side="tl" part="lem"/>
+               </get-case-from>
+               <clip pos="1" side="tl" part="tags"/>
+             </lu>
+             <b pos="1"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="a_verb"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="2" side="tl" part="pers"/>
+               <clip pos="2" side="tl" part="gen"/>
+               <clip pos="2" side="tl" part="nbr"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <get-case-from pos="3">
+                 <lit v="à nouveau"/>
+               </get-case-from>
+               <lit-tag v="adv"/>
              </lu>
            </chunk>
          </out>
@@ -7790,6 +8043,7 @@
           <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SAdv"/></tag>
+              <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
             </tags>
             <lu>
               <clip pos="1" side="tl" part="lemh"/>
@@ -7823,6 +8077,7 @@
           <chunk name="preadv_adv" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SAdv"/></tag>
+              <tag><clip pos="2" side="tl" part="a_pas_neg"/></tag>
             </tags>
             <lu>
               <clip pos="1" side="tl" part="lemh"/>
@@ -7890,6 +8145,7 @@
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+               <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
                <tag><clip pos="1" side="tl" part="pers"/></tag>
                <tag><clip pos="1" side="tl" part="nbr"/></tag>
              </tags>

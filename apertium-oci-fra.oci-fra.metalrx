@@ -925,6 +925,28 @@
 
 <!-- **************** N **************** -->
 
+  <!-- causa >> chose, cause -->
+  <rule weight="0.8">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
+    <match tags="adj.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="adj.*"/>
+    <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
+  </rule>
+<!--
+  <rule weight="1.0">
+    <match tags="det.def.f.sg"/>
+    <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
+  </rule>
+-->
+  <rule weight="1.2">
+    <match lemma="causa" tags="n.*.pl"><select lemma="chose"/></match>
+  </rule>
+
   <!-- franc >> franc, Franc_peuple -->
   <rule weight="0.8">
     <match lemma="franc" tags="n.*"><select lemma="Franc_peuple"/></match>
