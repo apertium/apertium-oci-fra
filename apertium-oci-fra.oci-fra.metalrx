@@ -925,6 +925,24 @@
 
 <!-- **************** N **************** -->
 
+  <!-- canton >> côté, canton -->
+  <rule weight="0.8">
+    <match lemma="canton" tags="n.*"><select lemma="côté"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="Canton" tags="n.*"><select lemma="canton"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="canton" tags="n.*"><select lemma="canton"/></match>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <or>
+      <match tags="np.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+
   <!-- causa >> chose, cause -->
   <rule weight="0.8">
     <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
