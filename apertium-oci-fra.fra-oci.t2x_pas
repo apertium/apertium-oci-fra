@@ -216,7 +216,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_negation SA_SAdv pas_neg > pas SA_SAdv pas_neg (je n'en ai eu aucune > n'ai pas agut cap)">
+    <rule comment="RÈGLA: SV_negation SA_SAdv pas_neg > SV_negation pas SA_SAdv pas_neg (je n'en ai eu aucune > n'ai pas agut cap)">
       <pattern>
         <pattern-item n="SV_negation"/>
         <pattern-item n="SA_SAdv"/>
@@ -249,6 +249,44 @@
           </when>
         </choose>
         <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_negation PREP pas_neg > SV_negation pas PREP pas_neg (je ne parle à persone > parli pas a degun)">
+      <pattern>
+        <pattern-item n="SV_negation"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
           <b pos="1"/>
           <chunk>
             <clip pos="2" part="lem"/>
