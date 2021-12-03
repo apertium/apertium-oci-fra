@@ -88,6 +88,10 @@
     <def-cat n="prnenc">
       <cat-item tags="prn.enc.*"/>
     </def-cat>
+    <def-cat n="adv_prntn">
+      <cat-item tags="adv"/>
+      <cat-item tags="prn.tn.*"/>
+    </def-cat>
     <def-cat n="prnsubj">
       <cat-item lemma="je" tags="prn.tn.p1.mf.sg"/>
       <cat-item lemma="tu" tags="prn.tn.p2.mf.sg"/>
@@ -9083,7 +9087,6 @@
              </lu>
              <b pos="2"/>
              <lu>
-
                <clip pos="2" side="tl" part="whole"/>
              </lu>
            </chunk>
@@ -9254,10 +9257,10 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE JAMAIS INF > INF PAS JAMAI: ne jamais manger > manjar pas jamai" v="oci">
+    <rule comment="RÈGLA: NE ADV_PRNTN INF > INF PAS ADV_PRNTN: ne jamais manger > manjar pas jamai ; ne rien écouter > escotar pas res" v="oci">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="inf"/>
        </pattern>
        <action>
@@ -9298,10 +9301,10 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE JAMAIS INF > NON PAS JAMAI INF: ne jamais manger > non pas jamei manjar" v="oci@gascon">
+    <rule comment="RÈGLA: NE ADV_PRNTN INF > NON PAS ADV_PRNTN INF: ne jamais manger > non pas jamei manjar ; ne rien écouter > non pas arren enténer" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="inf"/>
        </pattern>
        <action>
@@ -9338,9 +9341,7 @@
              </lu>
              <b pos="2"/>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9349,10 +9350,10 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE JAMAIS PRNPRO INF > PRNPRO INF PAS JAMAIS: ne jamais te dire > te dire pas jamai" v="oci">
+    <rule comment="RÈGLA: NE ADV_PRNTN PRNPRO INF > PRNPRO INF PAS ADV_PRNTN: ne jamais te dire > te dire pas jamai" v="oci">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="inf"/>
        </pattern>
@@ -9409,10 +9410,10 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE JAMAIS PRNPRO INF > NON PAS JAMEI PRNPRO INF: ne pas te dire > non pas jamei te dire" v="oci@gascon">
+    <rule comment="RÈGLA: NE ADV_PRNTN PRNPRO INF > NON PAS ADV_PRNTN PRNPRO INF: ne pas te dire > non pas jamei te dire" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="inf"/>
        </pattern>
@@ -9476,10 +9477,10 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE JAMAIS PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS JAMAIS: ne jamais te le dire > te lo dire pas jamai" v="oci">
+    <rule comment="RÈGLA: NE ADV_PRNTN PRNPRO PRNPRO INF > PRNPRO PRNPRO INF PAS ADV_PRNTN: ne jamais te le dire > te lo dire pas jamai" v="oci">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="inf"/>
@@ -9550,10 +9551,10 @@
     </rule>
 
 
-    <rule comment="RÈGLA: NE JAMAIS PRNPRO PRNPRO INF > NON PAS JAMEI PRNPRO PRNPRO INF: ne pas te le dire > non pas jamei t'ac dire" v="oci@gascon">
+    <rule comment="RÈGLA: NE ADV_PRNTN PRNPRO PRNPRO INF > NON PAS ADV_PRNTN PRNPRO PRNPRO INF: ne pas te le dire > non pas jamei t'ac dire" v="oci@gascon">
        <pattern>
          <pattern-item n="ne"/>
-         <pattern-item n="adv"/>
+         <pattern-item n="adv_prntn"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="prnpro"/>
          <pattern-item n="inf"/>
