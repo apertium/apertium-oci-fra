@@ -23,6 +23,11 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="ne_adv">
+      <cat-item lemma="ne" tags="SAdv"/>
+      <cat-item lemma="ne" tags="SAdv.*"/>
+    </def-cat>
+
     <def-cat n="SV">
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
@@ -31,7 +36,6 @@
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
     </def-cat>
-
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
       <cat-item lemma="sercj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SV.*"/>
@@ -922,6 +926,64 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_tn ne SV (aquesta regla és per impedir la generació del prn.tn">
+      <pattern>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SV > subjècte ne SV">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <call-macro n="generate_subject1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
