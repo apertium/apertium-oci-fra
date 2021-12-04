@@ -211,6 +211,23 @@
     <match tags="vbser.*.p3.*"/>
   </rule>
 
+  <!-- çò >> cela, ce -->
+  <rule weight="0.8">
+    <match lemma="çò" tags="prn.*"><select lemma="cela"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="çò" tags="prn.*"><select lemma="ce"/></match>
+    <match tags="vbser.*.p3.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="çò" tags="prn.*"><select lemma="ce"/></match>
+    <match lemma="que"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="çò" tags="prn.*"><select lemma="ce"/></match>
+    <match lemma="qui"/>
+  </rule>
+
   <!-- ieu/jo >> je, moi -->
   <rule weight="0.8">
     <or>
@@ -925,6 +942,11 @@
 
 <!-- **************** N **************** -->
 
+  <!-- vèspre >> après-midi, soir -->
+  <rule weight="0.8">
+    <match lemma="vèspre" tags="n.*"><select lemma="après-midi"/></match>
+  </rule>
+
   <!-- canton >> côté, canton -->
   <rule weight="0.8">
     <match lemma="canton" tags="n.*"><select lemma="côté"/></match>
@@ -1084,6 +1106,13 @@
 
   <!-- dire >> dire, appeler -->
   <macro name="verb_nopron_pron" p1="dire" p2="dire" p3="appeler" />
+  <rule weight="1.2">
+    <match lemma="dire" tags="vblex.*"><select lemma="dire"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="cnjsub"/>
+  </rule>
 
   <!-- sonar >> sonner, appeler -->
   <macro name="verb_nopron_pron" p1="sonar" p2="sonner" p3="appeler" />
