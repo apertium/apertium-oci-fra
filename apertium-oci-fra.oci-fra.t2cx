@@ -181,6 +181,10 @@
       <attr-item tags="ND"/>
     </def-attr>
 
+    <def-attr n="a_np">
+      <attr-item tags="np"/>
+    </def-attr>
+
     <def-attr n="a_pron_pas_neg">
       <attr-item tags="pas_neg"/>
     </def-attr>
@@ -214,6 +218,11 @@
 
  <def-macro n="generate_detdef1" npar="1"> <!-- par1 = SN -->
    <choose>
+     <when>
+       <test>
+         <equal><clip pos="1" part="a_np"/><lit-tag v="np"/></equal>
+       </test>
+     </when>
      <when>
        <test>
          <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
