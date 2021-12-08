@@ -1177,7 +1177,18 @@
         <match tags="prn.pro.*"/>
       </or>
     </repeat>
-    <match commit="caler" tags="vbmod.*"/>
+    <match lemma="caler" tags="vbmod.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*"/>
+    <match lemma="caler" tags="vbmod.pp.*"/>
   </rule>
 
   <!-- lo que >> celui que, celui qui -->
