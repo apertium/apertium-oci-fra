@@ -280,6 +280,9 @@
       <cat-item lemma="television" tags="n.*"/>
       <cat-item lemma="canal" tags="n.*"/>
       <cat-item lemma="TV" tags="np.*"/>
+      <cat-item lemma="region" tags="n.*"/>
+      <cat-item lemma="euroregion" tags="n.*"/>
+      <cat-item tags="np.al.*"/>
     </def-cat>
 
     <def-cat n="temps_n">
@@ -4288,6 +4291,55 @@
               <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="tags"/>
               <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETDEF radio NPTOP (la region Gasconha > la région Gascogne)">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="radio_tv"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="npal" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
