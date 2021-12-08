@@ -210,6 +210,11 @@
     <match lemma="aquò" tags="prn.*"><select lemma="ce"/></match>
     <match tags="vbser.*.p3.*"/>
   </rule>
+  <rule weight="1.2">
+    <match tags="pr"/>
+    <match lemma="aquò" tags="prn.*"><select lemma="cela"/></match>
+    <match tags="vbser.*.p3.*"/>
+  </rule>
 
   <!-- çò >> cela, ce -->
   <rule weight="0.8">
@@ -332,7 +337,7 @@
 
 <!-- **************** PR **************** -->
 
-  <!-- per >> pour, parr -->
+  <!-- per >> pour, par -->
   <rule weight="0.8">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
   </rule>
@@ -358,6 +363,21 @@
       <match lemma="mainatge" tags="n.*"/>
       <match lemma="professor" tags="n.*"/>
       <match lemma="mèstre" tags="n.*"/>
+
+      <match lemma="avion" tags="n.*"/>
+      <match lemma="tren" tags="n.*"/>
+      <match lemma="trin" tags="n.*"/>
+      <match lemma="veitura" tags="n.*"/>
+      <match lemma="batèl" tags="n.*"/>
+      <match lemma="batèu" tags="n.*"/>
+      <match lemma="vaissèl" tags="n.*"/>
+
+      <match lemma="vidèo" tags="n.*"/>
+      <match lemma="vidèo" tags="n.*"/>
+      <match lemma="visioconferéncia" tags="n.*"/>
+      <match lemma="internet" tags="n.*"/>
+      <match lemma="internèt" tags="n.*"/>
+      <match lemma="Internet" tags="np.*"/>
     </or>
   </rule>
   <rule weight="1.2">
@@ -941,6 +961,18 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- òc >> oc, oui -->
+  <rule weight="0.8">
+    <match lemma="òc" tags="n.*"><select lemma="oc"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="òc" tags="n.m.pl"><select lemma="oui"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.ind.*"/>
+    <match lemma="òc" tags="n.*"><select lemma="oui"/></match>
+  </rule>
 
   <!-- vèspre >> après-midi, soir -->
   <rule weight="0.8">
