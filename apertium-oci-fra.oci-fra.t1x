@@ -282,6 +282,7 @@
       <cat-item lemma="TV" tags="np.*"/>
       <cat-item lemma="region" tags="n.*"/>
       <cat-item lemma="euroregion" tags="n.*"/>
+      <cat-item lemma="festival" tags="n.*"/>
       <cat-item tags="np.al.*"/>
     </def-cat>
 
@@ -622,6 +623,7 @@
 
   <section-def-lists>
     <def-list n="en_majuscules">
+      <list-item v="État"/>
       <list-item v="Monday"/>
       <list-item v="Tuesday"/>
       <list-item v="Wednesday"/>
@@ -991,8 +993,9 @@
       <list-item v="Languedoc"/>
       <list-item v="Languedoc-Roussillon"/>
       <list-item v="Cerdagne"/>
-      <list-item v="Occitane"/>
+      <list-item v="Occitanie"/>
       <list-item v="Gascogne"/>
+      <list-item v="Guyenne"/>
       <list-item v="Gironde"/>
       <list-item v="Landes"/>
       <list-item v="Béarn"/>
@@ -1358,9 +1361,15 @@
       <list-item v="Costa Rica"/>
       <list-item v="Panama"/>
       <list-item v="Barbade"/>
+      <list-item v="Bahamas"/>
       <list-item v="Colombie"/>
       <list-item v="Vénézuéla"/>
       <list-item v="Venezuela"/>
+      <list-item v="Guadeloupe"/>
+      <list-item v="Réunion"/>
+      <list-item v="Martinique"/>
+      <list-item v="Guyane"/>
+      <list-item v="Surinam"/>
       <list-item v="Brésil"/>
       <list-item v="Équateur"/>
       <list-item v="Pérou"/>
@@ -3558,57 +3567,26 @@
       <choose>
         <when>
           <test>
-        <equal>
-          <var n="EOS"/>
-          <lit v="true"/>
-        </equal>
+            <equal><var n="EOS"/><lit v="true"/></equal>
           </test>
           <choose>
-        <when>
-          <test>
-            <and>
-              <equal>
-            <clip pos="1" side="sl" part="a_np_acr"/>
-            <lit v=""/>
-              </equal>
-              <not>
-            <in>
-              <clip pos="1" side="tl" part="lem"/>
-              <list n="en_majuscules"/>
-            </in>
-              </not>
-            </and>
-          </test>
-          <modify-case>
-            <clip pos="1" side="tl" part="lem"/>
-            <lit v="aa"/>
-          </modify-case>
-        </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="sl" part="a_np_acr"/><lit v=""/></equal>
+                  <not><in><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in></not>
+                </and>
+              </test>
+              <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
+            </when>
           </choose>
-          <let>
-        <var n="caseFirstWord"/>
-        <lit v="Aa"/>
-          </let>
+          <let><var n="caseFirstWord"/><lit v="Aa"/></let>
         </when>
         <otherwise>
-          <let>
-        <var n="caseFirstWord"/>
-        <lit v="aa"/>
-          </let>
+          <let><var n="caseFirstWord"/><lit v="aa"/></let>
         </otherwise>
       </choose>
-<!--    </when>
-    <otherwise>
-      <let>
-        <var n="caseFirstWord"/>
-        <lit v="aa"/>
-      </let>
-    </otherwise>
-      </choose>-->
-      <let>
-    <var n="EOS"/>
-    <lit v="false"/>
-      </let>
+      <let><var n="EOS"/><lit v="false"/></let>
     </def-macro>
 
     <def-macro n="f_maj_gentilici1" npar="1">
