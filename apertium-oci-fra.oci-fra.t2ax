@@ -199,27 +199,22 @@
    <choose>
      <when>
        <test>
-           <in caseless="yes">
-             <clip pos="1" part="lem"/>
-             <list n="SV_personals"/>
-           </in>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
        </test>
         <choose>
           <when>
             <test>
-              <equal>
-                <var n="finfrasa"/>
-                <lit v="yes"/>
-              </equal>
+              <or>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+              </or>
             </test>
             <choose>
               <when>
                 <test>
                   <not>
-                    <equal>
-                      <clip pos="1" part="temps"/>
-                      <lit-tag v="imp"/>
-                    </equal>
+                    <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
                   </not>
                 </test>
                 <out>
@@ -277,6 +272,8 @@
             <test>
               <or>
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
