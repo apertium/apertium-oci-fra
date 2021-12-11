@@ -5,6 +5,10 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SN_pl">
+      <cat-item tags="SN.*.pl"/>
+      <cat-item tags="SN.*.pl.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -39,6 +43,10 @@
     <def-cat n="SV_vbser_p3">
       <cat-item tags="SV.vbser.*.p3.*"/>
     </def-cat>
+    <def-cat n="SV_vbser_p3pl">
+      <cat-item tags="SV.vbser.*.p3.pl"/>
+      <cat-item tags="SV.vbser.*.p3.pl.*"/>
+    </def-cat>
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
       <cat-item lemma="sercj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SV.*"/>
@@ -64,7 +72,12 @@
 
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
     </def-cat>
+    <def-cat n="PREP_de">
+      <cat-item lemma="de" tags="PREP"/>
+    </def-cat>
+
 
     <def-cat n="cnjcoo">
       <cat-item tags="cnjcoo"/>
@@ -195,7 +208,7 @@
      </def-macro>
 
 
- <def-macro n="generate_subject1" npar="1">  <!--ATENCIÓN: se si crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+ <def-macro n="generate_subject1" npar="1">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
    <choose>
      <when>
        <test>
@@ -257,8 +270,8 @@
    </choose>
  </def-macro>
 
- <def-macro n="generate_subject2" npar="2">  <!--ATENCIÓN: se si crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
-<!-- el paràmetre 1 és la posició del verb, el segon la primera paraula (per agafar si és majúscula o no) -->
+ <def-macro n="generate_subject2" npar="2">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+<!-- el paràmetre 1 és el verb; el segon, la primera paraula (per agafar si és majúscula o no) -->
    <choose>
      <when>
        <test>
@@ -848,7 +861,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3 Det > ce SV_vbser_p3 Det">
+    <rule comment="RÈGLA: SV_vbser_p3 Det > ce SV_vbser_p3 Det: èra un ostal > c'était une maison">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
         <pattern-item n="Det"/>
@@ -906,6 +919,77 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3pl De SN_pl > ce SV_vbser_p3 De SN_pl: èran d'ostals > c'étaient des maisons">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
