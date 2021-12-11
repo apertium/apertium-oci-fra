@@ -383,7 +383,30 @@
       <match lemma="tigre" tags="n.*"/>
     </def-seq>
 
-    <def-seq n="fruit_amb_pinyol">
+    <def-seq n="fruit">
+      <match lemma="pomme" tags="n.*"/>
+      <match lemma="poire" tags="n.*"/>
+      <match lemma="pêche" tags="n.*"/>
+      <match lemma="nectarine" tags="n.*"/>
+      <match lemma="abricot" tags="n.*"/>
+      <match lemma="prune" tags="n.*"/>
+      <match lemma="cerise" tags="n.*"/>
+      <match lemma="orange" tags="n.*"/>
+      <match lemma="mandarine" tags="n.*"/>
+      <match lemma="agrume" tags="n.*"/>
+      <match lemma="melon" tags="n.*"/>
+      <match lemma="pastèque" tags="n.*"/>
+      <match lemma="raisin" tags="n.*"/>
+      <match lemma="figue" tags="n.*"/>
+      <match lemma="datte" tags="n.*"/>
+      <match lemma="banane" tags="n.*"/>
+      <match lemma="ananas" tags="n.*"/>
+      <match lemma="mangue" tags="n.*"/>
+      <match lemma="papaye" tags="n.*"/>
+      <match lemma="kiwi" tags="n.*"/>
+    </def-seq>
+
+    <def-seq n="fruit_avec_noyau">
       <match lemma="pêche" tags="n.*"/>
       <match lemma="nectarine" tags="n.*"/>
       <match lemma="abricot" tags="n.*"/>
@@ -391,8 +414,8 @@
       <match lemma="cerise" tags="n.*"/>
       <match lemma="olive" tags="n.*"/>
       <match lemma="amande" tags="n.*"/>
+      <match lemma="datte" tags="n.*"/>
     </def-seq>
-
   </def-seqs>
 <rules>
 
@@ -699,6 +722,117 @@
   <!-- soir >> vèspre, ser -->
   <rule weight="0.8">
     <match lemma="soir" tags="n.*"><select lemma="vèspre"/></match>
+  </rule>
+
+  <!-- pêche >> pesca, persèc/pershec -->
+  <rule weight="0.8">
+    <match lemma="pêche" tags="n.*"><select lemma="pesca"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="un" tags="det.*"/>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="manger" tags="vblex.*"/>
+      <match lemma="goûter" tags="vblex.*"/>
+      <match lemma="aimer" tags="vblex.*"/>
+      <match lemma="kiffer" tags="vblex.*"/>
+      <match lemma="adorer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="manger" tags="vblex.*"/>
+      <match lemma="goûter" tags="vblex.*"/>
+      <match lemma="aimer" tags="vblex.*"/>
+      <match lemma="kiffer" tags="vblex.*"/>
+      <match lemma="adorer" tags="vblex.*"/>
+    </or>
+    <match tags="adv"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="manger" tags="vblex.*"/>
+      <match lemma="goûter" tags="vblex.*"/>
+      <match lemma="aimer" tags="vblex.*"/>
+      <match lemma="kiffer" tags="vblex.*"/>
+      <match lemma="adorer" tags="vblex.*"/>
+    </or>
+    <match tags="adv"/>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="goût" tags="n.*"/>
+      <match lemma="odeur" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="fruit"/>
+      <seq n="fruit_avec_noyau"/>
+      <match lemma="raisin sec" tags="n.*"/>
+      <match lemma="mûr" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="fruit"/>
+      <seq n="fruit_avec_noyau"/>
+      <match lemma="raisin sec" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+      <match lemma="pêche" tags="n.f.pl"><select lemma="persèc"/></match>
+    </or>
   </rule>
 
   <!-- vol >> panatòri, vòl -->
@@ -1159,7 +1293,7 @@
       <seq n="parent"/>
       <seq n="bétail"/>
       <seq n="animaux_non_bétail"/>
-      <seq n="fruit_amb_pinyol"/>
+      <seq n="fruit_avec_noyau"/>
     </or>
   </rule>
 

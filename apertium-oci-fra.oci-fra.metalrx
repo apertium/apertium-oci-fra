@@ -380,6 +380,14 @@
       <match lemma="Internet" tags="np.*"/>
     </or>
   </rule>
+  <rule weight="1.0">
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <match lemma="biais" tags="n.*"/>
+  </rule>
   <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <repeat from="0" upto="2">
@@ -827,6 +835,7 @@
   </rule>
   <rule weight="1.0">
     <or>
+      <match tags="n.*.sg"/>
       <match tags="adj.*.sg"/>
     </or>
     <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
@@ -838,6 +847,8 @@
       <match tags="det.*"/>
       <match tags="n.*"/>
       <match tags="adj.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
       <match tags="cnjsub"/>
     </or>
   </rule>
@@ -937,6 +948,8 @@
       <match tags="det.*"/>
       <match tags="n.*"/>
       <match tags="adj.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
       <match tags="cnjsub"/>
     </or>
   </rule>
