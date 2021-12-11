@@ -5,6 +5,10 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SN_pl">
+      <cat-item tags="SN.*.pl"/>
+      <cat-item tags="SN.*.pl.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -221,6 +225,18 @@
      <when>
        <test>
          <equal><clip pos="1" part="a_np"/><lit-tag v="np"/></equal>
+       </test>
+     </when>
+     <when>
+       <test>
+         <or>
+           <equal><clip pos="1" part="lem"/><lit v="d_n"/></equal>
+           <equal><clip pos="1" part="lem"/><lit v="d_a_n"/></equal>
+           <equal><clip pos="1" part="lem"/><lit v="d_n_a"/></equal>
+           <equal><clip pos="1" part="lem"/><lit v="num_n"/></equal>
+           <equal><clip pos="1" part="lem"/><lit v="num_a_n"/></equal>
+           <equal><clip pos="1" part="lem"/><lit v="num_n_a"/></equal>
+         </or>
        </test>
      </when>
      <when>
@@ -829,6 +845,33 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PR_de SN_pl">
+      <pattern>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
       </action>
