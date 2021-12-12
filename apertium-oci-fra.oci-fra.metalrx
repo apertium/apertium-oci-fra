@@ -335,6 +335,11 @@
     <match tags="cm"/>
   </rule>
 
+  <!-- lo >> le, lui -->
+  <rule weight="0.8">
+    <match lemma="lo" tags="prn.pro.*"><select lemma="le"/></match>
+  </rule>
+
 <!-- **************** PR **************** -->
 
   <!-- per >> pour, par -->
@@ -1842,6 +1847,21 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- tirar >> tirer, tirer# sur -->
+  <rule weight="0.8">
+    <match lemma="tirar" tags="vblex.*"><select lemma="tirer"/></match>
+  </rule>
+
+  <!-- velhar >> veiller, voiler -->
+  <rule weight="0.8">
+    <match lemma="velhar" tags="vblex.*"><select lemma="veiller"/></match>
+  </rule>
+
+  <!-- crochetar >> accrocher, atteler -->
+  <rule weight="0.8">
+    <match lemma="crochetar" tags="vblex.*"><select lemma="accrocher"/></match>
+  </rule>
+
   <!-- tornar >> revenir, rentrer -->
   <rule weight="0.8">
     <match lemma="tornar" tags="vblex.*"><select lemma="revenir"/></match>
@@ -1863,8 +1883,16 @@
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
-    <match lemma="a" tags="pr"/>
     <match tags="pr"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="cridar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <match tags="prn.pro.*"/>
     <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
   <rule weight="1.0">
@@ -1893,12 +1921,20 @@
 
   <!-- dire >> dire, appeler -->
   <macro name="verb_nopron_pron" p1="dire" p2="dire" p3="appeler" />
-  <rule weight="1.2">
+  <rule weight="1.4">
     <match lemma="dire" tags="vblex.*"><select lemma="dire"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="cnjsub"/>
+  </rule>
+  <rule weight="1.4">
+    <match tags="prn.pro.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="dire" tags="vblex.pp.*"><select lemma="dire"/></match>
   </rule>
 
   <!-- sonar >> sonner, appeler -->
