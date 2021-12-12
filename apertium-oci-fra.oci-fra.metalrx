@@ -6,17 +6,17 @@
       <rule weight="0.6">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p1}}"/></match>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
         <match lemma="de" tags="pr"/>
         <or><match tags="np.loc"/><match tags="np.top.*"/></or>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
         <match tags="det.*"/>
         <match tags="adj.*"/>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
         <or>
           <match tags="num.*"/>
@@ -52,7 +52,7 @@
           <match lemma="XXX" tags="adj.*"/>
         </or>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <or>
           <match lemma="papa" tags="n.*"/>
           <match lemma="avesque" tags="n.*"/>
@@ -79,7 +79,7 @@
         </or>
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <or>
           <match lemma="papat" tags="n.*"/>
           <match lemma="pontificat" tags="n.*"/>
@@ -91,12 +91,26 @@
         <match lemma="de" tags="pr"/>
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
       </rule>
-      <rule weight="1.0">
+      <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
         <or>
           <match lemma="regnar" tags="vblex.*"/>
           <match lemma="governar" tags="vblex.*"/>
         </or>
+      </rule>
+    </def-macro>
+
+    <!-- Aquesta macro tria el verb p2 per traduir el prenom p1, però manté p1 si va seguit de cognom (o paraula desconeguda) -->
+    <def-macro name="ant_antcog">
+      <rule weight="0.6">
+         <match lemma="{{p1}}" tags="np.ant.*"><select lemma="{{p2}}"/></match>
+      </rule>
+      <rule weight="2.0">
+         <match lemma="{{p1}}" tags="np.ant.*"><select lemma="{{p1}}"/></match>
+         <or>
+           <match tags="np.*"/>
+           <match tags=""/>
+         </or>
       </rule>
     </def-macro>
 
@@ -1942,7 +1956,28 @@
 
 <!-- **************** NP **************** -->
 
-  <macro name="noms_propres" p1="Abraam" p2="Abraham" />
+  <macro name="ant_antcog" p1="Abraam" p2="Abraham" />
+  <macro name="ant_antcog" p1="Aquilles" p2="Achille" />
+  <macro name="ant_antcog" p1="August" p2="Auguste" />
+  <macro name="ant_antcog" p1="Cesar" p2="César" />
+  <macro name="ant_antcog" p1="Virgili" p2="Virgile" />
+<!--
+  <macro name="ant_antcog" p1="Eliseu" p2="Élisée" />
+  <macro name="ant_antcog" p1="Ezequiel" p2="Ézéchiel" />
+  <macro name="ant_antcog" p1="Hèctor" p2="Hector" />
+  <macro name="ant_antcog" p1="Horaci" p2="Horace" />
+  <macro name="ant_antcog" p1="Jesús" p2="Jésus" />
+  <macro name="ant_antcog" p1="Marc Aureli" p2="Marc-Aurèle" />
+  <macro name="ant_antcog" p1="Octavi" p2="Octave" />
+  <macro name="ant_antcog" p1="Salomó" p2="Salomon" />
+
+  <macro name="ant_antcog" p1="Cassandra" p2="Cassandre" />
+  <macro name="ant_antcog" p1="Maria Antonieta" p2="Marie-Antoinette" />
+  <macro name="ant_antcog" p1="Maria Cristina" p2="Marie-Cristine" />
+  <macro name="ant_antcog" p1="Roxana" p2="Roxanne" />
+  <macro name="ant_antcog" p1="Rut" p2="Ruth" />
+-->
+
   <macro name="noms_propres" p1="Adrian" p2="Adrien" />
   <macro name="noms_propres" p1="Albèrt" p2="Albert" />
   <macro name="noms_propres" p1="Andrieu" p2="André" />
@@ -1952,7 +1987,6 @@
   <macro name="noms_propres" p1="Antòni" p2="Antoine" />
   <macro name="noms_propres" p1="Ariana" p2="Ariane" />
   <macro name="noms_propres" p1="Arnau" p2="Arnaud" />
-  <macro name="noms_propres" p1="August" p2="Auguste" />
   <macro name="noms_propres" p1="Beatritz" p2="Béatrice" />
   <macro name="noms_propres" p1="Benesech" p2="Benoît" />
   <macro name="noms_propres" p1="Beneset" p2="Benoît" />
@@ -2019,6 +2053,7 @@
   <macro name="noms_propres" p1="Ludivina" p2="Ludivine" />
   <macro name="noms_propres" p1="Magdalena" p2="Madeleine" />
   <macro name="noms_propres" p1="Marcèl" p2="Marcel" />
+  <macro name="noms_propres" p1="Marcèu" p2="Marcel" />
   <macro name="noms_propres" p1="Margarida" p2="Marguerite" />
   <macro name="noms_propres" p1="Maria Cristina" p2="Marie-Christine" />
   <macro name="noms_propres" p1="Maria" p2="Marie" />
@@ -2027,6 +2062,7 @@
   <macro name="noms_propres" p1="Matilda" p2="Mathilde" />
   <macro name="noms_propres" p1="Maximilian" p2="Maximilien" />
   <macro name="noms_propres" p1="Miquèl" p2="Michel" />
+  <macro name="noms_propres" p1="Miquèu" p2="Michel" />
   <macro name="noms_propres" p1="Nicolau" p2="Nicolas" />
   <macro name="noms_propres" p1="Pau" p2="Paul" />
   <macro name="noms_propres" p1="Raimond" p2="Raymond" />
