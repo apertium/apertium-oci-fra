@@ -29,6 +29,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2ax.bin	\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1).t2cx.bin	\
+	$(PREFIX1).t2dx.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
 	$(PREFIX1b).t4x.bin	\
@@ -52,6 +53,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).t1x			\
 	$(PREFIX2).t2x.bin	\
 	$(PREFIX2).t2x_pas.bin	\
+	$(PREFIX2).t2x_pro.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
 	$(PREFIX2b).t2x_enon.bin	\
 	$(PREFIX2).t3x.bin	\
@@ -196,6 +198,10 @@ $(PREFIX1).t2cx.bin: $(BASENAME).$(PREFIX1).t2cx
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
+$(PREFIX1).t2dx.bin: $(BASENAME).$(PREFIX1).t2dx
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
 $(PREFIX1).t3x.bin: $(BASENAME).$(PREFIX1).t3x
 	apertium-validate-postchunk $<
 	apertium-preprocess-transfer $< $@
@@ -233,6 +239,10 @@ $(PREFIX2).t2x.bin: $(BASENAME).$(PREFIX2).t2x
 	apertium-preprocess-transfer $< $@
 
 $(PREFIX2).t2x_pas.bin: $(BASENAME).$(PREFIX2).t2x_pas
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX2).t2x_pro.bin: $(BASENAME).$(PREFIX2).t2x_pro
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
@@ -280,11 +290,13 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).t2ax	\
 		$(BASENAME).$(PREFIX1).t2bx	\
 		$(BASENAME).$(PREFIX1).t2cx	\
+		$(BASENAME).$(PREFIX1).t2dx	\
 		$(BASENAME).$(PREFIX1).t3x	\
 		$(BASENAME).$(PREFIX1).t4x	\
 		$(BASENAME).$(PREFIX2).t1x	\
 		$(BASENAME).$(PREFIX2).t2x	\
 		$(BASENAME).$(PREFIX2).t2x_pas	\
+		$(BASENAME).$(PREFIX2).t2x_pro	\
 		$(BASENAME).$(PREFIX2).t2x_supersn	\
 		$(BASENAME).$(PREFIX2).t2x_enon	\
 		$(BASENAME).$(PREFIX2).t3x	\
@@ -305,11 +317,13 @@ apertium_oci_fra_DATA=	\
 	$(BASENAME).$(PREFIX1).t2ax			\
 	$(BASENAME).$(PREFIX1).t2bx			\
 	$(BASENAME).$(PREFIX1).t2cx			\
+	$(BASENAME).$(PREFIX1).t2dx			\
 	$(BASENAME).$(PREFIX1).t3x			\
 	$(BASENAME).$(PREFIX1).t4x			\
 	$(BASENAME).$(PREFIX2).t1x			\
 	$(BASENAME).$(PREFIX2).t2x			\
 	$(BASENAME).$(PREFIX2).t2x_pas			\
+	$(BASENAME).$(PREFIX2).t2x_pro			\
 	$(BASENAME).$(PREFIX2).t2x_supersn			\
 	$(BASENAME).$(PREFIX2).t2x_enon			\
 	$(BASENAME).$(PREFIX2).t3x			\

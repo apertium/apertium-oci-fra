@@ -5,6 +5,10 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SN_pl">
+      <cat-item tags="SN.*.pl"/>
+      <cat-item tags="SN.*.pl.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -23,6 +27,11 @@
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="ne_adv">
+      <cat-item lemma="ne" tags="SAdv"/>
+      <cat-item lemma="ne" tags="SAdv.*"/>
+    </def-cat>
+
     <def-cat n="SV">
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
@@ -31,7 +40,13 @@
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
     </def-cat>
-
+    <def-cat n="SV_vbser_p3">
+      <cat-item tags="SV.vbser.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser_p3pl">
+      <cat-item tags="SV.vbser.*.p3.pl"/>
+      <cat-item tags="SV.vbser.*.p3.pl.*"/>
+    </def-cat>
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
       <cat-item lemma="sercj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SV.*"/>
@@ -57,7 +72,12 @@
 
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
+      <cat-item tags="PREP.*"/>
     </def-cat>
+    <def-cat n="PREP_de">
+      <cat-item lemma="de" tags="PREP"/>
+    </def-cat>
+
 
     <def-cat n="cnjcoo">
       <cat-item tags="cnjcoo"/>
@@ -187,31 +207,27 @@
              </choose>
      </def-macro>
 
- <def-macro n="generate_subject1" npar="1">  <!--ATENCIÓN: se si crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+
+ <def-macro n="generate_subject1" npar="1">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
    <choose>
      <when>
        <test>
-           <in caseless="yes">
-             <clip pos="1" part="lem"/>
-             <list n="SV_personals"/>
-           </in>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
        </test>
         <choose>
           <when>
             <test>
-              <equal>
-                <var n="finfrasa"/>
-                <lit v="yes"/>
-              </equal>
+              <or>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+              </or>
             </test>
             <choose>
               <when>
                 <test>
                   <not>
-                    <equal>
-                      <clip pos="1" part="temps"/>
-                      <lit-tag v="imp"/>
-                    </equal>
+                    <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
                   </not>
                 </test>
                 <out>
@@ -254,8 +270,8 @@
    </choose>
  </def-macro>
 
- <def-macro n="generate_subject2" npar="2">  <!--ATENCIÓN: se si crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
-<!-- el paràmetre 1 és la posició del verb, el segon la primera paraula (per agafar si és majúscula o no) -->
+ <def-macro n="generate_subject2" npar="2">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+<!-- el paràmetre 1 és el verb; el segon, la primera paraula (per agafar si és majúscula o no) -->
    <choose>
      <when>
        <test>
@@ -269,6 +285,8 @@
             <test>
               <or>
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
@@ -843,6 +861,141 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbser_p3 Det > ce SV_vbser_p3 Det: èra un ostal > c'était une maison">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="Det"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3pl De SN_pl > ce SV_vbser_p3 De SN_pl: èran d'ostals > c'étaient des maisons">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SPron_tn SPron_pro SPron_pro SPron_pro SV (aquesta regla és per impedir la generació del prn.tn">
       <pattern>
         <pattern-item n="SPron_tn"/>
@@ -922,6 +1075,64 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_tn ne SV (aquesta regla és per impedir la generació del prn.tn">
+      <pattern>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SV > subjècte ne SV">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <call-macro n="generate_subject1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>

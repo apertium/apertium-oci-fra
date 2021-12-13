@@ -280,6 +280,10 @@
       <cat-item lemma="television" tags="n.*"/>
       <cat-item lemma="canal" tags="n.*"/>
       <cat-item lemma="TV" tags="np.*"/>
+      <cat-item lemma="region" tags="n.*"/>
+      <cat-item lemma="euroregion" tags="n.*"/>
+      <cat-item lemma="festival" tags="n.*"/>
+      <cat-item tags="np.al.*"/>
     </def-cat>
 
     <def-cat n="temps_n">
@@ -478,11 +482,20 @@
       <attr-item tags="al"/>
     </def-attr>
 
+    <def-attr n="a_np_acr">
+      <attr-item tags="ant"/>
+      <attr-item tags="cog"/>
+      <attr-item tags="top"/>
+      <attr-item tags="al"/>
+      <attr-item tags="acr"/>
+    </def-attr>
+
     <def-attr n="a_det">
       <attr-item tags="det.def"/>
       <attr-item tags="det.ind"/>
       <attr-item tags="det.dem"/>
       <attr-item tags="det.pos"/>
+      <attr-item tags="det.itg"/>
       <attr-item tags="predet"/>
     </def-attr>
 
@@ -491,6 +504,7 @@
       <attr-item tags="ind"/>
       <attr-item tags="dem"/>
       <attr-item tags="pos"/>
+      <attr-item tags="itg"/>
       <attr-item tags="predet"/>
     </def-attr>
 
@@ -617,6 +631,7 @@
 
   <section-def-lists>
     <def-list n="en_majuscules">
+      <list-item v="État"/>
       <list-item v="Monday"/>
       <list-item v="Tuesday"/>
       <list-item v="Wednesday"/>
@@ -982,7 +997,13 @@
       <list-item v="Bretagne"/>
       <list-item v="Finistère"/>
       <list-item v="Normandie"/>
+      <list-item v="Roussillon"/>
+      <list-item v="Languedoc"/>
+      <list-item v="Languedoc-Roussillon"/>
+      <list-item v="Cerdagne"/>
+      <list-item v="Occitanie"/>
       <list-item v="Gascogne"/>
+      <list-item v="Guyenne"/>
       <list-item v="Gironde"/>
       <list-item v="Landes"/>
       <list-item v="Béarn"/>
@@ -1348,9 +1369,15 @@
       <list-item v="Costa Rica"/>
       <list-item v="Panama"/>
       <list-item v="Barbade"/>
+      <list-item v="Bahamas"/>
       <list-item v="Colombie"/>
       <list-item v="Vénézuéla"/>
       <list-item v="Venezuela"/>
+      <list-item v="Guadeloupe"/>
+      <list-item v="Réunion"/>
+      <list-item v="Martinique"/>
+      <list-item v="Guyane"/>
+      <list-item v="Surinam"/>
       <list-item v="Brésil"/>
       <list-item v="Équateur"/>
       <list-item v="Pérou"/>
@@ -3548,57 +3575,26 @@
       <choose>
         <when>
           <test>
-        <equal>
-          <var n="EOS"/>
-          <lit v="true"/>
-        </equal>
+            <equal><var n="EOS"/><lit v="true"/></equal>
           </test>
           <choose>
-        <when>
-          <test>
-            <and>
-              <equal>
-            <clip pos="1" side="sl" part="a_np_acr"/>
-            <lit v=""/>
-              </equal>
-              <not>
-            <in>
-              <clip pos="1" side="tl" part="lem"/>
-              <list n="en_majuscules"/>
-            </in>
-              </not>
-            </and>
-          </test>
-          <modify-case>
-            <clip pos="1" side="tl" part="lem"/>
-            <lit v="aa"/>
-          </modify-case>
-        </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="sl" part="a_np_acr"/><lit v=""/></equal>
+                  <not><in><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in></not>
+                </and>
+              </test>
+              <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
+            </when>
           </choose>
-          <let>
-        <var n="caseFirstWord"/>
-        <lit v="Aa"/>
-          </let>
+          <let><var n="caseFirstWord"/><lit v="Aa"/></let>
         </when>
         <otherwise>
-          <let>
-        <var n="caseFirstWord"/>
-        <lit v="aa"/>
-          </let>
+          <let><var n="caseFirstWord"/><lit v="aa"/></let>
         </otherwise>
       </choose>
-<!--    </when>
-    <otherwise>
-      <let>
-        <var n="caseFirstWord"/>
-        <lit v="aa"/>
-      </let>
-    </otherwise>
-      </choose>-->
-      <let>
-    <var n="EOS"/>
-    <lit v="false"/>
-      </let>
+      <let><var n="EOS"/><lit v="false"/></let>
     </def-macro>
 
     <def-macro n="f_maj_gentilici1" npar="1">
@@ -3683,6 +3679,7 @@
               <chunk name="det-nptop" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="1" side="tl" part="gen"/></tag>
                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3710,6 +3707,7 @@
               <chunk name="nptop" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="1" side="tl" part="gen"/></tag>
                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3798,6 +3796,7 @@
               <chunk name="det-nptop-adj" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="1" side="tl" part="gen"/></tag>
                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3831,6 +3830,7 @@
               <chunk name="nptop-adj" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="1" side="tl" part="gen"/></tag>
                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3882,6 +3882,7 @@
               <chunk name="det-adj-nptop" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3913,6 +3914,7 @@
               <chunk name="adj-nptop" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="1" side="tl" part="gen"/></tag>
                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -3958,6 +3960,7 @@
           <chunk name="det-nptop-adj" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4007,6 +4010,7 @@
           <chunk name="det-adj-nptop" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
               <tag><clip pos="3" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4053,6 +4057,7 @@
           <chunk name="npant" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4102,6 +4107,7 @@
           <chunk name="npant" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4159,6 +4165,7 @@
           <chunk name="npant" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4202,6 +4209,7 @@
           <chunk name="nptop" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
               <tag><clip pos="3" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4253,6 +4261,7 @@
           <chunk name="npal" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4268,6 +4277,55 @@
               <clip pos="2" side="tl" part="lemh"/>
               <clip pos="2" side="tl" part="tags"/>
               <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETDEF radio NPTOP (la region Gasconha > la région Gascogne)">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="radio_tv"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="npal" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
@@ -4297,6 +4355,7 @@
           <chunk name="nptop" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -4439,6 +4498,7 @@
               <chunk name="nptop" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -4468,6 +4528,7 @@
               <chunk name="nptop">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
                   <tag><var n="genero_sl"/></tag>
@@ -4700,6 +4761,7 @@
           <chunk name="np" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -5403,6 +5465,7 @@
           <chunk name="np" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -5463,6 +5526,7 @@
           <chunk name="np_adj" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
               <tag><clip pos="2" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -7011,11 +7075,15 @@
              <test>
                <or>
                  <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="en"/></equal>
                  </and>
                  <and>
-                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="en"/></equal>
+                   </or>
                    <or>
                      <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="me"/></equal>
                      <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="te"/></equal>
@@ -7023,6 +7091,13 @@
                      <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="nos"/></equal>
                      <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="vos"/></equal>
                    </or>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="en"/></equal>
+                   </or>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="ac"/></equal>
                  </and>
                </or>
              </test>
@@ -8113,6 +8188,7 @@
           <chunk name="np" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
