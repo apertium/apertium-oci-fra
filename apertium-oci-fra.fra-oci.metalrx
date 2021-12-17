@@ -737,6 +737,22 @@
 
 <!-- **************** N **************** -->
 
+  <!-- chute >> casuda, cascada -->
+  <rule weight="0.8">
+    <match lemma="chute" tags="n.*"><select lemma="casuda"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="chute" tags="n.f.pl"><select lemma="cascada"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+
   <!-- soir >> vèspre, ser -->
   <rule weight="0.8">
     <match lemma="soir" tags="n.*"><select lemma="vèspre"/></match>
