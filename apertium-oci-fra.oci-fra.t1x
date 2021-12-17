@@ -579,6 +579,18 @@
       <attr-item tags="itg"/>
     </def-attr>
 
+    <def-attr n="a_prn2">
+      <attr-item tags="tn"/>
+      <attr-item tags="tn.pos"/>
+      <attr-item tags="pro"/>
+      <attr-item tags="pro.ref"/>
+      <attr-item tags="pro.adv"/>
+      <attr-item tags="enc"/>
+      <attr-item tags="enc.ref"/>
+      <attr-item tags="enc.adv"/>
+      <attr-item tags="itg"/>
+    </def-attr>
+
     <def-attr n="a_pas_neg">
       <attr-item tags="pas_neg"/>
     </def-attr>
@@ -8212,26 +8224,58 @@
         <call-macro n="firstWord">
           <with-param pos="1"/>
         </call-macro>
+<!--
          <call-macro n="f_concord1">
            <with-param pos="1"/>
          </call-macro>
+-->
          <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-         <out>
-           <chunk namefrom="lemma" case="caseFirstWord">
-             <tags>
-               <tag><lit-tag v="SPron"/></tag>
-               <tag><clip pos="1" side="tl" part="a_prn"/></tag>
-               <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
-               <tag><clip pos="1" side="tl" part="pers"/></tag>
-               <tag><clip pos="1" side="tl" part="nbr"/></tag>
-             </tags>
-             <lu>
-               <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="tags"/>
-               <clip pos="1" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-         </out>
+         <choose>
+           <when>
+             <test>
+               <equal><clip pos="1" side="tl" part="a_pas_neg"/><lit v=""/></equal>
+             </test>
+             <out>
+               <chunk namefrom="lemma" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <lit-tag v="prn"/>
+                   <clip pos="1" side="tl" part="a_prn2"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <lit-tag v="3"/>
+                   <lit-tag v="4"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <out>
+               <chunk namefrom="lemma" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <lit-tag v="prn"/>
+                   <clip pos="1" side="tl" part="a_prn2"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <lit-tag v="4"/>
+                   <lit-tag v="5"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
        </action>
     </rule>
 

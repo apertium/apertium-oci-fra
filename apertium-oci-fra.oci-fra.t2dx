@@ -9,12 +9,22 @@
       <cat-item tags="SN.*.pl"/>
       <cat-item tags="SN.*.pl.*"/>
     </def-cat>
+    <def-cat n="SN_SPron">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
     <def-cat n="PP">
       <cat-item lemma="pp" tags="SA.*"/>
+    </def-cat>
+    <def-cat n="SPron">
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
     </def-cat>
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
@@ -50,13 +60,8 @@
     </def-cat>
 
     <def-cat n="SDet">
-      <cat-item tags="SDet"/>
-      <cat-item tags="SDet.*"/>
-    </def-cat>
-
-    <def-cat n="SPron">
-      <cat-item tags="SPron"/>
-      <cat-item tags="SPron.*"/>
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
     </def-cat>
 
     <def-cat n="Num">
@@ -165,10 +170,148 @@
   </section-def-attrs>
 
   <section-def-vars>
-    <def-var n="number"/>
+    <def-var n="genero"/>
+    <def-var n="numero"/>
   </section-def-vars>
 
   <section-def-macros>
+
+    <def-macro n="f_concord0" npar="1">
+      <choose>
+<!--To determine value of variables of gender and
+                 number and propagate to other rules.  Variables are
+                 not used again in this rule -->
+        <when>
+          <test>
+            <equal>
+              <clip pos="1" part="gen"/>
+              <lit-tag v="m"/>
+            </equal>
+          </test>
+          <let>
+            <var n="genero"/>
+            <lit-tag v="m"/>
+          </let>
+        </when>
+        <when>
+          <test>
+            <equal>
+              <clip pos="1" part="gen"/>
+              <lit-tag v="f"/>
+            </equal>
+          </test>
+          <let>
+            <var n="genero"/>
+            <lit-tag v="f"/>
+          </let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <equal>
+              <clip pos="1" part="nbr"/>
+              <lit-tag v="sg"/>
+            </equal>
+          </test>
+          <let>
+            <var n="numero"/>
+            <lit-tag v="sg"/>
+          </let>
+        </when>
+        <when>
+          <test>
+            <equal>
+              <clip pos="1" part="nbr"/>
+              <lit-tag v="pl"/>
+            </equal>
+          </test>
+          <let>
+            <var n="numero"/>
+            <lit-tag v="pl"/>
+          </let>
+        </when>
+      </choose>
+    </def-macro>
+
+    <def-macro n="f_concord1" npar="1">
+      <call-macro n="f_concord0"><with-param pos="1"/></call-macro>
+      <choose>
+        <when>
+          <test>
+<!-- If word has GD or ND, we try to assign the
+              gender or number of the previous rule. If there is no
+              value for the gender or number variable from previous
+              rules, gender will be masculine and number singular.-->
+            <equal>
+              <clip pos="1" part="gen"/>
+              <lit-tag v="GD"/>
+            </equal>
+          </test>
+          <choose>
+            <when>
+              <test>
+                <equal>
+                  <var n="genero"/>
+                  <lit-tag v="f"/>
+                </equal>
+              </test>
+              <let>
+                <clip pos="1" part="gen"/>
+                <lit-tag v="f"/>
+              </let>
+            </when>
+            <otherwise>
+              <let>
+                <clip pos="1" part="gen"/>
+                <lit-tag v="m"/>
+              </let>
+            </otherwise>
+          </choose>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <equal>
+              <clip pos="1" part="nbr"/>
+              <lit-tag v="ND"/>
+            </equal>
+          </test>
+          <choose>
+            <when>
+              <test>
+                <equal>
+                  <var n="numero"/>
+                  <lit-tag v="pl"/>
+                </equal>
+              </test>
+              <let>
+                <clip pos="1" part="nbr"/>
+                <lit-tag v="pl"/>
+              </let>
+            </when>
+            <otherwise>
+              <let>
+                <clip pos="1" part="nbr"/>
+                <lit-tag v="sg"/>
+              </let>
+            </otherwise>
+          </choose>
+        </when>
+      </choose>
+    </def-macro>
+
+    <def-macro n="f_concord2" npar="2">
+      <call-macro n="f_concord1"><with-param pos="1"/></call-macro>
+      <call-macro n="f_concord1"><with-param pos="2"/></call-macro>
+    </def-macro>
+
+    <def-macro n="f_concord3" npar="3">
+      <call-macro n="f_concord1"><with-param pos="1"/></call-macro>
+      <call-macro n="f_concord1"><with-param pos="2"/></call-macro>
+      <call-macro n="f_concord1"><with-param pos="3"/></call-macro>
+    </def-macro>
 
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
      <choose>
@@ -456,6 +599,116 @@
     </rule>
 
     <!-- FIN RÈGLAS DE CAMBIAMENT DE POSICION DELS PROCLITICS -->
+
+    <!-- RÈGLAS D'ACORD DELS PRONOMS -->
+
+    <rule comment="RÈGLA: SN">
+      <pattern>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron">
+      <pattern>
+        <pattern-item n="SPron"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron PREP_de SN_SPron: cap d'eles > aucune d'elles">
+      <pattern>
+        <pattern-item n="SPron"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_SPron"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron PREP_de SDet SN: cap de las comunas > aucune des comunes">
+      <pattern>
+        <pattern-item n="SPron"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS D'ACORD DELS PRONOMS -->
 
   </section-rules>
 </interchunk>
