@@ -281,6 +281,22 @@
     </repeat>
     <match tags="cm"/>
   </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+    <or>
+      <match lemma="atanben" tags="adv"/>
+      <match lemma="tanben" tags="adv"/>
+      <match lemma="tanplan" tags="adv"/>
+      <match lemma="tanpauc" tags="adv"/>
+      <match lemma="aitanpauc" tags="adv"/>
+      <match lemma="atanpauc" tags="adv"/>
+      <match lemma="tanpòc" tags="adv"/>
+      <match lemma="tampòc" tags="adv"/>
+    </or>
+  </rule>
 
   <!-- tu >> tu, toi -->
   <rule weight="0.8">
@@ -299,6 +315,19 @@
       </or>
     </repeat>
     <match tags="cm"/>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+    <or>
+      <match lemma="atanben" tags="adv"/>
+      <match lemma="tanben" tags="adv"/>
+      <match lemma="tanplan" tags="adv"/>
+      <match lemma="tanpauc" tags="adv"/>
+      <match lemma="aitanpauc" tags="adv"/>
+      <match lemma="atanpauc" tags="adv"/>
+      <match lemma="tanpòc" tags="adv"/>
+      <match lemma="tampòc" tags="adv"/>
+    </or>
   </rule>
 
   <!-- el/eth >> il(s), lui, eux -->
@@ -348,13 +377,370 @@
     </repeat>
     <match tags="cm"/>
   </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    </or>
+    <or>
+      <match lemma="atanben" tags="adv"/>
+      <match lemma="tanben" tags="adv"/>
+      <match lemma="tanplan" tags="adv"/>
+      <match lemma="tanpauc" tags="adv"/>
+      <match lemma="aitanpauc" tags="adv"/>
+      <match lemma="atanpauc" tags="adv"/>
+      <match lemma="tanpòc" tags="adv"/>
+      <match lemma="tampòc" tags="adv"/>
+    </or>
+  </rule>
 
   <!-- lo >> le, lui -->
   <rule weight="0.8">
     <match lemma="lo" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
 
-<!-- **************** PR **************** -->
+<!-- **************** PREP **************** -->
+
+  <!-- denquia >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="denquia" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="denquia" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- dinc >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="dinc" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dinc" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- dinca >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="dinca" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dinca" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- enquia >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="enquia" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enquia" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- entrò >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="entrò" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="entrò" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- entrò a >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="entrò a" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="entrò a" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- dusca >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="dusca" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dusca" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- duscas >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="duscas" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="duscas" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- enjusca >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="enjusca" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enjusca" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- jusca >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="jusca" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="jusca" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
+
+  <!-- juscas >> jusqu'à, jusque -->
+  <rule weight="0.8">
+    <match lemma="juscas" tags="pr"><select lemma="jusqu'à"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="juscas" tags="pr"><select lemma="jusque"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="en cò de" tags="pr"/>
+      <match lemma="en çò de" tags="pr"/>
+      <match lemma="a çò de" tags="pr"/>
+      <match lemma="cò de" tags="pr"/>
+      <match lemma="chas" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="cap a" tags="pr"/>
+      <match lemma="devèrs" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+      <match lemma="fòrça" tags="preadv"/>
+      <match lemma="fòrça" tags="adv"/>
+      <match lemma="hèra" tags="preadv"/>
+      <match lemma="hèra" tags="adv"/>
+      <match lemma="fòrt" tags="preadv"/>
+      <match lemma="fòrt" tags="adv"/>
+      <match lemma="hòrt" tags="preadv"/>
+      <match lemma="hòrt" tags="adv"/>
+      <match lemma="plan" tags="preadv"/>
+      <match lemma="plan" tags="adv"/>
+    </or>
+  </rule>
 
   <!-- per >> pour, par -->
   <rule weight="0.8">
@@ -1653,6 +2039,9 @@
   </rule>
   <rule weight="1.0">
     <match lemma="non" tags="adv"><select lemma="ne"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
     <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
   </rule>
 
