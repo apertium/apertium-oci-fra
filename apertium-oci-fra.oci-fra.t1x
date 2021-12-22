@@ -342,6 +342,17 @@
       <cat-item lemma="deceme" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="debuta_fin_n">
+      <cat-item lemma="debuta" tags="n.*"/>
+      <cat-item lemma="començar" tags="n.*"/>
+      <cat-item lemma="fin" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="mitat_n">
+      <cat-item lemma="mitat" tags="n.*"/>
+      <cat-item lemma="mieitat" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="num_romans"> <!-- per a reis, segles, mil·lenis -->
       <cat-item lemma="I" tags="num.*"/>
       <cat-item lemma="Ièr" tags="adj.*"/>
@@ -6692,6 +6703,87 @@
       </action>
     </rule>
 
+
+    <rule comment="RÈGLA: DETDEF MITAT DE MES > mi-MES">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="mitat_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><concat><lit v="mi-"/><clip pos="4" side="tl" part="lem"/></concat></let>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="le"/>
+              </get-case-from>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="4">
+                 <var n="lemma"/>
+              </get-case-from>
+              <lit-tag v="adv"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: PREP DETDEF DEBUTA/FIN DE MES > PREP DÉBUT/FIN MES">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="debuta_fin_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="5" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <!-- FIN RÈGLAS DATAS -->
 

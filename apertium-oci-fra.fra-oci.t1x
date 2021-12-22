@@ -335,6 +335,29 @@
       <cat-item lemma="décembre" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="mi-mois">
+      <cat-item lemma="mi-janvier" tags="adv"/>
+      <cat-item lemma="mi-février" tags="adv"/>
+      <cat-item lemma="mi-mars" tags="adv"/>
+      <cat-item lemma="mi-avril" tags="adv"/>
+      <cat-item lemma="mi-mai" tags="adv"/>
+      <cat-item lemma="mi-juin" tags="adv"/>
+      <cat-item lemma="mi-juillet" tags="adv"/>
+      <cat-item lemma="mi-août" tags="adv"/>
+      <cat-item lemma="mi-septembre" tags="adv"/>
+      <cat-item lemma="mi-octobre" tags="adv"/>
+      <cat-item lemma="mi-novembre" tags="adv"/>
+      <cat-item lemma="mi-décembre" tags="adv"/>
+    </def-cat>
+
+    <def-cat n="debut_n">
+      <cat-item lemma="début" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="fin_n">
+      <cat-item lemma="fin" tags="n.*"/>
+    </def-cat>
+
   </section-def-cats>
 
   <section-def-attrs>
@@ -3921,488 +3944,6 @@
 
   <section-rules>
 
-    <!-- RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
-
-    <rule comment="RÈGLA: DET">
-       <pattern>
-         <pattern-item n="det"/>
-       </pattern>
-       <action>
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="tipus_det">
-          <with-param pos="1"/>
-        </call-macro>
-         <out>
-           <chunk name="det">
-             <tags>
-               <tag><lit-tag v="Det"/></tag>
-               <tag><var n="tipusdet"/></tag>
-               <tag><clip pos="1" side="tl" part="gen"/></tag>
-               <tag><clip pos="1" side="tl" part="nbr"/></tag>
-               <tag><var n="genero_sl"/></tag>
-               <tag><var n="numero_sl"/></tag>
-            </tags>
-           <lu>
-             <clip pos="1" side="tl" part="lemh"/>
-             <clip pos="1" side="tl" part="tags"/>
-             <clip pos="1" side="tl" part="lemq"/>
-           </lu>
-         </chunk>
-         </out>
-       </action>
-    </rule>
-
-    <rule comment="RÈGLA: NOM">
-      <pattern>
-        <pattern-item n="nom"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_maj_gentilici">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-          <chunk name="n">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><clip pos="1" side="tl" part="gen"/></tag>
-              <tag><clip pos="1" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: NP">
-      <pattern>
-        <pattern-item n="np"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-          <chunk name="np">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><lit-tag v="np"/></tag>
-              <tag><clip pos="1" side="tl" part="gen"/></tag>
-              <tag><clip pos="1" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: ADJ">
-      <pattern>
-        <pattern-item n="adj"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_itg">
-          <with-param pos="1"/>
-        </call-macro>
-        <choose>
-          <when> <!-- <e><p><l>II<s n="num"/><s n="mf"/><s n="sp"/></l><r>IIe<s n="adj"/><s n="mf"/><s n="sg"/></r></p></e> -->
-            <test>
-              <equal>
-                <clip pos="1" side="tl" part="a_num"/><lit-tag v="num"/>
-              </equal>
-            </test>
-            <out>
-             <chunk name="num">
-               <tags>
-                 <tag><lit-tag v="Num"/></tag>
-               </tags>
-              <lu>
-                <clip pos="1" side="tl" part="whole"/>
-              </lu>
-             </chunk>
-            </out>
-          </when>
-          <otherwise>
-            <out>
-              <chunk name="a">
-                <tags>
-                  <tag><lit-tag v="SA"/></tag>
-                  <tag><clip pos="1" side="tl" part="gen"/></tag>
-                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
-                  <tag><var n="genero_sl"/></tag>
-                  <tag><var n="numero_sl"/></tag>
-                  <tag><var n="v_itg"/></tag>
-                </tags>
-                <lu>
-                  <clip pos="1" side="tl" part="lemh"/>
-                  <clip pos="1" side="tl" part="a_adjec"/>
-                  <lit-tag v="2"/>
-                  <lit-tag v="3"/>
-                  <clip pos="1" side="tl" part="lemq"/>
-                </lu>
-              </chunk>
-            </out>
-          </otherwise>
-        </choose>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: pp">
-      <pattern>
-        <pattern-item n="pp"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_chunk_tags">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-          <chunk name="pp">
-            <tags>
-              <tag><lit-tag v="SA"/></tag>
-              <tag><clip pos="1" side="tl" part="gen"/></tag>
-              <tag><clip pos="1" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="a_verb"/>
-              <clip pos="1" side="tl" part="temps"/>
-              <lit-tag v="2"/>
-              <lit-tag v="3"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: ADV">
-      <pattern>
-        <pattern-item n="adv_preadv"/>
-      </pattern>
-      <action>
-        <call-macro n="escriure_SAdv"><with-param pos="1"/></call-macro>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: ADVITG">
-      <pattern>
-        <pattern-item n="advitg"/>
-      </pattern>
-      <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="SAdv"/></tag>
-              <tag><lit-tag v="itg"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
-      <pattern>
-        <pattern-item n="preadv"/>
-        <pattern-item n="adv"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk name="preadv_adv">
-            <tags>
-              <tag><lit-tag v="SAdv"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="tags"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-            <b pos="1"/>
-            <lu>
-              <clip pos="2" side="tl" part="lemh"/>
-              <clip pos="2" side="tl" part="tags"/>
-              <clip pos="2" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: PRN">
-       <pattern>
-         <pattern-item n="prn"/>
-       </pattern>
-       <action>
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="tipus_prn">
-           <with-param pos="1"/>
-         </call-macro>
-         <choose>
-           <when>
-             <test>
-               <not>
-                 <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="est-ce que"/></equal>
-               </not>
-             </test>
-             <out>
-               <chunk name="prn">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
-                   <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-         </choose>
-       </action>
-    </rule>
-
-
-    <rule comment="RÈGLA: NUMERAL">
-      <pattern>
-        <pattern-item n="num"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <out>
-         <chunk name="num">
-           <tags>
-             <tag><lit-tag v="Num"/></tag>
-           </tags>
-          <lu>
-            <clip pos="1" side="tl" part="whole"/>
-          </lu>
-         </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: PREP">
-      <pattern>
-        <pattern-item n="pr"/>
-      </pattern>
-      <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="PREP"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: CNJCOO">
-      <pattern>
-        <pattern-item n="cnjcoo"/>
-      </pattern>
-      <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="cnjcoo"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: CNJSUB">
-      <pattern>
-        <pattern-item n="cnjsub"/>
-      </pattern>
-      <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="cnjsub"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: CNJADV">
-      <pattern>
-        <pattern-item n="cnjadv"/>
-      </pattern>
-      <action>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="cnjadv"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: RELATIF">
-      <pattern>
-        <pattern-item n="rel"/>
-      </pattern>
-      <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <out>
-          <chunk namefrom="lemma">
-            <tags>
-              <tag><lit-tag v="rel"/></tag>
-            </tags>
-            <lu>
-              <clip pos="1" side="tl" part="whole"/>
-            </lu>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: VBSER">
-       <pattern>
-         <pattern-item n="vbser"/>
-       </pattern>
-       <action>
-        <call-macro n="f_concord1">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="tipus_verb">
-          <with-param pos="1"/>
-        </call-macro>
-         <out>
-           <chunk name="vbser">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><lit-tag v="vbser"/></tag>
-               <tag><clip pos="1" side="tl" part="temps"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <lu>
-               <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="tags"/>
-               <clip pos="1" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-         </out>
-       </action>
-    </rule>
-
-    <rule comment="RÈGLA: VBNOSER">
-       <pattern>
-         <pattern-item n="vbnoser"/>
-       </pattern>
-       <action>
-        <call-macro n="tipus_verb">
-          <with-param pos="1"/>
-        </call-macro>
-         <out>
-           <chunk name="verb">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-               <tag><clip pos="1" side="tl" part="temps"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <lu>
-               <clip pos="1" side="tl" part="lemh"/>
-               <clip pos="1" side="tl" part="a_verb"/>
-               <clip pos="1" side="tl" part="temps"/>
-               <clip pos="1" side="tl" part="pers"/>
-               <clip pos="1" side="tl" part="nbr"/>
-               <clip pos="1" side="tl" part="lemq"/>
-              </lu>
-           </chunk>
-         </out>
-       </action>
-    </rule>
-
-    <rule comment="RÈGLA: IJ">
-      <pattern>
-        <pattern-item n="ij"/>
-      </pattern>
-      <action>
-        <out>
-         <chunk name="ij">
-           <tags>
-             <tag><lit-tag v="ij"/></tag>
-           </tags>
-          <lu>
-            <clip pos="1" side="tl" part="whole"/>
-          </lu>
-         </chunk>
-        </out>
-      </action>
-    </rule>
-
-    <!-- FIN RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
-
     <!-- RÈGLAS CONCORDANÇA -->
 
     <rule comment="RÈGLA: DET NOM">
@@ -7209,6 +6750,570 @@
       </action>
     </rule>
 
+   <rule comment="RÈGLA: début MOIS (début janvier > a la debuta de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="debut_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="debuta"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: début MOIS (début janvier > au començar de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="debut_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="començar"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP début MOIS (PREP début janvier > PREP a la debuta de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="debut_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="debuta"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP début MOIS (PREP début janvier > PREP lo començar de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="debut_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="començar"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: fin MOIS (fin janvier > a la fin de genièr)">
+      <pattern>
+        <pattern-item n="fin_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="fin"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP fin MOIS (PREP fin janvier > PREP a la fin de genièr)">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="fin_n"/>
+        <pattern-item n="nom_mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="fin"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: MI-MOIS (mi-janvier > a la mitat de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="1" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: MI-MOIS (mi-janvier > a la mieitat de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mieitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="1" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP MI-MOIS (PREP mi-janvier > PREP a la mitat de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP MI-MOIS (PREP mi-janvier > PREP lo mieitat de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mieitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: DETDEF MI-MOIS (la mi-janvier > a la mitat de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: DETDEF MI-MOIS (la mi-janvier > a la mieitat de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="a"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mieitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP DETDEF MI-MOIS (PREP la mi-janvier > PREP a la mitat de genièr)" v="oci">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: PREP DETDEF MI-MOIS (PREP la mi-janvier > PREP lo mieitat de genèr)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="pr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="mi-mois"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def.f.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <lit v="mieitat"/>
+              <lit-tag v="n.f.sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lem"/>
+              <lit-tag v="n.m.sg"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS DATAS -->
 
 
@@ -9990,7 +10095,6 @@
          </choose>
       </action>
     </rule>
-
 
   <!-- FIN RÈGLAS ELISION NE -->
 
@@ -13596,6 +13700,489 @@
     </rule>
 
   <!-- FIN RÈGLAS VBMOD + PRO + VBMOD -->
+
+
+    <!-- RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
+
+    <rule comment="RÈGLA: DET">
+       <pattern>
+         <pattern-item n="det"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord1">
+           <with-param pos="1"/>
+         </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="det">
+             <tags>
+               <tag><lit-tag v="Det"/></tag>
+               <tag><var n="tipusdet"/></tag>
+               <tag><clip pos="1" side="tl" part="gen"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+            </tags>
+           <lu>
+             <clip pos="1" side="tl" part="lemh"/>
+             <clip pos="1" side="tl" part="tags"/>
+             <clip pos="1" side="tl" part="lemq"/>
+           </lu>
+         </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: NOM">
+      <pattern>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NP">
+      <pattern>
+        <pattern-item n="np"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="np">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ADJ">
+      <pattern>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_itg">
+          <with-param pos="1"/>
+        </call-macro>
+        <choose>
+          <when> <!-- <e><p><l>II<s n="num"/><s n="mf"/><s n="sp"/></l><r>IIe<s n="adj"/><s n="mf"/><s n="sg"/></r></p></e> -->
+            <test>
+              <equal>
+                <clip pos="1" side="tl" part="a_num"/><lit-tag v="num"/>
+              </equal>
+            </test>
+            <out>
+             <chunk name="num">
+               <tags>
+                 <tag><lit-tag v="Num"/></tag>
+               </tags>
+              <lu>
+                <clip pos="1" side="tl" part="whole"/>
+              </lu>
+             </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="a">
+                <tags>
+                  <tag><lit-tag v="SA"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                  <tag><var n="v_itg"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_adjec"/>
+                  <lit-tag v="2"/>
+                  <lit-tag v="3"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: pp">
+      <pattern>
+        <pattern-item n="pp"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="pp">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="a_verb"/>
+              <clip pos="1" side="tl" part="temps"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ADV">
+      <pattern>
+        <pattern-item n="adv_preadv"/>
+      </pattern>
+      <action>
+        <call-macro n="escriure_SAdv"><with-param pos="1"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ADVITG">
+      <pattern>
+        <pattern-item n="advitg"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+              <tag><lit-tag v="itg"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREADV ADV (empaquetament en un sol chunk per t2x)">
+      <pattern>
+        <pattern-item n="preadv"/>
+        <pattern-item n="adv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk name="preadv_adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRN">
+       <pattern>
+         <pattern-item n="prn"/>
+       </pattern>
+       <action>
+         <call-macro n="f_concord1">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_prn">
+           <with-param pos="1"/>
+         </call-macro>
+         <choose>
+           <when>
+             <test>
+               <not>
+                 <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="est-ce que"/></equal>
+               </not>
+             </test>
+             <out>
+               <chunk name="prn">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="tags"/>
+                   <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+         </choose>
+       </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: NUMERAL">
+      <pattern>
+        <pattern-item n="num"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+         <chunk name="num">
+           <tags>
+             <tag><lit-tag v="Num"/></tag>
+           </tags>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+         </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP">
+      <pattern>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJCOO">
+      <pattern>
+        <pattern-item n="cnjcoo"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="cnjcoo"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJSUB">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="cnjsub"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+      </pattern>
+      <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="cnjadv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: RELATIF">
+      <pattern>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="rel"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: VBSER">
+       <pattern>
+         <pattern-item n="vbser"/>
+       </pattern>
+       <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="tags"/>
+               <clip pos="1" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: VBNOSER">
+       <pattern>
+         <pattern-item n="vbnoser"/>
+       </pattern>
+       <action>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+         <out>
+           <chunk name="verb">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="1" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="1" side="tl" part="lemh"/>
+               <clip pos="1" side="tl" part="a_verb"/>
+               <clip pos="1" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="1" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: IJ">
+      <pattern>
+        <pattern-item n="ij"/>
+      </pattern>
+      <action>
+        <out>
+         <chunk name="ij">
+           <tags>
+             <tag><lit-tag v="ij"/></tag>
+           </tags>
+          <lu>
+            <clip pos="1" side="tl" part="whole"/>
+          </lu>
+         </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
 
 
   <!-- AUTRAS RÈGLAS -->
