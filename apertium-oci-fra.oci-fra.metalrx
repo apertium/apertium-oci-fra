@@ -2169,6 +2169,11 @@
 
 <!-- **************** N **************** -->
 
+  <!-- char >> carri, carro -->
+  <rule weight="0.8">
+    <match lemma="char" tags="n.*"><select lemma="carri"/></match>
+  </rule>
+
   <!-- seguida >> suite, série -->
   <rule weight="0.8">
     <match lemma="seguida" tags="n.*"><select lemma="suite"/></match>
@@ -2323,6 +2328,84 @@
   <!-- tirar >> tirer, tirer# sur -->
   <rule weight="0.8">
     <match lemma="tirar" tags="vblex.*"><select lemma="tirer"/></match>
+  </rule>
+
+  <!-- menar/miar >> mener, conduire -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="mener"/></match>
+      <match lemma="miar" tags="vblex.*"><select lemma="mener"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="conduire"/></match>
+      <match lemma="miar" tags="vblex.*"><select lemma="conduire"/></match>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>  
+      <match lemma="veïcule" tags="n.*"/>
+      <match lemma="veitura" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobila" tags="n.*"/>
+      <match lemma="camion" tags="n.*"/>
+      <match lemma="car" tags="n.*"/>
+      <match lemma="autocar" tags="n.*"/>
+      <match lemma="autocarri" tags="n.*"/>
+      <match lemma="bus" tags="n.*"/>
+      <match lemma="autobús" tags="n.*"/>
+      <match lemma="autobus" tags="n.*"/>
+      <match lemma="mòto" tags="n.*"/>
+      <match lemma="moto" tags="n.*"/>
+      <match lemma="motocicleta" tags="n.*"/>
+      <match lemma="carri" tags="n.*"/>
+      <match lemma="carro" tags="n.*"/>
+      <match lemma="motocicleta" tags="n.*"/>
+    </or> 
+  </rule>
+  <rule weight="1.0">
+    <or>  
+      <match lemma="veïcule" tags="n.*"/>
+      <match lemma="veitura" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobila" tags="n.*"/>
+      <match lemma="camion" tags="n.*"/>
+      <match lemma="car" tags="n.*"/>
+      <match lemma="autocar" tags="n.*"/>
+      <match lemma="autocarri" tags="n.*"/>
+      <match lemma="bus" tags="n.*"/>
+      <match lemma="autobús" tags="n.*"/>
+      <match lemma="autobus" tags="n.*"/>
+      <match lemma="mòto" tags="n.*"/>
+      <match lemma="moto" tags="n.*"/>
+      <match lemma="motocicleta" tags="n.*"/>
+      <match lemma="carri" tags="n.*"/>
+      <match lemma="carro" tags="n.*"/>
+      <match lemma="motocicleta" tags="n.*"/>
+    </or> 
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="cm"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="cnjcoo"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="conduire"/></match>
+      <match lemma="miar" tags="vblex.*"><select lemma="conduire"/></match>
+    </or>
   </rule>
 
   <!-- velhar >> veiller, voiler -->

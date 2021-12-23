@@ -742,6 +742,11 @@
 
 <!-- **************** N **************** -->
 
+  <!-- différence >> diferéncia, disparietat -->
+  <rule weight="0.8">
+    <match lemma="différence" tags="n.*"><select lemma="diferéncia"/></match>
+  </rule>
+
   <!-- série >> seria, sèria, tièra -->
   <rule weight="0.8">
     <match lemma="série" tags="n.*"><select lemma="seria"/></match>
@@ -1285,6 +1290,104 @@
   <!-- tromper >> enganar, trompar... -->
   <rule weight="0.8">
     <match lemma="tromper" tags="vblex.*"><select lemma="enganar"/></match>
+  </rule>
+
+  <!-- conduire >> conduire/condusir, menar/miar -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="conduire" tags="vblex.*"><select lemma="conduire"/></match>
+      <match lemma="conduire" tags="vblex.*"><select lemma="condusir"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="conduire" tags="vblex.*"><select lemma="menar"/></match>
+      <match lemma="conduire" tags="vblex.*"><select lemma="miar"/></match>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>  
+      <match lemma="véhicule" tags="n.*"/>
+      <match lemma="voiture" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobile" tags="n.*"/>
+      <match lemma="camion" tags="n.*"/>
+      <match lemma="car" tags="n.*"/>
+      <match lemma="autocar" tags="n.*"/>
+      <match lemma="bus" tags="n.*"/>
+      <match lemma="autobus" tags="n.*"/>
+      <match lemma="moto" tags="n.*"/>
+      <match lemma="motocyclette" tags="n.*"/>
+      <match lemma="char" tags="n.*"/>
+      <match lemma="charrette" tags="n.*"/>
+    </or> 
+  </rule>
+  <rule weight="1.0">
+    <or>  
+      <match lemma="véhicule" tags="n.*"/>
+      <match lemma="voiture" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobile" tags="n.*"/>
+      <match lemma="camion" tags="n.*"/>
+      <match lemma="car" tags="n.*"/>
+      <match lemma="bus" tags="n.*"/>
+      <match lemma="autobus" tags="n.*"/>
+      <match lemma="moto" tags="n.*"/>
+      <match lemma="motocyclette" tags="n.*"/>
+      <match lemma="char" tags="n.*"/>
+      <match lemma="charrette" tags="n.*"/>
+    </or> 
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="cm"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="cnjcoo"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="conduire" tags="vblex.*"><select lemma="menar"/></match>
+      <match lemma="conduire" tags="vblex.*"><select lemma="miar"/></match>
+    </or>
+  </rule>
+
+  <!-- restar >> restar, demorar -->
+  <rule weight="0.8">
+    <match lemma="restar" tags="vblex.*"><select lemma="restar"/></match>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="restar" tags="vblex.*"><select lemma="demorar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="à" tags="pr"/>
+      <match lemma="chez" tags="pr"/>
+      <match lemma="ici" tags="adv"/>
+      <match lemma="là" tags="adv"/>
+      <match lemma="là-bas" tags="adv"/>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="restar" tags="vblex.*"><select lemma="demorar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="en" tags="pr"/>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags=""/>
+    </or>
   </rule>
 
   <!-- apeler >> apelar, sonar, cridar... -->
