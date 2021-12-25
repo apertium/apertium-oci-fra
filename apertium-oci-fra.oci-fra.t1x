@@ -1522,6 +1522,30 @@
       </choose>
     </def-macro>
 
+    <def-macro n="f_concord_bricolatge2" npar="2">
+<!--Pedaç totalment ad-hoc per solucionar problemes amb l'assignació del gènere i nombre a divers -->
+      <choose>
+        <when>
+          <test>
+            <and>
+              <or>
+                <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="divers"/></equal>
+                <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="nombreux"/></equal>
+              </or>
+              <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sp"/></equal>
+              <or>
+                <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+                <equal><clip pos="1" side="sl" part="nbr"/><lit-tag v="pl"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="2" side="tl" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
+
     <def-macro n="f_concord0" npar="1">
       <choose>
 <!--To determine value of variables of gender and
@@ -2098,6 +2122,7 @@
           </let>
         </when>
       </choose>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="2"/></call-macro>
     </def-macro>
 
     <def-macro n="f_concord3" npar="3">
@@ -2760,6 +2785,8 @@
           </let>
         </when>
       </choose>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="2"/></call-macro>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="3"/></call-macro>
     </def-macro>
 
     <def-macro n="f_concord4" npar="4">
@@ -3489,6 +3516,9 @@
           </let>
         </when>
           </choose>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="2"/></call-macro>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="3"/></call-macro>
+      <call-macro n="f_concord_bricolatge2"><with-param pos="1"/><with-param pos="4"/></call-macro>
         </def-macro>
 
         <def-macro n="f_chunk_tags" npar="1">
