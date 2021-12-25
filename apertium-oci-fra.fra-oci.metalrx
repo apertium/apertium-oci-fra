@@ -740,7 +740,22 @@
   </rule>
 
 
+<!-- **************** ADJ **************** -->
+
+  <!-- mauvais >> mal/mau, etc. -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="mauvais" tags="adj.*"><select lemma="mal"/></match>
+      <match lemma="mauvais" tags="adj.*"><select lemma="mau"/></match>
+    </or>
+  </rule>
+
 <!-- **************** N **************** -->
+
+  <!-- massacre >> carnalatge -->
+  <rule weight="0.8">
+    <match lemma="massacre" tags="n.*"><select lemma="carnalatge"/></match>
+  </rule>
 
   <!-- différence >> diferéncia, disparietat -->
   <rule weight="0.8">
@@ -771,6 +786,25 @@
   <!-- soir >> vèspre, ser -->
   <rule weight="0.8">
     <match lemma="soir" tags="n.*"><select lemma="vèspre"/></match>
+  </rule>
+
+  <!-- femme >> femna/hemna, mòlher -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="femme" tags="n.*"><select lemma="femna"/></match>
+      <match lemma="femme" tags="n.*"><select lemma="hemna"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.pos.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+      </or>
+    </repeat>
+    <match lemma="femme" tags="n.*"><select lemma="mòlher"/></match>
   </rule>
 
   <!-- pêche >> pesca, persèc/pershec -->
