@@ -581,6 +581,18 @@
 
 <!-- **************** ADV **************** -->
 
+  <!-- quelque >> environ, per tant -->
+  <rule weight="0.8">
+    <match lemma="quelque" tags="adv"><select lemma="environ"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="quelque" tags="adv"><select lemma="per tant"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+  </rule>
+
   <!-- ne >> non, ne -->
   <rule weight="0.8">
     <match lemma="ne" tags="adv"><select lemma="non" tags="adv"/></match>
@@ -744,13 +756,34 @@
 
   <!-- mauvais >> mal/mau, etc. -->
   <rule weight="0.8">
-    <or>
-      <match lemma="mauvais" tags="adj.*"><select lemma="mal"/></match>
-      <match lemma="mauvais" tags="adj.*"><select lemma="mau"/></match>
-    </or>
+    <match lemma="mauvais" tags="adj.*"><select lemma="mal"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="mauvais" tags="adj.*"><select lemma="mau"/></match>
   </rule>
 
 <!-- **************** N **************** -->
+
+  <!-- police >> polícia/policia, polissa -->
+  <rule weight="0.8">
+    <match lemma="police" tags="n.*"><select lemma="polícia"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="police" tags="n.*"><select lemma="policia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="police" tags="n.*"><select lemma="polissa"/></match>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="assurance" tags="n.*"/>
+      <match lemma="écriture" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- mairie >> maison comuna, comuna -->
   <rule weight="0.8">
@@ -1325,6 +1358,14 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- traduire >> traduire/tradusir, revirar -->
+  <rule weight="0.8">
+    <or>
+      <match lemma="traduire" tags="vblex.*"><select lemma="traduire"/></match>
+      <match lemma="traduire" tags="vblex.*"><select lemma="tradusir"/></match>
+    </or>
+  </rule>
 
   <!-- tromper >> enganar, trompar... -->
   <rule weight="0.8">

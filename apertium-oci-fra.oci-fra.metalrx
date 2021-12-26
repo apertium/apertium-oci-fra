@@ -2342,6 +2342,50 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- revirar >> retourner [leng], traduire -->
+  <rule weight="0.8">
+    <match lemma="revirar" tags="vblex.*"><select lemma="retourner"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="revirar" tags="vblex.*"><select lemma="traduire"/></match>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="de" tags="pr"/>
+      <match tags="np.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="revirar" tags="vblex.*"><select lemma="traduire"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="libre" tags="n.*"/>
+      <match lemma="libe" tags="n.*"/>
+      <match lemma="tèxte" tags="n.*"/>
+      <match lemma="roman" tags="n.*"/>
+      <match lemma="poèma" tags="n.*"/>
+      <match lemma="poesia" tags="n.*"/>
+      <match lemma="poësia" tags="n.*"/>
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="francés" tags="n.*"/>
+      <match lemma="anglés" tags="n.*"/>
+      <match lemma="catalan" tags="n.*"/>
+      <match lemma="italian" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="revirar" tags="vblex.pp.*"><select lemma="traduire"/></match>
+  </rule>
+
   <!-- tirar >> tirer, tirer# sur -->
   <rule weight="0.8">
     <match lemma="tirar" tags="vblex.*"><select lemma="tirer"/></match>
