@@ -8118,7 +8118,7 @@
        </action>
     </rule>
 
-    <rule comment="INF + ENCLÍTIC (regla per l'aranés: pensar-o > le penser)">
+    <rule comment="INF + ENCLÍTIC (pensar-o > le penser)">
       <pattern>
         <pattern-item n="inf"/>
         <pattern-item n="prnenc"/>
@@ -8158,6 +8158,236 @@
       </action>
   </rule>
 
+    <rule comment="INF + ENCLÍTIC + ENCLÍTIC (cantar-li-o > le lui chanter)" v="oci">
+      <pattern>
+        <pattern-item n="inf"/>
+        <pattern-item n="prnenc"/>
+        <pattern-item n="prnenc"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+         <choose>
+           <when>
+             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter toutes -->
+             <test>
+               <or>
+                 <and>
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="y"/></equal>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="o"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="vos"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="li"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="lor"/></equal>
+                   </or>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="li"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="lor"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="vos"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="o"/></equal>
+                   </or>
+                 </and>
+               </or>
+             </test>
+              <out>
+                <chunk name="pro_pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="3" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="3" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="2" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="2" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <chunk name="pro_pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="2" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="2" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="3" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="3" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+          </otherwise>
+        </choose>
+      </action>
+  </rule>
+
+    <rule comment="INF + ENCLÍTIC + ENCLÍTIC (cantar-li-o > le lui chanter)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="inf"/>
+        <pattern-item n="prnenc"/>
+        <pattern-item n="prnenc"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+         <choose>
+           <when>
+             <test>
+               <or>
+                 <and>
+                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="en"/></equal>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="en"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="me"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="te"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="se"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="nos"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="vos"/></equal>
+                   </or>
+                 </and>
+                 <and>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="i"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="en"/></equal>
+                   </or>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="ac"/></equal>
+                 </and>
+               </or>
+             </test>
+             <!-- changement d'ordre CD CI -->
+              <out>
+                <chunk name="pro_pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="3" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="3" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="2" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="2" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+            </when>
+            <otherwise>
+              <out>
+                <chunk name="pro_pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="2" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="2" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="3" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="3" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+          </otherwise>
+        </choose>
+      </action>
+  </rule>
   <!-- FIN AUTRAS RÈGLAS VERBALAS -->
 
     <!-- RÈGLAS CAPÇALERA CHUNK + LEMH/LEMQ -->
