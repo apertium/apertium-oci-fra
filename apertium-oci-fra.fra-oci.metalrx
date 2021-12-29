@@ -1161,6 +1161,13 @@
     <match tags="adj.*"/>
     <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
+    <or>
+      <match lemma="fixé" tags="adj.*"/>
+      <match lemma="fixer" tags="vblex.pp.*"/>
+    </or>
+  </rule>
   <rule weight="1.2">
     <or>
       <match tags="det.ind.*"/>
@@ -1171,21 +1178,7 @@
   </rule>
   <rule weight="1.2">
     <or>
-      <match lemma="premier" tags="adj.*"/>
-      <match lemma="second" tags="adj.*"/>
-      <match lemma="deuxième" tags="adj.*"/>
-      <match lemma="troisième" tags="adj.*"/>
-      <match lemma="quatrième" tags="adj.*"/>
-      <match lemma="cinquième" tags="adj.*"/>
-      <match lemma="sixième" tags="adj.*"/>
-      <match lemma="septième" tags="adj.*"/>
-      <match lemma="huitième" tags="adj.*"/>
-      <match lemma="neuvième" tags="adj.*"/>
-      <match lemma="dixième" tags="adj.*"/>
-      <match lemma="dernier" tags="adj.*"/>
-      <match lemma="1er" tags="adj.*"/>
-      <match lemma="2nd" tags="adj.*"/>
-      <match lemma="3ème" tags="adj.*"/>
+      <seq n="adj_ord"/>
     </or>
     <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
   </rule>
@@ -1195,8 +1188,9 @@
   </rule>
   <rule weight="1.2">
     <or>
-      <match lemma="donner"/>
-      <match lemma="décerner"/>
+      <match lemma="donner" tags="vblex.*"/>
+      <match lemma="décerner" tags="vblex.*"/>
+      <match lemma="recevoir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="1">
       <match tags="adv"/>
@@ -1205,10 +1199,23 @@
     <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
   </rule>
   <rule weight="1.2">
+    <or>
+      <match lemma="donner" tags="vblex.*"/>
+      <match lemma="décerner" tags="vblex.*"/>
+      <match lemma="recevoir" tags="vblex.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
+  </rule>
+  <rule weight="1.2">
     <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
     <or>
       <match lemma="donner" tags="vblex.pp.*"/>
       <match lemma="décerner" tags="vblex.pp.*"/>
+      <match lemma="recevoir" tags="vblex.pp.*"/>
     </or>
   </rule>
   <rule weight="1.0">
@@ -1217,6 +1224,13 @@
       <match tags="adv"/>
     </repeat>
     <match tags="adj.*"/>
+  </rule>
+  <rule weight="2.0">
+    <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
+    <or>
+      <match lemma="masculin" tags="adj.*"/>
+      <match lemma="féminin" tags="adj.*"/>
+    </or>
   </rule>
   <rule weight="1.0">
     <match lemma="le" tags="det.*"/>
@@ -1228,6 +1242,11 @@
     <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
     <match lemma="de" tags="pr"/>
     <match lemma="consolation" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
+    <match lemma="de" tags="pr"/>
+    <match lemma="Hollywood" tags="np.*"/>
   </rule>
   <rule weight="1.0">
     <match lemma="à" tags="pr"/>
@@ -1263,8 +1282,18 @@
   <rule weight="1.0">
     <or>
       <match lemma="hausser"/>
+      <match lemma="monter"/>
       <match lemma="baisser"/>
       <match lemma="chuter"/>
+      <match lemma="augmenter"/>
+      <match lemma="relever"/>
+      <match lemma="accroître"/>
+      <match lemma="majorer"/>
+      <match lemma="relever"/>
+      <match lemma="réduire"/>
+      <match lemma="diminuer"/>
+      <match lemma="rabaisser"/>
+      <match lemma="minorer"/>
     </or>
     <repeat from="0" upto="1">
       <match tags="adv"/>
@@ -1283,6 +1312,15 @@
       <match lemma="monter"/>
       <match lemma="baisser"/>
       <match lemma="chuter"/>
+      <match lemma="augmenter"/>
+      <match lemma="relever"/>
+      <match lemma="accroître"/>
+      <match lemma="majorer"/>
+      <match lemma="relever"/>
+      <match lemma="réduire"/>
+      <match lemma="diminuer"/>
+      <match lemma="rabaisser"/>
+      <match lemma="minorer"/>
     </or>
   </rule>
   <rule weight="1.0">
@@ -1297,6 +1335,15 @@
       <match lemma="monter"/>
       <match lemma="baisser"/>
       <match lemma="chuter"/>
+      <match lemma="augmenter"/>
+      <match lemma="relever"/>
+      <match lemma="accroître"/>
+      <match lemma="majorer"/>
+      <match lemma="relever"/>
+      <match lemma="réduire"/>
+      <match lemma="diminuer"/>
+      <match lemma="rabaisser"/>
+      <match lemma="minorer"/>
     </or>
   </rule>
   <rule weight="1.0">
@@ -1305,6 +1352,9 @@
       <match lemma="montée"/>
       <match lemma="baisse"/>
       <match lemma="chute"/>
+      <match lemma="augmentation"/>
+      <match lemma="réduction"/>
+      <match lemma="diminution"/>
     </or>
     <repeat from="0" upto="1">
       <match tags="adj"/>
