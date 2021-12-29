@@ -764,6 +764,11 @@
 
 <!-- **************** N **************** -->
 
+  <!-- langue >> lenga, lengua, etc. -->
+  <rule weight="0.8">
+    <match lemma="langue" tags="n.*"><select lemma="lenga"/></match>
+  </rule>
+
   <!-- police >> polícia/policia, polissa -->
   <rule weight="0.8">
     <match lemma="police" tags="n.*"><select lemma="polícia"/></match>
@@ -1409,12 +1414,20 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- renforcer >> enfortir/en·hortir, etc. -->
+  <rule weight="0.8">
+    <match lemma="renforcer" tags="vblex.*"><select lemma="enfortir"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="renforcer" tags="vblex.*"><select lemma="en·hortir"/></match>
+  </rule>
+
   <!-- traduire >> traduire/tradusir, revirar -->
   <rule weight="0.8">
-    <or>
-      <match lemma="traduire" tags="vblex.*"><select lemma="traduire"/></match>
-      <match lemma="traduire" tags="vblex.*"><select lemma="tradusir"/></match>
-    </or>
+    <match lemma="traduire" tags="vblex.*"><select lemma="traduire"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="traduire" tags="vblex.*"><select lemma="tradusir"/></match>
   </rule>
 
   <!-- tromper >> enganar, trompar... -->
@@ -1424,10 +1437,10 @@
 
   <!-- conduire >> conduire/condusir, menar/miar -->
   <rule weight="0.8">
-    <or>
-      <match lemma="conduire" tags="vblex.*"><select lemma="conduire"/></match>
-      <match lemma="conduire" tags="vblex.*"><select lemma="condusir"/></match>
-    </or>
+    <match lemma="conduire" tags="vblex.*"><select lemma="conduire"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="conduire" tags="vblex.*"><select lemma="condusir"/></match>
   </rule>
   <rule weight="1.0">
     <or>

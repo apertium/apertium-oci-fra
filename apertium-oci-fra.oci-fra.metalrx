@@ -429,6 +429,99 @@
 
 <!-- **************** PREP **************** -->
 
+  <!-- entà >> à, pour, vers -->
+  <!-- tà >> à, pour, vers -->
+  <!-- enta >> à, pour, vers -->
+  <rule weight="0.6">
+    <match lemma="entà" tags="pr"><select lemma="à"/></match>
+  </rule>
+  <rule weight="0.6">
+    <match lemma="tà" tags="pr"><select lemma="à"/></match>
+  </rule>
+  <rule weight="0.6">
+    <match lemma="enta" tags="pr"><select lemma="à"/></match>
+  </rule>
+  <rule weight="0.8" c="gascon">
+    <match lemma="entà" tags="pr"><select lemma="pour"/></match>
+  </rule>
+  <rule weight="0.8" c="gascon">
+    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
+  </rule>
+  <rule weight="0.8" c="gascon">
+    <match lemma="enta" tags="pr"><select lemma="pour"/></match>
+  </rule>
+
+  <rule weight="1.0" c="gascon">
+    <match lemma="entà" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.0" c="gascon">
+    <match lemma="tà" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.0" c="gascon">
+    <match lemma="enta" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" c="gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="entà" tags="pr"><select lemma="à"/></match>
+  </rule>
+  <rule weight="1.0" c="gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tà" tags="pr"><select lemma="à"/></match>
+  </rule>
+  <rule weight="1.0" c="gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="enta" tags="pr"><select lemma="à"/></match>
+  </rule>
+
   <!-- pendent >> pendant, lors de -->
   <rule weight="0.8">
     <match lemma="pendent" tags="pr"><select lemma="pendant"/></match>
@@ -2342,6 +2435,45 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- remassar >> rassembler, rallier -->
+  <rule weight="0.8">
+    <match lemma="remassar" tags="vblex.*"><select lemma="rassembler"/></match>
+  </rule>
+
+  <!-- refortilhar >> renforcer, conforcer -->
+  <rule weight="0.8">
+    <match lemma="refortilhar" tags="vblex.*"><select lemma="renforcer"/></match>
+  </rule>
+
+  <!-- regaudir >> réjouir, égayer, etc. -->
+  <rule weight="0.8">
+    <match lemma="regaudir" tags="vblex.*"><select lemma="réjouir"/></match>
+  </rule>
+
+  <!-- sietar >> assoir, siéger -->
+  <rule weight="0.8">
+    <match lemma="sietar" tags="vblex.*"><select lemma="assoir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sietar" tags="vblex.*"><select lemma="siéger"/></match>
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="np.*"/>
+      <match tags=""/>
+      <match lemma="vila" tags="n.*"/>
+      <match lemma="capitala" tags="n.*"/>
+      <match lemma="capdulh" tags="n.*"/>
+      <match lemma="palais" tags="n.*"/>
+      <match lemma="palai" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- revirar >> retourner [leng], traduire -->
   <rule weight="0.8">
     <match lemma="revirar" tags="vblex.*"><select lemma="retourner"/></match>
@@ -2357,7 +2489,7 @@
   </rule>
   <rule weight="1.0">
     <match lemma="revirar" tags="vblex.*"><select lemma="traduire"/></match>
-    <repeat from="0" upto="4">
+    <repeat from="0" upto="6">
       <or>
         <match tags="*"/>
         <match tags=""/>
@@ -2371,11 +2503,31 @@
       <match lemma="poèma" tags="n.*"/>
       <match lemma="poesia" tags="n.*"/>
       <match lemma="poësia" tags="n.*"/>
+      <match lemma="cançon" tags="n.*"/>
+      <match lemma="frasa" tags="n.*"/>
+      <match lemma="expression" tags="n.*"/>
+      <match lemma="provèrbi" tags="n.*"/>
+      <match lemma="reprovèrbi" tags="n.*"/>
+      <match lemma="reproèr" tags="n.*"/>
+      <match lemma="arrepervèri" tags="n.*"/>
       <match lemma="occitan" tags="n.*"/>
+      <match lemma="gascon" tags="n.*"/>
+      <match lemma="lengadocian" tags="n.*"/>
+      <match lemma="provençal" tags="n.*"/>
+      <match lemma="bearnés" tags="n.*"/>
+      <match lemma="aranés" tags="n.*"/>
+      <match lemma="auvernhat" tags="n.*"/>
+      <match lemma="alvernhàs" tags="n.*"/>
+      <match lemma="lemosin" tags="n.*"/>
       <match lemma="francés" tags="n.*"/>
       <match lemma="anglés" tags="n.*"/>
       <match lemma="catalan" tags="n.*"/>
       <match lemma="italian" tags="n.*"/>
+      <match lemma="lenga" tags="n.*"/>
+      <match lemma="lengua" tags="n.*"/>
+      <match lemma="lenca" tags="n.*"/>
+      <match lemma="edicion" tags="n.*"/>
+      <match lemma="publicar" tags="vblex.*"/>
     </or>
   </rule>
   <rule weight="1.0">
@@ -2483,6 +2635,53 @@
   <rule weight="0.8">
     <match lemma="tornar" tags="vblex.*"><select lemma="revenir"/></match>
   </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="o" tags="prn.pro.*"/>
+      <match lemma="ac" tags="prn.pro.*"/>
+    </or>
+    <match lemma="tornar" tags="vblex.*"><select lemma="rendre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tornar" tags="vblex.*"><select lemma="rendre"/></match>
+    <or>
+      <match lemma="lo" tags="prn.enc.*"/>
+      <match lemma="o" tags="prn.enc.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tornar" tags="vblex.*"><select lemma="rendre"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.enc.*"/>
+      </or>
+    </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="en" tags="prn.pro.*"/>
+    <match lemma="tornar" tags="vblex.*"><select lemma="aller"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tornar" tags="vblex.*"><select lemma="aller"/></match>
+    <or>
+      <match lemma="me" tags="prn.enc.*"/>
+      <match lemma="te" tags="prn.enc.*"/>
+      <match lemma="se" tags="prn.enc.*"/>
+      <match lemma="nos" tags="prn.enc.*"/>
+      <match lemma="vos" tags="prn.enc.*"/>
+    </or>
+    <match lemma="en" tags="prn.enc.*"/>
+  </rule>
 
   <!-- cridar >> appeler, crier -->
   <rule weight="0.8">
@@ -2490,14 +2689,14 @@
   </rule>
   <rule weight="1.0">
     <match lemma="cridar" tags="vblex.*"><select lemma="crier"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match lemma="a" tags="pr"/>
   </rule>
   <rule weight="1.2">
     <match lemma="cridar" tags="vblex.*"><select lemma="appeler"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="pr"/>
@@ -2505,7 +2704,7 @@
   </rule>
   <rule weight="1.2">
     <match lemma="cridar" tags="vblex.*"><select lemma="appeler"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="pr"/>
