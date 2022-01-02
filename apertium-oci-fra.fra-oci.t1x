@@ -243,9 +243,32 @@
       <cat-item tags="vbmod.*"/>
     </def-cat>
 
+    <def-cat n="vbnoserconj">
+      <cat-item tags="vblex.*.p1.*"/>
+      <cat-item tags="vblex.*.p2.*"/>
+      <cat-item tags="vblex.*.p3.*"/>
+      <cat-item tags="vbhaver.*.p1.*"/>
+      <cat-item tags="vbhaver.*.p2.*"/>
+      <cat-item tags="vbhaver.*.p3.*"/>
+      <cat-item tags="vbmod.*.p1.*"/>
+      <cat-item tags="vbmod.*.p2.*"/>
+      <cat-item tags="vbmod.*.p3.*"/>
+    </def-cat>
+
+    <def-cat n="vbnoserimper">
+      <cat-item tags="vblex.imp.*"/>
+      <cat-item tags="vblex.tv.imp.*"/>
+      <cat-item tags="vblex.pron.imp.*"/>
+      <cat-item tags="vblex.notv.imp.*"/>
+      <cat-item tags="vbhaver.imp.*"/>
+      <cat-item tags="vbmod.imp.*"/>
+    </def-cat>
+
     <def-cat n="inf">
       <cat-item tags="vblex.inf"/>
       <cat-item tags="vblex.tv.inf"/>
+      <cat-item tags="vblex.pron.inf"/>
+      <cat-item tags="vblex.nopron.inf"/>
       <cat-item tags="vbser.inf"/>
       <cat-item tags="vbhaver.inf"/>
       <cat-item tags="vbmod.inf"/>
@@ -427,6 +450,15 @@
       <attr-item tags="vbmod"/>
     </def-attr>
 
+    <def-attr n="a_verb_pron">
+      <attr-item tags="vblex"/>
+      <attr-item tags="vblex.pron"/>
+      <attr-item tags="vblex.nopron"/>
+      <attr-item tags="vbser"/>
+      <attr-item tags="vbhaver"/>
+      <attr-item tags="vbmod"/>
+    </def-attr>
+
     <def-attr n="a_num">
       <attr-item tags="num"/>
     </def-attr>
@@ -486,6 +518,7 @@
     <def-var n="v_vbser"/>
     <def-var n="v_vbfar"/>
     <def-var n="v_itg"/>
+    <def-var n="pronom"/>
     <def-var n="auxg"/>
     <def-var n="auxn"/>
     <def-var n="temp"/>
@@ -1361,6 +1394,7 @@
       <list-item v="Groenland"/>
       <list-item v="Canada"/>
       <list-item v="Manitoba"/>
+      <list-item v="Yukon"/>
       <list-item v="Ontario"/>
       <list-item v="Québec"/>
       <list-item v="Nouveau-Brunswick"/>
@@ -3793,6 +3827,189 @@
            </otherwise>
          </choose>
     </def-macro>
+
+    <def-macro n="f_unset_nopron" npar="1"> <!-- elimina nopron a vblex.nopron -->
+      <choose>
+	<when>
+	  <test>
+	    <equal><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex.nopron"/></equal>
+	  </test>
+	  <let><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex"/></let>
+	</when>
+      </choose>
+    </def-macro>
+
+    <def-macro n="f_set_pron_pro" npar="2"> <!-- posa a la variable 'pronom' el pronom reflexiu que calgui si el verb és reflexiu. El segon paramàtre és la repetició del primer, si és una forma conjugada (personal) del verb, altrament és l'auxiliar-->
+      <call-macro n="f_unset_nopron"><with-param pos="1"/></call-macro>
+      <let>
+        <var n="pronom"/>
+        <lit v=""/>
+      </let>
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex.pron"/></equal>
+          </test>
+          <choose>
+            <when>
+              <test>
+                <not><or>
+                <equal><clip pos="2" side="tl" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="2" side="tl" part="pers"/><lit-tag v="p2"/></equal>
+                </or></not>
+              </test>
+              <!-- ^prn<SPron><ref>{^se<prn><pro><ref><p3><mf><sp>$}$ -->
+              <append n="pronom">
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prn"/>
+                </get-case-from>
+                <lit-tag v="SPron.ref"/>
+                <lit v="{"/>
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="se"/>
+                </get-case-from>
+                <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                <lit v="$"/>
+                <lit v="}"/>
+                <lit v="$"/>
+              </append>
+            </when>
+            <otherwise>
+              <append n="pronom">
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prn"/>
+                </get-case-from>
+                <lit-tag v="SPron.ref"/>
+                <lit v="{"/>
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prpers"/>
+                </get-case-from>
+                <lit-tag v="prn.pro"/>
+                <clip pos="2" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+                <lit v="$"/>
+                <lit v="}"/>
+                <lit v="$"/>
+              </append>
+            </otherwise>
+          </choose>
+          <!-- ara arreglem la majúscula del verb, si cal -->
+          <choose>
+            <when>
+              <test>
+                <equal>
+                   <case-of pos="1" side="sl" part="lem"/>
+                   <lit v="Aa"/>
+                 </equal>
+              </test>
+              <modify-case>
+                <clip pos="1" side="tl" part="lemh"/>
+                <lit v="aa"/>
+              </modify-case>
+            </when>
+          </choose>
+          <let><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
+    <def-macro n="print_pron" npar="0"> <!-- escriu la variable 'pronom' -->
+        <choose>
+          <when>
+            <test>
+              <not><equal><var n="pronom"/><lit v=""/></equal></not>
+            </test>
+            <out>
+              <var n="pronom"/>
+              <b/>
+            </out>
+          </when>
+        </choose>
+    </def-macro>
+
+    <def-macro n="f_set_pron_enc" npar="1"> <!-- posa a la variable 'pronom' el pronom reflexiu enclític 'es´ si el verb és reflexiu -->
+      <let>
+        <var n="pronom"/>
+        <lit v=""/>
+      </let>
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex.pron"/></equal>
+          </test>
+          <choose>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+              </test>
+              <append n="pronom">
+                <lit v="me"/>
+                <lit-tag v="prn.enc"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+              </append>        
+            </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </test>
+              <append n="pronom">
+                <lit v="nos"/>
+                <lit-tag v="prn.enc"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+              </append>        
+            </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+              </test>
+              <append n="pronom">
+                <lit v="te"/>
+                <lit-tag v="prn.enc"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+              </append>        
+            </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </test>
+              <append n="pronom">
+                <lit v="vos"/>
+                <lit-tag v="prn.enc"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+              </append>        
+            </when>
+          </choose>
+          <let><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
+
 
     <def-macro n="f_itg" npar="1">
       <choose>
@@ -14271,7 +14488,69 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: VBNOSER">
+    <rule comment="RÈGLA: VBNOSER imperatiu (décolle! > enlaira't)">
+       <pattern>
+         <pattern-item n="vbnoserimper"/>
+       </pattern>
+       <action>
+        <call-macro n="tipus_verb"><with-param pos="1"/></call-macro>
+        <call-macro n="f_unset_nopron"><with-param pos="1"/></call-macro>
+        <call-macro n="f_set_pron_enc"><with-param pos="1"/></call-macro>
+        <choose>
+	  <when>
+	    <test>
+	      <equal><var n="pronom"/><lit v=""/></equal>
+	    </test>
+            <out>
+              <chunk name="verb">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                  <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_verb"/>
+                  <clip pos="1" side="tl" part="temps"/>
+                  <clip pos="1" side="tl" part="pers"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                 </lu>
+              </chunk>
+            </out>
+	  </when>
+	  <otherwise>
+            <out>
+              <chunk name="verb">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                  <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                </tags>
+                <mlu>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="pers"/>
+                    <clip pos="1" side="tl" part="nbr"/>
+                  </lu>
+                  <lu>
+	            <var n="pronom"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </mlu>
+              </chunk>
+            </out>
+	  </otherwise>
+        </choose>
+       </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: VBNOSER (décolle > s'enlaira)">
        <pattern>
          <pattern-item n="vbnoser"/>
        </pattern>
@@ -14279,6 +14558,11 @@
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
+        <call-macro n="f_set_pron_pro">
+          <with-param pos="1"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="print_pron"></call-macro>
          <out>
            <chunk name="verb">
              <tags>
@@ -14299,6 +14583,7 @@
          </out>
        </action>
     </rule>
+
 
     <rule comment="RÈGLA: IJ">
       <pattern>
@@ -14620,4 +14905,3 @@ Resources:
     https://wiki.apertium.org/wiki/A_long_introduction_to_transfer_rules
     https://wiki.apertium.org/wiki/Transfer#Adding_structural_transfer_.28grammar.29_rules
 -->
-
