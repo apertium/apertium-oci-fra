@@ -114,6 +114,51 @@
       </rule>
     </def-macro>
 
+    <!-- Aquesta macro tria el verb p2 si p1 és intransitiu i p3 si p1 és transitiu -->
+    <!-- p1 = verb fra, p2 = verb cat intransitiu, p3 = verb cat transitiu -->
+    <!-- la manera de veure que el verb és transitiu és molt barroera -->
+    <def-macro name="verb_intrans_trans">
+      <rule weight="0.8">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p2}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p3}}"/></match>
+        <or>
+          <match tags="det.*"/>
+          <match tags="np.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p3}}"/></match>
+        <or>
+          <match tags="num.*"/>
+          <match tags="num"/>
+        </or>
+        <match tags="n.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p3}}"/></match>
+        <or>
+          <match tags="num.*"/>
+          <match tags="num"/>
+        </or>
+        <match tags="adj.*"/>
+        <match tags="n.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="le" tags="prn.pro.*"/>
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="vblex.pp.*"/>
+        </or>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+    </def-macro>
+
     <!-- p1 = verb oci, p2 = verb fra no pron, p3 = verb fra pron -->
     <def-macro name="verb_nopron_pron">
       <rule weight="0.8">
@@ -2309,77 +2354,14 @@
 
 <!-- **************** N **************** -->
 
-  <!-- croissant >> còrna/còrn, carro -->
+  <!-- esquira >> sonnette, crevette -->
   <rule weight="0.8">
-    <match lemma="croissant" tags="n.*"><select lemma="còrna"/></match>
-  </rule>
-  <rule weight="0.8">
-    <match lemma="croissant" tags="n.*"><select lemma="còrn"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
-    <match lemma="rouge" tags="adj.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
-    <match lemma="rouge" tags="adj.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
+    <match lemma="esquira" tags="n.*"><select lemma="sonnette"/></match>
   </rule>
 
-  <!-- char >> carri, carro -->
+  <!-- carri >> char, car -->
   <rule weight="0.8">
-    <match lemma="char" tags="n.*"><select lemma="carri"/></match>
+    <match lemma="carri" tags="n.*"><select lemma="char"/></match>
   </rule>
 
   <!-- seguida >> suite, série -->
@@ -2532,6 +2514,16 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- enternir >> adapter, remanier -->
+  <rule weight="0.8">
+    <match lemma="enternir" tags="vblex.*"><select lemma="adapter"/></match>
+  </rule>
+
+  <!-- neurir >> nourrir, élever -->
+  <rule weight="0.8">
+    <match lemma="neurir" tags="vblex.*"><select lemma="nourrir"/></match>
+  </rule>
 
   <!-- remassar >> rassembler, rallier -->
   <rule weight="0.8">
@@ -2850,6 +2842,9 @@
     </repeat>
     <match lemma="dire" tags="vblex.pp.*"><select lemma="dire"/></match>
   </rule>
+
+  <!-- enlairar >> élever, décoller -->
+  <macro name="verb_nopron_pron" p1="enlairar" p2="élever" p3="décoller" />
 
   <!-- sonar >> sonner, appeler -->
   <macro name="verb_nopron_pron" p1="sonar" p2="sonner" p3="appeler" />
