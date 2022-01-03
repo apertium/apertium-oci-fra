@@ -428,13 +428,21 @@
       <attr-item tags="adv.pas_neg"/>
     </def-attr>
 
+    <def-attr n="a_pron_long">
+      <attr-item tags="tn"/>
+      <attr-item tags="tn.ref"/>
+      <attr-item tags="tn.pos"/>
+      <attr-item tags="pro"/>
+      <attr-item tags="pro.ref"/>
+      <attr-item tags="pro.adv"/>
+      <attr-item tags="enc"/>
+      <attr-item tags="enc.adv"/>
+      <attr-item tags="itg"/>
+    </def-attr>
+
     <def-attr n="a_pron">
       <attr-item tags="tn"/>
-<!--      <attr-item tags="tn.ref"/> -->
       <attr-item tags="pro"/>
-<!--      <attr-item tags="pro.ref"/> -->
-<!--      <attr-item tags="pro.adv"/> -->
-<!--      <attr-item tags="pro.pos"/> -->
       <attr-item tags="enc"/>
       <attr-item tags="itg"/>
     </def-attr>
@@ -474,6 +482,7 @@
       <attr-item tags="m"/>
       <attr-item tags="mf"/>
       <attr-item tags="f"/>
+      <attr-item tags="nt"/>
       <attr-item tags="GD"/>
     </def-attr>
 
@@ -3917,6 +3926,62 @@
           <let><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex"/></let>
         </when>
       </choose>
+    </def-macro>
+
+    <def-macro n="f_set_pron_pro_force" npar="1"> <!-- posa a la variable 'pronom' el pronom reflexiu que calgui, sabent que el verb és reflexiu -->
+      <call-macro n="f_unset_nopron"><with-param pos="1"/></call-macro>
+      <let>
+        <var n="pronom"/>
+        <lit v=""/>
+      </let>
+          <choose>
+            <when>
+              <test>
+                <not><or>
+                <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p2"/></equal>
+                </or></not>
+              </test>
+              <!-- ^prn<SPron><ref>{^se<prn><pro><ref><p3><mf><sp>$}$ -->
+              <append n="pronom">
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prn"/>
+                </get-case-from>
+                <lit-tag v="SPron.ref"/>
+                <lit v="{"/>
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="se"/>
+                </get-case-from>
+                <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                <lit v="$"/>
+                <lit v="}"/>
+                <lit v="$"/>
+              </append>
+            </when>
+            <otherwise>
+              <append n="pronom">
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prn"/>
+                </get-case-from>
+                <lit-tag v="SPron.ref"/>
+                <lit v="{"/>
+                <lit v="^"/>
+                <get-case-from pos="1">
+                  <lit v="prpers"/>
+                </get-case-from>
+                <lit-tag v="prn.pro"/>
+                <clip pos="1" side="tl" part="pers"/>
+                <lit-tag v="mf"/>
+                <clip pos="1" side="tl" part="nbr"/>
+                <lit v="$"/>
+                <lit v="}"/>
+                <lit v="$"/>
+              </append>
+            </otherwise>
+          </choose>
     </def-macro>
 
     <def-macro n="print_pron" npar="0"> <!-- escriu la variable 'pronom' -->
@@ -10455,7 +10520,7 @@
 
   <!-- RÈGLAS ELISION SUBJECTE -->
 
-    <rule comment="RÈGLA: PRNSUBJ VERB (il arrive: arriba)">
+    <rule comment="RÈGLA: PRNSUBJ VERB (il arrive > arriba ; il décolle > s'enlaira)">
       <pattern>
         <pattern-item n="prnsubj"/>
         <pattern-item n="verbconj"/>
@@ -10467,27 +10532,65 @@
          <call-macro n="tipus_verb">
           <with-param pos="2"/>
          </call-macro>
+        <call-macro n="f_set_pron_pro">
+          <with-param pos="2"/>
+          <with-param pos="2"/>
+        </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
-         <out>
-           <chunk name="verb">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
-               <tag><clip pos="2" side="tl" part="temps"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
-               <clip pos="2" side="tl" part="tags"/>
-               <clip pos="2" side="tl" part="lemq"/>
-              </lu>
-           </chunk>
-         </out>
+         <choose>
+           <when>
+             <test>
+               <equal><var n="pronom"/><lit v=""/></equal>
+             </test>
+             <out>
+               <chunk name="verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="2" side="tl" part="temps"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="2" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+              <modify-case>
+                <clip pos="2" side="sl" part="lemh"/>
+                <case-of pos="1" side="sl" part="lemh"/>
+              </modify-case>
+             <call-macro n="f_set_pron_pro_force"><with-param pos="2"/></call-macro>
+             <call-macro n="print_pron"></call-macro>
+              <modify-case>
+                <clip pos="2" side="tl" part="lemh"/>
+                <lit v="aa"/>
+              </modify-case>
+             <out>
+               <chunk name="verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="2" side="tl" part="temps"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
       </action>
     </rule>
 
@@ -11019,6 +11122,10 @@
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
+        <call-macro n="f_set_pron_pro">
+          <with-param pos="3"/>
+          <with-param pos="3"/>
+         </call-macro>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -11027,25 +11134,61 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
-         <out>
-           <chunk name="verb">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
-               <tag><clip pos="3" side="tl" part="temps"/></tag>
-               <tag><lit-tag v="negation"/></tag>
-               <tag><lit-tag v="sans_pas"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
-               <clip pos="3" side="tl" part="tags"/>
-               <clip pos="3" side="tl" part="lemq"/>
-             </lu>
-           </chunk>
-         </out>
+         <choose>
+           <when>
+             <test>
+               <equal><var n="pronom"/><lit v=""/></equal>
+             </test>
+             <out>
+               <chunk name="verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="3" side="tl" part="temps"/></tag>
+                   <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <get-case-from pos="1">
+                     <clip pos="3" side="tl" part="lemh"/>
+                   </get-case-from>
+                   <clip pos="3" side="tl" part="tags"/>
+                   <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+              <modify-case>
+                <clip pos="3" side="sl" part="lemh"/>
+                <case-of pos="1" side="sl" part="lemh"/>
+              </modify-case>
+             <call-macro n="f_set_pron_pro_force"><with-param pos="3"/></call-macro>
+             <call-macro n="print_pron"></call-macro>
+              <modify-case>
+                <clip pos="3" side="tl" part="lemh"/>
+                <lit v="aa"/>
+              </modify-case>
+             <out>
+               <chunk name="verb">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="3" side="tl" part="temps"/></tag>
+                   <tag><lit-tag v="negation"/></tag>
+                   <tag><lit-tag v="sans_pas"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="3" side="tl" part="lemh"/>
+                   <clip pos="3" side="tl" part="tags"/>
+                   <clip pos="3" side="tl" part="lemq"/>
+                  </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
       </action>
     </rule>
 
@@ -14330,7 +14473,11 @@
                  </tags>
                  <lu>
                    <clip pos="1" side="tl" part="lemh"/>
-                   <clip pos="1" side="tl" part="tags"/>
+                   <lit-tag v="prn"/>
+                   <clip pos="1" side="tl" part="a_pron_long"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <clip pos="1" side="tl" part="gen"/>
+                   <clip pos="1" side="tl" part="nbr"/>
                    <clip pos="1" side="tl" part="lemq"/>
                  </lu>
                </chunk>
