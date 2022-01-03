@@ -2555,6 +2555,28 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- mancar >> manquer, rater, faillir -->
+  <rule weight="0.8">
+    <match lemma="mancar" tags="vblex.*"><select lemma="manquer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="mancar" tags="vblex.*"><select lemma="rater"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="mancar" tags="vblex.*"><select lemma="rater"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="prn.pro.*"/>
+    <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+  </rule>
+
   <!-- enternir >> adapter, remanier -->
   <rule weight="0.8">
     <match lemma="enternir" tags="vblex.*"><select lemma="adapter"/></match>
