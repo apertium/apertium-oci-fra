@@ -29,6 +29,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2ax.bin	\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1).t2cx.bin	\
+	$(PREFIX1b).t2cx.bin	\
 	$(PREFIX1).t2dx.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
@@ -52,6 +53,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2).t1x			\
 	$(PREFIX2b).t1x			\
 	$(PREFIX2).t2x.bin	\
+	$(PREFIX2b).t2x.bin	\
 	$(PREFIX2).t2x_pas.bin	\
 	$(PREFIX2).t2x_pro.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
@@ -194,7 +196,17 @@ $(PREFIX1).t2bx.bin: $(BASENAME).$(PREFIX1).t2bx
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX1).t2cx.bin: $(BASENAME).$(PREFIX1).t2cx
+$(PREFIX1).t2cx: $(BASENAME).$(PREFIX1).t2cx
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t2cx >$@
+
+$(PREFIX1b).t2cx: $(BASENAME).$(PREFIX1).t2cx
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t2cx >$@
+
+$(PREFIX1).t2cx.bin: $(PREFIX1).t2cx
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX1b).t2cx.bin: $(PREFIX1b).t2cx
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
@@ -234,7 +246,17 @@ $(PREFIX2b).t1x.bin: $(PREFIX2b).t1x
 	apertium-validate-transfer $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX2).t2x.bin: $(BASENAME).$(PREFIX2).t2x
+$(PREFIX2).t2x: $(BASENAME).$(PREFIX2).t2x
+	apertium-filter-rules oci $(BASENAME).$(PREFIX2).t2x >$@
+
+$(PREFIX2b).t2x: $(BASENAME).$(PREFIX2).t2x
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).t2x >$@
+
+$(PREFIX2).t2x.bin: $(PREFIX2).t2x
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX2b).t2x.bin: $(PREFIX2b).t2x
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
