@@ -1,8 +1,8 @@
 Occitan and French (`apertium-oci-fra`)
 ===============================================================================
 
-This is an Apertium language pair for translating between Occitan and
-French. What you can use this language package for:
+This is an Apertium language pair for translating between (Languedocian and Gascon)
+Occitan and French. What you can use this language package for:
 
 * Translating between (Languedocian and Gascon) Occitan and French
 * Morphological analysis of (Languedocian and Gascon) Occitan and French
@@ -29,9 +29,11 @@ Compiling
 
 Given the requirements being installed, you should be able to just run:
 
+```sh
 $ ./configure --with-lang1=../apertium-oci --with-lang2=../apertium-fra
 $ make
 # make install
+```
 
 You should change ../apertium-oci and ../apertium-fra to the paths
 of the apertium-oci and apertium-fra repositories, respectively, if they
@@ -49,28 +51,38 @@ commands should work:
 
 Translation from French into Languedocian Occitan:
 
+```sh
 $ echo "Apertium est un logiciel de traduction automatique" | apertium -d . fra-oci
 Apertium es un logicial de traduccion automatica
+```
 
 Translation from French into Gascon Occitan:
 
+```sh
 $ echo "Apertium est un logiciel de traduction automatique" | apertium -d . fra-oci_gascon
 Apertium qu'ei un logiciau de traduccion automatica
+```
 
 Translation from Languedocian Occitan into French:
 
+```sh
 $  echo "Apertium es un logicial de traduccion automatica" | apertium -d . oci-fra
 Apertium est un logiciel de traduction automatique
+```
 
 Translation from Gascon Occitan into French:
 
+```sh
 $  echo "Apertium qu'ei un logiciau de traduccion automatica" | apertium -d . oci_gascon-fra
 Apertium est un logiciel de traduction automatique
+```
 
 After installing somewhere in $PATH, you should be able to do e.g.
 
+```sh
 $ echo "Apertium est un logiciel de traduction automatique" | apertium fra-oci
 Apertium es un logicial de traduccion automatica
+```
 
 Files and data
 ===============================================================================
