@@ -4,9 +4,9 @@ Occitan and French (`apertium-oci-fra`)
 This is an Apertium language pair for translating between Occitan and
 French. What you can use this language package for:
 
-* Translating between Occitan and French
-* Morphological analysis of Occitan and French
-* Part-of-speech tagging of Occitan and French
+* Translating between (Languedocian and Gascon) Occitan and French
+* Morphological analysis of (Languedocian and Gascon) Occitan and French
+* Part-of-speech tagging of (Languedocian and Gascon) Occitan and French
 
 For information on the latter two points, see subheading "For more
 information" below
@@ -29,9 +29,13 @@ Compiling
 
 Given the requirements being installed, you should be able to just run:
 
-$ ./configure
+$ ./configure --with-lang1=../apertium-oci --with-lang2=../apertium-fra
 $ make
 # make install
+
+You should change ../apertium-oci and ../apertium-fra to the paths
+of the apertium-oci and apertium-fra repositories, respectively, if they
+have different relative paths in your installation.
 
 You can use ./autogen.sh instead of ./configure you're compiling from
 SVN. If you installed any prerequisite language packages using a --prefix
@@ -43,29 +47,53 @@ Testing
 If you are in the source directory after running make, the following
 commands should work:
 
-$  echo "TODO test sentence 1" | apertium -d . oci-fra
-TODO test translated sentence 1
+Translation from French into Languedocian Occitan:
 
-$ echo "TODO test sentence 2" | apertium -d . fra-oci
-TODO test translated sentence 2
+$ echo "Apertium est un logiciel de traduction automatique" | apertium -d . fra-oci
+Apertium es un logicial de traduccion automatica
+
+Translation from French into Gascon Occitan:
+
+$ echo "Apertium est un logiciel de traduction automatique" | apertium -d . fra-oci_gascon
+Apertium qu'ei un logiciau de traduccion automatica
+
+Translation from Languedocian Occitan into French:
+
+$  echo "Apertium es un logicial de traduccion automatica" | apertium -d . oci-fra
+Apertium est un logiciel de traduction automatique
+
+Translation from Gascon Occitan into French:
+
+$  echo "Apertium qu'ei un logiciau de traduccion automatica" | apertium -d . oci_gascon-fra
+Apertium est un logiciel de traduction automatique
 
 After installing somewhere in $PATH, you should be able to do e.g.
 
-$  echo "TODO test sentence 1" | apertium oci-fra
-TODO test translated sentence 1
+$ echo "Apertium est un logiciel de traduction automatique" | apertium fra-oci
+Apertium es un logicial de traduccion automatica
 
 Files and data
 ===============================================================================
 
 * apertium-oci-fra.oci-fra.dix  - Bilingual dictionary
-* apertium-oci-fra.oci-fra.t1x  - Chunking rules for translating into Occitan
-* apertium-oci-fra.fra-oci.t1x  - Chunking rules for translating into French
-* apertium-oci-fra.oci-fra.t2x  - Interchunk rules for translating into Occitan
-* apertium-oci-fra.fra-oci.t2x  - Interchunk rules for translating into French
-* apertium-oci-fra.oci-fra.t3x  - Postchunk rules for translating into Occitan
-* apertium-oci-fra.fra-oci.t3x  - Postchunk rules for translating into French
-* apertium-oci-fra.oci-fra.lrx  - Lexical selection rules for translating into Occitan
-* apertium-oci-fra.fra-oci.lrx  - Lexical selection rules for translating into French
+* apertium-oci-fra.oci-fra.t1x  - Chunking rules for translating into French
+* apertium-oci-fra.fra-oci.t1x  - Chunking rules for translating into Occitan
+* apertium-oci-fra.oci-fra.t2ax  - First step of interchunk rules for translating into French
+* apertium-oci-fra.oci-fra.t2bx  - Second step of interchunk rules for translating into French
+* apertium-oci-fra.oci-fra.t2cx  - Third step of interchunk rules for translating into French
+* apertium-oci-fra.oci-fra.t2dx  - Fourth step of interchunk rules for translating into French
+* apertium-oci-fra.fra-oci.t2x  - First step of interchunk rules for translating into Occitan
+* apertium-oci-fra.fra-oci.t2x  - First step of interchunk rules for translating into Occitan
+* apertium-oci-fra.fra-oci.t2x_enon - Interchunk rules for translating into Occitan dealing with Gascon enonciatives
+* apertium-oci-fra.fra-oci.t2x_pas - Interchunk rules for translating into Occitan dealing with verbal negative forms
+* apertium-oci-fra.fra-oci.t2x_pro - Interchunk rules for translating into Occitan dealing with the order of proclitic pronouns
+* apertium-oci-fra.fra-oci.t2x_supersn  - Interchunk rules for translating into Occitan dealing with the grouping of noun phrases
+* apertium-oci-fra.oci-fra.t3x  - Postchunk rules for translating into French
+* apertium-oci-fra.fra-oci.t3x  - Postchunk rules for translating into Occitan
+* apertium-oci-fra.oci-fra.t4x  - Final transfer rules for translating into French
+* apertium-oci-fra.fra-oci.t4x  - Final transfer rules for translating into Occitan
+* apertium-oci-fra.oci-fra.metalrx  - Lexical selection rules for translating into French
+* apertium-oci-fra.fra-oci.metalrx  - Lexical selection rules for translating into Occitan
 * modes.xml                     - Translation modes
 
 For more information
