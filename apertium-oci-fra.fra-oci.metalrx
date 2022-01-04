@@ -875,6 +875,40 @@
 
 <!-- **************** N **************** -->
 
+  <!-- briquet >> batifòc, tirahuèc -->
+  <rule weight="0.8">
+    <match lemma="briquet" tags="n.*"><select lemma="batifòc"/></match>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="briquet" tags="n.*"><select lemma="tirahùec"/></match>
+  </rule>
+
+  <!-- fruit >> fruch/hrut, frucha/hruta -->
+  <rule weight="0.8">
+    <match lemma="fruit" tags="n.*"><select lemma="fruch"/></match>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="fruit" tags="n.*"><select lemma="hrut"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.mf.pl"/>
+    <match lemma="fruit" tags="n.*"><select lemma="frucha" tags="n.f.sg"/></match>
+  </rule>
+  <rule weight="1.1">
+    <match tags="det.def.mf.pl"/>
+    <match lemma="fruit" tags="n.*"><select lemma="hruta" tags="n.f.sg"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match tags="det.def.mf.pl"/>
+    <match lemma="fruit" tags="n.*"><select lemma="fruch"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.3">
+    <match tags="det.def.mf.pl"/>
+    <match lemma="fruit" tags="n.*"><select lemma="hrut"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
   <!-- char >> carri, carro -->
   <rule weight="0.8">
     <match lemma="char" tags="n.*"><select lemma="carri"/></match>
@@ -2052,44 +2086,58 @@
     <match lemma="voler" tags="vblex.*"><select lemma="volar"/></match>
   </rule>
   <rule weight="1.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
+    <match lemma="voler" tags="vblex.pp.*"><select lemma="raubar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
     <match lemma="voler" tags="vblex.pp.*"><select lemma="raubar"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match lemma="de" tags="pr"/>
-      <match tags="det.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="le" tags="prn.pro.*"/>
-    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
-        <match tags="det.*"/>
+        <match tags="cnjadv"/>
       </or>
     </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
+    <match tags="adv"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
     <or>
-      <match lemma="quelqu'un" tags="prn.*"/>
-      <seq n="personne"/>
-      <seq n="parent"/>
-      <seq n="bétail"/>
-      <seq n="animaux_non_bétail"/>
-      <seq n="fruit_avec_noyau"/>
+      <match tags="n.*.pl"/>
+      <match tags="adj.*.pl"/>
     </or>
   </rule>
-
+  <rule weight="1.0">
+    <match lemma="voler" tags="vblex.*"><select lemma="raubar"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="prn.tn.*"/>
+  </rule>
 
 
 <!-- **************** NP **************** -->

@@ -2399,6 +2399,24 @@
     <match lemma="esquira" tags="n.*"><select lemma="sonnette"/></match>
   </rule>
 
+  <!-- frucha sg >> fruit sg, fruit pl -->
+  <rule weight="0.8">
+    <match lemma="frucha" tags="n.f.sg"><select lemma="fruit" tags="n.f.sg"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.f.sg"/>
+    <match lemma="frucha" tags="n.f.sg"><select lemma="fruit" tags="n.f.pl"/></match>
+  </rule>
+
+  <!-- hruta sg >> fruit sg, fruit pl -->
+  <rule weight="0.8">
+    <match lemma="hruta" tags="n.f.sg"><select lemma="fruit" tags="n.f.sg"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.f.sg"/>
+    <match lemma="hruta" tags="n.f.sg"><select lemma="fruit" tags="n.f.pl"/></match>
+  </rule>
+
   <!-- carri >> char, car -->
   <rule weight="0.8">
     <match lemma="carri" tags="n.*"><select lemma="char"/></match>
