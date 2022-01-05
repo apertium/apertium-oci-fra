@@ -9,12 +9,29 @@
       <cat-item tags="SN.*.pl"/>
       <cat-item tags="SN.*.pl.*"/>
     </def-cat>
+    <def-cat n="SN_n">
+      <cat-item lemma="n" tags="SN.*"/>
+      <cat-item lemma="a-n" tags="SN.*"/>
+      <cat-item lemma="n-a" tags="SN.*"/>
+    </def-cat>
+    <def-cat n="SN_n_pl">
+      <cat-item lemma="n" tags="SN.*.pl"/>
+      <cat-item lemma="a-n" tags="SN.*.pl"/>
+      <cat-item lemma="n-a" tags="SN.*.pl"/>
+      <cat-item lemma="n" tags="SN.*.pl.*"/>
+      <cat-item lemma="a-n" tags="SN.*.pl.*"/>
+      <cat-item lemma="n-a" tags="SN.*.pl.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
     <def-cat n="PP">
       <cat-item lemma="pp" tags="SA.*"/>
+      <cat-item lemma="haverpp" tags="SA.*"/>
+    </def-cat>
+    <def-cat n="PP_haver">
+      <cat-item lemma="haverpp" tags="SA.*"/>
     </def-cat>
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
@@ -34,11 +51,18 @@
     <def-cat n="SV_vbhaver">
       <cat-item tags="SV.vbhaver"/>
       <cat-item tags="SV.vbhaver.*"/>
+      <cat-item lemma="havercj" tags="SV.*"/>
+      <cat-item lemma="haverinf_ger" tags="SV.*"/>
     </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
       <cat-item tags="SV.vbhaver.partitiu.*"/>
       <cat-item tags="SV.vblex.partitiu.*"/>
+    </def-cat>
+
+    <def-cat n="SV_aver"> <!-- il manque des formes comme l'infinitif et le passé composé -->
+      <cat-item lemma="havercj" tags="SV.*"/>
+      <cat-item lemma="havercj" tags="SVneg.*"/>
     </def-cat>
 
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
@@ -217,11 +241,61 @@
       <list-item v="peu"/>
       <list-item v="guère"/>
     </def-list>
+
+    <def-list n="pr_de">
+      <list-item v="de"/>
+      <list-item v="à côté de"/>
+      <list-item v="afin de"/>
+      <list-item v="à l'époque de"/>
+      <list-item v="à l'encontre de"/>
+      <list-item v="à l'exception de"/>
+      <list-item v="à l'instar de"/>
+      <list-item v="à l'insu de"/>
+      <list-item v="à l'issue de"/>
+      <list-item v="à l'occasion de"/>
+      <list-item v="à l'égard de"/>
+      <list-item v="à la demande de"/>
+      <list-item v="à la différence de"/>
+      <list-item v="à moins de"/>
+      <list-item v="à propos de"/>
+      <list-item v="à partir de"/>
+      <list-item v="à proximité de"/>
+      <list-item v="au-delà de"/>
+      <list-item v="au bout de"/>
+      <list-item v="au cours de"/>
+      <list-item v="au delà de"/>
+      <list-item v="au dire de"/>
+      <list-item v="au gré de"/>
+      <list-item v="au milieu de"/>
+      <list-item v="au profit de"/>
+      <list-item v="au prétexte de"/>
+      <list-item v="au sujet de"/>
+      <list-item v="autour de"/>
+      <list-item v="dans bien de"/>
+      <list-item v="dans le cadre de"/>
+      <list-item v="de la part de"/>
+      <list-item v="derrière de"/>
+      <list-item v="devant de"/>
+      <list-item v="en cas de"/>
+      <list-item v="en dehors de"/>
+      <list-item v="en échange de"/>
+      <list-item v="en faveur de"/>
+      <list-item v="en plus de"/>
+      <list-item v="en raison de"/>
+      <list-item v="en période de"/>
+      <list-item v="en temps de"/>
+      <list-item v="en tête de"/>
+      <list-item v="lors de"/>
+      <list-item v="par l'intermédiaire de"/>
+      <list-item v="pour ce qui est de"/>
+      <list-item v="sur la rêquete de"/>
+    </def-list>
+
   </section-def-lists>
 
   <section-def-macros>
 
- <def-macro n="generate_de" npar="0"> 
+ <def-macro n="generate_de" npar="0" v="oci@gascon"> 
     <!-- ^de<PREP>{^de<pr>$}$ -->
    <out>
      <chunk>
@@ -420,7 +494,7 @@
 
     <!-- RÈGLAS D'INCLUSION DE L'ARTICLE DEFINIT DEL PARTITIU -->
 
-    <rule comment="RÈGLA: SV PR_de DET_def SN: vòli d'aiga > je veux de l'eau" v="oci">
+    <rule comment="RÈGLA: SV_partitiu PR_de DET_def SN: vòli d'aiga > je veux de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="PREP_de"/>
@@ -454,45 +528,32 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV PR_de DET_def SN: vòli d'aiga > je veux de l'eau" v="oci@gascon">
+    <rule comment="RÈGLA: SV_vbhaver SN_n: aver rason > avoir raison (blòca la generacion del partitiu)" v="oci@gascon">
       <pattern>
-        <pattern-item n="SV_partitiu"/>
-        <pattern-item n="PREP_de"/>
-        <pattern-item n="SN_UNK"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-        </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="3"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
-
-<!--
-    <rule comment="RÈGLA: SV PR_de DET_def SN: vòli aiga > je veux de l'eau" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu SN: que vòli aiga > je veux de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SN_n"/>
       </pattern>
       <action>
         <out>
@@ -516,9 +577,8 @@
         </out>
       </action>
     </rule>
--->
 
-    <rule comment="RÈGLA: SV SAdv PR_de DET_def SN: vòli totjorn d'aiga > je veux toujours de l'eau ; vòli pas d'aigua > je ne veux pas d'eau">
+    <rule comment="RÈGLA: SV_partitiu SAdv PR_de DET_def SN: vòli totjorn d'aiga > je veux toujours de l'eau ; vòli pas d'aigua > je ne veux pas d'eau" v="oci">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="SAdv"/>
@@ -560,7 +620,72 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV SAdv SAdv PR_de DET_def SN: vòli totjorn d'aiga > je veux toujours de l'eau ; vòli pas d'aigua > je ne veux pas d'eau">
+    <rule comment="RÈGLA: SV_vbhaver SAdv SN_n: aver pas rason > avoir pas raison (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu SAdv SN: que vòli totjorn aiga > je veux toujours de l'eau ; vòli pas aigua > je ne veux pas d'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu SAdv SAdv PR_de DET_def SN: vòli pas totjorn d'aiga > je ne veux pas toujours de l'eau ; vòli pas torjorn d'aigua > je ne veux pas toujours d'eau" v="oci">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="SAdv"/>
@@ -610,7 +735,87 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbhaver PP PR_de DET_def SN: ai volgut d'aiga > j'ai voulu de l'eau">
+    <rule comment="RÈGLA: SV_vbhaver SAdv SAdv SN_n: aver pas totjorn rason > avoir pas raison (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu SAdv SAdv DET_def SN: que vòli pas totjorn aiga > je ne veux pas toujours de l'eau ; vòli pas totjorn aigua > je ne veux pas toujours d'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef3">
+          <with-param pos="4"/>
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver PP PR_de DET_def SN: ai volgut d'aiga > j'ai voulu de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="PP"/>
@@ -651,7 +856,71 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbhaver ADV PP PR_de DET_def SN: ai totjorn volgut d'aiga > j'ai toujours voulu de l'eau ; ai pas volgut d'aiga > j'ai pas voulu de l'eau">
+    <rule comment="RÈGLA: SV_vbhaver PP_haver SN: qu'èi avut vergonha > j'ai eu honte (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="PP_haver"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver SN: qu'èi volut aiga > j'ai voulu de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV PP PR_de DET_def SN: ai totjorn volgut d'aiga > j'ai toujours voulu de l'eau ; ai pas volgut d'aiga > je n'ai pas voulu de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
@@ -700,7 +969,86 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbhaver ADV ADV PP PR_de DET_def SN: ai totjorn volgut d'aiga > j'ai toujours voulu de l'eau ; ai pas volgut d'aiga > j'ai pas voulu de l'eau">
+    <rule comment="RÈGLA: SV_vbhaver ADV PP_haver SN: qu'èi totjorn avut vergonha > j'ai toujours eu honte (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_haver"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV PP SN: qu'èi totjorn volut aiga > j'ai toujours voulu de l'eau ; n'èi pas volut aiga > je n'ai pas voulu de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef2">
+          <with-param pos="4"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV ADV PP PR_de DET_def SN: ai pas totjorn volgut d'aiga > je n'ai pas toujours voulu de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
@@ -757,7 +1105,101 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbhaver ADV PP ADV PR_de DET_def SN: ai totjorn volgut d'aiga > j'ai toujours voulu de l'eau ; ai pas volgut d'aiga > j'ai pas voulu de l'eau">
+    <rule comment="RÈGLA: SV_vbhaver ADV ADV PP_haver SN: n'èi pas totjorn avut vergonha > je n'ai pas toujours eu honte (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_haver"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV ADV PP SN: n'èi pas totjorn volut aiga > je n'ai pas toujours voulu de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef3">
+          <with-param pos="5"/>
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV PP ADV PR_de DET_def SN: ai totjorn volgut d'aiga > je n'ai pas voulu toujours de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
@@ -809,6 +1251,100 @@
             <clip pos="6" part="lem"/>
             <clip pos="6" part="tags"/>
             <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV PP_haver ADV SN: n'èi pas avut totjorn vergonha > je n'ai pas eu toujours honte (blòca la generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_haver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver ADV PP ADV SN: n'èi pas volut totjorn aiga > je n'ai pas voulu toujours de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="generate_de"></call-macro>
+        <call-macro n="generate_detdef3">
+          <with-param pos="5"/>
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
       </action>
@@ -843,6 +1379,44 @@
             <clip pos="3" part="lem"/>
             <clip pos="3" part="tags"/>
             <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN: dab amics > avec des amis" v="oci@gascon">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><in caseless="yes"><clip pos="1" part="lem"/><list n="pr_de"/></in></not>
+                <not><equal caseless="yes"><clip pos="1" part="lem"/><lit v="comme"/></equal></not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef1">
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
       </action>
@@ -891,7 +1465,7 @@
     </rule>
 -->
 
-    <rule comment="RÈGLA: CM PR_de SN SV">
+    <rule comment="RÈGLA: CM PR_de SN SV" v="oci">
       <pattern>
         <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
@@ -961,7 +1535,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: PR_de SN_pl">
+    <rule comment="RÈGLA: PR_de SN_pl" v="oci">
       <pattern>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl"/>
@@ -983,6 +1557,38 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT PR_de SN_pl" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SENT"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
       </action>

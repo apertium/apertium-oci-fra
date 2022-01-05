@@ -6053,7 +6053,7 @@
 
     <rule comment="RÈGLA: ADJ NOM">
       <pattern>
-        <pattern-item n="adjec"/>
+        <pattern-item n="adj"/>
         <pattern-item n="nom"/>
       </pattern>
       <action>
@@ -6402,7 +6402,7 @@
     <rule comment="RÈGLA: ADV ADJ NOM">
       <pattern>
         <pattern-item n="adv_preadv"/>
-        <pattern-item n="adjec"/>
+        <pattern-item n="adj"/>
         <pattern-item n="nom"/>
       </pattern>
       <action>
@@ -8761,8 +8761,19 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="lem"/><lit v="avoir"/> </equal>
+            </test>
+            <let><var n="chunkname"/><lit v="haverpp"/></let>
+          </when>
+          <otherwise>
+            <let><var n="chunkname"/><lit v="pp"/></let>
+          </otherwise>
+        </choose>
         <out>
-          <chunk name="pp" case="caseFirstWord">
+          <chunk namefrom="chunkname" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SA"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
@@ -9153,8 +9164,19 @@
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
+         <choose>
+           <when>
+             <test>
+               <equal><clip pos="1" side="tl" part="lem"/><lit v="avoir"/> </equal>
+             </test>
+             <let><var n="chunkname"/><lit v="haverinf_ger"/></let>
+           </when>
+           <otherwise>
+             <let><var n="chunkname"/><lit v="verbinf_ger"/></let>
+           </otherwise>
+         </choose>
          <out>
-           <chunk name="verbinf_ger" case="caseFirstWord">
+           <chunk namefrom="chunkname" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
