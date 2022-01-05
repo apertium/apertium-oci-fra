@@ -13,6 +13,9 @@
     <def-cat n="PP">
       <cat-item lemma="pp" tags="SA.*"/>
     </def-cat>
+    <def-cat n="PP_partitiu">
+      <cat-item lemma="pp" tags="SA.*.partitiu"/>
+    </def-cat>
     <def-cat n="PP_pl">
       <cat-item lemma="pp" tags="SA.*.pl.*"/>
     </def-cat>
@@ -33,6 +36,9 @@
     <def-cat n="SV">
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_haver">
+      <cat-item tags="SV.vbhaver.*"/>
     </def-cat>
     <def-cat n="SV_sans_pas">
       <cat-item tags="SV.*.negation.sans_pas.*"/>
@@ -665,7 +671,82 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser PP PR_de DET_def SN: sont devenues des chansons populaires > son vengudas de cançons popularas" v="oci">
+    <rule comment="RÈGLA: SV_haver PP_partitiu PR_de DET_def SN: J'ai bu de l'eau. > Ai begut d'aiga" v="oci">
+      <pattern>
+        <pattern-item n="SV_haver"/>
+        <pattern-item n="PP_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_haver PP_partitiu PR_de DET_def SN: J'ai bu de l'eau. > Èi bevut aiga" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_haver"/>
+        <pattern-item n="PP_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser PP_pl PR_de DET_def SN: sont devenues des chansons populaires > son vengudas de cançons popularas" v="oci">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="PP_pl"/>
@@ -705,7 +786,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser PP PR_de DET_def SN: sont devenues des chansons populaires > son vengudas cançons popularas" v="oci@gascon">
+    <rule comment="RÈGLA: SV_vbser PP_pl PR_de DET_def SN: sont devenues des chansons populaires > son vengudas cançons popularas" v="oci@gascon">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="PP_pl"/>
@@ -740,7 +821,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser ADV PP PR_de DET_def SN: ne sont pas devenues des chansons populaires > son pas vengudas de cançons popularas" v="oci">
+    <rule comment="RÈGLA: SV_vbser ADV PP_pl PR_de DET_def SN: ne sont pas devenues des chansons populaires > son pas vengudas de cançons popularas" v="oci">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="SAdv"/>
@@ -787,7 +868,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser ADV PP PR_de DET_def SN: ne sont pas devenues des chansons populaires > son pas vengudas cançons popularas" v="oci@gascon">
+    <rule comment="RÈGLA: SV_vbser ADV PP_pl PR_de DET_def SN: ne sont pas devenues des chansons populaires > son pas vengudas cançons popularas" v="oci@gascon">
       <pattern>
         <pattern-item n="SV_vbser"/>
         <pattern-item n="SAdv"/>
