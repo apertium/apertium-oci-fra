@@ -581,6 +581,11 @@
 
 <!-- **************** PREP **************** -->
 
+  <!-- de >> de, en -->
+  <rule weight="0.6">
+    <match lemma="de" tags="pr"><select lemma="de"/></match>
+  </rule>
+
   <!-- entà >> à, pour, vers -->
   <!-- tà >> à, pour, vers -->
   <!-- enta >> à, pour, vers -->
@@ -2400,6 +2405,38 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- biais >> façon, biais -->
+<!--
+  <rule weight="0.8" v="oci">
+    <match lemma="biais" tags="n.*"><select lemma="façon"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="biais" tags="n.*"><select lemma="manière"/></match>
+  </rule>
+-->
+  <rule weight="0.8">
+    <match lemma="biais" tags="n.*"><select lemma="manière"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="biais" tags="n.*"><select lemma="façon"/></match>
+  </rule>
+
+  <!-- baloard >> rempart, boulevard -->
+  <rule weight="0.8">
+    <match lemma="baloard" tags="n.*"><select lemma="rempart"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="baloard" tags="n.*"><select lemma="boulevard"/></match>
+    <or>
+      <match tags="np.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="baloard" tags="n.*"><select lemma="boulevard"/></match>
+    <match lemma="periferic" tags="adj.*"/>
+  </rule>
 
   <!-- esquira >> sonnette, crevette -->
   <rule weight="0.8">
