@@ -2422,6 +2422,175 @@
     <match lemma="biais" tags="n.*"><select lemma="façon"/></match>
   </rule>
 
+  <!-- cop > fois, coup -->
+  <!--
+  # molts cops, alguns cops
+  # cops forts, cop molt dur, cops al pit
+  -->
+  <rule weight="0.9">
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match lemma="eth" tags="det.*"/>
+    </or>
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+    <match lemma="a" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="sent"/>
+      <match tags="cm"/>
+    </or>
+    <match tags="det.*"/>
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or> 
+      <match lemma="autre" tags="adj.*"/>
+      <match lemma="aute" tags="adj.*"/>
+    </or> 
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="un" tags="det.*"/>
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+    <match lemma="de" tags="pr"/>
+    <or> 
+      <match lemma="mai" tags="adv"/>
+      <match lemma="mei" tags="adv"/>
+    </or> 
+  </rule>
+  <rule weight="1.2">
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+    <match lemma="a" tags="pr"/>
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match lemma="eth" tags="det.*"/>
+    </or>
+    <or>
+      <seq n="temps"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or> 
+      <match lemma="donar" tags="vblex.*"/>
+      <match lemma="clavar" tags="vblex.*"/>
+      <match lemma="etzibar" tags="vblex.*"/>
+      <match lemma="rebre" tags="vblex.*"/>
+      <match lemma="donar" tags="vblex.*"/>
+      <match lemma="balhar" tags="vblex.*"/>
+      <match lemma="bailar" tags="vblex.*"/>
+      <match lemma="baliar" tags="vblex.*"/>
+      <match lemma="dar" tags="vblex.*"/>
+      <match lemma="recebre" tags="vblex.*"/>
+      <match lemma="recéber" tags="vblex.*"/>
+      <match lemma="réber" tags="vblex.*"/>
+      <match lemma="fotre" tags="vblex.*"/>
+      <match lemma="fóter" tags="vblex.*"/>
+      <match lemma="hóter" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or> 
+      <match lemma="donar" tags="vblex.*"/>
+      <match lemma="balhar" tags="vblex.*"/>
+      <match lemma="bailar" tags="vblex.*"/>
+      <match lemma="baliar" tags="vblex.*"/>
+      <match lemma="dar" tags="vblex.*"/>
+      <match lemma="recebre" tags="vblex.*"/>
+      <match lemma="recéber" tags="vblex.*"/>
+      <match lemma="réber" tags="vblex.*"/>
+      <match lemma="fotre" tags="vblex.*"/>
+      <match lemma="fóter" tags="vblex.*"/>
+      <match lemma="hóter" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match tags="adj.*"/>
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match lemma="eth" tags="det.*"/>
+    </or>
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+    <or>
+      <match lemma="que" tags="rel.*"/>
+      <match lemma="qui" tags="rel.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match lemma="eth" tags="det.*"/>
+    </or>
+    <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
+    <or>
+      <match lemma="que" tags="rel.*"/>
+      <match lemma="qui" tags="rel.*"/>
+    </or>
+    <or>
+      <match lemma="venir" tags="vblex.*"/>
+      <match lemma="vénguer" tags="vblex.*"/>
+      <match lemma="viéner" tags="vblex.*"/>
+      <match lemma="vier" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match lemma="eth" tags="det.*"/>
+    </or>
+    <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
+    <or>
+      <match lemma="que" tags="rel.*"/>
+      <match lemma="qui" tags="rel.*"/>
+    </or>
+    <repeat from="0" upto="6">
+      <match tags="*"/>
+    </repeat>
+    <or> 
+      <match lemma="donar" tags="vblex.*"/>
+      <match lemma="balhar" tags="vblex.*"/>
+      <match lemma="bailar" tags="vblex.*"/>
+      <match lemma="baliar" tags="vblex.*"/>
+      <match lemma="dar" tags="vblex.*"/>
+      <match lemma="recebre" tags="vblex.*"/>
+      <match lemma="recéber" tags="vblex.*"/>
+      <match lemma="réber" tags="vblex.*"/>
+      <match lemma="fotre" tags="vblex.*"/>
+      <match lemma="fóter" tags="vblex.*"/>
+      <match lemma="hóter" tags="vblex.*"/>
+    </or>
+  </rule>
+
   <!-- baloard >> rempart, boulevard -->
   <rule weight="0.8">
     <match lemma="baloard" tags="n.*"><select lemma="rempart"/></match>
