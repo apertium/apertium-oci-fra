@@ -518,14 +518,22 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match tags="pr"/>
+    <or>
+      <match tags="pr"/>
+      <match lemma="coma" tags="cnjadv"/>
+      <match lemma="com" tags="cnjadv"/>
+    </or>
     <or>
       <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
       <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
     </or>
   </rule>
   <rule weight="1.0">
-    <match tags="pr"/>
+    <or>
+      <match tags="pr"/>
+      <match lemma="coma" tags="cnjadv"/>
+      <match lemma="com" tags="cnjadv"/>
+    </or>
     <or>
       <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
       <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
@@ -2280,9 +2288,56 @@
 
 <!-- **************** PREADV **************** -->
 
-  <!-- tant >> si, autant -->
+  <!-- tant >> si, aussi -->
   <rule weight="0.8">
     <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match tags="cnjcoo"/>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+
+  <!-- autant >> si, aussi -->
+  <rule weight="0.8">
+    <match lemma="autant" tags="preadv"><select lemma="si"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match tags="cnjcoo"/>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
   </rule>
 
 <!-- **************** ADV **************** -->
@@ -2401,6 +2456,64 @@
       <match tags="adj.*"/>
     </repeat>
     <match lemma="coma" tags="adv"/>
+  </rule>
+
+<!-- GASCON: IDEM PRECEDENT -->
+  <!-- autant >> autant, tant -->
+  <rule weight="0.8">
+    <match lemma="autant" tags="adv"><select lemma="autant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="adv"><select lemma="tant"/></match>
+    <or>
+      <match tags="prn.*"/>
+      <match tags="n.acr.*"/>
+      <match tags="np.*"/>
+    </or>
+    <match lemma="com" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="adv"><select lemma="tant"/></match>
+    <match tags="det.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <or>
+      <match tags="n.*"/>
+      <match tags="np.*"/>
+    </or>
+    <match lemma="com" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="adv"><select lemma="tant"/></match>
+    <match tags="det.*"/>
+    <or>
+      <match tags="n.*"/>
+      <match tags="np.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="com" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="adv"><select lemma="tant"/></match>
+    <match tags="det.*"/>
+    <match tags="preadv"/>
+    <match tags="adj.*"/>
+    <match tags="n.*"/>
+    <match lemma="com" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="adv"><select lemma="tant"/></match>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+    <match tags="preadv"/>
+    <match tags="adj.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="com" tags="adv"/>
   </rule>
 
 
