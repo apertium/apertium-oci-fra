@@ -543,13 +543,17 @@
 
 <!-- **************** PREP **************** -->
 
-  <!-- en >> en, de -->
-  <rule weight="0.8">
-    <match lemma="en" tags="pr"><select lemma="en"/></match>
+  <!-- à >> a, en -->
+  <rule weight="0.6">
+    <match lemma="à" tags="pr"><select lemma="en"/></match>
   </rule>
-  <rule weight="1.0">
-    <match lemma="en" tags="pr"><select lemma="de"/></match>
-    <match lemma="biais" tags="n.*"/>
+
+  <!-- dans >> dins/dens, en -->
+  <rule weight="0.6">
+    <match lemma="dans" tags="pr"><select lemma="dins"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="dans" tags="pr"><select lemma="dens"/></match>
   </rule>
 
   <!-- pour >> per/entà -->
@@ -1683,6 +1687,32 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- causer >> causar, devisar, etc. -->
+  <rule weight="0.8">
+    <match lemma="causer" tags="vblex.*"><select lemma="causar" tags="vblex.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="causer" tags="vblex.*"><select lemma="devisar" tags="vblex.*"/></match>
+    <match lemma="avec" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="causer" tags="vblex.*"><select lemma="devisar" tags="vblex.*"/></match>
+    <match lemma="avec" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="causer" tags="vblex.*"><select lemma="devisar" tags="vblex.*"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="*.sg"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="causer" tags="vblex.*"><select lemma="devisar" tags="vblex.*"/></match>
+    <or>
+      <match lemma="amicalement" tags="adv"/>
+      <match lemma="tranquillement" tags="adv"/>
+      <match lemma="dehors" tags="adv"/>
+    </or>
+  </rule>
 
   <!-- plaire >> agradar, etc. -->
   <rule weight="0.8">

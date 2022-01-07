@@ -654,6 +654,48 @@
 
 <!-- **************** PREP **************** -->
 
+  <!-- en >> en, dans, de -->
+  <rule weight="0.8">
+    <match lemma="en" tags="pr"><select lemma="en"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="en" tags="pr"><select lemma="dans"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="consistir" tags="vblex.*"/>
+      <match lemma="convertir" tags="vblex.*"/>
+      <match lemma="transformar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="prn.enc.*"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="en" tags="pr"><select lemma="en"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="en" tags="pr"><select lemma="dans"/></match>
+    <match tags="det.*"/>
+    <match lemma="langue" tags="n.*"/>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="en" tags="pr"><select lemma="en"/></match>
+    <match tags="det.def.*"/>
+    <match lemma="langue" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="en" tags="pr"><select lemma="de"/></match>
+    <match lemma="biais" tags="n.*"/>
+  </rule>
+
   <!-- de >> de, en -->
   <rule weight="0.6">
     <match lemma="de" tags="pr"><select lemma="de"/></match>
@@ -2320,6 +2362,11 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- màger >> plus grand, majeur -->
+  <rule weight="0.8">
+    <match lemma="màger" tags="adj.*"><select lemma="majeur"/></match>
+  </rule>
+
   <!-- nòu >> nouveau, neuf -->
   <rule weight="0.8">
     <match lemma="nòu" tags="adj.*"><select lemma="nouveau"/></match>
@@ -2359,16 +2406,23 @@
   </rule>
   <rule weight="1.0">
     <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
-    <or>
-      <match tags="adj.*"/>
-      <match tags="adv"/>
-    </or>
-    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+    <match tags="vblex.pp.*"/>
+    <match lemma="de" tags="pr"/>
   </rule>
   <rule weight="1.0">
     <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
     <or>
       <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
       <match tags="adv"/>
     </or>
     <match tags="cnjcoo"/>
@@ -2378,15 +2432,75 @@
     </or>
     <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
   </rule>
+<!--
+  <rule weight="1.0">
+    <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match tags="cnjcoo"/>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+    <match tags="prn.pro.*"/>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match tags="cnjcoo"/>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+    <match tags="prn.pro.*"/>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+-->
 
   <!-- autant >> si, aussi -->
   <rule weight="0.8">
     <match lemma="autant" tags="preadv"><select lemma="si"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
+    <match tags="vblex.pp.*"/>
+    <match lemma="de" tags="pr"/>
+  </rule>
   <rule weight="1.0" c="oci@gascon">
     <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
     <or>
       <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
       <match tags="adv"/>
     </or>
     <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
@@ -2395,11 +2509,13 @@
     <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
     <or>
       <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
       <match tags="adv"/>
     </or>
     <match tags="cnjcoo"/>
     <or>
       <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
       <match tags="adv"/>
     </or>
     <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
@@ -3021,6 +3137,91 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- esperar >> attendre, espérer -->
+  <rule weight="0.8">
+    <match lemma="esperar" tags="vblex.*"><select lemma="attendre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
+    <match lemma="que" tags="cnjsub"/>
+    <repeat from="0" upto="10">
+      <or>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="pr"/>
+        <match tags="prn.tn.*"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.fti.*"/>
+      <match tags="vblex.prs.*"/>
+      <match tags="vblex.cni.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
+    <match tags="adv"/>
+    <match lemma="que" tags="cnjsub"/>
+    <repeat from="0" upto="10">
+      <or>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="pr"/>
+        <match tags="prn.tn.*"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.fti.*"/>
+      <match tags="vblex.prs.*"/>
+      <match tags="vblex.cni.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
+    <match tags="adv"/>
+    <match tags="adv"/>
+    <match lemma="que" tags="cnjsub"/>
+    <repeat from="0" upto="10">
+      <or>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="pr"/>
+        <match tags="prn.tn.*"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.fti.*"/>
+      <match tags="vblex.prs.*"/>
+      <match tags="vblex.cni.*"/>
+    </or>
+  </rule>
 
   <!-- mancar >> manquer, rater, faillir -->
   <rule weight="0.8">
