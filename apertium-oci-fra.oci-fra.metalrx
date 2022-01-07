@@ -381,7 +381,11 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match tags="pr"/>
+    <or>
+      <match tags="pr"/>
+      <match lemma="coma" tags="cnjadv"/>
+      <match lemma="com" tags="cnjadv"/>
+    </or>
     <or>
       <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
       <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
@@ -389,6 +393,21 @@
   </rule>
   <rule weight="0.9">
     <match tags="cnjcoo"/>
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <or>
+       <match lemma="mai" tags="adv"/>
+       <match lemma="mei" tags="adv"/>
+    </or>
+    <or>
+       <match tags="adv"/>
+       <match tags="adj.*"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
     <or>
       <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
       <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
@@ -462,11 +481,27 @@
     <match lemma="tu" tags="prn.*"><select lemma="tu"/></match>
   </rule>
   <rule weight="1.0">
-    <match tags="pr"/>
+    <or>
+      <match tags="pr"/>
+      <match lemma="coma" tags="cnjadv"/>
+      <match lemma="com" tags="cnjadv"/>
+    </or>
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
   </rule>
   <rule weight="0.9">
     <match tags="cnjcoo"/>
+    <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+  </rule>
+  <rule weight="0.9">
+    <or>
+       <match lemma="mai" tags="adv"/>
+       <match lemma="mei" tags="adv"/>
+    </or>
+    <or>
+       <match tags="adv"/>
+       <match tags="adj.*"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
   </rule>
   <rule weight="0.9">
@@ -530,10 +565,40 @@
   </rule>
   <rule weight="1.0">
     <or>
+       <match lemma="mai" tags="adv"/>
+       <match lemma="mei" tags="adv"/>
+    </or>
+    <or>
+       <match tags="adv"/>
+       <match tags="adj.*"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
       <match tags="pr"/>
       <match lemma="coma" tags="cnjadv"/>
       <match lemma="com" tags="cnjadv"/>
     </or>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+       <match lemma="mai" tags="adv"/>
+       <match lemma="mei" tags="adv"/>
+    </or>
+    <or>
+       <match tags="adv"/>
+       <match tags="adj.*"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
     <or>
       <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
       <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
@@ -2318,7 +2383,7 @@
   <rule weight="0.8">
     <match lemma="autant" tags="preadv"><select lemma="si"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="1.0" c="oci@gascon">
     <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
     <or>
       <match tags="adj.*"/>
@@ -2341,6 +2406,64 @@
   </rule>
 
 <!-- **************** ADV **************** -->
+
+  <!-- mai >> plus (adv), plus (adv.pas_neg) -->
+  <rule weight="0.8">
+    <match lemma="mai" tags="adv"><select lemma="plus" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pas" tags="adv"/>
+    <match lemma="mai" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
+
+  <!-- mei >> plus (adv), plus (adv.pas_neg) -->
+  <rule weight="0.8">
+    <match lemma="mei" tags="adv"><select lemma="plus" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pas" tags="adv"/>
+    <match lemma="mei" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="ne" tags="adv"/>
+      <match lemma="non" tags="adv"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+    <match lemma="mei" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
+
+  <!-- pus >> plus (adv), plus (adv.pas_neg) -->
+  <rule weight="0.8">
+    <match lemma="pus" tags="adv"><select lemma="plus" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pas" tags="adv"/>
+    <match lemma="pus" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
+
+  <!-- mèi >> plus (adv), plus (adv.pas_neg) -->
+  <rule weight="0.8">
+    <match lemma="mèi" tags="adv"><select lemma="plus" tags="adv"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pas" tags="adv"/>
+    <match lemma="mèi" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="ne" tags="adv"/>
+      <match lemma="non" tags="adv"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+    <match lemma="mèi" tags="adv"><select lemma="plus" tags="adv.pas_neg"/></match>
+  </rule>
 
   <!-- despuish >> après, depuis -->
   <rule weight="0.8">
