@@ -212,6 +212,61 @@
     </pipeline>
   </mode>
 
+  <mode name="oci-fra-unigram" install="no" gendebug="no">
+    <pipeline>
+      <program name="lt-proc -w">
+        <file name="oci-fra.automorf.bin"/>
+      </program>
+      <program name="cg-proc -w" debug-suff="disamb">
+        <file name="oci-fra.rlx.bin"/>
+      </program>
+      <program name="apertium-tagger -u 2 -g $2">
+        <file name="oci_leng.unigram.prob"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="oci-fra.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="oci-fra.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="oci-fra.t1x"/>
+        <file name="oci-fra.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunka">
+        <file name="apertium-oci-fra.oci-fra.t2ax"/>
+        <file name="oci-fra.t2ax.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkb">
+        <file name="apertium-oci-fra.oci-fra.t2bx"/>
+        <file name="oci-fra.t2bx.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkc">
+        <file name="oci-fra.t2cx"/>
+        <file name="oci-fra.t2cx.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkd">
+        <file name="apertium-oci-fra.oci-fra.t2dx"/>
+        <file name="oci-fra.t2dx.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-oci-fra.oci-fra.t3x"/>
+        <file name="oci-fra.t3x.bin"/>
+      </program>
+      <program name="apertium-transfer -n">
+        <file name="oci-fra.t4x"/>
+        <file name="oci-fra.t4x.bin"/>
+      </program>
+      <program name="lt-proc $1">
+        <file name="oci-fra.autogen.bin"/>
+      </program>
+      <program name="lt-proc -p">
+        <file name="oci-fra.autopgen.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
   <!-- oci@gascon → fra -->
 
   <mode name="oci_gascon-fra" install="yes" gendebug="yes">
@@ -277,6 +332,61 @@
       <program name="cg-conv -a -l"/>
       <program name="vislcg3 --trace --grammar">
         <file name="oci-fra.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="oci_gascon-fra-unigram" install="no" gendebug="no">
+    <pipeline>
+      <program name="lt-proc -w">
+        <file name="oci@gascon-fra.automorf.bin"/>
+      </program>
+      <program name="cg-proc -w" debug-suff="disamb">
+        <file name="oci-fra.rlx.bin"/>
+      </program>
+      <program name="apertium-tagger -u 2 -g $2">
+        <file name="oci_gasc.unigram.prob"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="oci@gascon-fra.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="oci-fra.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="oci@gascon-fra.t1x"/>
+        <file name="oci@gascon-fra.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunka">
+        <file name="apertium-oci-fra.oci-fra.t2ax"/>
+        <file name="oci-fra.t2ax.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkb">
+        <file name="apertium-oci-fra.oci-fra.t2bx"/>
+        <file name="oci-fra.t2bx.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkc">
+        <file name="oci@gascon-fra.t2cx"/>
+        <file name="oci@gascon-fra.t2cx.bin"/>
+      </program>
+      <program name="apertium-interchunk" debug-suff="interchunkd">
+        <file name="apertium-oci-fra.oci-fra.t2dx"/>
+        <file name="oci-fra.t2dx.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-oci-fra.oci-fra.t3x"/>
+        <file name="oci-fra.t3x.bin"/>
+      </program>
+      <program name="apertium-transfer -n">
+        <file name="oci@gascon-fra.t4x"/>
+        <file name="oci@gascon-fra.t4x.bin"/>
+      </program>
+      <program name="lt-proc $1">
+        <file name="oci-fra.autogen.bin"/>
+      </program>
+      <program name="lt-proc -p">
+        <file name="oci-fra.autopgen.bin"/>
       </program>
     </pipeline>
   </mode>
