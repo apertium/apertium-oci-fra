@@ -2758,6 +2758,44 @@
 
 <!-- **************** N **************** -->
 
+  <!-- despensa >> dépense, frais -->
+  <rule weight="0.8">
+    <match lemma="despensa" tags="n.*"><select lemma="dépense"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="despensa" tags="n.f.pl"><select lemma="frais"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="desplaçament" tags="n.*"/>
+      <match lemma="escolaritat" tags="n.*"/>
+      <match lemma="foncionament" tags="n.*"/>
+      <match lemma="gestion" tags="n.*"/>
+      <match lemma="magazinatge" tags="n.*"/>
+      <match lemma="manteniment" tags="n.*"/>
+      <match lemma="transpòrt" tags="n.*"/>
+      <match lemma="viatge" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- còsta >> côte, frais -->
+  <rule weight="0.8">
+    <match lemma="còsta" tags="n.*"><select lemma="côte"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còsta" tags="n.f.pl"><select lemma="frais"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="desplaçament" tags="n.*"/>
+      <match lemma="escolaritat" tags="n.*"/>
+      <match lemma="foncionament" tags="n.*"/>
+      <match lemma="gestion" tags="n.*"/>
+      <match lemma="magazinatge" tags="n.*"/>
+      <match lemma="manteniment" tags="n.*"/>
+      <match lemma="transpòrt" tags="n.*"/>
+      <match lemma="viatge" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- biais >> façon, biais -->
 <!--
   <rule weight="0.8" v="oci">
@@ -3137,6 +3175,16 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- garir >> guérir, soigner -->
+  <rule weight="0.8">
+    <match lemma="garir" tags="vblex.*"><select lemma="guérir"/></match>
+  </rule>
+
+  <!-- guarir >> guérir, soigner -->
+  <rule weight="0.8">
+    <match lemma="guarir" tags="vblex.*"><select lemma="guérir"/></match>
+  </rule>
 
   <!-- esperar >> attendre, espérer -->
   <rule weight="0.8">
