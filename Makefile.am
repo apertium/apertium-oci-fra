@@ -20,6 +20,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).autobil.bin	\
 	$(PREFIX1b).autobil.bin	\
 	$(PREFIX1).autolex.bin	\
+	$(PREFIX1b).autolex.bin	\
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -43,6 +44,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2).autobil.bin	\
 	$(PREFIX2b).autobil.bin	\
 	$(PREFIX2).autolex.bin	\
+	$(PREFIX2b).autolex.bin	\
 	$(PREFIX2).autogen.bin	\
 	$(PREFIX2b).autogen.bin	\
 	$(PREFIX2).autoprepgen.bin	\
@@ -158,16 +160,40 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ## Lexical selection rules
 ###############################################################################
 
-.deps/%.metalrx: %.metalrx .deps/.d
+.deps/$(PREFIX1).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).metalrx >$@
+
+.deps/$(PREFIX1b).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).metalrx >$@
+
+.deps/$(PREFIX2).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx
+	apertium-filter-rules oci $(BASENAME).$(PREFIX2).metalrx >$@
+
+.deps/$(PREFIX2b).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).metalrx >$@
+
+.deps/%.metalrx: .deps/%.ini.metalrx .deps/.d
 	apertium-metalrx $< $@
+
+#.deps/$(PREFIX1).metalrx: .deps/$(PREFIX1).ini.metalrx
+#	apertium-metalrx-to-lrx $< $@
+
+#.deps/$(PREFIX1).lrx: .deps/$(PREFIX1).metalrx
+#	apertium-metalrx-to-lrx $< $@
 
 .deps/%.lrx: .deps/%.metalrx
 	apertium-metalrx-to-lrx $< $@
 
-$(PREFIX1).autolex.bin: .deps/$(BASENAME).$(PREFIX1).lrx
+$(PREFIX1).autolex.bin: .deps/$(PREFIX1).lrx
 	lrx-comp $< $@
 
-$(PREFIX2).autolex.bin: .deps/$(BASENAME).$(PREFIX2).lrx
+$(PREFIX1b).autolex.bin: .deps/$(PREFIX1b).lrx
+	lrx-comp $< $@
+
+$(PREFIX2).autolex.bin: .deps/$(PREFIX2).lrx
+	lrx-comp $< $@
+
+$(PREFIX2b).autolex.bin: .deps/$(PREFIX2b).lrx
 	lrx-comp $< $@
 
 ###############################################################################
@@ -306,8 +332,10 @@ $(PREFIX2b).autopgen.bin: $(AP_SRC1)/$(LANG1b).autopgen.bin
 
 EXTRA_DIST=					\
 		.deps/$(BASENAME).$(PREFIX1).lrx	\
+		.deps/$(BASENAME).$(PREFIX1b).lrx	\
 		$(BASENAME).$(PREFIX1).dix	\
 		.deps/$(BASENAME).$(PREFIX2).lrx	\
+		.deps/$(BASENAME).$(PREFIX2b).lrx	\
 		$(BASENAME).$(PREFIX1).t1x	\
 		$(BASENAME).$(PREFIX1).t2ax	\
 		$(BASENAME).$(PREFIX1).t2bx	\
