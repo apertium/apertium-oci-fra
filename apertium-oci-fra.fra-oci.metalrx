@@ -1728,12 +1728,13 @@
   </rule>
 
   <!-- élever >> auçar/lhevar, abalir/neurir, elevar/neurir, ensenhar -->
-  <!-- languedocian -->
   <rule weight="0.8">
-    <match lemma="élever" tags="vblex.*"><select lemma="auçar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci"><select lemma="auçar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="lhevar"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="élever" tags="vblex.*"><select lemma="abalir"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci"><select lemma="abalir"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
     <repeat from="0" upto="4">
       <or>
         <match tags="prn.*"/>
@@ -1750,7 +1751,8 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match lemma="élever" tags="vblex.*"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
     <repeat from="0" upto="4">
       <or>
         <match tags="prn.*"/>
@@ -1790,10 +1792,12 @@
       <match tags="adv"/>
       <match tags="preadv"/>
     </repeat>
-    <match lemma="élever" tags="vblex.pp.*"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.pp.*" v="oci"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="élever" tags="vblex.*"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
     <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
@@ -1814,115 +1818,8 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match lemma="élever" tags="vblex.*"><select lemma="elevar"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-      </or>
-    </repeat>
-    <match lemma="par" tags="pr"/>
-    <match lemma="de" tags="pr"/>
-    <match tags="det.*"/>
-    <or>
-      <match lemma="père" tags="n.*"/>
-      <match lemma="mère" tags="n.*"/>
-      <match lemma="parent" tags="n.*"/>
-      <match lemma="grand-père" tags="n.*"/>
-      <match lemma="aïel" tags="n.*"/>
-      <match lemma="arrière-grand-père" tags="n.*"/>
-      <match lemma="oncle" tags="n.*"/>
-      <match lemma="tante" tags="n.*"/>
-    </or>
-  </rule>
-
-  <!-- gascon -->
-  <rule weight="0.9">
-    <match lemma="élever" tags="vblex.*"><select lemma="lhevar"/></match>
-  </rule>
-  <rule weight="1.1">
-    <match lemma="élever" tags="vblex.*"><select lemma="neurir"/></match>
-    <repeat from="0" upto="4">
-      <or>
-        <match tags="prn.*"/>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-        <match lemma="de" tags="pr"/>
-        <match tags="det.*"/>
-        <match tags="num"/>
-        <match tags="num.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="bétail"/>
-    </or>
-  </rule>
-  <rule weight="1.1">
-    <match lemma="élever" tags="vblex.*"><select lemma="neurir"/></match>
-    <repeat from="0" upto="4">
-      <or>
-        <match tags="prn.*"/>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-        <match lemma="de" tags="pr"/>
-        <match tags="det.*"/>
-        <match tags="num"/>
-        <match tags="num.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="enfant" tags="n.*"/>
-      <match lemma="fils" tags="n.*"/>
-      <match lemma="fille" tags="n.*"/>
-      <match lemma="petit-fils" tags="n.*"/>
-      <match lemma="frère" tags="n.*"/>
-      <match lemma="sœur" tags="n.*"/>
-      <match lemma="neuveu" tags="n.*"/>
-      <match lemma="nièce" tags="n.*"/>
-    </or>
-  </rule>
-  <rule weight="1.1">
-    <or>
-      <match lemma="enfant" tags="n.*"/>
-      <match lemma="fils" tags="n.*"/>
-      <match lemma="fille" tags="n.*"/>
-      <match lemma="petit-fils" tags="n.*"/>
-      <match lemma="frère" tags="n.*"/>
-      <match lemma="sœur" tags="n.*"/>
-      <match lemma="neuveu" tags="n.*"/>
-      <match lemma="nièce" tags="n.*"/>
-    </or>
-    <repeat from="0" upto="4">
-      <match tags="vbser.*"/>
-      <match tags="adj.*"/>
-      <match tags="adv"/>
-      <match tags="preadv"/>
-    </repeat>
-    <match lemma="élever" tags="vblex.pp.*"><select lemma="neurir"/></match>
-  </rule>
-  <rule weight="1.1">
-    <match lemma="élever" tags="vblex.*"><select lemma="neurir"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-      </or>
-    </repeat>
-    <match lemma="par" tags="pr"/>
-    <match tags="det.*"/>
-    <or>
-      <match lemma="père" tags="n.*"/>
-      <match lemma="mère" tags="n.*"/>
-      <match lemma="parent" tags="n.*"/>
-      <match lemma="grand-père" tags="n.*"/>
-      <match lemma="aïel" tags="n.*"/>
-      <match lemma="arrière-grand-père" tags="n.*"/>
-      <match lemma="oncle" tags="n.*"/>
-      <match lemma="tante" tags="n.*"/>
-    </or>
-  </rule>
-  <rule weight="1.1">
-    <match lemma="élever" tags="vblex.*"><select lemma="neurir"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci"><select lemma="elevar"/></match>
+    <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
     <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>

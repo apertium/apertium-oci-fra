@@ -708,36 +708,36 @@
     <match lemma="entà" tags="pr"><select lemma="à"/></match>
   </rule>
   <rule weight="0.6">
-    <match lemma="tà" tags="pr"><select lemma="à"/></match>
+    <match lemma="enta" tags="pr"><select lemma="à"/></match>
   </rule>
   <rule weight="0.6">
-    <match lemma="enta" tags="pr"><select lemma="à"/></match>
+    <match lemma="tà" tags="pr"><select lemma="à"/></match>
   </rule>
-  <rule weight="0.8" c="gascon">
+  <rule weight="0.8" v="oci@gascon">
     <match lemma="entà" tags="pr"><select lemma="pour"/></match>
   </rule>
-  <rule weight="0.8" c="gascon">
-    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
-  </rule>
-  <rule weight="0.8" c="gascon">
+  <rule weight="0.8" v="oci@gascon">
     <match lemma="enta" tags="pr"><select lemma="pour"/></match>
   </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
+  </rule>
 
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <match lemma="entà" tags="pr"><select lemma="à"/></match>
     <or>
       <match tags="np.top.*"/>
       <match tags=""/>
     </or>
   </rule>
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <match lemma="tà" tags="pr"><select lemma="à"/></match>
     <or>
       <match tags="np.top.*"/>
       <match tags=""/>
     </or>
   </rule>
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <match lemma="enta" tags="pr"><select lemma="à"/></match>
     <or>
       <match tags="np.top.*"/>
@@ -745,7 +745,7 @@
     </or>
   </rule>
 
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
@@ -761,7 +761,7 @@
     </repeat>
     <match lemma="entà" tags="pr"><select lemma="à"/></match>
   </rule>
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
@@ -777,7 +777,7 @@
     </repeat>
     <match lemma="tà" tags="pr"><select lemma="à"/></match>
   </rule>
-  <rule weight="1.0" c="gascon">
+  <rule weight="1.0" v="oci@gascon">
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
@@ -1175,6 +1175,7 @@
       <match lemma="enfant" tags="n.*"/>
       <match lemma="dròlle" tags="n.*"/>
       <match lemma="mainatge" tags="n.*"/>
+      <match lemma="gojat" tags="n.*"/>
       <match lemma="professor" tags="n.*"/>
       <match lemma="mèstre" tags="n.*"/>
 
@@ -2496,7 +2497,7 @@
     <match tags="vblex.pp.*"/>
     <match lemma="de" tags="pr"/>
   </rule>
-  <rule weight="1.0" c="oci@gascon">
+  <rule weight="1.0" v="oci@gascon">
     <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
     <or>
       <match tags="adj.*"/>
@@ -3186,6 +3187,51 @@
     <match lemma="guarir" tags="vblex.*"><select lemma="guérir"/></match>
   </rule>
 
+  <!-- sequestrar >> prendre# en otage, kidnapper -->
+  <rule weight="0.8">
+    <match lemma="sequestrar" tags="vblex.*"><select lemma="prendre# en otage"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sequestrar" tags="vblex.*"><select lemma="kidnapper"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="num.*"/>
+      <match tags="num"/>
+      <match tags="adj.*"/>
+    </or>
+    <or>
+      <match lemma="enfant" tags="n.*"/>
+      <match lemma="dròlle" tags="n.*"/>
+      <match lemma="mainatge" tags="n.*"/>
+      <match lemma="gojat" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sequestrar" tags="vblex.*"><select lemma="kidnapper"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="np.ant.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="enfant" tags="n.*"/>
+      <match lemma="dròlle" tags="n.*"/>
+      <match lemma="mainatge" tags="n.*"/>
+      <match lemma="gojat" tags="n.*"/>
+      <match tags="np.ant.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="sequestrar" tags="vblex.pp.*"><select lemma="kidnapper"/></match>
+  </rule>
+
   <!-- esperar >> attendre, espérer -->
   <rule weight="0.8">
     <match lemma="esperar" tags="vblex.*"><select lemma="attendre"/></match>
@@ -3602,6 +3648,9 @@
       <match tags="adj.*"/>
     </or>
   </rule>
+
+  <!-- mesclar >> mélanger, mêler -->
+  <macro name="verb_nopron_pron" p1="mesclar" p2="mélanger" p3="mêler" />
 
   <!-- dire >> dire, appeler -->
   <macro name="verb_nopron_pron" p1="dire" p2="dire" p3="appeler" />
