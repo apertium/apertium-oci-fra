@@ -2759,6 +2759,17 @@
 
 <!-- **************** N **************** -->
 
+  <!-- carn >> viande, chair -->
+  <rule weight="0.8">
+    <match lemma="carn" tags="n.*"><select lemma="viande"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="plaser" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+  </rule>
+
   <!-- despensa >> dépense, frais -->
   <rule weight="0.8">
     <match lemma="despensa" tags="n.*"><select lemma="dépense"/></match>
