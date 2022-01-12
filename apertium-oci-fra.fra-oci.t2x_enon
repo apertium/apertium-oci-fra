@@ -206,8 +206,6 @@
 
   <section-def-vars>
     <def-var n="set_enonciatiu"/>
-    <def-var n="case_enon"/>
-    <def-var n="case_verb"/>
     <def-var n="inici" v="&lt;oc&gt;"/> <!-- indica si és la primera frase que es tradueix -->
   </section-def-vars>
 
@@ -230,28 +228,7 @@
       </choose>
     </def-macro>
 
-    <def-macro n="escriure_enonciatiu" npar="2"><!-- par1 = vèrb; par2 = sent -->
-      <choose>
-        <when>
-          <test>
-            <equal><var n="inici"/><lit-tag v="oc"/></equal>
-          </test>
-          <let><var n="case_enon"/><lit-tag v="Aa"/></let>
-          <let><var n="case_verb"/><lit-tag v="aa"/></let>
-          <let>
-            <clip pos="1" part="chunk"/>
-            <concat>
-              <clip pos="1" part="chunk"/>
-              <lit-tag v="aa"/>
-            </concat>
-          </let>
-        </when>
-        <otherwise>
-          <let><var n="case_enon"/><lit-tag v=""/></let>
-          <let><var n="case_verb"/><lit-tag v=""/></let>
-        </otherwise>
-      </choose>
-
+    <def-macro n="escriure_enonciatiu3" npar="3"><!-- par1 = vèrb, par2 = sent (per causir l'enonciatiu), par3 = mot que seguís lo possible enonciatiu (per la gestion de las majusculas) -->
       <choose>
         <when>
           <test>
@@ -259,9 +236,10 @@
           </test>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="3">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="ne"/>
               <lit-tag v="adv"/>
@@ -278,9 +256,10 @@
           </test>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="3">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="e"/>
               <lit-tag v="adv"/>
@@ -297,9 +276,10 @@
           </test>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="3">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="be"/>
               <lit-tag v="adv"/>
@@ -313,9 +293,10 @@
         <otherwise>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="3">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="que"/>
               <lit-tag v="adv"/>
@@ -327,30 +308,10 @@
           </out>
         </otherwise>
       </choose>
+      <modify-case><clip pos="3" part="lem"/><lit v="aa"/></modify-case>
     </def-macro>
 
-    <def-macro n="escriure_enonciatiu1" npar="1"><!-- par1 = vèrb -->
-      <choose>
-        <when>
-          <test>
-            <equal><var n="inici"/><lit-tag v="oc"/></equal>
-          </test>
-          <let><var n="case_enon"/><lit-tag v="Aa"/></let>
-          <let><var n="case_verb"/><lit-tag v="aa"/></let>
-          <let>
-            <clip pos="1" part="chunk"/>
-            <concat>
-              <clip pos="1" part="chunk"/>
-              <lit-tag v="aa"/>
-            </concat>
-          </let>
-        </when>
-        <otherwise>
-          <let><var n="case_enon"/><lit-tag v=""/></let>
-          <let><var n="case_verb"/><lit-tag v=""/></let>
-        </otherwise>
-      </choose>
-
+    <def-macro n="escriure_enonciatiu2" npar="2"><!-- par1 = vèrb, par2 = mot que seguís lo possible enonciatiu (per la gestion de las majusculas) -->
       <choose>
         <when>
           <test>
@@ -358,9 +319,10 @@
           </test>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="2">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="ne"/>
               <lit-tag v="adv"/>
@@ -374,9 +336,10 @@
         <otherwise>
           <out>
             <chunk>
-              <lit v="enon"/>
+              <get-case-from pos="2">
+                <lit v="enon"/>
+              </get-case-from>
               <lit-tag v="SAdv"/>
-              <var n="case_enon"/>
               <lit v="{^"/>
               <lit v="que"/>
               <lit-tag v="adv"/>
@@ -388,9 +351,10 @@
           </out>
         </otherwise>
       </choose>
+      <modify-case><clip pos="2" part="lem"/><lit v="aa"/></modify-case>
     </def-macro>
 
-    <def-macro n="apondre_enonciatiu" npar="2"><!-- par1 = vèrb; par2 = sent -->
+    <def-macro n="aprondre_enonciatiu3" npar="3"><!-- par1 = vèrb, par2 = sent (per causir l'enonciatiu), par3 = mot que seguís lo possible enonciatiu (per la gestion de las majusculas) -->
       <choose>
         <when>
           <test>
@@ -402,7 +366,7 @@
             </and>
           </test>
           <let><var n="set_enonciatiu"/><lit v="oc"/></let>
-          <call-macro n="escriure_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
+          <call-macro n="escriure_enonciatiu3"><with-param pos="1"/><with-param pos="2"/><with-param pos="3"/></call-macro>
         </when>
         <when>
           <test>
@@ -417,12 +381,12 @@
         </when>
         <otherwise>
           <let><var n="set_enonciatiu"/><lit v="oc"/></let>
-          <call-macro n="escriure_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
+          <call-macro n="escriure_enonciatiu3"><with-param pos="1"/><with-param pos="2"/><with-param pos="3"/></call-macro>
         </otherwise>
       </choose>
     </def-macro>
 
-    <def-macro n="apondre_enonciatiu1" npar="1"><!-- par1 = vèrb -->
+    <def-macro n="apondre_enonciatiu2" npar="2"><!-- par1 = vèrb, par2 = mot que seguís lo possible enonciatiu (per la gestion de las majusculas) -->
       <choose>
         <when>
           <test>
@@ -434,7 +398,7 @@
             </and>
           </test>
           <let><var n="set_enonciatiu"/><lit v="oc"/></let>
-          <call-macro n="escriure_enonciatiu1"><with-param pos="1"/></call-macro>
+          <call-macro n="escriure_enonciatiu2"><with-param pos="1"/><with-param pos="2"/></call-macro>
         </when>
         <when>
           <test>
@@ -449,7 +413,7 @@
         </when>
         <otherwise>
           <let><var n="set_enonciatiu"/><lit v="oc"/></let>
-          <call-macro n="escriure_enonciatiu1"><with-param pos="1"/></call-macro>
+          <call-macro n="escriure_enonciatiu2"><with-param pos="1"/><with-param pos="2"/></call-macro>
         </otherwise>
       </choose>
     </def-macro>
@@ -458,7 +422,7 @@
 
   <section-rules>
 
-    <!-- RÈGLAS PER ACTUALISAR LA VARIABLA inici -->
+    <!-- RÈGLAS PER ACTUALIZAR LA VARIABLA inici -->
 
     <rule comment="RÈGLA: TOT_EXCEPTE_SENT">
       <pattern>
@@ -501,7 +465,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="1"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="1"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -519,7 +483,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="2"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="2"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -533,7 +497,7 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -544,7 +508,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="3"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="3"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -564,7 +528,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -577,7 +541,7 @@
       </pattern>
       <action>
         <let><clip pos="1" part="negation"/><lit-tag v="shens"/></let>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="1"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="1"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -603,7 +567,7 @@
       </pattern>
       <action>
         <let><clip pos="2" part="negation"/><lit-tag v="shens"/></let>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="2"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="2"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -617,7 +581,7 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -630,7 +594,7 @@
       </pattern>
       <action>
         <let><clip pos="3" part="negation"/><lit-tag v="shens"/></let>
-        <call-macro n="apondre_enonciatiu1"><with-param pos="3"/></call-macro>
+        <call-macro n="apondre_enonciatiu2"><with-param pos="3"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -650,7 +614,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -664,7 +628,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="2"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -678,7 +642,7 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -689,7 +653,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="3"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -721,7 +685,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -733,7 +697,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="4"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="4"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -771,7 +735,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -783,7 +747,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="4"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="4"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -821,7 +785,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -834,7 +798,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="5"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="5"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -878,7 +842,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -891,7 +855,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="1"/><with-param pos="3"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -935,7 +899,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -948,7 +912,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="3"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -968,7 +932,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -980,7 +944,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="4"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="4"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1018,7 +982,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1031,7 +995,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="5"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="5"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1075,7 +1039,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1088,7 +1052,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="5"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="5"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1132,7 +1096,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1146,7 +1110,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="2"/><with-param pos="6"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="6"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1196,7 +1160,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1210,7 +1174,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="2"/><with-param pos="6"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1272,7 +1236,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1286,7 +1250,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="4"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1324,7 +1288,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1337,7 +1301,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="5"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="5"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1381,7 +1345,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1395,7 +1359,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="6"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="6"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1457,7 +1421,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1471,7 +1435,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="6"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="6"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1533,7 +1497,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1548,7 +1512,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="3"/><with-param pos="7"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="7"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1604,7 +1568,7 @@
             <clip pos="7" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
@@ -1619,7 +1583,7 @@
         <pattern-item n="SENT"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <call-macro n="aprondre_enonciatiu3"><with-param pos="3"/><with-param pos="7"/><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1687,7 +1651,7 @@
             <clip pos="7" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="inici"/><lit-tag v="non"/></let>
       </action>
     </rule>
 
