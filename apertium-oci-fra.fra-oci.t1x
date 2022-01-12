@@ -528,6 +528,7 @@
     <def-var n="v_vbfar"/>
     <def-var n="v_itg"/>
     <def-var n="pronom"/>
+    <def-var n="caseFirstWord"/>
     <def-var n="auxg"/>
     <def-var n="auxn"/>
     <def-var n="temp"/>
@@ -3646,6 +3647,7 @@
     </def-macro>
 
     <def-macro n="escriure_prnpro_prnpro" npar="2" v="oci">
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -3658,15 +3660,13 @@
                <with-param pos="2"/>
              </call-macro>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -3676,16 +3676,15 @@
              <call-macro n="tipus_prn">
                <with-param pos="1"/>
              </call-macro>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="2">
-                     <clip pos="1" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="1" side="tl" part="lemh"/>
                    <clip pos="1" side="tl" part="tags"/>
                    <clip pos="1" side="tl" part="lemq"/>
                  </lu>
@@ -3731,6 +3730,7 @@
     </def-macro>
 
     <def-macro n="escriure_prnpro_prnpro" npar="2" v="oci@gascon">
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -3767,15 +3767,13 @@
                <with-param pos="2"/>
              </call-macro>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -3785,16 +3783,15 @@
              <call-macro n="tipus_prn">
                <with-param pos="1"/>
              </call-macro>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="2">
-                     <clip pos="1" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="1" side="tl" part="lemh"/>
                    <clip pos="1" side="tl" part="tags"/>
                    <clip pos="1" side="tl" part="lemq"/>
                  </lu>
@@ -3850,6 +3847,23 @@
       </choose>
     </def-macro>
 
+    <def-macro n="f_unset_capletter" npar="1"> 
+          <choose>
+            <when>
+              <test>
+                <equal>
+                   <case-of pos="1" side="sl" part="lem"/>
+                   <lit v="Aa"/>
+                 </equal>
+              </test>
+              <modify-case>
+                <clip pos="1" side="tl" part="lemh"/>
+                <lit v="aa"/>
+              </modify-case>
+            </when>
+          </choose>
+    </def-macro>
+
     <def-macro n="f_set_pron_pro" npar="2"> <!-- posa a la variable 'pronom' el pronom reflexiu que calgui si el verb és reflexiu. El segon paramàtre és la repetició del primer, si és una forma conjugada (personal) del verb, altrament és l'auxiliar-->
       <call-macro n="f_unset_nopron"><with-param pos="1"/></call-macro>
       <let>
@@ -3878,9 +3892,7 @@
                 <lit-tag v="SPron.ref"/>
                 <lit v="{"/>
                 <lit v="^"/>
-                <get-case-from pos="1">
-                  <lit v="se"/>
-                </get-case-from>
+                <lit v="se"/>
                 <lit-tag v="prn.pro.ref.p3.mf.sp"/>
                 <lit v="$"/>
                 <lit v="}"/>
@@ -3896,9 +3908,7 @@
                 <lit-tag v="SPron.ref"/>
                 <lit v="{"/>
                 <lit v="^"/>
-                <get-case-from pos="1">
-                  <lit v="prpers"/>
-                </get-case-from>
+                <lit v="prpers"/>
                 <lit-tag v="prn.pro"/>
                 <clip pos="2" side="tl" part="pers"/>
                 <lit-tag v="mf"/>
@@ -3910,20 +3920,7 @@
             </otherwise>
           </choose>
           <!-- ara arreglem la majúscula del verb, si cal -->
-          <choose>
-            <when>
-              <test>
-                <equal>
-                   <case-of pos="1" side="sl" part="lem"/>
-                   <lit v="Aa"/>
-                 </equal>
-              </test>
-              <modify-case>
-                <clip pos="1" side="tl" part="lemh"/>
-                <lit v="aa"/>
-              </modify-case>
-            </when>
-          </choose>
+          <call-macro n="f_unset_capletter"><with-param pos="1"/></call-macro>
           <let><clip pos="1" side="tl" part="a_verb_pron"/><lit-tag v="vblex"/></let>
         </when>
       </choose>
@@ -3952,9 +3949,7 @@
                 <lit-tag v="SPron.ref"/>
                 <lit v="{"/>
                 <lit v="^"/>
-                <get-case-from pos="1">
-                  <lit v="se"/>
-                </get-case-from>
+                <lit v="se"/>
                 <lit-tag v="prn.pro.ref.p3.mf.sp"/>
                 <lit v="$"/>
                 <lit v="}"/>
@@ -3964,9 +3959,7 @@
             <otherwise>
               <append n="pronom">
                 <lit v="^"/>
-                <get-case-from pos="1">
-                  <lit v="prn"/>
-                </get-case-from>
+                <lit v="prn"/>
                 <lit-tag v="SPron.ref"/>
                 <lit v="{"/>
                 <lit v="^"/>
@@ -3983,6 +3976,7 @@
               </append>
             </otherwise>
           </choose>
+          <call-macro n="f_unset_capletter"><with-param pos="1"/></call-macro>
     </def-macro>
 
     <def-macro n="print_pron" npar="0"> <!-- escriu la variable 'pronom' -->
@@ -7993,8 +7987,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8002,9 +7997,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8054,8 +8047,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8063,9 +8057,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8120,8 +8112,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8129,9 +8122,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8186,8 +8177,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8196,9 +8188,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8280,8 +8270,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser_adv_pp">
+           <chunk name="vbser-adv-pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8290,9 +8281,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8348,8 +8337,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8358,9 +8348,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -8412,8 +8400,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8422,9 +8411,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8511,8 +8498,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8521,10 +8509,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
-               <lit-tag v="vbser"/>
+               <var n="v_vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
                <clip pos="2" side="tl" part="nbr"/>
@@ -8609,8 +8594,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser_adv_pp">
+           <chunk name="vbser-adv-pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8619,9 +8605,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8675,8 +8659,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser_adv_pp">
+           <chunk name="vbser-adv-pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8685,9 +8670,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8741,8 +8724,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8751,9 +8735,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -8821,8 +8803,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8831,9 +8814,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -8928,8 +8909,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -8938,9 +8920,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -9034,8 +9014,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser_adv_pp">
+           <chunk name="vbser-adv-pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -9044,9 +9025,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -9108,8 +9087,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser_adv_pp">
+           <chunk name="vbser-adv-pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -9118,9 +9098,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -9182,8 +9160,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -9192,9 +9171,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <var n="v_vbser"/>
-               </get-case-from>
+               <var n="v_vbser"/>
                <lit-tag v="vbser"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -9254,8 +9231,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -9264,9 +9242,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -9360,16 +9336,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -9438,8 +9413,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -9448,9 +9424,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9552,16 +9526,15 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9624,8 +9597,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="v">
+           <chunk name="v" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -9634,9 +9608,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9659,8 +9631,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="v">
+           <chunk name="v" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -9669,9 +9642,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="non"/>
-               </get-case-from>
+               <lit v="non"/>
                <lit-tag v="adv"/>
              </lu>
              <b pos="1"/>
@@ -9707,16 +9678,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9763,16 +9733,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9826,8 +9795,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="v">
+           <chunk name="v" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -9836,9 +9806,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9870,8 +9838,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="v">
+           <chunk name="v" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -9880,9 +9849,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="non"/>
-               </get-case-from>
+               <lit v="non"/>
                <lit-tag v="adv"/>
              </lu>
              <b/>
@@ -9923,16 +9890,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -9979,15 +9945,14 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="non_pas_adv">
+           <chunk name="non_pas_adv" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="non"/>
-               </get-case-from>
+               <lit v="non"/>
                <lit-tag v="adv"/>
              </lu>
              <b pos="1"/>
@@ -10051,16 +10016,15 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -10121,15 +10085,14 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="non_pas_adv">
+           <chunk name="non_pas_adv" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SAdv"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="non"/>
-               </get-case-from>
+               <lit v="non"/>
                <lit-tag v="adv"/>
              </lu>
              <b pos="1"/>
@@ -10185,8 +10148,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -10196,9 +10160,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -10223,8 +10185,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -10234,9 +10197,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
               </lu>
@@ -10265,8 +10226,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-vbser">
+           <chunk name="pro-vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -10276,9 +10238,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -10313,8 +10273,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -10324,9 +10285,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -10414,6 +10373,7 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -10446,7 +10406,7 @@
                </when>
              </choose>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10456,9 +10416,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -10479,7 +10437,7 @@
            </when>
            <otherwise>
              <out>
-             <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10489,9 +10447,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -10539,13 +10495,14 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
                <equal><var n="pronom"/><lit v=""/></equal>
              </test>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -10553,9 +10510,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
                      <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                   </lu>
@@ -10569,10 +10524,6 @@
               </modify-case>
              <call-macro n="f_set_pron_pro_force"><with-param pos="2"/></call-macro>
              <call-macro n="print_pron"></call-macro>
-              <modify-case>
-                <clip pos="2" side="tl" part="lemh"/>
-                <lit v="aa"/>
-              </modify-case>
              <out>
                <chunk name="verb">
                  <tags>
@@ -10637,16 +10588,15 @@
         <call-macro n="tipus_verb">
          <with-param pos="1"/>
         </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <out>
-          <chunk name="prn">
+          <chunk name="prn" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SPron"/></tag>
               <tag><lit-tag v="ref"/></tag>
             </tags>
             <lu>
-              <get-case-from pos="1">
-                <lit v="se"/>
-              </get-case-from>
+              <lit v="se"/>
               <lit-tag v="prn.pro.ref.p3.mf.sp"/>
             </lu>
           </chunk>
@@ -10695,8 +10645,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -10704,9 +10655,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -10729,16 +10678,15 @@
         <pattern-item n="enprn"/>
       </pattern>
       <action>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-pro">
+           <chunk name="pro-pro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -10812,6 +10760,7 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -10821,7 +10770,7 @@
                </and>
              </test>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10829,9 +10778,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -10852,7 +10799,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10860,9 +10807,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -10913,6 +10858,7 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -10946,7 +10892,7 @@
                </when>
              </choose>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10954,9 +10900,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -10977,7 +10921,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -10985,9 +10929,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -11039,8 +10981,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -11048,9 +10991,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -11087,8 +11028,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11096,9 +11038,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
               </lu>
@@ -11133,13 +11073,14 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
                <equal><var n="pronom"/><lit v=""/></equal>
              </test>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11149,9 +11090,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -11159,18 +11098,8 @@
              </out>
            </when>
            <otherwise>
-              <modify-case>
-                <clip pos="3" side="sl" part="lemh"/>
-                <case-of pos="1" side="sl" part="lemh"/>
-              </modify-case>
-             <call-macro n="f_set_pron_pro_force"><with-param pos="3"/></call-macro>
-             <call-macro n="print_pron"></call-macro>
-              <modify-case>
-                <clip pos="3" side="tl" part="lemh"/>
-                <lit v="aa"/>
-              </modify-case>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11220,8 +11149,9 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -11231,9 +11161,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -11280,6 +11208,7 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -11289,7 +11218,7 @@
                </and>
              </test>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11298,9 +11227,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="4" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="4" side="tl" part="lemh"/>
                    <clip pos="4" side="tl" part="tags"/>
                    <clip pos="4" side="tl" part="lemq"/>
                  </lu>
@@ -11321,7 +11248,7 @@
            </when>
            <otherwise>
              <out>
-             <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11330,9 +11257,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -11387,6 +11312,7 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <choose>
            <when>
              <test>
@@ -11419,7 +11345,7 @@
                </when>
              </choose>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11428,9 +11354,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="4" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="4" side="tl" part="lemh"/>
                    <clip pos="4" side="tl" part="tags"/>
                    <clip pos="4" side="tl" part="lemq"/>
                  </lu>
@@ -11451,7 +11375,7 @@
            </when>
            <otherwise>
              <out>
-             <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11460,9 +11384,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -11502,8 +11424,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -11513,9 +11436,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -11541,8 +11462,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -11552,9 +11474,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
               </lu>
@@ -11584,8 +11504,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-vbser">
+           <chunk name="pro-vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11595,9 +11516,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -11633,8 +11552,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11644,9 +11564,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -11679,6 +11597,7 @@
          <call-macro n="neg_imp">
           <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -11732,6 +11651,7 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -11768,7 +11688,7 @@
                </when>
              </choose>
              <out>
-               <chunk name="pro-pro-verb">
+               <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -11778,9 +11698,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -11801,7 +11719,7 @@
            </when>
            <otherwise>
              <out>
-             <chunk name="pro-pro-verb">
+             <chunk name="pro-pro-verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -11811,9 +11729,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -11858,8 +11774,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -11867,9 +11784,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -11923,8 +11838,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11932,9 +11848,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="4" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="4" side="tl" part="lemh"/>
                <clip pos="4" side="tl" part="tags"/>
                <clip pos="4" side="tl" part="lemq"/>
              </lu>
@@ -11979,8 +11893,9 @@
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -11988,9 +11903,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="4" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="4" side="tl" part="lemh"/>
                <clip pos="4" side="tl" part="tags"/>
                <clip pos="4" side="tl" part="lemq"/>
              </lu>
@@ -12051,8 +11964,9 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="6" side="tl" part="a_verb"/></tag>
@@ -12060,9 +11974,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="5" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="5" side="tl" part="lemh"/>
                <clip pos="5" side="tl" part="tags"/>
                <clip pos="5" side="tl" part="lemq"/>
              </lu>
@@ -12128,8 +12040,9 @@
            <with-param pos="4"/>
            <with-param pos="5"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -12137,9 +12050,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="5" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="5" side="tl" part="lemh"/>
                <clip pos="5" side="tl" part="a_verb"/>
                <clip pos="1" side="tl" part="temps"/>
                <clip pos="1" side="tl" part="pers"/>
@@ -12187,8 +12098,9 @@
            <with-param pos="5"/>
            <with-param pos="6"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="6" side="tl" part="a_verb"/></tag>
@@ -12196,9 +12108,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="6" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="6" side="tl" part="lemh"/>
                <clip pos="6" side="tl" part="a_verb"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -12248,16 +12158,15 @@
            <with-param pos="4"/>
            <with-param pos="5"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="5" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="5" side="tl" part="lemh"/>
                <clip pos="5" side="tl" part="tags"/>
                <clip pos="5" side="tl" part="lemq"/>
              </lu>
@@ -12329,16 +12238,15 @@
            <with-param pos="5"/>
            <with-param pos="6"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="6" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="6" side="tl" part="lemh"/>
                <clip pos="6" side="tl" part="tags"/>
                <clip pos="6" side="tl" part="lemq"/>
              </lu>
@@ -12402,8 +12310,9 @@
            <with-param pos="6"/>
            <with-param pos="7"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="7" side="tl" part="a_verb"/></tag>
@@ -12412,9 +12321,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="7" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="7" side="tl" part="lemh"/>
                <clip pos="7" side="tl" part="a_verb"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -12477,8 +12384,9 @@
            <with-param pos="7"/>
            <with-param pos="8"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="8" side="tl" part="a_verb"/></tag>
@@ -12487,9 +12395,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="8" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="8" side="tl" part="lemh"/>
                <clip pos="8" side="tl" part="a_verb"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -12527,20 +12433,19 @@
          <call-macro n="tipus_verb">
           <with-param pos="8"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -12619,6 +12524,7 @@
          <call-macro n="tipus_verb">
           <with-param pos="9"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -12628,15 +12534,13 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="prnpro">
+           <chunk name="prnpro" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SPron"/></tag>
                <tag><var n="tipusprn"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -12707,12 +12611,13 @@
          <call-macro n="neg_imp">
           <with-param pos="2"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -12721,9 +12626,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -12760,6 +12663,7 @@
          <call-macro n="neg_imp">
           <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -12769,7 +12673,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -12778,9 +12682,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -12817,6 +12719,7 @@
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -12832,7 +12735,7 @@
               <with-param pos="2"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -12840,9 +12743,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <var n="v_vbser"/>
-                   </get-case-from>
+                   <var n="v_vbser"/>
                    <lit-tag v="vbser"/>
                    <clip pos="2" side="tl" part="temps"/>
                    <clip pos="2" side="tl" part="pers"/>
@@ -12873,7 +12774,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -12882,9 +12783,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -12933,6 +12832,7 @@
         <call-macro n="f_concord1">
           <with-param pos="4"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -12952,7 +12852,7 @@
               <with-param pos="3"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -12960,9 +12860,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <var n="v_vbser"/>
-                   </get-case-from>
+                   <var n="v_vbser"/>
                    <lit-tag v="vbser"/>
                    <clip pos="3" side="tl" part="temps"/>
                    <clip pos="3" side="tl" part="pers"/>
@@ -12993,7 +12891,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13002,9 +12900,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -13049,12 +12945,13 @@
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="vbser_pp">
+           <chunk name="vbser_pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -13063,9 +12960,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -13112,6 +13007,7 @@
         <call-macro n="f_concord1">
           <with-param pos="4"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13121,7 +13017,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="vbser_pp">
+           <chunk name="vbser_pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13130,9 +13026,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -13177,6 +13071,7 @@
           <with-param pos="3"/>
           <with-param pos="4"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13192,7 +13087,7 @@
               <with-param pos="4"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -13200,9 +13095,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <var n="v_vbser"/>
-                   </get-case-from>
+                   <var n="v_vbser"/>
                    <lit-tag v="vbser"/>
                    <clip pos="2" side="tl" part="temps"/>
                    <clip pos="2" side="tl" part="pers"/>
@@ -13239,7 +13132,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="2" side="tl" part="a_verb"/></tag>
@@ -13248,9 +13141,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -13307,6 +13198,7 @@
           <with-param pos="4"/>
           <with-param pos="5"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13326,7 +13218,7 @@
               <with-param pos="3"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -13334,9 +13226,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <var n="v_vbser"/>
-                   </get-case-from>
+                   <var n="v_vbser"/>
                    <lit-tag v="vbser"/>
                    <clip pos="3" side="tl" part="temps"/>
                    <clip pos="3" side="tl" part="pers"/>
@@ -13373,7 +13263,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13382,9 +13272,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -13434,12 +13322,13 @@
          <call-macro n="neg_imp">
           <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13448,9 +13337,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -13494,6 +13381,7 @@
          <call-macro n="neg_imp">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13503,7 +13391,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -13512,9 +13400,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -13558,6 +13444,7 @@
         <call-macro n="f_concord1">
           <with-param pos="4"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13573,7 +13460,7 @@
               <with-param pos="3"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -13581,9 +13468,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -13622,7 +13507,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13631,9 +13516,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -13689,6 +13572,7 @@
         <call-macro n="f_concord1">
           <with-param pos="5"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13708,7 +13592,7 @@
               <with-param pos="4"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -13716,9 +13600,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -13757,7 +13639,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -13766,9 +13648,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -13820,12 +13700,13 @@
         <call-macro n="f_concord1">
           <with-param pos="4"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="vbser_pp">
+           <chunk name="vbser_pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -13834,9 +13715,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -13887,6 +13766,7 @@
          <call-macro n="neg_imp">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <call-macro n="f_concord1">
           <with-param pos="5"/>
         </call-macro>
@@ -13899,7 +13779,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="vbser_pp">
+           <chunk name="vbser_pp" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -13908,9 +13788,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="tags"/>
                <clip pos="3" side="tl" part="lemq"/>
              </lu>
@@ -13962,6 +13840,7 @@
           <with-param pos="4"/>
           <with-param pos="5"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -13977,7 +13856,7 @@
               <with-param pos="5"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -13985,9 +13864,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -14032,7 +13909,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -14041,9 +13918,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="2" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="2" side="tl" part="lemh"/>
                    <clip pos="2" side="tl" part="tags"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
@@ -14107,6 +13982,7 @@
           <with-param pos="5"/>
           <with-param pos="6"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -14126,7 +14002,7 @@
               <with-param pos="4"/>
              </call-macro>
              <out>
-               <chunk name="vbser_pp">
+               <chunk name="vbser_pp" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><lit-tag v="vbser"/></tag>
@@ -14134,9 +14010,7 @@
                    <tag><lit-tag v="negation"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -14181,7 +14055,7 @@
            </when>
            <otherwise>
              <out>
-               <chunk name="verb">
+               <chunk name="verb" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -14190,9 +14064,7 @@
                    <tag><var n="tipusverb"/></tag>
                  </tags>
                  <lu>
-                   <get-case-from pos="1">
-                     <clip pos="3" side="tl" part="lemh"/>
-                   </get-case-from>
+                   <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="tags"/>
                    <clip pos="3" side="tl" part="lemq"/>
                  </lu>
@@ -14381,12 +14253,13 @@
         <call-macro n="tipus_verb">
           <with-param pos="2"/>
         </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
         <call-macro n="f_bcond">
           <with-param pos="1"/>
           <with-param pos="2"/>
         </call-macro>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -14394,9 +14267,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="2" side="tl" part="lemh"/>
-               </get-case-from>
+               <clip pos="2" side="tl" part="lemh"/>
                <clip pos="2" side="tl" part="tags"/>
                <clip pos="2" side="tl" part="lemq"/>
              </lu>
@@ -14423,12 +14294,13 @@
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -14436,9 +14308,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="caler"/>
-               </get-case-from>
+               <lit v="caler"/>
                <lit-tag v="vbmod"/>
                <clip pos="2" side="tl" part="temps"/>
                <clip pos="2" side="tl" part="pers"/>
@@ -14470,12 +14340,13 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="4" side="tl" part="a_verb"/></tag>
@@ -14483,9 +14354,7 @@
                <tag><lit-tag v="normal"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="3" side="tl" part="lem"/>
-               </get-case-from>
+               <clip pos="3" side="tl" part="lem"/>
                <clip pos="3" side="tl" part="tags"/>
              </lu>
              <b pos="2"/>
@@ -14523,6 +14392,7 @@
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -14532,7 +14402,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="vbmod-inf">
+           <chunk name="vbmod-inf" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="5" side="tl" part="a_verb"/></tag>
@@ -14541,9 +14411,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="caler"/>
-               </get-case-from>
+               <lit v="caler"/>
                <lit-tag v="vbmod"/>
                <clip pos="3" side="tl" part="temps"/>
                <clip pos="3" side="tl" part="pers"/>
@@ -14583,6 +14451,7 @@
          <call-macro n="tipus_verb">
           <with-param pos="6"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
@@ -14592,7 +14461,7 @@
            <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk name="pro-vbmod-inf">
+           <chunk name="pro-vbmod-inf" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="6" side="tl" part="a_verb"/></tag>
@@ -14601,9 +14470,7 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <clip pos="5" side="tl" part="lem"/>
-               </get-case-from>
+               <clip pos="5" side="tl" part="lem"/>
                <clip pos="5" side="tl" part="tags"/>
              </lu>
              <b pos="3"/>
@@ -14898,6 +14765,8 @@
          <call-macro n="tipus_prn">
            <with-param pos="1"/>
          </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <modify-case><clip pos="1" side="tl" part="lemh"/><lit v="aa"/></modify-case>
          <choose>
            <when>
              <test>
@@ -14906,7 +14775,7 @@
                </not>
              </test>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
@@ -15137,7 +15006,6 @@
        </action>
     </rule>
 
-
     <rule comment="RÈGLA: VBNOSER (décolle > s'enlaira)">
        <pattern>
          <pattern-item n="vbnoser"/>
@@ -15150,9 +15018,11 @@
           <with-param pos="1"/>
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+        <call-macro n="f_unset_capletter"><with-param pos="1"/></call-macro>
         <call-macro n="print_pron"></call-macro>
          <out>
-           <chunk name="verb">
+           <chunk name="verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -15238,12 +15108,13 @@
        </pattern>
        <action>
          <call-macro n="set_vbfar"></call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <call-macro n="f_bcond">
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
          <out>
-           <chunk name="pro-verb">
+           <chunk name="pro-verb" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -15251,10 +15122,8 @@
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
-               <get-case-from pos="1">
-                 <lit v="en"/>
-               </get-case-from>
-              <lit-tag v="prn.pro.adv"/>
+               <lit v="en"/>
+               <lit-tag v="prn.pro.adv"/>
              </lu>
              <b/>
              <lu>
@@ -15281,6 +15150,7 @@
        <call-macro n="f_chunk_tags">
          <with-param pos="1"/>
        </call-macro>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
 <!--
        <choose>
          <when>
@@ -15300,7 +15170,7 @@
        </choose>
 -->
        <out>
-         <chunk name="det">
+         <chunk name="det" case="caseFirstWord">
            <tags>
              <tag><lit-tag v="Det"/></tag>
              <tag><lit-tag v="def"/></tag>
@@ -15310,9 +15180,7 @@
              <tag><var n="numero_sl"/></tag>
            </tags>
             <lu>
-              <get-case-from pos="1">
-                 <lit v="lo"/>
-              </get-case-from>
+              <lit v="lo"/>
               <lit-tag v="det.def"/>
               <clip pos="1" side="tl" part="gen"/>
               <clip pos="1" side="tl" part="nbr"/>
@@ -15439,7 +15307,7 @@
               <equal><clip pos="1" side="sl" part="lem"/><lit v="?"/></equal>
             </test>
             <out>
-              <chunk name="quest" case="caseFirstWord">
+              <chunk name="quest">
                 <tags>
                   <tag><lit-tag v="SENT"/></tag>
                 </tags>
@@ -15454,7 +15322,7 @@
               <equal><clip pos="1" side="sl" part="lem"/><lit v="!"/></equal>
             </test>
             <out>
-              <chunk name="excl" case="caseFirstWord">
+              <chunk name="excl">
                 <tags>
                   <tag><lit-tag v="SENT"/></tag>
                 </tags>
@@ -15466,7 +15334,7 @@
           </when>
           <otherwise>
             <out>
-              <chunk name="std" case="caseFirstWord">
+              <chunk name="std">
                 <tags>
                   <tag><lit-tag v="SENT"/></tag>
                 </tags>
