@@ -3166,7 +3166,179 @@
      <or><match tags="np.loc"/><match tags="np.top.*"/><match tags="np.hyd.*"/></or>
   </rule>
 
+  <!-- cantèra > cantèra, lisière -->
 
+  <rule weight="0.6">
+     <match lemma="cantèra" tags="n.*"><select lemma="cantèra"/></match>
+  </rule>
+  <rule weight="1.0">
+     <match lemma="cantèra" tags="n.*"><select lemma="lisière"/></match>
+     <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+        <match lemma="lo" tags="det"/>
+    </repeat>
+     <or>
+        <match lemma="bòsc" tags="n.*"/>
+        <match lemma="selva" tags="n.*"/>
+        <match lemma="seuva" tags="n.*"/>
+        <match lemma="seuveta" tags="n.*"/>
+        <match lemma="seuvòta" tags="n.*"/>
+        <match lemma="seuvòla" tags="n.*"/>
+        <match lemma="forèst" tags="n.*"/>
+        <match lemma="bosquet" tags="n.*"/>
+        <match lemma="barta" tags="n.*"/>
+        <match lemma="boscàs" tags="n.*"/>
+     </or>
+  </rule>
+  <rule weight="1.0">
+     <match lemma="cantèra" tags="n.*"><select lemma="berge"/></match>
+     <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+        <match lemma="lo" tags="det"/>
+    </repeat>
+     <or>
+        <match lemma="riu" tags="n.*"/>
+        <match lemma="arriu" tags="n.*"/>
+        <match lemma="arribèra" tags="n.*"/>
+        <match lemma="ribèra" tags="n.*"/>
+        <match lemma="arrivèira" tags="n.*"/>
+        <match lemma="ribièira" tags="n.*"/>
+        <match lemma="aiga" tags="n.*"/>
+        <match lemma="gave" tags="n.*"/>
+        <match lemma="fluvi" tags="n.*"/>
+        <match lemma="flume" tags="n.*"/>
+        <match lemma="flum" tags="n.*"/>
+        <match lemma="fluvi" tags="n.*"/>
+        <match lemma="canal" tags="n.*"/>
+        <match lemma="canau" tags="n.*"/>
+        <match lemma="lac" tags="n.*"/>
+        <match lemma="mar" tags="n.*"/>
+        <match lemma="ocean" tags="n.*"/>
+     </or>
+  </rule>
+  <rule weight="1.0">
+     <match lemma="cantèra" tags="n.*"><select lemma="bord"/></match>
+     <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+        <match lemma="lo" tags="det"/>
+    </repeat>
+     <or>
+        <match lemma="camin" tags="n.*"/>
+        <match lemma="lièit" tags="n.*"/>
+        <match lemma="lhèit" tags="n.*"/>
+        <match lemma="lièch" tags="n.*"/>
+     </or>
+  </rule>
+  <rule weight="1.0">
+     <match lemma="cantèra" tags="n.*"><select lemma="bord"/></match>
+     <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+        <match lemma="lo" tags="det"/>
+    </repeat>
+      <match tags="np.top*"/>
+  </rule>
+  <rule weight="1.0">
+     <match lemma="cantèra" tags="n.*"><select lemma="bord"/></match>
+     <match lemma="sus" tags="pr"/>
+      <match lemma="lo" tags="det"/>
+     <match lemma="cantèra" tags="n.*"><select lemma="bord"/></match>
+  </rule>
+
+
+
+  <!-- talha >> impôt / taille -->
+  <rule weight="0.8">
+    <match lemma="talha" tags="n.*"><select lemma="taille"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="pagar"/>
+        <match lemma="collectar"/>
+        <match lemma="augmentar"/>
+        <match lemma="aumentar"/>
+        <match lemma="establir"/>
+        <match lemma="cobrar"/>
+        <match lemma="crubar"/>
+        <match lemma="reglar"/>
+        <match lemma="fixar"/>
+        <match lemma="aleugerir"/>
+        <match lemma="baissar"/>
+        <match lemma="baishar"/>
+        <match lemma="demesir"/>
+        <match lemma="demenir"/>
+        <match lemma="diminuir"/>
+        <match lemma="diminuïr"/>
+        <match lemma="demingar"/>
+    </or>
+    <match lemma="lo"/>
+    <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
+    <or>
+        <match lemma="èstre"/>
+        <match lemma="estar"/>
+        <match lemma="èsser"/>
+    </or>
+    <or>
+        <match lemma="pagar"/>
+        <match lemma="collectar"/>
+        <match lemma="augmentar"/>
+        <match lemma="aumentar"/>
+        <match lemma="establir"/>
+        <match lemma="cobrar"/>
+        <match lemma="crubar"/>
+        <match lemma="reglar"/>
+        <match lemma="fixar"/>
+        <match lemma="aleugerir"/>
+        <match lemma="demesir"/>
+        <match lemma="demenir"/>
+        <match lemma="diminuir"/>
+        <match lemma="diminuïr"/>
+        <match lemma="demingar"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="assubjectit"/>
+        <match lemma="astrenhut"/>
+        <match lemma="somés"/>
+        <match lemma="aumentar"/>
+        <match lemma="establir"/>
+        <match lemma="cobrar"/>
+        <match lemma="crubar"/>
+        <match lemma="reglar"/>
+    </or>
+    <match lemma="a"/>
+    <match lemma="lo"/>
+    <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="montant"/>
+        <match lemma="prètz"/>
+        <match lemma="soma"/>
+        <match lemma="taus"/>
+        <match lemma="exonerar"/>
+        <match lemma="descargar"/>
+        <match lemma="deveder"/>
+        <match lemma="devedor"/>
+        <match lemma="deveire"/>
+        <match lemma="dever"/>
+        <match lemma="passible"/>
+    </or>
+    <match lemma="de"/>
+    <match lemma="lo"/>
+    <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="exonerar"/>
+        <match lemma="descargar"/>
+    </or>
+    <match lemma="de"/>
+    <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
+  </rule>
 <!-- **************** VBSER **************** -->
 
   <!-- vbser >> être, avoir -->
@@ -3686,6 +3858,7 @@
 
   <!-- sonar >> sonner, appeler -->
   <macro name="verb_nopron_pron" p1="sonar" p2="sonner" p3="appeler" />
+
 
 <!-- **************** NP **************** -->
 
