@@ -1464,6 +1464,12 @@
   <rule weight="1.2">
     <match lemma="prix" tags="n.*"><select lemma="prèmi"/></match>
     <match tags="np.*"/>
+    <or>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="n.*" case="Aa"/>
+      <match tags="adj.*" case="Aa"/>
+    </or>
   </rule>
   <rule weight="1.2">
     <or>
@@ -1879,7 +1885,7 @@
         <match lemma="de" tags="pr"/>
       </or>
     </repeat>
-    <or>  
+    <or>
       <match lemma="véhicule" tags="n.*"/>
       <match lemma="voiture" tags="n.*"/>
       <match lemma="auto" tags="n.*"/>
@@ -1893,10 +1899,10 @@
       <match lemma="motocyclette" tags="n.*"/>
       <match lemma="char" tags="n.*"/>
       <match lemma="charrette" tags="n.*"/>
-    </or> 
+    </or>
   </rule>
   <rule weight="1.0">
-    <or>  
+    <or>
       <match lemma="véhicule" tags="n.*"/>
       <match lemma="voiture" tags="n.*"/>
       <match lemma="auto" tags="n.*"/>
@@ -1909,7 +1915,7 @@
       <match lemma="motocyclette" tags="n.*"/>
       <match lemma="char" tags="n.*"/>
       <match lemma="charrette" tags="n.*"/>
-    </or> 
+    </or>
     <repeat from="0" upto="4">
       <or>
         <match tags="cm"/>
@@ -2270,8 +2276,8 @@
 </rules>
 </metalrx>
 
-<!-- 
-Resources: 
+<!--
+Resources:
     https://wiki.apertium.org/wiki/How_to_get_started_with_lexical_selection_rules
     https://wiki.apertium.org/wiki/Constraint-based_lexical_selection
     https://wiki.apertium.org/wiki/Lexical_selection

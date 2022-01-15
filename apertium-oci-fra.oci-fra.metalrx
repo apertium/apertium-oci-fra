@@ -2363,6 +2363,15 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- cortés >> poli, courtois -->
+  <rule weight="0.8">
+    <match lemma="cortés" tags="adj.*"><select lemma="poli"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="amor" tags="n.*"/>
+    <match lemma="cortés" tags="adj.*"><select lemma="courtois"/></match>
+  </rule>
+
   <!-- màger >> plus grand, majeur -->
   <rule weight="0.8">
     <match lemma="màger" tags="adj.*"><select lemma="majeur"/></match>
@@ -2866,20 +2875,20 @@
     <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
   </rule>
   <rule weight="1.2">
-    <or> 
+    <or>
       <match lemma="autre" tags="adj.*"/>
       <match lemma="aute" tags="adj.*"/>
-    </or> 
+    </or>
     <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
   </rule>
   <rule weight="1.2">
     <match lemma="un" tags="det.*"/>
     <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
     <match lemma="de" tags="pr"/>
-    <or> 
+    <or>
       <match lemma="mai" tags="adv"/>
       <match lemma="mei" tags="adv"/>
-    </or> 
+    </or>
   </rule>
   <rule weight="1.2">
     <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
@@ -2893,7 +2902,7 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <or> 
+    <or>
       <match lemma="donar" tags="vblex.*"/>
       <match lemma="clavar" tags="vblex.*"/>
       <match lemma="etzibar" tags="vblex.*"/>
@@ -2917,7 +2926,7 @@
     <match lemma="còp" tags="n.*"><select lemma="coup"/></match>
   </rule>
   <rule weight="1.0">
-    <or> 
+    <or>
       <match lemma="donar" tags="vblex.*"/>
       <match lemma="balhar" tags="vblex.*"/>
       <match lemma="bailar" tags="vblex.*"/>
@@ -2978,7 +2987,7 @@
     <repeat from="0" upto="6">
       <match tags="*"/>
     </repeat>
-    <or> 
+    <or>
       <match lemma="donar" tags="vblex.*"/>
       <match lemma="balhar" tags="vblex.*"/>
       <match lemma="bailar" tags="vblex.*"/>
@@ -3370,6 +3379,11 @@
     <match lemma="guarir" tags="vblex.*"><select lemma="guérir"/></match>
   </rule>
 
+  <!-- contentar >> satisfaire, contenter -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="contentar" tags="vblex.*"><select lemma="satisfaire"/></match>
+  </rule>
+
   <!-- sequestrar >> prendre# en otage, kidnapper -->
   <rule weight="0.8">
     <match lemma="sequestrar" tags="vblex.*"><select lemma="prendre# en otage"/></match>
@@ -3663,7 +3677,7 @@
         <match lemma="de" tags="pr"/>
       </or>
     </repeat>
-    <or>  
+    <or>
       <match lemma="veïcule" tags="n.*"/>
       <match lemma="veitura" tags="n.*"/>
       <match lemma="auto" tags="n.*"/>
@@ -3681,10 +3695,10 @@
       <match lemma="carri" tags="n.*"/>
       <match lemma="carro" tags="n.*"/>
       <match lemma="motocicleta" tags="n.*"/>
-    </or> 
+    </or>
   </rule>
   <rule weight="1.0">
-    <or>  
+    <or>
       <match lemma="veïcule" tags="n.*"/>
       <match lemma="veitura" tags="n.*"/>
       <match lemma="auto" tags="n.*"/>
@@ -3702,7 +3716,7 @@
       <match lemma="carri" tags="n.*"/>
       <match lemma="carro" tags="n.*"/>
       <match lemma="motocicleta" tags="n.*"/>
-    </or> 
+    </or>
     <repeat from="0" upto="4">
       <or>
         <match tags="cm"/>
@@ -3836,6 +3850,10 @@
   <macro name="verb_nopron_pron" p1="mesclar" p2="mélanger" p3="mêler" />
 
   <!-- dire >> dire, appeler -->
+  <rule weight="0.8">
+    <match lemma="dire" tags="vblex.*"><select lemma="dire"/></match>
+  </rule>
+<!--
   <macro name="verb_nopron_pron" p1="dire" p2="dire" p3="appeler" />
   <rule weight="1.4">
     <match lemma="dire" tags="vblex.*"><select lemma="dire"/></match>
@@ -3852,6 +3870,7 @@
     </repeat>
     <match lemma="dire" tags="vblex.pp.*"><select lemma="dire"/></match>
   </rule>
+-->
 
   <!-- enlairar >> élever, décoller -->
   <macro name="verb_nopron_pron" p1="enlairar" p2="élever" p3="décoller" />
@@ -3999,8 +4018,8 @@
 </rules>
 </metalrx>
 
-<!-- 
-Resources: 
+<!--
+Resources:
     https://wiki.apertium.org/wiki/How_to_get_started_with_lexical_selection_rules
     https://wiki.apertium.org/wiki/Constraint-based_lexical_selection
     https://wiki.apertium.org/wiki/Lexical_selection
