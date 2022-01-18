@@ -381,6 +381,31 @@
       <cat-item lemma="fin" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="jour_n">
+      <cat-item lemma="lundi" tags="n.*"/>
+      <cat-item lemma="mardi" tags="n.*"/>
+      <cat-item lemma="mercredi" tags="n.*"/>
+      <cat-item lemma="jeudi" tags="n.*"/>
+      <cat-item lemma="vendredi" tags="n.*"/>
+      <cat-item lemma="samedi" tags="n.*"/>
+      <cat-item lemma="dimanche" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="jour_adv">
+      <cat-item lemma="avant-hier" tags="adv"/>
+      <cat-item lemma="hier" tags="adv"/>
+      <cat-item lemma="aujourd'hui" tags="adv"/>
+      <cat-item lemma="demain" tags="adv"/>
+      <cat-item lemma="après-demain" tags="adv"/>
+      <cat-item lemma="le lendemain" tags="adv"/>
+    </def-cat>
+
+    <def-cat n="part_jour">
+      <cat-item lemma="matin" tags="n.*"/>
+      <cat-item lemma="après-midi" tags="n.*"/>
+      <cat-item lemma="soir" tags="n.*"/>
+    </def-cat>
+
   </section-def-cats>
 
   <section-def-attrs>
@@ -6466,7 +6491,6 @@
 
     <!-- FIN RÈGLAS -CI/-LÀ -->
 
-
     <!-- RÈGLAS TOP -->
 
     <rule comment="RÈGLA: DETDEF NPTOP (la France > França, les États-Unis > los Estats Units)">
@@ -7727,8 +7751,111 @@
       </action>
     </rule>
 
-    <!-- FIN RÈGLAS DATAS -->
+   <rule comment="RÈGLA: JOUR_N PART_JOUR (lundi matin > diluns de matin)" v="oci">
+      <pattern>
+        <pattern-item n="jour_n"/>
+        <pattern-item n="part_jour"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
+   <rule comment="RÈGLA: JOUR_N NUM PART_JOUR (lundi 13 matin > diluns 13 de matin)" v="oci">
+      <pattern>
+        <pattern-item n="jour_n"/>
+        <pattern-item n="num"/>
+        <pattern-item n="part_jour"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: JOUR_ADV PART_JOUR (hier matin > ièr de matin)" v="oci">
+      <pattern>
+        <pattern-item n="jour_adv"/>
+        <pattern-item n="part_jour"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS DATAS -->
 
     <!-- RÈGLAS CAMBI AUXILIAR -->
 
