@@ -296,6 +296,19 @@
       <match lemma="millenari" tags="n.*"/>
     </def-seq>
 
+    <def-seq n="jorns">
+      <match lemma="diluns" tags="n.*"/>
+      <match lemma="dimars" tags="n.*"/>
+      <match lemma="dimècres" tags="n.*"/>
+      <match lemma="dimèrcs" tags="n.*"/>
+      <match lemma="dijòus" tags="n.*"/>
+      <match lemma="dijaus" tags="n.*"/>
+      <match lemma="divendres" tags="n.*"/>
+      <match lemma="divés" tags="n.*"/>
+      <match lemma="dissabte" tags="n.*"/>
+      <match lemma="dimenge" tags="n.*"/>
+    </def-seq>
+
     <def-seq n="locucion_ini_a">
       <match lemma="a la mitat de genièr" tags="adv"/>
       <match lemma="a la mieitat de genèr" tags="adv"/>
@@ -2539,6 +2552,34 @@
   </rule>
 
 <!-- **************** ADV **************** -->
+
+  <!-- al ser >> ce soir, soir -->
+  <rule weight="0.8">
+    <match lemma="al ser" tags="adv"><select lemma="ce soir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="jorns"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or><match tags="num"/><match tags="num.*"/></or>
+    </repeat>
+    <match lemma="al ser" tags="adv"><select lemma="soir"/></match>
+  </rule>
+
+  <!-- de ser >> ce soir, soir -->
+  <rule weight="0.8">
+    <match lemma="de ser" tags="adv"><select lemma="ce soir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="jorns"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or><match tags="num"/><match tags="num.*"/></or>
+    </repeat>
+    <match lemma="de ser" tags="adv"><select lemma="soir"/></match>
+  </rule>
 
   <!-- mai >> plus (adv), plus (adv.pas_neg) -->
   <rule weight="0.8">

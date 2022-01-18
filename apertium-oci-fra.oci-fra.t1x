@@ -370,6 +370,39 @@
       <cat-item lemma="mieitat" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="jorn_n">
+      <cat-item lemma="diluns" tags="n.*"/>
+      <cat-item lemma="dimars" tags="n.*"/>
+      <cat-item lemma="dimècres" tags="n.*"/>
+      <cat-item lemma="dimèrcs" tags="n.*"/>
+      <cat-item lemma="dijòus" tags="n.*"/>
+      <cat-item lemma="dijaus" tags="n.*"/>
+      <cat-item lemma="divendres" tags="n.*"/>
+      <cat-item lemma="divés" tags="n.*"/>
+      <cat-item lemma="dissabte" tags="n.*"/>
+      <cat-item lemma="dimenge" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="jorn_adv">
+      <cat-item lemma="davant-ièr" tags="adv"/>
+      <cat-item lemma="ièr delà" tags="adv"/>
+      <cat-item lemma="davant-ger" tags="adv"/>
+      <cat-item lemma="delà ger" tags="adv"/>
+      <cat-item lemma="ièr" tags="adv"/>
+      <cat-item lemma="ger" tags="adv"/>
+      <cat-item lemma="uèi" tags="adv"/>
+      <cat-item lemma="uei" tags="adv"/>
+      <cat-item lemma="deman" tags="adv"/>
+      <cat-item lemma="après-deman" tags="adv"/>
+      <cat-item lemma="l'endeman" tags="adv"/>
+      <cat-item lemma="l'endedia" tags="adv"/>
+    </def-cat>
+
+    <def-cat n="part_jorn">
+      <cat-item lemma="matin" tags="n.*"/>
+      <cat-item lemma="ser" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="num_romans"> <!-- per a reis, segles, mil·lenis -->
       <cat-item lemma="I" tags="num.*"/>
       <cat-item lemma="Ièr" tags="adj.*"/>
@@ -7388,6 +7421,111 @@
         </out>
       </action>
     </rule>
+
+
+    <rule comment="RÈGLA: JORN_n de PART_JORN > JORN_n PART_JORN (diluns de matin > lundi matin)">
+      <pattern>
+        <pattern-item n="jorn_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_n NUM de PART_JORN > JORN_n NUM PART_JORN (diluns 13 de matin > lundi 13 matin)">
+      <pattern>
+        <pattern-item n="jorn_n"/>
+        <pattern-item n="num"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_adv de PART_JORN > JORN_n PART_JORN (ièr de matin > hier matin)">
+      <pattern>
+        <pattern-item n="jorn_adv"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
 
     <!-- FIN RÈGLAS DATAS -->
 
