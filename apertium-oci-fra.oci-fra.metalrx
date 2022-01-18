@@ -3360,6 +3360,103 @@
     <match lemma="de"/>
     <match lemma="talha" tags="n.*"><select lemma="impôt"/></match>
   </rule>
+
+  <!-- tòca >> touche, cible -->
+  <rule weight="0.8">
+    <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
+  </rule>
+  
+  <rule weight="1.0">
+    <match lemma="aver"/>
+    <or>
+      <match lemma="per" tags="pr"/>
+      <match lemma="coma" tags="cnjadv"/>
+      <match lemma="com" tags="cnjadv"/>
+    </or>
+    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <or>
+      <match lemma="primièr" tags="adj.*"/>
+      <match lemma="purmèr" tags="adj.*"/>
+      <match lemma="prumèr" tags="adj.*"/>
+      <match lemma="primèr" tags="adj.*"/>
+      <match lemma="premièr" tags="adj.*"/>
+      <match lemma="màger" tags="adj.*"/>
+      <match lemma="géncer" tags="adj.*"/>
+      <match lemma="principau" tags="adj.*"/>
+      <match lemma="principal" tags="adj.*"/>
+      <match lemma="ultime" tags="adj.*"/>
+      <match lemma="doble" tags="adj.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="aute" tags="adj.*"/>
+      <match lemma="autre" tags="adj.*"/>
+      <match lemma="doble" tags="adj.*"/>
+    </or>
+    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match tags="det.*"/>
+    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <repeat from="0" upto="1">
+        <match tags="adj.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+        <or>
+          <match lemma="de" tags="pr"/>
+          <match lemma="per" tags="pr"/>
+        </or>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <or>
+          <match tags="adv"/>
+          <match tags="adv.enon"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="1">
+        <match tags="vbmod.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+        <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="estar" tags="vbser.*"/>
+      <match lemma="èstre" tags="vbser.*"/>
+      <match lemma="èsser" tags="vbser.*"/>
+    </or>
+    <repeat from="0" upto="1">
+        <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
+  <!-- laca >> laque, lac -->
+  <rule weight="0.8">
+    <match lemma="laca" tags="n.*"><select lemma="laque"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="laca" tags="n.*"><select lemma="lac"/></match>
+    <match lemma="pr"/>
+    <or>
+      <match tags="np.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+
+
+
+
+
+
 <!-- **************** VBSER **************** -->
 
   <!-- vbser >> être, avoir -->
