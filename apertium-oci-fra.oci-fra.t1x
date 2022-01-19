@@ -7496,7 +7496,7 @@
     </rule>
 
 
-    <rule comment="RÈGLA: JORN_adv de PART_JORN > JORN_n PART_JORN (ièr de matin > hier matin)">
+    <rule comment="RÈGLA: JORN_adv de PART_JORN > JORN_adv PART_JORN (ièr de matin > hier matin)">
       <pattern>
         <pattern-item n="jorn_adv"/>
         <pattern-item n="depr"/>
@@ -7520,6 +7520,158 @@
             <b pos="1"/>
             <lu>
               <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_n a lo PART_JORN > JORN_n PART_JORN (diluns al matin > lundi matin)">
+      <pattern>
+        <pattern-item n="jorn_n"/>
+        <pattern-item n="apr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_adv a lo PART_JORN > JORN_adv PART_JORN (ièr al matin > hier matin)">
+      <pattern>
+        <pattern-item n="jorn_adv"/>
+        <pattern-item n="apr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_n NUM a lo PART_JORN > JORN_n NUM PART_JORN (diluns 13 al matin > lundi 13 matin)">
+      <pattern>
+        <pattern-item n="jorn_n"/>
+        <pattern-item n="num"/>
+        <pattern-item n="apr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="5"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="5" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: JORN_adv NUM de PART_JORN > JORN_adv PART_JORN (diluns 13 al matin > lundi 13 matin)">
+      <pattern>
+        <pattern-item n="jorn_adv"/>
+        <pattern-item n="num"/>
+        <pattern-item n="apr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="part_jorn"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="5"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="5" side="tl" part="whole"/>
             </lu>
           </chunk>
         </out>
