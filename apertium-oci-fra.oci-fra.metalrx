@@ -2816,6 +2816,23 @@
 
 <!-- **************** N **************** -->
 
+  <!-- parrabastatge >> désordre, trouble -->
+  <rule weight="0.8">
+    <match lemma="parrabastatge" tags="n.*"><select lemma="désordre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="parrabastatge" tags="n.m.pl"><select lemma="trouble"/></match>
+  </rule>
+
+  <!-- monde >> monde, gens -->
+  <rule weight="0.8">
+    <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
+    <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
+  </rule>
+
   <!-- limon >> citron, limon -->
   <rule weight="0.8">
     <match lemma="limon" tags="n.*"><select lemma="citron"/></match>
