@@ -172,17 +172,8 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 .deps/$(PREFIX2b).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx
 	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).metalrx >$@
 
-.deps/%.metalrx: .deps/%.ini.metalrx .deps/.d
+.deps/%.lrx: .deps/%.ini.metalrx .deps/.d
 	apertium-metalrx $< $@
-
-#.deps/$(PREFIX1).metalrx: .deps/$(PREFIX1).ini.metalrx
-#	apertium-metalrx-to-lrx $< $@
-
-#.deps/$(PREFIX1).lrx: .deps/$(PREFIX1).metalrx
-#	apertium-metalrx-to-lrx $< $@
-
-.deps/%.lrx: .deps/%.metalrx
-	apertium-metalrx-to-lrx $< $@
 
 $(PREFIX1).autolex.bin: .deps/$(PREFIX1).lrx
 	lrx-comp $< $@
