@@ -906,6 +906,69 @@
 
 <!-- **************** N **************** -->
 
+  <!-- but >> tòca/mira, ponch/punt -->
+  <rule weight="0.8" v="oci">
+    <match lemma="but" tags="n.*" v="oci"><select lemma="tòca"/></match>
+    <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="mira"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="marquer" tags="vblex.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="but" tags="n.*" v="oci"><select lemma="ponch"/></match>
+    <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="punt"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+    <match lemma="but" tags="n.*" v="oci"><select lemma="ponch"/></match>
+    <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="punt"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="se" tags="prn.*"/>
+    <match lemma="marquer" tags="vblex.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="but" tags="n.*" v="oci"><select lemma="tòca"/></match>
+    <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="mira"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="se" tags="prn.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="marquer" tags="vblex.pp.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="but" tags="n.*" v="oci"><select lemma="tòca"/></match>
+    <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="mira"/></match>
+  </rule>
+
   <!-- entretien >> entreten, etc. -->
   <rule weight="0.8">
     <match lemma="entretien" tags="n.*"><select lemma="entreten"/></match>
