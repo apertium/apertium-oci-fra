@@ -564,6 +564,15 @@
       <attr-item tags="acr"/>
     </def-attr>
 
+    <def-attr n="a_np_acr_ij">
+      <attr-item tags="ant"/>
+      <attr-item tags="cog"/>
+      <attr-item tags="top"/>
+      <attr-item tags="al"/>
+      <attr-item tags="acr"/>
+      <attr-item tags="ij"/>
+    </def-attr>
+
     <def-attr n="a_det">
       <attr-item tags="det.def"/>
       <attr-item tags="det.ind"/>
@@ -779,6 +788,7 @@
       <list-item v="béarnais"/>
       <list-item v="bigourdan"/>
       <list-item v="languedocien"/>
+      <list-item v="quercynois"/>
       <list-item v="provençal"/>
       <list-item v="niçois"/>
       <list-item v="savoyard"/>
@@ -3748,7 +3758,7 @@
       </choose>
     </def-macro>
 
-  <def-macro n="firstWord" npar="1"><!--nova versió 8-febr-08  -->
+  <def-macro n="firstWord" npar="1">
       <choose>
         <when>
           <test>
@@ -3758,7 +3768,7 @@
             <when>
               <test>
                 <and>
-                  <equal><clip pos="1" side="sl" part="a_np_acr"/><lit v=""/></equal>
+                  <equal><clip pos="1" side="sl" part="a_np_acr_ij"/><lit v=""/></equal>
                   <not><in><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in></not>
                 </and>
               </test>
