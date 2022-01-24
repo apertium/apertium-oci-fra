@@ -2123,6 +2123,98 @@
 
     <!-- FIN RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
 
+    <!-- RÈGLAS eliminacion de "pas" en condicions de redondància -->
+
+    <rule comment="RÈGLA: NE SV_pers PAS Aucun > NE SV_pers Aucun (non ai pas cap d'idèa -> n'ai aucune idée)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (non n'ai pas cap -> n'en ai aucune)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (non n'i a pas cap -> n'y en a aucune)">
+      <pattern>
+        <pattern-item n="ne"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS eliminacion de "pas" en condicions de redondància -->
+
+
   </section-rules>
 </interchunk>
 
