@@ -212,7 +212,7 @@
    <choose>
      <when>
        <test>
-           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
        </test>
         <choose>
           <when>
@@ -275,10 +275,7 @@
    <choose>
      <when>
        <test>
-           <in caseless="yes">
-             <clip pos="1" part="lem"/>
-             <list n="SV_personals"/>
-           </in>
+         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
        </test>
         <choose>
           <when>
@@ -290,9 +287,82 @@
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
-                    <equal caseless="yes"><clip pos="1" part="lem"/><lit-tag v="havercj"/></equal>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="havercj"/></equal>
                   </or>
                   <equal caseless="yes"><clip pos="2" part="lem"/><lit v="y"/></equal>
+                </and>
+              </or>
+            </test>
+            <choose>
+              <when>
+                <test>
+                  <not>
+                    <equal>
+                      <clip pos="1" part="temps"/>
+                      <lit-tag v="imp"/>
+                    </equal>
+                  </not>
+                </test>
+                <out>
+                  <chunk>
+                    <get-case-from pos="2">
+                      <lit v="subj"/>
+                    </get-case-from>
+                    <lit-tag v="prn.subj"/>
+                    <clip pos="1" part="pers"/>
+                    <lit-tag v="GD"/>
+                    <clip pos="1" part="nbr"/>
+                    <lit v="{^"/>
+                    <get-case-from pos="2">
+                      <lit v="prpers"/>
+                    </get-case-from>
+                    <lit-tag v="prn.tn.3.4.5"/>
+                    <lit v="$}"/>
+                  </chunk>
+                  <b/>
+                </out>
+                <choose>
+                  <when>
+                    <test>
+                      <equal>
+                        <case-of pos="2" part="lem"/>
+                        <lit v="Aa"/>
+                      </equal>
+                    </test>
+                    <modify-case>
+                      <clip pos="2" part="lem"/>
+                      <lit v="aa"/>
+                    </modify-case>
+                  </when>
+                </choose>
+              </when>
+            </choose>
+          </when>
+        </choose>
+     </when>
+   </choose>
+ </def-macro>
+
+ <def-macro n="generate_subject3" npar="3"> 
+<!-- el paràmetre 1 és el verb; el segon, la primera paraula (per agafar si és majúscula o no); el tercer, el primer prn.pro -->
+   <choose>
+     <when>
+       <test>
+         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+       </test>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+                <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
+                  <or>
+                    <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="havercj"/></equal>
+                  </or>
+                  <equal caseless="yes"><clip pos="3" part="lem"/><lit v="y"/></equal>
                 </and>
               </or>
             </test>
@@ -1160,7 +1230,7 @@
       </pattern>
       <action>
         <call-macro n="generate_subject2">
-          <with-param pos="3"/>
+          <with-param pos="4"/>
           <with-param pos="1"/>
         </call-macro>
         <out>
@@ -1198,7 +1268,8 @@
         <pattern-item n="SV_pers"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject1">
+        <call-macro n="generate_subject2">
+          <with-param pos="2"/>
           <with-param pos="1"/>
         </call-macro>
         <out>
@@ -1227,9 +1298,10 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="generate_subject3">
           <with-param pos="3"/>
           <with-param pos="1"/>
+          <with-param pos="2"/>
         </call-macro>
         <out>
           <chunk>
@@ -1262,9 +1334,10 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="generate_subject3">
           <with-param pos="4"/>
           <with-param pos="1"/>
+          <with-param pos="2"/>
         </call-macro>
         <out>
           <chunk>
@@ -1449,6 +1522,276 @@
             <clip pos="2" part="whole"/>
           </chunk>
           <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv ne SV (que non cantes -> que TU ne chantes)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="3" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="3" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+		      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv SADv SV (que totjorn cantes -> que toujours TU chantes)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="3">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="3" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="3" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+	      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv ne SPron_pro SV (que ne li cantes -> que TU ne lui chantes)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="4" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="4" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+	      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv SAdv SPron_pro SV (que totjorn li cantes -> que toujours TU lui chantes)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="4" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="4" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="3">
+	      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv ne SPron_pro SPron_pro SPron_pro SV (se non n'i a -> s' IL n'y en a)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="5" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="5" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+	      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv SAdv SPron_pro SPron_pro SPron_pro SV (se totjorn n'i a -> si toujours IL y en a)">
+      <pattern>
+        <pattern-item n="cnjsub_adv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="5" part="pers"/>
+            <lit-tag v="GD"/>
+            <clip pos="5" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="2">
+	      <lit v="prpers"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
           <chunk>
             <clip pos="3" part="whole"/>
           </chunk>
