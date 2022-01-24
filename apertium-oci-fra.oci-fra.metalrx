@@ -2678,6 +2678,30 @@
     <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
   </rule>
 
+  <!-- non (adv.enon) >> [remove], non, ne -->
+  <rule weight="0.8">
+    <match lemma="non" tags="adv.enon"><remove tags="adv.enon"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="non" tags="adv.enon"><select lemma="ne" tags="adv"/></match>
+    <match lemma="pas" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="non" tags="adv.enon"><select lemma="ne" tags="adv"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="non" tags="adv.enon"><remove tags="adv.enon"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
+    <match lemma="pas" tags="adv"/>
+  </rule>
+
   <!-- pas >> pas, non -->
   <rule weight="0.8">
     <match lemma="pas" tags="adv"><select lemma="pas"/></match>

@@ -688,6 +688,10 @@
       <attr-item tags="pas_neg"/>
     </def-attr>
 
+    <def-attr n="a_enon">
+      <attr-item tags="enon"/>
+    </def-attr>
+
     <def-attr n="tipoenc_pro">
       <attr-item tags="ref.p3.mf.sp"/>
       <attr-item tags="p1.mf.sg"/>
@@ -9656,7 +9660,34 @@
         <pattern-item n="enon"/>
       </pattern>
       <action>
-        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><clip pos="1" side="tl" part="lem"/><lit v=""/></equal></not>
+                <equal><clip pos="1" side="tl" part="enon"/><lit v=""/></equal>
+              </and>
+            </test>
+            <call-macro n="firstWord">
+              <with-param pos="1"/>
+            </call-macro>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+            <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+            <out>
+              <chunk namefrom="lemma" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SAdv"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+        </choose>
       </action>
     </rule>
 
