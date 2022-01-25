@@ -1035,6 +1035,35 @@
     <match lemma="oreille" tags="n.*"/>
   </rule>
 
+  <!-- assemblée >> amassada / assemblada -->
+  <rule weight="0.8">
+    <match lemma="assemblée" tags="n.*"><select lemma="amassada"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="assemblée" tags="n*"><select lemma="assemblada"/></match>
+    <or>
+          <match lemma="nacionau"/>
+          <match lemma="nacional"/>
+          <match lemma="legislatiu"/>
+          <match lemma="constitucional"/>
+          <match lemma="constitucionau"/>
+          <match lemma="constituent"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="dissolucion"/>
+        <match lemma="eleccion"/>
+        <match lemma="elegida"/>
+        <match lemma="elegit"/>
+        <match lemma="elejut"/>
+        <match lemma="deputat"/>
+    </or>
+    <match lemma="de"/>
+    <match lemma="lo"/>
+    <match lemma="assemblée" tags="n.*"><select lemma="assemblada"/></match>
+  </rule>
+
   <!-- fruit >> fruch/hrut, frucha/hruta -->
   <rule weight="0.8">
     <match lemma="fruit" tags="n.*"><select lemma="fruch"/></match>
@@ -2026,12 +2055,12 @@
     </or>
   </rule>
 
-  <!-- restar >> restar, demorar -->
+  <!-- rester >> restar, demorar -->
   <rule weight="0.8">
-    <match lemma="restar" tags="vblex.*"><select lemma="restar"/></match>
+    <match lemma="rester" tags="vblex.*"><select lemma="restar"/></match>
   </rule>
   <rule weight="0.9">
-    <match lemma="restar" tags="vblex.*"><select lemma="demorar"/></match>
+    <match lemma="rester" tags="vblex.*"><select lemma="demorar"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
@@ -2044,7 +2073,7 @@
     </or>
   </rule>
   <rule weight="0.9">
-    <match lemma="restar" tags="vblex.*"><select lemma="demorar"/></match>
+    <match lemma="rester" tags="vblex.*"><select lemma="demorar"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
@@ -2060,9 +2089,9 @@
     <match lemma="saisir" tags="vblex.*"><select lemma="arrapar"/></match>
   </rule>
 
-  <!-- apeler >> apelar, sonar, cridar... -->
+  <!-- appeler >> apelar, sonar, cridar... -->
   <rule weight="0.8">
-    <match lemma="apeler" tags="vblex.*"><select lemma="apelar"/></match>
+    <match lemma="appeler" tags="vblex.*"><select lemma="apelar"/></match>
   </rule>
 
   <!-- tourner >> virar, rodar -->
@@ -2078,12 +2107,12 @@
     <match lemma="film" tags="n.*"/>
   </rule>
 
-  <!-- enfonser >> enfonzar/en·honsar, etc -->
+  <!-- enfoncer >> enfonzar/en·honsar, etc -->
   <rule weight="0.8">
-    <match lemma="enfonser" tags="vblex.*"><select lemma="enfonzar"/></match>
+    <match lemma="enfoncer" tags="vblex.*"><select lemma="enfonzar"/></match>
   </rule>
   <rule weight="0.9">
-    <match lemma="enfonser" tags="vblex.*"><select lemma="en·honsar"/></match>
+    <match lemma="enfoncer" tags="vblex.*"><select lemma="en·honsar"/></match>
   </rule>
 
   <!-- couler >> rajar/colar, s'enfonzar/colar, enfonzar/ahonar -->
@@ -2160,35 +2189,6 @@
 
   <!-- souvenir >> recordar, rebrembar -->
   <macro name="verb_nopron_pron" p1="souvenir" p2="recordar" p3="rebrembar" />
-
-  <!-- assemblée >> amassada / assemblada -->
-  <rule weight="0.8">
-    <match lemma="assemblée" tags="n.*"><select lemma="amassada"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="assemblée" tags="n*"><select lemma="assemblada"/></match>
-    <or>
-          <match lemma="nacionau"/>
-          <match lemma="nacional"/>
-          <match lemma="legislatiu"/>
-          <match lemma="constitucional"/>
-          <match lemma="constitucionau"/>
-          <match lemma="constituent"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <or>
-        <match lemma="dissolucion"/>
-        <match lemma="eleccion"/>
-        <match lemma="elegida"/>
-        <match lemma="elegit"/>
-        <match lemma="elejut"/>
-        <match lemma="deputat"/>
-    </or>
-    <match lemma="de"/>
-    <match lemma="lo"/>
-    <match lemma="assemblée" tags="n.*"><select lemma="assemblada"/></match>
-  </rule>
 
   <!-- voler >> volar / raubar -->
   <rule weight="0.8">
