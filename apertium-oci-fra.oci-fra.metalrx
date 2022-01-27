@@ -4586,8 +4586,68 @@
     <match lemma="corsar" tags="vblex.*"><select lemma="courser"/></match>
   </rule>
 
+  <!-- enrotlar >> enrouler, enrôler -->
+  <rule weight="0.8">
+    <match lemma="enrotlar" tags="vblex.*"><select lemma="enrouler"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enrotlar" tags="vblex.*"><select lemma="enrôler"/></match>
+    <repeat from="0" upto="1">
+        <match tags="adv"/>
+    </repeat>
+    <or>
+        <match lemma="dens" tags="pr"/>
+        <match lemma="dins" tags="pr"/>
+        <match lemma="hens" tags="pr"/>
+        <match lemma="en" tags="pr"/>
+        <match lemma="per" tags="pr"/>
+        <match lemma="tà" tags="pr"/>
+        <match lemma="entà" tags="pr"/>
+    </or>
+    <match tags="det.*"/>
+    <or>
+        <match lemma="armada" tags="n.*"/>
+        <match lemma="regiment" tags="n.*"/>
+        <match lemma="equipatge" tags="n.*"/>
+        <match lemma="chorma" tags="n.*"/>
+        <match lemma="còla" tags="n.*"/>
+        <match lemma="equipa" tags="n.*"/>
+        <match lemma="marina" tags="n.*"/>
+        <match lemma="tropa" tags="n.*"/>
+        <match lemma="troperada" tags="n.*"/>
+        <match lemma="companhiá" tags="n.*"/>
+        <match lemma="companhia" tags="n.*"/>
+        <match lemma="arramat" tags="n.*"/>
+        <match tags="np.top.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enrotlar" tags="vblex.*"><select lemma="enrôler"/></match>
+    <repeat from="0" upto="1">
+        <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+        <match tags="det.*"/>
+        <match lemma="com" tags="pr"/>
+        <match lemma="coma" tags="pr"/>
+    </repeat>
+    <or>
+        <match lemma="sordat" tags="n.*"/>
+        <match lemma="soldat" tags="n.*"/>
+        <match lemma="marin" tags="n.*"/>
+        <match lemma="marinèr" tags="n.*"/>
+        <match lemma="marinièr" tags="n.*"/>
+        <match lemma="equipatge" tags="n.*"/>
+        <match lemma="chorma" tags="n.*"/>
+        <match lemma="còla" tags="n.*"/>
+        <match lemma="equipa" tags="n.*"/>
+        <match lemma="esclau" tags="n.*"/>
+    </or>
+  </rule>
 
 
+  <!-- estrementir >> frissonner, secouer -->
+<macro name="verb_nopron_pron" p1="estrementir" p2="secouer" p3="frissonner" />
 
 
 <!-- **************** NP **************** -->

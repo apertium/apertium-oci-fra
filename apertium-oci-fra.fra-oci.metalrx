@@ -2257,6 +2257,25 @@
     <match lemma="distraire" tags="vblex.*"><select lemma="destorbar"/></match>
   </rule>
 
+  <macro name="verb_nopron_pron" p1="distraire" p2="destorbar" p3="divertir" />
+
+
+  <!-- foncer >> (ar)ronçar/escurcir -->
+  <rule weight="0.8">
+      <match lemma="foncer" tags="vblex.*"><select lemma="escurir"/></match>
+  </rule>
+  <rule weight="0.8">
+      <or>
+          <match lemma="foncer" tags="vblex.*"><select lemma="ronçar"/></match>
+          <match lemma="foncer" tags="vblex.*"><select lemma="arronçar"/></match>
+      </or>
+      <or>
+          <match lemma="sus" tags="pr"/>
+          <match lemma="sul"/>
+          <match lemma="suu"/>
+      </or>
+  </rule>
+
 <!-- **************** NP **************** -->
 
   <macro name="ant_antcog" p1="Abraham" p2="Abraam" />
