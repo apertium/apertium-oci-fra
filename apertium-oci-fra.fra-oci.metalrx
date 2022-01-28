@@ -2264,17 +2264,121 @@
   <rule weight="0.8">
       <match lemma="foncer" tags="vblex.*"><select lemma="escurir"/></match>
   </rule>
-  <rule weight="0.8">
-      <or>
-          <match lemma="foncer" tags="vblex.*"><select lemma="ronçar"/></match>
-          <match lemma="foncer" tags="vblex.*"><select lemma="arronçar"/></match>
-      </or>
-      <or>
-          <match lemma="sus" tags="pr"/>
-          <match lemma="sul"/>
-          <match lemma="suu"/>
-      </or>
+  <rule weight="1.0">
+      <match lemma="foncer" tags="vblex.*" ><select lemma="ronçar"/></match>
+      <match lemma="sur" tags="pr"/>
   </rule>
+
+
+  <!-- repérer >> localizar/senhalar -->
+  <rule weight="0.8">
+      <match lemma="repérer" tags="vblex.*"><select lemma="localizar"/></match>
+  </rule>
+
+
+  <!-- échouer >> encal(h)ar/mauescàder, fracassar -->
+  <macro name="verb_nopron_pron" p1="échouer" p2="fracassar" p3="encalar" v="oci" />
+  <macro name="verb_nopron_pron" p1="échouer" p2="mauescàder" p3="encalhar" v="oci@gascon" />
+
+
+  <!-- ébranler >> brandir, abranlir / susmàver, trebolar -->
+  <rule weight="0.8">
+      <match lemma="ébranler" tags="vblex.*" v="oci"><select lemma="brandir"/></match>
+      <match lemma="ébranler" tags="vblex.*" v="oci@gascon"><select lemma="abranlir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ébranler" tags="vblex.*" v="oci"><select lemma="trebolar"/></match>
+    <match lemma="ébranler" tags="vblex.*" v="oci@gascon"><select lemma="susmàver"/></match>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="det.*"/>
+       <match tags="num.*"/>
+       <match tags="num"/>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+       <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="opinion" tags="n.*"/>
+        <match lemma="volontat" tags="n.*"/>
+        <match lemma="determinacion" tags="n.*"/>
+        <match lemma="coratge" tags="n.*"/>
+        <match lemma="fisança" tags="n.*"/>
+        <match lemma="hidança" tags="n.*"/>
+        <match lemma="confisança" tags="n.*"/>
+        <match lemma="hida" tags="n.*"/>
+        <match lemma="ahida" tags="n.*"/>
+        <match lemma="hisança" tags="n.*"/>
+        <match lemma="certitud" tags="n.*"/>
+        <match lemma="certesa" tags="n.*"/>
+        <match lemma="credença" tags="n.*"/>
+        <match lemma="cresença" tags="n.*"/>
+        <match lemma="créder" tags="n.*"/>
+        <match lemma="fe" tags="n.*"/>
+        <match lemma="he" tags="n.*"/>
+        <match lemma="prejutjat" tags="n.*"/>
+        <match lemma="esperit" tags="n.*"/>
+        <match lemma="pensada" tags="n.*"/>
+        <match lemma="conviccion" tags="n.*"/>
+        <match lemma="créser" tags="n.*"/>
+        <match lemma="cregénça" tags="n.*"/>
+        <match lemma="òrdre" tags="n.*"/>
+        <match lemma="òrdi" tags="n.*"/>
+        <match lemma="societat" tags="n.*"/>
+        <match lemma="ordi" tags="n.*"/>
+        <match lemma="òrde" tags="n.*"/>
+        <match lemma="poder" tags="n.*"/>
+        <match lemma="constància" tags="n.*"/>
+        <match lemma="principi" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- recouper >> retalhar, concordar -->
+  <macro name="verb_nopron_pron" p1="recouper" p2="retalhar" p3="concordar" />
+
+  <!-- découper >> destacar, copar -->
+  <macro name="verb_nopron_pron" p1="découper" p2="copar" p3="destacar" />
+
+  <!-- rendre >> tornar/aller -->
+  <rule weight="0.8">
+      <match lemma="rendre" tags="vblex.*"><select lemma="tornar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="me" tags="prn.pro*"/>
+        <match lemma="te" tags="prn.pro*"/>
+        <match lemma="se" tags="prn.pro*"/>
+        <match lemma="nos" tags="prn.pro*"/>
+        <match lemma="vos" tags="prn.pro*"/>
+    </or>
+    <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
+    <or>
+        <match lemma="à" tags="pr"/>
+        <match lemma="sur" tags="pr"/>
+        <match lemma="vers" tags="pr"/>
+        <match lemma="chez" tags="pr"/>
+        <match lemma="dans" tags="pr"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="me" tags="prn.pro*"/>
+        <match lemma="te" tags="prn.pro*"/>
+        <match lemma="se" tags="prn.pro*"/>
+        <match lemma="nos" tags="prn.pro*"/>
+        <match lemma="vos" tags="prn.pro*"/>
+    </or>
+    <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
+     <match lemma="en" tags="pr"/>
+    <or>
+        <match ltags="np.top.*"/>
+        <match tags=""/>
+    </or>
+  </rule>
+
+  <!-- vantar >> vanter, louer -->
+  <macro name="verb_nopron_pron" p1="vantar" p2="louer" p3="vanter" />
 
 <!-- **************** NP **************** -->
 

@@ -4592,7 +4592,7 @@
   </rule>
   <rule weight="1.0">
     <match lemma="enrotlar" tags="vblex.*"><select lemma="enrôler"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
         <match tags="adv"/>
     </repeat>
     <or>
@@ -4604,7 +4604,16 @@
         <match lemma="tà" tags="pr"/>
         <match lemma="entà" tags="pr"/>
     </or>
-    <match tags="det.*"/>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="det.*"/>
+       <match tags="num.*"/>
+       <match tags="num"/>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+       <match tags="adj.*"/>
+      </or>
+    </repeat>
     <or>
         <match lemma="armada" tags="n.*"/>
         <match lemma="regiment" tags="n.*"/>
@@ -4623,7 +4632,7 @@
   </rule>
   <rule weight="1.0">
     <match lemma="enrotlar" tags="vblex.*"><select lemma="enrôler"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
         <match tags="adv"/>
     </repeat>
     <repeat from="0" upto="1">
@@ -4648,6 +4657,174 @@
 
   <!-- estrementir >> frissonner, secouer -->
 <macro name="verb_nopron_pron" p1="estrementir" p2="secouer" p3="frissonner" />
+
+  <!-- ronçar >> foncer, lancer -->
+  <macro name="verb_nopron_pron" p1="ronçar" p2="lancer" p3="foncer"/>
+
+
+  <!-- mirar >> mirer, viser -->
+  <rule weight="0.8">
+    <match lemma="mirar" tags="vblex.*"><select lemma="viser"/></match>
+  </rule>
+
+  <!-- negar >> noyer, nier -->
+  <macro name="verb_nopron_pron" p1="negar" p2="nier" p3="noyer" />
+
+  <!-- parcar >> garer, parquer -->
+  <macro name="verb_nopron_pron" p1="parcar" p2="parquer" p3="garer" v="oci@gascon" />
+
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="parcar" tags="vblex.*"><select lemma="parquer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="parcar" tags="vblex.*"><select lemma="garer"/></match>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="det.*"/>
+       <match tags="num.*"/>
+       <match tags="num"/>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+       <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="veitura" tags="n.*"/>
+        <match lemma="auto" tags="n.*"/>
+        <match lemma="autò" tags="n.*"/>
+        <match lemma="automobila" tags="n.*"/>
+        <match lemma="veïcul" tags="n.*"/>
+        <match lemma="carri" tags="n.*"/>
+        <match lemma="carreton" tags="n.*"/>
+        <match lemma="bicicleta" tags="n.*"/>
+        <match lemma="velo" tags="n.*"/>
+        <match lemma="velò" tags="n.*"/>
+        <match lemma="VTT" tags="n.*"/>
+        <match lemma="BTT" tags="n.*"/>
+        <match lemma="V.T.T." tags="n.*"/>
+        <match lemma="B.T.T." tags="n.*"/>
+        <match lemma="V.T.C." tags="n.*"/>
+        <match lemma="B.T.C." tags="n.*"/>
+        <match lemma="VTC" tags="n.*"/>
+        <match lemma="BTC" tags="n.*"/>
+        <match lemma="bici" tags="n.*"/>
+        <match lemma="petarèl" tags="n.*"/>
+        <match lemma="petafum" tags="n.*"/>
+        <match lemma="petahum" tags="n.*"/>
+        <match lemma="petarreta" tags="n.*"/>
+        <match lemma="velomotor" tags="n.*"/>
+        <match lemma="escotèr" tags="n.*"/>
+        <match lemma="scooter" tags="n.*"/>
+        <match lemma="landaire" tags="n.*"/>
+        <match lemma="vèspa" tags="n.*"/>
+        <match lemma="mòto" tags="n.*"/>
+        <match lemma="motò" tags="n.*"/>
+        <match lemma="moto" tags="n.*"/>
+        <match lemma="motocicleta" tags="n.*"/>
+        <match lemma="ciclomotor" tags="n.*"/>
+        <match lemma="mobileta" tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags=""/>
+    </or>
+  </rule>
+
+
+  <!-- pausar >> poser, reposer -->
+  <macro name="verb_nopron_pron" p1="pausar" p2="poser" p3="reposer" />
+
+  <!-- petaçar >> repriser, débrouiller -->
+  <macro name="verb_nopron_pron" p1="petaçar" p2="repriser" p3="débrouiller" />
+
+  <!-- picar >> piquer, taper, etc. -->
+  <rule weight="0.8">
+    <match lemma="picar" tags="vblex.*"><select lemma="taper"/></match>
+  </rule>
+
+  <!-- quichar >> serrer, appuyer, exagérer -->
+  <rule weight="0.8">
+    <match lemma="quichar" tags="vblex.*"><select lemma="serrer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="quichar" tags="vblex.*"><select lemma="appuyer"/></match>
+    <repeat from="0" upto="2">
+        <match tags="adv"/>
+    </repeat>
+    <match lemma="sus" tags="pr"/>
+  </rule>
+
+  <!-- sarrar >> serrer, rapprocher -->
+  <macro name="verb_nopron_pron" p1="sarrar" p2="serrer" p3="rapprocher" v="oci" />
+  <rule weight="0.8">
+    <match lemma="sarrar" tags="vblex.*"><select lemma="serrer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="sarrar" tags="vblex.*"><select lemma="rapprocher"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sarrar" tags="vblex.*"><select lemma="rapprocher"/></match>
+    <match lemma="de" tags="det"/>
+  </rule>
+
+  <!-- rodar >> tourner/rouler/rôder -->
+  <rule weight="0.8" v="oci">
+    <match lemma="rodar" tags="vblex.*"><select lemma="rouler"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="rodar" tags="vblex.*"><select lemma="rôder"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="rodar" tags="vblex.*"><select lemma="tourner"/></match>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="det.*"/>
+       <match tags="num.*"/>
+       <match tags="num"/>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+       <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="film" tags="n.*"/>
+        <match lemma="filme" tags="n.*"/>
+        <match lemma="seria" tags="n.*"/>
+        <match lemma="episòdi" tags="n.*"/>
+        <match lemma="vidèo" tags="n.*"/>
+        <match lemma="video" tags="n.*"/>
+        <match lemma="videò" tags="n.*"/>
+        <match lemma="story" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- sèire >> asseoir, siéger -->
+  <macro name="verb_nopron_pron" p1="sèire" p2="siéger" p3="asseoir" v="oci"/>
+
+  <!-- tronar >> tonner/trôner -->
+  <rule weight="0.8">
+    <match lemma="tronar" tags="vblex.*"><select lemma="tonner"/></match>
+  </rule>
+
+  <!-- vesiar >> choyer/voisiner -->
+  <rule weight="0.8">
+    <match lemma="vesiar" tags="vblex.*"><select lemma="choyer"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="vesiar" tags="vblex.*"><select lemma="voisiner"/></match>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="amb" tags="pr"/>
+        <match lemma="ambe" tags="pr"/>
+        <match lemma="damb" tags="pr"/>
+        <match lemma="dambe" tags="pr"/>
+        <match lemma="dab" tags="pr"/>
+    </or>
+  </rule>
 
 
 <!-- **************** NP **************** -->
