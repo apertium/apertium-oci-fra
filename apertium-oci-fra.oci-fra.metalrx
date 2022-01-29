@@ -2423,9 +2423,32 @@
 
 <!-- **************** CNJADV **************** -->
 
+  <!-- coma >> comme, que, en tant que -->
+  <rule weight="0.8">
+    <match lemma="coma" tags="cnjadv"><select lemma="comme"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="tan" tags="adv"/>
+      <match lemma="tant" tags="adv"/>
+      <match lemma="autan" tags="adv"/>
+      <match lemma="autant" tags="adv"/>
+    </or>
+    <match lemma="coma" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+
   <!-- com >> comme, que, en tant que -->
   <rule weight="0.8">
     <match lemma="com" tags="cnjadv"><select lemma="comme"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="tan" tags="adv"/>
+      <match lemma="tant" tags="adv"/>
+      <match lemma="autan" tags="adv"/>
+      <match lemma="autant" tags="adv"/>
+    </or>
+    <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
   </rule>
 
 <!-- **************** PREADV **************** -->
