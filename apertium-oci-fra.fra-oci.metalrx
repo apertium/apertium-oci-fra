@@ -888,6 +888,34 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- majeur >> màger, major -->
+  <rule weight="0.8">
+    <match lemma="majeur" tags="adj.*"><select lemma="màger"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="do" tags="n.*"/>
+      <match lemma="ré" tags="n.*"/>
+      <match lemma="mi" tags="n.*"/>
+      <match lemma="fa" tags="n.*"/>
+      <match lemma="sol" tags="n.*"/>
+      <match lemma="la" tags="n.*"/>
+      <match lemma="si" tags="n.*"/>
+      <match lemma="mode" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="majeur" tags="adj.*"><select lemma="major"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="dit" tags="n.*" v="oci@gascon"/>
+      <seq n="personne"/>
+    </or>
+    <match lemma="majeur" tags="adj.*"><select lemma="major"/></match>
+  </rule>
+
   <!-- même >> meteis/madeish, etc. -->
   <rule weight="0.8">
     <match lemma="même" tags="adj.*"><select lemma="meteis"/></match>
