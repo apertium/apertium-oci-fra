@@ -4051,6 +4051,19 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- fretar >> frotter, brosser -->
+  <rule weight="0.8">
+    <match lemma="fretar" tags="vblex.*"><select lemma="frotter"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="fretar" tags="vblex.*"><select lemma="brosser"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="dent" tags="n.*"/>
+  </rule>
+
   <!-- demorar >> demeurer, rester -->
   <rule weight="0.7">
     <match lemma="demorar" tags="vblex.*"><select lemma="demeurer"/></match>

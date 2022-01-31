@@ -1886,6 +1886,19 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- brosser >> brossar, fretar -->
+  <rule weight="0.8">
+    <match lemma="brosser" tags="vblex.*"><select lemma="brossar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="brosser" tags="vblex.*"><select lemma="fretar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="dent" tags="n.*"/>
+  </rule>
+
   <!-- causer >> causar, devisar, etc. -->
   <rule weight="0.8">
     <match lemma="causer" tags="vblex.*"><select lemma="causar"/></match>
