@@ -10765,6 +10765,46 @@
     </rule>
 
 
+    <rule comment="RÈGLA: ON VERBP3 (on peut: se pòt)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="verbp3"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <out>
+          <chunk name="prn" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+              <tag><lit-tag v="ref"/></tag>
+            </tags>
+            <lu>
+              <lit v="se"/>
+              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+           <chunk namefrom="chunkname">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="tags"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+
     <rule comment="RÈGLA: VERBP3 ON (peut-on: se pòt)">
       <pattern>
         <pattern-item n="verbp3"/>
