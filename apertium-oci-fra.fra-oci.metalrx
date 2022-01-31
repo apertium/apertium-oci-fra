@@ -932,6 +932,43 @@
     <match lemma="mauvais" tags="adj.*"><select lemma="mau"/></match>
   </rule>
 
+  <!-- chic >> elegant/brave -->
+  <rule weight="0.8">
+    <match lemma="chic" tags="adj.*"><select lemma="elegant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="chic" tags="adj.*"><select lemma="brave"/></match>
+    <or>
+      <match lemma="type" tags="n.*"/>
+      <match lemma="gars" tags="n.*"/>
+      <match lemma="mec" tags="n.*"/>
+      <match lemma="homme" tags="n.*"/>
+      <match lemma="femme" tags="n.*"/>
+      <match lemma="personne" tags="n.*"/>
+      <match lemma="nana" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- drôle >> amusant/estranh -->
+  <rule weight="0.8">
+    <match lemma="drôle" tags="adj.*"><select lemma="amusant"/></match>
+  </rule>
+
+
+  <!-- élevé >> haut, naut/ensenhat -->
+  <rule weight="0.8" v="oci">
+    <match lemma="élevé" tags="adj.*"><select lemma="naut"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="élevé" tags="adj.*"><select lemma="haut"/></match>
+  </rule>
+
+
+  <!-- éveillé >> esberit/desvelhat -->
+  <rule weight="0.8">
+    <match lemma="éveillé" tags="adj.*"><select lemma="desvelhat"/></match>
+  </rule>
+
 <!-- **************** N **************** -->
 
   <!-- plongeur >> cabussaire, vaisselaire -->
