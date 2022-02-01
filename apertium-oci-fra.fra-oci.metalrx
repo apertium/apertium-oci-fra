@@ -969,6 +969,67 @@
     <match lemma="éveillé" tags="adj.*"><select lemma="desvelhat"/></match>
   </rule>
 
+
+  <!-- laborieux >> penós/valent -->
+  <rule weight="0.8">
+    <match lemma="laborieux" tags="adj.*"><select lemma="penós"/></match>
+  </rule>
+
+
+  <!-- portable >> portable/mobile -->
+  <rule weight="0.8">
+    <match lemma="portable" tags="adj.*"><select lemma="portable"/></match>
+  </rule>
+  <rule weight="0.1">
+    <or>
+      <match lemma="telefòne" tags="n.*"/>
+      <match lemma="telefonet" tags="n.*"/>
+    </or>
+    <match lemma="portable" tags="adj.*"><select lemma="mobile"/></match>
+  </rule>
+
+
+  <!-- propre >> pròp(r)i/net -->
+  <rule weight="0.8">
+    <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
+    <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
+  </rule>
+
+
+  <!-- vague >> imprecís/vacant -->
+  <rule weight="0.8">
+    <match lemma="vague" tags="adj.*"><select lemma="imprecís"/></match>
+  </rule>
+  <rule weight="0.1">
+    <or>
+      <match lemma="terren" tags="n.*"/>
+      <match lemma="terrenh" tags="n.*"/>
+      <match lemma="terrenc" tags="n.*"/>
+      <match lemma="terrin" tags="n.*"/>
+      <match lemma="terralh" tags="n.*"/>
+      <match lemma="terrièra" tags="n.*"/>
+      <match lemma="èrm" tags="n.*"/>
+      <match lemma="gèrm" tags="n.*"/>
+    </or>
+    <match lemma="vague" tags="adj.*"><select lemma="vacant"/></match>
+  </rule>
+
+
+  <!-- voyant >> viu/vedent, vesent -->
+  <rule weight="0.8">
+    <match lemma="voyant" tags="adj.*"><select lemma="viu"/></match>
+  </rule>
+  <rule weight="0.1">
+    <or>
+      <match lemma="mau" tags="adv"/>
+      <match lemma="plan" tags="adv"/>
+      <match lemma="mal" tags="adv"/>
+    </or>
+    <match lemma="voyant" tags="adj.*" v="oci"><select lemma="vesent"/></match>
+    <match lemma="voyant" tags="adj.*" v="oci@gascon"><select lemma="vedent"/></match>
+  </rule>
+
+
 <!-- **************** N **************** -->
 
   <!-- plongeur >> cabussaire, vaisselaire -->
