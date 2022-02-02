@@ -885,6 +885,58 @@
     <match lemma="aussi" tags="preadv"><select lemma="tant"/></match>
   </rule>
 
+  <!-- proprement >> pròp(r)iament/netament -->
+  <rule weight="0.8">
+    <match lemma="proprement" tags="adv"><select lemma="netament"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="proprement" tags="adv" v="oci@gascon"><select lemma="pròpiament"/></match>
+    <match lemma="proprement" tags="adv" v="oci"><select lemma="pròpriament"/></match>
+    <or>
+        <match tags="adj.*"/>
+        <match lemma="dire" tags="vblex.*"/>
+        <match lemma="parler" tags="vblex.*"/>
+        <match tags="vblex.pp.*"/>
+    </or>
+  </rule>
+
+  <!-- tantôt >> totara/un còp, quora -->
+  <rule weight="0.8">
+    <match lemma="tantôt" tags="adv"><select lemma="totara"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tantôt" tags="adv" v="oci@gascon"><select lemma="un còp"/></match>
+    <match lemma="tantôt" tags="adv" v="oci"><select lemma="quora"/></match>
+    <repeat from="0" upto="4">
+        <match tags="*"/>
+        <match tags=""/>
+    </repeat>
+    <match lemma="tantôt" tags="adv"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tantôt" tags="adv"/>
+    <repeat from="0" upto="4">
+        <match tags="*"/>
+        <match tags=""/>
+    </repeat>
+    <match lemma="tantôt" tags="adv" v="oci@gascon"><select lemma="un còp"/></match>
+    <match lemma="tantôt" tags="adv" v="oci"><select lemma="quora"/></match>
+  </rule>
+
+  <!-- mieux >> mélher, melhor/mei plan, mai plan -->
+  <rule weight="0.8">
+    <match lemma="mieux" tags="adv" v="oci"><select lemma="melhor"/></match>
+    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mélher"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mei plan"/></match>
+    <match lemma="mieux" tags="adv" v="oci"><select lemma="mai plan"/></match>
+    <or>
+        <match tags="adj.*"/>
+        <match tags="vblex.pp.*"/>
+    </or>
+  </rule>
+
 
 <!-- **************** ADJ **************** -->
 
