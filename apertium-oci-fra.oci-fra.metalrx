@@ -4103,6 +4103,27 @@
     <match lemma="grand" tags="n.*"><select lemma="grand-père"/></match>
   </rule>
 
+  <!-- galant >> galant/amant -->
+  <rule weight="0.8">
+    <match lemma="galant" tags="n.*"><select lemma="galant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="det.pos.*"/>
+    <match lemma="galant" tags="n.*"><select lemma="amant"/></match>
+  </rule>
+  <rule weight="1.0">
+  <match lemma="vbhaver.*"/>
+    <or>
+      <match tags="det.*"/>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+      <match tags="cnjsub"/>
+    </or>
+    <match lemma="galant" tags="n.*"><select lemma="amant"/></match>
+  </rule>
+
 
 
 
