@@ -1676,17 +1676,20 @@
   </rule>
   <rule weight="1.2">
     <match tags="det.pos.*"/>
-    <match lemma="fille" tags="n.*"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
   </rule>
   <rule weight="1.2">
     <match tags="det.pos.*"/>
     <or><match tags="num.*"/><match tags="num"/></or>
-    <match lemma="fille" tags="n.*"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
   </rule>
   <rule weight="1.2">
     <match lemma="avoir"/>
     <or><match tags="det.*"/><match tags="num.*"/><match tags="num"/></or>
-    <match lemma="fille" tags="n.*"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
   </rule>
 
   <!-- vague >> èrsa, ondada -->
@@ -1941,7 +1944,7 @@
       <match lemma="diminution"/>
     </or>
     <repeat from="0" upto="1">
-      <match tags="adj"/>
+      <match tags="adj.*"/>
     </repeat>
     <match lemma="de" tags="pr"/>
     <match tags="det.*"/>
@@ -1971,6 +1974,58 @@
   <!-- serveur >> servidor, garçon -->
   <rule weight="0.8">
     <match lemma="serveur" tags="n.*"><select lemma="servidor"/></match>
+  </rule>
+
+  <!-- broche >> ast, bròca -->
+  <rule weight="0.8">
+    <match lemma="broche" tags="n.*"><select lemma="bròca"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="à" tags="pr"/>
+    <match lemma="la" tags="det.*"/>
+    <match lemma="broche" tags="n.*"><select lemma="ast"/></match>
+  </rule>
+
+  <!-- bulle >> bulla, botiòla/boishòrla -->
+  <rule weight="0.8">
+    <match lemma="bulle" tags="n.*" v="oci"><select lemma="botiòla"/></match>
+    <match lemma="bulle" tags="n.*" v="oci@gascon"><select lemma="boishòrla"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bulle" tags="n.*"><select lemma="ast"/></match>
+    <or>
+      <match lemma="papau" tags="adj.*"/>
+      <match lemma="papal" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bulle" tags="n.*"><select lemma="ast"/></match>
+    <match lemma="de" tags="pr"/>
+    <match lemma="le" tags="det.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="pape" tags="n.*"/>
+  </rule>
+
+  <!-- fonte >> fonuda/honuda, fonta -->
+  <rule weight="0.8">
+    <match lemma="fonte" tags="n.*" v="oci"><select lemma="fonuda"/></match>
+    <match lemma="fonte" tags="n.*" v="oci@gascon"><select lemma="honuda"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="en" tags="pr"/>
+    <match lemma="fonte" tags="n.*"><select lemma="fonta"/></match>
+  </rule>
+
+  <!-- fouille >> perquisition, cavament -->
+  <rule weight="0.8">
+    <match lemma="fouille" tags="n.*"><select lemma="perquisition"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="fouille" tags="n.*"><select lemma="cavament"/></match>
+    <match lemma="archéologique" tags="adj.*"/>
   </rule>
 
 
@@ -2572,6 +2627,10 @@
 
   <!-- vantar >> vanter, louer -->
   <macro name="verb_nopron_pron" p1="vantar" p2="louer" p3="vanter" />
+
+  <!-- dépêcher, se dépêcher -->
+  <macro name="verb_nopron_pron" p1="dépêcher" p2="despachar" p3="trigar" v="oci" />
+  <macro name="verb_nopron_pron" p1="dépêcher" p2="despachar" p3="amanejar" v="oci@gascon" />
 
 <!-- **************** NP **************** -->
 

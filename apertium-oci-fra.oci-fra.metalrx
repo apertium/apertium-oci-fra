@@ -4124,9 +4124,154 @@
     <match lemma="galant" tags="n.*"><select lemma="amant"/></match>
   </rule>
 
+  <!-- traca >> traque/sorte -->
+  <rule weight="0.8">
+    <match lemma="traca" tags="n.*"><select lemma="traque"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="de" tags="pr"/>
+    <match lemma="tot" tags="adj.*"/>
+    <match lemma="traca" tags="n.*"><select lemma="sorte"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+       <match lemma="un" tags="det.*"/>
+       <match tags="det.dem.*"/>
+    </or>
+    <match lemma="traca" tags="n.*"><select lemma="sorte"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+       <match lemma="lo" tags="det.*"/>
+       <match lemma="eth" tags="det.*"/>
+    </or>
+    <match lemma="traca" tags="n.*"><select lemma="sorte"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <or>
+        <match lemma="qui" tags="rel.*"/>
+        <match lemma="que" tags="rel.*"/>
+    </or>
+  </rule>
 
 
 
+  <!-- pastenaga >> pastenague, carotte -->
+  <rule weight="0.8">
+    <match lemma="pastenaga" tags="n.*"><select lemma="carotte"/></match>
+  </rule>
+  <rule weight="1.0" >
+    <or>
+        <match lemma="raia" tags="n.*"/>
+        <match lemma="roia" tags="n.*"/>
+        <match lemma="postèu" tags="n.*"/>
+        <match lemma="graiman" tags="n.*"/>
+        <match lemma="haucha" tags="n.*"/>
+        <match lemma="hauchèu" tags="n.*"/>
+        <match lemma="tèra" tags="n.*"/>
+        <match lemma="clavelada" tags="n.*"/>
+        <match lemma="peis" tags="n.*"/>
+        <match lemma="peish" tags="n.*"/>
+    </or>
+    <match lemma="pastenaga" tags="n.*"><select lemma="pastenague"/></match>
+  </rule>
+
+  <!-- rampa >> rampe, crampe -->
+  <rule weight="0.8">
+    <match lemma="rampa" tags="n.*"><select lemma="rampe"/></match>
+  </rule>
+  <rule weight="1.0" >
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="un" tags="det.*"/>
+    <match lemma="rampa" tags="n.*"><select lemma="crampe"/></match>
+  </rule>
+  <rule weight="1.2" >
+    <match lemma="i" tags="prn.*"/>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="un" tags="det.*"/>
+    <match lemma="rampa" tags="n.*"><select lemma="rampe"/></match>
+  </rule>
+
+  <!-- cosina >> cuisine, cosina -->
+  <rule weight="0.8">
+    <match lemma="cosina" tags="n.*"><select lemma="cuisine"/></match>
+  </rule>
+  <rule weight="1.0" >
+  <or>
+        <match lemma="permèr" tags="adj.*"/>
+        <match lemma="premièr" tags="adj.*"/>
+        <match lemma="primièr" tags="adj.*"/>
+        <match lemma="prumèr" tags="adj.*"/>
+        <match lemma="purmèr" tags="adj.*"/>
+        <match lemma="primèr" tags="adj.*"/>
+  </or>
+    <match lemma="cosina" tags="n.*"><select lemma="cousin"/></match>
+  </rule>
+  <rule weight="1.0" >
+    <match lemma="cosina" tags="n.*"><select lemma="cousin"/></match>
+  <or>
+        <match lemma="permèr" tags="adj.*"/>
+        <match lemma="premièr" tags="adj.*"/>
+        <match lemma="primièr" tags="adj.*"/>
+        <match lemma="prumèr" tags="adj.*"/>
+        <match lemma="purmèr" tags="adj.*"/>
+        <match lemma="primèr" tags="adj.*"/>
+        <match lemma="pròpi" tags="adj.*"/>
+        <match lemma="pròpri" tags="adj.*"/>
+        <match lemma="german" tags="adj.*"/>
+        <match tags="np.ant.*"/>
+  </or>
+  </rule>
+
+  <!-- còrn >> coin, corne -->
+  <rule weight="0.8">
+    <match lemma="còrn" tags="n.*"><select lemma="coin"/></match>
+  </rule>
+  <rule weight="1.0" >
+    <match lemma="còrn" tags="n.*"><select lemma="corne"/></match>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="3">
+      <match tags="adv.*"/>
+      <match tags="adj.*"/>
+      <match tags="det.*"/>
+    </repeat>
+  <or>
+        <match lemma="buòu" tags="n.*"/>
+        <match lemma="bueu" tags="n.*"/>
+        <match lemma="vaca" tags="n.*"/>
+        <match lemma="cabra" tags="n.*"/>
+        <match lemma="vacha" tags="n.*"/>
+        <match lemma="craba" tags="n.*"/>
+        <match lemma="bica" tags="n.*"/>
+        <match lemma="boc" tags="n.*"/>
+        <match lemma="pitèu" tags="n.*"/>
+        <match lemma="crabon" tags="n.*"/>
+        <match lemma="crapon" tags="n.*"/>
+        <match lemma="arquèr" tags="n.*"/>
+        <match lemma="diable" tags="n.*"/>
+  </or>
+  </rule>
 
 
 <!-- **************** VBSER **************** -->
