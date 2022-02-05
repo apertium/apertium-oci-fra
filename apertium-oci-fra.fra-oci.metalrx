@@ -303,6 +303,109 @@
         <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
       </rule>
     </def-macro>
+
+    <!-- Aquesta macro tria el verb p2 si p1 no és pronominal i p3 si p1 és pronominal i va seguit de la preposició p4 -->
+    <!-- p1 = verb fra, p2 = verb oci no pron, p3 = verb oci pron, p4 = prep fra -->
+    <def-macro name="verb_nopron_pron_prep">
+      <rule weight="0.8">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p2}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match lemma="{{p1}}" tags="vblex.*.p1.sg"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match lemma="{{p1}}" tags="vblex.*.p1.sg"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*.p1.sg"><select lemma="{{p3}}"/></match>
+        <match tags="prn.enc.p1.*.sg"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match lemma="{{p1}}" tags="vblex.*.p2.sg"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match lemma="{{p1}}" tags="vblex.*.p2.sg"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*.p2.sg"><select lemma="{{p3}}"/></match>
+        <match tags="prn.enc.p2.*.sg"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match lemma="{{p1}}" tags="vblex.*.p3.sg"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.*.p3.pl"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.ger"><select lemma="{{p3}}"/></match>
+        </or>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <match tags="prn.pro.*"/>
+        <or>
+          <match lemma="{{p1}}" tags="vblex.*.p3.sg"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.*.p3.pl"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.ger"><select lemma="{{p3}}"/></match>
+        </or>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match lemma="{{p1}}" tags="vblex.*.p3.sg"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.*.p3.pl"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.ger"><select lemma="{{p3}}"/></match>
+        </or>
+        <match tags="prn.enc.ref.p3.*.sp"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match lemma="{{p1}}" tags="vblex.*.p1.pl"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match lemma="{{p1}}" tags="vblex.*.p1.pl"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*.p1.pl"><select lemma="{{p3}}"/></match>
+        <match tags="prn.enc.p1.*.pl"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match lemma="{{p1}}" tags="vblex.*.p2.pl"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match lemma="{{p1}}" tags="vblex.*.p2.pl"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="{{p1}}" tags="vblex.*.p2.pl"><select lemma="{{p3}}"/></match>
+        <match tags="prn.enc.p2.*.pl"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+    </def-macro>
   </def-macros>
 
   <def-seqs>
@@ -2041,6 +2144,15 @@
     <match lemma="ménage" tags="n.*"><select lemma="recapte"/></match>
   </rule>
 
+  <!-- pòt >> lèvre, bise, pot -->
+  <rule weight="0.8">
+    <match lemma="pòt" tags="n.*"><select lemma="lèvre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pòt" tags="n.*"><select lemma="pot"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
 
 <!-- **************** VBHAVER **************** -->
 
@@ -2450,6 +2562,10 @@
 
   <!-- appeler >> cridar, sonar -->
   <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="sonar" />
+
+  <!-- mêler >> mesclar, mainar/aucupar -->
+  <macro name="verb_nopron_pron_prep" p1="mêler" p2="mesclar" p3="mainar" p4="de" v="oci" />
+  <macro name="verb_nopron_pron_prep" p1="mêler" p2="mesclar" p3="aucupar" p4="de" v="oci@gascon" />
 
   <!-- souvenir >> recordar, rebrembar -->
   <macro name="verb_nopron_pron" p1="souvenir" p2="recordar" p3="rebrembar" />
