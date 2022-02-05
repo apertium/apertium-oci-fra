@@ -2021,11 +2021,24 @@
 
   <!-- fouille >> perquisition, cavament -->
   <rule weight="0.8">
-    <match lemma="fouille" tags="n.*"><select lemma="perquisition"/></match>
+    <match lemma="fouille" tags="n.*"><select lemma="perquisicion"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="fouille" tags="n.*"><select lemma="cavament"/></match>
     <match lemma="archéologique" tags="adj.*"/>
+  </rule>
+
+  <!-- ménage >> coble, recapte -->
+  <rule weight="0.8">
+    <match lemma="ménage" tags="n.*"><select lemma="coble"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <match lemma="ménage" tags="n.*"><select lemma="recapte"/></match>
   </rule>
 
 
