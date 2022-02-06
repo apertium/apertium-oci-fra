@@ -818,6 +818,19 @@
 
 <!-- **************** ADV **************** -->
 
+  <!-- à moitié >> a miejas, mièg/mieitat -->
+  <rule weight="0.8">
+    <match lemma="à moitié" tags="adv"><select lemma="a miejas"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="à moitié" tags="adv" alt="oci"><select lemma="mièg"/></match>
+    <match lemma="à moitié" tags="adv" alt="oci@gascon"><select lemma="mieitat"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+    </or>
+  </rule>
+
   <!-- quelque >> environ, per tant -->
   <rule weight="0.8">
     <match lemma="quelque" tags="adv"><select lemma="environ"/></match>
@@ -1145,6 +1158,20 @@
 
   <!-- propre >> pròp(r)i/net -->
   <rule weight="0.8">
+    <match lemma="propre" tags="adj.*"><select lemma="net"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
+    <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="nom" tags="n.*"/>
+      <match lemma="opinion" tags="n.*"/>
+      <match lemma="idée" tags="n.*"/>
+      <match lemma="statut" tags="n.*"/>
+    </or>
     <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
     <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
   </rule>
@@ -2841,8 +2868,8 @@
   <macro name="noms_propres" p1="Lucie" p2="Lucia" />
   <macro name="noms_propres" p1="Ludivine" p2="Ludivina" />
   <macro name="noms_propres" p1="Madeleine" p2="Magdalena" />
-  <macro name="noms_propres" p1="Marcel" p2="Marcèl" />
-  <macro name="noms_propres" p1="Marcel" p2="Marcèu" />
+  <macro name="noms_propres" p1="Marcel" p2="Marcèl" v="oci"/>
+  <macro name="noms_propres" p1="Marcel" p2="Marcèu" v="oci@gascon"/>
   <macro name="noms_propres" p1="Marguerite" p2="Margarida" />
   <macro name="noms_propres" p1="Marie-Christine" p2="Maria Cristina" />
   <macro name="noms_propres" p1="Marie" p2="Maria" />
@@ -2850,8 +2877,8 @@
   <macro name="noms_propres" p1="Mathieu" p2="Matieu" />
   <macro name="noms_propres" p1="Mathilde" p2="Matilda" />
   <macro name="noms_propres" p1="Maximilien" p2="Maximilian" />
-  <macro name="noms_propres" p1="Michel" p2="Miquèl" />
-  <macro name="noms_propres" p1="Michel" p2="Miquèu" />
+  <macro name="noms_propres" p1="Michel" p2="Miquèl" v="oci"/>
+  <macro name="noms_propres" p1="Michel" p2="Miquèu" v="oci@gascon"/>
   <macro name="noms_propres" p1="Nicolas" p2="Nicolau" />
   <macro name="noms_propres" p1="Paul" p2="Pau" />
   <macro name="noms_propres" p1="Philippe" p2="Felip" />

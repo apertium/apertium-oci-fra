@@ -2969,6 +2969,27 @@
 
 <!-- **************** N **************** -->
 
+  <!-- prima >> printemps, prime -->
+  <rule weight="0.8">
+    <match lemma="prima" tags="n.*"><select lemma="printemps"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="donar" tags="vblex.*"/>
+      <match lemma="dar" tags="vblex.*"/>
+      <match lemma="recebre" tags="vblex.*"/>
+      <match lemma="recéber" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <match tags="det.*"/>
+      <match tags="adj.*"/>
+      <match tags="adv"/>
+      <match tags="preadv"/>
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <match lemma="prima" tags="n.*"><select lemma="prime"/></match>
+  </rule>
+
   <!-- roman >> roman, Romain -->
   <rule weight="0.8">
     <match lemma="roman" tags="n.*"><select lemma="roman"/></match>
@@ -3740,8 +3761,10 @@
   <rule weight="1.0">
     <or>
       <match lemma="mièg" tags="adj.*"/>
+      <match lemma="miei" tags="adj.*"/>
       <match lemma="mila" tags="n.*"/>
       <match lemma="milièr" tags="n.*"/>
+      <match lemma="milèr" tags="n.*"/>
       <match lemma="milion" tags="n.*"/>
       <match lemma="million" tags="n.*"/>
       <match lemma="miliard" tags="n.*"/>
@@ -5311,8 +5334,8 @@
   <macro name="noms_propres" p1="Lucia" p2="Lucie" />
   <macro name="noms_propres" p1="Ludivina" p2="Ludivine" />
   <macro name="noms_propres" p1="Magdalena" p2="Madeleine" />
-  <macro name="noms_propres" p1="Marcèl" p2="Marcel" />
-  <macro name="noms_propres" p1="Marcèu" p2="Marcel" />
+  <macro name="noms_propres" p1="Marcèl" p2="Marcel" v="oci"/>
+  <macro name="noms_propres" p1="Marcèu" p2="Marcel" v="oci@gascon"/>
   <macro name="noms_propres" p1="Margarida" p2="Marguerite" />
   <macro name="noms_propres" p1="Maria Cristina" p2="Marie-Christine" />
   <macro name="noms_propres" p1="Maria" p2="Marie" />
@@ -5320,8 +5343,8 @@
   <macro name="noms_propres" p1="Matieu" p2="Mathieu" />
   <macro name="noms_propres" p1="Matilda" p2="Mathilde" />
   <macro name="noms_propres" p1="Maximilian" p2="Maximilien" />
-  <macro name="noms_propres" p1="Miquèl" p2="Michel" />
-  <macro name="noms_propres" p1="Miquèu" p2="Michel" />
+  <macro name="noms_propres" p1="Miquèl" p2="Michel" v="oci"/>
+  <macro name="noms_propres" p1="Miquèu" p2="Michel" v="oci@gascon"/>
   <macro name="noms_propres" p1="Nicolau" p2="Nicolas" />
   <macro name="noms_propres" p1="Pau" p2="Paul" />
   <macro name="noms_propres" p1="Raimond" p2="Raymond" />
