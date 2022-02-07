@@ -2969,6 +2969,34 @@
 
 <!-- **************** N **************** -->
 
+  <!-- casa >> maison, case -->
+  <rule weight="0.8">
+    <match lemma="casa" tags="n.*" v="oci"><select lemma="maison"/></match>
+    <match lemma="casa" tags="n.*" v="oci@gascon"><select lemma="case"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="3">
+      <match tags="det.*"/>
+      <match tags="adj.*"/>
+      <match tags="preadv"/>
+    </repeat>
+    <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="3">
+      <match tags="det.*"/>
+      <match tags="adj.*"/>
+      <match tags="preadv"/>
+    </repeat>
+    <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
+    <or>
+      <match lemma="enlà" tags="adv"/>
+      <match lemma="estar" tags="vbser.ger"/>
+    </or>
+  </rule>
+
   <!-- estatjant >> habitant, locataire -->
   <rule weight="0.8">
     <match lemma="estatjant" tags="n.*"><select lemma="habitant"/></match>
