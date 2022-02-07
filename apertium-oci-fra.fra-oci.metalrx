@@ -1175,6 +1175,11 @@
     <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
     <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
+    <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
+    <match lemma="à" tags="pr"/>
+  </rule>
 
 
   <!-- vague >> imprecís/vacant -->
@@ -2493,8 +2498,15 @@
   </rule>
 
   <!-- appeler >> apelar, sonar, cridar... -->
-  <rule weight="0.8">
-    <match lemma="appeler" tags="vblex.*"><select lemma="apelar"/></match>
+  <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="apelar" />
+  <rule weight="1.4">
+    <or>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="appeler" tags="vblex.pp.*"><select lemma="apelar"/></match>
   </rule>
 
   <!-- tourner >> virar, rodar -->
@@ -2586,9 +2598,6 @@
 
   <!-- décoller >> despegar, enlairar -->
   <macro name="verb_intrans_trans" p1="décoller" p2="enlairar" p3="despegar" />
-
-  <!-- appeler >> cridar, sonar -->
-  <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="sonar" />
 
   <!-- mêler >> mesclar, mainar/aucupar -->
   <macro name="verb_nopron_pron_prep" p1="mêler" p2="mesclar" p3="mainar" p4="de" v="oci" />
