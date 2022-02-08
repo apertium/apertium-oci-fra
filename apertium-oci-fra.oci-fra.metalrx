@@ -4445,6 +4445,46 @@
   </rule>
 
 
+  <!-- halha >> feu, crête, faille -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="halha" tags="n.*"><select lemma="feu"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="halha" tags="n.*"><select lemma="faille"/></match>
+    <repeat from="0" upto="3">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <or>
+      <match lemma="hasan" tags="n.*"/>
+      <match lemma="gal" tags="n.*"/>
+      <match lemma="pol" tags="n.*"/>
+      <match lemma="poth" tags="n.*"/>
+      <match lemma="galh" tags="n.*"/>
+      <match lemma="veguèir" tags="n.*"/>
+      <match lemma="pèrro" tags="n.*"/>
+      <match lemma="pavés" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="hasan" tags="n.*"/>
+      <match lemma="gal" tags="n.*"/>
+      <match lemma="pol" tags="n.*"/>
+      <match lemma="poth" tags="n.*"/>
+      <match lemma="galh" tags="n.*"/>
+      <match lemma="veguèir" tags="n.*"/>
+      <match lemma="pèrro" tags="n.*"/>
+      <match lemma="pavés" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <match lemma="halha" tags="n.*"><select lemma="faille"/></match>
+  </rule>
+
+
 <!-- **************** VBSER **************** -->
 
   <!-- vbser >> être, avoir -->
