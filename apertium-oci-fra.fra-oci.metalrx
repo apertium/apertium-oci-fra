@@ -2307,17 +2307,21 @@
       <match lemma="chauffage" tags="n.m.*"/>
     </or>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
-    <match lemma="bois" tags="n.m.sg"><select lemma="lenha"/></match>
+    <match lemma="bois" tags="n.*"><select lemma="lenha"/></match>
   </rule>
 
   <rule weight="1.0">
-    <match lemma="bois" tags="n.m.sg"><select lemma="lenha"/></match>
+    <match lemma="bois" tags="n.*"><select lemma="lenha"/></match>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="feu" tags="n.*"/>
@@ -2338,7 +2342,7 @@
   </rule>
 
   <rule weight="1.1">
-    <match lemma="bois" tags="n.m.sg"><select lemma="bòsc"/></match>
+    <match lemma="bois" tags="n.*"><select lemma="bòsc"/></match>
     <repeat from="0" upto="1">
         <match lemma="de" tags="pr"/>
     </repeat>
@@ -2427,10 +2431,12 @@
     </or>
     <match tags="det.*"/>
     <repeat from="0" upto="4">
-      <match tags="adv"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
-    <match lemma="bois" tags="n.m.sg"><select lemma="bòsc"/></match>
+    <match lemma="bois" tags="n.*"><select lemma="bòsc"/></match>
   </rule>
 
   <!-- bois (pl) >> bòsc, bana/arram -->
@@ -2441,14 +2447,18 @@
     <match lemma="bois" tags="n.m.pl" v="oci"><select lemma="bana"/></match>
     <match lemma="bois" tags="n.m.pl" v="oci@gascon"><select lemma="arram"/></match>
     <repeat from="0" upto="3">
-      <match tags="adv"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="de" tags="pr"/>
     <match tags="det.*"/>
     <repeat from="0" upto="3">
-      <match tags="adv"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <or>
       <match lemma="cerf" tags="n.*"/>
@@ -2483,16 +2493,20 @@
       <match lemma="technicien" tags="n.*"/>
     </or>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <match lemma="cachet" tags="n.*"><select lemma="retribucion"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="cachet" tags="n.*"><select lemma="retribucion"/></match>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="intermittent" tags="n.*"/>
@@ -2536,8 +2550,10 @@
   <rule weight="1.0">
     <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="poste" tags="n.*"/>
@@ -2559,8 +2575,10 @@
       <match lemma="signature" tags="n.*"/>
     </or>
     <repeat from="0" upto="4">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
   </rule>
