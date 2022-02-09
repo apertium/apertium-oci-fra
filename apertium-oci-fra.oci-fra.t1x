@@ -36,6 +36,9 @@
     <def-cat n="adj">
       <cat-item tags="adj.*"/>
     </def-cat>
+    <def-cat n="adjpos">
+      <cat-item tags="adj.pos.*"/>
+    </def-cat>
     <def-cat n="adjec">
       <cat-item tags="adj.*"/>
       <cat-item tags="vblex.pp.*"/>
@@ -4035,6 +4038,172 @@
         </choose>
     </def-macro>
 
+    <def-macro n="write_det_pos" npar="3"><!--par1 = detdef, par2 = n, par3 = adjpos -->
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="mieu"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="men"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="mèn"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="mon"/>
+                  <lit-tag v="det.pos"/>
+                  <clip pos="1" side="tl" part="gen"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="tieu"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="ton"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="tòn"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="ton"/>
+                  <lit-tag v="det.pos"/>
+                  <clip pos="1" side="tl" part="gen"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="seu"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="son"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="sòn"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="son"/>
+                  <lit-tag v="det.pos"/>
+                  <clip pos="1" side="tl" part="gen"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="nòstre"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="nòste"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="noste"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="notre"/>
+                  <lit-tag v="det.pos.mf"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="vòstre"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="vòste"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="voste"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="votre"/>
+                  <lit-tag v="det.pos.mf"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="lor"/></equal>
+            </test>
+            <out>
+              <chunk name="det" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="Det"/></tag>
+                  <tag><lit-tag v="pos"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="leur"/>
+                  <lit-tag v="det.pos.mf"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+          </when>
+        </choose>
+    </def-macro>
+
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
       <choose>
         <when>
@@ -5190,6 +5359,126 @@
               <lit-tag v="2"/>
               <lit-tag v="3"/>
               <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETDEF NOM ADJPOS (la lenga nòstra > notre langue)">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjpos"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="write_det_pos">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETDEF NOM CNJCOO DETDEF NOM ADJPOS (la lenga e cultura nòstra > notre langue et culture)">
+      <pattern>
+        <pattern-item n="detdef"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="cnjcoo"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adjpos"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici2">
+          <with-param pos="4"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="write_det_pos">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n_cnjcoo_n" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
