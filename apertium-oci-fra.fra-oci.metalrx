@@ -2283,6 +2283,288 @@
   </rule>
 
 
+  <!-- bois (sg) >> fusta/husta, lenha -->
+  <rule weight="0.8">
+    <match lemma="bois" tags="n.*" v="oci"><select lemma="fusta"/></match>
+    <match lemma="bois" tags="n.*" v="oci@gascon"><select lemma="husta"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="feu" tags="n.*"/>
+      <match lemma="flamme" tags="n.*"/>
+      <match lemma="foyer" tags="n.*"/>
+      <match lemma="bûcher" tags="n.*"/>
+      <match lemma="âtre" tags="n.*"/>
+      <match lemma="cheminée" tags="n.*"/>
+      <match lemma="braise" tags="n.*"/>
+      <match lemma="cendre" tags="n.*"/>
+      <match lemma="allumette" tags="n.*"/>
+      <match lemma="charbon" tags="n.*"/>
+      <match lemma="bûche" tags="n.*"/>
+      <match lemma="poêle" tags="n.m.*"/>
+      <match lemma="poele" tags="n.m.*"/>
+      <match lemma="chauffage" tags="n.m.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <match lemma="bois" tags="n.m.sg"><select lemma="lenha"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="bois" tags="n.m.sg"><select lemma="lenha"/></match>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <or>
+      <match lemma="feu" tags="n.*"/>
+      <match lemma="flamme" tags="n.*"/>
+      <match lemma="foyer" tags="n.*"/>
+      <match lemma="bûcher" tags="n.*"/>
+      <match lemma="âtre" tags="n.*"/>
+      <match lemma="cheminée" tags="n.*"/>
+      <match lemma="braise" tags="n.*"/>
+      <match lemma="cendre" tags="n.*"/>
+      <match lemma="allumette" tags="n.*"/>
+      <match lemma="charbon" tags="n.*"/>
+      <match lemma="bûche" tags="n.*"/>
+      <match lemma="poêle" tags="n.m.*"/>
+      <match lemma="poele" tags="n.m.*"/>
+      <match lemma="chauffage" tags="n.m.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="bois" tags="n.m.sg"><select lemma="bòsc"/></match>
+    <repeat from="0" upto="1">
+        <match lemma="de" tags="pr"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <match tags="np.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+
+  <rule weight="1.2">
+    <match lemma="Bois" tags="n.*"><select lemma="bòsc"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="à" tags="pr"/>
+      <match lemma="à l'arrière de" tags="pr"/>
+      <match lemma="à l'extérieur deà" tags="pr"/>
+      <match lemma="à l'intérieur de" tags="pr"/>
+      <match lemma="à l'ombre de" tags="pr"/>
+      <match lemma="à côté de" tags="pr"/>
+      <match lemma="à destination de" tags="pr"/>
+      <match lemma="à proximité de" tags="pr"/>
+      <match lemma="à partir de" tags="pr"/>
+      <match lemma="à ras de" tags="pr"/>
+      <match lemma="au ras de" tags="pr"/>
+      <match lemma="à travers de" tags="pr"/>
+      <match lemma="à travers" tags="pr"/>
+      <match lemma="alentour de" tags="pr"/>
+      <match lemma="au-dedans de" tags="pr"/>
+      <match lemma="au-dehors de" tags="pr"/>
+      <match lemma="après" tags="pr"/>
+      <match lemma="avant" tags="pr"/>
+      <match lemma="au-delà de" tags="pr"/>
+      <match lemma="au bout de" tags="pr"/>
+      <match lemma="au delà de" tags="pr"/>
+      <match lemma="au commencement de" tags="pr"/>
+      <match lemma="au début de" tags="pr"/>
+      <match lemma="au long de" tags="pr"/>
+      <match lemma="au sein de" tags="pr"/>
+      <match lemma="au travers de" tags="pr"/>
+      <match lemma="aux portes de" tags="pr"/>
+      <match lemma="bien avant" tags="pr"/>
+      <match lemma="dans" tags="pr"/>
+      <match lemma="dans l'entourage de" tags="pr"/>
+      <match lemma="dans le fin fond de" tags="pr"/>
+      <match lemma="au fin fond de" tags="pr"/>
+      <match lemma="depuis" tags="pr"/>
+      <match lemma="jusqu'au début de" tags="pr"/>
+      <match lemma="jusqu'en début de" tags="pr"/>
+      <match lemma="jusqu'en fin de" tags="pr"/>
+      <match lemma="dos à" tags="pr"/>
+      <match lemma="du côté de" tags="pr"/>
+      <match lemma="en marge de" tags="pr"/>
+      <match lemma="en dehors de" tags="pr"/>
+      <match lemma="en delà de" tags="pr"/>
+      <match lemma="en deçà de" tags="pr"/>
+      <match lemma="en face de" tags="pr"/>
+      <match lemma="face à" tags="pr"/>
+      <match lemma="hors de" tags="pr"/>
+      <match lemma="hors" tags="pr"/>
+      <match lemma="le long de" tags="pr"/>
+      <match lemma="long de" tags="pr"/>
+      <match lemma="longtemps avant" tags="pr"/>
+      <match lemma="par" tags="pr"/>
+      <match lemma="par-delà" tags="pr"/>
+      <match lemma="proche de" tags="pr"/>
+      <match lemma="près de" tags="pr"/>
+      <match lemma="tout près de" tags="pr"/>
+      <match lemma="tout au long de" tags="pr"/>
+      <match lemma="un peu après" tags="pr"/>
+      <match lemma="un peu avant" tags="pr"/>
+      <match lemma="vers" tags="pr"/>
+      <match lemma="vers la moitié de" tags="pr"/>
+      <match lemma="à l'opposé de" tags="pr"/>
+      <match lemma="à l'entour de" tags="pr"/>
+      <match lemma="au sortir de" tags="pr"/>
+      <match lemma="attenant" tags="pr"/>
+      <match lemma="orée" tags="n.*"/>
+      <match lemma="lisière" tags="n.*"/>
+      <match lemma="bordure" tags="n.*"/>
+      <match lemma="ombre" tags="n.*"/>
+    </or>
+    <match tags="det.*"/>
+    <repeat from="0" upto="4">
+      <match tags="adv"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="bois" tags="n.m.sg"><select lemma="bòsc"/></match>
+  </rule>
+
+  <!-- bois (pl) >> bòsc, bana/arram -->
+  <rule weight="0.8">
+    <match lemma="bois" tags="n.m.pl"><select lemma="bòsc"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bois" tags="n.m.pl" v="oci"><select lemma="bana"/></match>
+    <match lemma="bois" tags="n.m.pl" v="oci@gascon"><select lemma="arram"/></match>
+    <repeat from="0" upto="3">
+      <match tags="adv"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <repeat from="0" upto="3">
+      <match tags="adv"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <or>
+      <match lemma="cerf" tags="n.*"/>
+      <match lemma="daim" tags="n.*"/>
+      <match lemma="renne" tags="n.*"/>
+      <match lemma="chevreuil" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- cachet >> cachet, retribucion, sagèl/sagèth -->
+  <rule weight="0.8">
+    <match lemma="cachet" tags="n.*"><select lemma="cachet"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="payer" tags="vblex.*"/>
+      <match lemma="courir" tags="vblex.*"/>
+      <match lemma="toucher" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <match tags="pr"/>
+      <match tags="adv"/>
+      <match tags="adj.*"/>
+      <match tags="det.*"/>
+    </repeat>
+    <match lemma="cachet" tags="n.*"><select lemma="retribucion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="intermittent" tags="n.*"/>
+      <match lemma="artiste" tags="n.*"/>
+      <match lemma="technicien" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <match lemma="cachet" tags="n.*"><select lemma="retribucion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cachet" tags="n.*"><select lemma="retribucion"/></match>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <or>
+      <match lemma="intermittent" tags="n.*"/>
+      <match lemma="artiste" tags="n.*"/>
+      <match lemma="technicien" tags="n.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="porter" tags="vblex.*"/>
+      <match lemma="marquer" tags="vblex.*"/>
+      <match lemma="marqué" tags="adj.*"/>
+      <match lemma="apposer" tags="vblex.*"/>
+      <match lemma="rompre" tags="vblex.*"/>
+      <match lemma="briser" tags="vblex.*"/>
+      <match lemma="sauter" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <match tags="pr"/>
+      <match tags="adv"/>
+      <match tags="adj.*"/>
+      <match tags="det.*"/>
+    </repeat>
+    <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="national" tags="adj.*"/>
+      <match lemma="départemental" tags="adj.*"/>
+      <match lemma="régional" tags="adj.*"/>
+      <match lemma="personnel" tags="adj.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <or>
+      <match lemma="poste" tags="n.*"/>
+      <match lemma="lettre" tags="n.*"/>
+      <match lemma="enveloppe" tags="n.*"/>
+      <match lemma="cire" tags="n.*"/>
+      <match lemma="imprimer" tags="n.*"/>
+      <match lemma="signature" tags="n.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="poste" tags="n.*"/>
+      <match lemma="lettre" tags="n.*"/>
+      <match lemma="enveloppe" tags="n.*"/>
+      <match lemma="cire" tags="n.*"/>
+      <match lemma="imprimer" tags="n.*"/>
+      <match lemma="signature" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <match tags="*"/>
+      <match tags=""/>
+    </repeat>
+    <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
+  </rule>
+
 <!-- **************** VBHAVER **************** -->
 
   <!-- vbhaver >> être, avoir -->
