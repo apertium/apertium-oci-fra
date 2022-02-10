@@ -823,8 +823,8 @@
     <match lemma="à moitié" tags="adv"><select lemma="a miejas"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="à moitié" tags="adv" alt="oci"><select lemma="mièg"/></match>
-    <match lemma="à moitié" tags="adv" alt="oci@gascon"><select lemma="mieitat"/></match>
+    <match lemma="à moitié" tags="adv" v="oci"><select lemma="mièg"/></match>
+    <match lemma="à moitié" tags="adv" v="oci@gascon"><select lemma="mieitat"/></match>
     <or>
       <match tags="adj.*"/>
       <match tags="vblex.pp.*"/>
@@ -2621,6 +2621,67 @@
     </repeat>
     <match lemma="cachet" tags="n.*"><select lemma="sagèl"/></match>
   </rule>
+
+  <!-- défaut >> defaut, manca -->
+  <rule weight="0.8">
+    <match lemma="défaut" tags="n.*"><select lemma="defaut"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="défaut" tags="n.*"><select lemma="manca"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
+  <!-- embouteillage >> embotelhatge, encombrament -->
+  <rule weight="0.8">
+    <match lemma="embouteillage" tags="n.*"><select lemma="encombrament"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="chaîne" tags="n.*"/>
+      <match lemma="usine" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="embouteillage" tags="n.*"><select lemma="embotelhatge"/></match>
+  </rule>
+
+  <!-- ennui >> anujèr, chepic -->
+  <rule weight="0.8">
+    <match lemma="ennui" tags="n.*" v="oci@gascon"><select lemma="chepic"/></match>
+    <match lemma="ennui" tags="n.*" v="oci"><select lemma="pensament"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="le" tags="det.m.sg"/>
+    <match lemma="ennui" tags="n.*" v="oci@gascon"><select lemma="anujèr"/></match>
+    <match lemma="ennui" tags="n.*" v="oci"><select lemma="anugièr"/></match>
+  </rule>
+
+  <!-- essor >> aviada, volada -->
+  <rule weight="0.8">
+    <match lemma="essor" tags="n.*"><select lemma="aviada"/></match>
+  </rule>
+
+  <!-- grenier >> granièr/graèr, pusaut/solèr -->
+  <rule weight="0.8">
+    <match lemma="grenier" tags="n.*" v="oci"><select lemma="pusaut"/></match>
+    <match lemma="grenier" tags="n.*" v="oci@gascon"><select lemma="solèr"/></match>
+  </rule>
+
+  <!-- fils >> hilhs/filhs, fils/hius -->
+  <rule weight="0.8">
+    <match lemma="fils" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fils" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+  </rule>
+
 
 <!-- **************** VBHAVER **************** -->
 
