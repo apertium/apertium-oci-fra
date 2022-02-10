@@ -4305,7 +4305,7 @@
     </or>
     <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
   </rule>
-<!--
+
   <rule weight="1.0">
     <match tags="det.*"/>
     <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
@@ -4341,7 +4341,7 @@
         <match tags="adv"/>
     </repeat>
     <match lemma="de" tags="pr"/>
-  </rule>-->
+  </rule>
 
   <!-- laca >> laque, lac -->
   <rule weight="0.8">
@@ -4411,13 +4411,17 @@
     <match lemma="traca" tags="n.*"><select lemma="sorte"/></match>
     <match lemma="de" tags="pr"/>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match tags="n.*"/>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <or>
         <match lemma="qui" tags="rel.*"/>
@@ -4454,8 +4458,10 @@
   <rule weight="1.0" >
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="un" tags="det.*"/>
     <match lemma="rampa" tags="n.*"><select lemma="crampe"/></match>
@@ -4464,8 +4470,10 @@
     <match lemma="i" tags="prn.*"/>
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="un" tags="det.*"/>
     <match lemma="rampa" tags="n.*"><select lemma="rampe"/></match>
@@ -4509,14 +4517,18 @@
   <rule weight="1.0" >
     <match lemma="còrn" tags="n.*"><select lemma="corne"/></match>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="de" tags="pr"/>
     <repeat from="0" upto="3">
-      <match tags="adv.*"/>
-      <match tags="adj.*"/>
-      <match tags="det.*"/>
+      <or>
+        <match tags="adv.*"/>
+        <match tags="adj.*"/>
+        <match tags="det.*"/>
+      </or>
     </repeat>
   <or>
         <match lemma="buòu" tags="n.*"/>
@@ -4552,8 +4564,10 @@
   <rule weight="1.0" v="oci@gascon">
     <match lemma="halha" tags="n.*"><select lemma="faille"/></match>
     <repeat from="0" upto="3">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="hasan" tags="n.*"/>
@@ -4578,8 +4592,10 @@
       <match lemma="pavés" tags="n.*"/>
     </or>
     <repeat from="0" upto="3">
-      <match tags="*"/>
-      <match tags=""/>
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <match lemma="halha" tags="n.*"><select lemma="faille"/></match>
   </rule>
@@ -5267,9 +5283,11 @@
         <match tags="adv"/>
     </repeat>
     <repeat from="0" upto="1">
+      <or>
         <match tags="det.*"/>
         <match lemma="com" tags="pr"/>
         <match lemma="coma" tags="pr"/>
+      </or>
     </repeat>
     <or>
         <match lemma="sordat" tags="n.*"/>
