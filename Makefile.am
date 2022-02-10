@@ -160,16 +160,16 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ## Lexical selection rules
 ###############################################################################
 
-.deps/$(PREFIX1).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx
+.deps/$(PREFIX1).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx .deps/.d
 	apertium-filter-rules oci $(BASENAME).$(PREFIX1).metalrx >$@
 
-.deps/$(PREFIX1b).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx
+.deps/$(PREFIX1b).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx .deps/.d
 	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).metalrx >$@
 
-.deps/$(PREFIX2).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx
+.deps/$(PREFIX2).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx .deps/.d
 	apertium-filter-rules oci $(BASENAME).$(PREFIX2).metalrx >$@
 
-.deps/$(PREFIX2b).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx
+.deps/$(PREFIX2b).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx .deps/.d
 	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).metalrx >$@
 
 .deps/%.lrx: .deps/%.ini.metalrx .deps/.d
