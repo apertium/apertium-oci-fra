@@ -31,6 +31,8 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1).t2cx.bin	\
 	$(PREFIX1b).t2cx.bin	\
+	$(PREFIX1).t2cx			\
+	$(PREFIX1b).t2cx			\
 	$(PREFIX1).t2dx.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
