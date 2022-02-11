@@ -2136,14 +2136,16 @@
 
   <!-- siège >> sèti, sètge, banc -->
   <rule weight="0.8">
-    <match lemma="siège" tags="n.*"><select lemma="sèti,"/></match>
+    <match lemma="siège" tags="n.*"><select lemma="sèti"/></match>
   </rule>
-  <rule weight="1.0">
+
+  <rule weight="1.0" v="oci">
     <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
     <match lemma="de" tags="pr"/>
-    <or><match tags="np.loc"/><match tags="np.top.*"/></or>
+    <or><match tags="np.loc"/><match tags="np.top.*"/><match tags=""/></or>
   </rule>
-  <rule weight="1.0">
+
+  <rule weight="1.0" v="oci">
     <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
     <match lemma="de" tags="pr"/>
     <match tags="det.*"/>
@@ -2152,6 +2154,34 @@
       <match lemma="château" tags="n.*"/>
       <match lemma="forteresse" tags="n.*"/>
     </or>
+  </rule>
+
+  <rule weight="1.0" v="oci">
+    <or>
+      <match lemma="tenir" tags="vblex.*"/>
+    </or>
+    <match lemma="un" tags="det.*"/>
+    <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
+  </rule>
+
+  <rule weight="1.2">
+    <match lemma="siège" tags="n.*"><select lemma="sedença"/></match>
+    <or>
+      <match lemma="social" tags="adj.*"/>
+      <match lemma="mondial" tags="adj.*"/>
+    </or>
+  </rule>
+  
+  <rule weight="1.2">
+    <match lemma="avoir" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv.*"/>
+        <match tags="adv.*"/>
+      </or>
+    </repeat>
+    <match lemma="son" tags="det.*"/>
+    <match lemma="siège" tags="n.*"><select lemma="sedença"/></match>
   </rule>
 
   <!-- serveur >> servidor, garçon -->
@@ -2186,7 +2216,7 @@
     <match lemma="de" tags="pr"/>
     <match lemma="le" tags="det.*"/>
     <repeat from="0" upto="2">
-      <match tags="adv.*"/>
+      <match tags="adv"/>
       <match tags="adj.*"/>
     </repeat>
     <match lemma="pape" tags="n.*"/>
@@ -2683,9 +2713,81 @@
   </rule>
 
 
-  <!-- portable >> portable/telefonet -->
+  <!-- portable >> portable, telefonet -->
   <rule weight="0.8">
     <match lemma="portable" tags="n.*"><select lemma="portable"/></match>
+  </rule>
+
+
+  <!-- appât >> esca, atrach/atrèit -->
+  <rule weight="0.8">
+    <match lemma="appât" tags="n.*"><select lemma="esca"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="appât" tags="n.*" v="oci"><select lemma="atrach"/></match>
+    <match lemma="appât" tags="n.*" v="oci@gascon"><select lemma="atrèit"/></match>
+    <match lemma="de" tags="pr"/>
+    <match lemma="le" tags="det*"/>
+    <match lemma="gain" tags="n.*"/>
+  </rule>
+
+  <!-- sabot >> esclòp, bata -->
+  <rule weight="0.8" v="oci">
+    <match lemma="sabot" tags="n.*"><select lemma="esclòp"/></match>
+  </rule>
+
+  <!-- tampon >> sagèl, tampon, tap -->
+  <rule weight="0.8">
+    <match lemma="tampon" tags="n.*"><select lemma="sagèl"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="tampon" tags="n.*"><select lemma="tampon"/></match>
+    <or>
+      <match lemma="hygiénique" tags="adj.*"/>
+      <match lemma="périodique" tags="adj.*"/>
+      <match lemma="lavable" tags="adj.*"/>
+      <match lemma="réutilisable" tags="adj.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="introduire" tags="vblex.*"/>
+    </or>
+    <match tags="det.*"/>
+    <match lemma="tampon" tags="n.*"><select lemma="tampon"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="distributeur" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="tampon" tags="n.*"><select lemma="tampon"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="tampon" tags="n.*"><select lemma="tampon"/></match>
+    <or>
+      <match lemma="avec" tags="pr"/>
+      <match lemma="sans" tags="pr"/>
+    </or>
+    <match lemma="applicateur" tags="n.*"/>
+  </rule>
+
+  <!-- toast >> brinde, tòsta -->
+  <rule weight="0.8">
+    <match lemma="toast" tags="n.*"><select lemma="tòsta"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="porter" tags="vblex.*"/>
+      <match lemma="boire" tags="vblex.*"/>
+    </or>
+    <match lemma="toast" tags="n.*"><select lemma="brinde"/></match>
   </rule>
 
 

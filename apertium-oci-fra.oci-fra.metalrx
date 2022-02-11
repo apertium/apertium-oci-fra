@@ -4412,14 +4412,14 @@
     <match lemma="de" tags="pr"/>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
     <match tags="n.*"/>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
@@ -4459,7 +4459,7 @@
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
@@ -4471,7 +4471,7 @@
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
@@ -4518,14 +4518,14 @@
     <match lemma="còrn" tags="n.*"><select lemma="corne"/></match>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
     <match lemma="de" tags="pr"/>
     <repeat from="0" upto="3">
       <or>
-        <match tags="adv.*"/>
+        <match tags="adv"/>
         <match tags="adj.*"/>
         <match tags="det.*"/>
       </or>
@@ -5522,6 +5522,29 @@
         <match lemma="dab" tags="pr"/>
     </or>
   </rule>
+
+  <!-- deishar >> laisser, deishar de -> arrêter de -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="deishar" tags="vblex.*"><select lemma="laisser"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="deishar" tags="vblex.*"><select lemma="laisser"/></match>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+
 
 
 <!-- **************** NP **************** -->
