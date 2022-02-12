@@ -570,6 +570,21 @@
   </rule>
   <rule weight="0.9">
     <or>
+       <match lemma="mai plan"/>
+       <match lemma="mei plan"/>
+       <match lemma="mai bas"/>
+       <match lemma="mai lèu"/>
+       <match lemma="mai naut"/>
+       <match lemma="mai tard"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+    <or>
+      <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
+      <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <or>
       <match lemma="ieu" tags="prn.*"><select lemma="moi"/></match>
       <match lemma="jo" tags="prn.*"><select lemma="moi"/></match>
     </or>
@@ -660,6 +675,18 @@
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
   </rule>
   <rule weight="0.9">
+    <or>
+       <match lemma="mai plan"/>
+       <match lemma="mei plan"/>
+       <match lemma="mai bas"/>
+       <match lemma="mai lèu"/>
+       <match lemma="mai naut"/>
+       <match lemma="mai tard"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+    <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
+  </rule>
+  <rule weight="0.9">
     <match lemma="tu" tags="prn.*"><select lemma="toi"/></match>
     <repeat from="0" upto="1">
       <or>
@@ -733,6 +760,21 @@
       <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
     </or>
   </rule>
+  <rule weight="0.9">
+    <or>
+       <match lemma="mai plan"/>
+       <match lemma="mei plan"/>
+       <match lemma="mai bas"/>
+       <match lemma="mai lèu"/>
+       <match lemma="mai naut"/>
+       <match lemma="mai tard"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.sg"><select lemma="lui"/></match>
+    </or>
+  </rule>
   <rule weight="1.0">
     <or>
       <match tags="pr"/>
@@ -752,6 +794,21 @@
     <or>
        <match tags="adv"/>
        <match tags="adj.*"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+    <or>
+      <match lemma="el" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+      <match lemma="prneth" tags="prn.tn.p3.m.pl"><select lemma="eux"/></match>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <or>
+       <match lemma="mai plan"/>
+       <match lemma="mei plan"/>
+       <match lemma="mai bas"/>
+       <match lemma="mai lèu"/>
+       <match lemma="mai naut"/>
+       <match lemma="mai tard"/>
     </or>
     <match lemma="que" tags="cnjsub"/>
     <or>
@@ -4661,6 +4718,11 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- desbocar >> déboucher, déboucher# sur, vomir -->
+  <rule weight="0.8">
+    <match lemma="desbocar" tags="vblex.*"><select lemma="déboucher"/></match>
+  </rule>
 
   <!-- estalviar/estauviar >> économiser, épargner -->
   <rule weight="0.8">

@@ -1052,6 +1052,15 @@
         <match tags="vblex.pp.*"/>
     </or>
   </rule>
+  <rule weight="1.2">
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="mieux" tags="adv" v="oci"><select lemma="melhor"/></match>
+    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mélher"/></match>
+    <match tags="*.pp.*"/>
+  </rule>
 
 
 <!-- **************** ADJ **************** -->
@@ -1208,6 +1217,35 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- rattachement >> restacament, incorporacion -->
+  <rule weight="0.8">
+    <match lemma="rattachement" tags="n.*"><select lemma="incorporacion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="rattachement" tags="n.*"><select lemma="incorporacion"/></match>
+    <or>
+      <match lemma="de"/>
+      <match lemma="à"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+        <match tags="np.top.*"/>
+        <match tags="" case="Aa"/>
+        <match lemma="pays" tags="n.*"/>
+        <match lemma="région" tags="n.*"/>
+        <match lemma="terre" tags="n.*"/>
+        <match lemma="ville" tags="n.*"/>
+        <match lemma="village" tags="n.*"/>
+        <match lemma="comté" tags="n.*"/>
+        <match lemma="duché" tags="n.*"/>
+        <match lemma="seigneurie" tags="n.*"/>
+        <match lemma="évéché" tags="n.*"/>
+        <match lemma="archevéché" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- plongeur >> cabussaire, vaisselaire -->
   <rule weight="0.8">
@@ -3102,6 +3140,9 @@
   <rule weight="0.8">
     <match lemma="saisir" tags="vblex.*"><select lemma="arrapar"/></match>
   </rule>
+
+  <!-- faufiler >> filbastar, engulhar -->
+  <macro name="verb_nopron_pron" p1="faufiler" p2="filbastar" p3="engulhar" />
 
   <!-- appeler >> apelar, sonar, cridar... -->
   <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="apelar" />
