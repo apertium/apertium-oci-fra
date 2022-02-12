@@ -34,6 +34,7 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2cx			\
 	$(PREFIX1b).t2cx			\
 	$(PREFIX1).t2dx.bin	\
+	$(PREFIX1).t2ex.bin	\
 	$(PREFIX1).t3x.bin	\
 	$(PREFIX1).t4x.bin	\
 	$(PREFIX1b).t4x.bin	\
@@ -58,6 +59,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).t1x			\
 	$(PREFIX2).t2x.bin	\
 	$(PREFIX2b).t2x.bin	\
+	$(PREFIX2).t2x_bis.bin	\
 	$(PREFIX2).t2x_pas.bin	\
 	$(PREFIX2).t2x_pro.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
@@ -233,6 +235,10 @@ $(PREFIX1).t2dx.bin: $(BASENAME).$(PREFIX1).t2dx
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
+$(PREFIX1).t2ex.bin: $(BASENAME).$(PREFIX1).t2ex
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
 $(PREFIX1).t3x.bin: $(BASENAME).$(PREFIX1).t3x
 	apertium-validate-postchunk $<
 	apertium-preprocess-transfer $< $@
@@ -276,6 +282,10 @@ $(PREFIX2).t2x.bin: $(PREFIX2).t2x
 	apertium-preprocess-transfer $< $@
 
 $(PREFIX2b).t2x.bin: $(PREFIX2b).t2x
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX2).t2x_bis.bin: $(BASENAME).$(PREFIX2).t2x_bis
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
@@ -334,10 +344,12 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).t2bx	\
 		$(BASENAME).$(PREFIX1).t2cx	\
 		$(BASENAME).$(PREFIX1).t2dx	\
+		$(BASENAME).$(PREFIX1).t2ex	\
 		$(BASENAME).$(PREFIX1).t3x	\
 		$(BASENAME).$(PREFIX1).t4x	\
 		$(BASENAME).$(PREFIX2).t1x	\
 		$(BASENAME).$(PREFIX2).t2x	\
+		$(BASENAME).$(PREFIX2).t2x_bis	\
 		$(BASENAME).$(PREFIX2).t2x_pas	\
 		$(BASENAME).$(PREFIX2).t2x_pro	\
 		$(BASENAME).$(PREFIX2).t2x_supersn	\
@@ -361,10 +373,12 @@ apertium_oci_fra_DATA=	\
 	$(BASENAME).$(PREFIX1).t2bx			\
 	$(BASENAME).$(PREFIX1).t2cx			\
 	$(BASENAME).$(PREFIX1).t2dx			\
+	$(BASENAME).$(PREFIX1).t2ex			\
 	$(BASENAME).$(PREFIX1).t3x			\
 	$(BASENAME).$(PREFIX1).t4x			\
 	$(BASENAME).$(PREFIX2).t1x			\
 	$(BASENAME).$(PREFIX2).t2x			\
+	$(BASENAME).$(PREFIX2).t2x_bis			\
 	$(BASENAME).$(PREFIX2).t2x_pas			\
 	$(BASENAME).$(PREFIX2).t2x_pro			\
 	$(BASENAME).$(PREFIX2).t2x_supersn			\
