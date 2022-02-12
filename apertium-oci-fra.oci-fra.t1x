@@ -11071,14 +11071,23 @@
          <pattern-item n="prn"/>
        </pattern>
        <action>
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>
-<!--
-         <call-macro n="f_concord1">
+         <call-macro n="firstWord">
            <with-param pos="1"/>
          </call-macro>
--->
+         <choose>
+           <when>
+             <test>
+               <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="il"/></equal>
+             </test>
+             <let><var n="genero"/><clip pos="1" side="tl" part="gen"/></let>
+           </when>
+           <when>
+             <test>
+               <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="rien"/></equal>
+             </test>
+             <let><var n="genero"/><lit-tag v="m"/></let>
+           </when>
+         </choose>
          <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
          <choose>
            <when>
