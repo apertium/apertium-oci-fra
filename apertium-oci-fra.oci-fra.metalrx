@@ -451,6 +451,35 @@
       <match lemma="deceme" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="instruments_musicals"><or>
+       <match lemma="piano" tags="n.*"/>
+       <match lemma="violon" tags="n.*"/>
+       <match lemma="vriolon" tags="n.*"/>
+       <match lemma="alto" tags="n.*"/>
+       <match lemma="violoncèle" tags="n.*"/>
+       <match lemma="contrabassa" tags="n.*"/>
+       <match lemma="flaüta" tags="n.*"/>
+       <match lemma="autbòi" tags="n.*"/>
+       <match lemma="clarin" tags="n.*"/>
+       <match lemma="clarineta" tags="n.*"/>
+       <match lemma="trompeta" tags="n.*"/>
+       <match lemma="trombòne" tags="n.*"/>
+       <match lemma="saxo" tags="n.*"/>
+       <match lemma="saxofòn" tags="n.*"/>
+       <match lemma="organe" tags="n.*"/>
+       <match lemma="arpa" tags="n.*"/>
+       <match lemma="harpa" tags="n.*"/>
+       <match lemma="guitarra" tags="n.*"/>
+       <match lemma="bassa" tags="n.*"/>
+       <match lemma="clavièr" tags="n.*"/>
+       <match lemma="clavier" tags="n.*"/>
+       <match lemma="clavèir" tags="n.*"/>
+       <match lemma="bateria" tags="n.*"/>
+       <match lemma="bodega" tags="n.*"/>
+       <match lemma="boha" tags="n.*"/>
+       <match lemma="pifre" tags="n.*"/>
+    </or></def-seq>
+
     <def-seq n="locucion_ini_a"><or>
       <match lemma="a la mitat de genièr" tags="adv"/>
       <match lemma="a la mieitat de genèr" tags="adv"/>
@@ -4719,6 +4748,104 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- har >> faire, jouer -->
+  <rule weight="0.8">
+    <match lemma="har" tags="vblex.*"><select lemma="faire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="har" tags="vblex.*"><select lemma="jouer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <match lemma="carta" tags="n.*"/>
+      <match lemma="poker" tags="n.*"/>
+      <match lemma="escacs" tags="n.*"/>
+      <match lemma="dama" tags="n.*"/>
+      <match lemma="go" tags="n.*"/>
+      <match lemma="dat" tags="n.*"/>
+      <match lemma="petanca" tags="n.*"/>
+      <match lemma="bola" tags="n.*"/>
+      <match lemma="bòla" tags="n.*"/>
+      <match lemma="jòc" tags="n.*"/>
+      <match lemma="juec" tags="n.*"/>
+      <match lemma="jòga" tags="n.*"/>
+      <match lemma="ping-pong" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="har" tags="vblex.*"><select lemma="jouer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.f.sg"/>
+    <match lemma="comedia" tags="n.*"/>
+  </rule>
+
+  <!-- jogar >> jouer, jouer# de -->
+  <rule weight="0.8">
+    <match lemma="jogar" tags="vblex.*"><select lemma="jouer"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="jogar" tags="vblex.*"><select lemma="jouer# de"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+  </rule>
+
+  <!-- tocar >> toucher, jouer# de -->
+  <rule weight="0.8">
+    <match lemma="tocar" tags="vblex.*"><select lemma="toucher"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tocar" tags="vblex.*"><select lemma="jouer# de"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+  </rule>
+
+  <!-- soar >> sonner, jouer# de -->
+  <rule weight="0.8">
+    <match lemma="soar" tags="vblex.*"><select lemma="sonner"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="soar" tags="vblex.*"><select lemma="jouer# de"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+  </rule>
+
+  <!-- tutar >> klaxonner, jouer# de -->
+  <rule weight="0.8">
+    <match lemma="tutar" tags="vblex.*"><select lemma="klaxonner"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tutar" tags="vblex.*"><select lemma="jouer# de"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+  </rule>
+
   <!-- desbocar >> déboucher, déboucher# sur, vomir -->
   <rule weight="0.8">
     <match lemma="desbocar" tags="vblex.*"><select lemma="déboucher"/></match>
@@ -5279,6 +5406,9 @@
       <match lemma="temps" tags="n.*"/>
     </or>
   </rule>
+
+  <!-- lançar >> foncer, lancer -->
+  <macro name="verb_nopron_pron" p1="lançar" p2="foncer" p3="lancer"/>
 
   <!-- cochar >> chasser/coucher, presser -->
   <macro name="verb_nopron_pron" p1="cochar" p2="chasser" p3="presser" v="oci"/>

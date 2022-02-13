@@ -2849,6 +2849,52 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- jouer >> jogar, har -->
+  <rule weight="0.8">
+    <match lemma="jouer" tags="vblex.*"><select lemma="jogar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="jouer" tags="vblex.*"><select lemma="har"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="à" tags="pr"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="jouer" tags="vblex.*"><select lemma="har"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="tour" tags="n.*"/>
+      <match lemma="farce" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="jouer" tags="vblex.*"><select lemma="har"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.f.sg"/>
+    <match lemma="comédie" tags="n.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="jouer" tags="vblex.*"><select lemma="jogar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="à" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.al.*"/>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+
   <!-- réussir >> i escàder, escàder -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="réussir" tags="vblex.*"><select lemma="i escàder"/></match>
