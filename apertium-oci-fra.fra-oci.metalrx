@@ -111,7 +111,7 @@
          <match lemma="{{p1}}" tags="np.ant.*"><select lemma="{{p1}}"/></match>
          <or>
            <match tags="np.*"/>
-           <match tags=""/>
+           <match tags="" case="Aa"/>
          </or>
       </rule>
     </def-macro>
@@ -595,6 +595,7 @@
       <match lemma="poire" tags="n.*"/>
       <match lemma="pêche" tags="n.*"/>
       <match lemma="nectarine" tags="n.*"/>
+      <match lemma="brugnon" tags="n.*"/>
       <match lemma="abricot" tags="n.*"/>
       <match lemma="prune" tags="n.*"/>
       <match lemma="cerise" tags="n.*"/>
@@ -1612,7 +1613,7 @@
     </repeat>
     <or>
       <match tags="np.top.*"/>
-      <match tags=""/>
+      <match tags="" case="Aa"/>
     </or>
   </rule>
 
@@ -1895,21 +1896,80 @@
     <match lemma="fille" tags="n.*"><select lemma="dròlle"/></match>
   </rule>
   <rule weight="1.2">
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+    <or>
+      <match lemma="aîné" tags="adj.*"/>
+      <match lemma="cadet" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
     <match tags="det.pos.*"/>
     <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
     <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
   </rule>
-  <rule weight="1.2">
+  <rule weight="1.0">
     <match tags="det.pos.*"/>
     <or><match tags="num.*"/><match tags="num"/></or>
     <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
     <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
   </rule>
-  <rule weight="1.2">
+  <rule weight="1.0">
     <match lemma="avoir"/>
     <or><match tags="det.*"/><match tags="num.*"/><match tags="num"/></or>
     <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
     <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personne"/>
+      <seq n="parent"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+    <match tags="adj.*"/>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personne"/>
+      <seq n="parent"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
+    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <match lemma="monsieur" tags="n.*"/>
+      <match lemma="madame" tags="n.*"/>
+      <match lemma="monseigneur" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- vague >> èrsa, ondada -->
@@ -2180,7 +2240,7 @@
   <rule weight="1.0" v="oci">
     <match lemma="siège" tags="n.*"><select lemma="sètge"/></match>
     <match lemma="de" tags="pr"/>
-    <or><match tags="np.loc"/><match tags="np.top.*"/><match tags=""/></or>
+    <or><match tags="np.loc"/><match tags="np.top.*"/><match tags="" case="Aa"/></or>
   </rule>
 
   <rule weight="1.0" v="oci">
@@ -2304,7 +2364,7 @@
     <match lemma="de" tags="pr"/>
     <or>
       <match tags="np.top.*"/>
-      <match tags=""/>
+      <match tags="" case="Aa"/>
     </or>
   </rule>
 
@@ -2433,7 +2493,7 @@
     </repeat>
     <or>
       <match tags="np.*"/>
-      <match tags=""/>
+      <match tags="" case="Aa"/>
     </or>
   </rule>
 
@@ -3178,7 +3238,7 @@
     <match lemma="en" tags="pr"/>
     <or>
       <match tags="np.top.*"/>
-      <match tags=""/>
+      <match tags="" case="Aa"/>
     </or>
   </rule>
 
@@ -3482,7 +3542,7 @@
      <match lemma="en" tags="pr"/>
     <or>
         <match ltags="np.top.*"/>
-        <match tags=""/>
+        <match tags="" case="Aa"/>
     </or>
   </rule>
 
