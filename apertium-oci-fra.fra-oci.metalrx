@@ -3129,6 +3129,52 @@
     </or>
   </rule>
 
+  <!-- décrocher >> descrocar, agantar/desgahar, despenjar -->
+  <rule weight="0.8">
+    <match lemma="décrocher" tags="vblex.*"><select lemma="despenjar"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="décrocher" tags="vblex.*" v="oci"><select lemma="agantar"/></match>
+    <match lemma="décrocher" tags="vblex.*" v="oci@gascon"><select lemma="desgahar"/></match>
+    <match tags="det.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="téléphone" tags="n.*"/>
+        <match tags="sent"/>
+        <match tags="cm"/>
+    </or>
+  </rule>
+
+
+  <!-- dérouler >> desenrotlar, debanar -->
+  <macro name="verb_nopron_pron" p1="dérouler" p2="desenrotlar" p3="debanar" />
+
+
+  <!-- éblouir >> esbleugir/enlusernar, embalausir/esmiraglar -->
+  <rule weight="0.8">
+    <match lemma="éblouir" tags="vblex.*" v="oci"><select lemma="esbleugir"/></match>
+    <match lemma="éblouir" tags="vblex.*" v="oci@gascon"><select lemma="enlusernar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="éblouir" tags="vblex.*.p2.*" v="oci"><select lemma="embalausir"/></match>
+    <match lemma="éblouir" tags="vblex.*.p2.*" v="oci@gascon"><select lemma="esmiraglar"/></match>
+  </rule>
+
+
+  <!-- embrasser >> abraçar, poto(n)ar -->
+  <rule weight="0.8">
+    <match lemma="embrasser" tags="vblex.*" v="oci"><select lemma="potonar"/></match>
+    <match lemma="embrasser" tags="vblex.*" v="oci@gascon"><select lemma="potoar"/></match>
+  </rule>
+
+
 <!-- **************** ADV **************** -->
 
   <!-- traduire >> traduire/tradusir, revirar -->

@@ -5353,10 +5353,20 @@
 
   <!-- venir >> venir, devenir -->
   <rule weight="0.8">
-    <match lemma="venir" tags="vblex.*"><select lemma="venir"/></match>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
   </rule>
   <rule weight="1.0">
-    <match lemma="venir" tags="vblex.*"><select lemma="devenir"/></match>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="devenir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="devenir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="devenir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="devenir"/></match>
+    </or>
     <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
@@ -5368,38 +5378,349 @@
       <match tags="adj.*"/>
     </or>
   </rule>
+
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="tot" tags="det.*"/>
+  </rule>
+  
   <rule weight="1.2">
-    <match lemma="venir" tags="vblex.*"><select lemma="venir"/></match>
+    <or>
+        <match lemma="faire" tags="vblex.*"/>
+        <match lemma="far" tags="vblex.*"/>
+        <match lemma="har" tags="vblex.*"/>
+        <match lemma="hèr" tags="vblex.*"/>
+        <match lemma="hèser" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="det.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+
+  
+  <rule weight="1.2">
+    <or>
+        <match lemma="faire" tags="vblex.*"/>
+        <match lemma="far" tags="vblex.*"/>
+        <match lemma="har" tags="vblex.*"/>
+        <match lemma="hèr" tags="vblex.*"/>
+        <match lemma="hèser" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="det.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
     <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
         <match tags="det.*"/>
       </or>
     </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
     <or>
       <seq n="jorns"/>
       <seq n="meses"/>
       <match lemma="prima" tags="n.*"/>
+      <match lemma="primtemps" tags="n.*"/>
+      <match lemma="primavèra" tags="n.*"/>
       <match lemma="estiu" tags="n.*"/>
       <match lemma="auton" tags="n.*"/>
+      <match lemma="abòr" tags="n.*"/>
+      <match lemma="davalada" tags="n.*"/>
+      <match lemma="tardor" tags="n.*"/>
+      <match lemma="agòr" tags="n.*"/>
+      <match lemma="gòrra" tags="n.*"/>
       <match lemma="ivèrn" tags="n.*"/>
       <match lemma="matin" tags="n.*"/>
       <match lemma="maitin" tags="n.*"/>
+      <match lemma="matinada" tags="n.*"/>
+      <match lemma="matiada" tags="n.*"/>
       <match lemma="aprèp-miègjorn" tags="n.*"/>
       <match lemma="aprèp-dinnada" tags="n.*"/>
       <match lemma="après-miègjorn" tags="n.*"/>
-      <match lemma="ser" tags="n.*"/>
+      <match lemma="après-dinnada" tags="n.*"/>
       <match lemma="vèspre" tags="n.*"/>
       <match lemma="vrèspe" tags="n.*"/>
+      <match lemma="vesprada" tags="n.*"/>
+      <match lemma="ser" tags="n.*"/>
+      <match lemma="sera" tags="n.*"/>
       <match lemma="nuèch" tags="n.*"/>
       <match lemma="nuech" tags="n.*"/>
       <match lemma="nuòch" tags="n.*"/>
       <match lemma="nueit" tags="n.*"/>
+      <match lemma="nuèit" tags="n.*"/>
       <match lemma="neit" tags="n.*"/>
       <match lemma="net" tags="n.*"/>
       <match lemma="moment" tags="n.*"/>
       <match lemma="temps" tags="n.*"/>
+      <match lemma="setmana" tags="n.*"/>
+      <match lemma="mes" tags="n.*"/>
+      <match lemma="jorn" tags="n.*"/>
+      <match lemma="annada" tags="n.*"/>
+      <match lemma="an" tags="n.*"/>
+      <match lemma="dia" tags="n.*"/>
+      <match lemma="còp" tags="n.*"/>
     </or>
+  </rule>
+
+
+
+  <rule weight="1.2">
+    <or>
+      <seq n="jorns"/>
+      <seq n="meses"/>
+      <match lemma="prima" tags="n.*"/>
+      <match lemma="primtemps" tags="n.*"/>
+      <match lemma="primavèra" tags="n.*"/>
+      <match lemma="estiu" tags="n.*"/>
+      <match lemma="auton" tags="n.*"/>
+      <match lemma="abòr" tags="n.*"/>
+      <match lemma="davalada" tags="n.*"/>
+      <match lemma="tardor" tags="n.*"/>
+      <match lemma="agòr" tags="n.*"/>
+      <match lemma="gòrra" tags="n.*"/>
+      <match lemma="ivèrn" tags="n.*"/>
+      <match lemma="matin" tags="n.*"/>
+      <match lemma="maitin" tags="n.*"/>
+      <match lemma="matinada" tags="n.*"/>
+      <match lemma="matiada" tags="n.*"/>
+      <match lemma="aprèp-miègjorn" tags="n.*"/>
+      <match lemma="aprèp-dinnada" tags="n.*"/>
+      <match lemma="après-miègjorn" tags="n.*"/>
+      <match lemma="après-dinnada" tags="n.*"/>
+      <match lemma="vèspre" tags="n.*"/>
+      <match lemma="vrèspe" tags="n.*"/>
+      <match lemma="vesprada" tags="n.*"/>
+      <match lemma="ser" tags="n.*"/>
+      <match lemma="sera" tags="n.*"/>
+      <match lemma="nuèch" tags="n.*"/>
+      <match lemma="nuech" tags="n.*"/>
+      <match lemma="nuòch" tags="n.*"/>
+      <match lemma="nueit" tags="n.*"/>
+      <match lemma="nuèit" tags="n.*"/>
+      <match lemma="neit" tags="n.*"/>
+      <match lemma="net" tags="n.*"/>
+      <match lemma="moment" tags="n.*"/>
+      <match lemma="temps" tags="n.*"/>
+      <match lemma="setmana" tags="n.*"/>
+      <match lemma="mes" tags="n.*"/>
+      <match lemma="jorn" tags="n.*"/>
+      <match lemma="annada" tags="n.*"/>
+      <match lemma="an" tags="n.*"/>
+      <match lemma="dia" tags="n.*"/>
+      <match lemma="còp" tags="n.*"/>
+    </or>
+    <or>
+      <match lemma="que" tags="rel.*"/>
+      <match lemma="qui" tags="rel.*"/>
+    </or>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+  </rule>
+
+  <rule weight="1.2">
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="ont"/>
+      <match lemma="on"/>
+      <match lemma="aquí" tags="adv"/>
+      <match lemma="ací" tags="adv"/>
+      <match lemma="ailà" tags="adv"/>
+      <match lemma="aciu" tags="adv"/>
+      <match lemma="aquiu" tags="adv"/>
+      <match lemma="alai" tags="adv"/>
+      <match lemma="alà" tags="adv"/>
+      <match lemma="enlà" tags="adv"/>
+      <match lemma="aicí" tags="adv"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="ont"/>
+      <match lemma="on"/>
+      <match lemma="aquí" tags="adv"/>
+      <match lemma="ací" tags="adv"/>
+      <match lemma="ailà" tags="adv"/>
+      <match lemma="aciu" tags="adv"/>
+      <match lemma="aquiu" tags="adv"/>
+      <match lemma="alai" tags="adv"/>
+      <match lemma="alà" tags="adv"/>
+      <match lemma="enlà" tags="adv"/>
+      <match lemma="aicí" tags="adv"/>
+    </or>
+  </rule>
+
+
+  <rule weight="1.2">
+    <match lemma="d'on" tags="pr"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="Venguèt" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="Vienó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Viengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Vengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+  </rule>
+
+  <rule weight="1.2">
+    <match lemma="Que" tags="adv.enon"/>
+    <or>
+      <match lemma="viéner" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="Venguèt" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="Vienó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Viengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Vengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="Puèi" tags="adv"/>
+      <match lemma="Puish" tags="adv"/>
+      <match lemma="Apuish" tags="adv"/>
+      <match lemma="Puòi" tags="adv"/>
+      <match lemma="Apuèi" tags="adv"/>
+      <match lemma="Tanben" tags="adv"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match lemma="que" tags="adv.enon"/>
+    </repeat>
+    <or>
+      <match lemma="venir" tags="vblex.ifi.p3.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="viéner" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vier" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="vénguer" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+    </or>
+    <match tags="det.*"/>
+    <match tags="n.*"/>
   </rule>
 
   <!-- lançar >> foncer, lancer -->
