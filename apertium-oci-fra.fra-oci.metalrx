@@ -665,9 +665,19 @@
 
 <!-- **************** PREP **************** -->
 
-  <!-- à >> a, en -->
+  <!-- à >> a, en, de -->
   <rule weight="0.6">
     <match lemma="à" tags="pr"><select lemma="a"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="moulin" tags="n.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <or>
+      <match lemma="vent" tags="n.*"/>
+      <match lemma="huile" tags="n.*"/>
+      <match lemma="eau" tags="n.*"/>
+      <match lemma="café" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- dans >> dins/dens, en -->

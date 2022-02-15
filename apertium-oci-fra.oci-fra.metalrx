@@ -937,9 +937,20 @@
     <match lemma="biais" tags="n.*"/>
   </rule>
 
-  <!-- de >> de, en -->
+  <!-- de >> de, en, à -->
   <rule weight="0.6">
     <match lemma="de" tags="pr"><select lemma="de"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="molin" tags="n.*"/>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match lemma="vent" tags="n.*"/>
+      <match lemma="òli" tags="n.*"/>
+      <match lemma="aiga" tags="n.*"/>
+      <match lemma="cafè" tags="n.*"/>
+      <match lemma="café" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- entà >> à, pour, vers -->
