@@ -111,6 +111,20 @@
     <def-cat n="prnenc">
       <cat-item tags="prn.enc.*"/>
     </def-cat>
+    <def-cat n="prnpro_ci_leng">
+      <cat-item lemma="me" tags="prn.pro.*"/>
+      <cat-item lemma="te" tags="prn.pro.*"/>
+      <cat-item lemma="li" tags="prn.pro.*"/>
+      <cat-item lemma="nos" tags="prn.pro.*"/>
+      <cat-item lemma="vos" tags="prn.pro.*"/>
+    </def-cat>
+    <def-cat n="prnpro_ci_gasc">
+      <cat-item lemma="me" tags="prn.pro.*"/>
+      <cat-item lemma="te" tags="prn.pro.*"/>
+      <cat-item lemma="lo" tags="prn.pro.*"/>
+      <cat-item lemma="nos" tags="prn.pro.*"/>
+      <cat-item lemma="vos" tags="prn.pro.*"/>
+    </def-cat>
 
     <def-cat n="verb">
       <cat-item tags="vblex.*"/>
@@ -235,6 +249,10 @@
       <cat-item lemma="auer" tags="vblex.*.p3.sg"/>
     </def-cat>
 
+    <def-cat n="vhaver_p3">
+      <cat-item tags="vbhaver.*.p3.*"/>
+    </def-cat>
+
     <def-cat n="tornar_conj">
       <cat-item lemma="tornar" tags="vblex.*.p1.*"/>
       <cat-item lemma="tornar" tags="vblex.*.p2.*"/>
@@ -243,6 +261,25 @@
     <def-cat n="tornar_inf_ger">
       <cat-item lemma="tornar" tags="vblex.inf"/>
       <cat-item lemma="tornar" tags="vblex.ger"/>
+    </def-cat>
+
+    <def-cat n="verb_har_dòu_conj">	<!-- em hè dòu > je regrette -->
+      <cat-item lemma="har# dòu" tags="vblex.*.p3.*"/>
+      <cat-item lemma="hèr# dòu" tags="vblex.*.p3.*"/>
+      <cat-item lemma="aver# degrèu" tags="vblex.*.p3.*"/>
+    </def-cat>
+    <def-cat n="verb_har_dòu_pp">
+      <cat-item lemma="har# dòu" tags="vblex.pp.*"/>
+      <cat-item lemma="hèr# dòu" tags="vblex.pp.*"/>
+      <cat-item lemma="aver# degrèu" tags="vblex.pp.*"/>
+    </def-cat>
+    <def-cat n="verb_har_dòu_inf_ger">
+      <cat-item lemma="har# dòu" tags="vblex.inf"/>
+      <cat-item lemma="har# dòu" tags="vblex.ger"/>
+      <cat-item lemma="hèr# dòu" tags="vblex.inf"/>
+      <cat-item lemma="hèr# dòu" tags="vblex.ger"/>
+      <cat-item lemma="aver# degrèu" tags="vblex.inf"/>
+      <cat-item lemma="aver# degrèu" tags="vblex.ger"/>
     </def-cat>
 
     <def-cat n="num">
@@ -7297,7 +7334,7 @@
 
     <rule comment="RÈGLA: ADJ NOM ADJ">
       <pattern>
-        <pattern-item n="adjec"/>
+        <pattern-item n="adj"/>
         <pattern-item n="nom"/>
         <pattern-item n="adjec"/>
       </pattern>
@@ -10401,6 +10438,195 @@
     </rule>
 
     <!-- FIN RÈGLAS 'TORNAR + INF' -->
+
+
+    <!-- RÈGLAS 'ME HAR DÒU > JE REGRETTE ' -->
+
+    <rule comment="RÈGLA: PRNPRO_CI VERB_HAR_DÒU (me hè dòu > je regrette)" v="oci@gascon">
+       <pattern>
+         <pattern-item n="prnpro_ci_gasc"/>
+         <pattern-item n="verb_har_dòu_conj"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="2"/>
+        </call-macro>
+         <choose>
+           <when>
+             <test>
+               <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+             </test>
+             <out>
+               <chunk name="prpers" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><lit-tag v="tn"/></tag>
+                   <tag><clip pos="1" side="sl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <lit v="prpers"/>
+                   <lit-tag v="prn.tn"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <clip pos="1" side="sl" part="gen"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <out>
+               <chunk name="prpers" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><lit-tag v="tn"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <lit v="prpers"/>
+                   <lit-tag v="prn.tn"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <lit-tag v="mf"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <b pos="1"/>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNPRO_CI HAVER VERB_HAR_DÒU_PP (m'a hèit dòu > j'ai regretté)" v="oci@gascon">
+       <pattern>
+         <pattern-item n="prnpro_ci_gasc"/>
+         <pattern-item n="vhaver_p3"/>
+         <pattern-item n="verb_har_dòu_pp"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="2"/>
+        </call-macro>
+         <choose>
+           <when>
+             <test>
+               <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="lo"/></equal>
+             </test>
+             <out>
+               <chunk name="prpers" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><lit-tag v="tn"/></tag>
+                   <tag><clip pos="1" side="sl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <lit v="prpers"/>
+                   <lit-tag v="prn.tn"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <clip pos="1" side="sl" part="gen"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <out>
+               <chunk name="prpers" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><lit-tag v="tn"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <lit v="prpers"/>
+                   <lit-tag v="prn.tn"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <lit-tag v="mf"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="3"/>
+         </call-macro>
+         <out>
+           <b pos="1"/>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <lit-tag v="m.sg"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <!-- FIN RÈGLAS 'ME HAR DÒU > JE REGRETTE ' -->
 
 
     <!-- AUTRAS RÈGLAS VERBALAS -->

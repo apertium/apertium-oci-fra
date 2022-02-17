@@ -13075,6 +13075,62 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: ON PRNPRO PRNPRO VERBP3 (on le lui dit: se o li diguèt)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="verbp3"/>
+      </pattern>
+      <action>
+         <call-macro n="f_concord1">
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+           <with-param pos="3"/>
+         </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="4"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <out>
+          <chunk name="prn" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+              <tag><lit-tag v="ref"/></tag>
+            </tags>
+            <lu>
+              <lit v="se"/>
+              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+           <chunk namefrom="chunkname">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="4" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="whole"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="3" side="tl" part="whole"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: ON NE VERBP3 (on ne mange pas: se manja pas)">
       <pattern>
         <pattern-item n="on"/>
@@ -13159,6 +13215,63 @@
                <clip pos="4" side="tl" part="lemh"/>
                <clip pos="4" side="tl" part="tags"/>
                <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ON NE PRNPRO PRNPRO VERBP3 (on ne le lui dit pas: se o li diguèt pas)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="ne"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="verbp3"/>
+      </pattern>
+      <action>
+         <call-macro n="f_concord1">
+           <with-param pos="3"/>
+         </call-macro>
+         <call-macro n="f_concord1">
+           <with-param pos="4"/>
+         </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="5"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <out>
+          <chunk name="prn" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+              <tag><lit-tag v="ref"/></tag>
+            </tags>
+            <lu>
+              <lit v="se"/>
+              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+           <chunk namefrom="chunkname">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="5" side="tl" part="temps"/></tag>
+               <tag><lit-tag v="negation"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="whole"/>
+             </lu>
+             <b pos="2"/>
+             <lu>
+               <clip pos="4" side="tl" part="whole"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="5" side="tl" part="lemh"/>
+               <clip pos="5" side="tl" part="tags"/>
+               <clip pos="5" side="tl" part="lemq"/>
               </lu>
            </chunk>
          </out>
