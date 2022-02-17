@@ -3012,19 +3012,6 @@
     </or>
   </rule>
 
-  <!-- plaire >> agradar, etc. -->
-  <rule weight="0.8">
-    <match lemma="plaire" tags="vblex.*"><select lemma="agradar"/></match>
-  </rule>
-
-  <!-- renforcer >> enfortir/en·hortir, etc. -->
-  <rule weight="0.8">
-    <match lemma="renforcer" tags="vblex.*"><select lemma="enfortir"/></match>
-  </rule>
-  <rule weight="0.8">
-    <match lemma="renforcer" tags="vblex.*"><select lemma="en·hortir"/></match>
-  </rule>
-
   <!-- élever >> auçar/lhevar, abalir/neurir, elevar/neurir, ensenhar -->
   <rule weight="0.8">
     <match lemma="élever" tags="vblex.*" v="oci"><select lemma="auçar"/></match>
@@ -3185,7 +3172,80 @@
   </rule>
 
 
-<!-- **************** ADV **************** -->
+  <!-- ficher >> ficar/hicar, fichar -->
+  <macro name="verb_nopron_pron" p1="ficher" p2="fichar" p3="ficar" v="oci" />
+  <macro name="verb_nopron_pron" p1="ficher" p2="fichar" p3="hicar" v="oci@gascon" />
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nous" tags="prn.pro.*"/>
+      <match lemma="vous" tags="prn.pro.*"/>
+    </or>
+    <match lemma="ficher" tags="vblex.*.p2.*" ><select lemma="trufar"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
+
+  <!-- hanter >> obsedir, frequentar -->
+  <rule weight="0.8">
+    <match lemma="hanter" tags="vblex.*"><select lemma="frequentar"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="nous" tags="prn.pro.*"/>
+      <match lemma="vous" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hanter" tags="vblex.*.p2.*" ><select lemma="obsedir"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="souvenir" tags="n.*"/>
+      <match lemma="pensée" tags="n.*"/>
+      <match lemma="question" tags="n.*"/>
+    </or>
+    <match lemma="le" tags="prn.pro.*"/>
+    <match lemma="hanter" tags="vblex.*.p2.*" ><select lemma="obsedir"/></match>
+  </rule>
+
+  <!-- primer >> premiar/primar -->
+  <rule weight="0.8">
+    <match lemma="primer" tags="vblex.*"><select lemma="premiar"/></match>
+  </rule>
+
+  <!-- ranger >> recaptar, rengar -->
+  <macro name="verb_nopron_pron" p1="ranger" p2="recaptar" p3="rengar" />
+
+  <!-- rappeler >> rampelar/raperar, remembrar -->
+  <macro name="verb_nopron_pron" p1="rappeler" p2="rampelar" p3="remembrar" v="oci" />
+  <macro name="verb_nopron_pron" p1="rappeler" p2="raperar" p3="remembrar" v="oci@gascon" />
+
+  <!-- refléter >> rebatre/rebàter, miralhar -->
+  <macro name="verb_nopron_pron" p1="refléter" p2="rebatre" p3="miralhar" v="oci" />
+  <macro name="verb_nopron_pron" p1="refléter" p2="rebàter" p3="miralhar" v="oci@gascon" />
+
+  <!-- repasser >> repassar, alisar -->
+  <rule weight="0.8">
+    <match lemma="repasser" tags="vblex.*"><select lemma="repassar"/></match>
+  </rule>
+
+  <!-- saisir >> sasir, arrapar -->
+  <rule weight="0.8">
+    <match lemma="saisir" tags="vblex.*"><select lemma="sasir"/></match>
+  </rule>
+
+  <!-- suspendre >> penjar, suspendre/suspéner -->
+  <rule weight="0.8">
+    <match lemma="suspendre" tags="vblex.*" v="oci"><select lemma="suspendre"/></match>
+    <match lemma="suspendre" tags="vblex.*" v="oci@gascon"><select lemma="suspéner"/></match>
+  </rule>
+
 
   <!-- traduire >> traduire/tradusir, revirar -->
   <rule weight="0.8">
@@ -3296,11 +3356,6 @@
       <match tags="np.top.*"/>
       <match tags="" case="Aa"/>
     </or>
-  </rule>
-
-  <!-- saisir >> arrapar, etc. -->
-  <rule weight="0.8">
-    <match lemma="saisir" tags="vblex.*"><select lemma="arrapar"/></match>
   </rule>
 
   <!-- faufiler >> filbastar, engulhar -->
@@ -3610,10 +3665,25 @@
   <macro name="verb_nopron_pron" p1="dépêcher" p2="despachar" p3="amanejar" v="oci@gascon" />
 
 
-
   <!-- borner >> bornar, limitar -->
   <macro name="verb_nopron_pron" p1="borner" p2="bornar" p3="limitar" />
 
+
+  <!-- traîner >> longanhejar/longuejar, tirassar/arossegar, pron rebalar/arossegar -->
+  <macro name="verb_nopron_pron" p1="traîner" p2="tirassar" p3="rebalar" v="oci" />
+  <macro name="verb_nopron_pron" p1="traîner" p2="arossegar" p3="arossegar" v="oci@gascon" />
+  <rule weight="0.8">
+      <match lemma="rendre" tags="vblex.*" v="oci"><select lemma="tirassar"/></match>
+      <match lemma="rendre" tags="vblex.*" v="oci@gascon"><select lemma="arossegar"/></match>
+  </rule>
+
+
+  <!-- viser >> mirar/visar -->
+  <rule weight="0.8">
+      <match lemma="viser" tags="vblex.*"><select lemma="mirar"/></match>
+  </rule>
+
+<!-- **************** ADV **************** -->
 
 <!-- **************** NP **************** -->
 

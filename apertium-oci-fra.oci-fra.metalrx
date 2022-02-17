@@ -6073,6 +6073,39 @@
   <macro name="verb_nopron_pron" p1="jumpar" p2="bercer" p3="balancer" v="oci@gascon" />
 
 
+  <!-- rebàter/rebatre >> rebattre, refléter -->
+  <macro name="verb_nopron_pron" p1="rebatre" p2="rebattre" p3="refléter" v="oci"/>
+  <macro name="verb_nopron_pron" p1="rebàter" p2="rebattre" p3="refléter" v="oci@gascon"/>
+
+
+  <!-- huéger >> fuir, éviter -->
+  <rule weight="0.8" v="oci@gascon">
+    <or>
+      <match lemma="huéger" tags="vblex.*"><select lemma="fuir"/></match>
+      <match lemma="húger" tags="vblex.*"><select lemma="fuir"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="huéger" tags="vblex.*"><select lemma="éviter"/></match>
+      <match lemma="húger" tags="vblex.*"><select lemma="éviter"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+
 
 <!-- **************** NP **************** -->
 
