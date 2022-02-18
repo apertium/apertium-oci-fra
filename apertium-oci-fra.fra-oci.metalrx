@@ -1235,6 +1235,18 @@
 
 <!-- **************** N **************** -->
 
+  <!-- palier >> pompidor/estància, repaus -->
+  <rule weight="0.8">
+    <match lemma="palier" tags="n.*" v="oci"><select lemma="pompidor"/></match>
+    <match lemma="palier" tags="n.*" v="oci@gascon"><select lemma="estància"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="palier" tags="n.*"><select lemma="repaus"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <match lemma="escalier" tags="n.*"/>
+  </rule>
+
   <!-- rattachement >> restacament, incorporacion -->
   <rule weight="0.8">
     <match lemma="rattachement" tags="n.*"><select lemma="incorporacion"/></match>
@@ -1242,8 +1254,8 @@
   <rule weight="1.0">
     <match lemma="rattachement" tags="n.*"><select lemma="incorporacion"/></match>
     <or>
-      <match lemma="de"/>
-      <match lemma="à"/>
+      <match lemma="de" tags="pr"/>
+      <match lemma="à" tags="pr"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="det.*"/>

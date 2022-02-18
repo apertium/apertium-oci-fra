@@ -3161,6 +3161,20 @@
 
 <!-- **************** N **************** -->
 
+  <!-- repaus >> repos, palier -->
+  <rule weight="0.8">
+    <match lemma="repaus" tags="n.*"><select lemma="repos"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="repaus" tags="n.*"><select lemma="palier"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="escalièr" tags="n.*"/>
+      <match lemma="escalèr" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- rèsta >> reste, restant -->
   <rule weight="0.8">
     <match lemma="rèsta" tags="n.*"><select lemma="reste"/></match>
