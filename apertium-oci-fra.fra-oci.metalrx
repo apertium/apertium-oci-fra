@@ -1235,6 +1235,47 @@
 
 <!-- **************** N **************** -->
 
+  <!-- maître >> mèstre/mèste, mestressa/mestrèssa -->
+  <rule weight="0.8">
+    <match lemma="maître" tags="n.*" v="oci"><select lemma="mèstre"/></match>
+    <match lemma="maître" tags="n.*" v="oci@gascon"><select lemma="mèste"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="maître" tags="n.f.*" v="oci"><select lemma="mestressa"/></match>
+    <match lemma="maître" tags="n.f.*" v="oci@gascon"><select lemma="mestrèssa"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="pape" tags="n.*"/>
+      <match lemma="évêque" tags="n.*"/>
+      <match lemma="archevêque" tags="n.*"/>
+      <match lemma="empereur" tags="n.*"/>
+      <match lemma="roi" tags="n.*"/>
+      <match lemma="tsar" tags="n.*"/>
+      <match lemma="vice-roi" tags="n.*"/>
+      <match lemma="prince" tags="n.*"/>
+      <match lemma="infant" tags="n.*"/>
+      <match lemma="dauphin" tags="n.*"/>
+      <match lemma="comte" tags="n.*"/>
+      <match lemma="comtesse" tags="n.*"/>
+      <match lemma="vicomte" tags="n.*"/>
+      <match lemma="duc" tags="n.*"/>
+      <match lemma="archiduc" tags="n.*"/>
+      <match lemma="marquis" tags="n.*"/>
+      <match lemma="baron" tags="n.*"/>
+      <match lemma="président" tags="n.*"/>
+      <match lemma="directeur" tags="n.*"/>
+      <match lemma="PDG" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="maître" tags="n.f.*" v="oci"><select lemma="mestressa"/></match>
+    <match lemma="maître" tags="n.f.*" v="oci@gascon"><select lemma="mestrèssa"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="np.ant.*"/>
+    <match tags="num.*"/>
+  </rule>
+
   <!-- palier >> pompidor/estància, repaus -->
   <rule weight="0.8">
     <match lemma="palier" tags="n.*" v="oci"><select lemma="pompidor"/></match>

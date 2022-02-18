@@ -2653,6 +2653,18 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- ferotge >> farouche, féroce -->
+  <rule weight="0.8">
+    <match lemma="ferotge" tags="adj.*"><select lemma="farouche"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="animal" tags="n.*"/>
+      <match lemma="animau" tags="n.*"/>
+    </or>
+    <match lemma="ferotge" tags="adj.*"><select lemma="féroce"/></match>
+  </rule>
+
   <!-- passat >> passé, dernier -->
   <rule weight="0.8">
     <match lemma="passat" tags="adj.*"><select lemma="passé"/></match>
