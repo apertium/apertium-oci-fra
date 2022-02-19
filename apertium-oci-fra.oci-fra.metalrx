@@ -4662,6 +4662,53 @@
   </or>
   </rule>
 
+  <!-- còr >> cœur, chœur -->
+  <rule weight="0.8">
+    <match lemma="còr" tags="n.*"><select lemma="cœur"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
+    <or>
+      <match lemma="infantil" tags="adj.*"/>
+      <match lemma="mainadèc" tags="adj.*"/>
+      <match lemma="masculin" tags="adj.*"/>
+      <match lemma="femenin" tags="adj.*"/>
+      <match lemma="mixte" tags="adj.*"/>
+      <match lemma="polifonic" tags="adj.*"/>
+      <match lemma="amator" tags="adj.*"/>
+      <match lemma="afeccionat"/>
+      <match lemma="aimador"/>
+      <match lemma="professional" tags="adj.*"/>
+      <match lemma="professionau" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or><match tags="np.top.*"/><match tags="np.loc"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <match lemma="glèisa" tags="adj.*"/>
+      <match lemma="catedrala" tags="adj.*"/>
+      <match lemma="catedrau" tags="adj.*"/>
+      <match lemma="abadiá" tags="adj.*"/>
+      <match lemma="abadia" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match tags="num.*"/>
+    <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
+  </rule>
+
   <!-- còrn >> coin, corne -->
   <rule weight="0.8">
     <match lemma="còrn" tags="n.*"><select lemma="coin"/></match>
