@@ -47,6 +47,7 @@
       <cat-item tags="adj.*"/>
       <cat-item tags="vblex.pp.*"/>
       <cat-item tags="vblex.tv.pp.*"/>
+      <cat-item tags="vblex.dat2nom.pp.*"/>
     </def-cat>
     <def-cat n="adjpl">
       <cat-item tags="adj.*.pl"/>
@@ -151,6 +152,7 @@
     <def-cat n="inf">
       <cat-item tags="vblex.inf"/>
       <cat-item tags="vblex.tv.inf"/>
+      <cat-item tags="vblex.dat2nom.inf"/>
       <cat-item tags="vbser.inf"/>
       <cat-item tags="vbhaver.inf"/>
       <cat-item tags="vbmod.inf"/>
@@ -159,11 +161,13 @@
     <def-cat n="infger">
       <cat-item tags="vblex.inf"/>
       <cat-item tags="vblex.tv.inf"/>
+      <cat-item tags="vblex.dat2nom.inf"/>
       <cat-item tags="vbser.inf"/>
       <cat-item tags="vbhaver.inf"/>
       <cat-item tags="vbmod.inf"/>
       <cat-item tags="vblex.ger"/>
       <cat-item tags="vblex.tv.ger"/>
+      <cat-item tags="vblex.dat2nom.ger"/>
       <cat-item tags="vbser.ger"/>
       <cat-item tags="vbhaver.ger"/>
       <cat-item tags="vbmod.ger"/>
@@ -172,6 +176,7 @@
     <def-cat n="pp">
       <cat-item tags="vblex.pp.*"/>
       <cat-item tags="vblex.tv.pp.*"/>
+      <cat-item tags="vblex.dat2nom.pp.*"/>
       <cat-item tags="vbser.pp.*"/>
       <cat-item tags="vbhaver.pp.*"/>
       <cat-item tags="vbmod.pp.*"/>
@@ -184,6 +189,7 @@
     <def-cat n="imp">
       <cat-item tags="vblex.imp.*"/>
       <cat-item tags="vblex.tv.imp.*"/>
+      <cat-item tags="vblex.dat2nom.imp.*"/>
       <cat-item tags="vbser.imp.*"/>
       <cat-item tags="vbhaver.imp.*"/>
       <cat-item tags="vbmod.imp.*"/>
@@ -230,8 +236,10 @@
     <def-cat n="vbnoser_inf_ger">
       <cat-item tags="vblex.inf"/>
       <cat-item tags="vblex.tv.inf"/>
+      <cat-item tags="vblex.dat2nom.inf"/>
       <cat-item tags="vblex.ger"/>
       <cat-item tags="vblex.tv.ger"/>
+      <cat-item tags="vblex.dat2nom.ger"/>
       <cat-item tags="vbhaver.inf"/>
       <cat-item tags="vbhaver.ger"/>
       <cat-item tags="vbmod.inf"/>
@@ -263,23 +271,34 @@
       <cat-item lemma="tornar" tags="vblex.ger"/>
     </def-cat>
 
-    <def-cat n="verb_har_dòu_conj">	<!-- em hè dòu > je regrette -->
+    <def-cat n="verb_dat2nom_conj">	<!-- em hè dòu > je regrette -->
+      <cat-item lemma="dòler" tags="vblex.*.p3.*"/>
+      <cat-item lemma="dòler# de" tags="vblex.*.p3.*"/>
       <cat-item lemma="har# dòu" tags="vblex.*.p3.*"/>
       <cat-item lemma="hèr# dòu" tags="vblex.*.p3.*"/>
       <cat-item lemma="aver# degrèu" tags="vblex.*.p3.*"/>
+      <cat-item lemma="vagar" tags="vblex.*.p3.*"/>
     </def-cat>
-    <def-cat n="verb_har_dòu_pp">
+    <def-cat n="verb_dat2nom_pp">
+      <cat-item lemma="dòler" tags="vblex.pp.*"/>
+      <cat-item lemma="dòler# de" tags="vblex.pp.*"/>
       <cat-item lemma="har# dòu" tags="vblex.pp.*"/>
       <cat-item lemma="hèr# dòu" tags="vblex.pp.*"/>
       <cat-item lemma="aver# degrèu" tags="vblex.pp.*"/>
+      <cat-item lemma="vagar" tags="vblex.pp.*"/>
     </def-cat>
-    <def-cat n="verb_har_dòu_inf_ger">
+    <def-cat n="verb_dat2nom_inf_ger">
+      <cat-item lemma="dòler" tags="vblex.inf"/>
+      <cat-item lemma="dòler# de" tags="vblex.inf"/>
+      <cat-item lemma="dòler" tags="vblex.ger"/>
       <cat-item lemma="har# dòu" tags="vblex.inf"/>
       <cat-item lemma="har# dòu" tags="vblex.ger"/>
       <cat-item lemma="hèr# dòu" tags="vblex.inf"/>
       <cat-item lemma="hèr# dòu" tags="vblex.ger"/>
       <cat-item lemma="aver# degrèu" tags="vblex.inf"/>
       <cat-item lemma="aver# degrèu" tags="vblex.ger"/>
+      <cat-item lemma="vagar" tags="vblex.inf"/>
+      <cat-item lemma="vagar" tags="vblex.ger"/>
     </def-cat>
 
     <def-cat n="num">
@@ -696,6 +715,7 @@
       <attr-item tags="adj"/>
       <attr-item tags="vblex.pp"/>
       <attr-item tags="vblex.tv.pp"/>
+      <attr-item tags="vblex.dat2nom.pp"/>
       <attr-item tags="vbhaver.pp"/>
       <attr-item tags="vbser.pp"/>
       <attr-item tags="vbmod.pp"/>
@@ -816,8 +836,8 @@
     <def-var n="tipusverb"/>
     <def-var n="tipusdet"/>
     <def-var n="uno"/>
-    <def-var n="genero"/>
-    <def-var n="numero"/>
+    <def-var n="genero" v="&lt;m&gt;"/>
+    <def-var n="numero" v="&lt;sg&gt;"/>
     <def-var n="genero_sl"/>
     <def-var n="numero_sl"/>
     <def-var n="concDet"/>
@@ -10442,10 +10462,144 @@
 
     <!-- RÈGLAS 'ME HAR DÒU > JE REGRETTE ' -->
 
+    <rule comment="RÈGLA: PRNPRO_CI VERB_HAR_DÒU (me hè dòu > je regrette)" v="oci">
+       <pattern>
+         <pattern-item n="prnpro_ci_leng"/>
+         <pattern-item n="verb_dat2nom_conj"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="2"/>
+        </call-macro>
+         <choose>
+           <when>
+             <test>
+               <equal><clip pos="1" side="tl" part="a_dat2nom"/><lit v=""/></equal>
+             </test>
+             <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+             <out>
+               <chunk namefrom="lemma" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lem"/>
+                   <lit-tag v="prn.pro"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <clip pos="1" side="tl" part="gen"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+               <b pos="1"/>
+               <chunk namefrom="chunkname" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                   <tag><clip pos="2" side="tl" part="temps"/></tag>
+                   <tag><clip pos="2" side="tl" part="pers"/></tag>
+                   <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="a_verb"/>
+                   <clip pos="2" side="tl" part="temps"/>
+                   <clip pos="2" side="tl" part="pers"/>
+                   <clip pos="2" side="tl" part="nbr"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <choose>
+               <when>
+                 <test>
+                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="li"/></equal>
+                 </test>
+                 <out>
+                   <chunk name="prpers" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><lit-tag v="tn"/></tag>
+                       <tag><var n="genero"/></tag>
+                       <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                     </tags>
+                     <lu>
+                       <lit v="prpers"/>
+                       <lit-tag v="prn.tn"/>
+                       <clip pos="1" side="tl" part="pers"/>
+                       <var n="genero"/>
+                       <clip pos="1" side="tl" part="nbr"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </when>
+               <otherwise>
+                 <out>
+                   <chunk name="prpers" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><lit-tag v="tn"/></tag>
+                       <tag><clip pos="1" side="tl" part="gen"/></tag>
+                       <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                     </tags>
+                     <lu>
+                       <lit v="prpers"/>
+                       <lit-tag v="prn.tn"/>
+                       <clip pos="1" side="tl" part="pers"/>
+                       <lit-tag v="mf"/>
+                       <clip pos="1" side="tl" part="nbr"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </otherwise>
+             </choose>
+           </otherwise>
+         </choose>
+         <call-macro n="firstWord">
+           <with-param pos="2"/>
+         </call-macro>
+         <call-macro n="f_vchunk_name">
+           <with-param pos="2"/>
+         </call-macro>
+         <out>
+           <b pos="1"/>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+               <tag><var n="tipusverb"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><clip pos="1" side="tl" part="pers"/></tag>
+               <tag><clip pos="1" side="tl" part="nbr"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lemh"/>
+               <clip pos="2" side="tl" part="a_verb"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <clip pos="1" side="tl" part="pers"/>
+               <clip pos="1" side="tl" part="nbr"/>
+               <clip pos="2" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
     <rule comment="RÈGLA: PRNPRO_CI VERB_HAR_DÒU (me hè dòu > je regrette)" v="oci@gascon">
        <pattern>
          <pattern-item n="prnpro_ci_gasc"/>
-         <pattern-item n="verb_har_dòu_conj"/>
+         <pattern-item n="verb_dat2nom_conj"/>
        </pattern>
        <action>
         <call-macro n="firstWord">
@@ -10534,7 +10688,7 @@
        <pattern>
          <pattern-item n="prnpro_ci_gasc"/>
          <pattern-item n="vhaver_p3"/>
-         <pattern-item n="verb_har_dòu_pp"/>
+         <pattern-item n="verb_dat2nom_pp"/>
        </pattern>
        <action>
         <call-macro n="firstWord">
