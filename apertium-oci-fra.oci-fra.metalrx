@@ -382,6 +382,55 @@
       </rule>
     </def-macro>
 
+    <!-- p1 = verb oci, p2 = verb fra no pron, p3 = verb fra amb pronom ci (li vaga) -->
+    <def-macro name="verb_nopron_pronci">
+      <rule weight="0.8">
+        <match lemma="{{p1}}" tags="vblex.*"><select lemma="{{p2}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="prn.pro.p1.mf.sg"/>
+          <match tags="prn.pro.p2.mf.sg"/>
+          <match tags="prn.pro.p3.mf.sg" v="oci"/>
+          <match tags="prn.pro.p3.m.sg" v="oci@gascon"><select lemma="lui"/></match>
+          <match tags="prn.pro.p3.f.sg" v="oci@gascon"><select lemma="lui"/></match>
+          <match tags="prn.pro.p1.mf.pl"/>
+          <match tags="prn.pro.p2.mf.pl"/>
+          <match tags="prn.pro.p3.mf.pl" v="oci"/>
+          <match tags="prn.pro.p3.m.pl" v="oci@gascon"><select lemma="leur"/></match>
+          <match tags="prn.pro.p3.f.pl" v="oci@gascon"><select lemma="leur"/></match>
+        </or>
+        <or>
+          <match lemma="{{p1}}" tags="vblex.*.p3.sg"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.*.p3.pl"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.inf"><select lemma="{{p3}}"/></match>
+          <match lemma="{{p1}}" tags="vblex.ger"><select lemma="{{p3}}"/></match>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="prn.pro.p1.mf.sg"/>
+          <match tags="prn.pro.p2.mf.sg"/>
+          <match tags="prn.pro.p3.mf.sg" v="oci"/>
+          <match tags="prn.pro.p3.m.sg" v="oci@gascon"><select lemma="lui"/></match>
+          <match tags="prn.pro.p3.f.sg" v="oci@gascon"><select lemma="lui"/></match>
+          <match tags="prn.pro.p1.mf.pl"/>
+          <match tags="prn.pro.p2.mf.pl"/>
+          <match tags="prn.pro.p3.mf.pl" v="oci"/>
+          <match tags="prn.pro.p3.m.pl" v="oci@gascon"><select lemma="leur"/></match>
+          <match tags="prn.pro.p3.f.pl" v="oci@gascon"><select lemma="leur"/></match>
+        </or>
+        <or>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.pl"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+    </def-macro>
+
   </def-macros>
 
   <def-seqs>
@@ -478,6 +527,41 @@
        <match lemma="bodega" tags="n.*"/>
        <match lemma="boha" tags="n.*"/>
        <match lemma="pifre" tags="n.*"/>
+    </or></def-seq>
+
+    <def-seq n="partidas_cos"><or>
+       <match lemma="cap" tags="n.*"/>
+       <match lemma="aurelha" tags="n.*"/>
+       <match lemma="nas" tags="n.*"/>
+       <match lemma="cara" tags="n.*"/>
+       <match lemma="gauta" tags="n.*"/>
+       <match lemma="jauta" tags="n.*"/>
+       <match lemma="boca" tags="n.*"/>
+       <match lemma="dent" tags="n.*"/>
+       <match lemma="molar" tags="n.*"/>
+       <match lemma="còl" tags="n.*"/>
+       <match lemma="garganta" tags="n.*"/>
+       <match lemma="esquina" tags="n.*"/>
+       <match lemma="esquia" tags="n.*"/>
+       <match lemma="espatla" tags="n.*"/>
+       <match lemma="braç" tags="n.*"/>
+       <match lemma="coide" tags="n.*"/>
+       <match lemma="cobde" tags="n.*"/>
+       <match lemma="punhet" tags="n.*"/>
+       <match lemma="man" tags="n.*"/>
+       <match lemma="ventre" tags="n.*"/>
+       <match lemma="vente" tags="n.*"/>
+       <match lemma="fetge" tags="n.*"/>
+       <match lemma="hitge" tags="n.*"/>
+       <match lemma="ren" tags="n.*"/>
+       <match lemma="cuol" tags="n.*"/>
+       <match lemma="cuu" tags="n.*"/>
+       <match lemma="camba" tags="n.*"/>
+       <match lemma="cama" tags="n.*"/>
+       <match lemma="genolh" tags="n.*"/>
+       <match lemma="jolh" tags="n.*"/>
+       <match lemma="cavilha" tags="n.*"/>
+       <match lemma="pè" tags="n.*"/>
     </or></def-seq>
 
     <def-seq n="locucion_ini_a"><or>
@@ -2893,6 +2977,16 @@
 
 <!-- **************** ADV **************** -->
 
+  <!-- abans d'ora >> avant l'heure, avant le temps, avant terme -->
+  <rule weight="0.8">
+    <match lemma="abans d'ora" tags="adv"><select lemma="avant l'heure"/></match>
+  </rule>
+
+  <!-- abansora >> avant l'heure, avant le temps, avant terme -->
+  <rule weight="0.8">
+    <match lemma="abansora" tags="adv"><select lemma="avant l'heure"/></match>
+  </rule>
+
   <!-- al ser >> ce soir, soir -->
   <rule weight="0.8">
     <match lemma="al ser" tags="adv"><select lemma="ce soir"/></match>
@@ -3184,6 +3278,23 @@
 
 <!-- **************** N **************** -->
 
+  <!-- còl >> cou, col -->
+  <rule weight="0.8">
+    <match lemma="còl" tags="n.*"><select lemma="cou"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="còl" tags="n.*"><select lemma="col"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <match lemma="mont" tags="n.*"/>
+      <match lemma="montanha" tags="n.*"/>
+      <match tags="np.top.*"/>
+    </or>
+  </rule>
+
   <!-- regent >> instituteur, régent -->
   <rule weight="0.8">
     <match lemma="regent" tags="n.*"><select lemma="instituteur"/></match>
@@ -3227,20 +3338,33 @@
     <match lemma="casa" tags="n.*" v="oci@gascon"><select lemma="case"/></match>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="a" tags="pr"/>
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="per" tags="pr"/>
+      <match lemma="dens" tags="pr"/>
+      <match lemma="hens" tags="pr"/>
+    </or>
     <repeat from="0" upto="3">
-      <match tags="det.*"/>
-      <match tags="adj.*"/>
-      <match tags="preadv"/>
+      <or>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="preadv"/>
+      </or>
     </repeat>
     <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
   </rule>
   <rule weight="1.0" v="oci@gascon">
     <match lemma="de" tags="pr"/>
+    <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="de" tags="pr"/>
     <repeat from="0" upto="3">
-      <match tags="det.*"/>
-      <match tags="adj.*"/>
-      <match tags="preadv"/>
+      <or>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="preadv"/>
+      </or>
     </repeat>
     <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
     <or>
@@ -3266,11 +3390,13 @@
       <match lemma="recéber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="4">
-      <match tags="det.*"/>
-      <match tags="adj.*"/>
-      <match tags="adv"/>
-      <match tags="preadv"/>
-      <match lemma="de" tags="pr"/>
+      <or>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match lemma="de" tags="pr"/>
+      </or>
     </repeat>
     <match lemma="prima" tags="n.*"><select lemma="prime"/></match>
   </rule>
@@ -3346,9 +3472,9 @@
           <match lemma="mas" tags="adv"/>
       </or>
       <match tags="adj.*"/>
-    <repeat from="0" upto="1">
+      <repeat from="0" upto="1">
           <match tags="n.*"/>
-    </repeat>
+      </repeat>
       <or>
           <match lemma="deu"/>
           <match lemma="del"/>
@@ -4865,6 +4991,40 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- dòler >> faire# mal, avoir# mal à -->
+  <rule weight="0.8" v="oci">
+    <match lemma="dòler" tags="vblex.*"><select lemma="faire# mal"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="dòler" tags="vblex.*"><select lemma="avoir# mal à"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="partidas_cos"/>
+    </or>
+  </rule>
+
+  <!-- dòler# de >> souffrir# de, avoir# mal à -->
+  <rule weight="0.8" v="oci">
+    <match lemma="dòler# de" tags="vblex.*"><select lemma="souffrir# de"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="dòler# de" tags="vblex.*"><select lemma="avoir# mal à"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="partidas_cos"/>
+    </or>
+  </rule>
+
   <!-- har >> faire, jouer -->
   <rule weight="0.8">
     <match lemma="har" tags="vblex.*"><select lemma="faire"/></match>
@@ -6213,7 +6373,7 @@
   </rule>
 
   <!-- vagar >> vaguer, avoir le temps -->
-  <macro name="verb_nopron_pron" p1="vagar" p2="vaguer" p3="avoir le temps" v="oci@gascon" />
+  <macro name="verb_nopron_pronci" p1="vagar" p2="vaguer" p3="avoir# le temps" v="oci@gascon" />
 
 
 <!-- **************** NP **************** -->

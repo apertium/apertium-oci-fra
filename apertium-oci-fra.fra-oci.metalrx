@@ -2423,14 +2423,14 @@
 
   <!-- gorge >> garganta, clusa -->
   <rule weight="0.8">
-    <match lemma="gorge" tags="n.*"><select lemma="clusa"/></match>
+    <match lemma="gorge" tags="n.*"><select lemma="garganta"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="gorge" tags="n.*"><select lemma="clusa"/></match>
-    <repeat from="0" upto="2">
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
       <match tags="det.def.*"/>
     </repeat>
-    <match lemma="de" tags="pr"/>
     <or>
       <match tags="np.top.*"/>
       <match tags="" case="Aa"/>
@@ -2448,7 +2448,7 @@
       <match tags="adv"/>
       <match tags="adj.*"/>
     </repeat>
-    <match lemma="mie" tags="n.*"><select lemma="amiga"/></match>
+    <match lemma="mie" tags="n.*"><select lemma="amic"/></match>
   </rule>
 
   <!-- plainte >> clam, planh -->
