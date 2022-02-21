@@ -564,6 +564,11 @@
        <match lemma="pè" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="v-non-pron"><or>
+      <match lemma="dòler# de" tags="vblex.*"/>
+      <match lemma="enlairar" tags="vblex.*"/>
+    </or></def-seq>
+
     <def-seq n="locucion_ini_a"><or>
       <match lemma="a la mitat de genièr" tags="adv"/>
       <match lemma="a la mieitat de genèr" tags="adv"/>
@@ -596,6 +601,44 @@
 <rules>
 
 <!-- **************** PRN **************** -->
+
+  <!-- se prn.pro >> se prn.pro, [remove] -->
+  <rule weight="0.8">
+    <match lemma="se" tags="prn.pro.*"><select lemma="se"/></match>
+  </rule>
+<!--
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><remove tags="prn.pro.*"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="prn.pro.*"/>
+        <match tags="vbser.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="v-non-pron"/>
+    </or>
+  </rule>
+-->
+
+  <!-- si prn.pro >> si prn.pro, [remove] -->
+  <rule weight="0.8">
+    <match lemma="si" tags="prn.pro.*"><select lemma="se"/></match>
+  </rule>
+<!--
+  <rule weight="1.0">
+    <match lemma="si" tags="prn.pro.ref.p3.mf.sp"><remove tags="prn.pro.ref.p3.mf.sp"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="prn.pro.*"/>
+        <match tags="adv"/>
+        <match tags="vbser.*"/>
+      </or>
+    </repeat>
+    <match tags="vblex.non-pron.*"/>
+  </rule>
+-->
 
   <!-- qué >> qu'est-ce que, que, quoi -->
   <rule weight="0.8">
@@ -3288,6 +3331,11 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- arpa >> harpe, griffe -->
+  <rule weight="0.8">
+    <match lemma="arpa" tags="n.*"><select lemma="harpe"/></match>
+  </rule>
 
   <!-- còl >> cou, col -->
   <rule weight="0.8">
