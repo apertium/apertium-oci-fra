@@ -11811,62 +11811,71 @@
          <choose>
            <when>
              <test>
-               <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="il"/></equal>
+               <equal><clip pos="1" side="tl" part="lem"/><lit v=""/></equal>
              </test>
-             <let><var n="genero"/><clip pos="1" side="tl" part="gen"/></let>
-           </when>
-           <when>
-             <test>
-               <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="rien"/></equal>
-             </test>
-             <let><var n="genero"/><lit-tag v="m"/></let>
-           </when>
-         </choose>
-         <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-         <choose>
-           <when>
-             <test>
-               <equal><clip pos="1" side="tl" part="a_pas_neg"/><lit v=""/></equal>
-             </test>
-             <out>
-               <chunk namefrom="lemma" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
-                   <tag><clip pos="1" side="tl" part="gen"/></tag>
-                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
-                   <lit-tag v="prn"/>
-                   <clip pos="1" side="tl" part="a_prn2"/>
-                   <clip pos="1" side="tl" part="pers"/>
-                   <lit-tag v="3"/>
-                   <lit-tag v="4"/>
-                 </lu>
-               </chunk>
-             </out>
            </when>
            <otherwise>
-             <out>
-               <chunk namefrom="lemma" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
-                   <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
-                   <tag><clip pos="1" side="tl" part="gen"/></tag>
-                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
-                   <lit-tag v="prn"/>
-                   <clip pos="1" side="tl" part="a_prn2"/>
-                   <clip pos="1" side="tl" part="pers"/>
-                   <lit-tag v="4"/>
-                   <lit-tag v="5"/>
-                 </lu>
-               </chunk>
-             </out>
+             <choose>
+               <when>
+                 <test>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="il"/></equal>
+                 </test>
+                 <let><var n="genero"/><clip pos="1" side="tl" part="gen"/></let>
+               </when>
+               <when>
+                 <test>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="rien"/></equal>
+                 </test>
+                 <let><var n="genero"/><lit-tag v="m"/></let>
+               </when>
+             </choose>
+             <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+             <choose>
+               <when>
+                 <test>
+                   <equal><clip pos="1" side="tl" part="a_pas_neg"/><lit v=""/></equal>
+                 </test>
+                 <out>
+                   <chunk namefrom="lemma" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                       <tag><clip pos="1" side="tl" part="gen"/></tag>
+                       <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                     </tags>
+                     <lu>
+                       <clip pos="1" side="tl" part="lemh"/>
+                       <lit-tag v="prn"/>
+                       <clip pos="1" side="tl" part="a_prn2"/>
+                       <clip pos="1" side="tl" part="pers"/>
+                       <lit-tag v="3"/>
+                       <lit-tag v="4"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </when>
+               <otherwise>
+                 <out>
+                   <chunk namefrom="lemma" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                       <tag><clip pos="1" side="tl" part="a_pas_neg"/></tag>
+                       <tag><clip pos="1" side="tl" part="gen"/></tag>
+                       <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                     </tags>
+                     <lu>
+                       <clip pos="1" side="tl" part="lemh"/>
+                       <lit-tag v="prn"/>
+                       <clip pos="1" side="tl" part="a_prn2"/>
+                       <clip pos="1" side="tl" part="pers"/>
+                       <lit-tag v="4"/>
+                       <lit-tag v="5"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </otherwise>
+             </choose>
            </otherwise>
          </choose>
        </action>
@@ -12394,4 +12403,3 @@ Resources:
     https://wiki.apertium.org/wiki/A_long_introduction_to_transfer_rules
     https://wiki.apertium.org/wiki/Transfer#Adding_structural_transfer_.28grammar.29_rules
 -->
-
