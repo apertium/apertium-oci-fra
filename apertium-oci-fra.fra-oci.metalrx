@@ -3702,12 +3702,18 @@
   </rule>
   <rule weight="1.0">
     <or>
-        <match lemma="me" tags="prn.pro*"/>
-        <match lemma="te" tags="prn.pro*"/>
-        <match lemma="se" tags="prn.pro*"/>
-        <match lemma="nos" tags="prn.pro*"/>
-        <match lemma="vos" tags="prn.pro*"/>
+        <match lemma="me" tags="prn.pro.*"/>
+        <match lemma="te" tags="prn.pro.*"/>
+        <match lemma="se" tags="prn.pro.*"/>
+        <match lemma="nos" tags="prn.pro.*"/>
+        <match lemma="vos" tags="prn.pro.*"/>
     </or>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="vbser.*"/>
+       <match tags="adv"/>
+      </or>
+    </repeat>
     <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
     <or>
         <match lemma="à" tags="pr"/>
@@ -3719,12 +3725,18 @@
   </rule>
   <rule weight="1.0">
     <or>
-        <match lemma="me" tags="prn.pro*"/>
-        <match lemma="te" tags="prn.pro*"/>
-        <match lemma="se" tags="prn.pro*"/>
-        <match lemma="nos" tags="prn.pro*"/>
-        <match lemma="vos" tags="prn.pro*"/>
+        <match lemma="me" tags="prn.pro.*"/>
+        <match lemma="te" tags="prn.pro.*"/>
+        <match lemma="se" tags="prn.pro.*"/>
+        <match lemma="nos" tags="prn.pro.*"/>
+        <match lemma="vos" tags="prn.pro.*"/>
     </or>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="vbser.*"/>
+       <match tags="adv"/>
+      </or>
+    </repeat>
     <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
      <match lemma="en" tags="pr"/>
     <or>
@@ -3765,8 +3777,6 @@
       <match lemma="divaguer" tags="vblex.*" v="oci"><select lemma="desparlar"/></match>
       <match lemma="chabraquejar" tags="vblex.*" v="oci@gascon"><select lemma="desparlar"/></match>
   </rule>
-
-<!-- **************** ADV **************** -->
 
 <!-- **************** NP **************** -->
 
