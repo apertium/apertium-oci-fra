@@ -261,6 +261,54 @@
       </rule>
       <rule weight="1.0">
         <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="vbser.*.p1.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="vbser.*.p2.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbser.inf"/>
+          <match tags="vbser.ger"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="vbser.*.p1.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="vbser.*.p2.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
       </rule>
       <rule weight="1.0">
@@ -378,6 +426,64 @@
       <rule weight="1.0">
         <match lemma="{{p1}}" tags="vblex.*.p2.pl"><select lemma="{{p3}}"/></match>
         <match tags="prn.enc.p2.*.pl"/>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="vbser.*.p1.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="vbser.*.p2.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbser.inf"/>
+          <match tags="vbser.ger"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="vbser.*.p1.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="vbser.*.p2.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
         <match lemma="{{p4}}" tags="pr"/>
       </rule>
     </def-macro>
@@ -6101,10 +6207,6 @@
   <!-- sonar >> sonner, appeler -->
   <macro name="verb_nopron_pron" p1="sonar" p2="sonner" p3="appeler" />
 
-
-
-
-
   <!-- aterrar >> atterrer, atterrir -->
   <rule weight="0.8">
     <match lemma="aterrar" tags="vblex.*"><select lemma="atterrer"/></match>
@@ -6367,12 +6469,12 @@
     </or>
   </rule>
 
-  <!-- deishar >> laisser, deishar de -> arrêter de -->
+  <!-- deishar >> laisser ; deishar de -> arrêter de -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="deishar" tags="vblex.*"><select lemma="laisser"/></match>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="deishar" tags="vblex.*"><select lemma="laisser"/></match>
+    <match lemma="deishar" tags="vblex.*"><select lemma="arrêter"/></match>
     <repeat from="0" upto="2">
       <or>
        <match tags="adv"/>
@@ -6380,10 +6482,11 @@
       </or>
     </repeat>
     <match lemma="de" tags="pr"/>
-    <repeat from="0" upto="2">
+    <repeat from="0" upto="4">
       <or>
        <match tags="adv"/>
        <match tags="preadv"/>
+       <match tags="prn.pro.*"/>
       </or>
     </repeat>
     <or>

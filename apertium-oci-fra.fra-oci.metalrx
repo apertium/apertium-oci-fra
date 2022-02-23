@@ -286,6 +286,9 @@
       </rule>
       <rule weight="1.0">
         <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
       </rule>
       <rule weight="1.0">
@@ -405,20 +408,28 @@
         <match tags="prn.enc.p2.*.pl"/>
         <match lemma="{{p4}}" tags="pr"/>
       </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="{{p1}}" tags="vblex.pp.*"><select lemma="{{p3}}"/></match>
+        <match lemma="{{p4}}" tags="pr"/>
+      </rule>
     </def-macro>
   </def-macros>
 
   <def-seqs>
     <def-seq n="prn_moi"><or>
-      <match lemma="moi" tags="prn.*"/>
-      <match lemma="toi" tags="prn.*"/>
-      <match lemma="lui" tags="prn.*"/>
-      <match lemma="elle" tags="prn.*"/>
-      <match lemma="soi" tags="prn.*"/>
-      <match lemma="nous" tags="prn.*"/>
-      <match lemma="vous" tags="prn.*"/>
-      <match lemma="eux" tags="prn.*"/>
-      <match lemma="il" tags="prn.*"/>
+      <match lemma="moi" tags="prn.tn.*"/>
+      <match lemma="toi" tags="prn.tn.*"/>
+      <match lemma="lui" tags="prn.tn.*"/>
+      <match lemma="il" tags="prn.tn.p3.f.sg"/>
+      <match lemma="soi" tags="prn.tn.*"/>
+      <match lemma="nous" tags="prn.tn.*"/>
+      <match lemma="vous" tags="prn.tn.*"/>
+      <match lemma="eux" tags="prn.tn.*"/>
+      <match lemma="il" tags="prn.tn.p3.f.pl"/>
     </or></def-seq>
 
     <def-seq n="personne"><or>
