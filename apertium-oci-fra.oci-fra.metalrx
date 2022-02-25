@@ -4865,6 +4865,22 @@
     <match lemma="de" tags="pr"/>
   </rule>
 
+  <rule weight="1.0">
+    <match lemma="lo.*" tags="det.*"/>
+    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <repeat from="0" upto="3">
+        <match tags="adj.*"/>
+        <match lemma="ne" tags="prn.*"/>
+        <match tags="adv.enon"/>
+    </repeat>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+        <match tags="preadv.*"/>
+        <match tags="adv.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
   <!-- laca >> laque, lac -->
   <rule weight="0.8">
     <match lemma="laca" tags="n.*"><select lemma="laque"/></match>
