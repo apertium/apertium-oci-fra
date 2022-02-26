@@ -5140,7 +5140,25 @@
     <match lemma="pòt" tags="n.*"><select lemma="pot"/></match>
     <match lemma="de" tags="pr"/>
   </rule>
-
+  <rule weight="1.0">
+    <or>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="far" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="preadv"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="pòt" tags="n.*"><select lemma="bise"/></match>
+  </rule>
 
   <!-- halha >> feu, crête, faille -->
   <rule weight="0.8" v="oci@gascon">

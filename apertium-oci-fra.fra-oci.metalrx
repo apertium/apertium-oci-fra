@@ -3326,6 +3326,10 @@
     <match lemma="embrasser" tags="vblex.*" v="oci"><select lemma="potonar"/></match>
     <match lemma="embrasser" tags="vblex.*" v="oci@gascon"><select lemma="potoar"/></match>
   </rule>
+  <rule weight="0.8">
+    <match lemma="vous" tags="prn.pro.*"/>
+    <match lemma="embrasser" tags="vblex.*"><select lemma="abraçar"/></match>
+  </rule>
 
 
   <!-- ficher >> ficar/hicar, fichar -->
@@ -3776,7 +3780,7 @@
   <!-- découper >> destacar, copar -->
   <macro name="verb_nopron_pron" p1="découper" p2="copar" p3="destacar" />
 
-  <!-- rendre >> tornar/aller -->
+  <!-- rendre >> tornar, aller -->
   <rule weight="0.8">
       <match lemma="rendre" tags="vblex.*"><select lemma="tornar"/></match>
   </rule>
@@ -3795,12 +3799,25 @@
       </or>
     </repeat>
     <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
+    <repeat from="0" upto="2">
+     <match tags="adv"/>
+    </repeat>
     <or>
         <match lemma="à" tags="pr"/>
         <match lemma="sur" tags="pr"/>
         <match lemma="vers" tags="pr"/>
         <match lemma="chez" tags="pr"/>
         <match lemma="dans" tags="pr"/>
+        <match lemma="chez moi" tags="adv"/>
+        <match lemma="chez toi" tags="adv"/>
+        <match lemma="chez lui" tags="adv"/>
+        <match lemma="chez elle" tags="adv"/>
+        <match lemma="chez nous" tags="adv"/>
+        <match lemma="chez vous" tags="adv"/>
+        <match lemma="chez eux" tags="adv"/>
+        <match lemma="chez elles" tags="adv"/>
+        <match lemma="chez soi" tags="adv"/>
+        <match lemma="à la maison" tags="adv"/>
     </or>
   </rule>
   <rule weight="1.0">
