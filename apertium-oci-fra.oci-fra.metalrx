@@ -670,6 +670,20 @@
        <match lemma="pè" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="color"><or>
+       <match lemma="blanc" tags="adj.*"/>
+       <match lemma="negre" tags="adj.*"/>
+       <match lemma="nege" tags="adj.*"/>
+       <match lemma="rog" tags="adj.*"/>
+       <match lemma="roi" tags="adj.*"/>
+       <match lemma="verd" tags="adj.*"/>
+       <match lemma="blau" tags="adj.*"/>
+       <match lemma="blu" tags="adj.*"/>
+       <match lemma="jaune" tags="adj.*"/>
+       <match lemma="irange" tags="adj.*"/>
+       <match lemma="gris" tags="adj.*"/>
+    </or></def-seq>
+
     <def-seq n="v-non-pron"><or>
       <match lemma="dòler# de" tags="vblex.*"/>
       <match lemma="enlairar" tags="vblex.*"/>
@@ -3512,6 +3526,43 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- fons >> fond, fonds -->
+  <rule weight="0.8">
+    <match lemma="fons" tags="n.*"><select lemma="fonds"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.m.sg"/>
+    <match lemma="fons" tags="n.*"><select lemma="fond"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="sus" tags="pr"/>
+      <match lemma="sobre" tags="pr"/>
+      <match lemma="subre" tags="pr"/>
+      <match lemma="demont de" tags="pr"/>
+      <match lemma="dessús de" tags="pr"/>
+    </or>
+    <match lemma="fons" tags="n.*"><select lemma="fond"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="article" tags="n.*"/>
+      <match lemma="question" tags="n.*"/>
+      <match lemma="pregunta" tags="n.*"/>
+      <match lemma="discussion" tags="n.*"/>
+      <match lemma="tèma" tags="n.*"/>
+      <match lemma="problèma" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="fons" tags="n.*"><select lemma="fond"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="fons" tags="n.*"><select lemma="fond"/></match>
+    <or>
+      <seq n="color"/>
+    </or>
+  </rule>
 
   <!-- arpa >> harpe, griffe -->
   <rule weight="0.8">
