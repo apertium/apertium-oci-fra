@@ -718,6 +718,81 @@
     <match lemma="lors de" tags="pr"><select lemma="durant"/></match>
   </rule>
 
+  <!-- vers >> cap a, cap tà -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="vers" tags="pr"><select lemma="cap a"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="aller" tags="vblex.*"/>
+      <match lemma="diriger" tags="vblex.*"/>
+      <match lemma="rouler" tags="vblex.*"/>
+      <match lemma="avancer" tags="vblex.*"/>
+      <match lemma="marcher" tags="vblex.*"/>
+      <match lemma="progresser" tags="vblex.*"/>
+      <match lemma="converger" tags="vblex.*"/>
+      <match lemma="confluer" tags="vblex.*"/>
+      <match lemma="couler" tags="vblex.*"/>
+      <match lemma="courir" tags="vblex.*"/>
+      <match lemma="trotter" tags="vblex.*"/>
+      <match lemma="trottiner" tags="vblex.*"/>
+      <match lemma="galoper" tags="vblex.*"/>
+      <match lemma="naviguer" tags="vblex.*"/>
+      <match lemma="sillonner" tags="vblex.*"/>
+      <match lemma="voguer" tags="vblex.*"/>
+      <match lemma="cheminer" tags="vblex.*"/>
+      <match lemma="acheminer" tags="vblex.*"/>
+      <match lemma="envoyer" tags="vblex.*"/>
+      <match lemma="aiguiller" tags="vblex.*"/>
+      <match lemma="orienter" tags="vblex.*"/>
+      <match lemma="tourner" tags="vblex.*"/>
+      <match lemma="suivre" tags="vblex.*"/>
+      <match lemma="précéder" tags="vblex.*"/>
+      <match lemma="mener" tags="vblex.*"/>
+      <match lemma="amener" tags="vblex.*"/>
+      <match lemma="emmener" tags="vblex.*"/>
+      <match lemma="reconduire" tags="vblex.*"/>
+      <match lemma="raccompagner" tags="vblex.*"/>
+      <match lemma="accompagner" tags="vblex.*"/>
+      <match lemma="cornaquer" tags="vblex.*"/>
+      <match lemma="router" tags="vblex.*"/>
+      <match lemma="détourner" tags="vblex.*"/>
+      <match lemma="guider" tags="vblex.*"/>
+      <match lemma="escorter" tags="vblex.*"/>
+      <match lemma="convoyer" tags="vblex.*"/>
+      <match lemma="filer" tags="vblex.*"/>
+      <match lemma="bondir" tags="vblex.*"/>
+      <match lemma="décamper" tags="vblex.*"/>
+      <match lemma="détaler" tags="vblex.*"/>
+      <match lemma="foncer" tags="vblex.*"/>
+      <match lemma="cavaler" tags="vblex.*"/>
+      <match lemma="pédaler" tags="vblex.*"/>
+      <match lemma="sprinter" tags="vblex.*"/>
+      <match lemma="crapahuter" tags="vblex.*"/>
+      <match lemma="ramper" tags="vblex.*"/>
+      <match lemma="évoluer" tags="vblex.*"/>
+      <match lemma="manœuvrer" tags="vblex.*"/>
+      <match lemma="progresser" tags="vblex.*"/>
+      <match lemma="clopiner" tags="vblex.*"/>
+      <match lemma="venir" tags="vblex.*"/>
+      <match lemma="revenir" tags="vblex.*"/>
+      <match lemma="retourner" tags="vblex.*"/>
+      <match lemma="voyager" tags="vblex.*"/>
+      <match lemma="arriver" tags="vblex.*"/>
+      <match lemma="parvenir" tags="vblex.*"/>
+      <match lemma="monter" tags="vblex.*"/>
+      <match lemma="descendre" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="vers" tags="pr"><select lemma="cap tà"/></match>
+  </rule>
+
+
 
 <!-- **************** REL **************** -->
 
@@ -1168,6 +1243,16 @@
     <match lemma="mieux" tags="adv" v="oci"><select lemma="melhor"/></match>
     <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mélher"/></match>
     <match tags="*.pp.*"/>
+  </rule>
+
+  <!-- quant à nous, quant à vous masc ou fem -->
+  <rule weight="0.8">
+    <match lemma="quant à nous" tags="adv" v="oci"><select lemma="nosautres"/></match>
+    <match lemma="quant à nous" tags="adv" v="oci@gascon"><select lemma="nosauts"/></match>
+  </rule>
+  <rule weight="0.8">
+    <match lemma="quant à vous" tags="adv" v="oci"><select lemma="vosautres"/></match>
+    <match lemma="quant à vous" tags="adv" v="oci@gascon"><select lemma="vosauts"/></match>
   </rule>
 
 

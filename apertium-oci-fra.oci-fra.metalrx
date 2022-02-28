@@ -1782,6 +1782,55 @@
     <match lemma="còp" tags="n.*"/>
   </rule>
 
+  <!-- tà çò de -> chez, en ce qui concerne -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="tà çò de" tags="pr"><select lemma="en ce qui concerne"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tà çò de" tags="pr"><select lemma="chez"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match lemma="le" tags="det.*"/>
+        <match lemma="lo" tags="det.*"/>
+        <match lemma="eth" tags="det.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="mossu" tags="n.*"/>
+      <match lemma="monsur" tags="n.*"/>
+      <match lemma="sénher" tags="n.*"/>
+      <match lemma="dauna" tags="n.*"/>
+      <match lemma="dama" tags="n.*"/>
+      <match lemma="dòna" tags="n.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="np.ant.*"/>
+      <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="seguir" tags="vblex.*"/>
+      <match lemma="segre" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="passar" tags="vblex.*"/>
+      <match lemma="dirigir" tags="vblex.*"/>
+      <match lemma="venir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="2">
+        <match lemma="en" tags="pr"/>
+        <match tags="n.*"/>
+    </repeat>
+    <match lemma="tà çò de" tags="pr"><select lemma="chez"/></match>
+  </rule>
+
+
 <!-- **************** REL **************** -->
 
   <!-- que >> que, qui -->
