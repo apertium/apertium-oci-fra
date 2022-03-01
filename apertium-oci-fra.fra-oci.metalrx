@@ -1222,10 +1222,10 @@
     <match lemma="tantôt" tags="adv" v="oci"><select lemma="quora"/></match>
   </rule>
 
-  <!-- mieux >> mélher, melhor/mei plan, mai plan -->
+  <!-- mieux >> miélher, melhor/mei plan, mai plan -->
   <rule weight="0.8">
     <match lemma="mieux" tags="adv" v="oci"><select lemma="melhor"/></match>
-    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mélher"/></match>
+    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="miélher"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mei plan"/></match>
@@ -1241,7 +1241,7 @@
       <match tags="adv"/>
     </repeat>
     <match lemma="mieux" tags="adv" v="oci"><select lemma="melhor"/></match>
-    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="mélher"/></match>
+    <match lemma="mieux" tags="adv" v="oci@gascon"><select lemma="miélher"/></match>
     <match tags="*.pp.*"/>
   </rule>
 
@@ -1291,7 +1291,7 @@
     <match lemma="même" tags="adj.*"><select lemma="meteis"/></match>
   </rule>
   <rule weight="0.8">
-    <match lemma="même" tags="adj.*"><select lemma="madeish"/></match>
+    <match lemma="même" tags="adj.*"><select lemma="medish"/></match>
   </rule>
 
   <!-- mauvais >> mal/mau, etc. -->
@@ -3149,6 +3149,40 @@
     <match lemma="nouvelle" tags="n.*"><select lemma="novèla"/></match>
   </rule>
 
+  <!-- poule -> galina/garia, grop -->
+  <rule weight="0.8">
+    <match lemma="poule" tags="n.*" v="oci"><select lemma="galina"/></match>
+    <match lemma="poule" tags="n.*" v="oci@gascon"><select lemma="garia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="poule" tags="n.*"><select lemma="grop"/></match>
+    <or>
+      <match tags="num.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="equipa" tags="n.*"/>
+      <match lemma="club" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="5">
+        <match tags="*"/>
+        <match tags=""/>
+    </repeat>
+    <match lemma="poule" tags="n.*"><select lemma="grop"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="poule" tags="n.*"><select lemma="grop"/></match>
+    <repeat from="0" upto="5">
+        <match tags="*"/>
+        <match tags=""/>
+    </repeat>
+    <or>
+      <match lemma="equipa" tags="n.*"/>
+      <match lemma="club" tags="n.*"/>
+    </or>
+  </rule>
+
 
 
 
@@ -3586,10 +3620,10 @@
   </rule>
 
   <!-- rester >> restar, demorar -->
-  <rule weight="0.8">
+  <rule weight="0.8" v="oci@aran">
     <match lemma="rester" tags="vblex.*"><select lemma="restar"/></match>
   </rule>
-  <rule weight="0.9">
+  <rule weight="0.9" v="oci@aran">
     <match lemma="rester" tags="vblex.*"><select lemma="demorar"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -3602,7 +3636,7 @@
       <match lemma="là-bas" tags="adv"/>
     </or>
   </rule>
-  <rule weight="0.9">
+  <rule weight="0.9" v="oci@aran">
     <match lemma="rester" tags="vblex.*"><select lemma="demorar"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -3618,7 +3652,8 @@
   <macro name="verb_nopron_pron" p1="faufiler" p2="filbastar" p3="engulhar" />
 
   <!-- appeler >> apelar, sonar, cridar... -->
-  <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="apelar" />
+  <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="apelar" v="oci" />
+  <macro name="verb_nopron_pron" p1="appeler" p2="cridar" p3="aperar" v="oci@gascon" />
   <rule weight="1.4">
     <or>
       <match tags="np.*"/>
@@ -3629,7 +3664,8 @@
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
-    <match lemma="appeler" tags="vblex.pp.*"><select lemma="apelar"/></match>
+    <match lemma="appeler" tags="vblex.pp.*" v="oci"><select lemma="apelar"/></match>
+    <match lemma="appeler" tags="vblex.pp.*" v="oci@gascon"><select lemma="aperar"/></match>
   </rule>
 
   <!-- tourner >> virar, rodar -->
