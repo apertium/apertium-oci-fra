@@ -48,6 +48,12 @@
       <cat-item tags="SV.vbser.*.p3.pl.*"/>
     </def-cat>
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
+      <cat-item tags="SV.*.p1.*"/>
+      <cat-item tags="SV.*.p2.*"/>
+      <cat-item tags="SV.*.p3.*"/>
+      <cat-item tags="SVneg.*.p1.*"/>
+      <cat-item tags="SVneg.*.p2.*"/>
+      <cat-item tags="SVneg.*.p3.*"/>
       <cat-item lemma="sercj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SV.*"/>
       <cat-item lemma="verbcj" tags="SVneg.*"/>
@@ -212,7 +218,12 @@
    <choose>
      <when>
        <test>
-         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+         <or>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+         </or>
        </test>
         <choose>
           <when>
@@ -275,7 +286,12 @@
    <choose>
      <when>
        <test>
-         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+         <or>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+         </or>
        </test>
         <choose>
           <when>
@@ -288,6 +304,7 @@
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
                     <equal caseless="yes"><clip pos="1" part="lem"/><lit v="havercj"/></equal>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="avoir"/></equal>
                   </or>
                   <equal caseless="yes"><clip pos="2" part="lem"/><lit v="y"/></equal>
                 </and>
@@ -348,7 +365,12 @@
    <choose>
      <when>
        <test>
-         <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+         <or>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+         </or>
        </test>
         <choose>
           <when>
@@ -361,6 +383,7 @@
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
                     <equal caseless="yes"><clip pos="1" part="lem"/><lit v="havercj"/></equal>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="avoir"/></equal>
                   </or>
                   <equal caseless="yes"><clip pos="3" part="lem"/><lit v="y"/></equal>
                 </and>

@@ -5138,6 +5138,7 @@
     <!-- fin règles pour éviter la génération de l'article (et contre-règles) -->
     <!-- FIN RÈGLAS TOP -->
 
+
     <!-- RÈGLAS CONCORDANÇA -->
 
     <rule comment="RÈGLA: DET NOM">
@@ -13709,8 +13710,9 @@
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
          <out>
-           <chunk name="verbinf_ger" case="caseFirstWord">
+           <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -13743,6 +13745,7 @@
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
          <choose>
            <when>
              <test>
@@ -13755,7 +13758,7 @@
            </otherwise>
          </choose>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -13835,8 +13838,9 @@
         <call-macro n="f_vchunk_name">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
