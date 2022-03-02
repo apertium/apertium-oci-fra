@@ -30,6 +30,9 @@
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
     </def-cat>
+    <def-cat n="SAdv_enon">
+      <cat-item tags="SAdv.enon"/>
+    </def-cat>
     <def-cat n="shens_adv">
       <cat-item lemma="shens" tags="SAdv"/>
     </def-cat>
@@ -1694,6 +1697,29 @@
     </rule>
 
     <!-- RÈGLAS PER GENERAR PAS D'ENONCIATIU -->
+
+    <rule comment="RÈGLA: ENON SV">
+      <pattern>
+        <pattern-item n="SAdv_enon"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="inici"/><lit-tag v="non"/></let>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: REL_CNJ SV">
       <pattern>
