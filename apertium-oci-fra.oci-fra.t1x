@@ -13297,21 +13297,12 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
-        <choose>
-          <when>
-            <test>
-              <equal><clip pos="1" side="tl" part="lem"/><lit v="avoir"/> </equal>
-            </test>
-            <let><var n="chunkname"/><lit v="haverpp"/></let>
-          </when>
-          <otherwise>
-            <let><var n="chunkname"/><lit v="pp"/></let>
-          </otherwise>
-        </choose>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk namefrom="chunkname" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SA"/></tag>
+              <tag><lit-tag v="pp"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
               <tag><clip pos="1" side="tl" part="nbr"/></tag>
               <tag><var n="genero_sl"/></tag>
@@ -13321,8 +13312,8 @@
               <clip pos="1" side="tl" part="lemh"/>
               <clip pos="1" side="tl" part="a_verb"/>
               <clip pos="1" side="tl" part="temps"/>
-              <lit-tag v="2"/>
               <lit-tag v="3"/>
+              <lit-tag v="4"/>
               <clip pos="1" side="tl" part="lemq"/>
             </lu>
           </chunk>
