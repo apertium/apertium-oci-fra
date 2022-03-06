@@ -1144,6 +1144,33 @@
   <rule weight="0.8">
     <match lemma="lo" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="det.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <or>
+      <match tags="vbmod.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.inf"/>
+    <repeat from="0" upto="2">
+      <match tags="det.*"/>
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
 
 <!-- **************** PREP **************** -->
 
