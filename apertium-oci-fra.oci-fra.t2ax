@@ -33,6 +33,12 @@
       <cat-item lemma="ne" tags="SAdv"/>
       <cat-item lemma="ne" tags="SAdv.*"/>
     </def-cat>
+    <def-cat n="SAdv_SPron_pro">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item tags="SPron.pro"/>
+      <cat-item tags="SPron.pro.*"/>
+    </def-cat>
 
     <def-cat n="SV">
       <cat-item tags="SV"/>
@@ -86,7 +92,6 @@
       <cat-item lemma="de" tags="PREP"/>
     </def-cat>
 
-
     <def-cat n="cnjcoo">
       <cat-item tags="cnjcoo"/>
       <cat-item tags="cnjcoo.*"/>
@@ -114,8 +119,20 @@
       <cat-item tags="rel.*"/>
     </def-cat>
 
+    <def-cat n="qui_rel">
+      <cat-item lemma="qui" tags="rel"/>
+      <cat-item lemma="qui" tags="rel.*"/>
+    </def-cat>
+
     <def-cat n="ij">
       <cat-item tags="ij"/>
+    </def-cat>
+
+    <def-cat n="cm_cnjcoo">
+      <cat-item tags="cm"/>
+      <cat-item tags="CM"/>
+      <cat-item tags="cnjcoo"/>
+      <cat-item tags="cnjcoo.*"/>
     </def-cat>
 
     <def-cat n="unknown">
@@ -1196,6 +1213,1287 @@
             <clip pos="3" part="lem"/>
             <clip pos="3" part="tags"/>
             <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser TN Rel > ce SV_vbser_p3 TN Rel: son eles que > ce sont eux qui">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser TN qui SV > ce SV_vbser_p3 TN qui SV: qu’ei jo qui portavi > c'est moi qui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser TN qui SAdv SV > ce SV_vbser_p3 TN qui SAdv SV: qu’ei jo qui totjorn portavi > c'est moi qui toujours portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser TN qui SAdv_SPron_pro SV > ce SV_vbser_p3 TN qui SAdv_SPron_pro SAdv_SPron_pro: qu’ei jo qui totjorn lo portavi > c'est moi qui toujours le portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser TN Rel > CM ce SV_vbser_p3 TN Rel: son eles que > ce sont eux qui">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser TN qui SV > CM ce SV_vbser_p3 TN qui SV: qu’ei jo qui portavi > c'est moi qui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser TN qui SAdv SV > CM ce SV_vbser_p3 TN qui SAdv SV: qu’ei jo qui totjorn portavi > c'est moi qui toujours portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser TN qui SAdv_SPron_pro SAdv_SPron_pro SV > CM ce SV_vbser_p3 TN qui SAdv_SPron_pro SAdv_SPron_pro SV: qu’ei jo qui totjorn lo portavi > c'est moi qui toujours le portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser SAdv TN Rel > ce SV_vbser_p3 SAdv TN Rel: son pas eles que > ce ne sont pas eux qui">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser SAdv TN qui SV > ce SV_vbser_p3 SAdv TN qui SV: qu’ei pas jo qui portavi > c'est pas moi qui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser SAdv TN qui SAdv SV > ce SV_vbser_p3 SAdv TN qui SAdv SV: qu’ei pas jo qui totjorn portavi > c'est pas moi qui toujours portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser SAdv TN qui SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3 SAdv TN qui SAdv_SPron_pro SAdv_SPron_pro SV: qu’ei pas jo qui totjorn lo portavi > c'est pas moi qui toujours le portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser SAdv TN Rel > CM ce SV_vbser_p3 SAdv TN Rel: son pas eles que > ce sont eux pas qui">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser SAdv TN qui SV > CM ce SV_vbser_p3 SAdv TN qui SV: qu’ei pas jo qui portavi > c'est pas moi qui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser SAdv TN qui SAdv SV > CM ce SV_vbser_p3 SAdv TN qui SAdv SV: qu’ei pas jo qui totjorn portavi > c'est pas moi qui toujours portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser SAdv TN qui SAdv_SPron_pro SAdv_SPron_pro SV > CM ce SV_vbser_p3 SAdv TN qui SAdv_SPron_pro SAdv_SPron_pro SV: qu’ei pas jo qui totjorn lo portavi > c'est pas moi qui toujours le portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <lit v="subj"/>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
