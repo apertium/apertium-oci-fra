@@ -87,6 +87,9 @@
     <def-cat n="pas_adv">
       <cat-item lemma="pas" tags="adv"/>
     </def-cat>
+    <def-cat n="tot_adv">
+      <cat-item lemma="tot" tags="adv"/>
+    </def-cat>
     <def-cat n="det">
       <cat-item tags="det.*"/>
       <cat-item tags="predet.*"/>
@@ -251,6 +254,15 @@
       <cat-item tags="vbhaver.ger"/>
       <cat-item tags="vbmod.inf"/>
       <cat-item tags="vbmod.ger"/>
+    </def-cat>
+
+    <def-cat n="vb_ger">
+      <cat-item tags="vblex.ger"/>
+      <cat-item tags="vblex.tv.ger"/>
+      <cat-item tags="vblex.dat2nom.ger"/>
+      <cat-item tags="vbhaver.ger"/>
+      <cat-item tags="vbmod.ger"/>
+      <cat-item tags="vbser.ger"/>
     </def-cat>
 
     <def-cat n="fa">
@@ -13028,7 +13040,7 @@
        </action>
     </rule>
 
-    <rule comment="INF/GER + ENCLÍTIC (pensar-o > le penser)">
+    <rule comment="INF/GER + ENCLITIC (pensar-o > le penser)">
       <pattern>
         <pattern-item n="infger"/>
         <pattern-item n="prnenc"/>
@@ -13068,7 +13080,7 @@
       </action>
   </rule>
 
-    <rule comment="INF/GER + ENCLÍTIC + ENCLÍTIC (cantar-li-o > le lui chanter)" v="oci">
+    <rule comment="INF/GER + ENCLITIC + ENCLITIC (cantar-li-o > le lui chanter)" v="oci">
       <pattern>
         <pattern-item n="infger"/>
         <pattern-item n="prnenc"/>
@@ -13188,7 +13200,7 @@
       </action>
   </rule>
 
-    <rule comment="INF/GER + ENCLÍTIC + ENCLÍTIC (cantar-li-o > le lui chanter)" v="oci@gascon">
+    <rule comment="INF/GER + ENCLITIC + ENCLITIC (cantar-li-o > le lui chanter)" v="oci@gascon">
       <pattern>
         <pattern-item n="infger"/>
         <pattern-item n="prnenc"/>
@@ -13298,6 +13310,275 @@
         </choose>
       </action>
   </rule>
+
+    <rule comment="RÈGLA: en tot VB_ger (en tot cantant > tout en chantant)" v="oci@gascon">
+       <pattern>
+         <pattern-item n="enpr"/>
+         <pattern-item n="tot_adv"/>
+         <pattern-item n="vb_ger"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+        <out>
+          <b pos="1"/>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <let><var n="lemma"/><clip pos="3" side="tl" part="lem"/></let>
+        <out>
+          <b pos="2"/>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+              <tag><var n="tipusverb"/></tag>
+              <tag><clip pos="3" side="tl" part="temps"/></tag>
+            </tags>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="a_verb"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: en tot VB_ger + ENCLITIC (en tot cantant-lo > tout en le chantant)" v="oci@gascon">
+       <pattern>
+         <pattern-item n="enpr"/>
+         <pattern-item n="tot_adv"/>
+         <pattern-item n="vb_ger"/>
+        <pattern-item n="prnenc"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+        <out>
+          <b pos="1"/>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <let><var n="lemma"/><clip pos="3" side="tl" part="lem"/></let>
+        <out>
+          <b pos="2"/>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+              <tag><var n="tipusverb"/></tag>
+              <tag><clip pos="3" side="tl" part="temps"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="lem"/>
+              <lit-tag v="prn.pro"/>
+              <clip pos="4" side="tl" part="tipoenc_pro"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="a_verb"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: en tot VB_ger + ENCLITIC + ENCLITIC (en tot anar-se'n > tout en s'en allant)" v="oci@gascon">
+       <pattern>
+         <pattern-item n="enpr"/>
+         <pattern-item n="tot_adv"/>
+         <pattern-item n="vb_ger"/>
+        <pattern-item n="prnenc"/>
+        <pattern-item n="prnenc"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+        <out>
+          <b pos="1"/>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+        <let><var n="lemma"/><clip pos="3" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <and>
+                  <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="i"/></equal>
+                  <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="en"/></equal>
+                </and>
+                <and>
+                  <or>
+                    <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="lo"/></equal>
+                    <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="i"/></equal>
+                    <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="en"/></equal>
+                  </or>
+                  <or>
+                    <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="me"/></equal>
+                    <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="te"/></equal>
+                    <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="se"/></equal>
+                    <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="nos"/></equal>
+                    <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="vos"/></equal>
+                  </or>
+                </and>
+                <and>
+                  <or>
+                    <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="i"/></equal>
+                    <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="en"/></equal>
+                  </or>
+                  <equal caseless="yes"><clip pos="5" side="sl" part="lem"/><lit v="ac"/></equal>
+                </and>
+              </or>
+            </test>
+            <!-- changement d'ordre CD CI -->
+            <out>
+              <b pos="2"/>
+              <chunk namefrom="lemma">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="3" side="tl" part="temps"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="5" side="tl" part="lem"/>
+                  <lit-tag v="prn.pro"/>
+                  <clip pos="5" side="tl" part="tipoenc_pro"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="4" side="tl" part="lem"/>
+                  <lit-tag v="prn.pro"/>
+                  <clip pos="4" side="tl" part="tipoenc_pro"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="a_verb"/>
+                  <clip pos="3" side="tl" part="temps"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="2"/>
+              <chunk namefrom="lemma">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="3" side="tl" part="temps"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="4" side="tl" part="lem"/>
+                  <lit-tag v="prn.pro"/>
+                  <clip pos="4" side="tl" part="tipoenc_pro"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="5" side="tl" part="lem"/>
+                  <lit-tag v="prn.pro"/>
+                  <clip pos="5" side="tl" part="tipoenc_pro"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="a_verb"/>
+                  <clip pos="3" side="tl" part="temps"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+          </otherwise>
+        </choose>
+       </action>
+    </rule>
 
   <!-- FIN AUTRAS RÈGLAS VERBALAS -->
 
@@ -13837,17 +14118,6 @@
           <with-param pos="1"/>
         </call-macro>
         <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-         <choose>
-           <when>
-             <test>
-               <equal><clip pos="1" side="tl" part="lem"/><lit v="avoir"/> </equal>
-             </test>
-             <let><var n="chunkname"/><lit v="haverinf_ger"/></let>
-           </when>
-           <otherwise>
-             <let><var n="chunkname"/><lit v="verbinf_ger"/></let>
-           </otherwise>
-         </choose>
          <out>
            <chunk namefrom="lemma" case="caseFirstWord">
              <tags>
