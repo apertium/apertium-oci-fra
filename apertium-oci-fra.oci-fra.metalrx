@@ -3659,6 +3659,11 @@
 
 <!-- **************** ADV **************** -->
 
+  <!-- pas >> pas -->
+  <rule weight="0.8">
+    <match lemma="pas" tags="adv"><select lemma="pas"/></match>
+  </rule>
+
   <!-- a lor >> chez lui, chez elle -->
   <rule weight="0.8">
     <match lemma="a lor" tags="adv"><select lemma="chez lui"/></match>
@@ -6935,6 +6940,11 @@
     <match tags="det.*"/>
     <match tags="n.*"/>
   </rule>
+
+  <!-- florir >> fleurir, moisir -->
+  <!-- hlorir >> fleurir, moisir -->
+  <macro name="verb_nopron_pron" p1="florir" p2="fleurir" p3="moisir"/>
+  <macro name="verb_nopron_pron" p1="hlorir" p2="fleurir" p3="moisir"/>
 
   <!-- lançar >> foncer, lancer -->
   <macro name="verb_nopron_pron" p1="lançar" p2="foncer" p3="lancer"/>
