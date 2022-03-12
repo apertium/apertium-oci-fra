@@ -15,6 +15,10 @@
     <def-cat n="ce_det">
       <cat-item lemma="ce" tags="det.dem.*"/>
     </def-cat>
+    <def-cat n="un_det">
+      <cat-item lemma="un" tags="det.ind.*"/>
+      <cat-item lemma="1" tags="num"/>
+    </def-cat>
 
     <def-cat n="predet">
       <cat-item tags="predet.*"/>
@@ -227,6 +231,10 @@
       <cat-item tags="vbser.pp.*"/>
     </def-cat>
 
+    <def-cat n="vbser_3psg">
+      <cat-item tags="vbser.*.p3.sg"/>
+    </def-cat>
+
     <def-cat n="vbhaver">
       <cat-item tags="vbhaver.*"/>
     </def-cat>
@@ -341,6 +349,10 @@
     </def-cat>
     <def-cat n="sent">
       <cat-item tags="sent"/>
+    </def-cat>
+
+    <def-cat n="heure">
+      <cat-item lemma="heure" tags="n.*"/>
     </def-cat>
 
     <def-cat n="train">
@@ -6919,6 +6931,205 @@
     </rule>
 
     <!-- FIN RÈGLAS TOP -->
+
+
+    <!-- RÈGLAS HORAS -->
+
+   <rule comment="RÈGLA: IL EST UNE HEURE (il est une heure > es una ora)" v="oci">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="vbser_3psg"/>
+        <pattern-item n="un_det"/>
+        <pattern-item n="heure"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="set_vbser"></call-macro>
+        <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <lit-tag v="p3"/>
+               <lit-tag v="sg"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="num_n">
+             <tags>
+               <tag><lit-tag v="SN"/></tag>
+               <tag><clip pos="4" side="tl" part="gen"/></tag>
+               <tag><clip pos="4" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: IL EST UNE HEURE (il est une heure > ei l'ua òra)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="vbser_3psg"/>
+        <pattern-item n="un_det"/>
+        <pattern-item n="heure"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="set_vbser"></call-macro>
+        <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <lit-tag v="p3"/>
+               <lit-tag v="sg"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="det_num_n">
+             <tags>
+               <tag><lit-tag v="SN"/></tag>
+               <tag><clip pos="4" side="tl" part="gen"/></tag>
+               <tag><clip pos="4" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <lit v="lo"/>
+               <lit-tag v="det.def.f.sg"/>
+             </lu>
+             <b/>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: IL EST NUM HEURE (il est deux heures > son doas oras)">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="vbser_3psg"/>
+        <pattern-item n="num"/>
+        <pattern-item n="heure"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="set_vbser"></call-macro>
+        <out>
+           <chunk name="vbser">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><lit-tag v="vbser"/></tag>
+               <tag><clip pos="2" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <get-case-from pos="1">
+                 <var n="v_vbser"/>
+               </get-case-from>
+               <lit-tag v="vbser"/>
+               <clip pos="2" side="tl" part="temps"/>
+               <lit-tag v="p3"/>
+               <lit-tag v="pl"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+           <chunk name="num_n">
+             <tags>
+               <tag><lit-tag v="SN"/></tag>
+               <tag><clip pos="4" side="tl" part="gen"/></tag>
+               <tag><clip pos="4" side="tl" part="nbr"/></tag>
+               <tag><var n="genero_sl"/></tag>
+               <tag><var n="numero_sl"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="tags"/>
+               <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+             <b pos="3"/>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="tags"/>
+               <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS HORAS -->
 
 
     <!-- RÈGLAS DATAS -->
