@@ -329,6 +329,10 @@
     <def-cat n="cm">
       <cat-item tags="cm"/>
     </def-cat>
+    <def-cat n="cm_qmarks">
+      <cat-item tags="cm"/>
+      <cat-item lemma="»" tags="rpar"/>
+    </def-cat>
     <def-cat n="lpar">
       <cat-item tags="lpar"/>
     </def-cat>
@@ -13239,6 +13243,14 @@
         <call-macro n="tipus_verb">
          <with-param pos="1"/>
         </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="chunkname"/><lit v="verbcj"/></equal>
+            </test>
+            <let><var n="chunkname"/><lit v="verbcj-prnsubj"/></let>
+          </when>
+        </choose>
         <out>
            <chunk namefrom="chunkname">
              <tags>
@@ -13254,6 +13266,67 @@
               </lu>
            </chunk>
          </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: CM VERB PRNSUBJ (, dit-il > , çò ditz)">
+      <pattern>
+        <pattern-item n="cm_qmarks"/>
+        <pattern-item n="verbconj"/>
+        <pattern-item n="prnsubj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord0">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="chunkname"/><lit v="verbcj"/></equal>
+            </test>
+            <let><var n="chunkname"/><lit v="verbcj-prnsubj"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk name="cm">
+            <tags>
+              <tag><lit-tag v="CM"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="ce">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+              <tag><lit-tag v="enon"/></tag>
+            </tags>
+            <lu>
+              <lit v="ce"/>
+              <lit-tag v="adv.enon"/>
+            </lu>
+          </chunk>
+          <b/>
+          <b/>
+          <chunk namefrom="chunkname">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="2" side="tl" part="temps"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
@@ -18547,8 +18620,9 @@
         <pattern-item n="lpar"/>
       </pattern>
       <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="lpar">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="LPAR"/></tag>
             </tags>
@@ -18565,8 +18639,9 @@
         <pattern-item n="rpar"/>
       </pattern>
       <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="rpar">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="RPAR"/></tag>
             </tags>
