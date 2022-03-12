@@ -78,6 +78,9 @@
     <def-cat n="la_adv">
       <cat-item lemma="là" tags="adv"/>
     </def-cat>
+    <def-cat n="tout_adv">
+      <cat-item lemma="tout" tags="adv"/>
+    </def-cat>
     <def-cat n="en_fait">
       <cat-item lemma="en fait" tags="adv"/>
     </def-cat>
@@ -17248,6 +17251,119 @@
              </out>
            </otherwise>
          </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: TOUT EN VBGER > EN VBGER (tout en décollant > en s'enlairant)">
+       <pattern>
+         <pattern-item n="tout_adv"/>
+         <pattern-item n="enprep"/>
+         <pattern-item n="ger"/>
+       </pattern>
+       <action>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_set_pron_pro">
+          <with-param pos="3"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="print_pron"></call-macro>
+         <out>
+           <chunk namefrom="chunkname">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="3" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="3" side="tl" part="lemh"/>
+               <clip pos="3" side="tl" part="a_verb"/>
+               <clip pos="3" side="tl" part="temps"/>
+               <clip pos="3" side="tl" part="pers"/>
+               <clip pos="3" side="tl" part="nbr"/>
+               <clip pos="3" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: TOUT EN PRNPRO VBGER > EN PRNPRO VBGER (tout en lui disant > en li disent)">
+       <pattern>
+         <pattern-item n="tout_adv"/>
+         <pattern-item n="enprep"/>
+         <pattern-item n="prnpro"/>
+         <pattern-item n="ger"/>
+       </pattern>
+       <action>
+        <call-macro n="tipus_verb">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_set_pron_pro">
+          <with-param pos="4"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="print_pron"></call-macro>
+        <out>
+          <chunk name="prnpro" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+              <tag><var n="tipusprn"/></tag>
+            </tags>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="3"/>
+           <chunk namefrom="chunkname">
+             <tags>
+               <tag><lit-tag v="SV"/></tag>
+               <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+               <tag><clip pos="4" side="tl" part="temps"/></tag>
+               <tag><var n="tipusverb"/></tag>
+             </tags>
+             <lu>
+               <clip pos="4" side="tl" part="lemh"/>
+               <clip pos="4" side="tl" part="a_verb"/>
+               <clip pos="4" side="tl" part="temps"/>
+               <clip pos="4" side="tl" part="pers"/>
+               <clip pos="4" side="tl" part="nbr"/>
+               <clip pos="4" side="tl" part="lemq"/>
+              </lu>
+           </chunk>
+         </out>
        </action>
     </rule>
 
