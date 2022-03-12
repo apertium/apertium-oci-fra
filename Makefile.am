@@ -62,6 +62,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2).t2x	\
 	$(PREFIX2b).t2x	\
 	$(PREFIX2).t2x_bis.bin	\
+	$(PREFIX2b).t2x_bis.bin	\
 	$(PREFIX2).t2x_pas.bin	\
 	$(PREFIX2).t2x_pro.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
@@ -287,7 +288,17 @@ $(PREFIX2b).t2x.bin: $(PREFIX2b).t2x
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX2).t2x_bis.bin: $(BASENAME).$(PREFIX2).t2x_bis
+$(PREFIX2).t2x_bis: $(BASENAME).$(PREFIX2).t2x_bis
+	apertium-filter-rules oci $(BASENAME).$(PREFIX2).t2x_bis >$@
+
+$(PREFIX2b).t2x_bis: $(BASENAME).$(PREFIX2).t2x_bis
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).t2x_bis >$@
+
+$(PREFIX2).t2x_bis.bin: $(PREFIX2).t2x_bis
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX2b).t2x_bis.bin: $(PREFIX2b).t2x_bis
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
