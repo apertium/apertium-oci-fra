@@ -3503,6 +3503,23 @@
     <match lemma="viu" tags="adj.*"><select lemma="vif"/></match>
   </rule>
 
+  <!-- acostumat -> habitué/habituel -->
+  <rule weight="0.8">
+    <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
+    <match lemma="a" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser"/>
+    <repeat from="0" upto="2">
+      <match tags="preadv"/>
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
+  </rule>
+
 
 <!-- **************** CNJADV **************** -->
 
@@ -5545,6 +5562,16 @@
   <rule weight="1.0">
     <match lemma="det.pos.*"/>
     <match lemma="grand" tags="n.*"><select lemma="grand-père"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="det.pos.*"/>
+    <match lemma="grand" tags="n.*"><select lemma="grand"/></match>
+    <or>
+      <match lemma="pair" tags="n.*"/>
+      <match lemma="paire" tags="n.*"/>
+      <match lemma="mair" tags="n.*"/>
+      <match lemma="maire" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- galant >> galant/amant -->
