@@ -3520,6 +3520,18 @@
     <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
   </rule>
 
+  <!-- pebrat -> poivré, grivois -->
+  <rule weight="0.8" v="oci">
+    <match lemma="pebrat" tags="adj.*"><select lemma="poivré"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <or>
+      <match lemma="cançon" tags="n.*"/>
+      <match lemma="istòria" tags="n.*"/>
+    </or>
+    <match lemma="pebrat" tags="adj.*"><select lemma="grivois"/></match>
+  </rule>
+
 
 <!-- **************** CNJADV **************** -->
 
@@ -5539,11 +5551,11 @@
       <match lemma="coma" tags="cnjadv"/>
       <match lemma="com" tags="cnjadv"/>
     </or>
-    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
   </rule>
 
   <rule weight="1.0">
-    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
     <or>
       <match lemma="primièr" tags="adj.*"/>
       <match lemma="purmèr" tags="adj.*"/>
@@ -5565,12 +5577,12 @@
       <match lemma="autre" tags="adj.*"/>
       <match lemma="doble" tags="adj.*"/>
     </or>
-    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
   </rule>
 
   <rule weight="1.0">
     <match tags="det.*"/>
-    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
     <repeat from="0" upto="1">
         <match tags="adj.*"/>
     </repeat>
@@ -5607,7 +5619,7 @@
 
   <rule weight="1.0">
     <match lemma="lo.*" tags="det.*"/>
-    <match lemma="tòca" tags="n.*"><select lemma="objectif"/></match>
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
     <repeat from="0" upto="3">
         <match tags="adj.*"/>
         <match lemma="ne" tags="prn.*"/>
