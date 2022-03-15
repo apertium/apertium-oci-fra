@@ -4198,6 +4198,74 @@
       <match tags="" case="Aa"/>
     </or>
   </rule>
+  <rule weight="1.2">
+    <match lemma="regent" tags="n.m.*"><select lemma="instituteur"/></match>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="escòla" tags="n.*"/>
+      <match lemma="pedagogia" tags="n.*"/>
+      <match lemma="escolan" tags="n.*"/>
+      <match lemma="ensenhar" tags="vblex.*"/>
+      <match lemma="apréner" tags="vblex.*"/>
+      <match lemma="aprene" tags="vblex.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="primari" tags="n.*"/>
+      <match lemma="primària" tags="n.*"/>
+      <match lemma="mairala" tags="n.*"/>
+      <match lemma="mairau" tags="n.*"/>
+      <match lemma="calandreta" tags="n.*"/>
+      <match lemma="Calandreta" tags="np.*"/>
+      <match lemma="bilingüe" tags="n.*"/>
+      <match lemma="monoligüe" tags="n.*"/>
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="classa" tags="n.*"/>
+      <match lemma="cors" tags="n.*"/>
+      <match lemma="eslhève" tags="n.*"/>
+      <match lemma="pòste" tags="n.*"/>
+      <match lemma="primari" tags="adj.*"/>
+      <match lemma="mairal" tags="adj.*"/>
+      <match lemma="mairau" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="escòla" tags="n.*"/>
+      <match lemma="pedagogia" tags="n.*"/>
+      <match lemma="escolan" tags="n.*"/>
+      <match lemma="ensenhar" tags="vblex.*"/>
+      <match lemma="apréner" tags="vblex.*"/>
+      <match lemma="aprene" tags="vblex.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="primari" tags="n.*"/>
+      <match lemma="primària" tags="n.*"/>
+      <match lemma="mairala" tags="n.*"/>
+      <match lemma="mairau" tags="n.*"/>
+      <match lemma="calandreta" tags="n.*"/>
+      <match lemma="Calandreta" tags="np.*"/>
+      <match lemma="bilingüe" tags="n.*"/>
+      <match lemma="monoligüe" tags="n.*"/>
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="classa" tags="n.*"/>
+      <match lemma="cors" tags="n.*"/>
+      <match lemma="eslhève" tags="n.*"/>
+      <match lemma="pòste" tags="n.*"/>
+      <match lemma="primari" tags="adj.*"/>
+      <match lemma="mairal" tags="adj.*"/>
+      <match lemma="mairau" tags="adj.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="regent" tags="n.m.*"><select lemma="instituteur"/></match>
+  </rule>
 
   <!-- repaus >> repos, palier -->
   <rule weight="0.8">
@@ -5046,6 +5114,17 @@
 -->
   <rule weight="1.2">
     <match lemma="causa" tags="n.*.pl"><select lemma="chose"/></match>
+  </rule>
+
+  <rule weight="1.2">
+    <or>
+      <match lemma="medish" tags="adj.*"/>
+      <match lemma="madish" tags="adj.*"/>
+      <match lemma="meteis" tags="adj.*"/>
+      <match lemma="madeish" tags="adj.*"/>
+      <match lemma="medeish" tags="adj.*"/>
+    </or>
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
   </rule>
 
   <rule weight="1.2">
@@ -7478,6 +7557,95 @@
        <match lemma="en" tags="pr"/>
       </or>
   </rule>
+
+  <!-- far mestièr de >> tenir lieu de, avoir besoin de -->
+  <rule weight="0.8" v="oci">
+    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="être# nécessaire de"/></match>
+  </rule>
+  <rule weight="0.9" v="oci">
+    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="n.*.pl"/>
+      <match tags="adj.*.pl"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <or>
+      <match lemma="me" tags="prn.*"/>
+      <match lemma="te" tags="prn.*"/>
+      <match lemma="li" tags="prn.*"/>
+      <match lemma="nos" tags="prn.*"/>
+      <match lemma="vos" tags="prn.*"/>
+      <match lemma="lor" tags="prn.*"/>
+    </or>
+    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="tenir# lieu de"/></match>
+    <or>
+      <match tags="n.*.sg"/>
+      <match tags="adj.*.sg"/>
+    </or>
+  </rule>
+
+  <!-- ha hrèita >> être nécessaire, être nécessaire des -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+    <match tags="n.*.pl"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*.sg"/>
+    <match tags="n.*.pl"/>
+  </rule>
+
+  <!-- ha besonh >> être nécessaire, être nécessaire des -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+    <match tags="n.*.pl"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*.pl"/>
+    <match tags="n.*.pl"/>
+  </rule>
+
+  <!-- quitar >> quitter, arrêter -->
+  <rule weight="0.8" v="oci">
+    <match lemma="quitar" tags="vblex.*"><select lemma="quitter"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="quitar" tags="vblex.*"><select lemma="arrêter"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
 
 
 
