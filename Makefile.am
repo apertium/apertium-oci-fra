@@ -63,6 +63,8 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).t2x	\
 	$(PREFIX2).t2x_bis.bin	\
 	$(PREFIX2b).t2x_bis.bin	\
+	$(PREFIX2).t2x_bis	\
+	$(PREFIX2b).t2x_bis	\
 	$(PREFIX2).t2x_pas.bin	\
 	$(PREFIX2).t2x_pro.bin	\
 	$(PREFIX2b).t2x_supersn.bin	\
