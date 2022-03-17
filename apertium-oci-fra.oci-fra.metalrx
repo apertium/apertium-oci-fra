@@ -7891,6 +7891,25 @@
   </rule>
 
 </rules>
+
+  <!-- Artés >> Artois, Arthez -->
+  <rule weight="0.8">
+    <match lemma="Artés" tags="np.top.*"><select lemma="Artois"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="Artés" tags="np.top.*"><select lemma="Arthez"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="Bearn" tags="np.*"/>
+      <match lemma="Asson" tags="np.*"/>
+      <match lemma="Biarn" tags="np.*"/>
+    </or>
+  </rule>
 </metalrx>
 
 <!--
