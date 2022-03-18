@@ -321,6 +321,9 @@
       <cat-item lemma="far# besonh" tags="vblex.*.p3.*"/>
       <cat-item lemma="har# besonh" tags="vblex.*.p3.*"/>
       <cat-item lemma="hèr# besonh" tags="vblex.*.p3.*"/>
+      <cat-item lemma="far# mestièr" tags="vblex.*.p3.*"/>
+      <cat-item lemma="har# hrèita" tags="vblex.*.p3.*"/>
+      <cat-item lemma="hèr# hrèita" tags="vblex.*.p3.*"/>
       <cat-item lemma="har# dòu" tags="vblex.*.p3.*"/>
       <cat-item lemma="hèr# dòu" tags="vblex.*.p3.*"/>
       <cat-item lemma="aver# degrèu" tags="vblex.*.p3.*"/>
@@ -332,6 +335,9 @@
       <cat-item lemma="far# besonh" tags="vblex.pp.*"/>
       <cat-item lemma="har# besonh" tags="vblex.pp.*"/>
       <cat-item lemma="hèr# besonh" tags="vblex.pp.*"/>
+      <cat-item lemma="far# mestièr" tags="vblex.pp.*"/>
+      <cat-item lemma="har# hrèita" tags="vblex.pp.*"/>
+      <cat-item lemma="hèr# hrèita" tags="vblex.pp.*"/>
       <cat-item lemma="har# dòu" tags="vblex.pp.*"/>
       <cat-item lemma="hèr# dòu" tags="vblex.pp.*"/>
       <cat-item lemma="aver# degrèu" tags="vblex.pp.*"/>
@@ -347,6 +353,12 @@
       <cat-item lemma="har# besonh" tags="vblex.ger"/>
       <cat-item lemma="hèr# besonh" tags="vblex.inf"/>
       <cat-item lemma="hèr# besonh" tags="vblex.ger"/>
+      <cat-item lemma="far# mestièr" tags="vblex.inf"/>
+      <cat-item lemma="far# mestièr" tags="vblex.ger"/>
+      <cat-item lemma="har# hrèita" tags="vblex.inf"/>
+      <cat-item lemma="har# hrèita" tags="vblex.ger"/>
+      <cat-item lemma="hèr# hrèita" tags="vblex.inf"/>
+      <cat-item lemma="hèr# hrèita" tags="vblex.ger"/>
       <cat-item lemma="har# dòu" tags="vblex.inf"/>
       <cat-item lemma="har# dòu" tags="vblex.ger"/>
       <cat-item lemma="hèr# dòu" tags="vblex.inf"/>
@@ -1890,6 +1902,19 @@
             <clip pos="1" side="tl" part="nbr"/>
             <lit-tag v="pl"/>
           </let>
+        </when>
+      </choose>
+      <choose>
+       <!-- canviem falloir p3.pl > p3.sg -->
+        <when>
+          <test>
+            <and>
+              <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="falloir"/></equal>
+              <equal><clip pos="1" side="tl" part="pers"/><lit-tag v="p3"/></equal>
+              <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></let>
         </when>
       </choose>
     </def-macro>
