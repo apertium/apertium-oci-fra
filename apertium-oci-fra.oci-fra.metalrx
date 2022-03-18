@@ -2547,7 +2547,7 @@
     <or>
       <match lemma="me" tags="prn.pro.*"/>
       <match lemma="te" tags="prn.pro.*"/>
-      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
       <match lemma="li" tags="prn.pro.*"/>
       <match lemma="nos" tags="prn.pro.*"/>
       <match lemma="vos" tags="prn.pro.*"/>
@@ -2562,7 +2562,7 @@
     <or>
       <match lemma="me" tags="prn.pro.*"/>
       <match lemma="te" tags="prn.pro.*"/>
-      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
       <match lemma="li" tags="prn.pro.*"/>
       <match lemma="nos" tags="prn.pro.*"/>
       <match lemma="vos" tags="prn.pro.*"/>
@@ -7511,7 +7511,7 @@
     <repeat from="0" upto="2">
       <or>
        <match tags="adv"/>
-       <match tags="preadv"/>
+       <match tags="prn.pro.*"/>
       </or>
     </repeat>
     <match tags="vblex.inf"/>
@@ -7654,77 +7654,364 @@
       </or>
   </rule>
 
-  <!-- far mestièr de >> tenir lieu de, avoir besoin de -->
-  <rule weight="0.8" v="oci">
-    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="être# nécessaire de"/></match>
+  <!-- far# besonh >> être nécessaire, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8">
+    <match lemma="far# besonh" tags="vblex.*"><select lemma="être nécessaire"/></match>
   </rule>
-  <rule weight="0.9" v="oci">
-    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+  <rule weight="1.0">
+    <match lemma="far# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="far# besonh" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="far# besonh" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
     <repeat from="0" upto="2">
       <or>
-        <match tags="adv"/>
-        <match tags="preadv"/>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
       </or>
     </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="far# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.pl"/>
+      <match tags="adj.*.pl"/>
+    </or>
+  </rule>
+
+  <!-- har# besonh >> être nécessaire, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8">
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="être nécessaire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="har# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.pl"/>
+      <match tags="adj.*.pl"/>
+    </or>
+  </rule>
+
+  <!-- hèr# besonh >> être nécessaire, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8">
+    <match lemma="hèr# besonh" tags="vblex.*"><select lemma="être nécessaire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="hèr# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hèr# besonh" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hèr# besonh" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hèr# besonh" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.pl"/>
+      <match tags="adj.*.pl"/>
+    </or>
+  </rule>
+
+  <!-- far# mestièr >> être nécessaire, tenir# lieu, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8" v="oci">
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="être nécessaire"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
     <or>
       <match tags="n.*.pl"/>
       <match tags="adj.*.pl"/>
     </or>
   </rule>
   <rule weight="1.0" v="oci">
-    <or>
-      <match lemma="me" tags="prn.*"/>
-      <match lemma="te" tags="prn.*"/>
-      <match lemma="li" tags="prn.*"/>
-      <match lemma="nos" tags="prn.*"/>
-      <match lemma="vos" tags="prn.*"/>
-      <match lemma="lor" tags="prn.*"/>
-    </or>
-    <match lemma="far# mestièr de" tags="vblex.*"><select lemma="tenir# lieu de"/></match>
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="tenir# lieu"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
     <or>
       <match tags="n.*.sg"/>
       <match tags="adj.*.sg"/>
     </or>
   </rule>
-
-  <!-- ha hrèita >> être nécessaire, être nécessaire des -->
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire"/></match>
+  <rule weight="1.2" v="oci">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.sg"/>
+      <match tags="adj.*.sg"/>
+    </or>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
-    <match tags="n.*.pl"/>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+  <rule weight="1.0" v="oci">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="far# mestièr" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
     <repeat from="0" upto="2">
       <or>
-        <match tags="adv"/>
-        <match tags="preadv"/>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
       </or>
     </repeat>
-    <match tags="adj.*.sg"/>
-    <match tags="n.*.pl"/>
+    <match tags="*.inf"/>
   </rule>
 
-  <!-- ha besonh >> être nécessaire, être nécessaire des -->
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire"/></match>
+  <!-- har# hrèita >> être nécessaire, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8">
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="être nécessaire"/></match>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
-    <match tags="n.*.pl"/>
+  <rule weight="1.0">
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match tags="det.*"/>
+    </or>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="har# besonh" tags="vblex.*"><select lemma="être# nécessaire des"/></match>
+  <rule weight="1.2">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.sg"/>
+      <match tags="adj.*.sg"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="har# hrèita" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
     <repeat from="0" upto="2">
       <or>
-        <match tags="adv"/>
-        <match tags="preadv"/>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
       </or>
     </repeat>
-    <match tags="adj.*.pl"/>
-    <match tags="n.*.pl"/>
+    <match tags="*.inf"/>
+  </rule>
+
+  <!-- hèr# hrèita >> être nécessaire, avoir# besoin, avoir# besoin de, falloir -->
+  <rule weight="0.8">
+    <match lemma="hèr# hrèita" tags="vblex.*"><select lemma="être nécessaire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="hèr# hrèita" tags="vblex.*"><select lemma="falloir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match tags="det.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hèr# hrèita" tags="vblex.*"><select lemma="avoir# besoin"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="n.*.sg"/>
+      <match tags="adj.*.sg"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="lo" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="hèr# hrèita" tags="vblex.*"><select lemma="avoir# besoin de"/></match>
+    <repeat from="0" upto="2">
+      <or>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="*.inf"/>
   </rule>
 
   <!-- quitar >> quitter, arrêter -->
