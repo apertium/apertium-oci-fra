@@ -1432,6 +1432,12 @@
     <match lemma="voyant" tags="adj.*" v="oci@gascon"><select lemma="vedent"/></match>
   </rule>
 
+  <!-- louable -> lau[sd]able, logadís -->
+  <rule weight="0.8">
+    <match lemma="louable" tags="adj.*" v="oci"><select lemma="lausable"/></match>
+    <match lemma="louable" tags="adj.*" v="oci@gascon"><select lemma="laudable"/></match>
+  </rule>
+
 
 <!-- **************** N **************** -->
 
@@ -3235,6 +3241,53 @@
       <match lemma="Euroligue" tags="np.*"/>
     </or>
   </rule>
+
+  <!-- boulette -> boleta/cagada -->
+  <rule weight="0.8">
+    <match lemma="boulette" tags="n.*"><select lemma="boleta"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="le" tags="det.*"/>
+    <match lemma="boulette" tags="n.*"><select lemma="cagada"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="faire" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+        <match tags="adv"/>
+        <match tags="preadv"/>
+    </repeat>
+    <match lemma="un" tags="det.*"/>
+    <repeat from="0" upto="4">
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+    </repeat>
+    <match lemma="boulette" tags="n.*"><select lemma="cagada"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="en" tags="prn.*"/>
+    <or>
+      <match lemma="faire" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+        <match tags="adv"/>
+        <match tags="preadv"/>
+    </repeat>
+    <match lemma="un" tags="det.*"/>
+    <repeat from="0" upto="4">
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+    </repeat>
+    <match lemma="boulette" tags="n.*"><select lemma="boleta"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="boulette" tags="n.*"><select lemma="boleta"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
 
 
 <!-- **************** VBHAVER **************** -->
