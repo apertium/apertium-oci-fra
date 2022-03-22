@@ -21,6 +21,8 @@ TARGETS_COMMON =		\
 	$(PREFIX1b).autobil.bin	\
 	$(PREFIX1).autolex.bin	\
 	$(PREFIX1b).autolex.bin	\
+        $(PREFIX1).autosep1.bin \
+        $(PREFIX1).autosep2.bin \
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -118,6 +120,20 @@ $(PREFIX2b).automorf.bin: $(AP_SRC2)/$(LANG2).automorf.bin $(PREFIX2b).autobil.b
 
 $(PREFIX1).autogen.bin: $(AP_SRC2)/$(LANG2).autogen.bin
 	cp $< $@
+
+###############################################################################
+## Multiwords
+###############################################################################
+
+$(PREFIX1).autosep1.bin: $(BASENAME).$(PREFIX1).l1x
+	lsx-comp lr $< $@
+$(PREFIX1).autosep2.bin: $(BASENAME).$(PREFIX1).l2x
+	lsx-comp lr $< $@
+
+$(PREFIX2).autosep1.bin: $(BASENAME).$(PREFIX2).l1x
+	lsx-comp lr $< $@
+$(PREFIX2).autosep2.bin: $(BASENAME).$(PREFIX2).l2x
+	lsx-comp lr $< $@
 
 ###############################################################################
 ## Tagger models
@@ -349,9 +365,11 @@ $(PREFIX2b).autopgen.bin: $(AP_SRC1)/$(LANG1b).autopgen.bin
 ###############################################################################
 
 EXTRA_DIST=					\
+		$(BASENAME).$(PREFIX1).dix	\
+		$(BASENAME).$(PREFIX1).l1x	\
+		$(BASENAME).$(PREFIX1).l2x	\
 		.deps/$(BASENAME).$(PREFIX1).lrx	\
 		.deps/$(BASENAME).$(PREFIX1b).lrx	\
-		$(BASENAME).$(PREFIX1).dix	\
 		.deps/$(BASENAME).$(PREFIX2).lrx	\
 		.deps/$(BASENAME).$(PREFIX2b).lrx	\
 		$(BASENAME).$(PREFIX1).t1x	\
