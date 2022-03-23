@@ -3290,6 +3290,124 @@
   </rule>
 
 
+  <!-- aileron -> aleta, aleron -->
+  <rule weight="0.8">
+    <match lemma="aileron" tags="n.*"><select lemma="aleta"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aileron" tags="n.*"><select lemma="aleron"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="avion" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="avion" tags="n.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="aileron" tags="n.*"><select lemma="aleron"/></match>
+  </rule>
+
+  <!-- baie -> baia, grana, obertura -->
+  <rule weight="0.8">
+    <match lemma="baie" tags="n.*"><select lemma="baia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="baie" tags="n.f.pl"><select lemma="grana"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="baie" tags="n.*"><select lemma="grana"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+        <match lemma="goji" tags="n.*"/>
+        <match lemma="génévrier" tags="n.*"/>
+        <match lemma="sureau" tags="n.*"/>
+        <match lemma="genièvre" tags="n.*"/>
+        <match lemma="sureau" tags="n.*"/>
+        <match lemma="houx" tags="n.*"/>
+        <match lemma="gui" tags="n.*"/>
+        <match lemma="sureau" tags="n.*"/>
+        <match lemma="sureau" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="baie" tags="n.*"><select lemma="baia"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+        <match tags="np.*"/>
+        <match tags=""/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="baie" tags="n.*"><select lemma="baia"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="mer" tags="n.*"/>
+        <match lemma="océan" tags="n.*"/>
+        <match lemma="bateau" tags="n.*"/>
+        <match lemma="plage" tags="n.*"/>
+        <match lemma="falaise" tags="n.*"/>
+        <match lemma="calanque" tags="n.*"/>
+        <match lemma="accoster" tags="vblex.*"/>
+        <match lemma="mouiller" tags="vblex.*"/>
+        <match lemma="débarquer" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="baie" tags="n.*"><select lemma="obertura"/></match>
+    <or>
+      <match lemma="vitré" tags="adj.*"/>
+      <match lemma="ouvrir" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <or>
+        <match lemma="ouvrir" tags="vblex.*"/>
+        <match lemma="fermer" tags="vblex.*"/>
+        <match lemma="passer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="baie" tags="n.*"><select lemma="obertura"/></match>
+  </rule>
+
+  <!-- beau-fils -> gendre, hilhastre/filhastre -->
+  <rule weight="0.8">
+    <match lemma="beau-fils" tags="n.*"><select lemma="gendre"/></match>
+  </rule>
+
+  <!-- boîte -> boita, discotèca -->
+  <rule weight="0.8">
+    <match lemma="boîte" tags="n.*"><select lemma="boita"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="aller" tags="vblex.*"/>
+        <match lemma="sortir" tags="vblex.*"/>
+        <match lemma="danser" tags="vblex.*"/>
+        <match lemma="draguer" tags="vblex.*"/>
+        <match lemma="soirée" tags="n.*"/>
+    </or>
+    <match lemma="en" tags="pr"/>
+    <match lemma="boîte" tags="n.*"><select lemma="discotèca"/></match>
+  </rule>
+
 
 <!-- **************** VBHAVER **************** -->
 
