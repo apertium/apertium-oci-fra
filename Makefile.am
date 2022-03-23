@@ -23,6 +23,8 @@ TARGETS_COMMON =		\
 	$(PREFIX1b).autolex.bin	\
         $(PREFIX1).autosep1.bin \
         $(PREFIX1).autosep2.bin \
+        $(PREFIX2).autosep1.bin \
+        $(PREFIX2).autosep2.bin \
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -124,6 +126,17 @@ $(PREFIX1).autogen.bin: $(AP_SRC2)/$(LANG2).autogen.bin
 ###############################################################################
 ## Multiwords
 ###############################################################################
+
+#.deps/$(PREFIX1).l1x: $(BASENAME).$(PREFIX1).l1x
+#	apertium-filter-rules oci $(BASENAME).$(PREFIX1).l1x >$@
+
+#.deps/$(PREFIX1b).l1x: $(BASENAME).$(PREFIX1).l1x
+#	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).l1x >$@
+
+#$(PREFIX1).autosep1.bin: .deps/$(PREFIX1).l1x
+#	lsx-comp lr $< $@
+#$(PREFIX1b).autosep1.bin: .deps/$(PREFIX1b).l1x
+#	lsx-comp lr $< $@
 
 $(PREFIX1).autosep1.bin: $(BASENAME).$(PREFIX1).l1x
 	lsx-comp lr $< $@
@@ -368,6 +381,8 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).dix	\
 		$(BASENAME).$(PREFIX1).l1x	\
 		$(BASENAME).$(PREFIX1).l2x	\
+		$(BASENAME).$(PREFIX2).l1x	\
+		$(BASENAME).$(PREFIX2).l2x	\
 		.deps/$(BASENAME).$(PREFIX1).lrx	\
 		.deps/$(BASENAME).$(PREFIX1b).lrx	\
 		.deps/$(BASENAME).$(PREFIX2).lrx	\
