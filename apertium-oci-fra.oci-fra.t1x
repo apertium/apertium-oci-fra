@@ -4097,15 +4097,25 @@
       <choose>
         <when>
           <test>
+            <or>
+              <in><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in>
+              <equal><clip pos="1" side="tl" part="a_num"/><lit v="num"/></equal>
+              <and>
+                <in caseless="yes"><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in>
+                <equal><var n="EOS"/><lit v="true"/></equal>
+                <not><equal><clip pos="1" side="tl" part="a_num"/><lit v="num"/></equal></not>
+              </and>
+            </or>
+          </test>
+        </when>
+        <when>
+          <test>
             <equal><var n="EOS"/><lit v="true"/></equal>
           </test>
           <choose>
             <when>
               <test>
-                <and>
-                  <equal><clip pos="1" side="sl" part="a_np_acr_ij"/><lit v=""/></equal>
-                  <not><in><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in></not>
-                </and>
+                <equal><clip pos="1" side="sl" part="a_np_acr_ij"/><lit v=""/></equal>
               </test>
               <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
             </when>
