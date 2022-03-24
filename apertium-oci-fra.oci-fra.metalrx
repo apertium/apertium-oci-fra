@@ -3173,6 +3173,11 @@
     <match lemma="passat" tags="adj.*"><select lemma="dernier"/></match>
   </rule>
 
+  <!-- venent >> prochain, suivant -->
+  <rule weight="0.8">
+    <match lemma="venent" tags="adj.*"><select lemma="prochain"/></match>
+  </rule>
+
   <!-- cortés >> poli, courtois -->
   <rule weight="0.8">
     <match lemma="cortés" tags="adj.*"><select lemma="poli"/></match>
@@ -3544,6 +3549,23 @@
       <match lemma="istòria" tags="n.*"/>
     </or>
     <match lemma="pebrat" tags="adj.*"><select lemma="grivois"/></match>
+  </rule>
+
+  <!-- espandit -> étendu, répandu -->
+  <rule weight="0.8">
+    <match lemma="espandit" tags="adj.*"><select lemma="répandu"/></match>
+  </rule>
+
+  <!-- parcial/parciau -> partial, partiel -->
+  <rule weight="0.8">
+    <match lemma="parcial" tags="adj.*" v="oci"><select lemma="partiel"/></match>
+    <match lemma="parciau" tags="adj.*" v="oci@gascon"><select lemma="partiel"/></match>
+  </rule>
+
+  <!-- sadol/hart -> repu, saoûl -->
+  <rule weight="0.8">
+    <match lemma="sadol" tags="adj.*" v="oci"><select lemma="repu"/></match>
+    <match lemma="hart" tags="adj.*" v="oci@gascon"><select lemma="repu"/></match>
   </rule>
 
 
@@ -4082,6 +4104,87 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- dintrada -> entrée, rentrée -->
+  <rule weight="0.8" v="oci">
+    <match lemma="dintrada" tags="n.*"><select lemma="entrée"/></match>
+  </rule>
+  <rule weight="1.1" v="oci">
+    <match lemma="dintrada" tags="n.m.*"><select lemma="rentrée"/></match>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="escòla" tags="n.*"/>
+      <match lemma="pedagogia" tags="n.*"/>
+      <match lemma="escolan" tags="n.*"/>
+      <match lemma="ensenhar" tags="vblex.*"/>
+      <match lemma="apréner" tags="vblex.*"/>
+      <match lemma="aprene" tags="vblex.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="primari" tags="n.*"/>
+      <match lemma="primària" tags="n.*"/>
+      <match lemma="mairala" tags="n.*"/>
+      <match lemma="mairau" tags="n.*"/>
+      <match lemma="calandreta" tags="n.*"/>
+      <match lemma="Calandreta" tags="np.*"/>
+      <match lemma="bilingüe" tags="n.*"/>
+      <match lemma="monoligüe" tags="n.*"/>
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="classa" tags="n.*"/>
+      <match lemma="cors" tags="n.*"/>
+      <match lemma="eslhève" tags="n.*"/>
+      <match lemma="pòste" tags="n.*"/>
+      <match lemma="primari" tags="adj.*"/>
+      <match lemma="mairal" tags="adj.*"/>
+      <match lemma="mairau" tags="adj.*"/>
+      <match lemma="regent" tags="n.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="institutor" tags="n.*"/>
+      <match lemma="professor" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.1" v="oci">
+    <or>
+      <match lemma="escòla" tags="n.*"/>
+      <match lemma="pedagogia" tags="n.*"/>
+      <match lemma="escolan" tags="n.*"/>
+      <match lemma="ensenhar" tags="vblex.*"/>
+      <match lemma="apréner" tags="vblex.*"/>
+      <match lemma="aprene" tags="vblex.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="primari" tags="n.*"/>
+      <match lemma="primària" tags="n.*"/>
+      <match lemma="mairala" tags="n.*"/>
+      <match lemma="mairau" tags="n.*"/>
+      <match lemma="calandreta" tags="n.*"/>
+      <match lemma="Calandreta" tags="np.*"/>
+      <match lemma="bilingüe" tags="n.*"/>
+      <match lemma="monoligüe" tags="n.*"/>
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="classa" tags="n.*"/>
+      <match lemma="cors" tags="n.*"/>
+      <match lemma="eslhève" tags="n.*"/>
+      <match lemma="pòste" tags="n.*"/>
+      <match lemma="primari" tags="adj.*"/>
+      <match lemma="mairal" tags="adj.*"/>
+      <match lemma="mairau" tags="adj.*"/>
+      <match lemma="regent" tags="n.*"/>
+      <match lemma="ensenhaire" tags="n.*"/>
+      <match lemma="institutor" tags="n.*"/>
+      <match lemma="professor" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="dintrada" tags="n.m.*"><select lemma="rentrée"/></match>
+  </rule>
 
   <!-- grop >> groupe, poule -->
   <rule weight="0.8">

@@ -812,6 +812,42 @@
     <match lemma="vers" tags="pr"><select lemma="cap tà"/></match>
   </rule>
 
+  <!-- sous l'effet de >> a causa de, jos l'efièch de -->
+  <!-- sous l'effet de >> pr'amor de, devath l'efèit de -->
+  <rule weight="0.8">
+    <match lemma="sous l'effet de" tags="pr" v="oci"><select lemma="a causa de"/></match>
+    <match lemma="sous l'effet de" tags="pr" v="oci@gascon"><select lemma="pr'amor de"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="sous l'effet de" tags="pr" v="oci"><select lemma="jos l'efièch de"/></match>
+    <match lemma="sous l'effet de" tags="pr" v="oci@gascon"><select lemma="devath l'efèit de"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="drogue" tags="n.*"/>
+      <match lemma="alcool" tags="n.*"/>
+      <match lemma="cannabis" tags="n.*"/>
+      <match lemma="cocaïne" tags="n.*"/>
+      <match lemma="héroïne" tags="n.*"/>
+      <match lemma="hashish" tags="n.*"/>
+      <match lemma="LMD" tags="n.*"/>
+      <match lemma="ecstasy" tags="n.*"/>
+      <match lemma="boisson" tags="n.*"/>
+      <match lemma="vin" tags="n.*"/>
+      <match lemma="bière" tags="n.*"/>
+      <match lemma="whisky" tags="n.*"/>
+      <match lemma="champagne" tags="n.*"/>
+      <match lemma="apéritif" tags="n.*"/>
+      <match lemma="liqueur" tags="n.*"/>
+      <match lemma="eau-de-vie" tags="n.*"/>
+    </or>
+  </rule>
+
 
 
 <!-- **************** REL **************** -->
@@ -1442,7 +1478,7 @@
 
 <!-- **************** N **************** -->
 
-  <!-- diffuseur >> mèstre/mèste, mestressa/mestrèssa -->
+  <!-- diffuseur >> difusor, difusader -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="diffuseur" tags="n.*"><select lemma="difusor"/></match>
   </rule>
@@ -1812,6 +1848,15 @@
     <or>
       <match lemma="assurance" tags="n.*"/>
       <match lemma="écriture" tags="n.*"/>
+      <match lemma="caractère" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="police" tags="n.*"><select lemma="polissa"/></match>
+    <or>
+      <match lemma="gras" tags="adj.*"/>
+      <match lemma="italique" tags="adj.*"/>
+      <match lemma="souligné" tags="adj.*"/>
     </or>
   </rule>
 
@@ -3073,6 +3118,12 @@
     <match lemma="ennui" tags="n.*" v="oci@gascon"><select lemma="chepic"/></match>
     <match lemma="ennui" tags="n.*" v="oci"><select lemma="pensament"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="lo" tags="det.def.m.sg"/>
+    <match lemma="ennui" tags="n.*" v="oci@gascon"><select lemma="anujèr"/></match>
+    <match lemma="ennui" tags="n.*" v="oci"><select lemma="anugièr"/></match>
+  </rule>
+
 
   <rule weight="1.0">
     <match lemma="le" tags="det.m.sg"/>
@@ -3173,6 +3224,11 @@
       <match lemma="boire" tags="vblex.*"/>
     </or>
     <match lemma="toast" tags="n.*"><select lemma="brinde"/></match>
+  </rule>
+
+  <!-- touffe -> mata, tufa/tuha -->
+  <rule weight="0.8">
+    <match lemma="touffe" tags="n.*"><select lemma="mata"/></match>
   </rule>
 
   <!-- nouvelle >> novèla, navèra -->
@@ -3406,6 +3462,52 @@
     </or>
     <match lemma="en" tags="pr"/>
     <match lemma="boîte" tags="n.*"><select lemma="discotèca"/></match>
+  </rule>
+
+  <!-- chat -> gat, chat -->
+  <rule weight="0.8">
+    <match lemma="chat" tags="n.*"><select lemma="gat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sur" tags="pr"/>
+    <match tags="det.*"/>
+    <match lemma="chat" tags="n.m.sg"><select lemma="chat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="chat" tags="n.m.sg"><select lemma="chat"/></match>
+    <match lemma="en" tags="pr"/>
+    <match lemma="ligne" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="chat" tags="n.m.sg"><select lemma="chat"/></match>
+    <match lemma="bot" tags="n.*"/>
+  </rule>
+
+  <!-- cliché -> clichat, lòc comun -->
+  <rule weight="0.8">
+    <match lemma="cliché" tags="n.*"><select lemma="clichat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cliché" tags="n.*"><select lemma="clichat"/></match>
+    <match lemma="sur" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="avoir" tags="vbhaver.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="le" tags="det.*"/>
+    <match lemma="cliché" tags="n.m.pl"><select lemma="clichat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="faire" tags="vblex.*"/>
+      <match tags="vbser.*"/>
+    </or>
+    <match lemma="cliché" tags="n.m.pl"><select lemma="clichat"/></match>
+  </rule>
+
+  <!-- cliché -> clichat, lòc comun -->
+  <rule weight="0.8">
+    <match lemma="génie" tags="n.*"><select lemma="engèni"/></match>
   </rule>
 
 
@@ -3646,6 +3748,19 @@
     </or>
   </rule>
 
+  <!-- démettre >> desmetre/desméter, deslogar -->
+  <rule weight="0.8">
+    <match lemma="démettre" tags="vblex.*" v="oci"><select lemma="desmetre"/></match>
+    <match lemma="démettre" tags="vblex.*" v="oci@gascon"><select lemma="desméter"/></match>
+  </rule>
+
+  <!-- dresser -> dreçar, quilhar -->
+  <macro name="verb_nopron_pron" p1="dresser" p2="dreçar" p3="quilhar" />
+
+  <rule weight="0.8">
+    <match lemma="dresser" tags="vblex.*"><select lemma="dreçar"/></match>
+  </rule>
+
   <!-- décrocher >> descrocar, agantar/desgahar, despenjar -->
   <rule weight="0.8">
     <match lemma="décrocher" tags="vblex.*"><select lemma="despenjar"/></match>
@@ -3674,6 +3789,10 @@
   <macro name="verb_nopron_pron" p1="dérouler" p2="desenrotlar" p3="debanar" />
 
 
+  <!-- terrer >> amagar, enterrar -->
+  <macro name="verb_nopron_pron" p1="terrer" p2="enterrar" p3="amagar" />
+
+
   <!-- éblouir >> esbleugir/enlusernar, embalausir/esmiraglar -->
   <rule weight="0.8">
     <match lemma="éblouir" tags="vblex.*" v="oci"><select lemma="esbleugir"/></match>
@@ -3695,6 +3814,15 @@
     <match lemma="embrasser" tags="vblex.*"><select lemma="abraçar"/></match>
   </rule>
 
+  <!-- engloutir >> engolir, englotir -->
+  <rule weight="0.8">
+    <match lemma="engloutir" tags="vblex.*"><select lemma="englotir"/></match>
+  </rule>
+
+  <!-- flotter >> flotar, plòure/plàver, bandejar -->
+  <rule weight="0.8">
+    <match lemma="flotter" tags="vblex.*"><select lemma="flotar"/></match>
+  </rule>
 
   <!-- ficher >> ficar/hicar, fichar -->
   <macro name="verb_nopron_pron" p1="ficher" p2="fichar" p3="ficar" v="oci" />
@@ -3782,6 +3910,12 @@
   <!-- tromper >> enganar, trompar... -->
   <rule weight="0.8">
     <match lemma="tromper" tags="vblex.*"><select lemma="enganar"/></match>
+  </rule>
+
+  <!-- truquer >> falsar/faussar, trucar... -->
+  <rule weight="0.8">
+    <match lemma="truquer" tags="vblex.*" v="oci"><select lemma="falsar"/></match>
+    <match lemma="truquer" tags="vblex.*" v="oci@gascon"><select lemma="faussar"/></match>
   </rule>
 
   <!-- conduire >> conduire/condusir, menar/miar -->
@@ -4020,6 +4154,11 @@
 
   <!-- souvenir >> recordar, rebrembar -->
   <macro name="verb_nopron_pron" p1="souvenir" p2="recordar" p3="rebrembar" />
+
+  <!-- décortiquer -> descloscar, derruscar, destecar -->
+  <rule weight="0.8">
+    <match lemma="décortiquer" tags="vblex.*"><select lemma="descloscar"/></match>
+  </rule>
 
   <!-- voler >> volar / raubar -->
   <rule weight="0.8">
