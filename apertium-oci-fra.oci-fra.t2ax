@@ -16,6 +16,7 @@
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn"/>
       <cat-item tags="SPron.tn.*"/>
+      <cat-item tags="prn.subj.*"/>
       <cat-item lemma="quel" tags="SPron.*"/>
       <cat-item lemma="qui" tags="SPron.*"/>
       <cat-item lemma="qui" tags="rel"/>
@@ -28,6 +29,12 @@
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="SAdv_SA">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
     </def-cat>
     <def-cat n="ne_adv">
       <cat-item lemma="ne" tags="SAdv"/>
@@ -50,6 +57,10 @@
     </def-cat>
     <def-cat n="SV_vbser_p3">
       <cat-item tags="SV.vbser.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser_p3sg">
+      <cat-item tags="SV.vbser.*.p3.sg"/>
+      <cat-item tags="SV.vbser.*.p3.sg.*"/>
     </def-cat>
     <def-cat n="SV_vbser_p3pl">
       <cat-item tags="SV.vbser.*.p3.pl"/>
@@ -2494,6 +2505,288 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv que > ce SV_vbser_p3 SAdv que: es aicí que > c'est ici que">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv SAdv que > ce SV_vbser_p3 SAdv SAdv que: es pas aicí que > c'est pas ici que">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+            <choose>
+              <when>
+                <test>
+                  <equal>
+                    <case-of pos="1" part="lem"/>
+                    <lit v="Aa"/>
+                  </equal>
+                </test>
+                <modify-case>
+                  <clip pos="1" part="lem"/>
+                  <lit v="aa"/>
+                </modify-case>
+              </when>
+            </choose>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv que > CM ce SV_vbser_p3 SAdv que: es aicí que > c'est ici que">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="2">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv SAdv que > CM ce SV_vbser_p3 SAdv SAdv que: es pas aicí que > c'est pas ici que">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="2">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="2" part="pers"/>
+                <clip pos="2" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="2">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SPron_tn SPron_pro SPron_pro SPron_pro SV (aquesta regla és per impedir la generació del prn.tn">
       <pattern>
         <pattern-item n="SPron_tn"/>
@@ -2706,7 +2999,7 @@
             <clip pos="2" part="nbr"/>
             <lit v="{^"/>
             <get-case-from pos="2">
-		      <lit v="prpers"/>
+	      <lit v="prpers"/>
             </get-case-from>
             <lit-tag v="prn.tn.3.4.5"/>
             <lit v="$}"/>
@@ -2877,7 +3170,7 @@
             <clip pos="3" part="nbr"/>
             <lit v="{^"/>
             <get-case-from pos="2">
-		      <lit v="prpers"/>
+	      <lit v="prpers"/>
             </get-case-from>
             <lit-tag v="prn.tn.3.4.5"/>
             <lit v="$}"/>
