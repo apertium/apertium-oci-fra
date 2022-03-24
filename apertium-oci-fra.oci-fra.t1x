@@ -14283,6 +14283,15 @@
          <pattern-item n="vbnoser_conj"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
         <call-macro n="firstWord">
           <with-param pos="1"/>
         </call-macro>
@@ -14295,7 +14304,6 @@
         <call-macro n="f_vchunk_name">
           <with-param pos="1"/>
         </call-macro>
-        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <out>
            <chunk namefrom="lemma">
