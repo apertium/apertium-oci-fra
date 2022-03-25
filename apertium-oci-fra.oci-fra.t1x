@@ -958,6 +958,31 @@
       <list-item v="mei bon"/>
     </def-list>
 
+    <def-list n="mois">
+      <list-item v="janvier"/>
+      <list-item v="février"/>
+      <list-item v="mars"/>
+      <list-item v="avril"/>
+      <list-item v="mai"/>
+      <list-item v="juin"/>
+      <list-item v="juillet"/>
+      <list-item v="août"/>
+      <list-item v="septembre"/>
+      <list-item v="octobre"/>
+      <list-item v="novembre"/>
+      <list-item v="décembre"/>
+    </def-list>
+
+    <def-list n="jour">
+      <list-item v="lundi"/>
+      <list-item v="mardi"/>
+      <list-item v="mercredi"/>
+      <list-item v="jeudi"/>
+      <list-item v="vendredi"/>
+      <list-item v="samedi"/>
+      <list-item v="dimanche"/>
+    </def-list>
+
     <def-list n="en_majuscules">
       <list-item v="Anglo-Saxon"/>
       <list-item v="Cap-Verdien"/>
@@ -5762,7 +5787,19 @@
         <choose>
           <when>
             <test>
-              <in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="adj_pre"/></in>
+              <or>
+                <in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="adj_pre"/></in>
+                <and>
+                  <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="prochain"/></equal>
+                  <not><in caseless="yes"><clip pos="2" side="sl" part="lem"/><list n="mois"/></in></not>
+                  <not><in caseless="yes"><clip pos="2" side="sl" part="lem"/><list n="jour"/></in></not>
+                  <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="semaine"/></equal></not>
+                  <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="mois"/></equal></not>
+                  <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="année"/></equal></not>
+                  <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="week-end"/></equal></not>
+                  <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="siècle"/></equal></not>
+                </and>
+              </or>
             </test>
             <out>
               <chunk name="a_n" case="caseFirstWord">
