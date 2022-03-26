@@ -41,6 +41,9 @@
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
     </def-cat>
+    <def-cat n="cela">
+      <cat-item lemma="cela" tags="SAdv.enon"/>
+    </def-cat>
     <def-cat n="SPron_pro">
       <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
@@ -60,15 +63,51 @@
       <cat-item lemma="haverinf_ger" tags="SV.*"/>
       <cat-item lemma="avoir" tags="SV.*"/>
     </def-cat>
+    <def-cat n="SV_vbhaver_p1_p2">
+      <cat-item tags="SV.vbhaver.*.p1.*"/>
+      <cat-item lemma="havercj" tags="SV.*.p1.*"/>
+      <cat-item lemma="haverinf_ger" tags="SV.*.p1.*"/>
+      <cat-item lemma="avoir" tags="SV.*.p1.*"/>
+      <cat-item tags="SV.vbhaver.*.p2.*"/>
+      <cat-item lemma="havercj" tags="SV.*.p2.*"/>
+      <cat-item lemma="haverinf_ger" tags="SV.*.p2.*"/>
+      <cat-item lemma="avoir" tags="SV.*.p2.*"/>
+    </def-cat>
+    <def-cat n="SV_vbhaver_p3">
+      <cat-item tags="SV.vbhaver.*.p3.*"/>
+      <cat-item lemma="havercj" tags="SV.*.p3.*"/>
+      <cat-item lemma="haverinf_ger" tags="SV.*.p3.*"/>
+      <cat-item lemma="avoir" tags="SV.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vbhaver_p3pl">
+      <cat-item tags="SV.vbhaver.*.p3.pl"/>
+      <cat-item lemma="havercj" tags="SV.*.p3.pl"/>
+      <cat-item lemma="haverinf_ger" tags="SV.*.p3.pl"/>
+      <cat-item lemma="avoir" tags="SV.*.p3.pl"/>
+    </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
       <cat-item tags="SV.vbhaver.partitiu.*"/>
       <cat-item tags="SV.vblex.partitiu.*"/>
     </def-cat>
+    <def-cat n="SV_pl">
+      <cat-item tags="SV.*.pl"/>
+    </def-cat>
 
     <def-cat n="SV_aver"> <!-- il manque des formes comme l'infinitif et le passé composé -->
       <cat-item lemma="havercj" tags="SV.*"/>
       <cat-item lemma="havercj" tags="SVneg.*"/>
+    </def-cat>
+
+    <def-cat n="SV_vblex_p1_p2">
+      <cat-item tags="SV.vblex.*.p1.*"/>
+      <cat-item tags="SV.vblex.*.p2.*"/>
+    </def-cat>
+    <def-cat n="SV_vblex_p3">
+      <cat-item tags="SV.vblex.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vblex_p3pl">
+      <cat-item tags="SV.vblex.*.p3.pl"/>
     </def-cat>
 
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
@@ -160,6 +199,11 @@
       <cat-item tags="SN.*"/>
       <cat-item tags="unknown"/>
     </def-cat>
+    <def-cat n="SNpl_UNK">
+      <cat-item tags="SN.*.pl"/>
+      <cat-item tags="SN.*.pl.*"/>
+      <cat-item tags="unknown"/>
+    </def-cat>
     <def-cat n="SN_SA_UNK">
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
@@ -174,11 +218,21 @@
     <def-cat n="CM">
       <cat-item tags="CM"/>
     </def-cat>
+    <def-cat n="CM_SENT">
+      <cat-item tags="CM"/>
+      <cat-item tags="SENT"/>
+      <cat-item tags="sent"/>
+    </def-cat>
+    <def-cat n="CM_RPAR">
+      <cat-item tags="CM"/>
+      <cat-item lemma="»" tags="RPAR"/>
+    </def-cat>
     <def-cat n="LPAR">
       <cat-item tags="LPAR"/>
     </def-cat>
     <def-cat n="SENT">
       <cat-item tags="SENT"/>
+      <cat-item tags="sent"/>
     </def-cat>
     <def-cat n="SENT_PREP_CNJ_REL">
       <cat-item tags="SENT"/>
@@ -230,11 +284,27 @@
       <attr-item tags="pas_neg"/>
     </def-attr>
 
+    <def-attr n="temps">
+      <attr-item tags="inf"/>
+      <attr-item tags="ger"/>
+      <attr-item tags="pp"/>
+      <attr-item tags="pri"/>
+      <attr-item tags="ifi"/>
+      <attr-item tags="pii"/>
+      <attr-item tags="fti"/>
+      <attr-item tags="cni"/>
+      <attr-item tags="prs"/>
+      <attr-item tags="pis"/>
+      <attr-item tags="fts"/>
+      <attr-item tags="imp"/>
+    </def-attr>
+
   </section-def-attrs>
 
   <section-def-vars>
     <def-var n="number"/>
     <def-var n="is_expression"/>
+    <def-var n="is_net"/>
   </section-def-vars>
 
   <section-def-lists>
@@ -306,6 +376,67 @@
   </section-def-lists>
 
   <section-def-macros>
+
+ <def-macro n="f_is_net" npar="1"> <!-- par1 = SV -->
+   <choose>
+     <when>
+       <test>
+         <or>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="conclure"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="dire"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="écrire"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="faire"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lire"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="répondre"/></equal>
+           <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+           <equal><clip pos="1" part="temps"/><lit-tag v="pii"/></equal>
+         </or>
+       </test>
+       <let><var n="is_net"/><lit-tag v="yes"/></let>
+     </when>
+     <otherwise>
+       <let><var n="is_net"/><lit-tag v="no"/></let>
+     </otherwise>
+   </choose>
+ </def-macro>
+
+ <def-macro n="generate_il" npar="1"> <!-- par1 = SV -->
+   <choose>
+     <when>
+       <test>
+        <equal><var n="is_net"/><lit-tag v="yes"/></equal>
+       </test>
+       <out>
+         <chunk>
+           <lit v="subj"/>
+           <lit-tag v="prn.subj"/>
+           <clip pos="1" part="pers"/>
+           <lit-tag v="GD"/>
+           <clip pos="1" part="nbr"/>
+           <lit v="{^"/>
+           <lit v="-prpers_net"/>
+           <lit-tag v="prn.tn.3.4.5"/>
+           <lit v="$}"/>
+         </chunk>
+       </out>
+     </when>
+     <otherwise>
+       <out>
+         <chunk>
+           <lit v="subj"/>
+           <lit-tag v="prn.subj"/>
+           <clip pos="1" part="pers"/>
+           <lit-tag v="GD"/>
+           <clip pos="1" part="nbr"/>
+           <lit v="{^"/>
+           <lit v="-prpers"/>
+           <lit-tag v="prn.tn.3.4.5"/>
+           <lit v="$}"/>
+         </chunk>
+       </out>
+     </otherwise>
+   </choose>
+ </def-macro>
 
  <def-macro n="f_expression" npar="2"> <!-- par1 = SV, par2 = SN (n) -->
    <choose>
@@ -1887,6 +2018,1364 @@
     </rule>
 
     <!-- FIN RÈGLAS D'INCLUSION DE L'ARTICLE DEFINIT DEL PARTITIU -->
+
+    <!-- RÈGLAS çò -->
+
+    <!-- çò > -il(s)/elle(s) -->
+
+    <rule comment="RÈGLA: çò SV_vblex_p3: çò ditz > dit-il">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3"/>
+      </pattern>
+      <action>
+        <call-macro n="f_is_net"><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <call-macro n="generate_il"><with-param pos="2"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3: çò li ditz > lui dit-il">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3"/>
+      </pattern>
+      <action>
+        <call-macro n="f_is_net"><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <call-macro n="generate_il"><with-param pos="3"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 PP: çò a dit > a-t-il dit">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <call-macro n="f_is_net"><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <call-macro n="generate_il"><with-param pos="2"/></call-macro>
+        <out>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3 PP: çò li a dit > lui a-t-il dit">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <call-macro n="f_is_net"><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <call-macro n="generate_il"><with-param pos="3"/></call-macro>
+        <out>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- çò > -je, -tu, -nous, -vous -->
+
+    <rule comment="RÈGLA: çò SV_vblex_p1_p2: çò disi > dis-je">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p1_p2"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <chunk>
+            <lit v="subj"/>
+            <lit-tag v="prn.subj"/>
+            <clip pos="2" part="pers"/>
+            <lit-tag v="mf"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <lit v="-prpers"/>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p1_p2: çò li disi > lui dis-je">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p1_p2"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <chunk>
+            <lit v="subj"/>
+            <lit-tag v="prn.subj"/>
+            <clip pos="3" part="pers"/>
+            <lit-tag v="mf"/>
+            <clip pos="3" part="nbr"/>
+            <lit v="{^"/>
+            <lit v="-prpers"/>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p1_p2 PP: çò ai dit > ai-je dit">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p1_p2"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <chunk>
+            <lit v="subj"/>
+            <lit-tag v="prn.subj"/>
+            <clip pos="2" part="pers"/>
+            <lit-tag v="mf"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <lit v="-prpers"/>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p1_p2 PP: çò li ai dit > lui ai-je dit">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p1_p2"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <chunk>
+            <lit v="subj"/>
+            <lit-tag v="prn.subj"/>
+            <clip pos="3" part="pers"/>
+            <lit-tag v="mf"/>
+            <clip pos="3" part="nbr"/>
+            <lit v="{^"/>
+            <lit v="-prpers"/>
+            <lit-tag v="prn.tn.3.4.5"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- çò > 0 -->
+
+    <rule comment="RÈGLA: çò SV_vblex_p3 SN: çò ditz Anna > dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vblex_p3 DET SN: çò dison los dròlles > disent les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vblex_p3pl PR_de SNpl: çò dison de dròlles > disent des enfants" v="oci">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3 SN: çò li ditz Anna > lui dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3 DET SN: çò li dison los dròlles > lui disent les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3pl PR_de SNpl: çò li dison de dròlles > lui disent des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3pl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vblex_p3 SAdv SN: çò ditz totjorn Anna > dit toujours Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vblex_p3 SAdv SDet SN: çò dison totjorn los dròlles > disent toujours les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vblex_p3pl SAdv PR_de SNpl: çò dison totjorn de dròlles > disent toujours des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vblex_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3 SAdv SN: çò me ditz totjorn Anna > me dit toujours Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3 SAdv SDet SN: çò me dison totjorn los dròlles > me disent toujours les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vblex_p3pl SAdv PR_de SNpl: çò me dison totjorn de dròlles > me disent toujours des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vblex_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="6"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 PP SN: çò a dit Anna > a dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 PP SDet SN: çò an dit los dròlles > ont dit les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3pl PP PR_de SNpl: çò an dit de dròlles > ont dit des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3 PP SN: çò m'a dit Anna > m'a dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3 PP SDet SN: çò m'an dit los dròlles > m'ont dit les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3pl PP PR_de SNpl: çò m'an dit de dròlles > m'ont dit des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="6"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 SAdv PP SN: çò a totjorn dit Anna > a toujours dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 PP SAdv SN: çò a dit totjorn Anna > a dit toujours Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3 SAdv PP SN: çò m'a totjorn dit Anna > m'a toujours dit Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SPron_pro SV_vbhaver_p3 PP SAdv SN: çò m'a dit totjorn Anna > m'a dit toujours Anna">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 SAdv PP SDet SN: çò an totjorn dit los dròlles > ont toujours dit les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3pl SAdv PP PR_de SNpl: çò an totjorn dit de dròlles > ont toujours dit des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="6"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3 PP SAdv SDet SN: çò an dit totjorn los dròlles > ont dit toujours les enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SDet"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: çò SV_vbhaver_p3pl PP SAdv PR_de SNpl: çò an dit totjorn de dròlles > ont dit toujours des enfants">
+      <pattern>
+        <pattern-item n="cela"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SNpl_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="6"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+<!--
+    <rule 
+-->
+    <!-- FIN RÈGLAS çò -->
 
   </section-rules>
 </interchunk>
