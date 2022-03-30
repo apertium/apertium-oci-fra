@@ -3530,6 +3530,18 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- marcher >> marchar, foncionar -->
+  <rule weight="0.8">
+    <match lemma="marcher" tags="vblex.*"><select lemma="marchar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="marcher" tags="vblex.*"><select lemma="foncionar"/></match>
+    <or>
+      <match lemma="jamais" tags="adv"/>
+      <match lemma="pas" tags="adv"/>
+    </or>
+  </rule>
+
   <!-- moisir >> mosir, florir/hlorir, etc. -->
   <rule weight="0.8">
     <match lemma="moisir" tags="vblex.*"><select lemma="mosir"/></match>
@@ -4437,6 +4449,7 @@
   <macro name="ant_antcog" p1="Achille" p2="Aquilles" />
   <macro name="ant_antcog" p1="Auguste" p2="August" />
   <macro name="ant_antcog" p1="César" p2="Cesar" />
+  <macro name="ant_antcog" p1="Hercule" p2="Ercules" />
   <macro name="ant_antcog" p1="Virgile" p2="Virgili" />
 
   <macro name="noms_propres" p1="Adrien" p2="Adrian" />
