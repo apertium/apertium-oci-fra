@@ -467,6 +467,44 @@
       <cat-item tags=""/>
     </def-cat>
 
+    <def-cat n="dignitari_n">
+      <cat-item lemma="temps" tags="n.*"/>
+      <cat-item lemma="papa" tags="n.*"/>
+      <cat-item lemma="avesque" tags="n.*"/>
+      <cat-item lemma="arquevesque" tags="n.*"/>
+      <cat-item lemma="abat" tags="n.*"/>
+      <cat-item lemma="emperador" tags="n.*"/>
+      <cat-item lemma="emperaire" tags="n.*"/>
+      <cat-item lemma="rei" tags="n.*"/>
+      <cat-item lemma="tsar" tags="n.*"/>
+      <cat-item lemma="vice-roi" tags="n.*"/>
+      <cat-item lemma="prince" tags="n.*"/>
+      <cat-item lemma="infant" tags="n.*"/>
+      <cat-item lemma="dalfin" tags="n.*"/>
+      <cat-item lemma="comte" tags="n.*"/>
+      <cat-item lemma="vescomte" tags="n.*"/>
+      <cat-item lemma="duc" tags="n.*"/>
+      <cat-item lemma="duquessa" tags="n.*"/>
+      <cat-item lemma="archiduc" tags="n.*"/>
+      <cat-item lemma="archiduchesse" tags="n.*"/>
+      <cat-item lemma="marqués" tags="n.*"/>
+      <cat-item lemma="baron" tags="n.*"/>
+      <cat-item lemma="senhor" tags="n.*"/>
+      <cat-item lemma="empèri" tags="n.*"/>
+      <cat-item lemma="reialme" tags="n.*"/>
+      <cat-item lemma="principautat" tags="n.*"/>
+      <cat-item lemma="ducat" tags="n.*"/>
+      <cat-item lemma="marquesat" tags="n.*"/>
+      <cat-item lemma="comtat" tags="n.*"/>
+      <cat-item lemma="baroniá" tags="n.*"/>
+      <cat-item lemma="baronia" tags="n.*"/>
+      <cat-item lemma="senhoriá" tags="n.*"/>
+      <cat-item lemma="senhoria" tags="n.*"/>
+      <cat-item lemma="abadiá" tags="n.*"/>
+      <cat-item lemma="abadia" tags="n.*"/>
+
+    </def-cat>
+
     <def-cat n="radio_tv">
       <cat-item lemma="ràdio" tags="n.*"/>
       <cat-item lemma="radiò" tags="n.*"/>
@@ -5121,7 +5159,171 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: en NP (evita la generació de l'article si país f.sg)">
+    <rule comment="REGLA: dignitari de NP (evita la generació de l'article si país)">
+      <pattern>
+        <pattern-item n="dignitari_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_concord1">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="1"/>
+       </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="n"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="2"/>
+        </out>
+       <call-macro n="f_concord1">
+         <with-param pos="3"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="3"/>
+       </call-macro>
+        <out>
+          <chunk name="nptop">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: DET dignitari de NP (evita la generació de l'article si país)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="dignitari_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_concord2">
+         <with-param pos="2"/>
+         <with-param pos="1"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="2"/>
+       </call-macro>
+        <out>
+          <chunk name="det" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="n"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <let><var n="lemma"/><clip pos="3" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="3"/>
+        </out>
+       <call-macro n="f_concord1">
+         <with-param pos="4"/>
+       </call-macro>
+       <call-macro n="f_chunk_tags">
+         <with-param pos="4"/>
+       </call-macro>
+        <out>
+          <chunk name="nptop">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="4" side="tl" part="gen"/></tag>
+              <tag><clip pos="4" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: en NP (evita la generació de l'article si país f.sg ; l'afegeix si riu)">
       <pattern>
         <pattern-item n="en_jusqua_pr"/>
         <pattern-item n="nptop"/>
@@ -5283,9 +5485,6 @@
                 </lu>
                 <b/>
                 <lu>
-                  <get-case-from pos="2">
-                    <clip pos="2" side="tl" part="lemh"/>
-                  </get-case-from>
                   <clip pos="2" side="tl" part="lemh"/>
                   <clip pos="2" side="tl" part="tags"/>
                   <clip pos="2" side="tl" part="lemq"/>
