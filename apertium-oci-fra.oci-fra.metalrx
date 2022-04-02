@@ -1372,6 +1372,14 @@
       <match lemma="café" tags="n.*"/>
     </or>
   </rule>
+  <rule weight="1.0">
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match lemma="fragmentacion" tags="n.*"/>
+      <match lemma="dispersion" tags="n.*"/>
+      <match lemma="sosmunicion" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- entà >> à, pour, vers -->
   <!-- tà >> à, pour, vers -->
@@ -4144,6 +4152,35 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- sansònha -> rengaine, cornemuse -->
+  <rule weight="0.8">
+    <match lemma="sansònha" tags="n.*"><select lemma="rengaine"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sansònha" tags="n.*"><select lemma="cornemuse"/></match>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="instruments_musicals"/>
+    </or>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="sansònha" tags="n.*"><select lemma="cornemuse"/></match>
+  </rule>
 
   <!-- dintrada -> entrée, rentrée -->
   <rule weight="0.8" v="oci">
