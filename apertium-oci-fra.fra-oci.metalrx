@@ -8,21 +8,31 @@
       </rule>
       <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
+        <repeat from="0" upto="5">
+           <match tags="np.ant.*"/>
+        </repeat>
         <match lemma="de" tags="pr"/>
-        <or><match tags="np.loc"/><match tags="np.top.*"/></or>
+        <or>
+          <match tags="np.top.*"/>
+          <match lemma="Bourbon" tags="np.cog.*"/>
+          <match lemma="Bourbon-Parme" tags="np.cog.*"/>
+          <match lemma="Bourbon-Siciles" tags="np.cog.*"/>
+          <match tags="np.loc"/>
+        </or>
       </rule>
       <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
-        <match lemma="de" tags="pr"/>
-        <or><match lemma="Bourbon" tags="np.cog.*"/></or>
-      </rule>
-      <rule weight="2.0">
-        <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
         <match tags="det.*"/>
         <match tags="adj.*"/>
       </rule>
       <rule weight="2.0">
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
         <or>
           <match tags="num.*"/>
           <match lemma="Ier" tags="adj.*"/>
@@ -87,6 +97,38 @@
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
       </rule>
       <rule weight="2.0">
+        <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match tags="cm"/>
+        <or>
+          <match lemma="pape" tags="n.*"/>
+          <match lemma="évêque" tags="n.*"/>
+          <match lemma="archevêque" tags="n.*"/>
+          <match lemma="saint" tags="n.*"/>
+          <match lemma="saint" tags="adj.*"/>
+          <match lemma="apôtre" tags="n.*"/>
+          <match lemma="empereur" tags="n.*"/>
+          <match lemma="roi" tags="n.*"/>
+          <match lemma="tsar" tags="n.*"/>
+          <match lemma="vice-roi" tags="n.*"/>
+          <match lemma="prince" tags="n.*"/>
+          <match lemma="infant" tags="n.*"/>
+          <match lemma="dauphin" tags="n.*"/>
+          <match lemma="comte" tags="n.*"/>
+          <match lemma="comtesse" tags="n.*"/>
+          <match lemma="vicomte" tags="n.*"/>
+          <match lemma="vicomtesse" tags="n.*"/>
+          <match lemma="duc" tags="n.*"/>
+          <match lemma="duchesse" tags="n.*"/>
+          <match lemma="archiduc" tags="n.*"/>
+          <match lemma="archiduchesse" tags="n.*"/>
+          <match lemma="marquis" tags="n.*"/>
+          <match lemma="baron" tags="n.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
         <or>
           <match lemma="papauté" tags="n.*"/>
           <match lemma="pontificat" tags="n.*"/>
@@ -96,6 +138,9 @@
           <match lemma="vice-royauté" tags="n.*"/>
         </or>
         <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
         <match lemma="{{p1}}" tags="np.*"><select lemma="{{p2}}"/></match>
       </rule>
       <rule weight="2.0">
@@ -4521,7 +4566,8 @@
   <macro name="noms_propres" p1="Jeanne" p2="Joana" />
   <macro name="noms_propres" p1="Jean" p2="Joan" />
   <macro name="noms_propres" p1="Jean-Paul" p2="Joan Pau" />
-  <macro name="noms_propres" p1="José" p2="Josèp" />
+  <macro name="noms_propres" p1="Joseph" p2="Josèp" v="oci"/>
+  <macro name="noms_propres" p1="Joseph" p2="Jausèp" v="oci@gascon"/>
   <macro name="noms_propres" p1="Joséphine" p2="Josefina" />
   <macro name="noms_propres" p1="Josiane" p2="Josiana" />
   <macro name="noms_propres" p1="Jules" p2="Juli" />
@@ -4539,8 +4585,8 @@
   <macro name="noms_propres" p1="Marcel" p2="Marcèl" v="oci"/>
   <macro name="noms_propres" p1="Marcel" p2="Marcèu" v="oci@gascon"/>
   <macro name="noms_propres" p1="Marguerite" p2="Margarida" />
-  <macro name="noms_propres" p1="Marie-Christine" p2="Maria Cristina" />
   <macro name="noms_propres" p1="Marie" p2="Maria" />
+  <macro name="noms_propres" p1="Marie-Christine" p2="Maria Cristina" />
   <macro name="noms_propres" p1="Marie-Thérèse" p2="Maria Terèsa" />
   <macro name="noms_propres" p1="Mathieu" p2="Matieu" alt="oci"/>
   <macro name="noms_propres" p1="Mathieu" p2="Matèu" alt="oci@gascon"/>
