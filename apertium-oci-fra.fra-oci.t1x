@@ -18546,8 +18546,10 @@
         <call-macro n="tipus_verb">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+        <call-macro n="f_unset_capletter"><with-param pos="1"/></call-macro>
          <out>
-           <chunk name="vbser">
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -18575,13 +18577,15 @@
         <call-macro n="tipus_verb"><with-param pos="1"/></call-macro>
         <call-macro n="f_unset_nopron"><with-param pos="1"/></call-macro>
         <call-macro n="f_set_pron_enc"><with-param pos="1"/></call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+        <call-macro n="f_unset_capletter"><with-param pos="1"/></call-macro>
         <choose>
 	  <when>
 	    <test>
 	      <equal><var n="pronom"/><lit v=""/></equal>
 	    </test>
             <out>
-              <chunk namefrom="chunkname">
+              <chunk namefrom="chunkname" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SV"/></tag>
                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -18601,7 +18605,7 @@
 	  </when>
 	  <otherwise>
             <out>
-              <chunk name="verb">
+              <chunk name="verb" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SV"/></tag>
                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
