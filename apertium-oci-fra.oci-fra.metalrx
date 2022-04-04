@@ -1148,10 +1148,54 @@
     <match lemma="aquò" tags="prn.*"><select lemma="ce"/></match>
     <match tags="vbser.*.p3.*"/>
   </rule>
+  <rule weight="1.0">
+    <match lemma="aquò" tags="prn.*"><select lemma="ce"/></match>
+        <or>
+            <match lemma="qui" tags="rel.*"/>
+            <match lemma="que" tags="rel.*"/>
+        </or>
+  </rule>
   <rule weight="1.2">
     <match tags="pr"/>
     <match lemma="aquò" tags="prn.*"><select lemma="cela"/></match>
     <match tags="vbser.*.p3.*"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+        <match lemma="per" tags="pr"/>
+        <match lemma="tà" tags="pr"/>
+        <match lemma="tad" tags="pr"/>
+        <match lemma="entà" tags="pr"/>
+        <match lemma="entad" tags="pr"/>
+        <match lemma="en per'mor de" tags="pr"/>
+        <match lemma="entà per'mor de" tags="pr"/>
+        <match lemma="per'mor de" tags="pr"/>
+        <match lemma="per encausa de" tags="pr"/>
+        <match lemma="per causa de" tags="pr"/>
+        <match lemma="a causa de" tags="pr"/>
+        <match lemma="en causa de" tags="pr"/>
+        <match lemma="en despièch de" tags="pr"/>
+        <match lemma="en despièit de" tags="pr"/>
+        <match lemma="a despièit de" tags="pr"/>
+        <match lemma="al despièch de" tags="pr"/>
+        <match lemma="a maugrat de" tags="pr"/>
+        <match lemma="maugrat" tags="pr"/>
+        <match lemma="malgrat" tags="pr"/>
+        <match lemma="maldespièch" tags="pr"/>
+        <match lemma="maldespièit" tags="pr"/>
+        <match lemma="maudespièch" tags="pr"/>
+    </or>
+    <match lemma="aquò" tags="prn.*"><select lemma="cela"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+        <match lemma="causa" tags="n.*"/>
+        <match lemma="encausa" tags="n.*"/>
+        <match lemma="rason" tags="n.*"/>
+        <match lemma="explicacion" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="aquò" tags="prn.*"><select lemma="cela"/></match>
   </rule>
 
   <!-- çò >> cela, ce -->
@@ -1654,6 +1698,33 @@
       </or>
     </repeat>
     <match tags="n.*"/>
+  </rule>
+
+  <!-- aquel/aqueth -> celui, celui-là -->
+  <rule weight="0.8">
+    <match lemma="aquel" tags="prn.*" v="oci"><select lemma="celui-là"/></match>
+    <match lemma="aqueth" tags="prn.*" v="oci@gascon"><select lemma="celui-là"/></match>
+  </rule>
+
+  <rule weight="0.8">
+    <match lemma="aquel" tags="prn.*" v="oci"><select lemma="celui"/></match>
+    <match lemma="aqueth" tags="prn.*" v="oci@gascon"><select lemma="celui"/></match>
+    <or>
+         <match tags="rel.*"/>
+         <match tags="rel"/>
+         <match tags="pr"/>
+         <match lemma="mai" tags="adv"/>
+         <match lemma="mei" tags="adv"/>
+         <match lemma="mas" tags="adv"/>
+         <match lemma="mes" tags="adv"/>
+         <match lemma="pus" tags="adv"/>
+         <match lemma="mens" tags="adv"/>
+         <match lemma="mensh" tags="adv"/>
+         <match lemma="tan" tags="adv"/>
+         <match lemma="tant" tags="adv"/>
+         <match lemma="autan" tags="adv"/>
+         <match lemma="autant" tags="adv"/>
+    </or>
   </rule>
 
 <!-- **************** PREP **************** -->
@@ -11002,6 +11073,114 @@
     <match lemma="clavar" tags="vblex.*"><select lemma="clôturer"/></match>
   </rule>
 
+  <!-- descarar >> dévisager, défigurer -->
+  <rule weight="0.8">
+    <match lemma="descarar" tags="vblex.*"><select lemma="dévisager"/></match>
+  </rule>
+
+  <!-- desmembrar >> oublier, démembrer -->
+  <rule weight="0.8">
+    <match lemma="desmembrar" tags="vblex.*"><select lemma="oublier"/></match>
+  </rule>
+
+  <!-- mutar >> muter, parler -->
+  <rule weight="0.8" v="oci">
+    <match lemma="mutar" tags="vblex.*"><select lemma="muter"/></match>
+  </rule>
+  <rule weight="0.8" v="oci">
+    <match lemma="sens" tags="pr"/>
+    <match lemma="mutar" tags="vblex.*"><select lemma="parler"/></match>
+  </rule>
+
+  <!-- pintar >> peindre, picoler -->
+  <rule weight="0.8">
+    <match lemma="pintar" tags="vblex.*"><select lemma="picoler"/></match>
+  </rule>
+
+  <!-- rajar >> couler, rayonner -->
+  <rule weight="0.8" v="oci">
+    <match lemma="rajar" tags="vblex.*"><select lemma="couler"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="rajar" tags="vblex.*"><select lemma="rayonner"/></match>
+  </rule>
+
+  <!-- raunhar >> grommeler, rogner -->
+  <rule weight="0.8">
+    <match lemma="raunhar" tags="vblex.*"><select lemma="rogner"/></match>
+  </rule>
+
+  <!-- revlincar >> corder, fausser, tordre -->
+  <rule weight="0.8">
+    <match lemma="revlincar" tags="vblex.*"><select lemma="tordre"/></match>
+  </rule>
+
+  <!-- ronhar >> ronronner, grogner -->
+  <rule weight="0.8">
+    <match lemma="ronhar" tags="vblex.*"><select lemma="ronronner"/></match>
+  </rule>
+
+  <!-- sagelar >> sceller, timbrer -->
+  <rule weight="0.8">
+    <or>
+        <match lemma="sagelar" tags="vblex.*"><select lemma="sceller"/></match>
+        <match lemma="sagerar" tags="vblex.*"><select lemma="sceller"/></match>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="sagelar" tags="vblex.*"><select lemma="timbrer"/></match>
+        <match lemma="sagerar" tags="vblex.*"><select lemma="timbrer"/></match>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="envolopa" tags="n.*"/>
+        <match lemma="còlis" tags="n.*"/>
+        <match lemma="paquet" tags="n.*"/>
+        <match lemma="envolòp" tags="n.*"/>
+        <match lemma="estrop" tags="n.*"/>
+        <match lemma="envolòpa" tags="n.*"/>
+        <match lemma="letra" tags="n.*"/>
+        <match lemma="carta" tags="n.*"/>
+        <match lemma="corrièr" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- tinturar >> teindre, teinter -->
+  <rule weight="0.8">
+    <match lemma="tinturar" tags="vblex.*"><select lemma="teindre"/></match>
+  </rule>
+
+  <!-- arrapar >> saisir, agripper -->
+  <rule weight="0.8">
+    <match lemma="arrapar" tags="vblex.*"><select lemma="saisir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="arrapar" tags="vblex.*"><select lemma="agripper"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+    </or>
+    <match lemma="arrapar" tags="vblex.*"><select lemma="saisir"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
 
 
 <!-- **************** NP **************** -->
