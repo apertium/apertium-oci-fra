@@ -2477,6 +2477,21 @@
     <match tags="det.def.*"/>
     <match lemma="biais" tags="n.*"/>
   </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="dintrar" tags="vblex.*"/>
+      <match lemma="entrar" tags="vblex.*"/>
+      <match lemma="intrar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gessir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match tags="det.*"/>
+  </rule>
   <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <repeat from="0" upto="2">
