@@ -22,9 +22,13 @@ TARGETS_COMMON =		\
 	$(PREFIX1).autolex.bin	\
 	$(PREFIX1b).autolex.bin	\
         $(PREFIX1).autosep1.bin \
+        $(PREFIX1b).autosep1.bin \
         $(PREFIX1).autosep2.bin \
+        $(PREFIX1b).autosep2.bin \
         $(PREFIX2).autosep1.bin \
+        $(PREFIX2b).autosep1.bin \
         $(PREFIX2).autosep2.bin \
+        $(PREFIX2b).autosep2.bin \
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -127,26 +131,23 @@ $(PREFIX1).autogen.bin: $(AP_SRC2)/$(LANG2).autogen.bin
 ## Multiwords
 ###############################################################################
 
-#.deps/$(PREFIX1).l1x: $(BASENAME).$(PREFIX1).l1x
-#	apertium-filter-rules oci $(BASENAME).$(PREFIX1).l1x >$@
-
-#.deps/$(PREFIX1b).l1x: $(BASENAME).$(PREFIX1).l1x
-#	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).l1x >$@
-
-#$(PREFIX1).autosep1.bin: .deps/$(PREFIX1).l1x
-#	lsx-comp lr $< $@
-#$(PREFIX1b).autosep1.bin: .deps/$(PREFIX1b).l1x
-#	lsx-comp lr $< $@
-
 $(PREFIX1).autosep1.bin: $(BASENAME).$(PREFIX1).l1x
-	lsx-comp lr $< $@
+	lsx-comp -v "oci" lr $< $@
+$(PREFIX1b).autosep1.bin: $(BASENAME).$(PREFIX1).l1x
+	lsx-comp -v "oci@gascon" lr $< $@
 $(PREFIX1).autosep2.bin: $(BASENAME).$(PREFIX1).l2x
-	lsx-comp lr $< $@
+	lsx-comp -v "oci" lr $< $@
+$(PREFIX1b).autosep2.bin: $(BASENAME).$(PREFIX1).l2x
+	lsx-comp -v "oci@gascon" lr $< $@
 
 $(PREFIX2).autosep1.bin: $(BASENAME).$(PREFIX2).l1x
-	lsx-comp lr $< $@
+	lsx-comp -v "oci" lr $< $@
+$(PREFIX2b).autosep1.bin: $(BASENAME).$(PREFIX2).l1x
+	lsx-comp -v "oci@gascon" lr $< $@
 $(PREFIX2).autosep2.bin: $(BASENAME).$(PREFIX2).l2x
-	lsx-comp lr $< $@
+	lsx-comp -v "oci" lr $< $@
+$(PREFIX2b).autosep2.bin: $(BASENAME).$(PREFIX2).l2x
+	lsx-comp -v "oci@gascon" lr $< $@
 
 ###############################################################################
 ## Tagger models
