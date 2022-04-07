@@ -43,6 +43,11 @@
       <cat-item tags="np.al"/>
       <cat-item tags="np.al.*"/>
     </def-cat>
+    <def-cat n="npantcog">
+      <cat-item tags="np.ant"/>
+      <cat-item tags="np.ant.*"/>
+      <cat-item tags="np.cog.*"/>
+    </def-cat>
     <def-cat n="npant_unk">
       <cat-item tags="np.ant"/>
       <cat-item tags="np.ant.*"/>
@@ -19031,6 +19036,141 @@
             </tags>
             <lu>
               <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Marie-Claire > Marie-Claire (1 chunk)">
+      <pattern>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="np">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Marie-Claire Dupont > Marie-Claire Dupont (1 chunk)">
+      <pattern>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="np">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Marie-Claire Dupont Fernandez > Marie-Claire Dupont Fernandez (1 chunk)">
+      <pattern>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+        <pattern-item n="npantcog"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="np">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
