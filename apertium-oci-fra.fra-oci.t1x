@@ -621,6 +621,8 @@
     <def-var n="concTercero"/>
     <def-var n="v_vbser"/>
     <def-var n="v_vbfar"/>
+    <def-var n="v_qualqun"/>
+    <def-var n="v_degun"/>
     <def-var n="v_itg"/>
     <def-var n="pronom"/>
     <def-var n="caseFirstWord"/>
@@ -1771,6 +1773,34 @@
           <let>
             <var n="v_vbfar"/>
             <lit v="har"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_qualqun" npar="0" v="oci">
+          <let>
+            <var n="v_qualqun"/>
+            <lit v="qualqu'un"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_qualqun" npar="0" v="oci@gascon">
+          <let>
+            <var n="v_qualqun"/>
+            <lit v="quauqu'un"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_degun" npar="0" v="oci">
+          <let>
+            <var n="v_degun"/>
+            <lit v="degun"/>
+          </let>
+    </def-macro>
+
+    <def-macro n="set_degun" npar="0" v="oci@gascon">
+          <let>
+            <var n="v_degun"/>
+            <lit v="arrés"/>
           </let>
     </def-macro>
 
@@ -7440,7 +7470,7 @@
         <pattern-item n="unite_temps"/>
       </pattern>
       <action>
-         <call-macro n="set_vbfar"></call-macro>
+        <call-macro n="set_vbfar"></call-macro>
         <call-macro n="tipus_verb">
          <with-param pos="2"/>
         </call-macro>
@@ -15029,13 +15059,14 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ON PRNPRO VERBP3 (on lui dit: se li diguèt)">
+    <rule comment="RÈGLA: ON PRNPRO VERBP3 (on lui dit: se li diguèt ; on me dit > qualqu'un me diguèt)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="prnpro"/>
         <pattern-item n="verbp3"/>
       </pattern>
       <action>
+         <call-macro n="set_qualqun"></call-macro>
          <call-macro n="f_concord1">
            <with-param pos="2"/>
          </call-macro>
@@ -15043,24 +15074,51 @@
          <with-param pos="3"/>
         </call-macro>
         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="me"/></equal>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="te"/></equal>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="nous"/></equal>
+                <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="vous"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk name="prn" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><lit-tag v="ref"/></tag>
+                </tags>
+                <lu>
+                  <var n="v_qualqun"/>
+                  <lit-tag v="prn.tn.m.sg"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="prn" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><lit-tag v="ref"/></tag>
+                </tags>
+                <lu>
+                  <lit v="se"/>
+                  <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
         <out>
-          <chunk name="prn" case="caseFirstWord">
-            <tags>
-              <tag><lit-tag v="SPron"/></tag>
-              <tag><lit-tag v="ref"/></tag>
-            </tags>
-            <lu>
-              <lit v="se"/>
-              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
-            </lu>
-          </chunk>
           <b pos="1"/>
            <chunk namefrom="chunkname">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
                <tag><clip pos="3" side="tl" part="temps"/></tag>
-               <tag><lit-tag v="negation"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
              <lu>
@@ -15174,7 +15232,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ON NE PRNPRO VERBP3 (on ne lui dit pas: se li diguèt pas)">
+    <rule comment="RÈGLA: ON NE PRNPRO VERBP3 (on ne lui dit pas > se li diguèt pas ; on ne me dit pas > degun me diguèt pas)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="ne"/>
@@ -15182,6 +15240,7 @@
         <pattern-item n="verbp3"/>
       </pattern>
       <action>
+         <call-macro n="set_degun"></call-macro>
          <call-macro n="f_concord1">
            <with-param pos="3"/>
          </call-macro>
@@ -15189,17 +15248,46 @@
          <with-param pos="4"/>
         </call-macro>
         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lemh"/><lit v="me"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lemh"/><lit v="te"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lemh"/><lit v="nous"/></equal>
+                <equal caseless="yes"><clip pos="3" side="sl" part="lemh"/><lit v="vous"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk namefrom="v_degun" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><lit-tag v="tn"/></tag>
+                  <tag><lit-tag v="pas_neg"/></tag>
+                </tags>
+                <lu>
+                  <var n="v_degun"/>
+                  <lit-tag v="prn.tn.m.sg"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="prn" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><lit-tag v="ref"/></tag>
+                </tags>
+                <lu>
+                  <lit v="se"/>
+                  <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
         <out>
-          <chunk name="prn" case="caseFirstWord">
-            <tags>
-              <tag><lit-tag v="SPron"/></tag>
-              <tag><lit-tag v="ref"/></tag>
-            </tags>
-            <lu>
-              <lit v="se"/>
-              <lit-tag v="prn.pro.ref.p3.mf.sp"/>
-            </lu>
-          </chunk>
           <b pos="1"/>
            <chunk namefrom="chunkname">
              <tags>
