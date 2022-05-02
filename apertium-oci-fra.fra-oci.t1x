@@ -112,6 +112,9 @@
     <def-cat n="prnpro">
       <cat-item tags="prn.pro.*"/>
     </def-cat>
+    <def-cat n="prnproref">
+      <cat-item tags="prn.pro.ref.*"/>
+    </def-cat>
     <def-cat n="prnenc">
       <cat-item tags="prn.enc.*"/>
     </def-cat>
@@ -226,6 +229,12 @@
       <cat-item tags="vbhaver.*.p3.*"/>
       <cat-item tags="vbser.*.p3.*"/>
       <cat-item tags="vbmod.*.p3.*"/>
+    </def-cat>
+    <def-cat n="verbp3sg">
+      <cat-item tags="vblex.*.p3.sg"/>
+      <cat-item tags="vbhaver.*.p3.sg"/>
+      <cat-item tags="vbser.*.p3.sg"/>
+      <cat-item tags="vbmod.*.p3.sg"/>
     </def-cat>
     <def-cat n="devoirp3sg">
       <cat-item lemma="devoir" tags="vblex.*.p3.sg"/>
@@ -14978,7 +14987,7 @@
     <rule comment="RÈGLA: ON VERBP3 (on peut: se pòt)">
       <pattern>
         <pattern-item n="on"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
         <call-macro n="tipus_verb">
@@ -15016,7 +15025,7 @@
 
     <rule comment="RÈGLA: VERBP3 ON (peut-on: se pòt)">
       <pattern>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
         <pattern-item n="on"/>
       </pattern>
       <action>
@@ -15059,11 +15068,48 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: ON PRNPROREF VERBP3 (on se dit: nos diguèrem)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="prnproref"/>
+        <pattern-item n="verbp3sg"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <out>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="3" side="tl" part="temps"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <lit v="nos"/>
+              <lit-tag v="prn.pro.p1.mf.pl"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="a_verb"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <lit-tag v="p1.pl"/>
+              <clip pos="3" side="tl" part="lemq"/>
+             </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: ON PRNPRO VERBP3 (on lui dit: se li diguèt ; on me dit > qualqu'un me diguèt)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="prnpro"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
          <call-macro n="set_qualqun"></call-macro>
@@ -15140,7 +15186,7 @@
         <pattern-item n="on"/>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
          <call-macro n="f_concord1">
@@ -15195,7 +15241,7 @@
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="ne"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
         <call-macro n="tipus_verb">
@@ -15232,12 +15278,52 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: ON PRNPROREF VERBP3 (on ne se dit pas > nos diguèrem pas)">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="ne"/>
+        <pattern-item n="prnproref"/>
+        <pattern-item n="verbp3sg"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <out>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="4" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="negation"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <lit v="nos"/>
+              <lit-tag v="prn.pro.p1.mf.pl"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="a_verb"/>
+              <clip pos="4" side="tl" part="temps"/>
+              <lit-tag v="p1.pl"/>
+              <clip pos="4" side="tl" part="lemq"/>
+             </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: ON NE PRNPRO VERBP3 (on ne lui dit pas > se li diguèt pas ; on ne me dit pas > degun me diguèt pas)">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
          <call-macro n="set_degun"></call-macro>
@@ -15317,7 +15403,7 @@
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
-        <pattern-item n="verbp3"/>
+        <pattern-item n="verbp3sg"/>
       </pattern>
       <action>
          <call-macro n="f_concord1">
