@@ -4742,6 +4742,16 @@
 
 <!-- **************** N **************** -->
 
+  <!-- part -> part, partie -->
+  <rule weight="0.8">
+    <match lemma="part" tags="n.*"><select lemma="part"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.ind.*"/>
+    <match lemma="part" tags="n.*"><select lemma="partie"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
   <!-- barde -> barde, argile -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="barde" tags="n.*"><select lemma="barde"/></match>
