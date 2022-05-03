@@ -260,6 +260,9 @@
     <def-cat n="SV_pii">
       <cat-item tags="SV.*.pii.*"/>
     </def-cat>
+    <def-cat n="SV_fti">
+      <cat-item tags="SV.*.fti.*"/>
+    </def-cat>
     <def-cat n="CNJSUB">
       <cat-item lemma="que" tags="cnjsub"/>
     </def-cat>
@@ -268,6 +271,12 @@
       <cat-item lemma="se" tags="cnjadv.*"/>
       <cat-item lemma="si" tags="cnjadv"/>
       <cat-item lemma="si" tags="cnjadv.*"/>
+    </def-cat>
+    <def-cat n="CNJADV_QUAN_AUTANLÈU">
+      <cat-item lemma="quan" tags="cnjadv"/>
+      <cat-item lemma="quan" tags="cnjadv.*"/>
+      <cat-item lemma="autanlèu que" tags="cnjadv"/>
+      <cat-item lemma="autanlèu que" tags="cnjadv.*"/>
     </def-cat>
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
@@ -2052,7 +2061,1400 @@
       </action>
     </rule>
 
+    <!-- ambe 1 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_SE SPron_pro SV_pii > CNJADV_SE SPron_pro SV_pis: Si vous l'aviez > Si l'avóssetz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE SN_UNK SPron_pro SV_pii > CNJADV_SE SN_UNK SPron_pro SV_pis: Si Jean l'avait > Si Jean l'avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK SPron_pro SV_pis: Si la maison l'avait > Si l'ostau l'avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK PREP SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK PREP SN_UNK SPron_pro SV_pis: Si la maison de Jean l'avait > Si l'ostau de Jean l'avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK PREP DET SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK PREP DET SN_UNK SPron_pro SV_pis: Si la maison de la montagne l'avait > Si l'ostau de la montanha l'avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- ambe 2 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_SE SPron_pro SV_pii > CNJADV_SE SPron_pro SV_pis: Si vous le lui aviez > Si l'ac avóssetz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE SN_UNK SPron_pro SV_pii > CNJADV_SE SN_UNK SPron_pro SV_pis: Si Jean le lui avait > Si Jean l'ac avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK SPron_pro SV_pis: Si la maison le lui avait > Si l'ostau l'ac avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK PREP SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK PREP SN_UNK SPron_pro SV_pis: Si la maison de Jean le lui avait > Si l'ostau de Jean l'ac avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_SE DET SN_UNK PREP DET SN_UNK SPron_pro SV_pii > CNJADV_SE DET SN_UNK PREP DET SN_UNK SPron_pro SV_pis: Si la maison de la montagne le lui avait > Si l'ostau de la montanha l'ac avosse" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_SE"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="9" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="9" part="temps"/><lit-tag v="pis"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS SI + PII  > SI + PIS -->
+
+
+    <!-- RÈGLAS QUAN_AUTANLÈU + FTI  > QUAN_AUTANLÈU + PRS -->
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SV_fti > CNJADV_QUAN_AUTANLÈU SV_prs: Quand vous aurez > Quan ajatz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="2" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SN_UNK SV_fti > CNJADV_QUAN_AUTANLÈU SN_UNK SV_prs: Quand Jean aura > Quan Jean aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK SV_prs: Quand la maison aura > Quan l'ostau aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SV_prs: Quand la maison de Jean aura > Quan l'ostau de Jean aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SV_prs: Quand la maison de la montagne aura > Quan l'ostau de la montanha aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- ambe 1 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU SPron_pro SV_prs: Quand vous l'aurez > Quan l'ajatz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU SN_UNK SPron_pro SV_prs: Quand Jean l'aura > Quan Jean l'aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK SPron_pro SV_prs: Quand la maison l'aura > Quan l'ostau l'aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SPron_pro SV_prs: Quand la maison de Jean l'aura > Quan l'ostau de Jean l'aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SPron_pro SV_prs: Quand la maison de la montagne l'aura > Quan l'ostau de la montanha l'aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- ambe 2 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU SPron_pro SV_prs: Quand vous le lui aurez > Quan l'ac ajatz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU SN_UNK SPron_pro SV_prs: Quand Jean le lui aura > Quan Jean l'ac aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK SPron_pro SV_prs: Quand la maison le lui aura > Quan l'ostau l'ac aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP SN_UNK SPron_pro SV_prs: Quand la maison de Jean le lui aura > Quan l'ostau de Jean l'ac aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SPron_pro SV_fti > CNJADV_QUAN_AUTANLÈU DET SN_UNK PREP DET SN_UNK SPron_pro SV_prs: Quand la maison de la montagne le lui aura > Quan l'ostau de la montanha l'ac aja" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_QUAN_AUTANLÈU"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_fti"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="9" part="temps"/><lit-tag v="fti"/></equal>
+            </test>
+            <let><clip pos="9" part="temps"/><lit-tag v="prs"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS QUAN_AUTANLÈU + FTI  > QUAN_AUTANLÈU + PRS -->
 
   </section-rules>
 </interchunk>
