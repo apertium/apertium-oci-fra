@@ -49,6 +49,27 @@
     <def-cat n="SV_vbmod">
       <cat-item tags="SV.vbmod"/>
       <cat-item tags="SV.vbmod.*"/>
+      <cat-item lemma="vouloir" tags="SV.vblex.*"/>
+      <cat-item lemma="aller" tags="SV.vblex.*"/>
+<!--
+      <cat-item lemma="sembler" tags="SV.vblex.*"/>
+      <cat-item lemma="paraître" tags="SV.vblex.*"/>
+-->
+      <cat-item lemma="savoir" tags="SV.vblex.*"/>
+      <cat-item lemma="venir" tags="SV.vblex.*"/>
+    </def-cat>
+    <def-cat n="pp_vbmod">
+      <cat-item lemma="devoir" tags="SA.pp.*"/>
+      <cat-item lemma="falloir" tags="SA.pp.*"/>
+      <cat-item lemma="pouvoir" tags="SA.pp.*"/>
+      <cat-item lemma="vouloir" tags="SA.pp.*"/>
+      <cat-item lemma="aller" tags="SA.pp.*"/>
+<!--
+      <cat-item lemma="sembler" tags="SA.pp.*"/>
+      <cat-item lemma="paraître" tags="SA.pp.*"/>
+-->
+      <cat-item lemma="savoir" tags="SA.pp.*"/>
+      <cat-item lemma="venir" tags="SA.pp.*"/>
     </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
@@ -589,11 +610,314 @@
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
           </chunk>
-          <b pos="6"/>
+          <b pos="5"/>
           <chunk>
             <clip pos="6" part="lem"/>
             <clip pos="6" part="tags"/>
             <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_vbhaver pp_vbmod SV_inf > SV_vbhaver pp_vbmod SPron_pro SV_inf: l'an pogut ajudar > ont pu l'aider">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_vbhaver pp_vbmod SV_inf > SV_vbhaver pp_vbmod SPron_pro SPron_pro SV_inf: l'i an pogut portar > ont pu l'y porter">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="3" part="lem"/>
+            </get-case-from>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_vbhaver SAdv pp_vbmod SV_inf > SV_vbhaver SAdv pp_vbmod SPron_pro SV_inf: l'an pas pogut ajudar > ont pas pu l'aider">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_vbhaver SAdv pp_vbmod SV_inf > SV_vbhaver SAdv pp_vbmod SPron_pro SPron_pro SV_inf: l'i an pas pogut portar > ont pas pu l'y porter">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="3" part="lem"/>
+            </get-case-from>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_vbhaver SAdv SAdv pp_vbmod SV_inf > SV_vbhaver SAdv SAdv pp_vbmod SPron_pro SV_inf: l'an pogut pas totjorn ajudar > ont pas toujours pas l'aider">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_vbhaver SAdv SAdv pp_vbmod SV_inf > SV_vbhaver SAdv SAdv pp_vbmod SPron_pro SPron_pro SV_inf: l'i an pogut pas totjorn portar > ont pas toujours pu l'y porter">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_vbmod"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="3" part="lem"/>
+            </get-case-from>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
           </chunk>
         </out>
       </action>
