@@ -15,6 +15,16 @@
       <cat-item tags="SPron"/>
       <cat-item tags="SPron.*"/>
     </def-cat>
+    <def-cat n="SN_SA_SPron_Det">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -34,6 +44,9 @@
       <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
     </def-cat>
+    <def-cat n="SPron_itg">
+      <cat-item tags="SPron.itg.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -41,6 +54,13 @@
     <def-cat n="SV">
       <cat-item tags="SV"/>
       <cat-item tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_copulatiu">
+      <cat-item tags="SV.vbser"/>
+      <cat-item tags="SV.vbser.*"/>
+      <cat-item lemma="paraître" tags="SV.*"/>
+      <cat-item lemma="sembler" tags="SV.*"/>
+      <cat-item lemma="devenir" tags="SV.*"/>
     </def-cat>
     <def-cat n="SV_vbhaver">
       <cat-item tags="SV.vbhaver"/>
@@ -1028,6 +1048,39 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_itg SV_copulatiu SN_SA_SPron_Det: quau es la situacion > quelle est la situation">
+      <pattern>
+        <pattern-item n="SPron_itg"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SN_SA_SPron_Det"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
       </action>

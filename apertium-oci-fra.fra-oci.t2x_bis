@@ -257,6 +257,10 @@
     <def-cat n="SV_prs">
       <cat-item tags="SV.*.prs.*"/>
     </def-cat>
+    <def-cat n="SV_pri_pii">
+      <cat-item tags="SV.*.pri.*"/>
+      <cat-item tags="SV.*.pii.*"/>
+    </def-cat>
     <def-cat n="SV_pii">
       <cat-item tags="SV.*.pii.*"/>
     </def-cat>
@@ -277,6 +281,10 @@
       <cat-item lemma="quan" tags="cnjadv.*"/>
       <cat-item lemma="autanlèu que" tags="cnjadv"/>
       <cat-item lemma="autanlèu que" tags="cnjadv.*"/>
+    </def-cat>
+    <def-cat n="CNJADV_MEMESI">
+      <cat-item lemma="quitament si" tags="cnjadv"/>
+      <cat-item lemma="quitament si" tags="cnjadv.*"/>
     </def-cat>
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
@@ -394,6 +402,22 @@
   </section-def-vars>
 
   <section-def-macros>
+    <def-macro n="escriure_quan" npar="1">
+      <out>
+        <chunk>
+          <get-case-from pos="1">
+            <lit v="quan"/>
+          </get-case-from>
+          <lit-tag v="cnjadv"/>
+          <lit v="{^"/>
+          <lit v="quan"/>
+          <lit-tag v="cnjadv"/>
+          <lit v="$}"/>
+        </chunk>
+        <b/>
+      </out>
+    </def-macro>
+
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
       <choose>
         <when>
@@ -411,7 +435,6 @@
         </when>
       </choose>
     </def-macro>
-
   </section-def-macros>
 
   <section-rules>
@@ -3455,6 +3478,852 @@
     </rule>
 
     <!-- FIN RÈGLAS QUAN_AUTANLÈU + FTI  > QUAN_AUTANLÈU + PRS -->
+
+
+    <!-- RÈGLAS CNJADV_MEMESI + PRI/PII  > QUAN + FTI/CNI -->
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SV_pri_pii > QUAN SV_fti_cni: Même si vous avez > Quan auratz ; Même si vous aviez > Quan auretz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="2" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="2" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="2" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SN_UNK SV_pri_pii > QUAN SN_UNK SV_fti_cni: Même si Jean a > Quan Jean aurà ; Même si Jean avait > Quan Jean auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK SV_pri_pii > QUAN DET SN_UNK SV_fti_cni: Même si la maison a > Quan l'ostal aurà ; Même si la maison avait > Quan l'ostal auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP SN_UNK SV_fti_cni: Même si la maison de Jean a > Quan l'ostau de Jean aurà ; Même si la maison de Jean avait > Quan l'ostau de Jean auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP DET SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP DET SN_UNK SV_fti_cni: Même si la maison de la montagne a > Quan l'ostau e la montanha aurà ; Même si la maison de la montagne avait > Quan l'ostau e la montanha auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- ambe 1 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SPron_pro SV_pri_pii > QUAN SPron_pro SV_fti_cni: Même si vous l'avez > Quan l'auratz ; Même si vous l'aviez > Quan l'auretz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="3" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="3" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SN_UNK SV_pri_pii > QUAN SN_UNK SV_fti_cni: Même si Jean l'a > Quan Jean l'aurà ; Même si Jean l'avait > Quan Jean l'auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK SV_pri_pii > QUAN DET SN_UNK SV_fti_cni: Même si la maison l'a > Quan l'ostal l'aurà ; Même si la maison l'avait > Quan l'ostal l'auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP SN_UNK SV_fti_cni: Même si la maison de Jean l'a > Quan l'ostau de Jean l'aurà ; Même si la maison de Jean l'avait > Quan l'ostau de Jean l'auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="7" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="7" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP DET SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP DET SN_UNK SV_fti_cni: Même si la maison de la montagne l'a > Quan l'ostau e la montanha l'aurà ; Même si la maison de la montagne l'avait > Quan l'ostau e la montanha l'auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- ambe 2 SPron_pro -->
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SPron_pro SPron_pro SV_pri_pii > QUAN SPron_pro SPron_pro SV_fti_cni: Même si vous le lui avez > Quan l'ac auratz ; Même si vous le lui aviez > Quan l'ac auretz" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="4" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="4" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI SN_UNK SV_pri_pii > QUAN SN_UNK SV_fti_cni: Même si Jean le lui a > Quan Jean l'ac aurà ; Même si Jean le lui avait > Quan Jean l'ac auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="5" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="5" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK SV_pri_pii > QUAN DET SN_UNK SV_fti_cni: Même si la maison le lui a > Quan l'ostal l'ac aurà ; Même si la maison le lui avait > Quan l'ostal l'ac auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="6" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="6" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP SN_UNK SV_fti_cni: Même si la maison de Jean le lui a > Quan l'ostau de Jean l'ac aurà ; Même si la maison de Jean le lui avait > Quan l'ostau de Jean l'ac auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="8" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="8" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CNJADV_MEMESI DET SN_UNK PREP DET SN_UNK SV_pri_pii > QUAN DET SN_UNK PREP DET SN_UNK SV_fti_cni: Même si la maison de la montagne le lui a > Quan l'ostau e la montanha l'ac aurà ; Même si la maison de la montagne le lui avait > Quan l'ostau e la montanha l'ac auré" v="oci@gascon">
+      <pattern>
+        <pattern-item n="CNJADV_MEMESI"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pri_pii"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="9" part="temps"/><lit-tag v="pri"/></equal>
+            </test>
+            <let><clip pos="9" part="temps"/><lit-tag v="fti"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="9" part="temps"/><lit-tag v="pii"/></equal>
+            </test>
+            <let><clip pos="9" part="temps"/><lit-tag v="cni"/></let>
+          </when>
+        </choose>
+        <call-macro n="escriure_quan"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS CNJADV_MEMESI + PRI/PII  > QUAN + FTI/CNI -->
 
   </section-rules>
 </interchunk>

@@ -67,6 +67,13 @@
       <cat-item tags="SV.vbser.*.p3.pl"/>
       <cat-item tags="SV.vbser.*.p3.pl.*"/>
     </def-cat>
+    <def-cat n="SV_copulatiu">
+      <cat-item tags="SV.vbser"/>
+      <cat-item tags="SV.vbser.*"/>
+      <cat-item lemma="paraître" tags="SV.*"/>
+      <cat-item lemma="sembler" tags="SV.*"/>
+      <cat-item lemma="devenir" tags="SV.*"/>
+    </def-cat>
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
       <cat-item tags="SV.*.p1.*"/>
       <cat-item tags="SV.*.p2.*"/>
@@ -81,7 +88,7 @@
       <cat-item lemma="havercj" tags="SVneg.*"/>
     </def-cat>
 
-    <def-cat n="Det">
+    <def-cat n="DET">
       <cat-item tags="Det"/>
       <cat-item tags="Det.*"/>
     </def-cat>
@@ -147,8 +154,13 @@
       <cat-item tags="cnjcoo.*"/>
     </def-cat>
 
-    <def-cat n="unknown">
-      <cat-item lemma="unknown" tags="unknown"/>
+    <def-cat n="UNK">
+      <cat-item tags="unknown"/>
+    </def-cat>
+    <def-cat n="SN_UNK">
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
+      <cat-item tags="unknown"/>
     </def-cat>
 
     <def-cat n="fi_frase">
@@ -470,9 +482,9 @@
 
     <!-- RÈGLAS finfrasa -->
 
-    <rule comment="RÈGLA: Det">
+    <rule comment="RÈGLA: DET">
       <pattern>
-        <pattern-item n="Det"/>
+        <pattern-item n="DET"/>
       </pattern>
       <action>
         <out>
@@ -662,9 +674,9 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: unknown">
+    <rule comment="RÈGLA: UNK">
       <pattern>
-        <pattern-item n="unknown"/>
+        <pattern-item n="UNK"/>
       </pattern>
       <action>
         <out>
@@ -694,20 +706,27 @@
 
     <!-- RÈGLAS accord en genre entre sujet et attribut -->
 
-    <rule comment="RÈGLA: SN SV_vbser SA: accord en genre entre suject et attribut: l'ostal es grand > la maison est grande">
+    <rule comment="RÈGLA: SN SV_copulatiu SA: accord en genre entre suject et attribut: l'ostal es grand > la maison est grande">
       <pattern>
         <pattern-item n="SN"/>
-        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SV_copulatiu"/>
         <pattern-item n="SA"/>
       </pattern>
       <action>
       <choose>
+      <!-- il y a deux cas :
+        * le sujet a changé de genre, ce qui cause que l'attribut doit le faire aussi (pos1: m + sl_f, f + sl_m)
+        * l'attribut dans la langue cible peut prendre les deux genres (pos3: sl_mf), mais on a choisit a t1x le mauvais (cela arrive plus souvent quand on a un sujet complexe du type SN (PREP SN)+, ce qui se gère dans les règles qui suivent)
+      -->
         <when>
           <test>
             <and>
               <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
               <equal><clip pos="3" part="gen"/><lit-tag v="f"/></equal>
-              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
             </and>
           </test>
           <let><clip pos="3" part="gen"/><lit-tag v="m"/></let>
@@ -717,7 +736,10 @@
             <and>
               <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
               <equal><clip pos="3" part="gen"/><lit-tag v="m"/></equal>
-              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
             </and>
           </test>
           <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
@@ -746,10 +768,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SN SV_vbser SA: accord en genre entre suject et attribut: l'ostal es força grand > la maison est très grande">
+    <rule comment="RÈGLA: SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut: l'ostal es força grand > la maison est très grande ; l'ostal es pas grand > la maison n'est pas grande">
       <pattern>
         <pattern-item n="SN"/>
-        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SV_copulatiu"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SA"/>
       </pattern>
@@ -760,7 +782,10 @@
             <and>
               <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
               <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
-              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
             </and>
           </test>
           <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
@@ -770,7 +795,10 @@
             <and>
               <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
               <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
-              <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
             </and>
           </test>
           <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
@@ -799,6 +827,1104 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP SN SV_copulatiu SA: accord en genre entre suject et attribut: la vesina de Jean es nazi > la voisine de Jean est nazie">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="par"/></equal> <!-- per evitar problèmas amb construccions coma 'lo vesin tres còps per an es ...' (lo cambiament de genre còp/fois causa de problèmas) -->
+          </test>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN SV_copulatiu SA: accord en genre entre suject et attribut: la vesina del vesin es nazi > la voisine du voisin est nazie">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP SN PREP SN SV_copulatiu SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP SN SV_copulatiu SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP SN SV_copulatiu SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP DET SN SV_copulatiu SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut: la vesina de Jean es pas nazi > la voisine de Jean n'est pas nazie">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="par"/></equal> <!-- per evitar problèmas amb construccions coma 'lo vesin tres còps per an es ...' (lo cambiament de genre còp/fois causa de problèmas) -->
+          </test>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut: la vesina del vesin es pas nazi > la voisine du voisin n'est pas nazie">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP SN PREP SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="8" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="8" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="9" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="9" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN PREP DET SN PREP DET SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="10" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="10" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="10" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="10" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="10" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="10" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+          <b pos="7"/>
+          <chunk>
+            <clip pos="8" part="lem"/>
+            <clip pos="8" part="tags"/>
+            <clip pos="8" part="chcontent"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="lem"/>
+            <clip pos="9" part="tags"/>
+            <clip pos="9" part="chcontent"/>
+          </chunk>
+          <b pos="9"/>
+          <chunk>
+            <clip pos="10" part="lem"/>
+            <clip pos="10" part="tags"/>
+            <clip pos="10" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -1090,10 +2216,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3 Det > ce SV_vbser_p3 Det: èra un ostal > c'était une maison">
+    <rule comment="RÈGLA: SV_vbser_p3 DET > ce SV_vbser_p3 DET: èra un ostal > c'était une maison">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
-        <pattern-item n="Det"/>
+        <pattern-item n="DET"/>
       </pattern>
       <action>
         <choose>
