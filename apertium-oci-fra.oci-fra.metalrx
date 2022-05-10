@@ -757,6 +757,46 @@
       <match lemma="professor" tags="n.*"/>
       <match lemma="mèstre" tags="n.*"/>
 
+      <match lemma="cantaire" tags="n.*"/>
+      <match lemma="compositor" tags="n.*"/>
+      <match lemma="escrivan" tags="n.*"/>
+      <match lemma="escriveire" tags="n.*"/>
+      <match lemma="musician" tags="n.*"/>
+      <match lemma="musicaire" tags="n.*"/>
+
+      <match lemma="crestian" tags="n.*"/>
+      <match lemma="catolic" tags="n.*"/>
+      <match lemma="protestant" tags="n.*"/>
+      <match lemma="musulman" tags="n.*"/>
+      <match lemma="sunnita" tags="n.*"/>
+      <match lemma="chiita" tags="n.*"/>
+
+      <match lemma="occitan" tags="n.*"/>
+      <match lemma="francés" tags="n.*"/>
+      <match lemma="anglés" tags="n.*"/>
+      <match lemma="castelhan" tags="n.*"/>
+      <match lemma="catalan" tags="n.*"/>
+      <match lemma="italian" tags="n.*"/>
+      <match lemma="espanhòl" tags="n.*"/>
+      <match lemma="espanhòu" tags="n.*"/>
+      <match lemma="basc" tags="n.*"/>
+      <match lemma="basco" tags="n.*"/>
+      <match lemma="basque" tags="n.*"/>
+      <match lemma="aragonés" tags="n.*"/>
+      <match lemma="breton" tags="n.*"/>
+      <match lemma="alsacian" tags="n.*"/>
+      <match lemma="peitavin" tags="n.*"/>
+      <match lemma="francoprovençal" tags="n.*"/>
+      <match lemma="francoprovençau" tags="n.*"/>
+      <match lemma="alemand" tags="n.*"/>
+      <match lemma="anglés" tags="n.*"/>
+      <match lemma="rus" tags="n.*"/>
+      <match lemma="ucraïnian" tags="n.*"/>
+      <match lemma="ucraïnés" tags="n.*"/>
+      <match lemma="ucraïnenc" tags="n.*"/>
+      <match lemma="american" tags="n.*"/>
+      <match lemma="chinés" tags="n.*"/>
+
       <match lemma="papa" tags="n.*"/>
       <match lemma="avesque" tags="n.*"/>
       <match lemma="arquevesque" tags="n.*"/>
@@ -3460,6 +3500,25 @@
   <rule weight="0.8">
     <match lemma="que" tags="rel.*"><select lemma="que"/></match>
   </rule>
+
+  <rule weight="3.0">
+    <or>
+      <seq n="personas"/>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="cm"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
+  </rule>
+
   <rule weight="2.0">
     <match lemma="que" tags="rel.*"><select lemma="que"/></match>
     <repeat from="0" upto="3">
@@ -4027,6 +4086,25 @@
   <rule weight="0.8" v="oci@gascon">
     <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
   </rule>
+
+  <rule weight="3.0" v="oci@gascon">
+    <or>
+      <seq n="personas"/>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="cm"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
+  </rule>
+
   <rule weight="2.0" v="oci@gascon">
     <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
     <repeat from="0" upto="3">
@@ -4053,7 +4131,6 @@
       <or>
         <match tags="adv"/>
         <match tags="cnjadv"/>
-        <match tags="cm"/>
       </or>
     </repeat>
     <match lemma="i" tags="prn.pro.adv"/>
@@ -4068,7 +4145,6 @@
       <or>
         <match tags="adv"/>
         <match tags="cnjadv"/>
-        <match tags="cm"/>
       </or>
     </repeat>
     <match lemma="i" tags="prn.pro.adv"/>
