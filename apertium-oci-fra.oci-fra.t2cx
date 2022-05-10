@@ -48,6 +48,10 @@
       <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
     </def-cat>
+    <def-cat n="SPron_i">
+      <cat-item lemma="y" tags="SPron.pro"/>
+      <cat-item lemma="y" tags="SPron.pro.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -84,6 +88,9 @@
       <cat-item lemma="havercj" tags="SV.*.p3.pl"/>
       <cat-item lemma="haverinf_ger" tags="SV.*.p3.pl"/>
       <cat-item lemma="avoir" tags="SV.*.p3.pl"/>
+    </def-cat>
+    <def-cat n="SV_aver_p3sg">
+      <cat-item lemma="avoir" tags="SV.*.p3.sg"/>
     </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
@@ -956,6 +963,84 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_i SV_aver_p3sg SN: i a aiga > il y a de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_aver_p3sg"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_i SV_aver_p3sg SAdv SN: i a pas aiga > y a pas de l'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_aver_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
       </action>
@@ -3397,9 +3482,6 @@
       </action>
     </rule>
 
-<!--
-    <rule 
--->
     <!-- FIN RÈGLAS çò -->
 
   </section-rules>
