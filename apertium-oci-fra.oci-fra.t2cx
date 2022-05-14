@@ -2095,6 +2095,40 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: PR_de SN_pl PR_de (blòca la possible transformacion del complement de nòm coma segond partitiu)" v="oci">
+      <pattern>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="generate_detdef1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SENT PR_de SN_pl" v="oci@gascon">
       <pattern>
         <pattern-item n="SENT"/>
