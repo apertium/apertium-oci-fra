@@ -1167,6 +1167,9 @@
       <list-item v="alsacien"/>
       <list-item v="bourgonde"/>
       <list-item v="bourguignon"/>
+      <list-item v="poitevin"/>
+      <list-item v="saintongeais"/>
+      <list-item v="angevin"/>
       <list-item v="occitan"/>
       <list-item v="aranais"/>
       <list-item v="corse"/>
@@ -1547,11 +1550,12 @@
       <list-item v="Pays de Buch"/>
       <list-item v="Camargue"/>
       <list-item v="Carcassés"/>
-
       <list-item v="Embrunais"/>
+      <list-item v="Lacaunais"/>
       <list-item v="Luchonnais"/>
       <list-item v="Nébouzan"/>
       <list-item v="Vazadais"/>
+      <list-item v="Velai"/>
       <list-item v="Aran"/>
       <list-item v="Aquitaine"/>
       <list-item v="Nouvelle-Aquitaine"/>
@@ -1577,6 +1581,10 @@
       <list-item v="Ardèche"/>
       <list-item v="Vivarais"/>
       <list-item v="Var"/>
+      <list-item v="Saintonge"/>
+      <list-item v="Poitou"/>
+      <list-item v="Charante"/>
+      <list-item v="Charante-Maritime"/>
       <list-item v="Bourgogne"/>
       <list-item v="Lorraine"/>
       <list-item v="Alsace"/>
@@ -5583,8 +5591,9 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="2"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -5651,8 +5660,9 @@
                 <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sp"/></equal>
               </or>
             </test>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
             <out>
-              <chunk name="det" case="caseFirstWord">
+              <chunk namefrom="lemma" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
                   <tag><var n="tipusdet"/></tag>
@@ -5670,8 +5680,9 @@
             </out>
           </when>
           <otherwise>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
             <out>
-              <chunk name="det" case="caseFirstWord">
+              <chunk namefrom="lemma" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
                   <tag><var n="tipusdet"/></tag>
@@ -6035,8 +6046,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -6151,8 +6163,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -6231,8 +6244,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -6677,8 +6691,9 @@
                 </and>
               </or>
             </test>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
             <out>
-              <chunk name="det" case="caseFirstWord">
+              <chunk namefrom="lemma" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
                   <tag><var n="tipusdet"/></tag>
@@ -6771,8 +6786,9 @@
             </choose>
           </when>
           <otherwise>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
             <out>
-              <chunk name="det" case="caseFirstWord">
+              <chunk namefrom="lemma" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="Det"/></tag>
                   <tag><var n="tipusdet"/></tag>
@@ -6896,8 +6912,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -6957,8 +6974,9 @@
         <call-macro n="firstWord">
           <with-param pos="4"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="4" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -7028,8 +7046,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -7101,8 +7120,9 @@
         <call-macro n="tipus_det">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="det" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
@@ -14580,8 +14600,9 @@
        <call-macro n="f_chunk_tags">
          <with-param pos="1"/>
        </call-macro>
+       <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
        <out>
-         <chunk name="det" case="caseFirstWord">
+         <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="Det"/></tag>
               <tag><var n="tipusdet"/></tag>
