@@ -18,6 +18,10 @@
       <cat-item lemma="pp" tags="SA.*.partitiu"/>
       <cat-item tags="SA.pp.*.partitiu"/>
     </def-cat>
+    <def-cat n="PPser">
+      <cat-item lemma="èsser" tags="SA.pp.*"/>
+      <cat-item lemma="estar" tags="SA.pp.*"/>
+    </def-cat>
     <def-cat n="PP_pl">
       <cat-item lemma="pp" tags="SA.*.pl.*"/>
       <cat-item tags="SA.pp.*.pl.*"/>
@@ -69,6 +73,16 @@
       <cat-item lemma="paréisher" tags="SV.*"/>
       <cat-item lemma="semblar" tags="SV.*"/>
       <cat-item lemma="venir" tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SPron">
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+    </def-cat>
+    <def-cat n="SPron_pro">
+      <cat-item tags="SPron.pro"/>
+      <cat-item tags="SPron.pro.*"/>
+      <cat-item tags="SPron.ref"/>
+      <cat-item tags="SPron.ref.*"/>
     </def-cat>
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
@@ -157,6 +171,12 @@
       <attr-item tags="pl"/>
       <attr-item tags="sp"/>
       <attr-item tags="ND"/>
+    </def-attr>
+
+    <def-attr n="sl_nbr">
+      <attr-item tags="sl_sg"/>
+      <attr-item tags="sl_pl"/>
+      <attr-item tags="sl_sp"/>
     </def-attr>
 
   </section-def-attrs>
@@ -319,6 +339,36 @@
           <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -375,6 +425,36 @@
             </and>
           </test>
           <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -443,6 +523,36 @@
           <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -466,6 +576,642 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SV_copulatiu PPser SA: accord en genre entre sujet et attribut: la maison a été grande > l'ostal es estat grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SV_copulatiu PPser SAdv SA: accord en genre entre sujet et attribut: la maison a été très grande > l'ostal es estat plan grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="3" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="3" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="3" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="3" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SV_copulatiu SAdv PPser SA: accord en genre entre sujet et attribut: la maison a toujours été grande > l'ostal es totjorn estat grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SV_copulatiu SAdv PPser SAdv SA: accord en genre entre sujet et attribut: la maison a toujours été très grande > l'ostal es totjorn estat plan grand">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
       </action>
@@ -511,6 +1257,36 @@
             </and>
           </test>
           <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -583,6 +1359,36 @@
             </and>
           </test>
           <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -662,6 +1468,36 @@
             </and>
           </test>
           <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -748,6 +1584,36 @@
             </and>
           </test>
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -840,6 +1706,36 @@
             </and>
           </test>
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -935,6 +1831,36 @@
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1006,7 +1932,7 @@
       <choose>
         <when>
           <test>
-            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="per"/></equal> <!-- per evitar problèmas amb construccions coma 'le voisin tres fois par an n'est pas ...' (lo cambiament de genre fois/còp causa de problèmas) -->
+            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="per"/></equal> <!-- per evitar problèmas amb construccions coma 'le voisin trois fois par an n'est pas ...' (lo cambiament de genre fois/còp causa de problèmas) -->
           </test>
         </when>
         <when>
@@ -1034,6 +1960,41 @@
             </and>
           </test>
           <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="per"/></equal> <!-- per evitar problèmas amb construccions coma 'le voisin trois fois par an n'est pas ...' (lo cambiament de genre fois/còp causa de problèmas) -->
+          </test>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1113,6 +2074,36 @@
             </and>
           </test>
           <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1201,6 +2192,36 @@
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="8" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1292,6 +2313,36 @@
             </and>
           </test>
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1391,6 +2442,36 @@
             </and>
           </test>
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="9" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1493,6 +2574,36 @@
           <let><clip pos="10" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="10" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="10" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="10" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="10" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1552,6 +2663,807 @@
             <clip pos="10" part="lem"/>
             <clip pos="10" part="tags"/>
             <clip pos="10" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP SN SPron_pro SV_copulatiu SA: aquesta regla inhibeix la concordança de les regles que segueixen si hi ha una preposició al davant del subjecte putatiu">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <out>
+        <chunk>
+          <clip pos="1" part="lem"/>
+          <clip pos="1" part="tags"/>
+          <clip pos="1" part="chcontent"/>
+        </chunk>
+	<b pos="1"/>
+        <chunk>
+          <clip pos="2" part="lem"/>
+          <clip pos="2" part="tags"/>
+          <clip pos="2" part="chcontent"/>
+        </chunk>
+	<b pos="2"/>
+        <chunk>
+          <clip pos="3" part="lem"/>
+          <clip pos="3" part="tags"/>
+          <clip pos="3" part="chcontent"/>
+        </chunk>
+	<b pos="3"/>
+        <chunk>
+          <clip pos="4" part="lem"/>
+          <clip pos="4" part="tags"/>
+          <clip pos="4" part="chcontent"/>
+        </chunk>
+	<b pos="4"/>
+        <chunk>
+          <clip pos="5" part="lem"/>
+          <clip pos="5" part="tags"/>
+          <clip pos="5" part="chcontent"/>
+        </chunk>
+      </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPron_pro SV_copulatiu SA: accord en genre entre sujet et attribut: la maison en est fière > l'ostal n'es gloriós">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPron_pro SV_copulatiu PPser SA: accord en genre entre sujet et attribut: la maison en a été fière > l'ostal n'es estat gloriós">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPron_pro SV_copulatiu PPser SAdv SA: accord en genre entre sujet et attribut: la maison en a été très fière > l'ostal n'es estat plan gloriós">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPron_pro SV_copulatiu SAdv PPser SA: accord en genre entre sujet et attribut: la maison en a toujours été fière > l'ostal n'es totjorn estat gloriós">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="6" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="6" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="6" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPron_pro SV_copulatiu SAdv PPser SAdv SA: accord en genre entre sujet et attribut: la maison en a toujours été très fière > l'ostal n'es totjorn estat plan gloriós">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PPser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="5" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="5" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="5" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="7" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="7" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <or>
+                <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+                <equal><clip pos="7" part="sl_nbr"/><lit-tag v="sl_sp"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
           </chunk>
         </out>
       </action>
