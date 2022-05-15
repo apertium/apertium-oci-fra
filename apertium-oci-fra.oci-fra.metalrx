@@ -3279,6 +3279,9 @@
   </rule>
   <rule weight="1.0">
     <match tags="*.pp.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
   </rule>
   <rule weight="1.0">
@@ -10284,6 +10287,18 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- provar >> prouver, essayer -->
+  <rule weight="0.8">
+    <match lemma="provar" tags="vblex.*"><select lemma="prouver"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="provar" tags="vblex.*"><select lemma="essayer"/></match>
+    <or>
+      <match lemma="se" tags="cnjadv"/>
+      <match lemma="si" tags="cnjadv"/>
+    </or>
+  </rule>
 
   <!-- foncionar >> fonctionner, marcher -->
   <rule weight="0.8">
