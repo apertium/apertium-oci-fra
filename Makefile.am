@@ -70,6 +70,7 @@ TARGETS_COMMON =		\
 	$(PREFIX2b).t2x.bin	\
 	$(PREFIX2).t2x	\
 	$(PREFIX2b).t2x	\
+	$(PREFIX2).t2x_ini.bin	\
 	$(PREFIX2).t2x_bis.bin	\
 	$(PREFIX2b).t2x_bis.bin	\
 	$(PREFIX2).t2x_bis	\
@@ -339,6 +340,10 @@ $(PREFIX2b).t2x_bis.bin: $(PREFIX2b).t2x_bis
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
+$(PREFIX2).t2x_ini.bin: $(BASENAME).$(PREFIX2).t2x_ini
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
 $(PREFIX2).t2x_pas.bin: $(BASENAME).$(PREFIX2).t2x_pas
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
@@ -404,6 +409,7 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).t4x	\
 		$(BASENAME).$(PREFIX2).t1x	\
 		$(BASENAME).$(PREFIX2).t2x	\
+		$(BASENAME).$(PREFIX2).t2x_ini	\
 		$(BASENAME).$(PREFIX2).t2x_bis	\
 		$(BASENAME).$(PREFIX2).t2x_pas	\
 		$(BASENAME).$(PREFIX2).t2x_pro	\
@@ -434,6 +440,7 @@ apertium_oci_fra_DATA=	\
 	$(BASENAME).$(PREFIX1).t4x			\
 	$(BASENAME).$(PREFIX2).t1x			\
 	$(BASENAME).$(PREFIX2).t2x			\
+	$(BASENAME).$(PREFIX2).t2x_ini			\
 	$(BASENAME).$(PREFIX2).t2x_bis			\
 	$(BASENAME).$(PREFIX2).t2x_pas			\
 	$(BASENAME).$(PREFIX2).t2x_pro			\
