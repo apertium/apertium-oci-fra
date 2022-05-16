@@ -95,6 +95,9 @@
     <def-cat n="tot_adv">
       <cat-item lemma="tot" tags="adv"/>
     </def-cat>
+    <def-cat n="tot_det">
+      <cat-item lemma="tot" tags="det.*"/>
+    </def-cat>
     <def-cat n="det">
       <cat-item tags="det.*"/>
       <cat-item tags="predet.*"/>
@@ -1555,7 +1558,8 @@
       <list-item v="Luchonnais"/>
       <list-item v="Nébouzan"/>
       <list-item v="Vazadais"/>
-      <list-item v="Velai"/>
+      <list-item v="Velay"/>
+      <list-item v="Vercors"/>
       <list-item v="Aran"/>
       <list-item v="Aquitaine"/>
       <list-item v="Nouvelle-Aquitaine"/>
@@ -5559,6 +5563,72 @@
             </out>
           </otherwise>
         </choose>
+      </action>
+    </rule>
+
+    <rule comment="REGLA: en tot NP: en tota Occitania > dans toute l'Occitanie">
+      <pattern>
+        <pattern-item n="enpr"/>
+        <pattern-item n="tot_det"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+       <call-macro n="firstWord">
+         <with-param pos="1"/>
+       </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="dans" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+               <lit v="dans"/>
+               <lit-tag v="pr"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="nptop" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <lit v="tout"/>
+              <lit-tag v="predet"/>
+              <var n="genero"/>
+              <var n="numero"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="le"/>
+              <lit-tag v="det.def"/>
+              <var n="genero"/>
+              <var n="numero"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
