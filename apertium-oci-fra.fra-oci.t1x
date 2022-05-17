@@ -176,8 +176,17 @@
       <cat-item lemma="premier" tags="adj.*"/>
     </def-cat>
 
+    <def-cat n="num_detind">
+      <cat-item tags="num"/>
+      <cat-item tags="num.*"/>
+      <cat-item tags="det.ind.*"/>
+    </def-cat>
+
     <def-cat n="pr">
       <cat-item tags="pr"/>
+    </def-cat>
+    <def-cat n="aprep">
+      <cat-item lemma="à" tags="pr"/>
     </def-cat>
     <def-cat n="deprep">
       <cat-item lemma="de" tags="pr"/>
@@ -412,6 +421,22 @@
       <cat-item lemma="décembre" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="nom_mois_an">
+      <cat-item lemma="janvier" tags="n.*"/>
+      <cat-item lemma="février" tags="n.*"/>
+      <cat-item lemma="mars" tags="n.*"/>
+      <cat-item lemma="avril" tags="n.*"/>
+      <cat-item lemma="mai" tags="n.*"/>
+      <cat-item lemma="juin" tags="n.*"/>
+      <cat-item lemma="juillet" tags="n.*"/>
+      <cat-item lemma="août" tags="n.*"/>
+      <cat-item lemma="septembre" tags="n.*"/>
+      <cat-item lemma="octobre" tags="n.*"/>
+      <cat-item lemma="novembre" tags="n.*"/>
+      <cat-item lemma="décembre" tags="n.*"/>
+      <cat-item tags="num"/>
+    </def-cat>
+
     <def-cat n="mi-mois">
       <cat-item lemma="mi-janvier" tags="adv"/>
       <cat-item lemma="mi-février" tags="adv"/>
@@ -458,6 +483,10 @@
       <cat-item lemma="matin" tags="n.*"/>
       <cat-item lemma="après-midi" tags="n.*"/>
       <cat-item lemma="soir" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="reprise_n">
+      <cat-item lemma="reprise" tags="n.*"/>
     </def-cat>
 
     <def-cat n="nom_monsieur">
@@ -8377,7 +8406,7 @@
    <rule comment="RÈGLA: début MOIS (début janvier > a la debuta de genièr)" v="oci">
       <pattern>
         <pattern-item n="debut_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -8421,7 +8450,7 @@
    <rule comment="RÈGLA: début MOIS (début janvier > au començar de genèr)" v="oci@gascon">
       <pattern>
         <pattern-item n="debut_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -8462,11 +8491,11 @@
       </action>
     </rule>
 
-   <rule comment="RÈGLA: PREP début MOIS (PREP début janvier > PREP a la debuta de genièr)" v="oci">
+   <rule comment="RÈGLA: PREP début MOIS (PREP début janvier > PREP la debuta de genièr)" v="oci">
       <pattern>
         <pattern-item n="pr"/>
         <pattern-item n="debut_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -8508,7 +8537,7 @@
       <pattern>
         <pattern-item n="pr"/>
         <pattern-item n="debut_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -8549,7 +8578,7 @@
    <rule comment="RÈGLA: fin MOIS (fin janvier > a la fin de genièr)">
       <pattern>
         <pattern-item n="fin_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -8590,11 +8619,11 @@
       </action>
     </rule>
 
-   <rule comment="RÈGLA: PREP fin MOIS (PREP fin janvier > PREP a la fin de genièr)">
+   <rule comment="RÈGLA: PREP fin MOIS (PREP fin janvier > PREP la fin de genièr)">
       <pattern>
         <pattern-item n="pr"/>
         <pattern-item n="fin_n"/>
-        <pattern-item n="nom_mois"/>
+        <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
         <call-macro n="f_concord1">
@@ -21353,6 +21382,43 @@
         </choose>
       </action>
     </rule>
+
+    <rule comment="RÈGLA: à X reprises > X còps">
+       <pattern>
+         <pattern-item n="aprep"/>
+         <pattern-item n="num_detind"/>
+         <pattern-item n="reprise_n"/>
+       </pattern>
+       <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk namefrom="adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="2" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+       </action>
+    </rule>
+
+  <!-- FIN AUTRAS RÈGLAS -->
 
   </section-rules>
 </transfer>
