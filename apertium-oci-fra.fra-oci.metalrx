@@ -721,8 +721,8 @@
       <match lemma="3ème" tags="adj.*"/>
     </or></def-seq>
   </def-seqs>
-<rules>
 
+<rules>
 
 <!-- **************** PREP **************** -->
 
@@ -732,7 +732,7 @@
     <match lemma="vis-a-vis de" tags="pr" v="oci@gascon"><select lemma="au respècte de"/></match>
   </rule>
 
-  <!-- à >> a, en, de -->
+  <!-- à >> a, en, de, [remove] -->
   <rule weight="0.6">
     <match lemma="à" tags="pr"><select lemma="a"/></match>
   </rule>
@@ -1540,6 +1540,20 @@
   <!-- diffuseur >> difusor, difusader -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="diffuseur" tags="n.*"><select lemma="difusor"/></match>
+  </rule>
+
+  <!-- reprise >> represa, còp -->
+  <rule weight="0.8">
+    <match lemma="reprise" tags="n.*"><select lemma="represa"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="à" tags="pr"><remove tags="pr"/></match>
+    <or>
+      <match tags="num"/>
+      <match tags="num.*"/>
+      <match tags="det.ind.*"/>
+    </or>
+    <match lemma="reprise" tags="n.*"><select lemma="còp"/></match>
   </rule>
 
   <!-- maître >> mèstre/mèste, mestressa/mestrèssa -->
@@ -4553,6 +4567,7 @@
   <macro name="noms_propres" p1="Didier" p2="Deidièr" />
   <macro name="noms_propres" p1="Dominique" p2="Domergue" />
   <macro name="noms_propres" p1="Édouard" p2="Edoard" />
+  <macro name="noms_propres" p1="Élisabeth" p2="Elisabèt" />
   <macro name="noms_propres" p1="Elisabeth" p2="Elisabèt" />
   <macro name="noms_propres" p1="Émilie" p2="Emilia" />
   <macro name="noms_propres" p1="Emmanuel" p2="Emanuèl" />
