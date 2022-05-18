@@ -84,6 +84,10 @@
       <cat-item tags="SPron.ref"/>
       <cat-item tags="SPron.ref.*"/>
     </def-cat>
+    <def-cat n="SPron_ref">
+      <cat-item tags="SPron.ref"/>
+      <cat-item tags="SPron.ref.*"/>
+    </def-cat>
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
       <cat-item tags="PREP.*"/>
@@ -177,6 +181,21 @@
       <attr-item tags="sl_sg"/>
       <attr-item tags="sl_pl"/>
       <attr-item tags="sl_sp"/>
+    </def-attr>
+
+    <def-attr n="pers">
+      <attr-item tags="p1"/>
+      <attr-item tags="p2"/>
+      <attr-item tags="p3"/>
+    </def-attr>
+
+    <def-attr n="a_pron">
+      <attr-item tags="tn"/>
+      <attr-item tags="pro"/>
+      <attr-item tags="ref"/>
+      <attr-item tags="ref.on"/>
+      <attr-item tags="enc"/>
+      <attr-item tags="itg"/>
     </def-attr>
 
   </section-def-attrs>
@@ -4304,6 +4323,436 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+      </action>
+    </rule>
+
+    <!-- casos ambe pronòm (se lo vèrb es reflexiu o a ja un complement dirècte, i a pas de partitiu) -->
+
+    <rule comment="RÈGLA: PRNPRO SV PR_de DET_def SN: s'éloigne de la gauche > s'aluènha de l'esquèrra" v="oci">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_pron"/><lit-tag v="ref"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lo"/></equal>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="me"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="te"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="nos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="vos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="lem"/>
+                <clip pos="4" part="tags"/>
+                <clip pos="4" part="chcontent"/>
+              </chunk>
+              <b pos="4"/>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+            </out>
+            <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+            <out>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNPRO SV PR_de DET_def SN: s'éloigne de la gauche > s'aluènha de l'esquèrra" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_pron"/><lit-tag v="ref"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lo"/></equal>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="me"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="te"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="nos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="vos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="lem"/>
+                <clip pos="4" part="tags"/>
+                <clip pos="4" part="chcontent"/>
+              </chunk>
+              <b pos="4"/>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+            </out>
+            <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+            <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+            <out>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNPRO SV SAdv PR_de DET_def SN: ne s'éloigne pas de la gauche > s'aluènha pas de l'esquèrra" v="oci">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_pron"/><lit-tag v="ref"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lo"/></equal>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="me"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="te"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="nos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="vos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="lem"/>
+                <clip pos="4" part="tags"/>
+                <clip pos="4" part="chcontent"/>
+              </chunk>
+              <b pos="4"/>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+              <b pos="5"/>
+              <chunk>
+                <clip pos="6" part="lem"/>
+                <clip pos="6" part="tags"/>
+                <clip pos="6" part="chcontent"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="lem"/>
+                <clip pos="4" part="tags"/>
+                <clip pos="4" part="chcontent"/>
+              </chunk>
+              <b pos="4"/>
+            </out>
+            <call-macro n="f_bcond"><with-param pos="5"/><with-param pos="6"/></call-macro>
+            <out>
+              <chunk>
+                <clip pos="6" part="lem"/>
+                <clip pos="6" part="tags"/>
+                <clip pos="6" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNPRO SV SAdv PR_de DET_def SN: ne s'éloigne pas de la gauche > s'aluènha pas de l'esquèrra" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_pron"/><lit-tag v="ref"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lo"/></equal>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="me"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="te"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="nos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p1"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="vos"/></equal>
+                  <equal><clip pos="2" part="pers"/><lit-tag v="p2"/></equal>
+                  <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+                </and>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="lem"/>
+                <clip pos="4" part="tags"/>
+                <clip pos="4" part="chcontent"/>
+              </chunk>
+              <b pos="4"/>
+              <chunk>
+                <clip pos="5" part="lem"/>
+                <clip pos="5" part="tags"/>
+                <clip pos="5" part="chcontent"/>
+              </chunk>
+              <b pos="5"/>
+              <chunk>
+                <clip pos="6" part="lem"/>
+                <clip pos="6" part="tags"/>
+                <clip pos="6" part="chcontent"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="1" part="lem"/>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+              <b pos="1"/>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+            </out>
+            <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+            <call-macro n="f_bcond"><with-param pos="5"/><with-param pos="6"/></call-macro>
+            <out>
+              <chunk>
+                <clip pos="6" part="lem"/>
+                <clip pos="6" part="tags"/>
+                <clip pos="6" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
