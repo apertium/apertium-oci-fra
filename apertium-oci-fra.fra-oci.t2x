@@ -26,6 +26,13 @@
       <cat-item lemma="pp" tags="SA.*.pl.*"/>
       <cat-item tags="SA.pp.*.pl.*"/>
     </def-cat>
+    <def-cat n="PPser_SA">
+      <cat-item lemma="èsser" tags="SA.pp.*"/>
+      <cat-item lemma="estar" tags="SA.pp.*"/>
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SAcomp.*"/>
+    </def-cat>
     <def-cat n="SAcomp">
       <cat-item tags="SAcomp.*"/>
     </def-cat>
@@ -318,6 +325,49 @@
           <clip pos="4" part="lem"/>
           <clip pos="4" part="tags"/>
           <clip pos="4" part="chcontent"/>
+        </chunk>
+      </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP DET SN SV_copulatiu SA: aquesta regla inhibeix la concordança de les regles que segueixen si hi ha una preposició al davant del subjecte putatiu">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+      <out>
+        <chunk>
+          <clip pos="1" part="lem"/>
+          <clip pos="1" part="tags"/>
+          <clip pos="1" part="chcontent"/>
+        </chunk>
+	<b pos="1"/>
+        <chunk>
+          <clip pos="2" part="lem"/>
+          <clip pos="2" part="tags"/>
+          <clip pos="2" part="chcontent"/>
+        </chunk>
+	<b pos="2"/>
+        <chunk>
+          <clip pos="3" part="lem"/>
+          <clip pos="3" part="tags"/>
+          <clip pos="3" part="chcontent"/>
+        </chunk>
+	<b pos="3"/>
+        <chunk>
+          <clip pos="4" part="lem"/>
+          <clip pos="4" part="tags"/>
+          <clip pos="4" part="chcontent"/>
+        </chunk>
+	<b pos="4"/>
+        <chunk>
+          <clip pos="5" part="lem"/>
+          <clip pos="5" part="tags"/>
+          <clip pos="5" part="chcontent"/>
         </chunk>
       </out>
       </action>
@@ -2693,7 +2743,7 @@
         <pattern-item n="SN"/>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_copulatiu"/>
-        <pattern-item n="SA"/>
+        <pattern-item n="PPser_SA"/>
       </pattern>
       <action>
       <out>
@@ -2725,6 +2775,56 @@
           <clip pos="5" part="lem"/>
           <clip pos="5" part="tags"/>
           <clip pos="5" part="chcontent"/>
+        </chunk>
+      </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP DET SN SPron_pro SV_copulatiu SA: aquesta regla inhibeix la concordança de les regles que segueixen si hi ha una preposició al davant del subjecte putatiu">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_copulatiu"/>
+        <pattern-item n="PPser_SA"/>
+      </pattern>
+      <action>
+      <out>
+        <chunk>
+          <clip pos="1" part="lem"/>
+          <clip pos="1" part="tags"/>
+          <clip pos="1" part="chcontent"/>
+        </chunk>
+	<b pos="1"/>
+        <chunk>
+          <clip pos="2" part="lem"/>
+          <clip pos="2" part="tags"/>
+          <clip pos="2" part="chcontent"/>
+        </chunk>
+	<b pos="2"/>
+        <chunk>
+          <clip pos="3" part="lem"/>
+          <clip pos="3" part="tags"/>
+          <clip pos="3" part="chcontent"/>
+        </chunk>
+	<b pos="3"/>
+        <chunk>
+          <clip pos="4" part="lem"/>
+          <clip pos="4" part="tags"/>
+          <clip pos="4" part="chcontent"/>
+        </chunk>
+	<b pos="4"/>
+        <chunk>
+          <clip pos="5" part="lem"/>
+          <clip pos="5" part="tags"/>
+          <clip pos="5" part="chcontent"/>
+        </chunk>
+	<b pos="5"/>
+        <chunk>
+          <clip pos="6" part="lem"/>
+          <clip pos="6" part="tags"/>
+          <clip pos="6" part="chcontent"/>
         </chunk>
       </out>
       </action>
