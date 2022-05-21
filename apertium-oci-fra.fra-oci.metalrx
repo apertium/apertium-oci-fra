@@ -1537,6 +1537,26 @@
 
 <!-- **************** N **************** -->
 
+  <!-- impasse >> androna, camin# d'enlòc -->
+  <rule weight="0.8" v="oci">
+    <match lemma="impasse" tags="n.*"><select lemma="androna"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="dans" tags="pr"/>
+    <match tags="det.*"/>
+    <match lemma="impasse" tags="n.*"><select lemma="camin# d'enlòc"/></match>
+  </rule>
+
+  <!-- impasse >> honset, camin# d'enlòc -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="impasse" tags="n.*"><select lemma="honset"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="dans" tags="pr"/>
+    <match tags="det.*"/>
+    <match lemma="impasse" tags="n.*"><select lemma="camin# d'enlòc"/></match>
+  </rule>
+
   <!-- diffuseur >> difusor, difusader -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="diffuseur" tags="n.*"><select lemma="difusor"/></match>
@@ -3879,14 +3899,14 @@
     </or>
   </rule>
 
-
   <!-- dérouler >> desenrotlar, debanar -->
   <macro name="verb_nopron_pron" p1="dérouler" p2="desenrotlar" p3="debanar" />
 
+  <!-- retrancher -> suprimir, fortificar -->
+  <macro name="verb_nopron_pron" p1="retrancher" p2="suprimir" p3="fortificar" />
 
   <!-- terrer >> amagar, enterrar -->
   <macro name="verb_nopron_pron" p1="terrer" p2="enterrar" p3="amagar" />
-
 
   <!-- éblouir >> esbleugir/enlusernar, embalausir/esmiraglar -->
   <rule weight="0.8">
@@ -3897,7 +3917,6 @@
     <match lemma="éblouir" tags="vblex.*.p2.*" v="oci"><select lemma="embalausir"/></match>
     <match lemma="éblouir" tags="vblex.*.p2.*" v="oci@gascon"><select lemma="esmiraglar"/></match>
   </rule>
-
 
   <!-- embrasser >> abraçar, poto(n)ar -->
   <rule weight="0.8">
