@@ -188,11 +188,34 @@
   </section-def-vars>
 
   <section-def-macros>
-    <def-macro n="test1" npar="1">
-      <let>
-        <var n="number"/>
-        <lit v=""/>
-      </let>
+    <def-macro n="f_acord_mantun2" npar="2"> <!-- par1 = prn/n -->
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="1" part="lem"/><lit v="mantun"/></equal>
+          </test>
+          <choose>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" part="gen"/><lit-tag v="m"/></equal>
+                  <equal><clip pos="2" part="gen"/><lit-tag v="f"/></equal>
+                </and>
+              </test>
+              <let><clip pos="1" part="gen"/><lit-tag v="f"/></let>
+            </when>
+            <when>
+              <test>
+                <and>
+                  <equal><clip pos="1" part="gen"/><lit-tag v="f"/></equal>
+                  <equal><clip pos="2" part="gen"/><lit-tag v="m"/></equal>
+                </and>
+              </test>
+              <let><clip pos="1" part="gen"/><lit-tag v="m"/></let>
+            </when>
+          </choose>
+        </when>
+      </choose>
     </def-macro>
 
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
@@ -1234,6 +1257,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="4"/></call-macro>
         <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1269,6 +1293,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="4"/></call-macro>
         <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1309,6 +1334,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="4"/></call-macro>
         <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1351,6 +1377,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1386,6 +1413,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1426,6 +1454,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1470,6 +1499,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1515,6 +1545,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1565,6 +1596,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1618,6 +1650,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1668,6 +1701,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
@@ -1723,6 +1757,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
         <let><clip pos="10" part="nbr"/><lit-tag v="sg"/></let>
         <out>
           <chunk>
