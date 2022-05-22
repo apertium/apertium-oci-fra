@@ -21612,19 +21612,69 @@
         <call-macro n="tipus_prn">
           <with-param pos="2"/>
         </call-macro>
-        <out>
-          <chunk name="prn">
-            <tags>
-              <tag><lit-tag v="SPron"/></tag>
-              <tag><var n="tipusprn"/></tag>
-            </tags>
-            <lu>
-              <clip pos="2" side="tl" part="lemh"/>
-              <clip pos="2" side="tl" part="tags"/>
-              <clip pos="2" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+         <let><var n="lemma"/><clip pos="2" side="tl" part="lem"/></let>
+         <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
+         <choose>
+           <when>
+             <test>
+               <not>
+                 <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v=""/></equal>
+               </not>
+             </test>
+             <choose>
+               <when>
+                 <test>
+                   <or>
+                     <equal><clip pos="2" side="tl" part="gen"/><lit v=""/></equal>
+                     <equal><clip pos="2" side="tl" part="nbr"/><lit v=""/></equal>
+                     <not><equal><var n="tipusprn"/><clip pos="2" side="tl" part="a_pron"/></equal></not>
+                   </or>
+                 </test>
+                 <out>
+                   <chunk namefrom="lemma" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><var n="tipusprn"/></tag>
+                     </tags>
+                     <lu>
+                       <clip pos="2" side="tl" part="lem"/>
+                       <lit-tag v="prn"/>
+                       <clip pos="2" side="tl" part="a_pron_long"/>
+                       <clip pos="2" side="tl" part="pers"/>
+                       <clip pos="2" side="tl" part="gen"/>
+                       <clip pos="2" side="tl" part="nbr"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </when>
+               <otherwise>
+                 <out>
+                   <chunk namefrom="lemma" case="caseFirstWord">
+                     <tags>
+                       <tag><lit-tag v="SPron"/></tag>
+                       <tag><var n="tipusprn"/></tag>
+                       <tag><clip pos="2" side="tl" part="gen"/></tag>
+                       <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                       <tag><var n="genero_sl"/></tag>
+                       <tag><var n="numero_sl"/></tag>
+                     </tags>
+                     <lu>
+                       <clip pos="2" side="tl" part="lem"/>
+                       <lit-tag v="prn"/>
+                       <clip pos="2" side="tl" part="a_pron_long"/>
+                       <clip pos="2" side="tl" part="pers"/>
+                       <lit-tag v="3"/>
+                       <lit-tag v="4"/>
+                     </lu>
+                   </chunk>
+                 </out>
+               </otherwise>
+             </choose>
+           </when>
+         </choose>
       </action>
     </rule>
 
