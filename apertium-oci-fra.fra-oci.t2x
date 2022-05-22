@@ -96,6 +96,9 @@
       <cat-item tags="SPron.ref"/>
       <cat-item tags="SPron.ref.*"/>
     </def-cat>
+    <def-cat n="PRN_mantun">
+      <cat-item lemma="mantun" tags="SPron.*"/>
+    </def-cat>
     <def-cat n="PREP">
       <cat-item tags="PREP"/>
       <cat-item tags="PREP.*"/>
@@ -250,6 +253,23 @@
       </choose>
     </def-macro>
 
+    <def-macro n="f_acord_mantun3" npar="3"> <!-- par1 = prn/n -->
+      <choose>
+        <when>
+          <test>
+            <or>
+              <equal><clip pos="2" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="2" part="gen"/><lit-tag v="f"/></equal>
+            </or>
+          </test>
+          <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        </when>
+        <otherwise>
+          <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        </otherwise>
+      </choose>
+    </def-macro>
+
     <def-macro n="f_bcond" npar="2"><!--Per mirar si el blanc conté o no format. Cal posar aquesta funció en les regles en què desaparegui alguna paraula, per tal de decidir si el blanc de la paraula eliminada s'ha d'eliminar o conservar. Si conté format cal conservar-la, si no en conté cal eliminar-la perquè no apareguin dos espais seguits. -->
       <choose>
         <when>
@@ -284,6 +304,77 @@
         </out>
       </action>
     </rule>
+
+    <!-- RÈGLAS PER MANTUN PRN -->
+
+    <rule comment="RÈGLA: PRN_mantun PREP SN SV_copulatiu SA: plusieurs d'elles > mantuna d'elas">
+      <pattern>
+        <pattern-item n="PRN_mantun"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRN_mantun PREP DET SN SV_copulatiu SA: plusieurs de ses nouvelles > mantuna de sas novèlas ; plusieurs d'entre ellex > mantuna d'entre elas">
+      <pattern>
+        <pattern-item n="PRN_mantun"/>
+        <pattern-item n="PREP"/>
+        <pattern-item n="PREP_DET"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS PER MANTUN PRN -->
 
     <!-- RÈGLAS PEL SUPERLATIU -->
 
@@ -1325,6 +1416,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -1432,7 +1524,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
-      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="4"/></call-macro>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -1542,6 +1634,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -1658,6 +1751,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -1780,6 +1874,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -1903,6 +1998,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2029,6 +2125,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2148,6 +2245,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2264,6 +2362,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2387,6 +2486,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun2"><with-param pos="1"/><with-param pos="3"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2516,6 +2616,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -2646,6 +2747,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -3857,6 +3959,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
@@ -4031,6 +4134,7 @@
         <pattern-item n="SA"/>
       </pattern>
       <action>
+      <call-macro n="f_acord_mantun3"><with-param pos="1"/><with-param pos="3"/><with-param pos="4"/></call-macro>
       <choose>
         <when>
           <test>
