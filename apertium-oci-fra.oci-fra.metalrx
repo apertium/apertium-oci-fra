@@ -4698,12 +4698,15 @@
 
   <!-- lo que >> celui que, celui qui -->
   <rule weight="0.8">
-    <match lemma="lo que" tags="rel.an.*"><select lemma="celui que"/></match>
+    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="lo que" tags="rel.an.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
+    <match lemma="lo que" tags="rel.*.sg"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
     </repeat>
     <or>
       <match tags="vblex.*.p3.sg"/>
@@ -4713,9 +4716,27 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match lemma="lo que" tags="rel.an.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.p3.sg"/>
+      <match tags="vbser.*.p3.sg"/>
+      <match tags="vbhaver.*.p3.sg"/>
+      <match tags="vbmod.*.p3.sg"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="lo que" tags="rel.*.pl"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
     </repeat>
     <or>
       <match tags="vblex.*.p3.pl"/>
@@ -4727,8 +4748,57 @@
 
   <!-- lo qui >> celui que, celui qui -->
   <rule weight="0.8">
-    <match lemma="lo qui" tags="rel.nn.*"><select lemma="celui qui"/></match>
+    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="lo qui" tags="rel.*.sg"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.p3.sg"/>
+      <match tags="vbser.*.p3.sg"/>
+      <match tags="vbhaver.*.p3.sg"/>
+      <match tags="vbmod.*.p3.sg"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.p3.sg"/>
+      <match tags="vbser.*.p3.sg"/>
+      <match tags="vbhaver.*.p3.sg"/>
+      <match tags="vbmod.*.p3.sg"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="lo qui" tags="rel.*.pl"><select lemma="celui qui"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.p3.pl"/>
+      <match tags="vbser.*.p3.pl"/>
+      <match tags="vbhaver.*.p3.pl"/>
+      <match tags="vbmod.*.p3.pl"/>
+    </or>
+  </rule>
+
 
 <!-- **************** NUM **************** -->
 
