@@ -2280,7 +2280,7 @@
     <match lemma="quau" tags="prn.itg.*"><select lemma="quel"/></match>
   </rule>
 
-  <!-- se prn.pro >> se prn.pro, [remove] -->
+  <!-- se prn.pro >> se prn.pro, on, [remove] -->
   <rule weight="0.8">
     <match lemma="se" tags="prn.pro.*"><select lemma="se"/></match>
   </rule>
@@ -2299,6 +2299,86 @@
     </or>
   </rule>
 -->
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match lemma="dire" tags="vblex.*"><select lemma="appeler"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match tags="vbhaver.*"/>
+    <match lemma="dire" tags="vblex.pp.*"><select lemma="appeler"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match tags="vbmod.*"/>
+    <match lemma="dire" tags="vblex.inf"><select lemma="appeler"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match tags="vbhaver.*"/>
+    <match tags="vbmod.pp.*"/>
+    <match lemma="dire" tags="vblex.inf*"><select lemma="appeler"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="prn.pro.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="vbmod.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+  <rule weight="3.0">
+    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="prn.pro.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="vbmod.pp.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+  <rule weight="3.0">
+    <match tags="det.def.*"/>
+    <or>
+      <match lemma="fach" tags="n.m.sg"/>
+      <match lemma="fait" tags="n.m.sg"/>
+      <match lemma="fèit" tags="n.m.sg"/>
+      <match lemma="hèit" tags="n.m.sg"/>
+      <match lemma="hèt" tags="n.m.sg"/>
+    </or>
+    <or>
+      <match lemma="que" tags="rel.*"><select lemma="que"/></match>
+      <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+  </rule>
 
   <!-- si prn.pro >> si prn.pro, [remove] -->
   <rule weight="0.8">
