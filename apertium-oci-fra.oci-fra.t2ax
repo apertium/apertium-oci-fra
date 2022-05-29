@@ -89,6 +89,12 @@
       <cat-item lemma="sembler" tags="SV.*"/>
       <cat-item lemma="devenir" tags="SV.*"/>
     </def-cat>
+    <def-cat n="SV_copulatiu_inf">
+      <cat-item tags="SV.vbser.*.inf"/>
+      <cat-item lemma="paraître" tags="SV.*.inf"/>
+      <cat-item lemma="sembler" tags="SV.*.inf"/>
+      <cat-item lemma="devenir" tags="SV.*.inf"/>
+    </def-cat>
     <def-cat n="SV_pers"><!--Formes personals. Exclou inf i ger (i alguns imperatius per ara) -->
       <cat-item tags="SV.*.p1.*"/>
       <cat-item tags="SV.*.p2.*"/>
@@ -101,6 +107,60 @@
       <cat-item lemma="verbcj" tags="SVneg.*"/>
       <cat-item lemma="havercj" tags="SV.*"/>
       <cat-item lemma="havercj" tags="SVneg.*"/>
+    </def-cat>
+    <def-cat n="SV_copulatiu_pers">
+      <cat-item tags="SV.vbser.*.p1.*"/>
+      <cat-item tags="SV.vbser.*.p2.*"/>
+      <cat-item tags="SV.vbser.*.p3.*"/>
+      <cat-item lemma="paraître" tags="SV.*.p1.*"/>
+      <cat-item lemma="paraître" tags="SV.*.p2.*"/>
+      <cat-item lemma="paraître" tags="SV.*.p3.*"/>
+      <cat-item lemma="sembler" tags="SV.*.p1.*"/>
+      <cat-item lemma="sembler" tags="SV.*.p2.*"/>
+      <cat-item lemma="sembler" tags="SV.*.p3.*"/>
+      <cat-item lemma="devenir" tags="SV.*.p1.*"/>
+      <cat-item lemma="devenir" tags="SV.*.p2.*"/>
+      <cat-item lemma="devenir" tags="SV.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vbmod_pers_non_falloir">
+      <cat-item lemma="devoir" tags="SV.vbmod.*.p1.*"/>
+      <cat-item lemma="devoir" tags="SV.vbmod.*.p2.*"/>
+      <cat-item lemma="devoir" tags="SV.vbmod.*.p3.*"/>
+      <cat-item lemma="pouvoir" tags="SV.vbmod.*.p1.*"/>
+      <cat-item lemma="pouvoir" tags="SV.vbmod.*.p2.*"/>
+      <cat-item lemma="pouvoir" tags="SV.vbmod.*.p3.*"/>
+      <cat-item lemma="vouloir" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="vouloir" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="vouloir" tags="SV.vblex.*.p3.*"/>
+      <cat-item lemma="aller" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="aller" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="aller" tags="SV.vblex.*.p3.*"/>
+<!--
+      <cat-item lemma="sembler" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="sembler" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="sembler" tags="SV.vblex.*.p3.*"/>
+      <cat-item lemma="paraître" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="paraître" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="paraître" tags="SV.vblex.*.p3.*"/>
+-->
+      <cat-item lemma="savoir" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="savoir" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="savoir" tags="SV.vblex.*.p3.*"/>
+      <cat-item lemma="venir" tags="SV.vblex.*.p1.*"/>
+      <cat-item lemma="venir" tags="SV.vblex.*.p2.*"/>
+      <cat-item lemma="venir" tags="SV.vblex.*.p3.*"/>
+    </def-cat>
+    <def-cat n="pp_vbmod_non_falloir">
+      <cat-item lemma="devoir" tags="SA.pp.*"/>
+      <cat-item lemma="pouvoir" tags="SA.pp.*"/>
+      <cat-item lemma="vouloir" tags="SA.pp.*"/>
+      <cat-item lemma="aller" tags="SA.pp.*"/>
+<!--
+      <cat-item lemma="sembler" tags="SA.pp.*"/>
+      <cat-item lemma="paraître" tags="SA.pp.*"/>
+-->
+      <cat-item lemma="savoir" tags="SA.pp.*"/>
+      <cat-item lemma="venir" tags="SA.pp.*"/>
     </def-cat>
 
     <def-cat n="verbs_expression_p3sg">
@@ -284,6 +344,19 @@
       <cat-item tags="cnjadv.*"/>
     </def-cat>
 
+    <def-cat n="cnjsub_adv_que_rel">
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjsub.*"/>
+      <cat-item tags="cnjadv"/>
+      <cat-item tags="cnjadv.*"/>
+      <cat-item lemma="que" tags="rel"/>
+      <cat-item lemma="que" tags="rel.*"/>
+      <cat-item lemma="lo que" tags="rel"/>
+      <cat-item lemma="lo que" tags="rel.*"/>
+      <cat-item lemma="celui que" tags="rel"/>
+      <cat-item lemma="celui que" tags="rel.*"/>
+    </def-cat>
+
     <def-cat n="rel">
       <cat-item tags="rel"/>
       <cat-item tags="rel.*"/>
@@ -407,6 +480,7 @@
 
   <section-def-vars>
     <def-var n="number"/>
+    <def-var n="gender"/>
     <def-var n="finfrasa" v="yes"/>
   </section-def-vars>
 
@@ -438,7 +512,7 @@
      </def-macro>
 
 
- <def-macro n="generate_subject1" npar="1">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+ <def-macro n="gen_subj1" npar="1">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
    <choose>
      <when>
        <test>
@@ -487,15 +561,9 @@
                 <choose>
                   <when>
                     <test>
-                      <equal>
-                        <case-of pos="1" part="lem"/>
-                        <lit v="Aa"/>
-                      </equal>
+                      <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                     </test>
-                    <modify-case>
-                      <clip pos="1" part="lem"/>
-                      <lit v="aa"/>
-                    </modify-case>
+                    <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
                   </when>
                 </choose>
               </when>
@@ -506,7 +574,7 @@
    </choose>
  </def-macro>
 
- <def-macro n="generate_subject2" npar="2">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
+ <def-macro n="gen_subj2" npar="2">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
 <!-- el paràmetre 1 és el verb; el segon, la primera paraula (per agafar si és majúscula o no) -->
    <choose>
      <when>
@@ -564,15 +632,9 @@
                 <choose>
                   <when>
                     <test>
-                      <equal>
-                        <case-of pos="2" part="lem"/>
-                        <lit v="Aa"/>
-                      </equal>
+                      <equal><case-of pos="2" part="lem"/><lit v="Aa"/></equal>
                     </test>
-                    <modify-case>
-                      <clip pos="2" part="lem"/>
-                      <lit v="aa"/>
-                    </modify-case>
+                    <modify-case><clip pos="2" part="lem"/><lit v="aa"/></modify-case>
                   </when>
                 </choose>
               </when>
@@ -583,7 +645,7 @@
    </choose>
  </def-macro>
 
- <def-macro n="generate_subject3" npar="3"> 
+ <def-macro n="gen_subj3" npar="3"> 
 <!-- el paràmetre 1 és el verb; el segon, la primera paraula (per agafar si és majúscula o no); el tercer, el primer prn.pro -->
    <choose>
      <when>
@@ -641,15 +703,91 @@
                 <choose>
                   <when>
                     <test>
-                      <equal>
-                        <case-of pos="2" part="lem"/>
-                        <lit v="Aa"/>
-                      </equal>
+                      <equal><case-of pos="2" part="lem"/><lit v="Aa"/></equal>
                     </test>
-                    <modify-case>
-                      <clip pos="2" part="lem"/>
-                      <lit v="aa"/>
-                    </modify-case>
+                    <modify-case><clip pos="2" part="lem"/><lit v="aa"/></modify-case>
+                  </when>
+                </choose>
+              </when>
+            </choose>
+          </when>
+        </choose>
+     </when>
+   </choose>
+ </def-macro>
+
+
+ <def-macro n="gen_subj_adj" npar="2"> <!-- par1 = SV, par2 = adj (le genre du sujet est pris de par2) -->
+   <choose>
+     <when>
+       <test>
+         <or>
+           <in caseless="yes"><clip pos="1" part="lem"/><list n="SV_personals"/></in>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+           <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+         </or>
+       </test>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><var n="finfrasa"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+              </or>
+            </test>
+            <choose>
+              <when>
+                <test>
+                  <not>
+                    <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
+                  </not>
+                </test>
+                <choose>
+                  <when>
+                    <test>
+                      <or>
+                        <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
+                        <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
+                      </or>
+                    </test>
+                    <let><var n="gender"/><lit-tag v="mf"/></let>
+                  </when>
+                  <when>
+                    <test>
+                      <equal><clip pos="2" part="gen"/><lit-tag v="mf"/></equal>
+                    </test>
+                    <let><var n="gender"/><lit-tag v="GD"/></let>
+                  </when>
+                  <otherwise>
+                    <let><var n="gender"/><clip pos="2" part="gen"/></let>
+                  </otherwise>
+                </choose>
+                <out>
+                  <chunk>
+                    <get-case-from pos="1">
+                      <lit v="subj"/>
+                    </get-case-from>
+                    <lit-tag v="prn.subj"/>
+                    <clip pos="1" part="pers"/>
+                    <var n="gender"/>
+                    <clip pos="1" part="nbr"/>
+                    <lit v="{^"/>
+                    <get-case-from pos="1">
+                      <lit v="prpers"/>
+                    </get-case-from>
+                    <lit-tag v="prn.tn.3.4.5"/>
+                    <lit v="$}"/>
+                  </chunk>
+                  <b/>
+                </out>
+                <choose>
+                  <when>
+                    <test>
+                      <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
+                    </test>
+                    <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
                   </when>
                 </choose>
               </when>
@@ -2147,7 +2285,7 @@
         <pattern-item n="SV_pers"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject1">
+        <call-macro n="gen_subj1">
           <with-param pos="1"/>
         </call-macro>
         <out>
@@ -2197,7 +2335,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="gen_subj2">
           <with-param pos="2"/>
           <with-param pos="1"/>
         </call-macro>
@@ -2262,7 +2400,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="gen_subj2">
           <with-param pos="3"/>
           <with-param pos="1"/>
         </call-macro>
@@ -2415,7 +2553,7 @@
           <b pos="1"/>
         </out>
         <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-        <call-macro n="generate_subject1">
+        <call-macro n="gen_subj1">
           <with-param pos="2"/>
         </call-macro>
         <out>
@@ -2450,7 +2588,7 @@
               <b pos="1"/>
             </out>
             <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-            <call-macro n="generate_subject1">
+            <call-macro n="gen_subj1">
               <with-param pos="3"/>
             </call-macro>
             <out>
@@ -2483,7 +2621,7 @@
               <b pos="2"/>
             </out>
             <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-            <call-macro n="generate_subject1">
+            <call-macro n="gen_subj1">
               <with-param pos="3"/>
             </call-macro>
             <out>
@@ -2515,7 +2653,7 @@
           <b pos="1"/>
         </out>
         <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-        <call-macro n="generate_subject1">
+        <call-macro n="gen_subj1">
           <with-param pos="3"/>
         </call-macro>
         <out>
@@ -2569,15 +2707,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2634,15 +2766,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2701,15 +2827,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2765,15 +2885,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2830,15 +2944,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2902,15 +3010,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -2981,16 +3083,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
-              </when>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case></when>
             </choose>
           </when>
         </choose>
@@ -3066,15 +3161,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3152,15 +3241,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3245,15 +3328,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3340,15 +3417,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3412,15 +3483,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3491,15 +3556,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3577,15 +3636,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -3953,15 +4006,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4032,15 +4079,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4118,15 +4159,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4211,15 +4246,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4621,15 +4650,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4693,15 +4716,9 @@
             <choose>
               <when>
                 <test>
-                  <equal>
-                    <case-of pos="1" part="lem"/>
-                    <lit v="Aa"/>
-                  </equal>
+                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
                 </test>
-                <modify-case>
-                  <clip pos="1" part="lem"/>
-                  <lit v="aa"/>
-                </modify-case>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
               </when>
             </choose>
           </when>
@@ -4920,7 +4937,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="gen_subj2">
           <with-param pos="4"/>
           <with-param pos="1"/>
         </call-macro>
@@ -4959,7 +4976,7 @@
         <pattern-item n="SV_pers"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject2">
+        <call-macro n="gen_subj2">
           <with-param pos="2"/>
           <with-param pos="1"/>
         </call-macro>
@@ -4989,7 +5006,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject3">
+        <call-macro n="gen_subj3">
           <with-param pos="3"/>
           <with-param pos="1"/>
           <with-param pos="2"/>
@@ -5025,7 +5042,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="generate_subject3">
+        <call-macro n="gen_subj3">
           <with-param pos="4"/>
           <with-param pos="1"/>
           <with-param pos="2"/>
@@ -5493,6 +5510,509 @@
           <b pos="4"/>
           <chunk>
             <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- amb vèrbs copulatius (per prene de l'atribut lo genre del subjècte) -->
+
+    <rule comment="RÈGLA: SV_copulatiu_pers SA > subjècte SV_copulatiu_pers SA: es naut > il est haut ; es nauta > elle est haute">
+      <pattern>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_copulatiu_pers SAdv SA > subjècte SV_copulatiu_pers SAdv SA: es pas naut > il est pas haut ; es pas nauta > elle est pas haute">
+      <pattern>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_copulatiu_pers SAdv SAdv SA > subjècte SV_copulatiu_pers SAdv SAdv SA: es pas totjorn naut > il est pas toujours haut ; es pas totjorn nauta > elle est pas toujours haute">
+      <pattern>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SA: qu'es naut > qu'il est haut ; qu'es nauta > qu'elle est haute">
+      <pattern>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SAdv SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SAdv SA: qu'es pas naut > qu'il est pas haut ; qu'es pas nauta > qu'elle est pas haute">
+      <pattern>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SAdv SAdv SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SAdv SAdv SA: qu'es pas totjorn naut > qu'il est pas toujours haut ; qu'es pas totjorn nauta > qu'elle est pas toujours haute">
+      <pattern>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="2"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SV_copulatiu_inf SA > subjècte SV_vbmod_pers SV_copulatiu_inf SA: pòt èsser naut > il peut être haut ; pòt èsser nauta > elle peut être haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SV_copulatiu_inf SAdv SA > subjècte SV_vbmod_pers SV_copulatiu_inf SAdv SA: pòt pas èsser naut > il peut pas être haut ; pòt pas èsser nauta > elle peut pas être haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SAdv SAdv SV_copulatiu_inf SA > subjècte SV_vbmod_pers SAdv SAdv SV_copulatiu_inf SA: pòt pas totjorn èsser naut > il peut pas toujours être haut ; pòt pas totjorn èsser nauta > elle peut pas toujours être haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SAdv SV_copulatiu_inf SA > subjècte SV_vbmod_pers SAdv SV_copulatiu_inf SA: pòt èsser plan naut > il peut être très haut ; pòt èsser plan nauta > elle peut être très haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SAdv SV_copulatiu_inf SAdv SA > subjècte SV_vbmod_pers SAdv SV_copulatiu_inf SAdv SA: pòt pas èsser plan naut > il peut pas être très haut ; pòt pas èsser plan nauta > elle peut pas être très haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbmod_pers SAdv SAdv SV_copulatiu_inf SA > subjècte SV_vbmod_pers SAdv SAdv SV_copulatiu_inf SAdv SA: pòt pas totjorn èsser plan naut > il peut pas toujours être très haut ; pòt pas totjorn èsser plan nauta > elle peut pas toujours être très haute">
+      <pattern>
+        <pattern-item n="SV_vbmod_pers_non_falloir"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_copulatiu_inf"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
