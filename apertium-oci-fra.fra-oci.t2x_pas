@@ -501,23 +501,21 @@
             <clip pos="1" part="tags"/>
             <clip pos="1" part="chcontent"/>
           </chunk>
+          <b/>
+          <chunk>
+            <lit v="pas"/>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <lit v="pas"/>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
         </out>
         <choose>
           <when>
             <test>
               <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
             </test>
-            <out>
-              <b/>
-              <chunk>
-                <lit v="pas"/>
-                <lit-tag v="SAdv"/>
-                <lit v="{^"/>
-                <lit v="pas"/>
-                <lit-tag v="adv"/>
-                <lit v="$}"/>
-              </chunk>
-            </out>
             <let><var n="v_det_pron_neg"/><lit v="false"/></let>
           </when>
         </choose>
@@ -541,6 +539,35 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV pas (per evitar 'pas pas', p.ex.: ne donnent d'ailleurs pas *> balhan pas d'autre biais pas">
+      <pattern>
+        <pattern-item n="SV_sans_pas"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
       </action>
