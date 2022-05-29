@@ -7801,6 +7801,50 @@
 
 <!-- **************** N **************** -->
 
+  <!-- talent -> talent, faim -->
+  <rule weight="0.8">
+    <match lemma="talent" tags="n.*"><select lemma="talent"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="aver" tags="vblex.*"/>
+      <match lemma="amaisar" tags="vblex.*"/>
+      <match lemma="amatigar" tags="vblex.*"/>
+      <match lemma="levar" tags="vblex.*"/>
+      <match lemma="patir" tags="vblex.*"/>
+      <match lemma="sofrir" tags="vblex.*"/>
+      <match lemma="esprovar" tags="vblex.*"/>
+      <match lemma="espravar" tags="vblex.*"/>
+      <match lemma="sasir" tags="vblex.*"/>
+      <match lemma="arrapar" tags="vblex.*"/>
+      <match lemma="encapar" tags="vblex.*"/>
+      <match lemma="gafar" tags="vblex.*"/>
+      <match lemma="gahar" tags="vblex.*"/>
+      <match lemma="penherar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="talent" tags="n.*.sg"><select lemma="faim"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="morir" tags="vblex.*"/>
+      <match lemma="crebar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match lemma="talent" tags="n.*.sg"><select lemma="faim"/></match>
+  </rule>
+
   <!-- mainatgièr n.f -> ménager, fermier -->
   <rule weight="0.8">
     <match lemma="mainatgièr" tags="n.f.*"><select lemma="ménager"/></match>
