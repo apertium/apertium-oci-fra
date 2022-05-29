@@ -20,6 +20,13 @@
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
     </def-cat>
+    <def-cat n="SPron">
+      <cat-item tags="SPron"/>
+      <cat-item tags="SPron.*"/>
+    </def-cat>
+    <def-cat n="SPron_itg">
+      <cat-item tags="SPron.itg.*"/>
+    </def-cat>
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn"/>
       <cat-item tags="SPron.tn.*"/>
@@ -304,11 +311,6 @@
       <cat-item tags="Det.*.pl.*"/>
     </def-cat>
 
-    <def-cat n="SPron">
-      <cat-item tags="SPron"/>
-      <cat-item tags="SPron.*"/>
-    </def-cat>
-
     <def-cat n="Num">
       <cat-item tags="Num"/>
       <cat-item tags="Num.*"/>
@@ -351,8 +353,6 @@
       <cat-item tags="cnjadv.*"/>
       <cat-item lemma="que" tags="rel"/>
       <cat-item lemma="que" tags="rel.*"/>
-      <cat-item lemma="lo que" tags="rel"/>
-      <cat-item lemma="lo que" tags="rel.*"/>
       <cat-item lemma="celui que" tags="rel"/>
       <cat-item lemma="celui que" tags="rel.*"/>
     </def-cat>
@@ -365,8 +365,6 @@
     <def-cat n="que_rel">
       <cat-item lemma="que" tags="rel"/>
       <cat-item lemma="que" tags="rel.*"/>
-      <cat-item lemma="lo que" tags="rel"/>
-      <cat-item lemma="lo que" tags="rel.*"/>
       <cat-item lemma="celui que" tags="rel"/>
       <cat-item lemma="celui que" tags="rel.*"/>
     </def-cat>
@@ -374,8 +372,6 @@
     <def-cat n="qui_rel">
       <cat-item lemma="qui" tags="rel"/>
       <cat-item lemma="qui" tags="rel.*"/>
-      <cat-item lemma="lo qui" tags="rel"/>
-      <cat-item lemma="lo qui" tags="rel.*"/>
       <cat-item lemma="celui qui" tags="rel"/>
       <cat-item lemma="celui qui" tags="rel.*"/>
     </def-cat>
@@ -390,8 +386,6 @@
     <def-cat n="que_rel_CM">
       <cat-item lemma="que" tags="rel"/>
       <cat-item lemma="que" tags="rel.*"/>
-      <cat-item lemma="lo que" tags="rel"/>
-      <cat-item lemma="lo que" tags="rel.*"/>
       <cat-item lemma="celui que" tags="rel"/>
       <cat-item lemma="celui que" tags="rel.*"/>
       <cat-item tags="CM"/>
@@ -474,6 +468,13 @@
       <attr-item tags="pis"/>
       <attr-item tags="fts"/>
       <attr-item tags="imp"/>
+    </def-attr>
+
+    <def-attr n="a_prn">
+      <attr-item tags="tn"/>
+      <attr-item tags="pro"/>
+      <attr-item tags="enc"/>
+      <attr-item tags="itg"/>
     </def-attr>
 
   </section-def-attrs>
@@ -912,7 +913,22 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
-        <!-- <let><var n="finfrasa"/><lit v="no"/></let> -->
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_prn"/><lit-tag v="itg"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="moi"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="toi"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="lui"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="eux"/></equal>
+              </or>
+            </test>
+          </when>
+          <otherwise>
+            <let><var n="finfrasa"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -944,7 +960,7 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
       </action>
     </rule>
 
@@ -960,7 +976,7 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
       </action>
     </rule>
 
@@ -976,7 +992,20 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="que"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="celui que"/></equal>
+              </or>
+            </test>
+            <let><var n="finfrasa"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="finfrasa"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
@@ -2532,141 +2561,6 @@
             <clip pos="5" part="lem"/>
             <clip pos="5" part="tags"/>
             <clip pos="5" part="chcontent"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: que_rel SV > que_rel subjècte SV">
-      <pattern>
-        <pattern-item n="que_rel"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-        </out>
-        <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-        <call-macro n="gen_subj1">
-          <with-param pos="2"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: que_rel SAdv SV > que_rel SAdv subjècte SV">
-      <pattern>
-        <pattern-item n="que_rel"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <choose>
-          <when>
-            <test>
-              <equal><clip pos="2" part="lem"/><lit v="ne"/></equal>
-            </test>
-            <out>
-              <chunk>
-                <clip pos="1" part="lem"/>
-                <clip pos="1" part="tags"/>
-                <clip pos="1" part="chcontent"/>
-              </chunk>
-              <b pos="1"/>
-            </out>
-            <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-            <call-macro n="gen_subj1">
-              <with-param pos="3"/>
-            </call-macro>
-            <out>
-              <chunk>
-                <clip pos="2" part="lem"/>
-                <clip pos="2" part="tags"/>
-                <clip pos="2" part="chcontent"/>
-              </chunk>
-              <b pos="2"/>
-              <chunk>
-                <clip pos="3" part="lem"/>
-                <clip pos="3" part="tags"/>
-                <clip pos="3" part="chcontent"/>
-              </chunk>
-            </out>
-          </when>
-          <otherwise>
-            <out>
-              <chunk>
-                <clip pos="1" part="lem"/>
-                <clip pos="1" part="tags"/>
-                <clip pos="1" part="chcontent"/>
-              </chunk>
-              <b pos="1"/>
-              <chunk>
-                <clip pos="2" part="lem"/>
-                <clip pos="2" part="tags"/>
-                <clip pos="2" part="chcontent"/>
-              </chunk>
-              <b pos="2"/>
-            </out>
-            <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-            <call-macro n="gen_subj1">
-              <with-param pos="3"/>
-            </call-macro>
-            <out>
-              <chunk>
-                <clip pos="3" part="lem"/>
-                <clip pos="3" part="tags"/>
-                <clip pos="3" part="chcontent"/>
-              </chunk>
-            </out>
-          </otherwise>
-        </choose>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: que_rel SPron_pro SV > que_rel subjècte SPron_pro SV">
-      <pattern>
-        <pattern-item n="que_rel"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-        </out>
-        <let><var n="finfrasa"/><lit v="yes"/></let> <!-- per forçar la generacion del pronom -->
-        <call-macro n="gen_subj1">
-          <with-param pos="3"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -5076,446 +4970,6 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: cnjsub_adv SV (que cantes -> que TU chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="2" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="2" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SPron_pro SV (que li cantes -> que TU lui chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="3" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="3" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SPron_pro SPron_pro SV (se n'i a -> s' IL y en a)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="4" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="4" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SPron_pro SPron_pro SPron_pro SV (se n'i a -> s' IL y en a)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="5" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="5" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv ne SV (que non cantes -> que TU ne chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="ne_adv"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="3" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="3" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SADv SV (que totjorn cantes -> que toujours TU chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <get-case-from pos="3">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="3" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="3" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv ne SPron_pro SV (que ne li cantes -> que TU ne lui chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="ne_adv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="4" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="4" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SAdv SPron_pro SV (que totjorn li cantes -> que toujours TU lui chantes)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="4" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="4" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="3">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv ne SPron_pro SPron_pro SPron_pro SV (se non n'i a -> s' IL n'y en a)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="ne_adv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="5" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="5" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv SAdv SPron_pro SPron_pro SPron_pro SV (se totjorn n'i a -> si toujours IL y en a)">
-      <pattern>
-        <pattern-item n="cnjsub_adv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SPron_pro"/>
-        <pattern-item n="SV_pers"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="whole"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="whole"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <get-case-from pos="2">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="5" part="pers"/>
-            <lit-tag v="GD"/>
-            <clip pos="5" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="2">
-	      <lit v="prpers"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.3.4.5"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-          <chunk>
-            <clip pos="3" part="whole"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="whole"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="whole"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
     <!-- amb vèrbs copulatius (per prene de l'atribut lo genre del subjècte) -->
 
     <rule comment="RÈGLA: SV_copulatiu_pers SA > subjècte SV_copulatiu_pers SA: es naut > il est haut ; es nauta > elle est haute">
@@ -5614,138 +5068,6 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SA: qu'es naut > qu'il est haut ; qu'es nauta > qu'elle est haute">
-      <pattern>
-        <pattern-item n="cnjsub_adv_que_rel"/>
-        <pattern-item n="SV_copulatiu_pers"/>
-        <pattern-item n="SA"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-        </out>
-        <let><var n="finfrasa"/><lit v="yes"/></let>
-        <call-macro n="gen_subj_adj">
-          <with-param pos="2"/>
-          <with-param pos="3"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SAdv SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SAdv SA: qu'es pas naut > qu'il est pas haut ; qu'es pas nauta > qu'elle est pas haute">
-      <pattern>
-        <pattern-item n="cnjsub_adv_que_rel"/>
-        <pattern-item n="SV_copulatiu_pers"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SA"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-        </out>
-        <let><var n="finfrasa"/><lit v="yes"/></let>
-        <call-macro n="gen_subj_adj">
-          <with-param pos="2"/>
-          <with-param pos="4"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-        </out>
-        <let><var n="finfrasa"/><lit v="no"/></let>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: cnjsub_adv_que_rel SV_copulatiu_pers SAdv SAdv SA > cnjsub_adv_que_rel subjècte SV_copulatiu_pers SAdv SAdv SA: qu'es pas totjorn naut > qu'il est pas toujours haut ; qu'es pas totjorn nauta > qu'elle est pas toujours haute">
-      <pattern>
-        <pattern-item n="cnjsub_adv_que_rel"/>
-        <pattern-item n="SV_copulatiu_pers"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SA"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-        </out>
-        <let><var n="finfrasa"/><lit v="yes"/></let>
-        <call-macro n="gen_subj_adj">
-          <with-param pos="2"/>
-          <with-param pos="5"/>
-        </call-macro>
-        <out>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6859,9 +6181,6 @@
       </action>
     </rule>
 
-<!--
-    <rule 
--->
     <!-- FIN RÈGLAS inclusion del pronòm subjècte -->
 
   </section-rules>
