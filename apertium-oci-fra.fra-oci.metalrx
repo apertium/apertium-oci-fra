@@ -3405,14 +3405,18 @@
       <match lemma="faire" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="4">
+      <or>
         <match tags="adv"/>
         <match tags="preadv"/>
+      </or>
     </repeat>
     <match lemma="un" tags="det.*"/>
     <repeat from="0" upto="4">
+      <or>
         <match tags="adv"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="boulette" tags="n.*"><select lemma="cagada"/></match>
   </rule>
@@ -3422,14 +3426,18 @@
       <match lemma="faire" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="4">
+      <or>
         <match tags="adv"/>
         <match tags="preadv"/>
+      </or>
     </repeat>
     <match lemma="un" tags="det.*"/>
     <repeat from="0" upto="4">
+      <or>
         <match tags="adv"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="boulette" tags="n.*"><select lemma="boleta"/></match>
   </rule>
@@ -3628,6 +3636,65 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- écrouler >> abausonar, espatarrar -->
+  <!-- écrouler >> aclapar, espatarrar -->
+  <rule weight="0.8" v="oci">
+    <match lemma="écrouler" tags="vblex.*"><select lemma="abausonar"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="écrouler" tags="vblex.*"><select lemma="aclapar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+   <match tags="prn.pro.*"/>
+    <match lemma="écrouler" tags="vblex.*"><select lemma="espatarrar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+   <match tags="prn.pro.*"/>
+   <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="écrouler" tags="vblex.pp.*"><select lemma="espatarrar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="vbmod.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="prn.pro.*"/>
+    <match lemma="écrouler" tags="vblex.inf"><select lemma="espatarrar"/></match>
+  </rule>
+
   <!-- ròder >> devorer, corroder -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="ròder" tags="vblex.*"><select lemma="devorer"/></match>
@@ -3809,10 +3876,12 @@
       <match lemma="nièce" tags="n.*"/>
     </or>
     <repeat from="0" upto="4">
-      <match tags="vbser.*"/>
-      <match tags="adj.*"/>
-      <match tags="adv"/>
-      <match tags="preadv"/>
+      <or>
+        <match tags="vbser.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
     </repeat>
     <match lemma="élever" tags="vblex.pp.*" v="oci"><select lemma="elevar"/></match>
     <match lemma="élever" tags="vblex.*" v="oci@gascon"><select lemma="neurir"/></match>
