@@ -612,7 +612,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
               </or>
             </test>
             <choose>
@@ -622,24 +622,34 @@
                     <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
                   </not>
                 </test>
-                <out>
-                  <chunk>
-                    <get-case-from pos="1">
-                      <lit v="subj"/>
-                    </get-case-from>
-                    <lit-tag v="prn.subj"/>
-                    <clip pos="1" part="pers"/>
-                    <lit-tag v="GD"/>
-                    <clip pos="1" part="nbr"/>
-                    <lit v="{^"/>
-                    <get-case-from pos="1">
-                      <lit v="prpers"/>
-                    </get-case-from>
-                    <lit-tag v="prn.tn.3.4.5"/>
-                    <lit v="$}"/>
-                  </chunk>
-                  <b/>
-                </out>
+                <choose>
+                  <when>
+                    <test>
+                      <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être# vrai"/></equal>
+                    </test>
+                    <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+                  </when>
+                  <otherwise>
+                    <out>
+                      <chunk>
+                        <get-case-from pos="1">
+                          <lit v="subj"/>
+                        </get-case-from>
+                        <lit-tag v="prn.subj"/>
+                        <clip pos="1" part="pers"/>
+                        <lit-tag v="GD"/>
+                        <clip pos="1" part="nbr"/>
+                        <lit v="{^"/>
+                        <get-case-from pos="1">
+                          <lit v="prpers"/>
+                        </get-case-from>
+                        <lit-tag v="prn.tn.3.4.5"/>
+                        <lit v="$}"/>
+                      </chunk>
+                      <b/>
+                    </out>
+                  </otherwise>
+                </choose>
                 <choose>
                   <when>
                     <test>
@@ -675,7 +685,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
@@ -746,7 +756,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
@@ -2654,9 +2664,7 @@
         <pattern-item n="DET"/>
       </pattern>
       <action>
-        <call-macro n="gen_ce">
-          <with-param pos="1"/>
-        </call-macro>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
