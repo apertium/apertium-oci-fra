@@ -1126,6 +1126,7 @@
       <match lemma="compositor" tags="n.*"/>
       <match lemma="escrivan" tags="n.*"/>
       <match lemma="escriveire" tags="n.*"/>
+      <match lemma="poèta" tags="n.*"/>
       <match lemma="musician" tags="n.*"/>
       <match lemma="musicaire" tags="n.*"/>
 
@@ -1184,6 +1185,24 @@
       <match lemma="archiduchesse" tags="n.*"/>
       <match lemma="marqués" tags="n.*"/>
       <match lemma="baron" tags="n.*"/>
+
+      <match lemma="trabalhador" tags="n.*"/>
+      <match lemma="tribalhador" tags="n.*"/>
+      <match lemma="paisan" tags="n.*"/>
+      <match lemma="pacan" tags="n.*"/>
+      <match lemma="pagés" tags="n.*"/>
+      <match lemma="agricultor" tags="n.*"/>
+      <match lemma="bordièr" tags="n.*"/>
+      <match lemma="bordèr" tags="n.*"/>
+      <match lemma="bordalèr" tags="n.*"/>
+      <match lemma="boriaire" tags="n.*"/>
+      <match lemma="arquitècte" tags="n.*"/>
+      <match lemma="engenhaire" tags="n.*"/>
+      <match lemma="informatician" tags="n.*"/>
+      <match lemma="programaire" tags="n.*"/>
+      <match lemma="programaire" tags="n.*"/>
+      <match lemma="policièr" tags="n.*"/>
+      <match lemma="pompièr" tags="n.*"/>
 
       <match lemma="abolicionista" tags="n.*"/>
       <match lemma="absentista" tags="n.*"/>
@@ -2366,6 +2385,81 @@
     </or>
   </rule>
 -->
+  <rule weight="1.0"> <!-- verbs intrasitius -->
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="insistir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="que"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="afirmar" tags="vblex.*"/>
+      <match lemma="reafirmar" tags="vblex.*"/>
+      <match lemma="creire" tags="vblex.*"/>
+      <match lemma="créder" tags="vblex.*"/>
+      <match lemma="créser" tags="vblex.*"/>
+      <match lemma="creir" tags="vblex.*"/>
+      <match lemma="decidir" tags="vblex.*"/>
+      <match lemma="declarar" tags="vblex.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="insinuar" tags="vblex.*"/>
+      <match lemma="interdíser" tags="vblex.*"/>
+      <match lemma="pensar" tags="vblex.*"/>
+      <match lemma="remarcar" tags="vblex.*"/>
+      <match lemma="remercar" tags="vblex.*"/>
+      <match lemma="verificar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="que"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="prn.*"/>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+      <match tags="np.*"/>
+    </or>
+    <match lemma="se" tags="prn.pro.*"><select lemma="se"/></match>
+    <or>
+      <match lemma="afirmar" tags="vblex.*"/>
+      <match lemma="reafirmar" tags="vblex.*"/>
+      <match lemma="creire" tags="vblex.*"/>
+      <match lemma="créder" tags="vblex.*"/>
+      <match lemma="créser" tags="vblex.*"/>
+      <match lemma="creir" tags="vblex.*"/>
+      <match lemma="decidir" tags="vblex.*"/>
+      <match lemma="declarar" tags="vblex.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="insinuar" tags="vblex.*"/>
+      <match lemma="interdíser" tags="vblex.*"/>
+      <match lemma="pensar" tags="vblex.*"/>
+      <match lemma="remarcar" tags="vblex.*"/>
+      <match lemma="remercar" tags="vblex.*"/>
+      <match lemma="verificar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="que"/>
+  </rule>
   <rule weight="3.0">
     <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
