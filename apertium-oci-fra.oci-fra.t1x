@@ -1383,6 +1383,7 @@
       <list-item v="tagal"/>
       <list-item v="indonésien"/>
       <list-item v="javanais"/>
+      <list-item v="balinais"/>
       <list-item v="taïwanais"/>
       <list-item v="hawaïen"/>
       <list-item v="tahitien"/>
@@ -11325,17 +11326,24 @@
          <pattern-item n="inf"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="f_vchunk_name">
            <with-param pos="1"/>
          </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11376,6 +11384,16 @@
          <pattern-item n="inf"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
            <with-param pos="1"/>
          </call-macro>
@@ -11386,7 +11404,7 @@
           <with-param pos="1"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -11478,17 +11496,24 @@
          <pattern-item n="inf"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="f_vchunk_name">
            <with-param pos="1"/>
          </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="1"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -11598,6 +11623,16 @@
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
            <with-param pos="1"/>
          </call-macro>
@@ -11608,7 +11643,7 @@
           <with-param pos="3"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -11656,17 +11691,24 @@
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="f_vchunk_name">
            <with-param pos="1"/>
          </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="1"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -11765,17 +11807,24 @@
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
+        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <call-macro n="firstWord">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="f_vchunk_name">
            <with-param pos="1"/>
          </call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="1"/>
          </call-macro>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="1" side="tl" part="a_verb"/></tag>
@@ -15538,6 +15587,15 @@
          <pattern-item n="prn"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
          <call-macro n="firstWord">
            <with-param pos="1"/>
          </call-macro>
@@ -15562,7 +15620,6 @@
                  <let><var n="genero"/><lit-tag v="m"/></let>
                </when>
              </choose>
-             <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
              <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
              <choose>
                <when>
@@ -15570,7 +15627,7 @@
                    <equal><clip pos="1" side="tl" part="a_pas_neg"/><lit v=""/></equal>
                  </test>
                  <out>
-                   <chunk namefrom="lemma" case="caseFirstWord">
+                   <chunk namefrom="lemma">
                      <tags>
                        <tag><lit-tag v="SPron"/></tag>
                        <tag><clip pos="1" side="tl" part="a_prn"/></tag>
@@ -15590,7 +15647,7 @@
                </when>
                <otherwise>
                  <out>
-                   <chunk namefrom="lemma" case="caseFirstWord">
+                   <chunk namefrom="lemma">
                      <tags>
                        <tag><lit-tag v="SPron"/></tag>
                        <tag><clip pos="1" side="tl" part="a_prn"/></tag>
@@ -15805,6 +15862,15 @@
          <pattern-item n="vbser_conj"/>
        </pattern>
        <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="EOS"/><lit v="true"/></equal>
+            </test>
+            <modify-case><var n="lemma"/><lit v="Aa"/></modify-case>
+          </when>
+        </choose>
         <call-macro n="firstWord">
           <with-param pos="1"/>
         </call-macro>
@@ -15814,11 +15880,9 @@
         <call-macro n="f_canvis_temps">
           <with-param pos="1"/>
         </call-macro>
-        <call-macro n="f_vchunk_name">
-          <with-param pos="1"/>
-        </call-macro>
+         <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <out>
-           <chunk namefrom="chunkname" case="caseFirstWord">
+           <chunk namefrom="lemma">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><lit-tag v="vbser"/></tag>
@@ -15861,9 +15925,6 @@
           <with-param pos="1"/>
         </call-macro>
         <call-macro n="f_canvis_temps">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_vchunk_name">
           <with-param pos="1"/>
         </call-macro>
         <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
@@ -16257,6 +16318,9 @@
                 <or>
                   <equal><clip pos="1" side="sl" part="lem"/><lit v=";"/></equal>
                   <equal><clip pos="1" side="sl" part="lem"/><lit v=":"/></equal>
+                  <equal><clip pos="1" side="sl" part="lem"/><lit v="—"/></equal>
+                  <equal><clip pos="1" side="sl" part="lem"/><lit v="—"/></equal>
+                  <equal><clip pos="1" side="sl" part="lem"/><lit v="―"/></equal>
                 </or>
               </not>
             </test>
