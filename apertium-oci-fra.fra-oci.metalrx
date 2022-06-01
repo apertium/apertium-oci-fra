@@ -1537,6 +1537,21 @@
 
 <!-- **************** N **************** -->
 
+  <!-- atteinte >> atac, ataca prejudici -->
+  <rule weight="0.8" v="oci">
+    <match lemma="atteinte" tags="n.*"><select lemma="atac"/></match>
+  </rule>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="atteinte" tags="n.*"><select lemma="ataca"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="porter" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="atteinte" tags="n.*"><select lemma="prejudici"/></match>
+  </rule>
+
   <!-- impasse >> androna, camin# d'enlòc -->
   <rule weight="0.8" v="oci">
     <match lemma="impasse" tags="n.*"><select lemma="androna"/></match>
