@@ -4542,6 +4542,35 @@
       </action>
     </rule>
 
+    <!-- amb vèrbs copulatius seguits de nòm (per prene de l'atribut lo genre del subjècte) -->
+
+    <rule comment="RÈGLA: SV_copulatiu_pers SN > subjècte SV_copulatiu_pers SN: es pompièr > il est pompier ; es pompièra > elle est pompière">
+      <pattern>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <!-- amb verbs_expression -->
 
     <rule comment="RÈGLA: que_rel verbs_expression_p3sg DETsg > que_rel verbs_expression_p3sg DETsg (que dit son professor > que dit son professeur">
