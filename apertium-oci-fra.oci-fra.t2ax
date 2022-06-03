@@ -9,6 +9,9 @@
       <cat-item tags="SN.*.pl"/>
       <cat-item tags="SN.*.pl.*"/>
     </def-cat>
+    <def-cat n="SN_vertat">
+      <cat-item lemma="vérité" tags="SN.*.sg"/>
+    </def-cat>
     <def-cat n="NP">
       <cat-item tags="SN.np"/>
       <cat-item tags="SN.np.*"/>
@@ -19,6 +22,12 @@
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
+    </def-cat>
+    <def-cat n="SA_SN">
+      <cat-item tags="SA"/>
+      <cat-item tags="SA.*"/>
+      <cat-item tags="SN"/>
+      <cat-item tags="SN.*"/>
     </def-cat>
     <def-cat n="SPron">
       <cat-item tags="SPron"/>
@@ -512,6 +521,78 @@
              </choose>
      </def-macro>
 
+ <def-macro n="gen_ce" npar="1"> 
+    <choose>
+      <when>
+        <test>
+          <and>
+            <equal><var n="finfrasa"/><lit v="yes"/></equal>
+            <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+          </and>
+        </test>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="1" part="pers"/>
+            <clip pos="1" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ce"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.nt"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
+            </test>
+            <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
+          </when>
+        </choose>
+      </when>
+   </choose>
+ </def-macro>
+
+ <def-macro n="gen_ce_incond" npar="1"> 
+    <choose>
+      <when>
+        <test>
+          <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
+        </test>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <lit v="subj"/>
+            </get-case-from>
+            <lit-tag v="prn.subj"/>
+            <clip pos="1" part="pers"/>
+            <clip pos="1" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="ce"/>
+            </get-case-from>
+            <lit-tag v="prn.tn.nt"/>
+            <lit v="$}"/>
+          </chunk>
+          <b/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
+            </test>
+            <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
+          </when>
+        </choose>
+      </when>
+   </choose>
+ </def-macro>
 
  <def-macro n="gen_subj1" npar="1">  <!--ATENCIÓN: si se crean nuevos chunks verbales en el t1x con nuevos lemas, hay que añadirlos a la lista SV_personals en el caso de que sean SV con formas personales. De lo contrario no se creará el sujeto correspondiente cuando aparezcan en un texto. -->
    <choose>
@@ -531,7 +612,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
               </or>
             </test>
             <choose>
@@ -541,24 +622,34 @@
                     <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
                   </not>
                 </test>
-                <out>
-                  <chunk>
-                    <get-case-from pos="1">
-                      <lit v="subj"/>
-                    </get-case-from>
-                    <lit-tag v="prn.subj"/>
-                    <clip pos="1" part="pers"/>
-                    <lit-tag v="GD"/>
-                    <clip pos="1" part="nbr"/>
-                    <lit v="{^"/>
-                    <get-case-from pos="1">
-                      <lit v="prpers"/>
-                    </get-case-from>
-                    <lit-tag v="prn.tn.3.4.5"/>
-                    <lit v="$}"/>
-                  </chunk>
-                  <b/>
-                </out>
+                <choose>
+                  <when>
+                    <test>
+                      <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être# vrai"/></equal>
+                    </test>
+                    <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+                  </when>
+                  <otherwise>
+                    <out>
+                      <chunk>
+                        <get-case-from pos="1">
+                          <lit v="subj"/>
+                        </get-case-from>
+                        <lit-tag v="prn.subj"/>
+                        <clip pos="1" part="pers"/>
+                        <lit-tag v="GD"/>
+                        <clip pos="1" part="nbr"/>
+                        <lit v="{^"/>
+                        <get-case-from pos="1">
+                          <lit v="prpers"/>
+                        </get-case-from>
+                        <lit-tag v="prn.tn.3.4.5"/>
+                        <lit v="$}"/>
+                      </chunk>
+                      <b/>
+                    </out>
+                  </otherwise>
+                </choose>
                 <choose>
                   <when>
                     <test>
@@ -594,7 +685,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
@@ -665,7 +756,7 @@
                 <equal><var n="finfrasa"/><lit v="yes"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p1"/></equal>
                 <equal><clip pos="1" part="pers"/><lit-tag v="p2"/></equal>
-                <equal><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
                 <and> <!-- ajouter si "y + avoir" (ça ne marche pas toujours, par exemple: Pierre y a mangé... mais ça marche presque toujours) -->
                   <or>
                     <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
@@ -2573,41 +2664,7 @@
         <pattern-item n="DET"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2632,41 +2689,7 @@
         <pattern-item n="SN_pl"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2696,38 +2719,7 @@
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2751,41 +2743,7 @@
         <pattern-item n="ce_que_qui_rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2810,41 +2768,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2876,41 +2800,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2949,40 +2839,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case></when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3027,41 +2884,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3107,41 +2930,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3194,41 +2983,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3283,41 +3038,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3349,41 +3070,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3422,41 +3109,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3502,41 +3155,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3594,28 +3213,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -3656,28 +3254,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -3725,28 +3302,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -3801,28 +3357,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -3872,41 +3407,7 @@
         <pattern-item n="rel"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -3945,41 +3446,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -4025,41 +3492,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -4112,41 +3545,7 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -4211,28 +3610,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4281,28 +3659,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4357,28 +3714,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4440,28 +3776,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <lit v="subj"/>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4516,41 +3831,7 @@
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -4582,41 +3863,7 @@
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
-        <choose>
-          <when>
-            <test>
-              <and>
-                <equal><var n="finfrasa"/><lit v="yes"/></equal>
-                <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
-              </and>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="1">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="1" part="pers"/>
-                <clip pos="1" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="1">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-            <choose>
-              <when>
-                <test>
-                  <equal><case-of pos="1" part="lem"/><lit v="Aa"/></equal>
-                </test>
-                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
-              </when>
-            </choose>
-          </when>
-        </choose>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -4662,30 +3909,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="2">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4726,30 +3950,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <choose>
-          <when>
-            <test>
-              <not><equal><clip pos="2" part="temps"/><lit-tag v="imp"/></equal></not>
-            </test>
-            <out>
-              <chunk>
-                <get-case-from pos="2">
-                  <lit v="subj"/>
-                </get-case-from>
-                <lit-tag v="prn.subj"/>
-                <clip pos="2" part="pers"/>
-                <clip pos="2" part="nbr"/>
-                <lit v="{^"/>
-                <get-case-from pos="2">
-                  <lit v="ce"/>
-                </get-case-from>
-                <lit-tag v="prn.tn.nt"/>
-                <lit v="$}"/>
-              </chunk>
-              <b/>
-            </out>
-          </when>
-        </choose>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -4970,7 +4171,7 @@
       </action>
     </rule>
 
-    <!-- amb vèrbs copulatius (per prene de l'atribut lo genre del subjècte) -->
+    <!-- amb vèrbs copulatius seguits d'adjectiu (per prene de l'atribut lo genre del subjècte) -->
 
     <rule comment="RÈGLA: SV_copulatiu_pers SA > subjècte SV_copulatiu_pers SA: es naut > il est haut ; es nauta > elle est haute">
       <pattern>
@@ -5335,6 +4536,35 @@
             <clip pos="6" part="lem"/>
             <clip pos="6" part="tags"/>
             <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- amb vèrbs copulatius seguits de nòm (per prene de l'atribut lo genre del subjècte) -->
+
+    <rule comment="RÈGLA: SV_copulatiu_pers SN > subjècte SV_copulatiu_pers SN: es pompièr > il est pompier ; es pompièra > elle est pompière">
+      <pattern>
+        <pattern-item n="SV_copulatiu_pers"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj_adj">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
