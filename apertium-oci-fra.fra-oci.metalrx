@@ -4436,10 +4436,12 @@
   </rule>
 
 
-  <!-- échouer >> encal(h)ar/mauescàder, fracassar -->
-  <macro name="verb_nopron_pron" p1="échouer" p2="fracassar" p3="encalar" v="oci" />
-  <macro name="verb_nopron_pron" p1="échouer" p2="mauescàder" p3="encalhar" v="oci@gascon" />
-
+  <!-- échouer >> mal escaire/(s'i) mauescàder, encalar/encalhar -->
+  <macro name="verb_nopron_pron" p1="échouer" p2="mal escaire" p3="encalar" v="oci" />
+  <macro name="verb_nopron_pron" p1="échouer" p2="i mauescàder" p3="encalhar" v="oci@gascon" />
+  <rule weight="0.9" v="oci@gascon">
+    <match lemma="échouer" tags="vblex.pp.*"><select lemma="mauescàder"/></match>
+  </rule>
 
   <!-- ébranler >> brandir, abranlir / susmàver, trebolar -->
   <rule weight="0.8">
