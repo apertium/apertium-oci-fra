@@ -12645,7 +12645,6 @@
                    <lit-tag v="3"/>
                    <lit-tag v="4"/>
                    <lit-tag v="5"/>
-                   <clip pos="2" side="tl" part="nbr"/>
                  </lu>
                  <b pos="2"/>
                  <lu>
@@ -15364,7 +15363,17 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lemh"/></let>
+         <choose>
+           <when>
+             <test>
+               <equal><clip pos="2" side="tl" part="a_verb_pron"/><lit-tag v="vblex.pron"/></equal>
+             </test>
+             <call-macro n="f_set_pron_pro_force"><with-param pos="2"/><with-param pos="1"/></call-macro>
+             <call-macro n="print_pron"></call-macro>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="tl" part="lemh"/></let>
+           </when>
+         </choose>
          <choose>
 	   <when>
 	     <test>
