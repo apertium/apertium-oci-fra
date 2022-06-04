@@ -239,6 +239,24 @@
      </choose>
     </def-macro>
 
+  <def-macro n="gen_ne" npar="1">
+    <out>
+      <chunk>
+        <get-case-from pos="1">
+          <lit v="ne"/>
+        </get-case-from>
+        <lit-tag v="SAdv"/>
+        <lit v="{^"/>
+        <get-case-from pos="1">
+          <lit v="ne"/>
+        </get-case-from>
+        <lit-tag v="adv"/>
+        <lit v="$}"/>
+      </chunk>
+      <b/>
+    </out>
+  </def-macro>
+
   </section-def-macros>
 
   <section-rules>
@@ -390,20 +408,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -417,10 +423,7 @@
             <test>
               <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
             </test>
-            <call-macro n="f_bcond">
-              <with-param pos="1"/>
-              <with-param pos="2"/>
-            </call-macro>
+            <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
             <let><var n="v_det_pron_neg"/><lit v="false"/></let>
           </when>
           <otherwise>
@@ -442,20 +445,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -499,20 +490,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -562,20 +541,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -599,20 +566,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -641,20 +596,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -685,20 +628,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <clip pos="2" part="whole"/>
           </chunk>
@@ -721,20 +652,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <clip pos="3" part="whole"/>
           </chunk>
@@ -764,20 +683,8 @@
         <pattern-item n="pas"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <clip pos="4" part="whole"/>
           </chunk>
@@ -813,20 +720,8 @@
         <pattern-item n="SV_inf"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -868,20 +763,8 @@
         <pattern-item n="SV_inf"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -928,20 +811,8 @@
         <pattern-item n="SV_inf"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -984,6 +855,256 @@
 
     <!-- FIN RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
 
+    <!-- RÈGLAS inclusion advèrbi "ne" sens "pas" -->
+
+    <rule comment="RÈGLA: SPron_neg SV_pers (nat ne manja -> aucun ne mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers (nat n'i manja -> aucun n'y mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers (nat n'i en manja -> aucun n'en y mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg SV_pers pas (nat ne manja pas -> aucun ne mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers pas (nat n'i manja pas -> aucun n'y mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers pas (nat n'i en manja pas -> aucun n'en y mange)">
+      <pattern>
+        <pattern-item n="SPron_neg"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+          <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_pers Det_Prn_pas_neg (ne manja nat -> ne mange aucun)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers Det_Prn_pas_neg (ne'n manja nat -> n'en mange aucun)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers Det_Prn_pas_neg (n'i en manja nat -> n'y en mange aucun)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="Det_Prn_pas_neg"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS inclusion advèrbi "ne" sens "pas" -->
+
     <!-- RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
 
     <rule comment="RÈGLA: SV_pers pas SAdv_pas_neg (cantes pas jamai -> NE chantes jamais)">
@@ -993,20 +1114,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -1016,10 +1125,7 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <call-macro n="f_bcond">
-          <with-param pos="2"/>
-          <with-param pos="3"/>
-        </call-macro>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
         <out>
           <chunk>
             <clip pos="3" part="whole"/>
@@ -1037,20 +1143,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -1086,20 +1180,8 @@
         <pattern-item n="SAdv_pas_neg"/>
       </pattern>
       <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
         <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="SAdv"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ne"/>
-            </get-case-from>
-            <lit-tag v="adv"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
           <chunk>
             <get-case-from pos="2">
               <clip pos="1" part="lem"/>
@@ -2220,7 +2302,6 @@
     </rule>
 
     <!-- FIN RÈGLAS eliminacion de "pas" en condicions de redondància -->
-
 
   </section-rules>
 </interchunk>
