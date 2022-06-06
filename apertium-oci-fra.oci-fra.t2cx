@@ -622,6 +622,7 @@
              <or>
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="affaire"/></equal>
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="avantage"/></equal>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="besoin"/></equal>
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="cours"/></equal>
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="coutume de"/></equal>	<!-- xxxx -->
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="droit"/></equal>
@@ -787,7 +788,7 @@
    </choose>
  </def-macro>
 
- <def-macro n="generate_de" npar="0" v="oci@gascon"> 
+ <def-macro n="generate_de" npar="0">
     <!-- ^de<PREP>{^de<pr>$}$ -->
    <out>
      <chunk>
@@ -1083,6 +1084,52 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SPron_i SV_aver_p3sg SN: i a aiga > il y a de l'eau (cas pauc frequent en lengadocian mas qu'existís)" v="oci">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_aver_p3sg"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_expression">
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SPron_i SV_aver_p3sg SN: i a aiga > il y a de l'eau" v="oci@gascon">
       <pattern>
         <pattern-item n="SPron_i"/>
@@ -1104,10 +1151,21 @@
           </chunk>
           <b pos="2"/>
         </out>
-        <call-macro n="generate_de"/>
-        <call-macro n="generate_detdef1">
+        <call-macro n="f_expression">
+          <with-param pos="1"/>
           <with-param pos="3"/>
         </call-macro>
+        <choose>
+          <when>
+            <test>
+             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="3" part="lem"/>
