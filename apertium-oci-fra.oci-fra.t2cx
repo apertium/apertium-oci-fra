@@ -104,6 +104,13 @@
       <cat-item tags="SV.*.pl"/>
     </def-cat>
 
+    <def-cat n="SV_ser">
+      <cat-item tags="SV.vbser.*"/>
+    </def-cat>
+    <def-cat n="SV_ser_pl">
+      <cat-item tags="SV.vbser.*.pl"/>
+    </def-cat>
+
     <def-cat n="SV_aver"> <!-- il manque des formes comme l'infinitif et le passé composé -->
       <cat-item lemma="havercj" tags="SV.*"/>
       <cat-item lemma="havercj" tags="SVneg.*"/>
@@ -2268,6 +2275,114 @@
         </out>
       </action>
     </rule>
+
+    <!-- règlas amb SV_ser -->
+
+    <rule comment="RÈGLA: SV_ser SN: son pompièrs > sont des pompièrs" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_ser_pl"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_ser SAdv SN: son pas pompièrs > sont pas des pompièrs" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_ser_pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_ser SAdv SAdv SN: son pas tostemps pompièrs > sont pas toujours des pompièrs" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_ser_pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
 
     <!-- règlas amb 'ne' (sens 'pas' en francés) -->
 
