@@ -6163,7 +6163,7 @@
     </rule>
 
 
-    <rule comment="RÈGLA: fa temps > il y a longtemps temps">
+    <rule comment="RÈGLA: fa temps > il y a longtemps">
       <pattern>
         <pattern-item n="fa"/>
         <pattern-item n="temps_n"/>
@@ -6207,6 +6207,209 @@
               <clip pos="1" side="tl" part="nbr"/>
             </lu>
             <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                 <lit v="longtemps"/>
+              </get-case-from>
+              <lit-tag v="adv"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: fa ADV NUM temps > il y a ADV NUM temps">
+      <pattern>
+        <pattern-item n="fa"/>
+        <pattern-item n="adv"/>
+        <pattern-item n="num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="v" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vblex"/></tag>
+              <tag><clip pos="1" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="normal"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="il"/>
+              </get-case-from>
+              <lit-tag v="prn.tn.p3.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="y"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="avoir"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="pers"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: fa ADV DETIND temps > il y a ADV DETIND temps">
+      <pattern>
+        <pattern-item n="fa"/>
+        <pattern-item n="adv"/>
+        <pattern-item n="detind"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="v" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vblex"/></tag>
+              <tag><clip pos="1" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="normal"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="il"/>
+              </get-case-from>
+              <lit-tag v="prn.tn.p3.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="y"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="avoir"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="pers"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: fa ADV temps > il y a ADV longtemps">
+      <pattern>
+        <pattern-item n="fa"/>
+        <pattern-item n="adv"/>
+        <pattern-item n="temps_n"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="v" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vblex"/></tag>
+              <tag><clip pos="1" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="normal"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="il"/>
+              </get-case-from>
+              <lit-tag v="prn.tn.p3.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="2">
+                 <lit v="y"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="2">
+                 <lit v="avoir"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="pers"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
             <lu>
               <get-case-from pos="2">
                  <lit v="longtemps"/>
