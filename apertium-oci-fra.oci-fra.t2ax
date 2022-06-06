@@ -55,6 +55,10 @@
       <cat-item tags="SPron.pro"/>
       <cat-item tags="SPron.pro.*"/>
     </def-cat>
+    <def-cat n="SPron_i">
+      <cat-item lemma="y" tags="SPron.pro"/>
+      <cat-item lemma="y" tags="SPron.pro.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -2797,6 +2801,165 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_i SV_ser_pl SN_pl > il SPron_i SV_haver_sg SN_pl (i èran representants > il y avait représentants)">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        <call-macro n="gen_subj2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+<!-- ^avoir<SV><vbhaver><normal><pri><p3><sg>{^avoir<vbhaver><4><p3><sg>$}$ -->
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="SV.vbhaver.normal"/>
+            <clip pos="2" part="temps"/>
+            <clip pos="2" part="pers"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="vbhaver.4.5.6"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_i SV_ser_pl SAdv SN_pl > il SPron_i SV_haver_sg SAdv SN_pl (i èran pas representants > il y avait pas représentants)">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        <call-macro n="gen_subj2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+<!-- ^avoir<SV><vbhaver><normal><pri><p3><sg>{^avoir<vbhaver><4><p3><sg>$}$ -->
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="SV.vbhaver.normal"/>
+            <clip pos="2" part="temps"/>
+            <clip pos="2" part="pers"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="vbhaver.4.5.6"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_i SV_ser_pl SAdv SAdv SN_pl > il SPron_i SV_haver_sg SAdv SAdv SN_pl (i èran pas tostemps representants > il y avait pas toujours représentants)">
+      <pattern>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        <call-macro n="gen_subj2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+<!-- ^avoir<SV><vbhaver><normal><pri><p3><sg>{^avoir<vbhaver><4><p3><sg>$}$ -->
+          <chunk>
+            <get-case-from pos="2">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="SV.vbhaver.normal"/>
+            <clip pos="2" part="temps"/>
+            <clip pos="2" part="pers"/>
+            <clip pos="2" part="nbr"/>
+            <lit v="{^"/>
+            <get-case-from pos="1">
+              <lit v="avoir"/>
+            </get-case-from>
+            <lit-tag v="vbhaver.4.5.6"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
