@@ -92,6 +92,9 @@
     <def-cat n="SV_p3">
       <cat-item tags="SV.*.p3.*"/>
     </def-cat>
+    <def-cat n="SV_inf">
+      <cat-item tags="SV.*.inf"/>
+    </def-cat>
     <def-cat n="SV_vbser">
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
@@ -2807,6 +2810,252 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbser_p3sg SV_inf > ce SV_vbser_p3sg SV_inf">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro SV_inf > ce SV_vbser_p3sg SAdv_SPron_pro SV_inf">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro SV_inf > ce SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro SV_inf">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg cnjsub_adv_que_rel > ce SV_vbser_p3sg cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser_p3sg cnjsub_adv_que_rel > CM ce SV_vbser_p3sg cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="cm_cnjcoo"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ce_incond"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SPron_i SV_ser_pl SN_pl > il SPron_i SV_haver_sg SN_pl (i èran representants > il y avait représentants)">
       <pattern>
         <pattern-item n="SPron_i"/>
@@ -4314,10 +4563,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3sg SAdv que > ce SV_vbser_p3 SAdv que: es aicí que > c'est ici que">
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv que > ce SV_vbser_p3 SAdv que: es evident que > c'est évident que">
       <pattern>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="SA"/>
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
@@ -4345,11 +4594,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3sg SAdv SAdv que > ce SV_vbser_p3 SAdv SAdv que: es pas aicí que > c'est pas ici que">
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv SAdv que > ce SV_vbser_p3 SAdv SAdv que: es pas evident que > c'est pas évident que">
       <pattern>
         <pattern-item n="SV_vbser_p3sg"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="SA"/>
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
@@ -4383,11 +4632,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv que > CM ce SV_vbser_p3 SAdv que: es aicí que > c'est ici que">
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv que > CM ce SV_vbser_p3 SAdv que: es evident que > c'est évident que">
       <pattern>
         <pattern-item n="cm_cnjcoo"/>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="SA"/>
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
@@ -4423,12 +4672,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv SAdv que > CM ce SV_vbser_p3 SAdv SAdv que: es pas aicí que > c'est pas ici que">
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv SAdv que > CM ce SV_vbser_p3 SAdv SAdv que: es pas evident que > c'est pas évident que">
       <pattern>
         <pattern-item n="cm_cnjcoo"/>
         <pattern-item n="SV_vbser_p3sg"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="SAdv_SA"/>
+        <pattern-item n="SA"/>
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
