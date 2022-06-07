@@ -38,6 +38,11 @@
       <cat-item lemma="haverpp" tags="SA.*"/>
       <cat-item lemma="avoir" tags="SA.pp.*"/>
     </def-cat>
+    <def-cat n="PP_partitiu">
+      <cat-item lemma="pp" tags="SA.*.partitiu"/>
+      <cat-item lemma="haverpp" tags="SA.*.partitiu"/>
+      <cat-item tags="SA.pp.*.partitiu"/>
+    </def-cat>
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
     </def-cat>
@@ -778,6 +783,15 @@
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="secours"/></equal>
              </or>
            </and>
+           <and>
+             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="tirer"/></equal>
+             <or>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="parti"/></equal>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="profit"/></equal>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="vanité"/></equal>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="venjance"/></equal>
+             </or>
+           </and>
          </or>
        </test>
        <let><var n="is_expression"/><lit-tag v="yes"/></let>
@@ -1106,7 +1120,7 @@
           <b pos="2"/>
         </out>
         <call-macro n="f_expression">
-          <with-param pos="1"/>
+          <with-param pos="1"/>			<!-- xxxxxxx 1 >>> 2 -->
           <with-param pos="3"/>
         </call-macro>
         <choose>
@@ -1152,7 +1166,7 @@
           <b pos="2"/>
         </out>
         <call-macro n="f_expression">
-          <with-param pos="1"/>
+          <with-param pos="1"/>			<!-- xxxxxxx 1 >>> 2 -->
           <with-param pos="3"/>
         </call-macro>
         <choose>
@@ -1504,7 +1518,7 @@
     <rule comment="RÈGLA: SV_vbhaver PP PR_de SN: ai volgut d'aiga > j'ai voulu de l'eau" v="oci">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_UNK"/>
       </pattern>
@@ -1576,7 +1590,7 @@
     <rule comment="RÈGLA: SV_vbhaver SN: qu'èi volut aiga > j'ai voulu de l'eau" v="oci@gascon">
       <pattern>
         <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="SN_n"/>
       </pattern>
       <action>
@@ -1623,7 +1637,7 @@
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_UNK"/>
       </pattern>
@@ -1710,7 +1724,7 @@
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="SN_n"/>
       </pattern>
       <action>
@@ -1765,7 +1779,7 @@
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_UNK"/>
       </pattern>
@@ -1867,7 +1881,7 @@
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="SN_n"/>
       </pattern>
       <action>
@@ -1917,7 +1931,7 @@
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_UNK"/>
@@ -2017,7 +2031,7 @@
       <pattern>
         <pattern-item n="SV_vbhaver"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="PP"/>
+        <pattern-item n="PP_partitiu"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SN_n"/>
       </pattern>
