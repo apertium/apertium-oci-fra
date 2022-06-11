@@ -495,6 +495,12 @@
       <cat-item tags=""/>
     </def-cat>
 
+    <def-cat n="faicon_n">
+      <cat-item lemma="faiçon" tags="n.*"/>
+      <cat-item lemma="façon" tags="n.*"/>
+      <cat-item lemma="manièra" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="illa_n">
       <cat-item lemma="illa" tags="n.*"/>
       <cat-item lemma="ilha" tags="n.*"/>
@@ -16233,6 +16239,47 @@
 
 
     <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: DE FAIÇON ADJ > DE FAÇON ADJ (SAdv per evitar la generacion de l'article partitiu)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="faicon_n"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_n_a" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: DETDEF PR > CELUI PR (lo de > celui de)">
       <pattern>
