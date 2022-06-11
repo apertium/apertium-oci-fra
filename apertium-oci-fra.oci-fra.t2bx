@@ -24,6 +24,12 @@
       <cat-item tags="SPron.*.pas_neg"/>
       <cat-item tags="SPron.*.pas_neg.*"/>
     </def-cat>
+    <def-cat n="SAdv_SPron_pro">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item tags="SPron.pro"/>
+      <cat-item tags="SPron.pro.*"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -161,6 +167,15 @@
     <def-cat n="SENT">
       <cat-item tags="sent"/>
     </def-cat>
+    <def-cat n="SENT_PREP_CNJ_REL">
+      <cat-item tags="sent"/>
+      <cat-item tags="PREP"/>
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjadv"/>
+<!--      <cat-item tags="cnjcoo"/>  -->
+      <cat-item tags="rel"/>
+      <cat-item tags="rel.*"/>
+    </def-cat>
   </section-def-cats>
 
   <section-def-attrs>
@@ -263,7 +278,7 @@
 
     <!-- RÈGLAS non inclusion advèrbi "ne" -->
 
-    <rule comment="RÈGLA: ne SV_pers (non cantes -> ne chantes)">
+    <rule comment="RÈGLA: ne SV_pers (non cantes > ne chantes)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SV_pers"/>
@@ -283,7 +298,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ne SPron_pro SV_pers (non li cantes -> ne lui chantes)">
+    <rule comment="RÈGLA: ne SPron_pro SV_pers (non li cantes > ne lui chantes)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SPron_pro"/>
@@ -308,7 +323,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ne SPron_pro SPron_pro SV_pers (non li o cantes -> ne le lui chantes)">
+    <rule comment="RÈGLA: ne SPron_pro SPron_pro SV_pers (non li o cantes > ne le lui chantes)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SPron_pro"/>
@@ -338,7 +353,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ne pas SAdv_Pron_pas_neg (non pas jamai cantar -> ne jamais chanter)">
+    <rule comment="RÈGLA: ne pas SAdv_Pron_pas_neg (non pas jamai cantar > ne jamais chanter)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="pas"/>
@@ -363,7 +378,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ne pas SV_inf PREP Aucun (non pas parlar a arrés -> ne parler a personne)">
+    <rule comment="RÈGLA: ne pas SV_inf PREP Aucun (non pas parlar a arrés > ne parler a personne)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="pas"/>
@@ -402,7 +417,7 @@
 
     <!-- RÈGLAS inclusion advèrbi "ne" ambe possible eliminacion de "pas" -->
 
-    <rule comment="RÈGLA: SV_pers pas (cantes pas -> NE chantes pas ; degun (...) ven pas > personne (...) ne vient)">
+    <rule comment="RÈGLA: SV_pers pas (cantes pas > NE chantes pas ; degun (...) ven pas > personne (...) ne vient)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -438,7 +453,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers pas (li cantes pas -> NE lui chantes pas)">
+    <rule comment="RÈGLA: SPron_pro SV_pers pas (li cantes pas > NE lui chantes pas)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -482,7 +497,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas (la li cantes pas -> NE la lui chantes pas)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas (la li cantes pas > NE la lui chantes pas)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -531,11 +546,110 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: PREP pas SAdv_pas_neg SV_inf (de pas jamai cantar > de ne jamais chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP pas SAdv_pas_neg SAdv_SPron_pro SV_inf (de pas jamai li cantar > de ne jamais lui chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP pas SAdv_pas_neg SAdv_SPron_pro SAdv_SPron_pro SV_inf (de pas jamai li'n cantar > de ne jamai lui en chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_pas_neg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS inclusion advèrbi "ne" ambe possible eliminacion de "pas" -->
 
     <!-- RÈGLAS inclusion advèrbi "ne" sens eliminacion de "pas" -->
 
-    <rule comment="RÈGLA: SV_pers SAdv_pas_neg (cantes jamei -> NE chantes jamais)">
+    <rule comment="RÈGLA: SV_pers SAdv_pas_neg (cantes jamei > NE chantes jamais)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="SAdv_pas_neg"/>
@@ -559,7 +673,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers SAdv_pas_neg (li cantes jamei -> NE lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SV_pers SAdv_pas_neg (li cantes jamei > NE lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -588,7 +702,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers SAdv_pas_neg (l'ac cantes jamei -> NE la lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers SAdv_pas_neg (l'ac cantes jamei > NE la lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -622,7 +736,157 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_inf pas (cantar pas -> NE pas chanter)">
+    <rule comment="RÈGLA: PREP pas SV_inf (de pas cantar > de ne pas chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="3">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP pas SAdv_SPron_pro SV_inf (de pas li cantar > de ne pas lui chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="3">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP pas SAdv_SPron_pro SAdv_SPron_pro SV_inf (de pas li'n cantar > de ne pas lui en chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="3">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP pas SAdv_SPron_pro SAdv_SPron_pro SAdv_SPron_pro SV_inf (de pas totjorn li'n cantar > de ne pas toujours lui en chanter)">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="gen_ne"><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="3">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_inf pas (cantar pas > NE pas chanter)">
       <pattern>
         <pattern-item n="SV_inf"/>
         <pattern-item n="pas"/>
@@ -645,7 +909,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_inf pas (li cantar pas -> NE pas lui chanter)">
+    <rule comment="RÈGLA: SPron_pro SV_inf pas (li cantar pas > NE pas lui chanter)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_inf"/>
@@ -675,7 +939,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_inf pas (li o cantar pas -> NE pas le lui chanter)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_inf pas (li o cantar pas > NE pas le lui chanter)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -712,7 +976,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers mai que SV_inf (vòli mai que manjar -> NE veux pas que SV_inf)">
+    <rule comment="RÈGLA: SV_pers mai que SV_inf (vòli mai que manjar > NE veux pas que SV_inf)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="plus"/>
@@ -754,7 +1018,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers mai que SV_inf (li vòli mai que manjar -> NE lui veux pas que SV_inf)">
+    <rule comment="RÈGLA: SPron_pro SV_pers mai que SV_inf (li vòli mai que manjar > NE lui veux pas que SV_inf)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -801,7 +1065,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers mai que SV_inf (li o vòli mai que manjar -> NE le lui veux pas que SV_inf)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers mai que SV_inf (li o vòli mai que manjar > NE le lui veux pas que SV_inf)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -857,7 +1121,7 @@
 
     <!-- RÈGLAS inclusion advèrbi "ne" sens "pas" -->
 
-    <rule comment="RÈGLA: SPron_neg SV_pers (nat ne manja -> aucun ne mange)">
+    <rule comment="RÈGLA: SPron_neg SV_pers (nat ne manja > aucun ne mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SV_pers"/>
@@ -878,7 +1142,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers (nat n'i manja -> aucun n'y mange)">
+    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers (nat n'i manja > aucun n'y mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SPron_pro"/>
@@ -904,7 +1168,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers (nat n'i en manja -> aucun n'en y mange)">
+    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers (nat n'i en manja > aucun n'en y mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SPron_pro"/>
@@ -935,7 +1199,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg SV_pers pas (nat ne manja pas -> aucun ne mange)">
+    <rule comment="RÈGLA: SPron_neg SV_pers pas (nat ne manja pas > aucun ne mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SV_pers"/>
@@ -958,7 +1222,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers pas (nat n'i manja pas -> aucun n'y mange)">
+    <rule comment="RÈGLA: SPron_neg SPron_pro SV_pers pas (nat n'i manja pas > aucun n'y mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SPron_pro"/>
@@ -986,7 +1250,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers pas (nat n'i en manja pas -> aucun n'en y mange)">
+    <rule comment="RÈGLA: SPron_neg SPron_pro SPron_pro SV_pers pas (nat n'i en manja pas > aucun n'en y mange)">
       <pattern>
         <pattern-item n="SPron_neg"/>
         <pattern-item n="SPron_pro"/>
@@ -1019,7 +1283,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers Det_Prn_pas_neg (ne manja nat -> ne mange aucun)">
+    <rule comment="RÈGLA: SV_pers Det_Prn_pas_neg (ne manja nat > ne mange aucun)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="Det_Prn_pas_neg"/>
@@ -1042,7 +1306,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers Det_Prn_pas_neg (ne'n manja nat -> n'en mange aucun)">
+    <rule comment="RÈGLA: SPron_pro SV_pers Det_Prn_pas_neg (ne'n manja nat > n'en mange aucun)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -1070,7 +1334,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers Det_Prn_pas_neg (n'i en manja nat -> n'y en mange aucun)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers Det_Prn_pas_neg (n'i en manja nat > n'y en mange aucun)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -1107,7 +1371,7 @@
 
     <!-- RÈGLAS inclusion advèrbi "ne" ambe eliminacion de "pas" -->
 
-    <rule comment="RÈGLA: SV_pers pas SAdv_pas_neg (cantes pas jamai -> NE chantes jamais)">
+    <rule comment="RÈGLA: SV_pers pas SAdv_pas_neg (cantes pas jamai > NE chantes jamais)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1135,7 +1399,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers pas SAdv_pas_neg (li cantes pas jamai -> NE lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SV_pers pas SAdv_pas_neg (li cantes pas jamai > NE lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -1171,7 +1435,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas SAdv_pas_neg (la li cantes pas jamai -> NE la lui chantes jamais)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers pas SAdv_pas_neg (la li cantes pas jamai > NE la lui chantes jamais)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -1254,7 +1518,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN SV_pers PAS > DET_aucun SN NE SV_pers (cap de pòrta es pas dobèrta -> aucune porte n'est ouverte)">
+    <rule comment="RÈGLA: DET_aucun SN SV_pers PAS > DET_aucun SN NE SV_pers (cap de pòrta es pas dobèrta > aucune porte n'est ouverte)">
       <pattern>
         <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
@@ -1291,7 +1555,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP SN SV_pers PAS > DET_aucun SN PREP SN NE SV_pers (cap de jogaire de França ven pas -> aucun joueur de la France ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP SN SV_pers PAS > DET_aucun SN PREP SN NE SV_pers (cap de jogaire de França ven pas > aucun joueur de la France ne vient)">
       <pattern>
         <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
@@ -1338,7 +1602,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN NE SV_pers (cap de jogaire de l'equipa ven pas -> aucun joueur de l'équipe ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN NE SV_pers (cap de jogaire de l'equipa ven pas > aucun joueur de l'équipe ne vient)">
       <pattern>
         <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
@@ -1390,7 +1654,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP SN SV_pers PAS > DET_aucun SN PREP Det SN PREP SN NE SV_pers (cap de jogaire de l'equipa de França ven pas -> aucun joueur de l'équipe de France ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP SN SV_pers PAS > DET_aucun SN PREP Det SN PREP SN NE SV_pers (cap de jogaire de l'equipa de França ven pas > aucun joueur de l'équipe de France ne vient)">
       <pattern>
         <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
@@ -1452,7 +1716,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN PREP Det SN NE SV_pers (cap de membre de la familha de mon marit ven pas -> aucun membre de la famille de mon mari ne vient)">
+    <rule comment="RÈGLA: DET_aucun SN PREP Det SN PREP Det SN SV_pers PAS > DET_aucun SN PREP Det SN PREP Det SN NE SV_pers (cap de membre de la familha de mon marit ven pas > aucun membre de la famille de mon mari ne vient)">
       <pattern>
         <pattern-item n="DET_aucun"/>
         <pattern-item n="SN"/>
@@ -1519,7 +1783,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers PAS Aucun > NE SV_pers Aucun (ai pas cap d'idèa -> n'ai aucune idée)">
+    <rule comment="RÈGLA: SV_pers PAS Aucun > NE SV_pers Aucun (ai pas cap d'idèa > n'ai aucune idée)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1555,7 +1819,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (n'ai pas cap -> n'en ai aucune)">
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (n'ai pas cap > n'en ai aucune)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -1596,7 +1860,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (n'i a pas cap -> n'y en a aucune)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (n'i a pas cap > n'y en a aucune)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -1642,7 +1906,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers PAS PREP Aucun > NE SV_pers PREP Aucun (parli pas a degun -> ne parle à personne)">
+    <rule comment="RÈGLA: SV_pers PAS PREP Aucun > NE SV_pers PREP Aucun (parli pas a degun > ne parle à personne)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1683,7 +1947,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers PAS PREP Aucun > NE SPron_pro SV_pers PREP Aucun (ne parli pas a degun -> n'en parle à personne)">
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS PREP Aucun > NE SPron_pro SV_pers PREP Aucun (ne parli pas a degun > n'en parle à personne)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -1729,7 +1993,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PREP Aucun > NE SPron_pro SPron_pro SV_pers PREP Aucun (n'i parli pas a degun -> n'en y parle à personne)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PREP Aucun > NE SPron_pro SPron_pro SV_pers PREP Aucun (n'i parli pas a degun > n'en y parle à personne)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -1780,7 +2044,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers PAS PP_Inf Aucun > NE SV_pers PP_Inf Aucun (ai pas agut cap d'idèa -> n'ai eu aucune idée ; vòli pas aver cap d'idèa)">
+    <rule comment="RÈGLA: SV_pers PAS PP_Inf Aucun > NE SV_pers PP_Inf Aucun (ai pas agut cap d'idèa > n'ai eu aucune idée ; vòli pas aver cap d'idèa)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1821,7 +2085,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SV_pers PP_Inf Aucun (i a pas agut cap -> n'y a pas eu aucune">
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SV_pers PP_Inf Aucun (i a pas agut cap > n'y a pas eu aucune">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -1867,7 +2131,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SPron_pro SV_pers PP_Inf Aucun (n'i a pas agut cap -> n'y en a pas eu aucune">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PP_Inf Aucun > NE SPron_pro SPron_pro SV_pers PP_Inf Aucun (n'i a pas agut cap > n'y en a pas eu aucune">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -1918,7 +2182,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_pers PAS PP_Inf PREP Aucun > NE SV_pers PP_Inf PREP Aucun (ai pas parlat a degun -> n'ai parlé à personne)">
+    <rule comment="RÈGLA: SV_pers PAS PP_Inf PREP Aucun > NE SV_pers PP_Inf PREP Aucun (ai pas parlat a degun > n'ai parlé à personne)">
       <pattern>
         <pattern-item n="SV_pers"/>
         <pattern-item n="pas"/>
@@ -1964,7 +2228,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_pers PAS PP_Inf PREP Aucun > NE SPron_pro SV_pers PP_Inf PREP Aucun (n'ai pas parlat a degun -> n'en ai parlé à personne)">
+    <rule comment="RÈGLA: SPron_pro SV_pers PAS PP_Inf PREP Aucun > NE SPron_pro SV_pers PP_Inf PREP Aucun (n'ai pas parlat a degun > n'en ai parlé à personne)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_pers"/>
@@ -2015,7 +2279,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PP_Inf PREP Aucun > NE SPron_pro SPron_pro SV_pers PP_Inf PREP Aucun (n'i ai pas parlat a degun -> n'en y ai parlé à personne)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers PAS PP_Inf PREP Aucun > NE SPron_pro SPron_pro SV_pers PP_Inf PREP Aucun (n'i ai pas parlat a degun > n'en y ai parlé à personne)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -2071,7 +2335,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_inf pas SAdv_Pron_pas_neg (cantar pas jamai -> NE jamais chanter)">
+    <rule comment="RÈGLA: SV_inf pas SAdv_Pron_pas_neg (cantar pas jamai > NE jamais chanter)">
       <pattern>
         <pattern-item n="SV_inf"/>
         <pattern-item n="pas"/>
@@ -2111,7 +2375,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SV_inf pas SAdv_Pron_pas_neg (li cantar pas jamai -> NE lui jamais chanter)">
+    <rule comment="RÈGLA: SPron_pro SV_inf pas SAdv_Pron_pas_neg (li cantar pas jamai > NE lui jamais chanter)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SV_inf"/>
@@ -2158,7 +2422,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SPron_pro SPron_pro SV_inf pas SAdv_Pron_pas_neg (li'n cantar pas jamai -> NE lui en jamais chanter)">
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_inf pas SAdv_Pron_pas_neg (li'n cantar pas jamai > NE lui en jamais chanter)">
       <pattern>
         <pattern-item n="SPron_pro"/>
         <pattern-item n="SPron_pro"/>
@@ -2214,7 +2478,7 @@
 
     <!-- RÈGLAS eliminacion de "pas" en condicions de redondància -->
 
-    <rule comment="RÈGLA: NE SV_pers PAS Aucun > NE SV_pers Aucun (non ai pas cap d'idèa -> n'ai aucune idée)">
+    <rule comment="RÈGLA: NE SV_pers PAS Aucun > NE SV_pers Aucun (non ai pas cap d'idèa > n'ai aucune idée)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SV_pers"/>
@@ -2238,7 +2502,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: NE SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (non n'ai pas cap -> n'en ai aucune)">
+    <rule comment="RÈGLA: NE SPron_pro SV_pers PAS Aucun > NE SPron_pro SV_pers Aucun (non n'ai pas cap > n'en ai aucune)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SPron_pro"/>
@@ -2267,7 +2531,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: NE SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (non n'i a pas cap -> n'y en a aucune)">
+    <rule comment="RÈGLA: NE SPron_pro SPron_pro SV_pers PAS Aucun > NE SPron_pro SPron_pro SV_pers Aucun (non n'i a pas cap > n'y en a aucune)">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="SPron_pro"/>
