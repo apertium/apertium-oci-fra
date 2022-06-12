@@ -546,6 +546,201 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_pers SAdv pas (cantaràs segurament pas > NE chanteras sûrement pas ; volràs non pas cantar > voudras ne pas chanter ; degun (...) vendrà segurament pas > personne (...) ne viendra sûrement)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="ne"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="non"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="whole"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
+            <out>
+              <chunk>
+                <get-case-from pos="2">
+                  <clip pos="1" part="lem"/>
+                </get-case-from>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="2"/>
+              <chunk>
+                <clip pos="3" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_pers SAdv pas (li cantaràs segurament pas > NE lui chanteras sûrement pas ; i volràs non pas cantar > y voudras ne pas chanter ; degun (...) li vendrà segurament pas > personne (...) ne lui viendra sûrement)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="ne"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="non"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="whole"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
+            <out>
+              <chunk>
+                <get-case-from pos="2">
+                  <clip pos="1" part="lem"/>
+                </get-case-from>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="3"/>
+              <chunk>
+                <clip pos="4" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SPron_pro SV_pers SAdv pas (li'n cantaràs segurament pas > NE lui en chanteras sûrement pas ; li'n volràs non pas cantar > lui en voudras ne pas chanter; degun (...) li'n vendrà segurament pas > personne (...) ne lui en vendra sûrement)">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pas"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="ne"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="non"/></equal>
+              </or>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="1" part="whole"/>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
+            <out>
+              <chunk>
+                <get-case-from pos="2">
+                  <clip pos="1" part="lem"/>
+                </get-case-from>
+                <clip pos="1" part="tags"/>
+                <clip pos="1" part="chcontent"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+        <out>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><var n="v_det_pron_neg"/><lit v="true"/></equal>
+            </test>
+            <call-macro n="f_bcond"><with-param pos="4"/><with-param pos="5"/></call-macro>
+            <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+          </when>
+          <otherwise>
+            <out>
+              <b pos="4"/>
+              <chunk>
+                <clip pos="5" part="whole"/>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: PREP pas SAdv_pas_neg SV_inf (de pas jamai cantar > de ne jamais chanter)">
       <pattern>
         <pattern-item n="SENT_PREP_CNJ_REL"/>
