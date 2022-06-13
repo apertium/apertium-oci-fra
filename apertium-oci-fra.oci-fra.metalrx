@@ -15106,6 +15106,49 @@
     <match lemma="de" tags="pr"/>
   </rule>
 
+  <!-- apear >> appuyer, avoir pied -->
+  <macro name="verb_nopron_pronci" p1="apear" p2="avoir# pied" p3="appuyer" v="oci@gascon" />
+  <rule weight="1.0">
+    <match lemma="apear" tags="vblex.*"><select lemma="appuyer"/></match>
+    <or>
+      <match lemma="sur" tags="pr"/>
+      <match lemma="sus" tags="pr"/>
+      <match lemma="subre" tags="pr"/>
+      <match lemma="suber" tags="pr"/>
+    </or>
+  </rule>
+
+  <!-- apotjar >> esquisser, acheminer -->
+  <macro name="verb_nopron_pronci" p1="apotjar" p2="esquisser" p3="acheminer" v="oci@gascon" />
+
+  <!-- ahidar >> confier, fier -->
+  <macro name="verb_nopron_pronci" p1="ahidar" p2="confier" p3="fier" v="oci@gascon" />
+
+  <!-- estar >> rester, convenir -->
+  <macro name="verb_nopron_pronci" p1="estar" p2="demeurer" p3="convenir" v="oci@gascon" />
+  <rule weight="1.0" v="oci@gascon">
+    <match tags="prn.pro"/>
+    <match lemma="estar" tags="vblex.*"><select lemma="convenir"/></match>
+  </rule>
+
+  <!-- devirar >> tourner, retourner, passer -->
+  <rule weight="0.8">
+    <match lemma="devirar" tags="vblex.*"><select lemma="tourner"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro"/>
+    <match lemma="devirar" tags="vblex.*"><select lemma="retourner"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="se" tags="prn.pro"/>
+    <match lemma="devirar" tags="vblex.*"><select lemma="passer"/></match>
+  </rule>
+  <rule weight="1.4">
+    <match tags="prn.pro"/>
+    <match lemma="en" tags="prn.pro.adv"/>
+    <match lemma="devirar" tags="vblex.*"><select lemma="retourner"/></match>
+  </rule>
+
 
 <!-- **************** NP **************** -->
 
