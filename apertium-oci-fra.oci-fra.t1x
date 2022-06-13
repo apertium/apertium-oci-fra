@@ -320,6 +320,9 @@
       <cat-item lemma="ajaire" tags="vblex.*.p1.*"/>
       <cat-item lemma="ajaire" tags="vblex.*.p2.*"/>
       <cat-item lemma="ajaire" tags="vblex.*.p3.*"/>
+      <cat-item lemma="enamorar" tags="vblex.*.p1.*"/>
+      <cat-item lemma="enamorar" tags="vblex.*.p2.*"/>
+      <cat-item lemma="enamorar" tags="vblex.*.p3.*"/>
       <cat-item lemma="enlairar" tags="vblex.*.p1.*"/>
       <cat-item lemma="enlairar" tags="vblex.*.p2.*"/>
       <cat-item lemma="enlairar" tags="vblex.*.p3.*"/>
@@ -343,6 +346,7 @@
       <cat-item lemma="acochar" tags="vblex.pp.*"/>
       <cat-item lemma="ajaçar" tags="vblex.pp.*"/>
       <cat-item lemma="ajaire" tags="vblex.pp.*"/>
+      <cat-item lemma="enamorar" tags="vblex.pp.*"/>
       <cat-item lemma="enlairar" tags="vblex.pp.*"/>
       <cat-item lemma="escàder" tags="vblex.pp.*"/>
       <cat-item lemma="mau escàder" tags="vblex.pp.*"/>
@@ -489,6 +493,12 @@
 
     <def-cat n="unknown">
       <cat-item tags=""/>
+    </def-cat>
+
+    <def-cat n="faicon_n">
+      <cat-item lemma="faiçon" tags="n.*"/>
+      <cat-item lemma="façon" tags="n.*"/>
+      <cat-item lemma="manièra" tags="n.*"/>
     </def-cat>
 
     <def-cat n="illa_n">
@@ -1077,6 +1087,7 @@
       <list-item v="Afro-Américain"/>
       <list-item v="Anglo-Saxon"/>
       <list-item v="Cap-Verdien"/>
+      <list-item v="cité-État"/>
       <list-item v="Contre-Réforme"/>
       <list-item v="chef# d'État"/>
       <list-item v="coup# d'État"/>
@@ -1320,6 +1331,7 @@
       <list-item v="rom"/>
       <list-item v="romani"/>
       <list-item v="grec"/>
+      <list-item v="achéen"/>
       <list-item v="minoen"/>
       <list-item v="mycénien"/>
       <list-item v="béotien"/>
@@ -1594,6 +1606,9 @@
       <list-item v="Pays de Buch"/>
       <list-item v="Camargue"/>
       <list-item v="Carcassés"/>
+      <list-item v="Carladés"/>
+      <list-item v="Castrais"/>
+      <list-item v="Chalosse"/>
       <list-item v="Embrunais"/>
       <list-item v="Gabardan"/>
       <list-item v="Lacaunais"/>
@@ -2039,6 +2054,7 @@
       <list-item v="Corrèze"/>
       <list-item v="Creuse"/>
       <list-item v="Dordogne"/>
+      <list-item v="Isle"/>
       <list-item v="Drôme"/>
       <list-item v="Durance"/>
       <list-item v="Eure"/>
@@ -2059,6 +2075,7 @@
       <list-item v="Marne"/>
       <list-item v="Meuse"/>
       <list-item v="Moselle"/>
+      <list-item v="Oise"/>
       <list-item v="Rhin"/>
       <list-item v="Saone"/>
       <list-item v="Seine"/>
@@ -16225,6 +16242,47 @@
 
 
     <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: DE FAIÇON ADJ > DE FAÇON ADJ (SAdv per evitar la generacion de l'article partitiu)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="faicon_n"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_n_a" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: DETDEF PR > CELUI PR (lo de > celui de)">
       <pattern>

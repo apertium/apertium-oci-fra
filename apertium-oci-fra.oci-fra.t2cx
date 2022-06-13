@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interchunk>
   <section-def-cats>
+    <def-cat n="DET">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+    </def-cat>
     <def-cat n="SN">
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
@@ -42,6 +46,9 @@
       <cat-item lemma="pp" tags="SA.*.partitiu"/>
       <cat-item lemma="haverpp" tags="SA.*.partitiu"/>
       <cat-item tags="SA.pp.*.partitiu"/>
+      <cat-item lemma="être" tags="SA.pp.*"/>
+      <cat-item lemma="avoir" tags="SA.pp.*"/>
+      <cat-item lemma="falloir" tags="SA.pp.*"/>
     </def-cat>
     <def-cat n="SPron_tn">
       <cat-item tags="SPron.tn.*"/>
@@ -104,6 +111,9 @@
       <cat-item tags="SV.vbser.partitiu.*"/>
       <cat-item tags="SV.vbhaver.partitiu.*"/>
       <cat-item tags="SV.vblex.partitiu.*"/>
+      <cat-item lemma="être" tags="SV.*"/>
+      <cat-item lemma="avoir" tags="SV.*"/>
+      <cat-item lemma="falloir" tags="SV.*"/>
     </def-cat>
     <def-cat n="SV_pl">
       <cat-item tags="SV.*.pl"/>
@@ -242,7 +252,6 @@
     </def-cat>
     <def-cat n="CM_SENT">
       <cat-item tags="CM"/>
-      <cat-item tags="SENT"/>
       <cat-item tags="sent"/>
     </def-cat>
     <def-cat n="CM_RPAR">
@@ -253,17 +262,19 @@
       <cat-item tags="LPAR"/>
     </def-cat>
     <def-cat n="SENT">
-      <cat-item tags="SENT"/>
       <cat-item tags="sent"/>
     </def-cat>
     <def-cat n="SENT_PREP_CNJ_REL">
-      <cat-item tags="SENT"/>
+      <cat-item tags="sent"/>
       <cat-item tags="PREP"/>
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjadv"/>
       <cat-item tags="cnjcoo"/>
       <cat-item tags="rel"/>
       <cat-item tags="rel.*"/>
+    </def-cat>
+    <def-cat n="ij">
+      <cat-item tags="ij"/>
     </def-cat>
   </section-def-cats>
 
@@ -307,6 +318,10 @@
       <attr-item tags="pas_neg"/>
     </def-attr>
 
+    <def-attr n="a_part">
+      <attr-item tags="partitiu"/>
+    </def-attr>
+
     <def-attr n="temps">
       <attr-item tags="inf"/>
       <attr-item tags="ger"/>
@@ -328,6 +343,7 @@
     <def-var n="number"/>
     <def-var n="is_expression"/>
     <def-var n="is_net"/>
+    <def-var n="es_pot_gen_part" v="yes"/>
   </section-def-vars>
 
   <section-def-lists>
@@ -792,12 +808,16 @@
                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="venjance"/></equal>
              </or>
            </and>
+           <and>
+             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="poser"/></equal>
+               <equal caseless="yes"><clip pos="2" part="lem"/><lit v="problème"/></equal>
+           </and>
          </or>
        </test>
-       <let><var n="is_expression"/><lit-tag v="yes"/></let>
+       <let><var n="is_expression"/><lit v="yes"/></let>
      </when>
      <otherwise>
-       <let><var n="is_expression"/><lit-tag v="no"/></let>
+       <let><var n="is_expression"/><lit v="no"/></let>
      </otherwise>
    </choose>
  </def-macro>
@@ -999,6 +1019,277 @@
 
   <section-rules>
 
+    <!-- RÈGLAS es_pot_gen_part -->
+
+    <rule comment="RÈGLA: DET">
+      <pattern>
+        <pattern-item n="DET"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SA">
+      <pattern>
+        <pattern-item n="SA"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><clip pos="1" part="temps"/><lit-tag v="pp"/></equal>
+                <or>
+                  <equal><clip pos="1" part="a_part"/><lit-tag v="partitiu"/></equal>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="avoir"/></equal>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                </or>
+              </and>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV">
+      <pattern>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="1" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: Num">
+      <pattern>
+        <pattern-item n="Num"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP">
+      <pattern>
+        <pattern-item n="PREP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN">
+      <pattern>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+<!--
+    <rule comment="RÈGLA: SAdv">
+      <pattern>
+        <pattern-item n="SAdv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron">
+      <pattern>
+        <pattern-item n="SPron"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjcoo">
+      <pattern>
+        <pattern-item n="cnjcoo"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+-->
+
+    <rule comment="RÈGLA: cnjsub">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjadv">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: rel">
+      <pattern>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+<!--
+    <rule comment="RÈGLA: ij">
+      <pattern>
+        <pattern-item n="ij"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: UNK">
+      <pattern>
+        <pattern-item n="UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+-->
+
+    <rule comment="RÈGLA: SENT">
+      <pattern>
+        <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS es_pot_gen_part -->
+
     <!-- RÈGLAS D'INCLUSION DE L'ARTICLE DEFINIT DEL PARTITIU -->
 
     <rule comment="RÈGLA: SV_partitiu PR_de SN: vòli d'aiga > je veux de l'eau" v="oci">
@@ -1022,9 +1313,24 @@
           </chunk>
           <b pos="2"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="3"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="3" part="lem"/>
@@ -1032,32 +1338,9 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
-
-<!--
-    <rule comment="RÈGLA: SV_vbhaver SN_n: aver rason > avoir raison (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
 
     <rule comment="RÈGLA: SV_partitiu SN: que vòli aiga > je veux de l'eau" v="oci@gascon">
       <pattern>
@@ -1080,7 +1363,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef1">
@@ -1095,6 +1389,122 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu PR_de SN CM: vòli d'aiga > je veux de l'eau" v="oci">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_UNK"/>
+        <pattern-item n="CM"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+            <out>
+              <b/>
+            </out>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_partitiu SN CM: que vòli aiga, > je veux de l'eau," v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SN_n"/>
+        <pattern-item n="CM"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_expression">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <out>
+              <b/>
+            </out>
+            <call-macro n="generate_detdef1">
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
       </action>
     </rule>
 
@@ -1120,13 +1530,13 @@
           <b pos="2"/>
         </out>
         <call-macro n="f_expression">
-          <with-param pos="1"/>			<!-- xxxxxxx 1 >>> 2 -->
+          <with-param pos="2"/>
           <with-param pos="3"/>
         </call-macro>
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+             <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef1">
@@ -1141,6 +1551,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1166,13 +1577,13 @@
           <b pos="2"/>
         </out>
         <call-macro n="f_expression">
-          <with-param pos="1"/>			<!-- xxxxxxx 1 >>> 2 -->
+          <with-param pos="2"/>
           <with-param pos="3"/>
         </call-macro>
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+             <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef1">
@@ -1187,6 +1598,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1230,6 +1642,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1280,6 +1693,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1311,10 +1725,25 @@
           </chunk>
           <b pos="3"/>
         </out>
-        <call-macro n="generate_detdef2">
-          <with-param pos="4"/>
-          <with-param pos="2"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef2">
+              <with-param pos="4"/>
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="4" part="lem"/>
@@ -1322,6 +1751,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1353,7 +1783,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef2">
@@ -1369,6 +1810,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1407,11 +1849,26 @@
           </chunk>
           <b pos="4"/>
         </out>
-        <call-macro n="generate_detdef3">
-          <with-param pos="5"/>
-          <with-param pos="2"/>
-          <with-param pos="3"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef3">
+              <with-param pos="5"/>
+              <with-param pos="2"/>
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="5" part="lem"/>
@@ -1419,46 +1876,9 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
-
-<!--
-    <rule comment="RÈGLA: SV_vbhaver SAdv SAdv SN_n: aver pas totjorn rason > avoir pas raison (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
 
     <rule comment="RÈGLA: SV_partitiu SAdv SAdv SN: que vòli pas totjorn aiga > je ne veux pas toujours de l'eau ; vòli pas totjorn aigua > je ne veux pas toujours d'eau" v="oci@gascon">
       <pattern>
@@ -1495,7 +1915,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef3">
@@ -1512,6 +1943,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1543,9 +1975,24 @@
           </chunk>
           <b pos="3"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="4"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="4"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="4" part="lem"/>
@@ -1553,39 +2000,9 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
-
-<!--
-    <rule comment="RÈGLA: SV_vbhaver PP_haver SN: qu'èi avut vergonha > j'ai eu honte (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="PP_haver"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
 
     <rule comment="RÈGLA: SV_vbhaver SN: qu'èi volut aiga > j'ai voulu de l'eau" v="oci@gascon">
       <pattern>
@@ -1615,7 +2032,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef1">
@@ -1630,6 +2058,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1668,10 +2097,25 @@
           </chunk>
           <b pos="4"/>
         </out>
-        <call-macro n="generate_detdef2">
-          <with-param pos="5"/>
-          <with-param pos="2"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef2">
+              <with-param pos="5"/>
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="5" part="lem"/>
@@ -1679,46 +2123,9 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
-
-<!--
-    <rule comment="RÈGLA: SV_vbhaver ADV PP_haver SN: qu'èi totjorn avut vergonha > j'ai toujours eu honte (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="PP_haver"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
 
     <rule comment="RÈGLA: SV_vbhaver ADV PP SN: qu'èi totjorn volut aiga > j'ai toujours voulu de l'eau ; n'èi pas volut aiga > je n'ai pas voulu de l'eau" v="oci@gascon">
       <pattern>
@@ -1755,7 +2162,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef2">
@@ -1771,6 +2189,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1816,11 +2235,26 @@
           </chunk>
           <b pos="5"/>
         </out>
-        <call-macro n="generate_detdef3">
-          <with-param pos="6"/>
-          <with-param pos="2"/>
-          <with-param pos="3"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef3">
+              <with-param pos="6"/>
+              <with-param pos="2"/>
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="6" part="lem"/>
@@ -1828,53 +2262,9 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
-
-<!--
-    <rule comment="RÈGLA: SV_vbhaver ADV ADV PP_haver SN: n'èi pas totjorn avut vergonha > je n'ai pas toujours eu honte (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="PP_haver"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-        </out>
-      </action>
-    </rule>
--->
 
     <rule comment="RÈGLA: SV_vbhaver ADV ADV PP SN: n'èi pas totjorn volut aiga > je n'ai pas toujours voulu de l'eau" v="oci@gascon">
       <pattern>
@@ -1911,12 +2301,34 @@
           </chunk>
           <b pos="4"/>
         </out>
-        <call-macro n="generate_de"></call-macro>
-        <call-macro n="generate_detdef3">
+        <call-macro n="f_expression">
+          <with-param pos="4"/>
           <with-param pos="5"/>
-          <with-param pos="2"/>
-          <with-param pos="3"/>
         </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef3">
+              <with-param pos="5"/>
+              <with-param pos="2"/>
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="5" part="lem"/>
@@ -1924,6 +2336,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1969,11 +2382,26 @@
           </chunk>
           <b pos="5"/>
         </out>
-        <call-macro n="generate_detdef3">
-          <with-param pos="6"/>
-          <with-param pos="2"/>
-          <with-param pos="4"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+                  <or>
+                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                    <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+                  </or>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef3">
+              <with-param pos="6"/>
+              <with-param pos="2"/>
+              <with-param pos="4"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="6" part="lem"/>
@@ -1981,49 +2409,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: SV_vbhaver ADV PP_haver ADV SN: n'èi pas avut totjorn vergonha > je n'ai pas eu toujours honte (blòca la generacion del partitiu)" v="oci@gascon">
-      <pattern>
-        <pattern-item n="SV_vbhaver"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="PP_haver"/>
-        <pattern-item n="SAdv"/>
-        <pattern-item n="SN"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-          <b pos="3"/>
-          <chunk>
-            <clip pos="4" part="lem"/>
-            <clip pos="4" part="tags"/>
-            <clip pos="4" part="chcontent"/>
-          </chunk>
-          <b pos="4"/>
-          <chunk>
-            <clip pos="5" part="lem"/>
-            <clip pos="5" part="tags"/>
-            <clip pos="5" part="chcontent"/>
-          </chunk>
-        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2069,7 +2455,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
             <call-macro n="generate_detdef3">
@@ -2086,6 +2483,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2120,6 +2518,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2158,6 +2557,7 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2200,6 +2600,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 -->
@@ -2242,39 +2643,12 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
-      </action>
-    </rule>
-
-    <rule comment="RÈGLA: SN PR_de SN_pl (blòca la transformacion del partitiu)">
-      <pattern>
-        <pattern-item n="SN"/>
-        <pattern-item n="PREP_de"/>
-        <pattern-item n="SN_pl"/>
-      </pattern>
-      <action>
-        <out>
-          <chunk>
-            <clip pos="1" part="lem"/>
-            <clip pos="1" part="tags"/>
-            <clip pos="1" part="chcontent"/>
-          </chunk>
-          <b pos="1"/>
-          <chunk>
-            <clip pos="2" part="lem"/>
-            <clip pos="2" part="tags"/>
-            <clip pos="2" part="chcontent"/>
-          </chunk>
-          <b pos="2"/>
-          <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
-          </chunk>
-        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
       </action>
     </rule>
 
     <rule comment="RÈGLA: PR_de SN_pl" v="oci">
+<!-- xxxxxx -->
       <pattern>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl"/>
@@ -2288,9 +2662,16 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="2"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+             <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
@@ -2298,14 +2679,15 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
-    <rule comment="RÈGLA: PR_de SN_pl PR_de (blòca la possible transformacion del complement de nòm coma segond partitiu)" v="oci">
+    <rule comment="RÈGLA: PR_de SN_pl CM (pas de canvi en 'es_pot_gen_part' per continuar generant, si cal, de partitius" v="oci">
       <pattern>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl"/>
-        <pattern-item n="PREP_de"/>
+        <pattern-item n="CM"/>
       </pattern>
       <action>
         <out>
@@ -2316,20 +2698,27 @@
           </chunk>
           <b pos="1"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="2"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+             <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="2"/>
+            </call-macro>
+            <out>
+              <b/>
+            </out>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
           </chunk>
-          <b pos="2"/>
           <chunk>
-            <clip pos="3" part="lem"/>
-            <clip pos="3" part="tags"/>
-            <clip pos="3" part="chcontent"/>
+            <clip pos="3" part="whole"/>
           </chunk>
         </out>
       </action>
@@ -2364,6 +2753,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2394,6 +2784,7 @@
             <clip pos="2" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2429,6 +2820,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2471,6 +2863,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2510,6 +2903,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2541,7 +2935,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
           </when>
@@ -2553,6 +2958,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2596,6 +3002,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2634,7 +3041,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
           </when>
@@ -2646,6 +3064,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2696,6 +3115,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2741,7 +3161,18 @@
         <choose>
           <when>
             <test>
-             <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+              <and>
+                <not><equal><var n="is_expression"/><lit-tag v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_de"/>
           </when>
@@ -2753,6 +3184,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
       </action>
     </rule>
 
