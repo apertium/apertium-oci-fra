@@ -2888,6 +2888,33 @@
     </or>
   </rule>
 
+  <!-- barrage >> barratge, paissièira/paishèra -->
+  <rule weight="0.8">
+    <match lemma="barrage" tags="n.*"><select lemma="barratge"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="barrage" tags="n.*"><select lemma="paissièira"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="barrage" tags="n.*"><select lemma="paishèra"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+
   <!-- mie >> mica, amiga -->
   <rule weight="0.8">
     <match lemma="mie" tags="n.*"><select lemma="mica"/></match>
