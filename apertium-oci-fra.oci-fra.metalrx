@@ -8126,6 +8126,34 @@
     <or><match tags="vblex.*"/><match tags="vbser.*"/><match tags="vbhaver.*"/><match tags="vbmod.*"/></or>
   </rule>
 -->
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+    </or>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+       <match tags="vbser.*"/>
+       <match lemma="semblar" tags="vblex.*"/>
+       <match lemma="paréisser" tags="vblex.*"/>
+       <match lemma="pareisher" tags="vblex.*"/>
+       <match lemma="paréisher" tags="vblex.*"/>
+       <match lemma="devenir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv.*"/>
+    </repeat>
+    <match lemma="tant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
+  </rule>
 
   <!-- autant >> si, aussi -->
   <rule weight="0.8">
@@ -8159,6 +8187,34 @@
       <match tags="adv"/>
     </or>
     <match lemma="com" tags="cnjadv"><select lemma="que"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="autant" tags="preadv"><select lemma="aussi"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+    </or>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+       <match tags="vbser.*"/>
+       <match lemma="semblar" tags="vblex.*"/>
+       <match lemma="paréisser" tags="vblex.*"/>
+       <match lemma="pareisher" tags="vblex.*"/>
+       <match lemma="paréisher" tags="vblex.*"/>
+       <match lemma="devenir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv.*"/>
+    </repeat>
+    <match lemma="autant" tags="preadv"><select lemma="si"/></match>
+    <or>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+      <match tags="adv"/>
+    </or>
+    <match lemma="que" tags="cnjsub"/>
   </rule>
 
 <!-- **************** ADV **************** -->
@@ -8558,6 +8614,22 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- paishèra -> digue, barrage -->
+  <rule weight="0.8">
+    <match lemma="paishèra" tags="n.*"><select lemma="digue"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="paishèra" tags="n.*"><select lemma="barrage"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
 
   <!-- talent -> talent, faim -->
   <rule weight="0.8">

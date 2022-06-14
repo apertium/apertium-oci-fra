@@ -460,6 +460,10 @@
       <cat-item lemma="fin" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="mal_n">
+      <cat-item lemma="mal" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="jour_n">
       <cat-item lemma="lundi" tags="n.*"/>
       <cat-item lemma="mardi" tags="n.*"/>
@@ -1279,6 +1283,8 @@
       <list-item v="Navarre"/>
       <list-item v="Biscaye"/>
       <list-item v="Guipuscoa"/>
+      <list-item v="Labourd"/>
+      <list-item v="Soule"/>
       <list-item v="Castille"/>
       <list-item v="Andalousie"/>
       <list-item v="Extrémadure"/>
@@ -1346,7 +1352,11 @@
       <list-item v="Gabardan"/>
       <list-item v="Lacaunais"/>
       <list-item v="Luchonnais"/>
+      <list-item v="Maremne"/>
+      <list-item v="Marencin"/>
+      <list-item v="Marensin"/>
       <list-item v="Nébouzan"/>
+      <list-item v="Seignanx"/>
       <list-item v="Vazadais"/>
       <list-item v="Velay"/>
       <list-item v="Vercors"/>
@@ -22208,6 +22218,47 @@
             </lu>
           </chunk>
         </out>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: mal à DETDEF N (mal au dos > mal d'esquina)">
+       <pattern>
+         <pattern-item n="mal_n"/>
+         <pattern-item n="aprep"/>
+         <pattern-item n="detdef"/>
+         <pattern-item n="nom"/>
+       </pattern>
+       <action>
+        <call-macro n="f_concord1">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk namefrom="mal_de_x">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
        </action>
     </rule>
 

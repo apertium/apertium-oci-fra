@@ -1545,6 +1545,8 @@
       <list-item v="Navarre"/>
       <list-item v="Biscaye"/>
       <list-item v="Guipuscoa"/>
+      <list-item v="Labourd"/>
+      <list-item v="Soule"/>
       <list-item v="Castille"/>
       <list-item v="Andalousie"/>
       <list-item v="Extrémadure"/>
@@ -1613,7 +1615,11 @@
       <list-item v="Gabardan"/>
       <list-item v="Lacaunais"/>
       <list-item v="Luchonnais"/>
+      <list-item v="Maremne"/>
+      <list-item v="Marencin"/>
+      <list-item v="Marensin"/>
       <list-item v="Nébouzan"/>
+      <list-item v="Seignanx"/>
       <list-item v="Vazadais"/>
       <list-item v="Velay"/>
       <list-item v="Vercors"/>
@@ -4342,10 +4348,16 @@
               <and>
                 <in caseless="yes"><clip pos="1" side="tl" part="lem"/><list n="en_majuscules"/></in>
                 <equal><var n="EOS"/><lit v="true"/></equal>
-                <not><equal><clip pos="1" side="tl" part="a_num"/><lit v="num"/></equal></not>
+                <not><equal><clip pos="1" side="tl" part="a_num"/><lit-tag v="num"/></equal></not>
               </and>
             </or>
           </test>
+        </when>
+        <when>
+          <test>
+            <equal><clip pos="1" side="tl" part="a_np_acr"/><lit-tag v="acr"/></equal>
+          </test>
+          <let><var n="caseFirstWord"/><lit v="aa"/></let>
         </when>
         <when>
           <test>
