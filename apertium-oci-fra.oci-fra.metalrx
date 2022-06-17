@@ -4424,6 +4424,20 @@
       <match lemma="pòrta" tags="n.*"/>
     </or>
   </rule>
+  <rule weight="1.4">
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="nòrd" tags="n.*"/>
+      <match lemma="Nòrd" tags="np.*"/>
+      <match lemma="sud" tags="n.*"/>
+      <match lemma="Sud" tags="np.*"/>
+      <match lemma="èst" tags="n.*"/>
+      <match lemma="Èst" tags="np.*"/>
+      <match lemma="oèst" tags="n.*"/>
+      <match lemma="Oèst" tags="np.*"/>
+    </or>
+  </rule>
   <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <match tags="det.*"/>
@@ -13032,6 +13046,11 @@
     <match lemma="valon" tags="n.m.*"><select lemma="vallon"/></match>
   </rule>
 
+  <!-- cadre >> vallon, wallon -->
+  <rule weight="0.8">
+    <match lemma="valon" tags="n.m.*"><select lemma="vallon"/></match>
+  </rule>
+
 
 
 
@@ -15417,6 +15436,19 @@
     <match tags="prn.pro"/>
     <match lemma="en" tags="prn.pro.adv"/>
     <match lemma="devirar" tags="vblex.*"><select lemma="retourner"/></match>
+  </rule>
+
+  <!-- sortir >> sortir, venir -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="sortir" tags="vblex.*"><select lemma="sortir"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="sortir" tags="vblex.*"><select lemma="sortir"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="vblex.inf"/>
   </rule>
 
 

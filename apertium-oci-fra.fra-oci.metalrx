@@ -1493,6 +1493,7 @@
       <match lemma="opinion" tags="n.*"/>
       <match lemma="idée" tags="n.*"/>
       <match lemma="statut" tags="n.*"/>
+      <match lemma="sens" tags="n.*"/>
     </or>
     <match lemma="propre" tags="adj.*" v="oci@gascon"><select lemma="pròpi"/></match>
     <match lemma="propre" tags="adj.*" v="oci"><select lemma="pròpri"/></match>
@@ -3736,6 +3737,16 @@
   <!-- bard -> barde, glaise -->
   <rule weight="0.8" v="oci">
     <match lemma="bard" tags="n.*"><select lemma="barde"/></match>
+  </rule>
+
+  <!-- cadre -> quadre, encastre -->
+  <rule weight="0.8">
+    <match lemma="cadre" tags="n.*"><select lemma="quadre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dans" tags="pr"/>
+    <match tags="det.dem.*"/>
+    <match lemma="cadre" tags="n.*"><select lemma="encastre"/></match>
   </rule>
 
 
