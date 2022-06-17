@@ -4139,7 +4139,8 @@
     </def-macro>
 
     <def-macro n="escriure_prnpro_prnpro" npar="2" v="oci">
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lem"/></let>
+         <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <choose>
            <when>
              <test>
@@ -4158,9 +4159,8 @@
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="lem"/>
                    <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
                  </lu>
                </chunk>
                <b pos="1"/>
@@ -4168,7 +4168,7 @@
              <call-macro n="tipus_prn">
                <with-param pos="1"/>
              </call-macro>
-             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="tl" part="lem"/></let>
              <out>
                <chunk name="prn" case="caseFirstWord">
                  <tags>
@@ -4176,9 +4176,8 @@
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="lem"/>
                    <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
                  </lu>
                </chunk>
              </out>
@@ -4188,7 +4187,7 @@
                <with-param pos="1"/>
              </call-macro>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
@@ -4204,8 +4203,9 @@
              <call-macro n="tipus_prn">
                <with-param pos="2"/>
              </call-macro>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="tl" part="lem"/></let>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
@@ -4222,26 +4222,145 @@
     </def-macro>
 
     <def-macro n="escriure_prnpro_prnpro" npar="2" v="oci@gascon">
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <!-- cas 'le/la/les + lui/leur' : on inverse CD et CI -->
+         <choose>
+           <when>
+             <test>
+               <and>
+                 <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="le"/></equal>
+                 <or>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="lui"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="leur"/></equal>
+                 </or>
+               </and>
+             </test>
+             <let><clip pos="1" side="tl" part="lem"/><lit v="lo"/></let>
+             <choose>
+               <when>
+                 <test>
+                   <equal><clip pos="1" side="sl" part="nbr"/><lit v=""/></equal>
+                 </test>
+                 <let><clip pos="1" side="tl" part="gen"/><lit-tag v="m.sg"/></let>
+               </when>
+               <otherwise>
+                 <let><clip pos="1" side="tl" part="gen"/><lit-tag v="m"/></let>
+                 <let><clip pos="1" side="tl" part="nbr"/><clip pos="2" side="sl" part="nbr"/></let>
+               </otherwise>
+             </choose>
+             <let><clip pos="2" side="tl" part="lem"/><lit v="ac"/></let>
+             <let><clip pos="2" side="tl" part="gen"/><lit-tag v="nt"/></let>
+             <let><clip pos="2" side="tl" part="nbr"/><lit-tag v=""/></let>
+           </when>
+         </choose>
+                 
+         <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lem"/></let>
+         <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
          <choose>
            <when>
              <test>
                <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                 <and> <!-- lo: prioritat 1 -->
                    <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></equal>
+                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
                  </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ac"/></equal>
+                 <and> <!-- la: prioritat 2 -->
                    <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
+                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                   <not>
+                     <and>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="m"/></equal>
+                       <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                     </and>
+                   </not>
+                 </and>
+                 <and> <!-- los: prioritat 3 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></equal>
+                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+                   <not>
+                     <and>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                     </and>
+                   </not>
+                 </and>
+                 <and> <!-- las: prioritat 4 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
+                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+                   <not>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                   </not>
+                 </and>
+                 <and> <!-- se: prioritat 5 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="se"/></equal>
+                   <not>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                   </not>
+                 </and>
+                 <and> <!-- te: prioritat 6 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="te"/></equal>
+                   <not>
+                     <or>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="se"/></equal>
+                     </or>
+                   </not>
+                 </and>
+                 <and> <!-- vos: prioritat 7 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="vos"/></equal>
+                   <not>
+                     <or>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="se"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="te"/></equal>
+                     </or>
+                   </not>
+                 </and>
+                 <and> <!-- me: prioritat 8 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="me"/></equal>
+                   <not>
+                     <or>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="se"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="te"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="vos"/></equal>
+                     </or>
+                   </not>
+                 </and>
+                 <and> <!-- nos: prioritat 9 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ne"/></equal>
+                   <not>
+                     <or>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="lo"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="se"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="te"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="vos"/></equal>
+                       <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="me"/></equal>
+                     </or>
+                   </not>
+                 </and>
+                 <and> <!-- ne: prioritat 10 -->
+                   <or>
+                     <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ne"/></equal>
+                     <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="en"/></equal>
+                   </or>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ac"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="i"/></equal>
+                   </or>
+                 </and>
+                 <and> <!-- ac: prioritat 11 -->
+                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ac"/></equal>
+                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="i"/></equal>
                  </and>
                </or>
              </test>
              <!-- changement d'ordre CD CI -->
+<!--
              <choose>
              <when>
                <test>
@@ -4255,6 +4374,7 @@
                <let><clip pos="1" side="tl" part="nbr"/><lit-tag v=""/></let>
              </when>
              </choose>
+-->
              <call-macro n="tipus_prn">
                <with-param pos="2"/>
              </call-macro>
@@ -4265,9 +4385,8 @@
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="lem"/>
                    <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
                  </lu>
                </chunk>
                <b pos="1"/>
@@ -4275,7 +4394,8 @@
              <call-macro n="tipus_prn">
                <with-param pos="1"/>
              </call-macro>
-             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lem"/></let>
+             <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
              <out>
                <chunk name="prn" case="caseFirstWord">
                  <tags>
@@ -4283,9 +4403,8 @@
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="lem"/>
                    <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
                  </lu>
                </chunk>
              </out>
@@ -4295,15 +4414,14 @@
                <with-param pos="1"/>
              </call-macro>
              <out>
-               <chunk name="prn">
+               <chunk name="prn" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SPron"/></tag>
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="1" side="tl" part="lemh"/>
+                   <clip pos="1" side="tl" part="lem"/>
                    <clip pos="1" side="tl" part="tags"/>
-                   <clip pos="1" side="tl" part="lemq"/>
                  </lu>
                </chunk>
                <b pos="1"/>
@@ -4318,9 +4436,8 @@
                    <tag><var n="tipusprn"/></tag>
                  </tags>
                  <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="lem"/>
                    <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
                  </lu>
                </chunk>
              </out>
@@ -15809,132 +15926,59 @@
         <pattern-item n="verbconj"/>
       </pattern>
       <action>
-         <call-macro n="tipus_prn">
-           <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="f_concord1">
-           <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="f_concord1">
-           <with-param pos="2"/>
-         </call-macro>
-         <call-macro n="f_concord1">
-           <with-param pos="3"/>
-         </call-macro>
+        <call-macro n="tipus_prn">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="3"/>
+        </call-macro>
         <call-macro n="f_concord0">
           <with-param pos="1"/>
         </call-macro>
-         <call-macro n="tipus_verb">
+        <call-macro n="tipus_verb">
           <with-param pos="4"/>
-         </call-macro>
-         <call-macro n="f_bcond">
-           <with-param pos="1"/>
-           <with-param pos="2"/>
-         </call-macro>
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
-         <choose>
-           <when>
-             <test>
-               <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ac"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </or>
-             </test>
-             <choose>
-               <when>
-                 <test>
-                   <and>
-                     <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                     <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                   </and>
-                 </test>
-                 <let><clip pos="2" side="tl" part="lem"/><lit v="ac"/></let>
-                 <let><clip pos="2" side="tl" part="gen"/><lit-tag v="nt"/></let>
-                 <let><clip pos="2" side="tl" part="nbr"/><lit-tag v=""/></let>
-               </when>
-             </choose>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><clip pos="4" side="tl" part="pers"/></tag>
-                   <tag><clip pos="4" side="tl" part="nbr"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><lit-tag v="sans_pas"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <lit-tag v="4"/>
-                   <lit-tag v="5"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-           <otherwise>
-             <out>
-               <chunk name="pro-pro-verb" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><clip pos="4" side="tl" part="pers"/></tag>
-                   <tag><clip pos="4" side="tl" part="nbr"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><lit-tag v="sans_pas"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <lit-tag v="4"/>
-                   <lit-tag v="5"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </otherwise>
-         </choose>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <modify-case>
+          <clip pos="2" side="tl" part="lem"/>
+          <case-of pos="1" side="tl" part="lem"/>
+        </modify-case>
+        <call-macro n="escriure_prnpro_prnpro">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <b pos="3"/>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="4" side="tl" part="temps"/></tag>
+              <tag><clip pos="4" side="tl" part="pers"/></tag>
+              <tag><clip pos="4" side="tl" part="nbr"/></tag>
+              <tag><lit-tag v="negation"/></tag>
+              <tag><lit-tag v="sans_pas"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="a_verb"/>
+              <lit-tag v="3"/>
+              <lit-tag v="4"/>
+              <lit-tag v="5"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
@@ -16230,27 +16274,7 @@
 -->
 
 
-    <rule comment="RÈGLA: PRNPRO PRNPRO (y en > n'i; le lui > o li)" v="oci">
-      <pattern>
-        <pattern-item n="prnpro"/>
-        <pattern-item n="prnpro"/>
-      </pattern>
-      <action>
-         <call-macro n="f_concord1">
-           <with-param pos="1"/>
-         </call-macro>
-         <call-macro n="f_concord1">
-           <with-param pos="2"/>
-         </call-macro>
-        <call-macro n="escriure_prnpro_prnpro">
-          <with-param pos="1"/>
-          <with-param pos="2"/>
-        </call-macro>
-      </action>
-    </rule>
-
-
-    <rule comment="RÈGLA: PRNPRO PRNPRO (y en > n'i; le lui > l'ac)" v="oci@gascon">
+    <rule comment="RÈGLA: PRNPRO PRNPRO (y en > n'i; le lui > o li / l'ac)">
       <pattern>
         <pattern-item n="prnpro"/>
         <pattern-item n="prnpro"/>
@@ -16425,147 +16449,37 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
-         <choose>
-           <when>
-             <test>
-               <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ac"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </or>
-             </test>
-             <!-- changement d'ordre CD CI -->
-             <choose>
-               <when>
-                 <test>
-                   <and>
-                     <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                     <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                   </and>
-                 </test>
-                 <let><clip pos="2" side="tl" part="lem"/><lit v="ac"/></let>
-                 <let><clip pos="2" side="tl" part="gen"/><lit-tag v="nt"/></let>
-                 <let><clip pos="2" side="tl" part="nbr"/><lit-tag v=""/></let>
-               </when>
-             </choose>
-             <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lem"/></let>
-             <let><var n="chunkname"/><clip pos="3" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="3" side="tl" part="lem"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                 </lu>
-               </chunk>
-               <b pos="2"/>
-             </out>
-             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lem"/></let>
-             <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lem"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                 </lu>
-               </chunk>
-               <b pos="3"/>
-             </out>
-             <let><var n="caseFirstWord"/><case-of pos="4" side="sl" part="lemh"/></let>
-             <let><var n="chunkname"/><clip pos="4" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><clip pos="4" side="tl" part="pers"/></tag>
-                   <tag><clip pos="4" side="tl" part="nbr"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <lit-tag v="4"/>
-                   <lit-tag v="5"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-           <otherwise>
-             <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lem"/></let>
-             <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lem"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                 </lu>
-               </chunk>
-               <b pos="2"/>
-             </out>
-             <let><var n="caseFirstWord"/><case-of pos="3" side="sl" part="lem"/></let>
-             <let><var n="chunkname"/><clip pos="3" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SPron"/></tag>
-                   <tag><var n="tipusprn"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="3" side="tl" part="lem"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                 </lu>
-               </chunk>
-               <b pos="3"/>
-             </out>
-             <let><var n="caseFirstWord"/><case-of pos="4" side="sl" part="lemh"/></let>
-             <let><var n="chunkname"/><clip pos="4" side="tl" part="lem"/></let>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><clip pos="4" side="tl" part="pers"/></tag>
-                   <tag><clip pos="4" side="tl" part="nbr"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <lit-tag v="4"/>
-                   <lit-tag v="5"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </otherwise>
-         </choose>
+        <modify-case>
+          <clip pos="2" side="tl" part="lem"/>
+          <case-of pos="1" side="tl" part="lem"/>
+        </modify-case>
+        <call-macro n="escriure_prnpro_prnpro">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="4" side="sl" part="lemh"/></let>
+        <let><var n="chunkname"/><clip pos="4" side="tl" part="lem"/></let>
+        <out>
+          <b pos="3"/>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="4" side="tl" part="temps"/></tag>
+              <tag><clip pos="4" side="tl" part="pers"/></tag>
+              <tag><clip pos="4" side="tl" part="nbr"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="a_verb"/>
+              <lit-tag v="3"/>
+              <lit-tag v="4"/>
+              <lit-tag v="5"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
@@ -17008,104 +16922,35 @@
            <with-param pos="2"/>
            <with-param pos="3"/>
          </call-macro>
-         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
-         <choose>
-           <when>
-             <test>
-               <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="4" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="4" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="ac"/></equal>
-                   <equal caseless="yes"><clip pos="4" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </or>
-             </test>
-             <choose>
-               <when>
-                 <test>
-                   <and>
-                     <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                     <equal caseless="yes"><clip pos="4" side="tl" part="lem"/><lit v="lo"/></equal>
-                   </and>
-                 </test>
-                 <let><clip pos="3" side="tl" part="lem"/><lit v="ac"/></let>
-                 <let><clip pos="3" side="tl" part="gen"/><lit-tag v="nt"/></let>
-                 <let><clip pos="3" side="tl" part="nbr"/><lit-tag v=""/></let>
-               </when>
-             </choose>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="5" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="5" side="tl" part="temps"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="tags"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="4"/>
-                 <lu>
-                   <clip pos="5" side="tl" part="lemh"/>
-                   <clip pos="5" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <clip pos="5" side="tl" part="pers"/>
-                   <clip pos="5" side="tl" part="nbr"/>
-                   <clip pos="5" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-           <otherwise>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="5" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="5" side="tl" part="temps"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="tags"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="4"/>
-                 <lu>
-                   <clip pos="5" side="tl" part="lemh"/>
-                   <clip pos="5" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <clip pos="5" side="tl" part="pers"/>
-                   <clip pos="5" side="tl" part="nbr"/>
-                   <clip pos="5" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </otherwise>
-         </choose>
+        <modify-case>
+          <clip pos="3" side="tl" part="lem"/>
+          <case-of pos="1" side="tl" part="lem"/>
+        </modify-case>
+        <call-macro n="escriure_prnpro_prnpro">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="5" side="sl" part="lemh"/></let>
+        <out>
+          <b pos="4"/>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="5" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="5" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="negation"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="a_verb"/>
+              <lit-tag v="3"/>
+              <clip pos="5" side="tl" part="pers"/>
+              <clip pos="5" side="tl" part="nbr"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
@@ -17126,7 +16971,7 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
-        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
          <out>
            <chunk name="vbser" case="caseFirstWord">
              <tags>
@@ -17344,7 +17189,7 @@
        </action>
     </rule>
 
-    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB (n'y en a pas: n'i a pas; Ne le lui dit-il pas: L'ac diguèt pas)" v="oci@gascon">
+    <rule comment="RÈGLA: NE PRNPRO PRNPRO VERB (Ne le lui dit-il pas: L'ac digó pas)" v="oci@gascon">
       <pattern>
         <pattern-item n="ne"/>
         <pattern-item n="prnpro"/>
@@ -17373,105 +17218,34 @@
            <with-param pos="1"/>
            <with-param pos="2"/>
          </call-macro>
-         <choose>
-           <when>
-             <test>
-               <or>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="sl" part="lem"/><lit v="y"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="sl" part="lem"/><lit v="en"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-                 <and>
-                   <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ac"/></equal>
-                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                 </and>
-               </or>
-             </test>
-             <choose>
-               <when>
-                 <test>
-                   <and>
-                     <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
-                     <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="lo"/></equal>
-                   </and>
-                 </test>
-                 <let><clip pos="2" side="tl" part="lem"/><lit v="ac"/></let>
-                 <let><clip pos="2" side="tl" part="gen"/><lit-tag v="nt"/></let>
-                 <let><clip pos="2" side="tl" part="nbr"/><lit-tag v=""/></let>
-               </when>
-             </choose>
-             <out>
-               <chunk namefrom="chunkname" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><lit-tag v="sans_pas"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <clip pos="4" side="tl" part="pers"/>
-                   <clip pos="4" side="tl" part="nbr"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </when>
-           <otherwise>
-             <out>
-             <chunk name="pro-pro-verb" case="caseFirstWord">
-                 <tags>
-                   <tag><lit-tag v="SV"/></tag>
-                   <tag><clip pos="4" side="tl" part="a_verb"/></tag>
-                   <tag><clip pos="4" side="tl" part="temps"/></tag>
-                   <tag><lit-tag v="negation"/></tag>
-                   <tag><lit-tag v="sans_pas"/></tag>
-                   <tag><var n="tipusverb"/></tag>
-                 </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
-                 <lu>
-                   <clip pos="3" side="tl" part="lemh"/>
-                   <clip pos="3" side="tl" part="tags"/>
-                   <clip pos="3" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="3"/>
-                 <lu>
-                   <clip pos="4" side="tl" part="lemh"/>
-                   <clip pos="4" side="tl" part="a_verb"/>
-                   <lit-tag v="3"/>
-                   <clip pos="4" side="tl" part="pers"/>
-                   <clip pos="4" side="tl" part="nbr"/>
-                   <clip pos="4" side="tl" part="lemq"/>
-                 </lu>
-               </chunk>
-             </out>
-           </otherwise>
-         </choose>
+        <modify-case>
+          <clip pos="2" side="tl" part="lem"/>
+          <case-of pos="1" side="tl" part="lem"/>
+        </modify-case>
+        <call-macro n="escriure_prnpro_prnpro">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk namefrom="chunkname" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><clip pos="4" side="tl" part="a_verb"/></tag>
+              <tag><clip pos="4" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="negation"/></tag>
+              <tag><lit-tag v="sans_pas"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="a_verb"/>
+              <lit-tag v="3"/>
+              <clip pos="4" side="tl" part="pers"/>
+              <clip pos="4" side="tl" part="nbr"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
@@ -17603,7 +17377,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ON PRNPRO VERBP3 (on lui dit: se li diguèt ; on me dit > qualqu'un me diguèt)">
+    <rule comment="RÈGLA: ON PRNPRO VERBP3 (on lui dit > se li diguèt ; on me dit > qualqu'un me diguèt)" v="oci">
       <pattern>
         <pattern-item n="on"/>
         <pattern-item n="prnpro"/>
@@ -17678,6 +17452,136 @@
               </lu>
            </chunk>
          </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ON PRNPRO VERBP3 (on en dit > se'n diguó ; on lui dit > lo's diguó ; on me dit > quauqu'un me diguó)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="on"/>
+        <pattern-item n="prnpro"/>
+        <pattern-item n="verbp3sg"/>
+      </pattern>
+      <action>
+        <call-macro n="set_qualqun"></call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="3"/>
+        </call-macro>
+        <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="lo"/></equal>
+            </test>
+            <call-macro n="tipus_prn">
+              <with-param pos="2"/>
+            </call-macro>
+            <out>
+              <chunk name="lo" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><var n="tipusprn"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="lem"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+            <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lem"/></let>
+            <out>
+              <chunk name="se" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SPron"/></tag>
+                  <tag><lit-tag v="ref"/></tag>
+                </tags>
+                <lu>
+                  <lit v="se"/>
+                  <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                </lu>
+              </chunk>
+              <b pos="2"/>
+              <chunk namefrom="chunkname">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                  <tag><clip pos="3" side="tl" part="temps"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+           <choose>
+             <when>
+               <test>
+                 <or>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="me"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="te"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="nous"/></equal>
+                   <equal caseless="yes"><clip pos="2" side="sl" part="lemh"/><lit v="vous"/></equal>
+                 </or>
+               </test>
+               <out>
+                 <chunk name="prn" case="caseFirstWord">
+                   <tags>
+                     <tag><lit-tag v="SPron"/></tag>
+                     <tag><lit-tag v="ref"/></tag>
+                     <tag><lit-tag v="on"/></tag>
+                   </tags>
+                   <lu>
+                     <var n="v_qualqun"/>
+                     <lit-tag v="prn.tn.m.sg"/>
+                   </lu>
+                 </chunk>
+               </out>
+             </when>
+             <otherwise>
+               <out>
+                 <chunk name="prn" case="caseFirstWord">
+                   <tags>
+                     <tag><lit-tag v="SPron"/></tag>
+                     <tag><lit-tag v="ref"/></tag>
+                     <tag><lit-tag v="on"/></tag>
+                   </tags>
+                   <lu>
+                     <lit v="se"/>
+                     <lit-tag v="prn.pro.ref.p3.mf.sp"/>
+                   </lu>
+                 </chunk>
+               </out>
+             </otherwise>
+           </choose>
+           <out>
+             <b pos="1"/>
+              <chunk namefrom="chunkname">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="3" side="tl" part="a_verb"/></tag>
+                  <tag><clip pos="3" side="tl" part="temps"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="whole"/>
+                </lu>
+                <b pos="2"/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                 </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
