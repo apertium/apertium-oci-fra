@@ -1014,24 +1014,40 @@
 
 <!-- **************** PRN **************** -->
 
-  <!-- lui prn.pro >> lo prn.pro.p3.m, lo prn.pro.p3.f (Gascon) -->
-  <rule weight="0.8">
+  <!-- lui prn.pro >> lo prn.pro.p3.m.sg, lo prn.pro.p3.f.sg, ac (Gascon) -->
+  <rule weight="0.8" v="oci@gascon">
     <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.sg"/></match>
   </rule>
-
-  <!-- leur prn.pro >> lo prn.pro.p3.m, lo prn.pro.p3.f (Gascon) -->
-  <rule weight="0.8">
-    <match lemma="leur" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.pl"/></match>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="le" tags="prn.pro.*"/>
+    <match lemma="lui" tags="prn.pro.*"><select lemma="ac" tags="prn.pro.*"/></match>
   </rule>
 
-  <!-- lui prn.enc >> lo prn.enc.p3.m, lo prn.enc.p3.f (Gascon) -->
-  <rule weight="0.8">
+  <!-- leur prn.pro >> lo prn.pro.p3.mf.pl, prn.pro.p3.f, ac (Gascon) -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="leur" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.*"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="le" tags="prn.pro.*"/>
+    <match lemma="leur" tags="prn.pro.*"><select lemma="ac" tags="prn.pro.*"/></match>
+  </rule>
+
+  <!-- lui prn.enc >> lo prn.enc.p3.m.sg, lo prn.enc.p3.f.sg, ac prn.enc (Gascon) -->
+  <rule weight="0.8" v="oci@gascon">
     <match lemma="lui" tags="prn.enc.*"><select lemma="lo" tags="prn.enc.p3.m.sg"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="le" tags="prn.enc.*"/>
+    <match lemma="lui" tags="prn.enc.*"><select lemma="ac" tags="prn.enc.*"/></match>
   </rule>
 
   <!-- leur prn.enc >> lo prn.enc.p3.m, lo prn.enc.p3.f (Gascon) -->
-  <rule weight="0.8">
-    <match lemma="leur" tags="prn.enc.*"><select lemma="lo" tags="prn.enc.p3.m.pl"/></match>
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="leur" tags="prn.enc.*"><select lemma="lo" tags="prn.enc.*"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="le" tags="prn.enc.*"/>
+    <match lemma="leur" tags="prn.enc.*"><select lemma="ac" tags="prn.enc.*"/></match>
   </rule>
 
 <!-- **************** ADV **************** -->
