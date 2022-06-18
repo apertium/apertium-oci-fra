@@ -692,6 +692,10 @@
       <cat-item lemma="enlà" tags="adv"/>
     </def-cat>
 
+    <def-cat n="ençà">
+      <cat-item lemma="ençà" tags="adv"/>
+    </def-cat>
+
     <def-cat n="estant">
       <cat-item lemma="èster" tags="vbser.ger"/>
       <cat-item lemma="estar" tags="vbser.ger"/>
@@ -10504,7 +10508,7 @@
     <!-- FIN RÈGLAS HORAS -->
 
 
-    <!-- RÈGLAS DE ... ESTANT/ENLÀ -->
+    <!-- RÈGLAS DE ... ESTANT/ENLÀ/ENÇÀ -->
 
     <rule comment="RÈGLA: DE NOM ESTANT > DEPUIS DETDEF NOM (de casa estant > depuis la maison)">
       <pattern>
@@ -10568,6 +10572,48 @@
             </tags>
             <lu>
                <lit v="à partir de"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                 <lit v="le"/>
+              </get-case-from>
+              <lit-tag v="det.def"/>
+              <clip pos="2" side="tl" part="gen"/>
+              <lit-tag v="sg"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE NOM ENÇÀ > DEPUIS DETDEF NOM (de casa ençà > depuis la maison)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="nomsp_sg"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_det_nom" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
                <lit-tag v="pr"/>
             </lu>
             <b pos="1"/>
@@ -10656,6 +10702,72 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: DE NP ENLÀ > À PARTIR DE NP (de Tolosa enlà > à partir de Toulouse)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="np"/>
+        <pattern-item n="enlà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_np" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="à partir de"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE NP ENÇÀ > DEPUIS NP (de Tolosa ençà > depuis Toulouse)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="np"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_np" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: DE DET NOM ESTANT > DEPUIS DET NOM (d'una casa estant > depuis une maison)">
       <pattern>
         <pattern-item n="depr"/>
@@ -10697,7 +10809,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE DET NOM ENLÀ > DEPUIS DET NOM (d'una casa enlà > à partir d'une maison)">
+    <rule comment="RÈGLA: DE DET NOM ENLÀ > À PARTIR DE DET NOM (d'una casa enlà > à partir d'une maison)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="det"/>
@@ -10738,7 +10850,48 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS ENLÀ > DEPUIS DET NUMERAL MOIS (de lo 20 de novembre enlà > à partir du 20 novembre)">
+    <rule comment="RÈGLA: DE DET NOM ENÇÀ > DEPUIS DET NOM (d'una casa ençà > depuis une maison)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_det_nom" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS ENLÀ > À PARTIR DE DET NUMERAL MOIS (de lo 20 de novembre enlà > à partir du 20 novembre)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="det"/>
@@ -10782,7 +10935,51 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS DE NUM ENLÀ > DEPUIS DET NUMERAL MOIS NUM (de lo 20 de novembre 2020 enlà > à partir du 20 novembre 2020)">
+    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS ENÇÀ > DEPUIS DET NUMERAL MOIS (de lo 20 de novembre ençà > depuis le 20 novembre)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="det"/>
+        <pattern-item n="num_premier"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="5"/>
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS DE NUM ENLÀ > À PARTIR DE DET NUMERAL MOIS NUM (de lo 20 de novembre 2020 enlà > à partir du 20 novembre 2020)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="det"/>
@@ -10832,7 +11029,57 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE NUM ORA ENLÀ > DEPUIS NUM HEURE (de 2 oras enlà > à partir de 2 oras)">
+    <rule comment="RÈGLA: DE DET NUMERAL DE MOIS DE NUM ENÇÀ > DEPUIS DET NUMERAL MOIS NUM (de lo 20 de novembre 2020 ençà > depuis le 20 novembre 2020)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="det"/>
+        <pattern-item n="num_premier"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="nom_mois"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="num"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="5"/>
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="whole"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="7" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE NUM ORA ENLÀ > À PARTIR DE NUM HEURE (de 2 oras enlà > à partir de 2 oras)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="num"/>
@@ -10869,7 +11116,44 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE NUM ORA_ABREV ENLÀ > DEPUIS NUM HEURE_ABREV (de 2 o. enlà > à partir de 2 h.)">
+    <rule comment="RÈGLA: DE NUM ORA ENÇÀ > DEPUIS NUM HEURE (de 2 oras ençà > depuis 2 heures)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom_ora"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE NUM ORA_ABREV ENLÀ > À PARTIR DE NUM HEURE_ABREV (de 2 o. enlà > à partir de 2 h.)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="num"/>
@@ -10908,7 +11192,46 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE DETDEF UNA ORA ENLÀ > DEPUIS UNE HEURE (de l'una ora enlà > à partir d'une heure)">
+    <rule comment="RÈGLA: DE NUM ORA_ABREV ENÇÀ > DEPUIS NUM HEURE_ABREV (de 2 o. ençà > depuis 2 h.)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom_ora_abrev"/>
+        <pattern-item n="sent"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+               <lit v="h."/>
+               <lit-tag v="n.f.sp"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE DETDEF UNA ORA ENLÀ > À PARTIR D'UNE HEURE (de l'una ora enlà > à partir d'une heure)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="detdef"/>
@@ -10946,7 +11269,45 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: DE DETDEF UNA ORA_ABREV ENLÀ > DEPUIS UNE HEURE_ABREV (de l'una o. enlà > à partir de une h.)">
+    <rule comment="RÈGLA: DE DETDEF UNA ORA ENÇÀ > DEPUIS UNE HEURE (de l'una ora ençà > depuis une heure)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="una"/>
+        <pattern-item n="nom_ora"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE DETDEF UNA ORA_ABREV ENLÀ > À PARTIR D'UNE HEURE_ABREV (de l'una o. enlà > à partir de une h.)">
       <pattern>
         <pattern-item n="depr"/>
         <pattern-item n="detdef"/>
@@ -10986,7 +11347,47 @@
       </action>
     </rule>
 
-    <!-- FIN RÈGLAS DE ... ESTANT/ENLÀ -->
+    <rule comment="RÈGLA: DE DETDEF UNA ORA_ABREV ENÇÀ > DEPUIS UNE HEURE_ABREV (de l'una o. ençà > depuis une h.)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="una"/>
+        <pattern-item n="nom_ora_abrev"/>
+        <pattern-item n="sent"/>
+        <pattern-item n="ençà"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_data" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="depuis"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+               <lit v="h."/>
+               <lit-tag v="n.f.sp"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS DE ... ESTANT/ENLÀ/ENÇÀ -->
 
 
     <!-- RÈGLAS CAMBI AUXILIAR -->
