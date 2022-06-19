@@ -4294,14 +4294,18 @@
   <rule weight="0.8">
     <match lemma="ac" tags="prn.enc.*"><select lemma="le"/></match>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.enc.*"/>
-    <match lemma="ac" tags="prn.enc.*"><select lemma="lui"/></match>
-  </rule>
 
   <!-- lo >> le, lui -->
   <rule weight="0.8">
     <match lemma="lo" tags="prn.enc.*"><select lemma="le"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.enc.*.sg"><select lemma="lui"/></match>
+    <match lemma="ac" tags="prn.enc.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.enc.*.pl"><select lemma="leur"/></match>
+    <match lemma="ac" tags="prn.enc.*"/>
   </rule>
 
   <!-- aquel/aqueth -> celui, celui-là -->
