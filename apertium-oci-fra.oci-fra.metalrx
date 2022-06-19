@@ -904,6 +904,7 @@
        <match lemma="damorar" tags="vblex.*"/>
        <match lemma="bronzir" tags="vblex.*"/>
        <match lemma="predominar" tags="vblex.*"/>
+       <match lemma="consistir" tags="vblex.*"/>
        <match lemma="aterrar" tags="vblex.*"/>
        <match lemma="francimandejar" tags="vblex.*"/>
        <match lemma="franchimandejar" tags="vblex.*"/>
@@ -1137,6 +1138,7 @@
        <match lemma="tornar# damorar" tags="vblex.*"/>
        <match lemma="tornar# bronzir" tags="vblex.*"/>
        <match lemma="tornar# predominar" tags="vblex.*"/>
+       <match lemma="tornar# consistir" tags="vblex.*"/>
        <match lemma="tornar# aterrar" tags="vblex.*"/>
        <match lemma="tornar# francimandejar" tags="vblex.*"/>
        <match lemma="tornar# franchimandejar" tags="vblex.*"/>
@@ -3411,26 +3413,61 @@
 
   <!-- ac >> le, lui, leur -->
   <rule weight="0.8">
+    <match lemma="ac" tags="prn.pro.*"><select lemma="lui"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"/>
-    <match lemma="ac" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="vbhaver.*"/>
+        <match tags="vbmod.*"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="vbser.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="explicar" tags="vblex.*"/>
+      <match lemma="contar" tags="vblex.*"/>
+      <match lemma="anonciar" tags="vblex.*"/>
+      <match lemma="pensar" tags="vblex.*"/>
+      <match lemma="poder" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="desirar" tags="vblex.*"/>
+      <match lemma="semblar" tags="vblex.*"/>
+      <match lemma="paréisser" tags="vblex.*"/>
+      <match lemma="paréisher" tags="vblex.*"/>
+    </or>
   </rule>
 
   <!-- lo >> le, lui -->
   <rule weight="0.8">
     <match lemma="lo" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
+
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <match tags="vblex.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3438,14 +3475,17 @@
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <match tags="vblex.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3453,115 +3493,263 @@
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.pp.*"/>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="4">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <match tags="vbhaver.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.pp.*"/>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="4">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <or>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.inf"/>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="4">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <or>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.inf"/>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="4">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <or>
+      <match tags="vbmod.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.inf"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <or>
+      <match tags="vbmod.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.inf"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
     <match tags="pr"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
+    <or>
+      <match tags="n.*"/>
+      <match tags="prn.tn.*"/>
+    </or>
+    <repeat from="0" upto="4">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
     <match tags="pr"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
     </repeat>
-    <match tags="n.*"/>
+    <or>
+      <match tags="n.*"/>
+      <match tags="prn.tn.*"/>
+    </or>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3569,21 +3757,274 @@
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="n.*"/>
+      <match tags="prn.tn.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="n.*"/>
+      <match tags="prn.tn.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <or>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.inf"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
     <match tags="pr"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3591,7 +4032,17 @@
     <match tags="n.*"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3599,7 +4050,10 @@
     <match tags="n.*"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3607,21 +4061,30 @@
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <or>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match tags="*.inf"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
     <match tags="pr"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3629,7 +4092,17 @@
     <match tags="n.*"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3637,7 +4110,10 @@
     <match tags="n.*"/>
     <repeat from="0" upto="3">
       <or>
+        <match tags="predet.*"/>
         <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
         <match tags="preadv"/>
         <match tags="adj.*"/>
       </or>
@@ -3645,7 +4121,117 @@
     <match tags="n.*"/>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <or>
+      <match tags="vbmod.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.inf"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <or>
+      <match tags="vbmod.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="*.inf"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+    <or>
+      <match tags="prn.tn.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+  </rule>
+
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <or>
       <seq n="verbs_intrans"/>
       <match lemma="dire" tags="vblex.*"/>
@@ -3653,21 +4239,25 @@
     </or>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <or>
       <seq n="verbs_intrans"/>
       <match lemma="dire" tags="vblex.*"/>
       <match lemma="díser" tags="vblex.*"/>
     </or>
   </rule>
+
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="lui"/></match>
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <or>
       <match tags="vbhaver.*"/>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -3679,13 +4269,16 @@
     </or>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*"><select lemma="leur"/></match>
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
     <or>
       <match tags="vbhaver.*"/>
       <match tags="vbmod.*"/>
       <match lemma="far" tags="vblex.*"/>
       <match lemma="har" tags="vblex.*"/>
       <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="voler" tags="vblex.*"/>
+      <match lemma="saber" tags="vblex.*"/>
+      <match lemma="sàber" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
