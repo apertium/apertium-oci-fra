@@ -806,6 +806,7 @@
        <match lemma="trabalhar" tags="vblex.*"/>
        <match lemma="trebalhar" tags="vblex.*"/>
        <match lemma="tribalhar" tags="vblex.*"/>
+       <match lemma="beneficiar" tags="vblex.*"/>
        <match lemma="comparéisser" tags="vblex.*"/>
        <match lemma="compareisher" tags="vblex.*"/>
        <match lemma="comparéisher" tags="vblex.*"/>
@@ -1043,6 +1044,7 @@
        <match lemma="tornar# trabalhar" tags="vblex.*"/>
        <match lemma="tornar# trebalhar" tags="vblex.*"/>
        <match lemma="tornar# tribalhar" tags="vblex.*"/>
+       <match lemma="tornar# beneficiar" tags="vblex.*"/>
        <match lemma="tornar# comparéisser" tags="vblex.*"/>
        <match lemma="tornar# compareisher" tags="vblex.*"/>
        <match lemma="tornar# comparéisher" tags="vblex.*"/>
@@ -5489,7 +5491,6 @@
     </or>
   </rule>
 
-<!--
   <rule weight="1.0">
     <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="2">
@@ -5515,7 +5516,6 @@
       <match tags="adj.*"/>
     </or>
   </rule>
--->
 
   <rule weight="1.0">
     <or>
@@ -6422,7 +6422,6 @@
     </or>
   </rule>
 
-<!--
   <rule weight="1.0">
     <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="2">
@@ -6454,7 +6453,6 @@
       <match tags="adj.*"/>
     </or>
   </rule>
--->
 
   <rule weight="1.0">
     <or>
@@ -9801,24 +9799,6 @@
     <match lemma="fonduda" tags="n.*" alt="oci"><select lemma="fonte"/></match>
   </rule>
 
-  <!-- òc >> oc, occitan, oui -->
-  <rule weight="0.8">
-    <match lemma="òc" tags="n.*"><select lemma="oui"/></match>
-  </rule>
-  <rule weight="1.0">
-    <or>
-        <match lemma="de" tags="pr"/>
-        <match lemma="lo" tags="det.*"/>
-        <match lemma="eth" tags="det.*"/>
-        <match lemma="le" tags="det.*"/>
-    </or>
-    <match lemma="òc" tags="n.*"><select lemma="oc"/></match>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="en" tags="pr"/>
-    <match lemma="òc" tags="n.*"><select lemma="occitan"/></match>
-  </rule>
-
   <!-- fons >> fond, fonds -->
   <rule weight="0.8">
     <match lemma="fons" tags="n.*"><select lemma="fonds"/></match>
@@ -10746,14 +10726,31 @@
     </or>
   </rule>
 
-  <!-- òc >> oc, oui -->
+  <!-- òc >> oc, occitan, oui -->
   <rule weight="0.8">
+    <match lemma="òc" tags="n.*"><select lemma="oui"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="de" tags="pr"/>
+        <match lemma="lo" tags="det.*"/>
+        <match lemma="eth" tags="det.*"/>
+        <match lemma="le" tags="det.*"/>
+    </or>
     <match lemma="òc" tags="n.*"><select lemma="oc"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="1.2">
+    <match lemma="en" tags="pr"/>
+    <match lemma="òc" tags="n.*"><select lemma="occitan"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="òc" tags="n.*"><select lemma="oui"/></match>
+    <match lemma="per" tags="pr"/>
+  </rule>
+  <rule weight="1.2">
     <match lemma="òc" tags="n.m.pl"><select lemma="oui"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="1.2">
     <match tags="det.ind.*"/>
     <match lemma="òc" tags="n.*"><select lemma="oui"/></match>
   </rule>
