@@ -16755,6 +16755,54 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: DE FAIÇON PREADV ADJ > DE FAÇON PREADV ADJ (SAdv per evitar la generacion de l'article partitiu)">
+      <pattern>
+        <pattern-item n="depr"/>
+        <pattern-item n="faicon_n"/>
+        <pattern-item n="adv_preadv"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_n_a" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: DETDEF PR > CELUI PR (lo de > celui de)">
       <pattern>
         <pattern-item n="detdef"/>

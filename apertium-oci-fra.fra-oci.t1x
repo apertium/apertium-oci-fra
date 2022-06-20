@@ -464,6 +464,11 @@
       <cat-item lemma="mal" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="facon_n">
+      <cat-item lemma="façon" tags="n.*"/>
+      <cat-item lemma="manière" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="jour_n">
       <cat-item lemma="lundi" tags="n.*"/>
       <cat-item lemma="mardi" tags="n.*"/>
@@ -22366,6 +22371,89 @@
         </out>
         <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
        </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE FAÇON ADJ > DE FAIÇON ADJ (SAdv per evitar l'analisa coma article partitiu)">
+      <pattern>
+        <pattern-item n="deprep"/>
+        <pattern-item n="facon_n"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_n_a">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DE FAÇON PREADV ADJ > DE FAIÇON PREADV ADJ (SAdv per evitar l'analisa coma article partitiu)">
+      <pattern>
+        <pattern-item n="deprep"/>
+        <pattern-item n="facon_n"/>
+        <pattern-item n="adv_preadv"/>
+        <pattern-item n="adjec"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_n_a">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
     </rule>
 
   <!-- FIN AUTRAS RÈGLAS -->
