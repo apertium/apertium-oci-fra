@@ -3419,50 +3419,9 @@
     </or>
   </rule>
 
-  <!-- ac >> le, lui, leur -->
+  <!-- ac >> le -->
   <rule weight="0.8">
     <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
-    <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
-    <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="vbser.*"/>
-      <match lemma="dire" tags="vblex.*"/>
-      <match lemma="díser" tags="vblex.*"/>
-      <match lemma="respondre" tags="vblex.*"/>
-      <match lemma="repóner" tags="vblex.*"/>
-      <match lemma="atier" tags="vblex.*"/>
-      <match lemma="replicar" tags="vblex.*"/>
-      <match lemma="respotir" tags="vblex.*"/>
-      <match lemma="rebecar" tags="vblex.*"/>
-      <match lemma="explicar" tags="vblex.*"/>
-      <match lemma="contar" tags="vblex.*"/>
-      <match lemma="anonciar" tags="vblex.*"/>
-      <match lemma="pensar" tags="vblex.*"/>
-      <match lemma="poder" tags="vblex.*"/>
-      <match lemma="voler" tags="vblex.*"/>
-      <match lemma="desirar" tags="vblex.*"/>
-      <match lemma="semblar" tags="vblex.*"/>
-      <match lemma="paréisser" tags="vblex.*"/>
-      <match lemma="paréisher" tags="vblex.*"/>
-    </or>
   </rule>
 
   <!-- lo >> le, lui -->
@@ -3472,6 +3431,15 @@
 
   <rule weight="1.0" v="oci@gascon">
     <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <match lemma="ac" tags="prn.pro.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.pl"><select lemma="leur"/></match>
+    <match lemma="ac" tags="prn.pro.*"/>
+  </rule>
+
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <match tags="vblex.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -4352,12 +4320,12 @@
     </or>
   </rule>
 
-  <!-- ac >> le, lui, leur -->
+  <!-- ac (prn.enc) >> le, lui, leur -->
   <rule weight="0.8">
     <match lemma="ac" tags="prn.enc.*"><select lemma="le"/></match>
   </rule>
 
-  <!-- lo >> le, lui -->
+  <!-- lo (prn.enc) >> le, lui -->
   <rule weight="0.8">
     <match lemma="lo" tags="prn.enc.*"><select lemma="le"/></match>
   </rule>
@@ -5491,7 +5459,7 @@
     </or>
   </rule>
 
-  <rule weight="1.0">
+  <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
     <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -6422,7 +6390,7 @@
     </or>
   </rule>
 
-  <rule weight="1.0">
+  <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
     <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="2">
       <or>
