@@ -4770,6 +4770,25 @@
 
 <!-- **************** NP **************** -->
 
+  <!-- Vienne >> Viena, Vinhana -->
+  <rule weight="0.8">
+    <match lemma="Vienne" tags="np.*"><select lemma="Viena"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.*"/>
+    <match lemma="Vienne" tags="np.*"><select lemma="Vinhana"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match tags="det.def.*"/>
+    <match lemma="Vienne" tags="np.*"><select lemma="Viena"/></match>
+    <match tags="adj.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match tags="det.def.*"/>
+    <match tags="adj.*"/>
+    <match lemma="Vienne" tags="np.*"><select lemma="Viena"/></match>
+  </rule>
+
   <macro name="ant_antcog" p1="Abraham" p2="Abraam" />
   <macro name="ant_antcog" p1="Achille" p2="Aquilles" />
   <macro name="ant_antcog" p1="Auguste" p2="August" />

@@ -2060,6 +2060,10 @@
       <list-item v="Uruguay"/>
     </def-list>
 
+    <def-list n="top_oc">	<!-- toponymes de pays et régions avec déterminant en français et sans lui en occitan (liste occitane à cause de problèmes d'homonymie en français) -->
+      <list-item v="Vinhana"/>
+    </def-list>
+
     <def-list n="fleuves_rivieres">	<!-- toponymes de fleuves et rivières avec déterminant en français et sans lui en occitan -->
       <list-item v="Adour"/>
       <list-item v="Allier"/>
@@ -4466,6 +4470,7 @@
               <or>
                 <in><clip pos="1" side="tl" part="lem"/><list n="pays"/></in>
                 <in><clip pos="1" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+                <in><clip pos="1" side="sl" part="lem"/><list n="top_oc"/></in>
               </or>
             </test>
             <out>
@@ -4747,6 +4752,7 @@
               <or>
                 <in><clip pos="1" side="tl" part="lem"/><list n="pays"/></in>
                 <in><clip pos="1" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+                <in><clip pos="1" side="sl" part="lem"/><list n="top_oc"/></in>
               </or>
             </test>
             <out>
@@ -4809,7 +4815,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ADJ NPTOP (anciana Grècia > la ancienne Grèce)">
+    <rule comment="RÈGLA: ADJ NPTOP (anciana Grècia > l'ancienne Grèce)">
       <pattern>
         <pattern-item n="adj"/>
         <pattern-item n="nptop"/>
@@ -4831,6 +4837,7 @@
               <or>
                 <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
                 <in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+                <in><clip pos="2" side="sl" part="lem"/><list n="top_oc"/></in>
               </or>
             </test>
             <out>
@@ -5518,11 +5525,12 @@
                   <or>
                     <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
                     <in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in>
+                    <in><clip pos="2" side="sl" part="lem"/><list n="top_oc"/></in>
                   </or>
                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
                 </and>
-                <!-- + pays m.sg qui commencen en voyelle -->
+                <!-- + pays m.sg qui commencent en voyelle -->
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Annam"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Alabama"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Alaska"/></equal>
@@ -5561,12 +5569,13 @@
                 <or>
                   <not><in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in></not>
                   <not><in><clip pos="2" side="tl" part="lem"/><list n="fleuves_rivieres"/></in></not>
+                  <not><in><clip pos="2" side="sl" part="lem"/><list n="top_oc"/></in></not>
                 </or>
                 <and>
                   <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="f"/></equal>
                   <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
                 </and>
-                <!-- + pays m.sg qui commencen en voyelle -->
+                <!-- + pays m.sg qui commencent en voyelle -->
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Annam"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Alabama"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Alaska"/></equal>
