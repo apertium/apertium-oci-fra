@@ -414,6 +414,10 @@
       <cat-item tags="num.*"/>
     </def-cat>
 
+    <def-cat n="num_strict">
+      <cat-item tags="num"/>
+    </def-cat>
+
     <def-cat n="num_premier"> <!-- per datas -->
       <cat-item tags="num"/>
       <cat-item tags="num.*"/>
@@ -9010,6 +9014,59 @@
               </lu>
             </chunk>
          </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET NUM (l'8% > le 8%)">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="num_strict"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="GD"/></equal>
+            </test>
+            <let><clip pos="1" side="tl" part="gen"/><lit-tag v="m"/></let>
+          </when>
+        </choose>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="det" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lem"/>
+              <clip pos="1" side="tl" part="tags"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <out>
+          <chunk name="num">
+            <tags>
+              <tag><lit-tag v="Num"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
       </action>
     </rule>
 
