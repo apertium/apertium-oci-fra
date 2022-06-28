@@ -1554,7 +1554,35 @@
 
 <!-- **************** N **************** -->
 
-  <!-- atteinte >> atac, ataca prejudici -->
+  <!-- apanage >> apanatge, prejudici -->
+  <rule weight="0.8">
+    <match lemma="apanage" tags="n.*"><select lemma="apanatge"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="apanage" tags="n.*"><select lemma="privilègi"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="apanage" tags="n.*"><select lemma="apanatge"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="np.ant.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="apanage" tags="n.*"><select lemma="apanatge"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="aîné" tags="n.*"/>
+      <match lemma="fils" tags="n.*"/>
+      <match lemma="fille" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- atteinte >> atac/ataca, prejudici -->
   <rule weight="0.8" v="oci">
     <match lemma="atteinte" tags="n.*"><select lemma="atac"/></match>
   </rule>

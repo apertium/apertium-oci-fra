@@ -913,7 +913,8 @@
        <match lemma="francimandejar" tags="vblex.*"/>
        <match lemma="franchimandejar" tags="vblex.*"/>
        <match lemma="abdicar" tags="vblex.*"/>
-       <match lemma="basculer" tags="vblex.*"/>
+       <match lemma="bascular" tags="vblex.*"/>
+       <match lemma="degenerar" tags="vblex.*"/>
        <match lemma="rebrotar" tags="vblex.*"/>
        <match lemma="regrelhar" tags="vblex.*"/>
        <match lemma="dòler# de" tags="vblex.*"/>
@@ -1151,7 +1152,8 @@
        <match lemma="tornar# francimandejar" tags="vblex.*"/>
        <match lemma="tornar# franchimandejar" tags="vblex.*"/>
        <match lemma="tornar# abdicar" tags="vblex.*"/>
-       <match lemma="tornar# basculer" tags="vblex.*"/>
+       <match lemma="tornar# bascular" tags="vblex.*"/>
+       <match lemma="tornar# degenerar" tags="vblex.*"/>
     </or></def-seq>
 
     <def-seq n="verbs_expression"><or>
@@ -8508,6 +8510,21 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- miei >> demi, moyen -->
+  <rule weight="0.8">
+    <match lemma="miei" tags="adj.*"><select lemma="demi"/></match>
+  </rule>
+  <rule weight="1.0" alt="oci">
+    <or>
+      <match tags="n.*"/>
+      <match tags="np.top.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="miei" tags="adj.*"><select lemma="moyen"/></match>
+  </rule>
+
   <!-- ferotge >> farouche, féroce -->
   <rule weight="0.8">
     <match lemma="ferotge" tags="adj.*"><select lemma="farouche"/></match>
@@ -8879,8 +8896,10 @@
       <match lemma="tendresa" tags="n.*"/>
     </or>
     <repeat from="0" upto="2">
-      <match tags="preadv"/>
-      <match tags="adv"/>
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
     </repeat>
     <match lemma="viu" tags="adj.*"><select lemma="vif"/></match>
   </rule>
@@ -8896,8 +8915,10 @@
   <rule weight="1.0">
     <match tags="vbser"/>
     <repeat from="0" upto="2">
-      <match tags="preadv"/>
-      <match tags="adv"/>
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
     </repeat>
     <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
   </rule>
@@ -9152,6 +9173,32 @@
   </rule>
 
 <!-- **************** ADV **************** -->
+
+  <!-- aperaquí >> à côté, environ -->
+  <rule weight="0.8">
+    <match lemma="aperaquí" tags="adv"><select lemma="à côté"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aperaquí" tags="adv"><select lemma="environ"/></match>
+    <or>
+      <match tags="num"/>
+      <match tags="num.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aperaquí" tags="adv"><select lemma="environ"/></match>
+    <match tags="det.def.*"/>
+    <or>
+      <match lemma="an" tags="n.*"/>
+      <match lemma="annada" tags="n.*"/>
+      <match lemma="sègle" tags="n.*"/>
+      <match lemma="segle" tags="n.*"/>
+    </or>
+    <or>
+      <match tags="num"/>
+      <match tags="num.*"/>
+    </or>
+  </rule>
 
   <!-- pas >> pas -->
   <rule weight="0.8">
@@ -11559,14 +11606,18 @@
     <match lemma="lo.*" tags="det.*"/>
     <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
     <repeat from="0" upto="3">
+      <or>
         <match tags="adj.*"/>
         <match lemma="ne" tags="prn.*"/>
         <match tags="adv.enon"/>
+      </or>
     </repeat>
     <match tags="vbser.*"/>
     <repeat from="0" upto="2">
-        <match tags="preadv.*"/>
-        <match tags="adv.*"/>
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
     </repeat>
     <match lemma="de" tags="pr"/>
   </rule>
@@ -11920,8 +11971,10 @@
       <match tags="num.*"/>
     </or>
     <repeat from="0" upto="2">
-      <match tags="preadv"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
     </repeat>
     <match lemma="pòt" tags="n.*"><select lemma="bise"/></match>
   </rule>
