@@ -1573,6 +1573,28 @@
       <list-item v="Roussillon"/>
       <list-item v="Languedoc"/>
       <list-item v="Languedoc-Roussillon"/>
+      <list-item v="Hautes-Pyrénées"/>
+      <list-item v="Hautes-Alpes"/>
+      <list-item v="Pyrénées-Atlantiques"/>
+      <list-item v="Pyrénées-Orientales"/>
+      <list-item v="Alpes-de-Haute-Provence"/>
+      <list-item v="Alpes-Maritimes"/>
+      <list-item v="Haute-Alsace"/>
+      <list-item v="Haute-Corse"/>
+      <list-item v="Haute-Garonne"/>
+      <list-item v="Haute-Loire"/>
+      <list-item v="Haute-Marne"/>
+      <list-item v="Haute-Normandie"/>
+      <list-item v="Haute-Saône"/>
+      <list-item v="Haute-Savoie"/>
+      <list-item v="Haute-Vienne"/>
+      <list-item v="Haute-Autriche"/>
+      <list-item v="Haute-Égypte"/>
+      <list-item v="Haut-Karabagh"/>
+      <list-item v="Haut-Palatinat"/>
+      <list-item v="Haut-Rhin"/>
+      <list-item v="Hauts-de-France"/>
+      <list-item v="Hauts-de-Seine"/>
       <list-item v="Cerdagne"/>
       <list-item v="Ardèche"/>
       <list-item v="Aude"/>
@@ -1926,7 +1948,7 @@
       <list-item v="Bangladesh"/>
       <list-item v="Sri-Lanka"/>
       <list-item v="Sri Lanka"/>
-      <list-item v="Marroc"/>
+      <list-item v="Maroc"/>
       <list-item v="Numidie"/>
       <list-item v="Canaries"/>
       <list-item v="Mauritanie"/>
@@ -5541,7 +5563,6 @@
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Arkansas"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Aragon"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Arizona"/></equal>
-                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aveyron"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Azerbaïdjan"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Équateur"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Essex"/></equal>
@@ -5561,12 +5582,121 @@
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Ouzbékistan"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Uruguay"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Wisconsin"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agenais"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Albigeois"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Armagnac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agarnaguès"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Astarac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aubrac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aveyron"/></equal>
               </or>
             </test>
             <let><clip pos="1" side="tl" part="lem"/><get-case-from pos="1"><lit v="en"/></get-case-from></let> <!-- en Égypte -->
           </when>
         </choose>
         <choose>
+          <when>
+            <test>
+              <and>
+                <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
+                <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></equal>
+                <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+              </and>
+            </test>
+            <let><clip pos="1" side="tl" part="lem"/><get-case-from pos="1"><lit v="en"/></get-case-from></let> <!-- en Égypte -->
+          </when>
+        </choose>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <in><clip pos="2" side="tl" part="lem"/><list n="pays"/></in>
+                <equal><clip pos="2" side="tl" part="gen"/><lit-tag v="m"/></equal>
+                <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+                <!-- + pays m.sg qui commencent en voyelle -->
+		<not><or>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Annam"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Alabama"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Alaska"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Arkansas"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aragon"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Arizona"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Azerbaïdjan"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Équateur"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Essex"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Hampshire"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Honduras"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Hubei"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Idaho"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Illinois"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Iowa"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Iran"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Irak"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Iraq"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Oklahoma"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Ohio"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Ontario"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Oregon"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Ouzbékistan"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Uruguay"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Wisconsin"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agenais"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Albigeois"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Armagnac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agarnaguès"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Astarac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aubrac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aveyron"/></equal>
+	        </or></not>
+              </and>
+            </test>
+            <choose>
+              <when>
+                <test>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="en"/></equal>
+                </test>
+	        <let><clip pos="1" side="tl" part="lem"/><lit v="à"/></let>
+              </when>
+            </choose>
+            <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+            <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+            <out>
+              <chunk namefrom="lemma" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="PREP"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="whole"/>
+                </lu>
+              </chunk>
+              <b pos="1"/>
+            </out>
+            <call-macro n="firstWord">
+              <with-param pos="2"/>
+            </call-macro>
+            <out>
+              <chunk name="nptop" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="2" side="tl" part="gen"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def.m.sg"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
           <when>
             <test>
               <or>
@@ -5586,7 +5716,6 @@
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Arkansas"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Aragon"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Arizona"/></equal>
-                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aveyron"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Azerbaïdjan"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Équateur"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Essex"/></equal>
@@ -5606,6 +5735,13 @@
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Ouzbékistan"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Uruguay"/></equal>
                 <equal><clip pos="2" side="tl" part="lem"/><lit v="Wisconsin"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agenais"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Albigeois"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Armagnac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Agarnaguès"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Astarac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aubrac"/></equal>
+                <equal><clip pos="2" side="tl" part="lem"/><lit v="Aveyron"/></equal>
               </or>
             </test>
             <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
