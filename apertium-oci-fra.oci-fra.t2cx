@@ -2562,6 +2562,64 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: cnjsub SN: que amics > que des amis" v="oci@gascon">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: rel SN: qui amics > que des amis" v="oci@gascon">
+      <pattern>
+        <pattern-item n="rel"/>
+        <pattern-item n="SN_n_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="generate_de"/>
+        <call-macro n="generate_detdef1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
 <!-- tròp de problèmas
     <rule comment="RÈGLA: SENT_PREP_CNJ_REL SAdv PR_de SN: ambe totjorn d'amics > avec toujours des amis" v="oci">
       <pattern>
