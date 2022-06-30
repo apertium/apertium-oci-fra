@@ -18,6 +18,7 @@
     </def-cat>
     <def-cat n="NPsg">
       <cat-item tags="SN.np.*.sg.*"/>
+      <cat-item tags="SN.np.cog.*"/>
     </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
@@ -68,6 +69,10 @@
       <cat-item tags="SAdv.itg.*"/>
       <cat-item lemma="qu'est-ce que" tags="SPron.itg.*"/>
     </def-cat>
+    <def-cat n="co_que">
+      <cat-item lemma="celui que" tags="rel.*"/>
+      <cat-item lemma="celui qui" tags="rel.*"/>
+    </def-cat>
     <def-cat n="SAdv_SA">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -91,6 +96,12 @@
     </def-cat>
     <def-cat n="SV_p3">
       <cat-item tags="SV.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_p3sg">
+      <cat-item tags="SV.*.p3.sg"/>
+    </def-cat>
+    <def-cat n="SV_p3pl">
+      <cat-item tags="SV.*.p3.pl"/>
     </def-cat>
     <def-cat n="SV_inf">
       <cat-item tags="SV.*.inf"/>
@@ -121,6 +132,14 @@
     <def-cat n="SV_aux_p3">
       <cat-item tags="SV.vbser.*.p3.*"/>
       <cat-item tags="SV.vbhaver.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_aux_p3sg">
+      <cat-item tags="SV.vbser.*.p3.sg"/>
+      <cat-item tags="SV.vbhaver.*.p3.sg"/>
+    </def-cat>
+    <def-cat n="SV_aux_p3pl">
+      <cat-item tags="SV.vbser.*.p3.pl"/>
+      <cat-item tags="SV.vbhaver.*.p3.pl"/>
     </def-cat>
     <def-cat n="SV_copulatiu">
       <cat-item tags="SV.vbser"/>
@@ -338,6 +357,7 @@
       <cat-item tags="Det.*.sg"/>
       <cat-item tags="Det.*.sg.*"/>
       <cat-item tags="SN.np.*.sg.*"/>
+      <cat-item tags="SN.np.cog.*"/>
     </def-cat>
     <def-cat n="DETpl">
       <cat-item tags="Det.*.pl"/>
@@ -2697,6 +2717,316 @@
         <pattern-item n="PP"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_p3sg DETsg (aquela règla es per empachar la generacion prn.tn): çò que ditz lo grop > ce que dit le groupe">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_p3sg"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_p3pl DETpl (aquela règla es per empachar la generacion prn.tn): çò que dison los grops > ce que disent les groupes">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_p3pl"/>
+        <pattern-item n="DETpl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3sg PP DETsg_NPsg (aquela règla es per empachar la generacion prn.tn): çò qu'a dit lo grop > ce qu'a dit le groupe">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3sg"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3pl PP DETpl (aquela règla es per empachar la generacion prn.tn): çò qu'an dit los grops > ce qu'ont dit les groupes">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3pl"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DETpl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3sg SAdv PP DETsg_NPsg (aquela règla es per empachar la generacion prn.tn): çò qu'a ara dit lo grop > ce qu'a maintenant dit le groupe">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3pl SAdv PP DETpl (aquela règla es per empachar la generacion prn.tn): çò qu'an ara dit los grops > ce qu'ont maintenant dit les groupes">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DETpl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3sg PP SAdv DETsg_NPsg (aquela règla es per empachar la generacion prn.tn): çò qu'a dit ara lo grop > ce qu'a dit maintenant le groupe">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3sg"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3pl SAdv PP DETpl (aquela règla es per empachar la generacion prn.tn): çò qu'an dit ara los grops > ce qu'ont dit maintenant les groupes">
+      <pattern>
+        <pattern-item n="co_que"/>
+        <pattern-item n="SV_aux_p3pl"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DETpl"/>
       </pattern>
       <action>
         <out>
