@@ -163,6 +163,10 @@
       <cat-item tags="rel"/>
       <cat-item tags="rel.*"/>
     </def-cat>
+    <def-cat n="co_que">
+      <cat-item lemma="celui que" tags="rel.*"/>
+      <cat-item lemma="celui qui" tags="rel.*"/>
+    </def-cat>
 
     <def-cat n="unknown">
       <cat-item lemma="unkwnown" tags="unknown"/>
@@ -3888,6 +3892,39 @@
           <b pos="8"/>
           <chunk>
             <clip pos="9" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_pers pas CNJSUB ÇÒ_QUE (votarén pas que çò que > NE voteront que ce que)">
+      <pattern>
+        <pattern-item n="SV_pers"/>
+        <pattern-item n="pas"/>
+        <pattern-item n="cnjsub"/>
+        <pattern-item n="co_que"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ne"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
         <let><var n="v_det_pron_neg"/><lit v="false"/></let>
