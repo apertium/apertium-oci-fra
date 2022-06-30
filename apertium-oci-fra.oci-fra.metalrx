@@ -15646,6 +15646,60 @@
     <match lemma="revirar" tags="vblex.pp.*"><select lemma="traduire"/></match>
   </rule>
 
+  <!-- illegalizar >> rendre# illégal, rendre# illégaux, etc. -->
+  <rule weight="0.8">
+    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégal"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégale"/></match>
+    <match tags="det.*.f.sg"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégaux"/></match>
+    <match tags="det.*.pl"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégales"/></match>
+    <match tags="det.*.f.pl"/>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="illegalizar" tags="vblex.pp.f.sg"><select lemma="rendre# illégale"/></match>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="illegalizar" tags="vblex.pp.m.pl"><select lemma="rendre# illégaux"/></match>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="illegalizar" tags="vblex.pp.f.pl"><select lemma="rendre# illégales"/></match>
+  </rule>
+
+  <!-- agilizar >> rendre# agile, rendre# agiles -->
+  <rule weight="0.8">
+    <match lemma="agilizar" tags="vblex.*"><select lemma="rendre# agile"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="agilizar" tags="vblex.*"><select lemma="rendre# agiles"/></match>
+    <match tags="det.*.pl"/>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="agilizar" tags="vblex.pp.*.pl"><select lemma="rendre# agiles"/></match>
+  </rule>
+
   <!-- tirar >> tirer, tirer# sur -->
   <rule weight="0.8">
     <match lemma="tirar" tags="vblex.*"><select lemma="tirer"/></match>
