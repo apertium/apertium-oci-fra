@@ -1102,6 +1102,8 @@
     <def-list n="en_majuscules">
       <list-item v="Afro-Américain"/>
       <list-item v="Anglo-Saxon"/>
+      <list-item v="ap. J.-C."/>
+      <list-item v="av. J.-C."/>
       <list-item v="Cap-Verdien"/>
       <list-item v="cité-État"/>
       <list-item v="Contre-Réforme"/>
@@ -2288,27 +2290,18 @@
                  not used again in this rule -->
         <when>
           <test>
-            <equal>
-              <clip pos="1" side="tl" part="gen"/>
-              <lit-tag v="m"/>
-            </equal>
+            <or>
+              <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="nt"/></equal>
+            </or>
           </test>
-          <let>
-            <var n="genero"/>
-            <lit-tag v="m"/>
-          </let>
+          <let><var n="genero"/><lit-tag v="m"/></let>
         </when>
         <when>
           <test>
-            <equal>
-              <clip pos="1" side="tl" part="gen"/>
-              <lit-tag v="f"/>
-            </equal>
+            <equal><clip pos="1" side="tl" part="gen"/><lit-tag v="f"/></equal>
           </test>
-          <let>
-            <var n="genero"/>
-            <lit-tag v="f"/>
-          </let>
+          <let><var n="genero"/><lit-tag v="f"/></let>
         </when>
       </choose>
       <choose>
@@ -16653,9 +16646,25 @@
                </when>
                <when>
                  <test>
-                   <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="rien"/></equal>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="rien"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="personne"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ceci"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="cela"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ça"/></equal>
+                   </or>
                  </test>
                  <let><var n="genero"/><lit-tag v="m"/></let>
+               </when>
+               <when>
+                 <test>
+                   <or>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="celui"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="celui-ci"/></equal>
+                     <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="celui-là"/></equal>
+                   </or>
+                 </test>
+                 <call-macro n="f_concord0"><with-param pos="1"/></call-macro>
                </when>
              </choose>
              <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
@@ -17475,6 +17484,8 @@
             </lu>
           </chunk>
         </out>
+        <let><var n="genero"/><lit-tag v="m"/></let>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
       </action>
     </rule>
   </section-rules>
