@@ -513,8 +513,7 @@
       <cat-item lemma="ièrla" tags="n.*"/>
     </def-cat>
 
-    <def-cat n="dignitari_n">
-      <cat-item lemma="temps" tags="n.*"/>
+    <def-cat n="dignitari_n_et_al">
       <cat-item lemma="papa" tags="n.*"/>
       <cat-item lemma="avesque" tags="n.*"/>
       <cat-item lemma="arquevesque" tags="n.*"/>
@@ -532,12 +531,14 @@
       <cat-item lemma="duc" tags="n.*"/>
       <cat-item lemma="duquessa" tags="n.*"/>
       <cat-item lemma="archiduc" tags="n.*"/>
-      <cat-item lemma="archiduchesse" tags="n.*"/>
+      <cat-item lemma="archiduquessa" tags="n.*"/>
       <cat-item lemma="marqués" tags="n.*"/>
       <cat-item lemma="baron" tags="n.*"/>
       <cat-item lemma="senhor" tags="n.*"/>
+
       <cat-item lemma="empèri" tags="n.*"/>
       <cat-item lemma="reialme" tags="n.*"/>
+      <cat-item lemma="reiaume" tags="n.*"/>
       <cat-item lemma="principautat" tags="n.*"/>
       <cat-item lemma="ducat" tags="n.*"/>
       <cat-item lemma="marquesat" tags="n.*"/>
@@ -549,6 +550,15 @@
       <cat-item lemma="abadiá" tags="n.*"/>
       <cat-item lemma="abadia" tags="n.*"/>
 
+      <cat-item lemma="istòria" tags="n.*"/>
+      <cat-item lemma="istuèra" tags="n.*"/>
+      <cat-item lemma="cort" tags="n.*"/>
+      <cat-item lemma="ambaissada" tags="n.*"/>
+      <cat-item lemma="ambaishada" tags="n.*"/>
+      <cat-item lemma="consolat" tags="n.*"/>
+      <cat-item lemma="ambaissador" tags="n.*"/>
+      <cat-item lemma="ambaishador" tags="n.*"/>
+      <cat-item lemma="cònsol" tags="n.*"/>
     </def-cat>
 
     <def-cat n="radio_tv">
@@ -5365,9 +5375,9 @@
       </action>
     </rule>
 
-    <rule comment="REGLA: dignitari de NP (evita la generació de l'article si país)">
+    <rule comment="REGLA: dignitari de NP (evita la generació de l'article si país... mai 'ambassade de France', 'ambassade du Gabon')">
       <pattern>
-        <pattern-item n="dignitari_n"/>
+        <pattern-item n="dignitari_n_et_al"/>
         <pattern-item n="depr"/>
         <pattern-item n="nptop"/>
       </pattern>
@@ -5410,36 +5420,122 @@
           </chunk>
           <b pos="2"/>
         </out>
-       <call-macro n="f_concord1">
-         <with-param pos="3"/>
-       </call-macro>
-       <call-macro n="f_chunk_tags">
-         <with-param pos="3"/>
-       </call-macro>
-        <out>
-          <chunk name="nptop">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><lit-tag v="np"/></tag>
-              <tag><clip pos="3" side="tl" part="gen"/></tag>
-              <tag><clip pos="3" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="3" side="tl" part="lemh"/>
-              <clip pos="3" side="tl" part="tags"/>
-              <clip pos="3" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
+        <call-macro n="f_concord1">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <or>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="histoire"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ambassade"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ambassadeur"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="consulat"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="consul"/></equal>
+                </or>
+                <or>
+                  <in><clip pos="3" side="tl" part="lem"/><list n="pays"/></in>
+                  <in><clip pos="3" side="sl" part="lem"/><list n="top_oc"/></in>
+                </or>
+                <equal><clip pos="3" side="tl" part="gen"/><lit-tag v="m"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="det-nptop">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def"/>
+                  <clip pos="3" side="tl" part="gen"/>
+                  <clip pos="3" side="tl" part="nbr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <when>
+            <test>
+              <and>
+                <or>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="histoire"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ambassade"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="ambassadeur"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="consulat"/></equal>
+                  <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="consul"/></equal>
+                </or>
+                <or>
+                  <in><clip pos="3" side="tl" part="lem"/><list n="pays"/></in>
+                  <in><clip pos="3" side="sl" part="lem"/><list n="top_oc"/></in>
+                </or>
+                <equal><clip pos="3" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="det-nptop">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="3" side="tl" part="gen"/></tag>
+                  <tag><clip pos="3" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def.mf.pl"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="nptop" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="3" side="tl" part="lemh"/>
+                  <clip pos="3" side="tl" part="tags"/>
+                  <clip pos="3" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
-    <rule comment="REGLA: DET dignitari de NP (evita la generació de l'article si país)">
+    <rule comment="REGLA: DET dignitari de NP (evita la generació de l'article si país... mai 'l'ambassade de France', 'l'ambassade du Gabon')">
       <pattern>
         <pattern-item n="det"/>
-        <pattern-item n="dignitari_n"/>
+        <pattern-item n="dignitari_n_et_al"/>
         <pattern-item n="depr"/>
         <pattern-item n="nptop"/>
       </pattern>
@@ -5503,29 +5599,115 @@
           </chunk>
           <b pos="3"/>
         </out>
-       <call-macro n="f_concord1">
-         <with-param pos="4"/>
-       </call-macro>
-       <call-macro n="f_chunk_tags">
-         <with-param pos="4"/>
-       </call-macro>
-        <out>
-          <chunk name="nptop">
-            <tags>
-              <tag><lit-tag v="SN"/></tag>
-              <tag><lit-tag v="np"/></tag>
-              <tag><clip pos="4" side="tl" part="gen"/></tag>
-              <tag><clip pos="4" side="tl" part="nbr"/></tag>
-              <tag><var n="genero_sl"/></tag>
-              <tag><var n="numero_sl"/></tag>
-            </tags>
-            <lu>
-              <clip pos="4" side="tl" part="lemh"/>
-              <clip pos="4" side="tl" part="tags"/>
-              <clip pos="4" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
+        <call-macro n="f_concord1">
+          <with-param pos="4"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="4"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <or>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="histoire"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ambassade"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ambassadeur"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="consulat"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="consul"/></equal>
+                </or>
+                <or>
+                  <in><clip pos="4" side="tl" part="lem"/><list n="pays"/></in>
+                  <in><clip pos="4" side="sl" part="lem"/><list n="top_oc"/></in>
+                </or>
+                <equal><clip pos="4" side="tl" part="gen"/><lit-tag v="m"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="det-nptop">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="4" side="tl" part="gen"/></tag>
+                  <tag><clip pos="4" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def"/>
+                  <clip pos="4" side="tl" part="gen"/>
+                  <clip pos="4" side="tl" part="nbr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="4" side="tl" part="lemh"/>
+                  <clip pos="4" side="tl" part="tags"/>
+                  <clip pos="4" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <when>
+            <test>
+              <and>
+                <or>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="histoire"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ambassade"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="ambassadeur"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="consulat"/></equal>
+                  <equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="consul"/></equal>
+                </or>
+                <or>
+                  <in><clip pos="4" side="tl" part="lem"/><list n="pays"/></in>
+                  <in><clip pos="4" side="sl" part="lem"/><list n="top_oc"/></in>
+                </or>
+                <equal><clip pos="4" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="det-nptop">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="4" side="tl" part="gen"/></tag>
+                  <tag><clip pos="4" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def.mf.pl"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="4" side="tl" part="lemh"/>
+                  <clip pos="4" side="tl" part="tags"/>
+                  <clip pos="4" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="nptop" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><lit-tag v="np"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                  <tag><var n="genero_sl"/></tag>
+                  <tag><var n="numero_sl"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="4" side="tl" part="lemh"/>
+                  <clip pos="4" side="tl" part="tags"/>
+                  <clip pos="4" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
     </rule>
 
