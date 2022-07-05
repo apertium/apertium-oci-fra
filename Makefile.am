@@ -203,31 +203,32 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ## Lexical selection rules
 ###############################################################################
 
-.deps/$(PREFIX1).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx .deps/.d
-	apertium-filter-rules oci $(BASENAME).$(PREFIX1).metalrx >$@
+.deps/$(PREFIX1).lrx: $(BASENAME).$(PREFIX1).lrx .deps/.d
+	apertium-filter-rules oci $< >$@
 
-.deps/$(PREFIX1b).ini.metalrx: $(BASENAME).$(PREFIX1).metalrx .deps/.d
-	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).metalrx >$@
+.deps/$(PREFIX1b).lrx: $(BASENAME).$(PREFIX1).lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
 
-.deps/$(PREFIX2).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx .deps/.d
-	apertium-filter-rules oci $(BASENAME).$(PREFIX2).metalrx >$@
+.deps/$(PREFIX2).lrx: $(BASENAME).$(PREFIX2).lrx .deps/.d
+	apertium-filter-rules oci $< >$@
 
-.deps/$(PREFIX2b).ini.metalrx: $(BASENAME).$(PREFIX2).metalrx .deps/.d
-	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX2).metalrx >$@
-
-.deps/%.lrx: .deps/%.ini.metalrx .deps/.d
-	apertium-metalrx $< $@
+.deps/$(PREFIX2b).lrx: $(BASENAME).$(PREFIX2).lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
 
 $(PREFIX1).autolex.bin: .deps/$(PREFIX1).lrx
+	apertium-validate-lrx $<
 	lrx-comp $< $@
 
 $(PREFIX1b).autolex.bin: .deps/$(PREFIX1b).lrx
+	apertium-validate-lrx $<
 	lrx-comp $< $@
 
 $(PREFIX2).autolex.bin: .deps/$(PREFIX2).lrx
+	apertium-validate-lrx $<
 	lrx-comp $< $@
 
 $(PREFIX2b).autolex.bin: .deps/$(PREFIX2b).lrx
+	apertium-validate-lrx $<
 	lrx-comp $< $@
 
 ###############################################################################
@@ -403,10 +404,10 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).l2x	\
 		$(BASENAME).$(PREFIX2).l1x	\
 		$(BASENAME).$(PREFIX2).l2x	\
-		.deps/$(BASENAME).$(PREFIX1).lrx	\
-		.deps/$(BASENAME).$(PREFIX1b).lrx	\
-		.deps/$(BASENAME).$(PREFIX2).lrx	\
-		.deps/$(BASENAME).$(PREFIX2b).lrx	\
+		$(BASENAME).$(PREFIX1).lrx	\
+		$(BASENAME).$(PREFIX1b).lrx	\
+		$(BASENAME).$(PREFIX2).lrx	\
+		$(BASENAME).$(PREFIX2b).lrx	\
 		$(BASENAME).$(PREFIX1).t1x	\
 		$(BASENAME).$(PREFIX1).t2x_temps	\
 		$(BASENAME).$(PREFIX1).t2ax	\
