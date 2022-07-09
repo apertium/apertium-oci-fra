@@ -1430,6 +1430,24 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- brûlant >> cremador/brutlant, ardent/escosent -->
+  <rule weight="0.8">
+    <match lemma="brûlant" tags="adj.*" v="oci"><select lemma="cremador"/></match>
+    <match lemma="brûlant" tags="adj.*" v="oci@gascon"><select lemma="brutlant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="débat" tags="n.*"/>
+      <match lemma="dossier" tags="n.*"/>
+      <match lemma="problème" tags="n.*"/>
+      <match lemma="question" tags="n.*"/>
+      <match lemma="sujet" tags="n.*"/>
+      <match lemma="thème" tags="n.*"/>
+    </or>
+    <match lemma="brûlant" tags="adj.*" v="oci"><select lemma="ardent"/></match>
+    <match lemma="brûlant" tags="adj.*" v="oci@gascon"><select lemma="escosent"/></match>
+  </rule>
+
   <!-- majeur >> màger, major -->
   <rule weight="0.8">
     <match lemma="majeur" tags="adj.*"><select lemma="màger"/></match>
@@ -4864,7 +4882,6 @@
 
   <macro n="ant_antcog"><with-param v="Abraham"/><with-param v="Abraam"/></macro>
   <macro n="ant_antcog"><with-param v="Achille"/><with-param v="Aquilles"/></macro>
-  <macro n="ant_antcog"><with-param v="Adrien"/><with-param v="Adrian"/></macro>
   <macro n="ant_antcog"><with-param v="Auguste"/><with-param v="August"/></macro>
   <macro n="ant_antcog"><with-param v="Augustin"/><with-param v="Agustin"/></macro>
   <macro n="ant_antcog"><with-param v="Aurélien"/><with-param v="Aurelian"/></macro>
@@ -4875,7 +4892,9 @@
   <macro n="ant_antcog"><with-param v="Hercule"/><with-param v="Ercules"/></macro>
   <macro n="ant_antcog" v="oci"><with-param v="Juvénal"/><with-param v="Juvenal"/></macro>
   <macro n="ant_antcog" v="oci@gascon"><with-param v="Juvénal"/><with-param v="Juvenau"/></macro>
+  <macro n="ant_antcog"><with-param v="Marc-Aurèle"/><with-param v="Marc Aurèli"/></macro>
   <macro n="ant_antcog"><with-param v="Thierry"/><with-param v="Teiric"/></macro>
+  <macro n="ant_antcog"><with-param v="Valérien"/><with-param v="Valerian"/></macro>
   <macro n="ant_antcog"><with-param v="Virgile"/><with-param v="Virgili"/></macro>
 
   <macro n="ant_antcog"><with-param v="Cassandre"/><with-param v="Cassandra"/></macro>
