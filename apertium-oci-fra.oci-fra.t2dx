@@ -78,6 +78,9 @@
       <cat-item lemma="savoir" tags="SV.vblex.*"/>
       <cat-item lemma="venir" tags="SV.vblex.*"/>
     </def-cat>
+    <def-cat n="SV_venir">
+      <cat-item lemma="venir" tags="SV.*"/>
+    </def-cat>
     <def-cat n="pp_vbmod">
       <cat-item lemma="devoir" tags="SA.pp.*"/>
       <cat-item lemma="falloir" tags="SA.pp.*"/>
@@ -939,6 +942,46 @@
             <clip pos="7" part="lem"/>
             <clip pos="7" part="tags"/>
             <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_pro SV_venir PREP_de SV_inf > SV_vbmod PREP_de SPron_pro SV_inf: se ven de manjar > vient de se manger">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_venir"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
       </action>
