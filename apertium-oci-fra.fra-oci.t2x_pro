@@ -70,6 +70,10 @@
       <cat-item lemma="venir" tags="SA.pp.*"/>
       <cat-item lemma="viéner" tags="SA.pp.*"/>
     </def-cat>
+    <def-cat n="SV_venir">
+      <cat-item lemma="venir" tags="SV.*"/>
+      <cat-item lemma="viéner" tags="SV.*"/>
+    </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
       <cat-item tags="SV.vbhaver.partitiu.*"/>
@@ -784,6 +788,46 @@
             <clip pos="7" part="lem"/>
             <clip pos="7" part="tags"/>
             <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_venir PREP_de SPronPro SV_inf > SPronPro SV_vbmod PREP_de SV_inf: vient de se manger > se ven de manjar">
+      <pattern>
+        <pattern-item n="SV_venir"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SPronPro"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="3" part="lem"/>
+            </get-case-from>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
       </action>
