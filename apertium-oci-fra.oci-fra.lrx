@@ -16578,6 +16578,34 @@
 
   <!-- sonar >> sonner, appeler -->
   <macro n="verb_nopron_pron"><with-param v="sonar"/><with-param v="sonner"/><with-param v="appeler"/></macro>
+  <rule weight="1.4">
+    <match lemma="lo" tags="prn.pro.*"/>
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="n.*"/>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="lo" tags="prn.pro.*"/>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="sonar" tags="vblex.pp.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="n.*"/>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
 
   <!-- aterrar >> atterrer, atterrir -->
   <rule weight="0.8">
