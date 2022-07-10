@@ -1714,9 +1714,65 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SAdv_pas_neg (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="SAdv_pas_neg"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="true"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SENT (gestion variable v_det_pron_neg)">
       <pattern>
         <pattern-item n="SENT"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjsub (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: cnjadv (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="cnjadv"/>
+      </pattern>
+      <action>
+        <let><var n="v_det_pron_neg"/><lit v="false"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: rel (gestion variable v_det_pron_neg)">
+      <pattern>
+        <pattern-item n="rel"/>
       </pattern>
       <action>
         <let><var n="v_det_pron_neg"/><lit v="false"/></let>
