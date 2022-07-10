@@ -64,6 +64,32 @@
       <cat-item lemma="cela" tags="SPron.tn"/>
       <cat-item lemma="cela" tags="SPron.tn.*"/>
     </def-cat>
+    <def-cat n="SPron_moi">
+      <cat-item lemma="moi" tags="SPron.tn"/>
+      <cat-item lemma="moi" tags="SPron.tn.*"/>
+    </def-cat>
+    <def-cat n="SPron_toi">
+      <cat-item lemma="toi" tags="SPron.tn"/>
+      <cat-item lemma="toi" tags="SPron.tn.*"/>
+    </def-cat>
+    <def-cat n="SPron_lui_elle">
+      <cat-item lemma="lui" tags="SPron.tn"/>
+      <cat-item lemma="lui" tags="SPron.tn.*"/>
+      <cat-item lemma="il" tags="SPron.tn.f.sg"/>
+    </def-cat>
+    <def-cat n="SPron_nous">
+      <cat-item lemma="nous" tags="SPron.tn"/>
+      <cat-item lemma="nous" tags="SPron.tn.*"/>
+    </def-cat>
+    <def-cat n="SPron_vous">
+      <cat-item lemma="vous" tags="SPron.tn"/>
+      <cat-item lemma="vous" tags="SPron.tn.*"/>
+    </def-cat>
+    <def-cat n="SPron_eux_elles">
+      <cat-item lemma="eux" tags="SPron.tn"/>
+      <cat-item lemma="eux" tags="SPron.tn.*"/>
+      <cat-item lemma="il" tags="SPron.tn.f.pl"/>
+    </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
@@ -117,9 +143,25 @@
     <def-cat n="SV_vbser_p3">
       <cat-item tags="SV.vbser.*.p3.*"/>
     </def-cat>
+    <def-cat n="SV_vbser_p1sg">
+      <cat-item tags="SV.vbser.*.p1.sg"/>
+      <cat-item tags="SV.vbser.*.p1.sg.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser_p2sg">
+      <cat-item tags="SV.vbser.*.p2.sg"/>
+      <cat-item tags="SV.vbser.*.p2.sg.*"/>
+    </def-cat>
     <def-cat n="SV_vbser_p3sg">
       <cat-item tags="SV.vbser.*.p3.sg"/>
       <cat-item tags="SV.vbser.*.p3.sg.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser_p1pl">
+      <cat-item tags="SV.vbser.*.p1.pl"/>
+      <cat-item tags="SV.vbser.*.p1.pl.*"/>
+    </def-cat>
+    <def-cat n="SV_vbser_p2pl">
+      <cat-item tags="SV.vbser.*.p2.pl"/>
+      <cat-item tags="SV.vbser.*.p2.pl.*"/>
     </def-cat>
     <def-cat n="SV_vbser_p3pl">
       <cat-item tags="SV.vbser.*.p3.pl"/>
@@ -3314,10 +3356,10 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel">
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv cnjsub_adv_que_rel">
       <pattern>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv"/>
         <pattern-item n="cnjsub_adv_que_rel"/>
       </pattern>
       <action>
@@ -3339,11 +3381,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel">
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel">
       <pattern>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SPron_pro"/>
-        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
         <pattern-item n="cnjsub_adv_que_rel"/>
       </pattern>
       <action>
@@ -3363,6 +3405,1284 @@
           <b pos="3"/>
           <chunk>
             <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SPron_moi cnjsub_adv_que_rel > ce SV_vbser_p3sg SPron_moi cnjsub_adv_que_rel (soi ieu que > c'est moi que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SPron_toi cnjsub_adv_que_rel > ce SV_vbser_p3sg SPron_toi cnjsub_adv_que_rel (ès tu que > c'est toi que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SPron_lui_elle cnjsub_adv_que_rel > ce SV_vbser_p3sg SPron_lui_elle cnjsub_adv_que_rel (es el que > c'est lui que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SPron_lui_elle"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SPron_nous cnjsub_adv_que_rel > ce SV_vbser_p3sg SPron_nous cnjsub_adv_que_rel (sèm nosautres que > c'est nous que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SPron_vous cnjsub_adv_que_rel > ce SV_vbser_p3pl SPron_vous cnjsub_adv_que_rel (sètz vosautres que > c'est vous que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3pl SPron_eux_elles cnjsub_adv_que_rel > ce SV_vbser_p3pl SPron_eux_elles cnjsub_adv_que_rel (son els que > ce sont eux que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SPron_eux_elles"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SPron_moi qui_rel SV > ce SV_vbser_p3sg SPron_moi qui_rel SV: soi ieu qui > c'est moi qui (evita la generacion'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SPron_toi qui_rel SV > ce SV_vbser_p3sg SPron_toi qui_rel SV: ès tu qui > c'est toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SPron_nous qui_rel SV > ce SV_vbser_p3sg SPron_nous qui_rel SV: sèm nosautres qui > c'est nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SPron_vous qui_rel SV > ce SV_vbser_p3pl SPron_vous qui_rel SV: sètz vosautres qui > c'est vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SPron_moi qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_moi qui_rel SAdv_SPron_pro SV: soi ieu qui > c'est moi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SPron_toi qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_toi qui_rel SAdv_SPron_pro SV: ès tu qui > c'est toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SPron_nous qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_nous qui_rel SAdv_SPron_pro SV: sèm nosautres qui > c'est nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SPron_vous qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3pl SPron_vous qui_rel SAdv_SPron_pro SV: sètz vosautres qui > c'est vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SPron_moi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_moi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: soi ieu qui > c'est moi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SPron_toi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_toi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: ès tu qui > c'est toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SPron_nous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SPron_nous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: sèm nosautres qui > c'est nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SPron_vous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3pl SPron_vous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: sètz vosautres qui > c'est vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SAdv SPron_moi cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv SPron_moi cnjsub_adv_que_rel (soi pas ieu que > c'est pas moi que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SAdv SPron_toi cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv SPron_toi cnjsub_adv_que_rel (ès pas tu que > c'est pas toi que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3sg SAdv SPron_lui_elle cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv SPron_lui_elle cnjsub_adv_que_rel (es pas el que > c'est pas lui que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_lui_elle"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SAdv SPron_nous cnjsub_adv_que_rel > ce SV_vbser_p3sg SAdv SPron_nous cnjsub_adv_que_rel (sèm pas nosautres que > c'est pas nous que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SAdv SPron_vous cnjsub_adv_que_rel > ce SV_vbser_p3pl SAdv SPron_vous cnjsub_adv_que_rel (sètz pas vosautres que > c'est pas vous que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3pl SAdv SPron_eux_elles cnjsub_adv_que_rel > ce SV_vbser_p3pl SAdv SPron_eux_elles cnjsub_adv_que_rel (son pas els que > ce sont pas eux que)">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_eux_elles"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SAdv SPron_moi qui_rel SV > ce SV_vbser_p3sg SAdv SPron_moi qui_rel SV: soi pas ieu qui > c'est pas moi qui (evita la generacion'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SAdv SPron_toi qui_rel SV > ce SV_vbser_p3sg SAdv SPron_toi qui_rel SV: ès pas tu qui > c'est pas toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SAdv SPron_nous qui_rel SV > ce SV_vbser_p3sg SAdv SPron_nous qui_rel SV: sèm pas nosautres qui > c'est pas nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SAdv SPron_vous qui_rel SV > ce SV_vbser_p3pl SAdv SPron_vous qui_rel SV: sètz pas vosautres qui > c'est pas vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SAdv SPron_moi qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_moi qui_rel SAdv_SPron_pro SV: soi pas ieu qui > c'est pas moi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SAdv SPron_toi qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_toi qui_rel SAdv_SPron_pro SV: ès pas tu qui > c'est pas toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SAdv SPron_nous qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_nous qui_rel SAdv_SPron_pro SV: sèm pas nosautres qui > c'est pas nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SAdv SPron_vous qui_rel SAdv_SPron_pro SV > ce SV_vbser_p3pl SAdv SPron_vous qui_rel SAdv_SPron_pro SV: sètz pas vosautres qui > c'est pas vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1sg SAdv SPron_moi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_moi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: soi pas ieu qui > c'est pas moi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_moi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2sg SAdv SPron_toi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_toi qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: ès pas tu qui > c'est pas toi qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_toi"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p1pl SAdv SPron_nous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3sg SAdv SPron_nous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: sèm pas nosautres qui > c'est pas nous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p1pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p2pl SAdv SPron_vous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV > ce SV_vbser_p3pl SAdv SPron_vous qui_rel SAdv_SPron_pro SAdv_SPron_pro SV: sètz pas vosautres qui > c'est pas vous qui (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbser_p2pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <let><clip pos="1" part="pers"/><lit-tag v="p3"/></let>
+        <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -3396,11 +4716,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv_SPron_pro cnjsub_adv_que_rel">
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv cnjsub_adv_que_rel">
       <pattern>
         <pattern-item n="cm_cnjcoo"/>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv"/>
         <pattern-item n="cnjsub_adv_que_rel"/>
       </pattern>
       <action>
@@ -3428,12 +4748,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv_SPron_pro SAdv_SPron_pro cnjsub_adv_que_rel">
+    <rule comment="RÈGLA: CM SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel > CM ce SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel">
       <pattern>
         <pattern-item n="cm_cnjcoo"/>
         <pattern-item n="SV_vbser_p3sg"/>
-        <pattern-item n="SAdv_SPron_pro"/>
-        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
         <pattern-item n="cnjsub_adv_que_rel"/>
       </pattern>
       <action>
