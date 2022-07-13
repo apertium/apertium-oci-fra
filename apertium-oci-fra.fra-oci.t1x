@@ -15709,6 +15709,21 @@
            <with-param pos="2"/>
          </call-macro>
          <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
+         <out>
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lem"/>
+               <clip pos="2" side="tl" part="tags"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <let><var n="caseFirstWord"/><case-of pos="3" side="sl" part="lemh"/></let>
          <choose>
 	   <when>
 	     <test>
@@ -15718,7 +15733,7 @@
 	       </or>
 	     </test>
              <out>
-               <chunk name="pro-vbser" case="caseFirstWord">
+               <chunk name="vbser" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -15727,12 +15742,6 @@
                    <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
                  <lu>
                    <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="a_verb"/>
@@ -15746,7 +15755,7 @@
 	   </when>
 	   <otherwise>
              <out>
-               <chunk name="pro-vbser" case="caseFirstWord">
+               <chunk name="vbser" case="caseFirstWord">
                  <tags>
                    <tag><lit-tag v="SV"/></tag>
                    <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -15757,12 +15766,6 @@
                    <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
                  <lu>
                    <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="a_verb"/>
@@ -15844,6 +15847,23 @@
                  <equal><clip pos="3" side="tl" part="nbr"/><lit v=""/></equal>
 	       </or>
 	     </test>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
+             <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
+             <out>
+               <chunk namefrom="chunkname" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lem"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                 </lu>
+               </chunk>
+               <b pos="2"/>
+             </out>
+             <let><var n="caseFirstWord"/><case-of pos="3" side="sl" part="lemh"/></let>
+             <let><var n="chunkname"/><clip pos="3" side="tl" part="lem"/></let>
              <out>
                <chunk namefrom="chunkname" case="caseFirstWord">
                  <tags>
@@ -15854,12 +15874,6 @@
                    <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
                  <lu>
                    <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="a_verb"/>
@@ -15872,6 +15886,23 @@
              </out>
 	   </when>
            <otherwise>
+             <let><var n="caseFirstWord"/><case-of pos="2" side="sl" part="lemh"/></let>
+             <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
+             <out>
+               <chunk namefrom="chunkname" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><var n="tipusprn"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lem"/>
+                   <clip pos="2" side="tl" part="tags"/>
+                 </lu>
+               </chunk>
+               <b pos="2"/>
+             </out>
+             <let><var n="caseFirstWord"/><case-of pos="3" side="sl" part="lemh"/></let>
+             <let><var n="chunkname"/><clip pos="3" side="tl" part="lem"/></let>
              <out>
                <chunk namefrom="chunkname" case="caseFirstWord">
                  <tags>
@@ -15884,12 +15915,6 @@
                    <tag><lit-tag v="sans_pas"/></tag>
                    <tag><var n="tipusverb"/></tag>
                  </tags>
-                 <lu>
-                   <clip pos="2" side="tl" part="lemh"/>
-                   <clip pos="2" side="tl" part="tags"/>
-                   <clip pos="2" side="tl" part="lemq"/>
-                 </lu>
-                 <b pos="2"/>
                  <lu>
                    <clip pos="3" side="tl" part="lemh"/>
                    <clip pos="3" side="tl" part="a_verb"/>
@@ -17132,8 +17157,23 @@
            <with-param pos="2"/>
          </call-macro>
          <let><var n="caseFirstWord"/><case-of pos="1" side="sl" part="lemh"/></let>
+         <let><var n="chunkname"/><clip pos="2" side="tl" part="lem"/></let>
          <out>
-           <chunk name="pro-vbser" case="caseFirstWord">
+           <chunk namefrom="chunkname" case="caseFirstWord">
+             <tags>
+               <tag><lit-tag v="SPron"/></tag>
+               <tag><var n="tipusprn"/></tag>
+             </tags>
+             <lu>
+               <clip pos="2" side="tl" part="lem"/>
+               <clip pos="2" side="tl" part="tags"/>
+             </lu>
+           </chunk>
+           <b pos="2"/>
+         </out>
+         <let><var n="caseFirstWord"/><case-of pos="3" side="sl" part="lemh"/></let>
+         <out>
+           <chunk name="vbser" case="caseFirstWord">
              <tags>
                <tag><lit-tag v="SV"/></tag>
                <tag><clip pos="3" side="tl" part="a_verb"/></tag>
@@ -17142,12 +17182,6 @@
                <tag><lit-tag v="sans_pas"/></tag>
                <tag><var n="tipusverb"/></tag>
              </tags>
-             <lu>
-               <clip pos="2" side="tl" part="lemh"/>
-               <clip pos="2" side="tl" part="tags"/>
-               <clip pos="2" side="tl" part="lemq"/>
-             </lu>
-             <b pos="2"/>
              <lu>
                <clip pos="3" side="tl" part="lemh"/>
                <clip pos="3" side="tl" part="a_verb"/>
