@@ -70,6 +70,10 @@
       <cat-item tags="SV.vblex.*.partitiu"/>
       <cat-item tags="SV.vbhaver.*.partitiu"/>
     </def-cat>
+    <def-cat n="SV_connaitre_inf">
+      <cat-item lemma="conéisser" tags="SV.vblex.inf.partitiu"/>
+      <cat-item lemma="conéisher" tags="SV.vblex.inf.partitiu"/>
+    </def-cat>
     <def-cat n="SV_partitiu_neg">
       <cat-item tags="SV.vblex.*.negation.partitiu"/>
       <cat-item tags="SV.vblex.*.negation.*.partitiu"/>
@@ -85,6 +89,20 @@
       <cat-item lemma="paréisher" tags="SV.*"/>
       <cat-item lemma="semblar" tags="SV.*"/>
       <cat-item lemma="venir" tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_faire">
+      <cat-item lemma="far" tags="SV.*"/>
+      <cat-item lemma="har" tags="SV.*"/>
+    </def-cat>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_faire_pp"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+    <def-cat n="SV_faire_pp">
+      <cat-item lemma="far" tags="SA.pp.*"/>
+      <cat-item lemma="har" tags="SA.pp.*"/>
     </def-cat>
     <def-cat n="SPron">
       <cat-item tags="SPron"/>
@@ -3850,6 +3868,219 @@
             <clip pos="5" part="lem"/>
             <clip pos="5" part="tags"/>
             <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPronPro SV_faire SV_connaitre_inf PR_de: se fait connaître du public > se fa conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_faire"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPronPro SV_vbser SV_faire_pp SV_connaitre_inf PR_de: s'est fait connaître du public > s'es fach conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SV_faire_pp"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPronPro SV_vbser SV_faire_pp SV_connaitre_inf PR_de: Jean s'est fait connaître du public > Jean s'es fach conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SV_faire_pp"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPronPro SV_faire SAdv SV_connaitre_inf PR_de: ne se fait pas connaître du public > se fa pas conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_faire"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPronPro SV_vbser SAdv SV_faire_pp SV_connaitre_inf PR_de: ne s'est pas fait connaître du public > s'es pas fach conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_faire_pp"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN SPronPro SV_vbser SAdv SV_faire_pp SV_connaitre_inf PR_de: Jean ne s'est pas fait connaître du public > Jean s'es pas fach conéisser del public (per empachar lo cambiament de 'du')">
+      <pattern>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_vbser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SV_faire_pp"/>
+        <pattern-item n="SV_connaitre_inf"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
           </chunk>
         </out>
       </action>
