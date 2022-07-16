@@ -611,6 +611,1604 @@
       </rule>
     </def-macro>
 
+    <!-- (rel) que >> que, qui -->
+    <!-- (rel) qui >> que, qui -->
+    <def-macro n="gen_que_qui" npar="1">
+      <rule weight="0.8">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="pr"/>
+        <repeat from="0" upto="1">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="sent"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="cnjadv"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+      </rule>
+      <rule weight="3.2">
+        <seq n="jorns"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <or>
+          <match lemma="venir" tags="vblex.*.p3.sg"/>
+          <match lemma="vénguer" tags="vblex.*.p3.sg"/>
+          <match lemma="viéner" tags="vblex.*.p3.sg"/>
+          <match lemma="vier" tags="vblex.*.p3.sg"/>
+        </or>
+      </rule>
+
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match tags="vbhaver.*"/>
+            <match tags="vbmod.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match lemma="caler" tags="vbmod.*"/>
+          <match lemma="faler" tags="vbmod.*"/>
+        </or>
+      </rule>
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match tags="vbhaver.*"/>
+            <match tags="vbmod.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match lemma="far# besonh" tags="vblex.*"/>
+          <match lemma="har# besonh" tags="vblex.*"/>
+          <match lemma="hèr# besonh" tags="vblex.*"/>
+          <match lemma="far# mestièr" tags="vblex.*"/>
+          <match lemma="har# hrèita" tags="vblex.*"/>
+          <match lemma="hèr# hrèita" tags="vblex.*"/>
+        </or>
+        <match tags="det.*"/>
+      </rule>
+      <rule weight="1.0" v="oci">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <match lemma="far# mestièr" tags="vblex.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+      </rule>
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <or>
+          <match lemma="far# besonh" tags="vblex.*"/>
+          <match lemma="har# besonh" tags="vblex.*"/>
+          <match lemma="hèr# besonh" tags="vblex.*"/>
+          <match lemma="far# mestièr" tags="vblex.*"/>
+          <match lemma="har# hrèita" tags="vblex.*"/>
+          <match lemma="hèr# hrèita" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+      </rule>
+
+      <rule weight="3.0">
+        <or>
+          <seq n="personas"/>
+          <match tags="np.ant.*"/>
+          <match tags="np.cog.*"/>
+        </or>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="pr"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+      </rule>
+
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.*"/>
+          <match tags="vblex.*.p2.*"/>
+          <match tags="vbser.*.p1.*"/>
+          <match tags="vbser.*.p2.*"/>
+          <match tags="vbhaver.*.p1.*"/>
+          <match tags="vbhaver.*.p2.*"/>
+          <match tags="vbmod.*.p1.*"/>
+          <match tags="vbmod.*.p2.*"/>
+        </or>
+      </rule>
+
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <or>
+          <seq n="verb_dat2nom_conj"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verb_dat2nom_pp"/>
+        </or>
+      </rule>
+
+      <rule weight="2.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="vblex.pp.*"/>
+          <match tags="np.*"/>
+          <match tags="prn.tn.*"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="verbs_intrans"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="vblex.pp.*"/>
+          <match tags="np.*"/>
+          <match tags="prn.tn.*"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbhaver.*.p3.*"/>
+          <match tags="vbmod.*.p3.*"/>
+          <match lemma="saber" tags="vblex.*.p3.*"/>
+          <match lemma="sàber" tags="vblex.*.p3.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verbs_intrans"/>
+        </or>
+      </rule>
+
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="cnjadv"/>
+            <match tags="cm"/>
+          </or>
+        </repeat>
+        <match lemma="i" tags="prn.pro.adv"/>
+        <or>
+          <match lemma="aver" tags="vblex.*.p3.*"/>
+          <match lemma="auer" tags="vblex.*.p3.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="cnjadv"/>
+            <match tags="cm"/>
+          </or>
+        </repeat>
+        <match lemma="i" tags="prn.pro.adv"/>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match lemma="aver" tags="vblex.pp.*"/>
+          <match lemma="auer" tags="vblex.pp.*"/>
+        </or>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="prn.tn.p1.*.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.p1.*.sg"/>
+        <repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.sg"/>
+          <match tags="vbser.*.p1.sg"/>
+          <match tags="vbhaver.*.p1.sg"/>
+          <match tags="vbmod.*.p1.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p2.*.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.p2.*.sg"/>
+        <repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.sg"/>
+          <match tags="vbser.*.p2.sg"/>
+          <match tags="vbhaver.*.p2.sg"/>
+          <match tags="vbmod.*.p2.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p1.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+	  <or>
+	    <match tags="adv"/>
+	    <match tags="adv.enon"/>
+	  </or>
+        </repeat>
+        <match tags="prn.pro.p1.*.pl"/>
+        <repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.pl"/>
+          <match tags="vbser.*.p1.pl"/>
+          <match tags="vbhaver.*.p1.pl"/>
+          <match tags="vbmod.*.p1.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p2.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+	  <or>
+	    <match tags="adv"/>
+	    <match tags="adv.enon"/>
+	  </or>
+        </repeat>
+        <match tags="prn.pro.p2.*.pl"/>
+        <repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.pl"/>
+          <match tags="vbser.*.p2.pl"/>
+          <match tags="vbhaver.*.p2.pl"/>
+          <match tags="vbmod.*.p2.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.ref.p3.mf.sp"/>
+        <repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.*"/>
+          <match tags="vbser.*.p3.*"/>
+          <match tags="vbhaver.*.p3.*"/>
+          <match tags="vbmod.*.p3.*"/>
+        </or>
+      </rule>
+
+      <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.*"/>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <match tags="vblex.pp.*"/>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+      </rule>
+
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+          <match tags="np.*.pl"/>
+          <match tags="prn.tn.*.pl"/>
+          <match tags="num"/>
+        </or>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+          <match tags="np.*.pl"/>
+          <match tags="prn.tn.*.pl"/>
+          <match tags="num"/>
+        </or>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.sg"/>
+          <match tags="adj.*.sg"/>
+          <match tags="np.*.sg"/>
+          <match tags="np.cog.*"/>
+          <match tags="prn.tn.*.sg"/>
+          <match tags="prn.tn.nt"/>
+        </or>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+          <match tags="adj.*"/>
+          <match tags="num.*"/>
+          <match tags="num"/>
+          <match tags="cnjsub"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.sg"/>
+          <match tags="adj.*.sg"/>
+          <match tags="np.*.sg"/>
+          <match tags="np.cog.*"/>
+          <match tags="prn.tn.*.sg"/>
+          <match tags="prn.tn.nt"/>
+        </or>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vblex.pp.*"/>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+          <match tags="adj.*"/>
+          <match tags="num.*"/>
+          <match tags="num"/>
+          <match tags="cnjsub"/>
+        </or>
+      </rule>
+
+
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+          <match tags="np.*.pl"/>
+          <match tags="prn.tn.*.pl"/>
+          <match tags="num"/>
+        </or>
+        <match tags="pr"/>
+        <repeat from="1" upto="4">
+          <or>
+            <match tags="n.*"/>
+            <match tags="np.*"/>
+            <match tags="adj.*"/>
+            <match tags="vblex.pp.*"/>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+          <match tags="np.*.pl"/>
+          <match tags="prn.tn.*.pl"/>
+          <match tags="num"/>
+        </or>
+        <match tags="pr"/>
+        <repeat from="1" upto="4">
+          <or>
+            <match tags="n.*"/>
+            <match tags="np.*"/>
+            <match tags="adj.*"/>
+            <match tags="vblex.pp.*"/>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.sg"/>
+          <match tags="adj.*.sg"/>
+          <match tags="np.*.sg"/>
+          <match tags="np.cog.*"/>
+          <match tags="prn.tn.*.sg"/>
+          <match tags="prn.tn.nt"/>
+        </or>
+        <match tags="pr"/>
+        <repeat from="1" upto="4">
+          <or>
+            <match tags="n.*"/>
+            <match tags="np.*"/>
+            <match tags="adj.*"/>
+            <match tags="vblex.pp.*"/>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+          <match tags="adj.*"/>
+          <match tags="num.*"/>
+          <match tags="num"/>
+          <match tags="cnjsub"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*.sg"/>
+          <match tags="adj.*.sg"/>
+          <match tags="np.*.sg"/>
+          <match tags="np.cog.*"/>
+          <match tags="prn.tn.*.sg"/>
+          <match tags="prn.tn.nt"/>
+        </or>
+        <match tags="pr"/>
+        <repeat from="1" upto="4">
+          <or>
+            <match tags="n.*"/>
+            <match tags="np.*"/>
+            <match tags="adj.*"/>
+            <match tags="vblex.pp.*"/>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vblex.pp.*"/>
+        <or>
+          <match tags="det.*"/>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+          <match tags="adj.*"/>
+          <match tags="num.*"/>
+          <match tags="num"/>
+          <match tags="cnjsub"/>
+        </or>
+      </rule>
+
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.*"/>
+        <match lemma="que" tags="cnjsub"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.*"/>
+        <match tags="adv"/>
+        <match lemma="que" tags="cnjsub"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <match tags="vblex.pp.*"/>
+        <match lemma="que" tags="cnjsub"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <match tags="vblex.pp.*"/>
+        <match tags="adv"/>
+        <match lemma="que" tags="cnjsub"/>
+      </rule>
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <match tags="vblex.*.p3.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <match tags="vbhaver.*.p3.*"/>
+        <match tags="vblex.pp.*"/>
+      </rule>
+
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <or>
+          <seq n="verb_dat2nom_conj"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="verb_dat2nom_pp"/>
+        </or>
+      </rule>
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.*"/>
+        <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.*"/>
+        <match tags="vbhaver.*.p3.*"/>
+        <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.*"/>
+        <match tags="prn.pro.*"/>
+        <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match tags="prn.pro.*"/>
+        <match tags="prn.pro.*"/>
+        <match tags="vbhaver.*.p3.*"/>
+        <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
+        <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
+      </rule>
+
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vbser.*.p3.*"/>
+          <match lemma="semblar" tags="vblex.*.p3.*"/>
+          <match lemma="venir" tags="vblex.*.p3.*"/>
+          <match lemma="vénguer" tags="vblex.*.p3.*"/>
+          <match lemma="viéner" tags="vblex.*.p3.*"/>
+          <match lemma="vier" tags="vblex.*.p3.*"/>
+          <match lemma="anar" tags="vblex.*.p3.*"/>
+          <match lemma="arribar" tags="vblex.*.p3.*"/>
+          <match lemma="dormir" tags="vblex.*.p3.*"/>
+          <match lemma="dromir" tags="vblex.*.p3.*"/>
+          <match lemma="dròmer" tags="vblex.*.p3.*"/>
+          <match lemma="reflectir" tags="vblex.*.p3.*"/>
+          <match lemma="viure" tags="vblex.*.p3.*"/>
+          <match lemma="víver" tags="vblex.*.p3.*"/>
+          <match lemma="víuer" tags="vblex.*.p3.*"/>
+          <match lemma="trabalhar" tags="vblex.*.p3.*"/>
+          <match lemma="trebalhar" tags="vblex.*.p3.*"/>
+          <match lemma="tribalhar" tags="vblex.*.p3.*"/>
+          <match lemma="dintrar" tags="vblex.*.p3.*"/>
+          <match lemma="entrar" tags="vblex.*.p3.*"/>
+          <match lemma="intrar" tags="vblex.*.p3.*"/>
+          <match lemma="sortir" tags="vblex.*.p3.*"/>
+          <match lemma="gésser" tags="vblex.*.p3.*"/>
+          <match lemma="passar" tags="vblex.*.p3.*"/>
+          <match lemma="tornar" tags="vblex.*.p3.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="vbser.pp.*"/>
+          <match lemma="semblar" tags="vblex.pp.*"/>
+          <match lemma="venir" tags="vblex.pp.*"/>
+          <match lemma="vénguer" tags="vblex.pp.*"/>
+          <match lemma="viéner" tags="vblex.pp.*"/>
+          <match lemma="vier" tags="vblex.pp.*"/>
+          <match lemma="anar" tags="vblex.pp.*"/>
+          <match lemma="arribar" tags="vblex.pp.*"/>
+          <match lemma="dormir" tags="vblex.pp.*"/>
+          <match lemma="dromir" tags="vblex.pp.*"/>
+          <match lemma="dròmer" tags="vblex.pp.*"/>
+          <match lemma="reflectir" tags="vblex.pp.*"/>
+          <match lemma="viure" tags="vblex.pp.*"/>
+          <match lemma="víver" tags="vblex.pp.*"/>
+          <match lemma="víuer" tags="vblex.pp.*"/>
+          <match lemma="trabalhar" tags="vblex.pp.*"/>
+          <match lemma="trebalhar" tags="vblex.pp.*"/>
+          <match lemma="tribalhar" tags="vblex.pp.*"/>
+          <match lemma="dintrar" tags="vblex.pp.*"/>
+          <match lemma="entrar" tags="vblex.pp.*"/>
+          <match lemma="intrar" tags="vblex.pp.*"/>
+          <match lemma="sortir" tags="vblex.pp.*"/>
+          <match lemma="gésser" tags="vblex.pp.*"/>
+          <match lemma="passar" tags="vblex.pp.*"/>
+          <match lemma="tornar" tags="vblex.pp.*"/>
+        </or>
+      </rule>
+
+      <rule weight="1.2">
+        <match lemma="çò" tags="prn.*"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match lemma="en" tags="prn.pro.adv"/>
+        <match tags="vbser.*"/>
+      </rule>
+
+      <rule weight="1.2">
+        <match lemma="çò" tags="prn.*"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.sg"/>
+      </rule>
+      <rule weight="1.2">
+        <match lemma="çò" tags="prn.*"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro"/>
+          </or>
+        </repeat>
+        <match tags="vblex.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.pl"/>
+      </rule>
+
+      <rule weight="1.4">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match lemma="es" tags="prn.pro.ref.*"/>
+        <match lemma="necessitar" tags="vblex.*"/>
+        <match tags="vblex.inf"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <match lemma="es" tags="prn.pro.ref.*"/>
+        <match tags="vbhaver.*"/>
+        <match lemma="necessitar" tags="vblex.pp.*"/>
+        <match tags="vblex.inf"/>
+      </rule>
+
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match lemma="caler" tags="vbmod.*"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*"/>
+        <match lemma="caler" tags="vbmod.pp.*"/>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="prn.tn.p1.mf.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.sg"/>
+          <match tags="vbser.*.p1.sg"/>
+          <match tags="vbhaver.*.p1.sg"/>
+          <match tags="vbmod.*.p1.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p2.mf.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.sg"/>
+          <match tags="vbser.*.p2.sg"/>
+          <match tags="vbhaver.*.p2.sg"/>
+          <match tags="vbmod.*.p2.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p3.*.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p1.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.pl"/>
+          <match tags="vbser.*.p1.pl"/>
+          <match tags="vbhaver.*.p1.pl"/>
+          <match tags="vbmod.*.p1.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p2.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.pl"/>
+          <match tags="vbser.*.p2.pl"/>
+          <match tags="vbhaver.*.p2.pl"/>
+          <match tags="vbmod.*.p2.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="prn.tn.p3.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+
+    <!--
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p1.mf.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.sg"/>
+          <match tags="vbser.*.p1.sg"/>
+          <match tags="vbhaver.*.p1.sg"/>
+          <match tags="vbmod.*.p1.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p2.mf.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.sg"/>
+          <match tags="vbser.*.p2.sg"/>
+          <match tags="vbhaver.*.p2.sg"/>
+          <match tags="vbmod.*.p2.sg"/>
+        </or>
+      </rule>
+    -->
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p3.*.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+    <!--
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p1.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p1.pl"/>
+          <match tags="vbser.*.p1.pl"/>
+          <match tags="vbhaver.*.p1.pl"/>
+          <match tags="vbmod.*.p1.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p2.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p2.pl"/>
+          <match tags="vbser.*.p2.pl"/>
+          <match tags="vbhaver.*.p2.pl"/>
+          <match tags="vbmod.*.p2.pl"/>
+        </or>
+      </rule>
+    -->
+      <rule weight="3.2">
+        <match tags="pr"/>
+        <match tags="prn.tn.p3.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+
+      <rule weight="3.2">
+        <match tags="prn.tn.p3.*.sg"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+       <match lemma="i" tags="prn.pro.*"/>
+        <or>
+          <match lemma="aver" tags="vblex.*.p3.sg"/>
+          <match lemma="aver" tags="vbhaver.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.2">
+        <match tags="prn.tn.p3.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+       <match lemma="i" tags="prn.pro.*"/>
+        <or>
+          <match lemma="aver" tags="vblex.*.p3.pl"/>
+          <match lemma="aver" tags="vbhaver.*.p3.pl"/>
+        </or>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*.sg"/>
+        </repeat>
+        <repeat from="1" upto="3">
+          <or>
+            <match tags="np.*.sg"/>
+            <match tags="np.cog.*"/>
+            <match tags="" case="Aa"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vbser.pp.*"/>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*.sg"/>
+        </repeat>
+        <repeat from="1" upto="3">
+          <or>
+            <match tags="np.*.sg"/>
+            <match tags="np.cog.*"/>
+            <match tags="" case="Aa"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.sg"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vbser.pp.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.sg"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.def.*.pl"/>
+        <match tags="np.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vbser.pp.*"/>
+        <match tags="det.def.*.pl"/>
+        <match tags="np.*.pl"/>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.pl"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+      <rule weight="3.0">
+        <match tags="vbser.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="vbser.pp.*"/>
+        <match tags="det.*.pl"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adj.*"/>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+    </def-macro>
   </def-macros>
 
   <def-seqs>
@@ -5411,2776 +7009,10 @@
 <!-- **************** REL **************** -->
 
   <!-- (rel) que >> que, qui -->
-  <rule weight="0.8">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-  </rule>
-
-  <rule weight="5.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <or>
-      <seq n="personas"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-        <match tags="adj.*"/>
-      </or>
-    </repeat>
-    <match tags="pr"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.*"/>
-      <match tags="vblex.*.p2.*"/>
-      <match tags="vbser.*.p1.*"/>
-      <match tags="vbser.*.p2.*"/>
-      <match tags="vbhaver.*.p1.*"/>
-      <match tags="vbhaver.*.p2.*"/>
-      <match tags="vbmod.*.p1.*"/>
-      <match tags="vbmod.*.p2.*"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-      <match tags="vblex.pp.*"/>
-      <match tags="np.*"/>
-      <match tags="prn.tn.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-      <match tags="vblex.pp.*"/>
-      <match tags="np.*"/>
-      <match tags="prn.tn.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.*"/>
-      <match tags="vbmod.*.p3.*"/>
-      <match lemma="saber" tags="vblex.*.p3.*"/>
-      <match lemma="sàber" tags="vblex.*.p3.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-        <match tags="cm"/>
-      </or>
-    </repeat>
-    <match lemma="i" tags="prn.pro.adv"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.*"/>
-      <match lemma="auer" tags="vblex.*.p3.*"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="cnjadv"/>
-        <match tags="cm"/>
-      </or>
-    </repeat>
-    <match lemma="i" tags="prn.pro.adv"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match lemma="aver" tags="vblex.pp.*"/>
-      <match lemma="auer" tags="vblex.pp.*"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.p1.*.sg"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.p2.*.sg"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.p1.*.pl"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.p2.*.pl"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.ref.p3.mf.sp"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.*"/>
-      <match tags="vbser.*.p3.*"/>
-      <match tags="vbhaver.*.p3.*"/>
-      <match tags="vbmod.*.p3.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.pl"/>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="np.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="np.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <match tags="pr"/>
-    <repeat from="1" upto="4">
-      <or>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="vblex.pp.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.pl"/>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <match tags="pr"/>
-    <repeat from="1" upto="4">
-      <or>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="vblex.pp.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <match tags="pr"/>
-    <repeat from="1" upto="4">
-      <or>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="vblex.pp.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="np.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <match tags="pr"/>
-    <repeat from="1" upto="4">
-      <or>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="vblex.pp.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="np.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <match tags="adv"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <match tags="adv"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vblex.*.p3.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="prn.pro.*"/>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="prn.pro.*"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbser.*.p3.*"/>
-      <match lemma="semblar" tags="vblex.*.p3.*"/>
-      <match lemma="venir" tags="vblex.*.p3.*"/>
-      <match lemma="vénguer" tags="vblex.*.p3.*"/>
-      <match lemma="viéner" tags="vblex.*.p3.*"/>
-      <match lemma="vier" tags="vblex.*.p3.*"/>
-      <match lemma="anar" tags="vblex.*.p3.*"/>
-      <match lemma="arribar" tags="vblex.*.p3.*"/>
-      <match lemma="dormir" tags="vblex.*.p3.*"/>
-      <match lemma="dromir" tags="vblex.*.p3.*"/>
-      <match lemma="dròmer" tags="vblex.*.p3.*"/>
-      <match lemma="reflectir" tags="vblex.*.p3.*"/>
-      <match lemma="viure" tags="vblex.*.p3.*"/>
-      <match lemma="víver" tags="vblex.*.p3.*"/>
-      <match lemma="víuer" tags="vblex.*.p3.*"/>
-      <match lemma="trabalhar" tags="vblex.*.p3.*"/>
-      <match lemma="trebalhar" tags="vblex.*.p3.*"/>
-      <match lemma="tribalhar" tags="vblex.*.p3.*"/>
-      <match lemma="dintrar" tags="vblex.*.p3.*"/>
-      <match lemma="entrar" tags="vblex.*.p3.*"/>
-      <match lemma="intrar" tags="vblex.*.p3.*"/>
-      <match lemma="sortir" tags="vblex.*.p3.*"/>
-      <match lemma="gésser" tags="vblex.*.p3.*"/>
-      <match lemma="passar" tags="vblex.*.p3.*"/>
-      <match lemma="tornar" tags="vblex.*.p3.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="vbser.pp.*"/>
-      <match lemma="semblar" tags="vblex.pp.*"/>
-      <match lemma="venir" tags="vblex.pp.*"/>
-      <match lemma="vénguer" tags="vblex.pp.*"/>
-      <match lemma="viéner" tags="vblex.pp.*"/>
-      <match lemma="vier" tags="vblex.pp.*"/>
-      <match lemma="anar" tags="vblex.pp.*"/>
-      <match lemma="arribar" tags="vblex.pp.*"/>
-      <match lemma="dormir" tags="vblex.pp.*"/>
-      <match lemma="dromir" tags="vblex.pp.*"/>
-      <match lemma="dròmer" tags="vblex.pp.*"/>
-      <match lemma="reflectir" tags="vblex.pp.*"/>
-      <match lemma="viure" tags="vblex.pp.*"/>
-      <match lemma="víver" tags="vblex.pp.*"/>
-      <match lemma="víuer" tags="vblex.pp.*"/>
-      <match lemma="trabalhar" tags="vblex.pp.*"/>
-      <match lemma="trebalhar" tags="vblex.pp.*"/>
-      <match lemma="tribalhar" tags="vblex.pp.*"/>
-      <match lemma="dintrar" tags="vblex.pp.*"/>
-      <match lemma="entrar" tags="vblex.pp.*"/>
-      <match lemma="intrar" tags="vblex.pp.*"/>
-      <match lemma="sortir" tags="vblex.pp.*"/>
-      <match lemma="gésser" tags="vblex.pp.*"/>
-      <match lemma="passar" tags="vblex.pp.*"/>
-      <match lemma="tornar" tags="vblex.pp.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="en" tags="prn.pro.adv"/>
-    <match tags="vbser.*"/>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-
-  <rule weight="1.4">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="es" tags="prn.pro.ref.*"/>
-    <match lemma="necessitar" tags="vblex.*"/>
-    <match tags="vblex.inf"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="es" tags="prn.pro.ref.*"/>
-    <match tags="vbhaver.*"/>
-    <match lemma="necessitar" tags="vblex.pp.*"/>
-    <match tags="vblex.inf"/>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match lemma="caler" tags="vbmod.*"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*"/>
-    <match lemma="caler" tags="vbmod.pp.*"/>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.mf.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.mf.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-<!--
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p1.mf.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p2.mf.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
--->
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-<!--
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
--->
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.2">
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match lemma="i" tags="prn.pro.*"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.sg"/>
-      <match lemma="aver" tags="vbhaver.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match lemma="i" tags="prn.pro.*"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.pl"/>
-      <match lemma="aver" tags="vbhaver.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*.sg"/>
-    </repeat>
-    <repeat from="1" upto="3">
-      <or>
-        <match tags="np.*.sg"/>
-        <match tags="np.cog.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*.sg"/>
-    </repeat>
-    <repeat from="1" upto="3">
-      <or>
-        <match tags="np.*.sg"/>
-        <match tags="np.cog.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.def.*.pl"/>
-    <match tags="np.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <match tags="det.def.*.pl"/>
-    <match tags="np.*.pl"/>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <match tags="det.*.pl"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
+  <macro n="gen_que_qui"><with-param v="que"/></macro>
 
   <!-- (rel) qui >> que, qui --> <!-- còpia que >> que, qui -->
-  <rule weight="0.8">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-  </rule>
-
-  <rule weight="5.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="5.0" v="oci">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <or>
-      <seq n="personas"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-        <match tags="adj.*"/>
-      </or>
-    </repeat>
-    <match tags="pr"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.*"/>
-      <match tags="vblex.*.p2.*"/>
-      <match tags="vbser.*.p1.*"/>
-      <match tags="vbser.*.p2.*"/>
-      <match tags="vbhaver.*.p1.*"/>
-      <match tags="vbhaver.*.p2.*"/>
-      <match tags="vbmod.*.p1.*"/>
-      <match tags="vbmod.*.p2.*"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="cnjadv"/>
-        <match tags="cm"/>
-      </or>
-    </repeat>
-    <match lemma="i" tags="prn.pro.adv"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.*"/>
-      <match lemma="auer" tags="vblex.*.p3.*"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="cnjadv"/>
-        <match tags="cm"/>
-      </or>
-    </repeat>
-    <match lemma="i" tags="prn.pro.adv"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match lemma="aver" tags="vblex.pp.*"/>
-      <match lemma="auer" tags="vblex.pp.*"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.p1.*.sg"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.p2.*.sg"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.p1.*.pl"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.p2.*.pl"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.ref.p3.mf.sp"/>
-    <repeat from="0" upto="1">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.*"/>
-      <match tags="vbser.*.p3.*"/>
-      <match tags="vbhaver.*.p3.*"/>
-      <match tags="vbmod.*.p3.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.pl"/>
-<!--
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
--->
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-      <match tags="np.*.pl"/>
-      <match tags="prn.tn.*.pl"/>
-      <match tags="num"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-<!--
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
--->
-  </rule>
-
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="n.*.sg"/>
-      <match tags="adj.*.sg"/>
-      <match tags="np.*.sg"/>
-      <match tags="np.cog.*"/>
-      <match tags="prn.tn.*.sg"/>
-      <match tags="prn.tn.nt"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="cm"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vblex.pp.*"/>
-    <or>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <match tags="np.*"/>
-      <match tags="adj.*"/>
-      <match tags="num.*"/>
-      <match tags="num"/>
-      <match tags="cnjsub"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.*"/>
-    <match tags="adv"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-    <match tags="adv"/>
-    <match lemma="que" tags="cnjsub"/>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vblex.*.p3.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <match tags="vblex.pp.*"/>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="prn.pro.*"/>
-    <or><match tags="vblex.*.p3.*"/><match tags="vbmod.*.p3.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match tags="prn.pro.*"/>
-    <match tags="prn.pro.*"/>
-    <match tags="vbhaver.*.p3.*"/>
-    <or><match tags="vblex.pp.*"/><match tags="vbmod.pp.*"/></or>
-    <or><match tags="vblex.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vbser.*.p3.*"/>
-      <match lemma="semblar" tags="vblex.*.p3.*"/>
-      <match lemma="venir" tags="vblex.*.p3.*"/>
-      <match lemma="vénguer" tags="vblex.*.p3.*"/>
-      <match lemma="viéner" tags="vblex.*.p3.*"/>
-      <match lemma="vier" tags="vblex.*.p3.*"/>
-      <match lemma="anar" tags="vblex.*.p3.*"/>
-      <match lemma="arribar" tags="vblex.*.p3.*"/>
-      <match lemma="dormir" tags="vblex.*.p3.*"/>
-      <match lemma="dromir" tags="vblex.*.p3.*"/>
-      <match lemma="dròmer" tags="vblex.*.p3.*"/>
-      <match lemma="reflectir" tags="vblex.*.p3.*"/>
-      <match lemma="viure" tags="vblex.*.p3.*"/>
-      <match lemma="víver" tags="vblex.*.p3.*"/>
-      <match lemma="víuer" tags="vblex.*.p3.*"/>
-      <match lemma="trabalhar" tags="vblex.*.p3.*"/>
-      <match lemma="trebalhar" tags="vblex.*.p3.*"/>
-      <match lemma="tribalhar" tags="vblex.*.p3.*"/>
-      <match lemma="dintrar" tags="vblex.*.p3.*"/>
-      <match lemma="entrar" tags="vblex.*.p3.*"/>
-      <match lemma="intrar" tags="vblex.*.p3.*"/>
-      <match lemma="sortir" tags="vblex.*.p3.*"/>
-      <match lemma="gésser" tags="vblex.*.p3.*"/>
-      <match lemma="passar" tags="vblex.*.p3.*"/>
-      <match lemma="tornar" tags="vblex.*.p3.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match lemma="«" tags="lpar"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="vbser.pp.*"/>
-      <match lemma="semblar" tags="vblex.pp.*"/>
-      <match lemma="venir" tags="vblex.pp.*"/>
-      <match lemma="vénguer" tags="vblex.pp.*"/>
-      <match lemma="viéner" tags="vblex.pp.*"/>
-      <match lemma="vier" tags="vblex.pp.*"/>
-      <match lemma="anar" tags="vblex.pp.*"/>
-      <match lemma="arribar" tags="vblex.pp.*"/>
-      <match lemma="dormir" tags="vblex.pp.*"/>
-      <match lemma="dromir" tags="vblex.pp.*"/>
-      <match lemma="dròmer" tags="vblex.pp.*"/>
-      <match lemma="reflectir" tags="vblex.pp.*"/>
-      <match lemma="viure" tags="vblex.pp.*"/>
-      <match lemma="víver" tags="vblex.pp.*"/>
-      <match lemma="víuer" tags="vblex.pp.*"/>
-      <match lemma="trabalhar" tags="vblex.pp.*"/>
-      <match lemma="trebalhar" tags="vblex.pp.*"/>
-      <match lemma="tribalhar" tags="vblex.pp.*"/>
-      <match lemma="dintrar" tags="vblex.pp.*"/>
-      <match lemma="entrar" tags="vblex.pp.*"/>
-      <match lemma="intrar" tags="vblex.pp.*"/>
-      <match lemma="sortir" tags="vblex.pp.*"/>
-      <match lemma="gésser" tags="vblex.pp.*"/>
-      <match lemma="passar" tags="vblex.pp.*"/>
-      <match lemma="tornar" tags="vblex.pp.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match lemma="en" tags="prn.pro.adv"/>
-    <match tags="vbser.*"/>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="çò" tags="prn.*"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro"/>
-      </or>
-    </repeat>
-    <match tags="vblex.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-
-  <rule weight="1.4">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match lemma="es" tags="prn.pro.ref.*"/>
-    <match lemma="necessitar" tags="vblex.*"/>
-    <match tags="vblex.inf"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <match lemma="es" tags="prn.pro.ref.*"/>
-    <match tags="vbhaver.*"/>
-    <match lemma="necessitar" tags="vblex.pp.*"/>
-    <match tags="vblex.inf"/>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match lemma="caler" tags="vbmod.*"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*"/>
-    <match lemma="caler" tags="vbmod.pp.*"/>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.mf.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.mf.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-<!--
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p1.mf.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.sg"/>
-      <match tags="vbser.*.p1.sg"/>
-      <match tags="vbhaver.*.p1.sg"/>
-      <match tags="vbmod.*.p1.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p2.mf.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.sg"/>
-      <match tags="vbser.*.p2.sg"/>
-      <match tags="vbhaver.*.p2.sg"/>
-      <match tags="vbmod.*.p2.sg"/>
-    </or>
-  </rule>
--->
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-<!--
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p1.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p1.pl"/>
-      <match tags="vbser.*.p1.pl"/>
-      <match tags="vbhaver.*.p1.pl"/>
-      <match tags="vbmod.*.p1.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p2.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p2.pl"/>
-      <match tags="vbser.*.p2.pl"/>
-      <match tags="vbhaver.*.p2.pl"/>
-      <match tags="vbmod.*.p2.pl"/>
-    </or>
-  </rule>
--->
-  <rule weight="3.2">
-    <match tags="pr"/>
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.2">
-    <match tags="prn.tn.p3.*.sg"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match lemma="i" tags="prn.pro.*"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.sg"/>
-      <match lemma="aver" tags="vbhaver.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.2">
-    <match tags="prn.tn.p3.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match lemma="i" tags="prn.pro.*"/>
-    <or>
-      <match lemma="aver" tags="vblex.*.p3.pl"/>
-      <match lemma="aver" tags="vbhaver.*.p3.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*.sg"/>
-    </repeat>
-    <repeat from="1" upto="3">
-      <or>
-        <match tags="np.*.sg"/>
-        <match tags="np.cog.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*.sg"/>
-    </repeat>
-    <repeat from="1" upto="3">
-      <or>
-        <match tags="np.*.sg"/>
-        <match tags="np.cog.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.sg"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.def.*.pl"/>
-    <match tags="np.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <match tags="det.def.*.pl"/>
-    <match tags="np.*.pl"/>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="3.0">
-    <match tags="vbser.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="vbser.pp.*"/>
-    <match tags="det.*.pl"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="n.*"/>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adj.*"/>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
+  <macro n="gen_que_qui"><with-param v="qui"/></macro>
 
   <!-- lo que >> celui que, celui qui -->
   <rule weight="0.8">
@@ -13938,7 +12770,7 @@
   <rule weight="0.8">
     <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
   </rule>
-  
+
   <rule weight="1.0">
     <match lemma="aver"/>
     <or>
@@ -15527,12 +14359,12 @@
       </repeat>
      <match lemma="lèit" tags="n.*"><select lemma="lait"/></match>
   </rule>
-  
+
   <!-- carta >> carte, charte -->
   <rule weight="0.8">
     <match lemma="carta" tags="n.*"><select lemma="carte"/></match>
   </rule>
-  
+
   <rule weight="1.0">
     <or>
         <match lemma="signar" tags="vblex.*"/>
@@ -17188,7 +16020,7 @@
     </repeat>
     <match lemma="tot" tags="det.*"/>
   </rule>
-  
+
   <rule weight="1.2">
     <or>
         <match lemma="faire" tags="vblex.*"/>
@@ -17226,7 +16058,7 @@
     <match tags="n.*"/>
   </rule>
 
-  
+
   <rule weight="1.2">
     <or>
         <match lemma="faire" tags="vblex.*"/>
