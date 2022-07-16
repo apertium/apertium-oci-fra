@@ -10840,6 +10840,24 @@
 
 <!-- **************** N **************** -->
 
+  <!-- dauneta -> dame, maître -->
+  <rule weight="0.8">
+    <match lemma="dauneta" tags="n.*"><select lemma="dame"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.pos.*"/>
+    <match lemma="dauneta" tags="n.*"><select lemma="maître"/></match>
+  </rule>
+
+  <!-- daunina -> dame, maître -->
+  <rule weight="0.8">
+    <match lemma="daunina" tags="n.*"><select lemma="dame"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.pos.*"/>
+    <match lemma="daunina" tags="n.*"><select lemma="maître"/></match>
+  </rule>
+
   <!-- paishèra -> digue, barrage -->
   <rule weight="0.8">
     <match lemma="paishèra" tags="n.*"><select lemma="digue"/></match>
@@ -15228,6 +15246,9 @@
       <match tags="np.cog.*"/>
     </or>
   </rule>
+
+  <!-- estar >> être, être (nopron) -->
+  <macro n="verb_nopron_pron_prep" v="oci@gascon"><with-param v="estar"/><with-param v="être"/><with-param v="nopron_être"/><with-param v="a"/></macro>
 
   <!-- provar >> prouver, essayer -->
   <rule weight="0.8">
