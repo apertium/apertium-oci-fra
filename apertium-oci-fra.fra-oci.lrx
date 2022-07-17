@@ -1439,6 +1439,9 @@
       <match lemma="étude" tags="n.*"/>
       <match lemma="recherche" tags="n.*"/>
       <match lemma="analyse" tags="n.*"/>
+      <match lemma="enquête" tags="n.*"/>
+      <match lemma="façon" tags="n.*"/>
+      <match lemma="manière" tags="n.*"/>
     </or>
     <match lemma="poussé" tags="adj.*" v="oci"><select lemma="aprigondit"/></match>
     <match lemma="poussé" tags="adj.*" v="oci@gascon"><select lemma="apregondit"/></match>
@@ -1635,6 +1638,19 @@
   </rule>
   <rule weight="1.0">
     <match lemma="Sarrasin" tags="n.*"><select lemma="sarrasin"/></match>
+  </rule>
+
+  <!-- course >> corsa, crompa -->
+  <rule weight="0.8">
+    <match lemma="course" tags="n.*"><select lemma="corsa"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="course" tags="n.f.pl"><select lemma="crompa"/></match>
   </rule>
 
   <!-- apanage >> apanatge, prejudici -->
