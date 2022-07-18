@@ -584,6 +584,27 @@
    </choose>
  </def-macro>
 
+ <def-macro n="f_expression_de" npar="2" v="oci"> <!-- par1 = SV, par2 = SN (n) -->
+   <choose>
+     <when>
+       <test>
+         <and>
+           <or>
+             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="mettre"/></equal>
+             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="tomber"/></equal>
+           </or>
+           <equal caseless="yes"><clip pos="2" part="lem"/><lit v="accord"/></equal>
+         </and>
+       </test>
+       <let><var n="is_expression"/><lit v="yes"/></let>
+     </when>
+     <otherwise>
+       <let><var n="is_expression"/><lit v="no"/></let>
+     </otherwise>
+   </choose>
+ </def-macro>
+
  <def-macro n="f_expression" npar="2"> <!-- par1 = SV, par2 = SN (n) -->
    <choose>
      <when>
@@ -1311,6 +1332,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1328,15 +1353,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef1">
               <with-param pos="3"/>
@@ -1413,6 +1441,10 @@
         <pattern-item n="CM"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="1"/>
+          <with-param pos="3"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1430,15 +1462,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef1">
               <with-param pos="3"/>
@@ -1717,6 +1752,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="1"/>
+          <with-param pos="4"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1740,15 +1779,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef2">
               <with-param pos="4"/>
@@ -1826,7 +1868,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_partitiu SAdv SAdv PR_de SN: vòli pas totjorn d'aiga > je ne veux pas toujours de l'eau ; vòli pas torjorn d'aigua > je ne veux pas toujours d'eau" v="oci">
+    <rule comment="RÈGLA: SV_partitiu SAdv SAdv PR_de SN: vòli pas totjorn d'aiga > je ne veux pas toujours de l'eau ; vòli pas totjorn d'aigua > je ne veux pas toujours d'eau" v="oci">
       <pattern>
         <pattern-item n="SV_partitiu"/>
         <pattern-item n="SAdv"/>
@@ -1835,6 +1877,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="1"/>
+          <with-param pos="5"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1864,15 +1910,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef3">
               <with-param pos="5"/>
@@ -1967,6 +2016,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="2"/>
+          <with-param pos="4"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1990,15 +2043,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef1">
               <with-param pos="4"/>
@@ -2083,6 +2139,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="3"/>
+          <with-param pos="5"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2112,15 +2172,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef2">
               <with-param pos="5"/>
@@ -2215,6 +2278,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="4"/>
+          <with-param pos="6"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2250,15 +2317,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef3">
               <with-param pos="6"/>
@@ -2362,6 +2432,10 @@
         <pattern-item n="SN_UNK"/>
       </pattern>
       <action>
+        <call-macro n="f_expression_de">
+          <with-param pos="3"/>
+          <with-param pos="6"/>
+        </call-macro>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2397,15 +2471,18 @@
         <choose>
           <when>
             <test>
-              <not>
-                <and>
-                  <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
-                  <or>
-                    <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
-                    <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
-                  </or>
-                </and>
-              </not>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
             </test>
             <call-macro n="generate_detdef3">
               <with-param pos="6"/>
@@ -2520,9 +2597,21 @@
           </chunk>
           <b pos="2"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="3"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="3" part="lem"/><lit v="accord"/></equal>
+                  <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="3" part="lem"/>
@@ -2660,9 +2749,21 @@
           </chunk>
           <b pos="3"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="4"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="4" part="lem"/><lit v="accord"/></equal>
+                  <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="4"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="4" part="lem"/>
@@ -2697,9 +2798,21 @@
           </chunk>
           <b pos="2"/>
         </out>
-        <call-macro n="generate_detdef1">
-          <with-param pos="3"/>
-        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <not>
+                <and>
+                  <equal caseless="yes"><clip pos="3" part="lem"/><lit v="accord"/></equal>
+                  <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                </and>
+              </not>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
         <out>
           <chunk>
             <clip pos="3" part="lem"/>
