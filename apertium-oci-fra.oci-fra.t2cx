@@ -316,6 +316,12 @@
       <attr-item tags="ND"/>
     </def-attr>
 
+    <def-attr n="sl_nbr">
+      <attr-item tags="sl_sg"/>
+      <attr-item tags="sl_pl"/>
+      <attr-item tags="sl_sp"/>
+    </def-attr>
+
     <def-attr n="a_np">
       <attr-item tags="np"/>
     </def-attr>
@@ -588,14 +594,20 @@
    <choose>
      <when>
        <test>
-         <and>
-           <or>
-             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+         <or>
+           <and>
+             <or>
+               <equal caseless="yes"><clip pos="1" part="lem"/><lit v="être"/></equal>
+               <equal caseless="yes"><clip pos="1" part="lem"/><lit v="mettre"/></equal>
+               <equal caseless="yes"><clip pos="1" part="lem"/><lit v="tomber"/></equal>
+             </or>
+             <equal caseless="yes"><clip pos="2" part="lem"/><lit v="accord"/></equal>
+           </and>
+           <and>
              <equal caseless="yes"><clip pos="1" part="lem"/><lit v="mettre"/></equal>
-             <equal caseless="yes"><clip pos="1" part="lem"/><lit v="tomber"/></equal>
-           </or>
-           <equal caseless="yes"><clip pos="2" part="lem"/><lit v="accord"/></equal>
-         </and>
+             <equal caseless="yes"><clip pos="2" part="lem"/><lit v="côté"/></equal>
+           </and>
+         </or>
        </test>
        <let><var n="is_expression"/><lit v="yes"/></let>
      </when>
@@ -893,7 +905,13 @@
      </when>
      <when>
        <test>
-         <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+         <or>
+           <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+           <and>
+             <equal><clip pos="1" part="nbr"/><lit-tag v="sp"/></equal>
+             <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+           </and>
+         </or>
        </test>
        <out>
          <chunk>
@@ -905,7 +923,7 @@
            <lit v="le"/>
            <lit-tag v="det.def"/>
            <clip pos="1" part="gen"/>
-           <clip pos="1" part="nbr"/>
+           <lit-tag v="sg"/>
            <lit v="$}"/>
          </chunk>
          <b/>
@@ -942,7 +960,13 @@
      </when>
      <when>
        <test>
-         <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+         <or>
+           <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+           <and>
+             <equal><clip pos="1" part="nbr"/><lit-tag v="sp"/></equal>
+             <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+           </and>
+         </or>
        </test>
        <out>
          <chunk>
@@ -954,7 +978,7 @@
            <lit v="le"/>
            <lit-tag v="det.def"/>
            <clip pos="1" part="gen"/>
-           <clip pos="1" part="nbr"/>
+           <lit-tag v="sg"/>
            <lit v="$}"/>
          </chunk>
          <b/>
@@ -994,7 +1018,13 @@
      </when>
      <when>
        <test>
-         <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+         <or>
+           <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+           <and>
+             <equal><clip pos="1" part="nbr"/><lit-tag v="sp"/></equal>
+             <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+           </and>
+         </or>
        </test>
        <out>
          <chunk>
@@ -1006,7 +1036,7 @@
            <lit v="le"/>
            <lit-tag v="det.def"/>
            <clip pos="1" part="gen"/>
-           <clip pos="1" part="nbr"/>
+           <lit-tag v="sg"/>
            <lit v="$}"/>
          </chunk>
          <b/>
