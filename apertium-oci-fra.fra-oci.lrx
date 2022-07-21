@@ -739,6 +739,74 @@
       <match lemma="Titanic" tags="np.*"/>
     </or></def-seq>
 
+    <def-seq n="vetement"><or>
+      <match lemma="vêtement" tags="n.*"/>
+      <match lemma="sous-vêtement" tags="n.*"/>
+      <match lemma="robe" tags="n.*"/>
+      <match lemma="combinaison" tags="n.*"/>
+      <match lemma="costume" tags="n.*"/>
+      <match lemma="T-shirt" tags="n.*"/>
+      <match lemma="chemise" tags="n.*"/>
+      <match lemma="chemisier" tags="n.*"/>
+      <match lemma="blouson" tags="n.*"/>
+      <match lemma="décolleté" tags="n.*"/>
+      <match lemma="manteau" tags="n.*"/>
+      <match lemma="imperméable" tags="n.*"/>
+      <match lemma="redingote" tags="n.*"/>
+      <match lemma="frac" tags="n.*"/>
+      <match lemma="pantalon" tags="n.*"/>
+      <match lemma="jupe" tags="n.*"/>
+      <match lemma="minijupe" tags="n.*"/>
+      <match lemma="haut" tags="n.*"/>
+      <match lemma="pull" tags="n.*"/>
+      <match lemma="pullover" tags="n.*"/>
+      <match lemma="sweater" tags="n.*"/>
+      <match lemma="sweat" tags="n.*"/>
+      <match lemma="cravate" tags="n.*"/>
+      <match lemma="tailleur" tags="n.*"/>
+      <match lemma="uniforme" tags="n.*"/>
+      <match lemma="gilet" tags="n.*"/>
+      <match lemma="cardigan" tags="n.*"/>
+      <match lemma="slip" tags="n.*"/>
+      <match lemma="caleçon" tags="n.*"/>
+      <match lemma="soutien-gorge" tags="n.*"/>
+      <match lemma="soutif" tags="n.*"/>
+      <match lemma="maillot# de corps" tags="n.*"/>
+      <match lemma="tricot# de corps" tags="n.*"/>
+      <match lemma="maillot# de peau" tags="n.*"/>
+      <match lemma="tricot# de peau" tags="n.*"/>
+      <match lemma="short" tags="n.*"/>
+      <match lemma="collant" tags="n.*"/>
+      <match lemma="bas" tags="n.*"/>
+      <match lemma="chapeau" tags="n.*"/>
+      <match lemma="casquette" tags="n.*"/>
+      <match lemma="bonnet" tags="n.*"/>
+      <match lemma="écharpe" tags="n.*"/>
+      <match lemma="gant" tags="n.*"/>
+      <match lemma="chaussette" tags="n.*"/>
+      <match lemma="chaussure" tags="n.*"/>
+      <match lemma="tennis" tags="n.f.*"/>
+      <match lemma="basket" tags="n.f.*"/>
+      <match lemma="botte" tags="n.*"/>
+      <match lemma="sandale" tags="n.*"/>
+      <match lemma="boucle# d'oreille" tags="n.*"/>
+      <match lemma="bague" tags="n.*"/>
+      <match lemma="anneau" tags="n.*"/>
+      <match lemma="bracelet" tags="n.*"/>
+      <match lemma="lunette" tags="n.f.pl"/>
+      <match lemma="ceinture" tags="n.*"/>
+      <match lemma="justaucorps" tags="n.*"/>
+      <match lemma="léotard" tags="n.*"/>
+      <match lemma="legging" tags="n.*"/>
+      <match lemma="maillot" tags="n.*"/>
+      <match lemma="maillot# de bain" tags="n.*"/>
+      <match lemma="bikini" tags="n.*"/>
+      <match lemma="monokini" tags="n.*"/>
+      <match lemma="brassière" tags="n.*"/>
+      <match lemma="tablier" tags="n.*"/>
+      <match lemma="capuche" tags="n.*"/>
+    </or></def-seq>
+
     <def-seq n="adj_ord"><or>
       <match lemma="premier" tags="adj.*"/>
       <match lemma="second" tags="adj.*"/>
@@ -804,6 +872,11 @@
       <match lemma="dispersion" tags="n.*"/>
       <match lemma="sous-munition" tags="n.*"/>
     </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="gaz" tags="n.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <match lemma="effet" tags="n.*"/>
   </rule>
 
   <!-- dans >> dins/dens, en -->
@@ -3930,6 +4003,35 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- mettre >> metre/méter, (se) cargar/passar -->
+  <rule weight="0.8">
+    <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="metre"/></match>
+    <match lemma="mettre" tags="vblex.*" v="oci@gascon"><select lemma="méter"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="cargar"/></match>
+    <match lemma="mettre" tags="vblex.*" v="oci@gascon"><select lemma="passar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="vetement"/>
+    </or>
+  </rule>
+
   <!-- écrouler >> abausonar, espatarrar -->
   <!-- écrouler >> aclapar, espatarrar -->
   <rule weight="0.8" v="oci">
@@ -3949,7 +4051,7 @@
         <match tags="preadv"/>
       </or>
     </repeat>
-   <match tags="prn.pro.*"/>
+    <match tags="prn.pro.*"/>
     <match lemma="écrouler" tags="vblex.*"><select lemma="espatarrar"/></match>
   </rule>
   <rule weight="1.0">
