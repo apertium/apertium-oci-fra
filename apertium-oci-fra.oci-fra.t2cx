@@ -74,8 +74,23 @@
       <cat-item lemma="tout de même" tags="cnjadv"/>
       <cat-item lemma="toutefois" tags="cnjadv"/>
     </def-cat>
+    <def-cat n="SAdv_SPron_pro">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item lemma="donc" tags="cnjadv"/>
+      <cat-item lemma="cependant" tags="cnjadv"/>
+      <cat-item lemma="néanmoins" tags="cnjadv"/>
+      <cat-item lemma="nonobstant" tags="cnjadv"/>
+      <cat-item lemma="tout de même" tags="cnjadv"/>
+      <cat-item lemma="toutefois" tags="cnjadv"/>
+      <cat-item tags="SPron.pro"/>
+      <cat-item tags="SPron.pro.*"/>
+    </def-cat>
     <def-cat n="ne_adv">
       <cat-item lemma="ne" tags="SAdv"/>
+    </def-cat>
+    <def-cat n="pas_adv">
+      <cat-item lemma="pas" tags="SAdv"/>
     </def-cat>
     <def-cat n="SV">
       <cat-item tags="SV"/>
@@ -120,6 +135,14 @@
       <cat-item lemma="être" tags="SV.*"/>
       <cat-item lemma="avoir" tags="SV.*"/>
       <cat-item lemma="falloir" tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_partitiu_inf">
+      <cat-item tags="SV.vbser.partitiu.inf"/>
+      <cat-item tags="SV.vbhaver.partitiu.inf"/>
+      <cat-item tags="SV.vblex.partitiu.inf"/>
+      <cat-item lemma="être" tags="SV.*.inf"/>
+      <cat-item lemma="avoir" tags="SV.*.inf"/>
+      <cat-item lemma="falloir" tags="SV.*.inf"/>
     </def-cat>
     <def-cat n="SV_pl">
       <cat-item tags="SV.*.pl"/>
@@ -1457,6 +1480,339 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): balhar pas d'aiga > ne pas donner d'eau" v="oci">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SAdv_SPron_pro SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): li balhar pas d'aiga > ne pas lui donner d'eau" v="oci">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SV_partitiu_inf SAdv PR_de SN (empacha la generacion de l'article determinat): balhar pas totjorn d'aiga > ne pas donner toujours d'eau" v="oci">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SAdv_SPron_pro SAdv_SPron_pro SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): li'n balhar pas d'aiga > ne pas lui en donner d'eau" v="oci">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): non pas balhar d'aiga > ne pas donner d'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="f_expression">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SAdv_SPron_pro SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): non pas lo balhar d'aiga > ne pas lui donner d'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="f_expression">
+          <with-param pos="4"/>
+          <with-param pos="5"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NE PAS SAdv_SPron_pro SAdv_SPron_pro SV_partitiu_inf PR_de SN (empacha la generacion de l'article determinat): non pas tostemps lo balhar d'aiga > ne pas toujours lui donner d'eau" v="oci@gascon">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_partitiu_inf"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="f_expression">
+          <with-param pos="5"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><var n="is_expression"/><lit v="yes"/></equal></not>
+                <not>
+                  <and>
+                    <equal caseless="yes"><clip pos="5" part="lem"/><lit v="être"/></equal>
+                    <or>
+                      <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+                      <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+                    </or>
+                  </and>
+                </not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="6" part="whole"/>
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
