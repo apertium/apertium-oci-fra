@@ -676,6 +676,10 @@
       <attr-item tags="dat2nom"/>
     </def-attr>
 
+    <def-attr n="pron">
+      <attr-item tags="pron"/>
+    </def-attr>
+
     <def-attr n="a_non-pron">
       <attr-item tags="non-pron"/>
     </def-attr>
@@ -4844,7 +4848,19 @@
             </in>
           </or>
           </test>
-          <let><var n="tipusverb"/><lit-tag v="partitiu"/></let>
+          <choose>
+            <when>
+              <test>
+                <equal>
+                 <clip pos="1" side="tl" part="pron"/><lit-tag v="pron"/>
+                </equal>
+              </test>
+              <let><var n="tipusverb"/><concat><lit-tag v="pron"/><lit-tag v="partitiu"/></concat></let>
+            </when>
+            <otherwise>
+              <let><var n="tipusverb"/><lit-tag v="partitiu"/></let>
+            </otherwise>
+          </choose>
         </when>
         <otherwise>
           <let><var n="tipusverb"/><lit-tag v="normal"/></let>
