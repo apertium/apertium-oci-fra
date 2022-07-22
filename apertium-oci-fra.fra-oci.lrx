@@ -4031,6 +4031,23 @@
       <seq n="vetement"/>
     </or>
   </rule>
+  <rule weight="1.0">
+    <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="cargar"/></match>
+    <match lemma="mettre" tags="vblex.*" v="oci@gascon"><select lemma="passar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="vetement"/>
+    </or>
+  </rule>
 
   <!-- écrouler >> abausonar, espatarrar -->
   <!-- écrouler >> aclapar, espatarrar -->
