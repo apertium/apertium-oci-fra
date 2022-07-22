@@ -547,6 +547,12 @@
       <attr-item tags="ND"/>
     </def-attr>
 
+    <def-attr n="sl_nbr">
+      <attr-item tags="sl_sg"/>
+      <attr-item tags="sl_pl"/>
+      <attr-item tags="sl_sp"/>
+    </def-attr>
+
     <def-attr n="a_verb">
       <attr-item tags="vblex"/>
       <attr-item tags="vbser"/>
@@ -1238,7 +1244,7 @@
 
     <!-- RÈGLAS accord en genre entre sujet et attribut -->
 
-    <rule comment="RÈGLA: SN SV_copulatiu SA: accord en genre entre suject et attribut: l'ostal es grand > la maison est grande">
+    <rule comment="RÈGLA: SN SV_copulatiu SA: accord en genre entre suject et attribut: l'ostal es grand > la maison est grande ; las bragas son granas > le pantalon est grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_copulatiu"/>
@@ -1277,6 +1283,57 @@
           <let><clip pos="3" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="3" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="3" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="3" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1300,7 +1357,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut: l'ostal es força grand > la maison est très grande ; l'ostal es pas grand > la maison n'est pas grande">
+    <rule comment="RÈGLA: SN SV_copulatiu SAdv SA: accord en genre entre suject et attribut: l'ostal es força grand > la maison est très grande ; l'ostal es pas grand > la maison n'est pas grande ; las bragas son pas granas > le pantalon n'est pas grand">
       <pattern>
         <pattern-item n="SN"/>
         <pattern-item n="SV_copulatiu"/>
@@ -1334,6 +1391,57 @@
             </and>
           </test>
           <let><clip pos="4" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="2" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1407,6 +1515,62 @@
           <let><clip pos="5" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+        <when>
+          <test>
+            <equal caseless="yes"><clip pos="2" part="lem"/><lit v="par"/></equal> <!-- per evitar problèmas amb construccions coma 'lo vesin tres còps per an es ...' (lo cambiament de genre còp/fois causa de problèmas) -->
+          </test>
+        </when>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -1478,6 +1642,57 @@
             </and>
           </test>
           <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1558,6 +1773,57 @@
             </and>
           </test>
           <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1645,6 +1911,57 @@
             </and>
           </test>
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1738,6 +2055,57 @@
             </and>
           </test>
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1832,6 +2200,57 @@
             </and>
           </test>
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -1936,6 +2355,57 @@
           <let><clip pos="6" part="gen"/><lit-tag v="f"/></let>
         </when>
       </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="4" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
@@ -2014,6 +2484,57 @@
             </and>
           </test>
           <let><clip pos="7" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="5" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="5" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -2101,6 +2622,57 @@
             </and>
           </test>
           <let><clip pos="8" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="6" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="6" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -2195,6 +2767,57 @@
             </and>
           </test>
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -2295,6 +2918,57 @@
             </and>
           </test>
           <let><clip pos="9" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="7" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="9" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="9" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="7" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
@@ -2396,6 +3070,57 @@
             </and>
           </test>
           <let><clip pos="10" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="10" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="8" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="10" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="10" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="1" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="8" part="nbr"/><lit-tag v="pl"/></let>
         </when>
       </choose>
         <out>
