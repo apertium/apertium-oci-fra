@@ -8087,6 +8087,82 @@
       </action>
     </rule>
 
+<!-- calen mai d'ajustaments per empachar errors
+    <rule comment="RÈGLA: NPTOP ADJ (Alpes autrichiennes > Alps austrians)">
+      <pattern>
+        <pattern-item n="nptop"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="nptop-adj">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ADJ NPTOP (Hautes Alpes > Nauts Alps)">
+      <pattern>
+        <pattern-item n="adj"/>
+        <pattern-item n="nptop"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="nptop-adj">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="np"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+-->
+
     <!-- FIN RÈGLAS TOP -->
 
 
