@@ -4782,6 +4782,21 @@
     </repeat>
     <match lemma="que"/>
   </rule>
+  <rule weight="1.0">
+    <match tags="sent"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match lemma="i" tags="prn.pro.adv"/>
+    <or>
+      <match lemma="poder" tags="vbmod.*"/>
+    </or>
+  </rule>
   <rule weight="3.0">
     <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
@@ -15409,6 +15424,43 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- amassar >> amasser, réunir -->
+  <rule weight="0.8">
+    <match lemma="amassar" tags="vblex.*"><select lemma="amasser"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <seq n="personas"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="prn.pro.ref.*"/>
+    </repeat>
+    <match lemma="amassar" tags="vblex.*"><select lemma="réunir"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="amassar" tags="vblex.*"><select lemma="réunir"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="personas"/>
+    </or>
+  </rule>
 
   <!-- premiar >> primer, décerner# un prix, décerner# un prix à -->
   <rule weight="0.8">

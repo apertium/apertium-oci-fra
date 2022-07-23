@@ -279,6 +279,11 @@
       <cat-item tags="vbser.pp.*"/>
     </def-cat>
 
+    <def-cat n="vbser_raffoler_pp">
+      <cat-item tags="vbser.pp.*"/>
+      <cat-item lemma="raffoler" tags="vblex.pp.*"/> <!-- raffoler > èsser# fòu / estar# dòu -->
+    </def-cat>
+
     <def-cat n="vbhaver">
       <cat-item tags="vbhaver.*"/>
     </def-cat>
@@ -9831,13 +9836,15 @@
     <rule comment="RÈGLA: HAVER SER_PP > SER + SER_PP: ai été > ei estat">
        <pattern>
          <pattern-item n="vbhaver"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="2"/>
          </call-macro>
+         <let><clip pos="2" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="2" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="2"/>
          </call-macro>
@@ -9916,6 +9923,7 @@
                     <clip pos="2" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="2" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -9938,6 +9946,7 @@
                     <clip pos="2" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="2" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -10255,7 +10264,7 @@
        <pattern>
         <pattern-item n="prnsubj"/>
          <pattern-item n="vbhaverconj"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -10265,6 +10274,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="3"/>
          </call-macro>
+         <let><clip pos="3" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="3" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="3"/>
          </call-macro>
@@ -10306,6 +10317,7 @@
                <clip pos="3" side="tl" part="temps"/>
                <lit-tag v="3"/>
                <lit-tag v="4"/>
+               <clip pos="3" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -10317,7 +10329,7 @@
         <pattern-item n="prnsubj"/>
          <pattern-item n="vbhaverconj"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -10327,6 +10339,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><clip pos="4" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="4" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="4"/>
          </call-macro>
@@ -10370,6 +10384,7 @@
                <clip pos="4" side="tl" part="temps"/>
                <lit-tag v="2"/>
                <lit-tag v="3"/>
+               <clip pos="4" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -10382,7 +10397,7 @@
          <pattern-item n="vbhaverconj"/>
          <pattern-item n="adv_preadv"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -10392,6 +10407,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><clip pos="5" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="5" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="5"/>
          </call-macro>
@@ -10439,6 +10456,7 @@
                <clip pos="5" side="tl" part="temps"/>
                <lit-tag v="2"/>
                <lit-tag v="3"/>
+               <clip pos="5" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -10450,13 +10468,15 @@
          <pattern-item n="ne"/>
          <pattern-item n="vbhaver"/>
          <pattern-item n="pas"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="4"/>
          </call-macro>
+         <let><clip pos="4" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="4" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="4"/>
          </call-macro>
@@ -10549,6 +10569,7 @@
                     <clip pos="4" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="4" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -10570,6 +10591,7 @@
                     <clip pos="4" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="4" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -10705,7 +10727,7 @@
         <pattern-item n="ne"/>
         <pattern-item n="vbhaverconj"/>
         <pattern-item n="pas"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -10715,6 +10737,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><clip pos="5" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="5" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="5"/>
          </call-macro>
@@ -10763,6 +10787,7 @@
                <clip pos="5" side="tl" part="temps"/>
                <lit-tag v="2"/>
                <lit-tag v="3"/>
+               <clip pos="5" side="tl" part="lemq"/>
              </lu>
            </chunk>
          </out>
@@ -10775,13 +10800,15 @@
          <pattern-item n="vbhaver"/>
          <pattern-item n="pas"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><clip pos="5" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="5" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="5"/>
          </call-macro>
@@ -10877,6 +10904,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -10900,6 +10928,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -10914,13 +10943,15 @@
          <pattern-item n="vbhaver"/>
          <pattern-item n="adv"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><clip pos="5" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="5" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="5"/>
          </call-macro>
@@ -11018,6 +11049,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11039,6 +11071,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11484,7 +11517,7 @@
          <pattern-item n="vbhaver"/>
          <pattern-item n="pas"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -11494,6 +11527,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="6"/>
          </call-macro>
+         <let><clip pos="6" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="6" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="6"/>
          </call-macro>
@@ -11593,6 +11628,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11615,6 +11651,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="3"/>
                     <lit-tag v="4"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11630,7 +11667,7 @@
          <pattern-item n="vbhaver"/>
          <pattern-item n="adv"/>
          <pattern-item n="adv"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
@@ -11640,6 +11677,8 @@
          <call-macro n="tipus_verb">
           <with-param pos="6"/>
          </call-macro>
+         <let><clip pos="6" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="6" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="6"/>
          </call-macro>
@@ -11700,6 +11739,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11721,6 +11761,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -11960,13 +12001,15 @@
          <pattern-item n="prnpro"/>
          <pattern-item n="vbhaver"/>
          <pattern-item n="pas"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="5"/>
          </call-macro>
+         <let><clip pos="5" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="5" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="5"/>
          </call-macro>
@@ -12029,6 +12072,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -12049,6 +12093,7 @@
                     <clip pos="5" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="5" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -12223,13 +12268,15 @@
          <pattern-item n="prnpro"/>
          <pattern-item n="vbhaver"/>
          <pattern-item n="pas"/>
-         <pattern-item n="vbser_pp"/>
+         <pattern-item n="vbser_raffoler_pp"/>
        </pattern>
        <action>
          <call-macro n="set_vbser"></call-macro>
          <call-macro n="tipus_verb">
           <with-param pos="6"/>
          </call-macro>
+         <let><clip pos="6" side="tl" part="gen"/><lit-tag v="GD"/></let>
+         <let><clip pos="6" side="tl" part="nbr"/><lit-tag v="ND"/></let>
          <call-macro n="f_concord1">
           <with-param pos="6"/>
          </call-macro>
@@ -12296,6 +12343,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>
@@ -12316,6 +12364,7 @@
                     <clip pos="6" side="tl" part="temps"/>
                     <lit-tag v="2"/>
                     <lit-tag v="3"/>
+                    <clip pos="6" side="tl" part="lemq"/>
                   </lu>
                 </chunk>
               </out>

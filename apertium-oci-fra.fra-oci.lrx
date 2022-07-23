@@ -4049,6 +4049,109 @@
     </or>
   </rule>
 
+  <!-- raffoler >> èsser# fòl, èsser# fòls, etc., desirar -->
+  <!-- raffoler >> estar# hòu, estar# hòus, etc., desirar -->
+  <rule weight="0.8">
+    <match lemma="raffoler" tags="vblex.*" v="oci"><select lemma="èsser# fòl"/></match>
+    <match lemma="raffoler" tags="vblex.*" v="oci@gascon"><select lemma="estar# hòu"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="raffoler" tags="vblex.*.pl" v="oci"><select lemma="èsser# fòls"/></match>
+    <match lemma="raffoler" tags="vblex.*.pl" v="oci@gascon"><select lemma="estar# hòus"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="n.f.sg"/>
+      <match tags="adj.f.sg"/>
+      <match tags="np.ant.f.sg"/>
+      <match lemma="il" tags="prn.tn.p3.f.sg"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.*.sg" v="oci"><select lemma="èsser# fòla"/></match>
+    <match lemma="raffoler" tags="vblex.*.sg" v="oci@gascon"><select lemma="estar# hòla"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.pl"/>
+      <match tags="adj.f.pl"/>
+      <match lemma="il" tags="prn.tn.p3.f.pl"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.*.pl" v="oci"><select lemma="èsser# fòlas"/></match>
+    <match lemma="raffoler" tags="vblex.*.pl" v="oci@gascon"><select lemma="estar# hòlas"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbhaver.*.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci"><select lemma="èsser# fòls"/></match>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci@gascon"><select lemma="estar# hòus"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.sg"/>
+      <match tags="adj.f.sg"/>
+      <match tags="np.*.f.sg"/>
+      <match lemma="il" tags="prn.tn.p3.f.sg"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci"><select lemma="èsser# fòla"/></match>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci@gascon"><select lemma="estar# hòla"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.pl"/>
+      <match tags="adj.f.pl"/>
+      <match lemma="il" tags="prn.tn.p3.f.pl"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci"><select lemma="èsser# fòlas"/></match>
+    <match lemma="raffoler" tags="vblex.pp.*" v="oci@gascon"><select lemma="estar# hòlas"/></match>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+      <match tags="vbser.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match lemma="raffoler" tags="vblex.pp.*"><select lemma="desirar"/></match>
+  </rule>
+
   <!-- écrouler >> abausonar, espatarrar -->
   <!-- écrouler >> aclapar, espatarrar -->
   <rule weight="0.8" v="oci">
