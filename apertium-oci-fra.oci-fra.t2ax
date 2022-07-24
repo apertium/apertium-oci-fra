@@ -136,6 +136,15 @@
     <def-cat n="SV_inf">
       <cat-item tags="SV.*.inf"/>
     </def-cat>
+    <def-cat n="SV_vbhaver">
+      <cat-item tags="SV.vbhaver"/>
+      <cat-item tags="SV.vbhaver.*"/>
+    </def-cat>
+    <def-cat n="SV_vbhaver_conj">
+      <cat-item tags="SV.vbhaver.*.p1.*"/>
+      <cat-item tags="SV.vbhaver.*.p2.*"/>
+      <cat-item tags="SV.vbhaver.*.p3.*"/>
+    </def-cat>
     <def-cat n="SV_vbser">
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
@@ -266,6 +275,9 @@
 -->
       <cat-item lemma="savoir" tags="SA.pp.*"/>
       <cat-item lemma="venir" tags="SA.pp.*"/>
+    </def-cat>
+    <def-cat n="pp_etre_necessaire">
+      <cat-item lemma="être nécessaire" tags="SA.pp.*"/>
     </def-cat>
 
     <def-cat n="verbs_expression_p3sg">
@@ -1241,6 +1253,103 @@
     </rule>
 
     <!-- FIN RÈGLAS finfrasa -->
+
+    <!-- RÈGLAS acord entre auxiliar e pp -->
+
+    <rule comment="RÈGLA: SV_vbhaver_conj pp_etre_necessaire (an fach besonh > ont été nécessaires)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_conj"/>
+        <pattern-item n="pp_etre_necessaire"/>
+      </pattern>
+      <action>
+        <let><clip pos="2" part="nbr"/><clip pos="1" part="nbr"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_conj SAdv pp_etre_necessaire (an pas fach besonh > n'ont pas été nécessaires)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_conj"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_etre_necessaire"/>
+      </pattern>
+      <action>
+        <let><clip pos="3" part="nbr"/><clip pos="1" part="nbr"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_conj SAdv SAdv pp_etre_necessaire (an pas totjorn fach besonh > n'ont pas toujours été nécessaires)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_conj"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="pp_etre_necessaire"/>
+      </pattern>
+      <action>
+        <let><clip pos="4" part="nbr"/><clip pos="1" part="nbr"/></let>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- FIN RÈGLAS acord entre auxiliar e pp -->
 
     <!-- RÈGLAS accord en genre entre sujet et attribut -->
 
