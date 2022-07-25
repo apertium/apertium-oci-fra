@@ -29,6 +29,9 @@
       <cat-item lemma="haverpp" tags="SA.*"/>
       <cat-item tags="SA.pp.*"/>
     </def-cat>
+    <def-cat n="PP_vbser">
+      <cat-item lemma="être" tags="SA.pp.*"/>
+    </def-cat>
     <def-cat n="SA_SN">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -151,6 +154,9 @@
     </def-cat>
     <def-cat n="SV_vbser_p3">
       <cat-item tags="SV.vbser.*.p3.*"/>
+    </def-cat>
+    <def-cat n="SV_vbhaver_p3">
+      <cat-item tags="SV.vbhaver.*.p3.*"/>
     </def-cat>
     <def-cat n="SV_vbser_p1sg">
       <cat-item tags="SV.vbser.*.p1.sg"/>
@@ -629,6 +635,56 @@
              </choose>
      </def-macro>
 
+ <def-macro n="write_ce" npar="1"> 
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><clip pos="1" part="a_verb"/><lit-tag v="vbhaver"/></equal>
+                <equal><clip pos="1" part="pers"/><lit-tag v="p3"/></equal>
+                <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="cela"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <get-case-from pos="1">
+                  <lit v="subj"/>
+                </get-case-from>
+                <lit-tag v="prn.subj"/>
+                <clip pos="1" part="pers"/>
+                <clip pos="1" part="nbr"/>
+                <lit v="{^"/>
+                <get-case-from pos="1">
+                  <lit v="ce"/>
+                </get-case-from>
+                <lit-tag v="prn.tn.nt"/>
+                <lit v="$}"/>
+              </chunk>
+              <b/>
+            </out>
+          </otherwise>
+        </choose>
+     </def-macro>
+
  <def-macro n="gen_ce" npar="1"> 
     <choose>
       <when>
@@ -638,23 +694,7 @@
             <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
           </and>
         </test>
-        <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="1" part="pers"/>
-            <clip pos="1" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ce"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.nt"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-        </out>
+        <call-macro n="write_ce"><with-param pos="1"/></call-macro>
         <choose>
           <when>
             <test>
@@ -673,23 +713,7 @@
         <test>
           <not><equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal></not>
         </test>
-        <out>
-          <chunk>
-            <get-case-from pos="1">
-              <lit v="subj"/>
-            </get-case-from>
-            <lit-tag v="prn.subj"/>
-            <clip pos="1" part="pers"/>
-            <clip pos="1" part="nbr"/>
-            <lit v="{^"/>
-            <get-case-from pos="1">
-              <lit v="ce"/>
-            </get-case-from>
-            <lit-tag v="prn.tn.nt"/>
-            <lit v="$}"/>
-          </chunk>
-          <b/>
-        </out>
+        <call-macro n="write_ce"><with-param pos="1"/></call-macro>
         <choose>
           <when>
             <test>
@@ -4245,6 +4269,96 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbhaver_p3sg PP_vbser cnjsub_adv_que_rel > ce SV_vbhaver_p3sg PP_vbser cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3sg"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3sg SAdv PP_vbser cnjsub_adv_que_rel > ce SV_vbhaver_p3sg SAdv PP_vbser cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3sg SAdv SAdv PP_vbser cnjsub_adv_que_rel > ce SV_vbhaver_p3sg SAdv SAdv PP_vbser cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SV_vbser_p1sg SPron_moi cnjsub_adv_que_rel > ce SV_vbser_p3sg SPron_moi cnjsub_adv_que_rel (soi ieu que > c'est moi que)">
       <pattern>
         <pattern-item n="SV_vbser_p1sg"/>
@@ -6280,7 +6394,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SV_vbser_p3 DET > ce SV_vbser_p3 DET: èra un ostal > c'était une maison">
+    <rule comment="RÈGLA: SV_vbser_p3 DET > ce SV_vbser_p3 DET: èra un ostal > c'était une maison ; son las soas politicas > ce sont ses politiques">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
         <pattern-item n="DET"/>
@@ -6298,6 +6412,92 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser DET > ce SV_vbhaver_p3 PP_vbser DET: es estat un ostal > ça a été une maison ; son estadas las soas politicas > cela ont été ses politiques">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="DET"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3 SAdv DET > ce SV_vbser_p3 SAdv DET: èra pas un ostal > c'était pas une maison ; son pas las soas politicas > ce sont pas ses politiques">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DET"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv PP_vbser DET > ce SV_vbhaver_p3 SAdv PP_vbser DET: es pas estat un ostal > ça a pas été une maison ; son pas estadas las soas politicas > cela ont pas été ses politiques">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="DET"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6335,6 +6535,109 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser PREP_de SN_pl > ce SV_vbhaver_p3 PP_vbser PREP_de SN_pl: son estats d'ostals > cela ont été des maisons">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3pl SAdv De SN_pl > ce SV_vbser_p3 SAdv De SN_pl: èran pas d'ostals > c'étaient pas des maisons">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv PP_vbser PREP_de SN_pl > ce SV_vbhaver_p3 SAdv PP_vbser PREP_de SN_pl: son pas estats d'ostals > cela ont pas été des maisons">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SV_vbser_p3 CNJSUB > ce SV_vbser_p3 CNJSUB: es que > c'est que">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
@@ -6359,6 +6662,92 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser CNJSUB > ce SV_vbhaver_p3 PP_vbser CNJSUB: es estat que > ça a été que">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3 SAdv CNJSUB > ce SV_vbser_p3 SAdv CNJSUB: es pas que > c'est pas que">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv PP_vbser CNJSUB > ce SV_vbhaver_p3 SAdv PP_vbser CNJSUB: es pas estat que > ça a pas été que">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="cnjsub"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SV_vbser_p3 ce_que_qui_rel > ce SV_vbser_p3 ce_que_qui_rel: es çò qu'a fait > c'est ce qu'a fait">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
@@ -6377,6 +6766,92 @@
             <clip pos="2" part="lem"/>
             <clip pos="2" part="tags"/>
             <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser ce_que_qui_rel > ce SV_vbhaver_p3 PP_vbser ce_que_qui_rel: es estat çò que > ça a été ce qui">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="ce_que_qui_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbser_p3 SAdv ce_que_qui_rel > ce SV_vbser_p3 SAdv ce_que_qui_rel: es pas çò qu'a fait > c'est pas ce qu'a fait">
+      <pattern>
+        <pattern-item n="SV_vbser_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="ce_que_qui_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv PP_vbser ce_que_qui_rel > ce SV_vbhaver_p3 SAdv PP_vbser ce_que_qui_rel: es pas estat çò que > ça a pas été ce qui">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="ce_que_qui_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6408,6 +6883,36 @@
             <clip pos="3" part="lem"/>
             <clip pos="3" part="tags"/>
             <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser NP Rel > ce SV_vbhaver_p3 PP_vbser NP Rel: es estada Aitana que > ça a éte Aitana que">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="NP"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6446,6 +6951,41 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv PP_vbser NP Rel > ce SV_vbhaver_p3 SAdv PP_vbser NP Rel: es pas estada Aitana que > ça a pas éte Aitana que">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="NP"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6491,6 +7031,46 @@
             <clip pos="5" part="lem"/>
             <clip pos="5" part="tags"/>
             <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 SAdv SAdv PP_vbser NP Rel > ce SV_vbhaver_p3 SAdv SAdv PP_vbser NP Rel: es pas totjorn estada Aitana que > ça a pas toujours éte Aitana que">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="NP"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6684,6 +7264,36 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser TN Rel > ce SV_vbhaver_p3 PP_vbser TN Rel: son estats eles que > cela ont été eux qui">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SV_vbser TN qui SV > ce SV_vbser_p3 TN qui SV: qu’ei jo qui portavi > c'est moi qui portais (evita la generacion d'un segond pronom subjècte)">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
@@ -6716,6 +7326,41 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser TN Rel SV > ce SV_vbhaver_p3 PP_vbser TN Rel SV: soi estat ièu qui portavi > ça a été moi qui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6761,6 +7406,46 @@
             <clip pos="5" part="lem"/>
             <clip pos="5" part="tags"/>
             <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser TN Rel SAdv_SPron_pro SV> ce SV_vbhaver_p3 PP_vbser TN Rel SAdv_SPron_pro SV: soi estat ièu qui totjorn portavi > ça a été moi qui toujours portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
@@ -6813,6 +7498,51 @@
             <clip pos="6" part="lem"/>
             <clip pos="6" part="tags"/>
             <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_vbhaver_p3 PP_vbser TN Rel SAdv_SPron_pro SAdv_SPron_pro SV> ce SV_vbhaver_p3 PP_vbser TN Rel SAdv_SPron_pro SAdv_SPron_pro SV: soi estat ièu qui totjorn li portavi > ça a été moi qui toujours lui portais (evita la generacion d'un segond pronom subjècte)">
+      <pattern>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP_vbser"/>
+        <pattern-item n="SPron_tn"/>
+        <pattern-item n="qui_rel"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
