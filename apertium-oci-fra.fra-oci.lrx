@@ -4449,6 +4449,93 @@
     </or>
   </rule>
 
+  <!-- être# bidon >> èsser# fals, èsser# falsa, etc., desirar -->
+  <!-- être# bidon >> estar# faus, estar# fausa, etc., desirar -->
+  <rule weight="0.8">
+    <match lemma="être# bidon" tags="vblex.*" v="oci"><select lemma="èsser# fals"/></match>
+    <match lemma="être# bidon" tags="vblex.*" v="oci@gascon"><select lemma="estar# faus"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="être# bidon" tags="vblex.*.pl"><select lemma="èsser# falses"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="n.f.sg"/>
+      <match tags="adj.f.sg"/>
+      <match tags="np.ant.f.sg"/>
+      <match lemma="il" tags="prn.tn.p3.f.sg"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="être# bidon" tags="vblex.*.sg" v="oci"><select lemma="èsser# falsa"/></match>
+    <match lemma="être# bidon" tags="vblex.*.sg" v="oci@gascon"><select lemma="estar# fausa"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.pl"/>
+      <match tags="adj.f.pl"/>
+      <match lemma="il" tags="prn.tn.p3.f.pl"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="être# bidon" tags="vblex.*.pl" v="oci"><select lemma="èsser# falsas"/></match>
+    <match lemma="être# bidon" tags="vblex.*.pl" v="oci@gascon"><select lemma="estar# fausas"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="être# bidon" tags="vblex.pp.*"><select lemma="èsser# falses"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.sg"/>
+      <match tags="adj.f.sg"/>
+      <match tags="np.*.f.sg"/>
+      <match lemma="il" tags="prn.tn.p3.f.sg"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="être# bidon" tags="vblex.pp.*" v="oci"><select lemma="èsser# falsa"/></match>
+    <match lemma="être# bidon" tags="vblex.pp.*" v="oci@gascon"><select lemma="estar# fausa"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.f.pl"/>
+      <match tags="adj.f.pl"/>
+      <match lemma="il" tags="prn.tn.p3.f.pl"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="vbhaver.*.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="être# bidon" tags="vblex.pp.*" v="oci"><select lemma="èsser# falsas"/></match>
+    <match lemma="être# bidon" tags="vblex.pp.*" v="oci@gascon"><select lemma="estar# fausas"/></match>
+  </rule>
+
   <!-- raffoler >> èsser# fòl, èsser# fòls, etc., desirar -->
   <!-- raffoler >> estar# hòu, estar# hòus, etc., desirar -->
   <rule weight="0.8">
