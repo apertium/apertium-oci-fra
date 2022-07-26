@@ -4723,10 +4723,10 @@
     <or>
       <match lemma="insistir" tags="vblex.*"/>
     </or>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
-        <match tags="preadv"/>
+        <match tags="cnjadv"/>
       </or>
     </repeat>
     <match lemma="que"/>
@@ -4746,15 +4746,23 @@
       <match lemma="díser" tags="vblex.*"/>
       <match lemma="insinuar" tags="vblex.*"/>
       <match lemma="interdíser" tags="vblex.*"/>
+      <match lemma="proïbir" tags="vblex.*"/>
+      <match lemma="defendre" tags="vblex.*"/>
+      <match lemma="defénder" tags="vblex.*"/>
+      <match lemma="enebir" tags="vblex.*"/>
       <match lemma="pensar" tags="vblex.*"/>
       <match lemma="remarcar" tags="vblex.*"/>
       <match lemma="remercar" tags="vblex.*"/>
       <match lemma="verificar" tags="vblex.*"/>
+      <match lemma="demandar" tags="vblex.*"/>
+      <match lemma="demanar" tags="vblex.*"/>
+      <match lemma="exiger" tags="vblex.*"/>
+      <match lemma="reclamar" tags="vblex.*"/>
     </or>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
-        <match tags="preadv"/>
+        <match tags="cnjadv"/>
       </or>
     </repeat>
     <match lemma="que"/>
@@ -4785,13 +4793,26 @@
       <match lemma="remercar" tags="vblex.*"/>
       <match lemma="verificar" tags="vblex.*"/>
     </or>
-    <repeat from="0" upto="3">
+    <repeat from="0" upto="2">
       <or>
         <match tags="adv"/>
-        <match tags="preadv"/>
+        <match tags="cnjadv"/>
       </or>
     </repeat>
     <match lemma="que"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="parlar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="de"/>
   </rule>
   <rule weight="1.0">
     <match tags="sent"/>
@@ -15406,12 +15427,9 @@
   <rule weight="0.8">
     <match lemma="valon" tags="n.m.*"><select lemma="vallon"/></match>
   </rule>
-
-  <!-- cadre >> vallon, wallon -->
-  <rule weight="0.8">
-    <match lemma="valon" tags="n.m.*"><select lemma="vallon"/></match>
+  <rule weight="1.0">
+    <match lemma="valon" tags="n.m.pl"><select lemma="wallon"/></match>
   </rule>
-
 
 
 
