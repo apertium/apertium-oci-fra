@@ -1504,6 +1504,32 @@
     <match lemma="pas" tags="adv"><select lemma="pas"/></match>
   </rule>
 
+  <!-- lourdement >> pesugament, de bèth tròç -->
+  <rule weight="0.8">
+    <match lemma="lourdement" tags="adv"><select lemma="pesugament"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tromper" tags="vblex.*"/>
+    <match lemma="lourdement" tags="adv"><select lemma="de bèth tròç"/></match>
+  </rule>
+
+  <!-- grossièrement >> grossièrament, gròssament, de bèth tròç -->
+  <rule weight="0.8">
+    <match lemma="grossièrement" tags="adv"><select lemma="grossièrament"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="tromper" tags="vblex.*"/>
+    <match lemma="grossièrement" tags="adv"><select lemma="de bèth tròç"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="grossièrement" tags="adv"><select lemma="gròssament"/></match>
+	<or>
+      <match tags="num"/>
+      <match tags="num.*"/>
+      <match tags="adj.*"/>
+    </or>
+  </rule>
+
   <!-- chez moi, toi, lui... après préposition -->
   <rule weight="0.8">
     <match lemma="chez moi" tags="adv" v="oci"><select lemma="en çò mieu"/></match>
@@ -1840,6 +1866,17 @@
 
 
 <!-- **************** ADJ **************** -->
+
+  <!-- large >> large, gran -->
+  <rule weight="0.8">
+    <match lemma="large" tags="adj.*"><select lemma="large"/></match>
+  </rule>
+<!--
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="large" tags="adj.*"><select lemma="gran"/></match>
+    <match tags="n.*"/>
+  </rule>
+-->
 
   <!-- rampant >> reptant, rabalaire -->
   <rule weight="0.8">
