@@ -2584,6 +2584,7 @@
        <match lemma="abdicar" tags="vblex.*"/>
        <match lemma="bascular" tags="vblex.*"/>
        <match lemma="degenerar" tags="vblex.*"/>
+       <match lemma="durar" tags="vblex.*"/>
        <match lemma="ripostar" tags="vblex.*"/>
        <match lemma="durar" tags="vblex.*"/>
        <match lemma="pantugar" tags="vblex.*"/>
@@ -3202,6 +3203,23 @@
       <match lemma="pescaminas" tags="n.*"/>
       <match lemma="dragaminas" tags="n.*"/>
       <match lemma="dragaire" tags="n.*"/>
+    </or></def-seq>
+
+    <def-seq n="legums"><or>
+      <match lemma="legume" tags="n.*"/>
+      <match lemma="tomata" tags="n.*"/>
+      <match lemma="carròta" tags="n.*"/>
+      <match lemma="patana" tags="n.*"/>
+      <match lemma="patata" tags="n.*"/>
+      <match lemma="caulet" tags="n.*"/>
+      <match lemma="caul" tags="n.*"/>
+      <match lemma="cogombre" tags="n.*"/>
+      <match lemma="cogom" tags="n.*"/>
+      <match lemma="cogorda" tags="n.*"/>
+      <match lemma="cogordeta" tags="n.*"/>
+      <match lemma="coja" tags="n.*"/>
+      <match lemma="ceba" tags="n.*"/>
+      <match lemma="alh" tags="n.*"/>
     </or></def-seq>
 
     <def-seq n="personas"><or>
@@ -10995,6 +11013,59 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- sèrra >> colline, serre -->
+  <rule weight="0.8">
+    <match lemma="sèrra" tags="n.*"><select lemma="colline"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="efièch" tags="n.*"/>
+      <match lemma="efièit" tags="n.*"/>
+      <match lemma="efèit" tags="n.*"/>
+      <match lemma="efècte" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <match lemma="sèrra" tags="n.*"><select lemma="serre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sèrra" tags="n.*"><select lemma="serre"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="legums"/>
+      <match lemma="fraga" tags="n.*"/>
+      <match lemma="ahraga" tags="n.*"/>
+      <match lemma="badau" tags="n.*"/>
+      <match lemma="batena" tags="n.*"/>
+      <match lemma="fresa" tags="n.*"/>
+      <match lemma="majofa" tags="n.*"/>
+      <match lemma="golaròt" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="legums"/>
+      <match lemma="fraga" tags="n.*"/>
+      <match lemma="ahraga" tags="n.*"/>
+      <match lemma="badau" tags="n.*"/>
+      <match lemma="batena" tags="n.*"/>
+      <match lemma="fresa" tags="n.*"/>
+      <match lemma="majofa" tags="n.*"/>
+      <match lemma="golaròt" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="sèrra" tags="n.*"><select lemma="serre"/></match>
+  </rule>
 
   <!-- popa >> sein, poupe -->
   <rule weight="0.8">
