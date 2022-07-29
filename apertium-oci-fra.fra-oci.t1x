@@ -13,6 +13,9 @@
       <cat-item tags="det.def.*"/>
       <cat-item tags="det.pos.*"/>
     </def-cat>
+    <def-cat n="detpos">
+      <cat-item tags="det.pos.*"/>
+    </def-cat>
     <def-cat n="detind">
       <cat-item tags="det.ind.*"/>
     </def-cat>
@@ -26,6 +29,9 @@
 
     <def-cat n="predet">
       <cat-item tags="predet.*"/>
+    </def-cat>
+    <def-cat n="tout_predet">
+      <cat-item lemma="tout" tags="predet.*"/>
     </def-cat>
 
     <def-cat n="nom">
@@ -379,6 +385,10 @@
       <cat-item lemma="rendre" tags="vblex.pp.*"/>
     </def-cat>
 
+    <def-cat n="durant_ger">
+      <cat-item lemma="durer" tags="vblex.ger"/>
+    </def-cat>
+
     <def-cat n="ij">
       <cat-item tags="ij"/>
     </def-cat>
@@ -486,6 +496,10 @@
     <def-cat n="facon_n">
       <cat-item lemma="façon" tags="n.*"/>
       <cat-item lemma="manière" tags="n.*"/>
+    </def-cat>
+
+    <def-cat n="vie_nsg">
+      <cat-item lemma="vie" tags="n.f.sg"/>
     </def-cat>
 
     <def-cat n="jour_n">
@@ -8891,6 +8905,185 @@
                 <lit v="temps"/>
               </get-case-from>
               <lit-tag v="n.m.sg"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: NUM temps durant > pendent NUM temps">
+      <pattern>
+        <pattern-item n="num"/>
+        <pattern-item n="unite_temps"/>
+        <pattern-item n="durant_ger"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="pendent"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <clip pos="1" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETIND temps durant > pendent DETIND temps">
+      <pattern>
+        <pattern-item n="detind"/>
+        <pattern-item n="unite_temps"/>
+        <pattern-item n="durant_ger"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="pendent"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <clip pos="1" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DETPOS vie_n durant > pendent PREDET DETPOS vie_n (ma vie durant > pendent tota ma vida)">
+      <pattern>
+        <pattern-item n="detpos"/>
+        <pattern-item n="vie_nsg"/>
+        <pattern-item n="durant_ger"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="pendent"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="tot"/>
+              </get-case-from>
+              <lit-tag v="predet.f.sg"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <clip pos="1" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREDET DETPOS vie_n durant > pendent PREDET DETPOS vie_n (toute ma vie durant > pendent tota ma vida)">
+      <pattern>
+        <pattern-item n="tout_predet"/>
+        <pattern-item n="detpos"/>
+        <pattern-item n="vie_nsg"/>
+        <pattern-item n="durant_ger"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="pendent"/>
+              </get-case-from>
+              <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <clip pos="1" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
             </lu>
             <b pos="3"/>
             <lu>
