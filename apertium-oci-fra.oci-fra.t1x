@@ -16813,7 +16813,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: ADJEC">
+    <rule comment="RÈGLA: ADJ">
       <pattern>
         <pattern-item n="adj"/>
       </pattern>
@@ -16827,8 +16827,9 @@
         <call-macro n="f_chunk_tags">
           <with-param pos="1"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="adj" case="caseFirstWord">
+          <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SA"/></tag>
               <tag><clip pos="1" side="tl" part="gen"/></tag>
