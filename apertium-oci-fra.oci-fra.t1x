@@ -357,6 +357,9 @@
       <cat-item lemma="estar" tags="vblex.*.p1.*"/>
       <cat-item lemma="estar" tags="vblex.*.p2.*"/>
       <cat-item lemma="estar" tags="vblex.*.p3.*"/>
+      <cat-item lemma="estremvirar" tags="vblex.*.p1.*"/>
+      <cat-item lemma="estremvirar" tags="vblex.*.p2.*"/>
+      <cat-item lemma="estremvirar" tags="vblex.*.p3.*"/>
     </def-cat>
     <def-cat n="verb_pron-nopron_pp">
       <cat-item lemma="acochar" tags="vblex.pp.*"/>
@@ -372,6 +375,7 @@
       <cat-item lemma="i mau escàder" tags="vblex.pp.*"/>
       <cat-item lemma="dòler# de" tags="vblex.pp.*"/>
       <cat-item lemma="estar" tags="vblex.pp.*"/>
+      <cat-item lemma="estremvirar" tags="vblex.pp.*"/>
     </def-cat>
 
     <def-cat n="verb_dat2nom_conj">	<!-- em hè dòu > je regrette -->
@@ -12410,7 +12414,7 @@
       <action>
          <choose>
            <when>
-             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter toutes -->
+             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter tous -->
              <test>
                <or>
                  <and>
@@ -16228,7 +16232,7 @@
        </action>
     </rule>
 
-    <rule comment="INF/GER + ENCLITIC (pensar-o > le penser)">
+    <rule comment="INF/GER + ENCLITIC (pensar-o > le penser; estremvirà's > faire volte-face)">
       <pattern>
         <pattern-item n="infger"/>
         <pattern-item n="prnenc"/>
@@ -16243,28 +16247,56 @@
         <call-macro n="f_canvis_temps">
           <with-param pos="1"/>
         </call-macro>
-        <out>
-          <chunk name="pro_inf" case="caseFirstWord">
-            <tags>
-              <tag><lit-tag v="SV"/></tag>
-              <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-              <tag><var n="tipusverb"/></tag>
-              <tag><clip pos="1" side="tl" part="temps"/></tag>
-            </tags>
-            <lu>
-              <clip pos="2" side="tl" part="lem"/>
-              <lit-tag v="prn.pro"/>
-              <clip pos="2" side="tl" part="tipoenc_pro"/>
-            </lu>
-            <b/>
-            <lu>
-              <clip pos="1" side="tl" part="lemh"/>
-              <clip pos="1" side="tl" part="a_verb"/>
-              <clip pos="1" side="tl" part="temps"/>
-              <clip pos="1" side="tl" part="lemq"/>
-            </lu>
-          </chunk>
-        </out>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><clip pos="1" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+                <equal><clip pos="2" side="tl" part="tipoenc_pro"/><lit-tag v="ref.p3.mf.sp"/></equal>
+              </and>
+            </test>
+            <out>
+              <chunk name="inf" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="1" side="tl" part="temps"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_verb"/>
+                  <clip pos="1" side="tl" part="temps"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="pro_inf" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="1" side="tl" part="temps"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="lem"/>
+                  <lit-tag v="prn.pro"/>
+                  <clip pos="2" side="tl" part="tipoenc_pro"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="a_verb"/>
+                  <clip pos="1" side="tl" part="temps"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
       </action>
   </rule>
 
@@ -16286,7 +16318,7 @@
         </call-macro>
          <choose>
            <when>
-             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter toutes -->
+             <!-- D'après Alibèrt il y a différents ordres des pronoms en languedocien. Nous tâchons de les traiter tous -->
              <test>
                <or>
                  <and>
@@ -16405,6 +16437,66 @@
           <with-param pos="1"/>
         </call-macro>
          <choose>
+           <when>
+             <test>
+               <and>
+                 <equal><clip pos="1" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+                 <equal><clip pos="2" side="tl" part="tipoenc_pro"/><lit-tag v="ref.p3.mf.sp"/></equal>
+               </and>
+             </test>
+              <out>
+                <chunk name="pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="3" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="3" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+           </when>
+           <when>
+             <test>
+               <and>
+                 <equal><clip pos="1" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+                 <equal><clip pos="3" side="tl" part="tipoenc_pro"/><lit-tag v="ref.p3.mf.sp"/></equal>
+               </and>
+             </test>
+              <out>
+                <chunk name="pro_inf" case="caseFirstWord">
+                  <tags>
+                    <tag><lit-tag v="SV"/></tag>
+                    <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                    <tag><var n="tipusverb"/></tag>
+                    <tag><clip pos="1" side="tl" part="temps"/></tag>
+                  </tags>
+                  <lu>
+                    <clip pos="2" side="tl" part="lem"/>
+                    <lit-tag v="prn.pro"/>
+                    <clip pos="2" side="tl" part="tipoenc_pro"/>
+                  </lu>
+                  <b/>
+                  <lu>
+                    <clip pos="1" side="tl" part="lemh"/>
+                    <clip pos="1" side="tl" part="a_verb"/>
+                    <clip pos="1" side="tl" part="temps"/>
+                    <clip pos="1" side="tl" part="lemq"/>
+                  </lu>
+                </chunk>
+              </out>
+           </when>
            <when>
              <test>
                <or>
