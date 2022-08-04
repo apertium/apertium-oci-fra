@@ -10652,6 +10652,18 @@
 
 <!-- **************** ADV **************** -->
 
+  <!-- segur >> sûr, bien sûr -->
+  <rule weight="0.8">
+    <match lemma="segur" tags="adv"><select lemma="sûr"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="sent"/>
+      <match tags="cm"/>
+    </or>
+    <match lemma="segur" tags="adv"><select lemma="bien sûr"/></match>
+  </rule>
+
   <!-- bèth tròç >> beaucoup, long -->
   <rule weight="0.8">
     <match lemma="bèth tròç" tags="adv"><select lemma="beaucoup"/></match>
