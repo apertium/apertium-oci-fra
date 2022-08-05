@@ -3290,7 +3290,6 @@
       <match lemma="persona" tags="n.*"/>
       <match lemma="òme" tags="n.*"/>
       <match lemma="òmi" tags="n.*"/>
-      <match lemma="òmi" tags="n.*"/>
       <match lemma="femna" tags="n.*"/>
       <match lemma="hemna" tags="n.*"/>
       <match lemma="ciutadan" tags="n.*"/>
@@ -7093,6 +7092,9 @@
   </rule>
   <rule weight="1.0">
     <or>
+      <match lemma="començar" tags="vblex.*"/>
+      <match lemma="terminar" tags="vblex.*"/>
+      <match lemma="acabar" tags="vblex.*"/>
       <match lemma="dintrar" tags="vblex.*"/>
       <match lemma="entrar" tags="vblex.*"/>
       <match lemma="intrar" tags="vblex.*"/>
@@ -7105,6 +7107,45 @@
     </repeat>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
     <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="començar" tags="vblex.*"/>
+      <match lemma="terminar" tags="vblex.*"/>
+      <match lemma="acabar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <or>
+      <match lemma="A" tags="n.acr.*"/>
+      <match lemma="a" tags="n.m.sp"/>
+      <match lemma="b" tags="n.m.sp"/>
+      <match lemma="c" tags="n.m.sp"/>
+      <match lemma="d" tags="n.m.sp"/>
+      <match lemma="e" tags="n.m.sp"/>
+      <match lemma="f" tags="n.m.sp"/>
+      <match lemma="g" tags="n.m.sp"/>
+      <match lemma="h" tags="n.m.sp"/>
+      <match lemma="i" tags="n.m.sp"/>
+      <match lemma="j" tags="n.m.sp"/>
+      <match lemma="k" tags="n.m.sp"/>
+      <match lemma="l" tags="n.m.sp"/>
+      <match lemma="m" tags="n.m.sp"/>
+      <match lemma="n" tags="n.m.sp"/>
+      <match lemma="o" tags="n.m.sp"/>
+      <match lemma="p" tags="n.m.sp"/>
+      <match lemma="q" tags="n.m.sp"/>
+      <match lemma="r" tags="n.m.sp"/>
+      <match lemma="s" tags="n.m.sp"/>
+      <match lemma="t" tags="n.m.sp"/>
+      <match lemma="u" tags="n.m.sp"/>
+      <match lemma="v" tags="n.m.sp"/>
+      <match lemma="w" tags="n.m.sp"/>
+      <match lemma="x" tags="n.m.sp"/>
+      <match lemma="y" tags="n.m.sp"/>
+      <match lemma="z" tags="n.m.sp"/>
   </rule>
   <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
@@ -7145,7 +7186,7 @@
       <match lemma="preveir" tags="vblex.*"/>
       <match lemma="preveire" tags="vblex.*"/>
     </or>
-    <repeat from="0" upto="2">
+    <repeat from="0" uptoacabar2">
       <match tags="adv"/>
     </repeat>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
@@ -11116,6 +11157,54 @@
 
 <!-- **************** N **************** -->
 
+  <!-- astre >> astre, hasard, chance -->
+  <rule weight="0.8">
+    <match lemma="astre" tags="n.*"><select lemma="astre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="per" tags="pr"/>
+    <match lemma="astre" tags="n.*"><select lemma="hasard"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còp" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="astre" tags="n.*"><select lemma="hasard"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="qual" tags="det.*"/>
+      <match lemma="quau" tags="det.*"/>
+      <match lemma="quin" tags="det.*"/>
+      <match lemma="qun" tags="det.*"/>
+    </or>
+    <match lemma="astre" tags="n.*"><select lemma="hasard"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="aver" tags="vblex.*"/>
+      <match lemma="auer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.det.*"/>
+    <match lemma="astre" tags="n.*"><select lemma="chance"/></match>
+  </rule>
+
+  <!-- escadença >> occasion, hasard -->
+  <rule weight="0.8">
+    <match lemma="escadença" tags="n.*"><select lemma="occasion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="per" tags="pr"/>
+    <match lemma="escadença" tags="n.*"><select lemma="hasard"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còp" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="escadença" tags="n.*"><select lemma="hasard"/></match>
+  </rule>
+
   <!-- sèrra >> colline, serre -->
   <rule weight="0.8">
     <match lemma="sèrra" tags="n.*"><select lemma="colline"/></match>
@@ -11311,6 +11400,7 @@
   <rule weight="1.0">
     <or>
       <match lemma="aver" tags="vblex.*"/>
+      <match lemma="auer" tags="vblex.*"/>
       <match lemma="amaisar" tags="vblex.*"/>
       <match lemma="amatigar" tags="vblex.*"/>
       <match lemma="levar" tags="vblex.*"/>
@@ -11937,9 +12027,56 @@
     <match lemma="carn" tags="n.*"><select lemma="viande"/></match>
   </rule>
   <rule weight="1.0">
+    <match tags="det.pos.*"/>
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+  </rule>
+  <rule weight="1.0">
     <match lemma="plaser" tags="n.*"/>
     <match lemma="de" tags="pr"/>
     <match tags="det.def.*"/>
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+    <match lemma="uman" tags="adj.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="òme" tags="n.*"/>
+      <match lemma="òmi" tags="n.*"/>
+      <match lemma="femna" tags="n.*"/>
+      <match lemma="hemna" tags="n.*"/>
+      <match lemma="enfant" tags="n.*"/>
+      <match lemma="dròlle" tags="n.*"/>
+      <match lemma="mainatge" tags="n.*"/>
+      <match lemma="gojat" tags="n.*"/>
+      <match lemma="garçon" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+    <match lemma="e" tags="cnjcoo"/>
+    <or>
+      <match lemma="òs" tags="n.*"/>
+      <match lemma="uas" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
+    <match tags="cnjcoo"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <match lemma="esperit" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esperit" tags="n.*"/>
+    <match tags="cnjcoo"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
     <match lemma="carn" tags="n.f.sg"><select lemma="chair"/></match>
   </rule>
 
@@ -13220,7 +13357,10 @@
   </rule>
 
   <rule weight="1.0">
-    <match lemma="aver"/>
+    <or>
+      <match lemma="aver" tags="vblex.*"/>
+      <match lemma="auer" tags="vblex.*"/>
+    </or>
     <or>
       <match lemma="per" tags="pr"/>
       <match lemma="coma" tags="cnjadv"/>
