@@ -4239,6 +4239,8 @@
     </def-macro>
 
     <def-macro n="escriure_SAdv" npar="1">
+      <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lem"/></let>
+      <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
       <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
       <choose>
         <when>
@@ -4246,7 +4248,7 @@
             <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.pas_neg"/></equal>
           </test>
           <out>
-            <chunk namefrom="lemma">
+            <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
                 <tag><lit-tag v="SAdv"/></tag>
                 <tag><lit-tag v="pas_neg"/></tag>
@@ -4263,7 +4265,7 @@
             <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.enon"/></equal>
           </test>
           <out>
-            <chunk namefrom="lemma">
+            <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
                 <tag><lit-tag v="SAdv"/></tag>
                 <tag><lit-tag v="enon"/></tag>
@@ -4277,7 +4279,7 @@
         </when>
         <otherwise>
           <out>
-            <chunk namefrom="lemma">
+            <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
                 <tag><lit-tag v="SAdv"/></tag>
               </tags>
