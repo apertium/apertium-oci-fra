@@ -87,15 +87,20 @@
     <def-cat n="SPron_nous">
       <cat-item lemma="nous" tags="SPron.tn"/>
       <cat-item lemma="nous" tags="SPron.tn.*"/>
+      <cat-item lemma="subj" tags="prn.subj.p1.*.pl"/>
     </def-cat>
     <def-cat n="SPron_vous">
       <cat-item lemma="vous" tags="SPron.tn"/>
       <cat-item lemma="vous" tags="SPron.tn.*"/>
+      <cat-item lemma="subj" tags="prn.subj.p2.*.pl"/>
     </def-cat>
     <def-cat n="SPron_eux_elles">
       <cat-item lemma="eux" tags="SPron.tn"/>
       <cat-item lemma="eux" tags="SPron.tn.*"/>
       <cat-item lemma="il" tags="SPron.tn.f.pl"/>
+    </def-cat>
+    <def-cat n="SPron_tous">
+      <cat-item lemma="tout" tags="SPron.tn.*.pl"/>
     </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
@@ -231,6 +236,12 @@
       <cat-item lemma="verbcj" tags="SVneg.*"/>
       <cat-item lemma="havercj" tags="SV.*"/>
       <cat-item lemma="havercj" tags="SVneg.*"/>
+    </def-cat>
+    <def-cat n="SV_pers_p1pl">
+      <cat-item tags="SV.*.p1.pl"/>
+    </def-cat>
+    <def-cat n="SV_pers_p2pl">
+      <cat-item tags="SV.*.p2.pl"/>
     </def-cat>
     <def-cat n="SV_copulatiu_pers">
       <cat-item tags="SV.vbser.*.p1.*"/>
@@ -3332,6 +3343,349 @@
     <!-- FIN RÈGLAS accord en genre entre sujet et attribut -->
 
     <!-- RÈGLAS inclusion del pronòm subjècte -->
+
+    <rule comment="RÈGLA: tots SV_p1pl > nous tous SV_p1pl (tots volèm > nous tous voulons)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_nous tots SV_p1pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: tots SV_p2pl > vous tous SV_p2pl (tots volètz > vous tous voulez)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_vous tots SV_p2pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: tots SPron_pro SV_p1pl > nous tous SPron_pro SV_p1pl (tots i volèm > nous tous y voulons)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_nous tots SPron_pro SV_p1pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: tots SPron_pro SV_p2pl > vous tous SPron_pro SV_p2pl (tots i volètz > vous tous y voulez)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="3"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_vous tots SPron_pro SV_p2pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: tots SPron_pro SPron_pro SV_p1pl > nous tous SPron_pro SPron_pro SV_p1pl (tots l'i volèm > nous tous l'y voulons)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_nous tots SPron_pro SPron_pro SV_p1pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_nous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p1pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: tots SPron_pro SPron_pro SV_p2pl > vous tous SPron_pro SPron_pro SV_p2pl (tots l'i volètz > vous tous l'y voulez)">
+      <pattern>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_subj2">
+          <with-param pos="4"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SPron_vous tots SPron_pro SPron_pro SV_p2pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SPron_vous"/>
+        <pattern-item n="SPron_tous"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV_pers_p2pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
 
     <rule comment="RÈGLA: SPron_tn SV (aquela règla es per empachar la generacion prn.tn)">
       <pattern>
