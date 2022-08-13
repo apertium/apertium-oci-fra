@@ -4243,13 +4243,32 @@
 
     <def-macro n="escriure_SAdv" npar="1">
       <let><var n="caseFirstWord"/><case-of pos="1" side="tl" part="lem"/></let>
-      <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
       <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
       <choose>
         <when>
           <test>
+            <or>
+              <equal><clip pos="1" side="tl" part="lem"/><lit v="abC"/></equal>
+              <equal><clip pos="1" side="tl" part="lem"/><lit v="apC"/></equal>
+            </or>
+          </test>
+          <out>
+            <chunk namefrom="lemma">
+              <tags>
+                <tag><lit-tag v="SAdv"/></tag>
+              </tags>
+              <lu>
+                <clip pos="1" side="tl" part="lem"/>
+                <lit-tag v="adv"/>
+              </lu>
+            </chunk>
+          </out>
+        </when>
+        <when>
+          <test>
             <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.pas_neg"/></equal>
           </test>
+          <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
           <out>
             <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
@@ -4267,6 +4286,7 @@
           <test>
             <equal><clip pos="1" side="tl" part="a_adv"/><lit-tag v="adv.enon"/></equal>
           </test>
+          <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
           <out>
             <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
@@ -4281,6 +4301,7 @@
           </out>
         </when>
         <otherwise>
+          <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
           <out>
             <chunk namefrom="lemma" case="caseFirstWord">
               <tags>
