@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lrx>
-
   <def-macros>
     <def-macro n="noms_propres" npar="2">
       <rule weight="0.6">
@@ -2082,6 +2081,134 @@
 
 <!-- **************** N **************** -->
 
+  <!-- mine >> mina, cara, semblant, morre/mus -->
+  <rule weight="0.8">
+    <match lemma="mine" tags="n.*"><select lemma="mina"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="bon" tags="adj.*"/>
+      <match lemma="mauvais" tags="adj.*"/>
+    </or>
+    <match lemma="mine" tags="n.*"><select lemma="cara"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="mine" tags="n.*"><select lemma="semblant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match tags="det.def.*"/>
+    <match lemma="mine" tags="n.*" v="oci"><select lemma="morre"/></match>
+    <match lemma="mine" tags="n.*" v="oci@gascon"><select lemma="mus"/></match>
+  </rule>
+
+  <!-- économie >> economia, estalvi/estauvi -->
+  <rule weight="0.8">
+    <match lemma="économie" tags="n.*"><select lemma="economia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match lemma="en" tags="pr"/>
+    </or>
+    <or>
+      <match lemma="argent" tags="n.*"/>
+      <match lemma="frais" tags="n.*"/>
+      <match lemma="temps" tags="n.*"/>
+      <match lemma="ressource" tags="n.*"/>
+      <match lemma="personnel" tags="n.*"/>
+      <match lemma="coût" tags="n.m.pl"/>
+      <match lemma="énergie" tags="n.*"/>
+      <match lemma="électricité" tags="n.*"/>
+      <match lemma="gaz" tags="n.*"/>
+      <match lemma="pétrole" tags="n.*"/>
+      <match lemma="hidrocarbure" tags="n.*"/>
+      <match lemma="eau" tags="n.*"/>
+      <match lemma="matière" tags="n.*"/>
+      <match lemma="impôt" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+    <or>
+      <match lemma="énergétique" tags="adj.*"/>
+      <match lemma="annuel" tags="adj.*"/>
+      <match lemma="budgétaire" tags="adj.*"/>
+      <match lemma="draconien" tags="adj.*"/>
+      <match lemma="stricte" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="mesure" tags="n.*"/>
+      <match lemma="campagne" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <or>
+        <match lemma="environ" tags="adv"/>
+        <match lemma="à peu près" tags="adv"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="num"/>
+      <match lemma="dizaine" tags="n.*.pl"/>
+      <match lemma="centaine" tags="n.*.pl"/>
+      <match lemma="millier" tags="n.*.pl"/>
+      <match lemma="million" tags="n.*.pl"/>
+      <match lemma="milliard" tags="n.*.pl"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="économie" tags="n.*" v="oci"><select lemma="estalvi"/></match>
+    <match lemma="économie" tags="n.*" v="oci@gascon"><select lemma="estauvi"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match tags="num.*"/>
+      <match lemma="dizaine" tags="n.*.pl"/>
+      <match lemma="centaine" tags="n.*.pl"/>
+      <match lemma="millier" tags="n.*.pl"/>
+      <match lemma="million" tags="n.*.pl"/>
+      <match lemma="milliard" tags="n.*.pl"/>
+    </or>
+  </rule>
+
   <!-- arrondissement >> arrondiment, arredondiment -->
   <rule weight="0.8">
     <match lemma="arrondissement" tags="n.*"><select lemma="arrondiment"/></match>
@@ -2395,7 +2522,7 @@
     <match lemma="manière" tags="n.*"><select lemma="manièra"/></match>
   </rule>
 
-  <!-- dizaine >> desenat/detzenat, vinten/vintau -->
+  <!-- dizaine >> desenat, detzenat -->
   <rule weight="0.8">
     <match lemma="dizaine" tags="n.*"><select lemma="desenat"/></match>
   </rule>
@@ -2403,7 +2530,7 @@
     <match lemma="dizaine" tags="n.*"><select lemma="detzenat"/></match>
   </rule>
 
-  <!-- douzaine >> dotzena, dotzenat, vinten/vintau -->
+  <!-- douzaine >> dotzena, dotzenat -->
   <rule weight="0.8">
     <match lemma="douzaine" tags="n.*"><select lemma="dotzena"/></match>
   </rule>
@@ -5756,7 +5883,8 @@
   <macro n="noms_propres"><with-param v="Madeleine"/><with-param v="Magdalena"/></macro>
   <macro n="noms_propres" v="oci"><with-param v="Marcel"/><with-param v="Marcèl"/></macro>
   <macro n="noms_propres" v="oci@gascon"><with-param v="Marcel"/><with-param v="Marcèu"/></macro>
-  <macro n="noms_propres"><with-param v="Marguerite"/><with-param v="Margarida"/></macro>
+  <macro n="noms_propres" v="oci"><with-param v="Marguerite"/><with-param v="Margarida"/></macro>
+  <macro n="noms_propres" v="oci@gascon"><with-param v="Marguerite"/><with-param v="Margalida"/></macro>
   <macro n="noms_propres"><with-param v="Marie"/><with-param v="Maria"/></macro>
   <macro n="noms_propres"><with-param v="Marie-Christine"/><with-param v="Maria Cristina"/></macro>
   <macro n="noms_propres"><with-param v="Marie-Thérèse"/><with-param v="Maria Terèsa"/></macro>

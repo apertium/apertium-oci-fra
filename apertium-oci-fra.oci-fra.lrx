@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lrx>
-
   <def-macros>
     <def-macro n="noms_propres" npar="2">
       <rule weight="0.6">
@@ -2484,6 +2483,14 @@
       <match lemma="vos" tags="prn.pro.*"/>
     </or></def-seq>
 
+    <def-seq n="venir"><or>
+       <match lemma="venir" tags="vblex.*"/>
+       <match lemma="vénguer" tags="vblex.*"/>
+       <match lemma="vàder" tags="vblex.*"/>
+       <match lemma="vier" tags="vblex.*"/>
+       <match lemma="viéner" tags="vblex.*"/>
+    </or></def-seq>
+
     <def-seq n="verbs_intrans"><or>
        <match lemma="agradar" tags="vblex.*"/>
        <match lemma="anar" tags="vblex.*"/>
@@ -3324,6 +3331,8 @@
       <match lemma="alumne" tags="n.*"/>
       <match lemma="aprenent" tags="n.*"/>
       <match lemma="licean" tags="n.*"/>
+      <match lemma="estudiant" tags="n.*"/>
+      <match lemma="universitari" tags="n.*"/>
       <match lemma="curat" tags="n.*"/>
       <match lemma="curè" tags="n.*"/>
       <match lemma="capelan" tags="n.*"/>
@@ -3341,6 +3350,8 @@
       <match lemma="musicaire" tags="n.*"/>
       <match lemma="cercaire" tags="n.*"/>
       <match lemma="recercaire" tags="n.*"/>
+      <match lemma="militant" tags="n.*"/>
+      <match lemma="defensor" tags="n.*"/>
 
       <match lemma="crestian" tags="n.*"/>
       <match lemma="catolic" tags="n.*"/>
@@ -3493,6 +3504,8 @@
       <match lemma="ambaissador" tags="n.*"/>
       <match lemma="ambaishador" tags="n.*"/>
       <match lemma="cònsol" tags="n.*"/>
+      <match lemma="plenipotenciari" tags="n.*"/>
+      <match lemma="representant" tags="n.*"/>
       <match lemma="vice-cònsol" tags="n.*"/>
       <match lemma="vicecònsol" tags="n.*"/>
       <match lemma="ministre" tags="n.*"/>
@@ -4770,6 +4783,15 @@
 
 <!-- **************** PRN **************** -->
 
+  <!-- totes eles >> tout, chacun d'eux -->
+  <rule weight="0.8">
+    <match lemma="totes eles" tags="prn.*"><select lemma="tout"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="pr"/>
+    <match lemma="totes eles" tags="prn.*"><select lemma="chacun d'eux"/></match>
+  </rule>
+
   <!-- qual prn.itg >> quel, qui -->
   <rule weight="0.8">
     <match lemma="qual" tags="prn.itg.*"><select lemma="quel"/></match>
@@ -4824,6 +4846,7 @@
       <match lemma="decidir" tags="vblex.*"/>
       <match lemma="declarar" tags="vblex.*"/>
       <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
       <match lemma="díser" tags="vblex.*"/>
       <match lemma="insinuar" tags="vblex.*"/>
       <match lemma="interdíser" tags="vblex.*"/>
@@ -4881,6 +4904,45 @@
       </or>
     </repeat>
     <match lemma="que"/>
+  </rule>
+  <rule weight="1.0"> 
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="far" tags="vblex.*.p3.pl"/>
+      <match lemma="har" tags="vblex.*.p3.pl"/>
+      <match lemma="hèr" tags="vblex.*.p3.pl"/>
+      <match lemma="afirmar" tags="vblex.*"/>
+      <match lemma="reafirmar" tags="vblex.*"/>
+      <match lemma="creire" tags="vblex.*"/>
+      <match lemma="créder" tags="vblex.*"/>
+      <match lemma="créser" tags="vblex.*"/>
+      <match lemma="creir" tags="vblex.*"/>
+      <match lemma="decidir" tags="vblex.*"/>
+      <match lemma="declarar" tags="vblex.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="discutir" tags="vblex.*"/>
+      <match lemma="insinuar" tags="vblex.*"/>
+      <match lemma="interdíser" tags="vblex.*"/>
+      <match lemma="pensar" tags="vblex.*"/>
+      <match lemma="remarcar" tags="vblex.*"/>
+      <match lemma="remercar" tags="vblex.*"/>
+      <match lemma="verificar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr" v="oci"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match tags="n.*.pl"/>
   </rule>
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
@@ -6323,6 +6385,41 @@
     </or>
   </rule>
 
+  <rule weight="1.2" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="le"/></match>
+    <seq n="venir"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+
+  <rule weight="1.4" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
+    <seq n="venir"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <seq n="verbs_intrans"/>
+      <match tags="vbser.inf"/>
+      <match lemma="dire" tags="vblex.inf"/>
+      <match lemma="díser" tags="vblex.inf"/>
+      <match lemma="respondre" tags="vblex.inf"/>
+      <match lemma="repóner" tags="vblex.inf"/>
+      <match lemma="atier" tags="vblex.inf"/>
+      <match lemma="replicar" tags="vblex.inf"/>
+      <match lemma="respotir" tags="vblex.inf"/>
+      <match lemma="rebecar" tags="vblex.inf"/>
+      <match lemma="explicar" tags="vblex.inf"/>
+      <match lemma="contar" tags="vblex.inf"/>
+      <match lemma="anonciar" tags="vblex.inf"/>
+      <match lemma="semblar" tags="vblex.inf"/>
+      <match lemma="paréisser" tags="vblex.inf"/>
+      <match lemma="paréisher" tags="vblex.inf"/>
+    </or>
+  </rule>
+
   <rule weight="1.0" v="oci@gascon">
     <match lemma="lo" tags="prn.pro.*.sg"><select lemma="lui"/></match>
     <or>
@@ -7146,6 +7243,7 @@
       <match lemma="x" tags="n.m.sp"/>
       <match lemma="y" tags="n.m.sp"/>
       <match lemma="z" tags="n.m.sp"/>
+    </or>
   </rule>
   <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
@@ -7186,7 +7284,7 @@
       <match lemma="preveir" tags="vblex.*"/>
       <match lemma="preveire" tags="vblex.*"/>
     </or>
-    <repeat from="0" uptoacabar2">
+    <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match lemma="per" tags="pr"><select lemma="par"/></match>
@@ -11157,6 +11255,61 @@
 
 <!-- **************** N **************** -->
 
+  <!-- cara >> visage, mine -->
+  <rule weight="0.8">
+    <match lemma="cara" tags="n.*"><select lemma="visage"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="bo" tags="adj.*"/>
+      <match lemma="mal" tags="adj.*"/>
+    </or>
+    <match lemma="cara" tags="n.*"><select lemma="mine"/></match>
+  </rule>
+
+  <!-- morre >> museau, mine -->
+  <rule weight="0.8">
+    <match lemma="morre" tags="n.*"><select lemma="museau"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="far" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <match lemma="morre" tags="n.*"><select lemma="mine"/></match>
+  </rule>
+
+  <!-- mus >> museau, mine -->
+  <rule weight="0.8">
+    <match lemma="mus" tags="n.*"><select lemma="museau"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="far" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
+    <match lemma="mus" tags="n.*"><select lemma="mine"/></match>
+  </rule>
+
+  <!-- cònsul >> maire, consule -->
+  <rule weight="0.8">
+    <match lemma="cònsol" tags="n.*"><select lemma="maire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cònsol" tags="n.m.*"><select lemma="consule"/></match>
+    <match lemma="roman" tags="adj.*"/>
+  </rule>
+
   <!-- astre >> astre, hasard, chance -->
   <rule weight="0.8">
     <match lemma="astre" tags="n.*"><select lemma="astre"/></match>
@@ -11188,6 +11341,13 @@
       <match tags="adv"/>
     </repeat>
     <match tags="det.det.*"/>
+    <match lemma="astre" tags="n.*"><select lemma="chance"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="portar" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
     <match lemma="astre" tags="n.*"><select lemma="chance"/></match>
   </rule>
 
@@ -15829,6 +15989,9 @@
     </repeat>
     <or>
       <seq n="personas"/>
+      <match lemma="país" tags="n.*"/>
+      <match lemma="region" tags="n.*"/>
+      <match lemma="vila" tags="n.*"/>
     </or>
   </rule>
 
@@ -18555,6 +18718,7 @@
   <macro n="ant_antcog"><with-param v="Agustin"/><with-param v="Augustin"/></macro>
   <macro n="ant_antcog"><with-param v="Aquilles"/><with-param v="Achille"/></macro>
   <macro n="ant_antcog"><with-param v="August"/><with-param v="Auguste"/></macro>
+  <macro n="ant_antcog"><with-param v="Aurelian"/><with-param v="Aurélien"/></macro>
   <macro n="ant_antcog"><with-param v="Cesar"/><with-param v="César"/></macro>
   <macro n="ant_antcog"><with-param v="Luci"/><with-param v="Lucius"/></macro>
   <macro n="ant_antcog"><with-param v="Marc Aurèli"/><with-param v="Marc-Aurèle"/></macro>
@@ -18658,6 +18822,7 @@
   <macro n="noms_propres"><with-param v="Magdalena"/><with-param v="Madeleine"/></macro>
   <macro n="noms_propres"><with-param v="Marcèl"/><with-param v="Marcel"/></macro>
   <macro n="noms_propres"><with-param v="Marcèu"/><with-param v="Marcel"/></macro>
+  <macro n="noms_propres"><with-param v="Margalida"/><with-param v="Marguerite"/></macro>
   <macro n="noms_propres"><with-param v="Margarida"/><with-param v="Marguerite"/></macro>
   <macro n="noms_propres"><with-param v="Maria"/><with-param v="Marie"/></macro>
   <macro n="noms_propres"><with-param v="Maria Cristina"/><with-param v="Marie-Christine"/></macro>
