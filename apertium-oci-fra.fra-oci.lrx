@@ -1460,6 +1460,49 @@
 
 <!-- **************** PRN **************** -->
 
+  <!-- combien prn.itg >> quant -->
+  <rule weight="0.8">
+    <match lemma="combien" tags="prn.itg.*"><select lemma="quant" tags="prn.itg.m.sg"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="combien" tags="prn.itg.*"><select lemma="quant" tags="prn.itg.m.pl"/></match>
+    <match tags="vbser.*.pl"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="combien" tags="prn.itg.*"><select lemma="quant" tags="prn.itg.f.pl"/></match>
+    <match tags="vbser.*.pl"/>
+    <match tags="det.*.f.pl"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="combien" tags="prn.itg.*"><select lemma="quant" tags="prn.itg.f.pl"/></match>
+    <match tags="vbser.*.pl"/>
+    <match tags="det.*.mf.pl"/>
+    <or>
+      <match tags="n.*.f.pl"/>
+      <match tags="adj.*.f.pl"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="combien" tags="prn.itg.*"><select lemma="quant" tags="prn.itg.m.pl"/></match>
+    <repeat from="0" upto="5">
+      <or>
+        <match tags="prn.tn.*"/>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="en" tags="prn.pro.adv"/>
+    <or>
+      <match tags="vblex.*"/>
+      <match tags="vbhaver.*"/>
+      <match tags="vbmod.*"/>
+    </or>
+  </rule>
+
   <!-- lui prn.pro >> lo prn.pro.p3.m.sg, lo prn.pro.p3.f.sg, ac (Gascon) -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.sg"/></match>
@@ -2080,6 +2123,19 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- pige >> linha, an/candela -->
+  <rule weight="0.8">
+    <match lemma="pige" tags="n.*"><select lemma="linha"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="num"/>
+      <match tags="num.*"/>
+    </or>
+    <match lemma="pige" tags="n.*" v="oci"><select lemma="an"/></match>
+    <match lemma="pige" tags="n.*" v="oci@gascon"><select lemma="candela"/></match>
+  </rule>
 
   <!-- mine >> mina, cara, semblant, morre/mus -->
   <rule weight="0.8">
