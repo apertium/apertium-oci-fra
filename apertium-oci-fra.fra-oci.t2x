@@ -6,6 +6,22 @@
       <cat-item tags="SN.*"/>
       <cat-item tags="SPron.tn.*"/>
     </def-cat>
+    <def-cat n="SN_adj_nom">
+      <cat-item lemma="a_n" tags="SN.*"/>
+      <cat-item lemma="a_n_a" tags="SN.*"/>
+      <cat-item lemma="adv_a_n" tags="SN.*"/>
+      <cat-item lemma="adv_a_n_a" tags="SN.*"/>
+      <cat-item lemma="a_a_n" tags="SN.*"/>
+      <cat-item lemma="a_a_n_a" tags="SN.*"/>
+    </def-cat>
+    <def-cat n="SN_adj_nom_pl">
+      <cat-item lemma="a_n" tags="SN.*.pl.*"/>
+      <cat-item lemma="a_n_a" tags="SN.*.pl.*"/>
+      <cat-item lemma="adv_a_n" tags="SN.*.pl.*"/>
+      <cat-item lemma="adv_a_n_a" tags="SN.*.pl.*"/>
+      <cat-item lemma="a_a_n" tags="SN.*.pl.*"/>
+      <cat-item lemma="a_a_n_a" tags="SN.*.pl.*"/>
+    </def-cat>
     <def-cat n="SA">
       <cat-item tags="SA"/>
       <cat-item tags="SA.*"/>
@@ -4197,6 +4213,101 @@
           <b pos="6"/>
           <chunk>
             <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- reglas per PREP_de + adj + nom -->
+
+    <rule comment="RÈGLA: SV PR_de DET_def SN: Je veux de grands libres > Vòli grans libes" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="1" part="lem"/><lit v="protegir"/></equal>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="2" part="lem"/>
+                <clip pos="2" part="tags"/>
+                <clip pos="2" part="chcontent"/>
+              </chunk>
+              <b pos="2"/>
+            </out>
+          </when>
+          <otherwise>
+            <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+          </otherwise>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV SAdv PR_de DET_def SN: Je veux toujours de grands libres > Vòli tostemps grans libes" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="1" part="lem"/><lit v="protegir"/></equal>
+            </test>
+            <out>
+              <chunk>
+                <clip pos="3" part="lem"/>
+                <clip pos="3" part="tags"/>
+                <clip pos="3" part="chcontent"/>
+              </chunk>
+              <b pos="3"/>
+            </out>
+          </when>
+          <otherwise>
+            <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+          </otherwise>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
       </action>
