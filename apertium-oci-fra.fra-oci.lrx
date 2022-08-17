@@ -1203,6 +1203,14 @@
     </or>
   </rule>
   <rule weight="1.0">
+    <or>
+      <match lemma="fer" tags="n.*"/>
+      <match lemma="lampe" tags="n.*"/>
+    </or>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <match tags="vblex.inf"/>
+  </rule>
+  <rule weight="1.0">
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <or>
       <match lemma="fragmentation" tags="n.*"/>
@@ -1214,6 +1222,13 @@
     <match lemma="gaz" tags="n.*"/>
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <match lemma="effet" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="à" tags="pr"><select lemma="en"/></match>
+    <or>
+      <match lemma="bicyclette" tags="n.*"/>
+      <match lemma="vélo" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- dans >> dins/dens, en -->
@@ -2123,6 +2138,21 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- âge >> atge, edat -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="âge" tags="n.*"><select lemma="atge"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="âge" tags="n.*"><select lemma="edat"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="or" tags="n.*"/>
+      <match lemma="pierre" tags="n.*"/>
+      <match lemma="bronze" tags="n.*"/>
+      <match lemma="fer" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- pige >> linha, an/candela -->
   <rule weight="0.8">
@@ -4888,6 +4918,61 @@
     </repeat>
     <match tags="prn.pro.*"/>
     <match lemma="écrouler" tags="vblex.inf"><select lemma="espatarrar"/></match>
+  </rule>
+
+  <!-- déchanter >> quitar# sos espèrs, quitar# mos espèrs, etc. -->
+  <rule weight="0.8" v="oci">
+    <match lemma="déchanter" tags="vblex.*"><select lemma="quitar# sos espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="déchanter" tags="vblex.*.p1.sg"><select lemma="quitar# mos espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="déchanter" tags="vblex.*.p2.sg"><select lemma="quitar# tos espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="déchanter" tags="vblex.*.p1.pl"><select lemma="quitar# nòstres espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="déchanter" tags="vblex.*.p2.pl"><select lemma="quitar# vòstres espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="déchanter" tags="vblex.*.p3.pl"><select lemma="quitar# lors espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p1.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# mos espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p2.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# tos espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p1.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# nòstres espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p2.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# vòstres espèrs"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p3.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# lors espèrs"/></match>
   </rule>
 
   <!-- ròder >> devorer, corroder -->
