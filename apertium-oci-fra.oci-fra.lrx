@@ -18735,6 +18735,7 @@
   <macro n="ant_antcog"><with-param v="Marc Aurèli"/><with-param v="Marc-Aurèle"/></macro>
   <macro n="ant_antcog"><with-param v="Octavi"/><with-param v="Octave"/></macro>
   <macro n="ant_antcog"><with-param v="Ovidi"/><with-param v="Ovide"/></macro>
+  <macro n="ant_antcog"><with-param v="Tiziano"/><with-param v="Titien"/></macro>
   <macro n="ant_antcog"><with-param v="Valerian"/><with-param v="Valérien"/></macro>
   <macro n="ant_antcog"><with-param v="Virgili"/><with-param v="Virgile"/></macro>
 
@@ -18870,6 +18871,15 @@
   <macro n="noms_propres"><with-param v="Victòria"/><with-param v="Victoire"/></macro>
   <macro n="noms_propres"><with-param v="Virginia"/><with-param v="Virginie"/></macro>
   <macro n="noms_propres"><with-param v="Xavièr"/><with-param v="Xavier"/></macro>
+
+  <!-- Grac >> Gracchus, Gracques -->
+  <rule weight="0.8">
+    <match lemma="Grac" tags="np.cog.*"><select lemma="Gracchus"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.mf.pl"/>
+    <match lemma="Grac" tags="np.cog.*"><select lemma="Gracques"/></match>
+  </rule>
 
   <!-- Totsants >> la Toussaint, Toussaint -->
   <rule weight="0.8">
