@@ -2665,6 +2665,7 @@
        <match lemma="viratornar" tags="vblex.*"/>
        <match lemma="pèthmudar" tags="vblex.*"/>
        <match lemma="peumudar" tags="vblex.*"/>
+       <match lemma="servir" tags="vblex.*"/>
        <match lemma="dòler# de" tags="vblex.*"/>
        <match lemma="metre# son veto" tags="vblex.*"/>
        <match lemma="méter# son veto" tags="vblex.*"/>
@@ -16010,11 +16011,11 @@
     <match lemma="que" tags="cnjsub"/>
   </rule>
 
-  <!-- amassar >> amasser, réunir -->
+  <!-- amassar >> amasser, rassembler/réunir -->
   <rule weight="0.8">
     <match lemma="amassar" tags="vblex.*"><select lemma="amasser"/></match>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
+  <rule weight="1.0">
     <or>
       <seq n="personas"/>
     </or>
@@ -16028,10 +16029,12 @@
     <repeat from="0" upto="1">
       <match tags="prn.pro.ref.*"/>
     </repeat>
-    <match lemma="amassar" tags="vblex.*"><select lemma="réunir"/></match>
+    <match lemma="amassar" tags="vblex.*" v="oci"><select lemma="rassembler"/></match>
+    <match lemma="amassar" tags="vblex.*" v="oci@gascon"><select lemma="réunir"/></match>
   </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="amassar" tags="vblex.*"><select lemma="réunir"/></match>
+  <rule weight="1.0">
+    <match lemma="amassar" tags="vblex.*" v="oci"><select lemma="rassembler"/></match>
+    <match lemma="amassar" tags="vblex.*" v="oci@gascon"><select lemma="réunir"/></match>
     <repeat from="0" upto="4">
       <or>
         <match tags="det.*"/>
