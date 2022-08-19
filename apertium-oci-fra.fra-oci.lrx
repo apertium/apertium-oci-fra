@@ -4625,6 +4625,26 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- enjamber >> enforcar, encambar -->
+  <!-- enjamber >> en·horcar, encamar -->
+  <rule weight="0.8">
+    <match lemma="enjamber" tags="vblex.*" v="oci"><select lemma="enforcar"/></match>
+    <match lemma="enjamber" tags="vblex.*" v="oci@gascon"><select lemma="en·horcar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enjamber" tags="vblex.*" v="oci"><select lemma="encambar"/></match>
+    <match lemma="enjamber" tags="vblex.*" v="oci@gascon"><select lemma="encamar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="vélo" tags="n.*"/>
+      <match lemma="bicyclette" tags="n.*"/>
+      <match lemma="cheval" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- mettre >> metre/méter, (se) cargar/passar -->
   <rule weight="0.8">
     <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="metre"/></match>
@@ -5221,9 +5241,148 @@
   <!-- dresser -> dreçar, quilhar -->
   <macro n="verb_nopron_pron"><with-param v="dresser"/><with-param v="dreçar"/><with-param v="quilhar"/></macro>
 
-  <!-- figer -> callar, pauhicar -->
+  <!-- figer -> callar, palficar/pauhicar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="figer"/><with-param v="callar"/><with-param v="palficar"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="figer"/><with-param v="callar"/><with-param v="pauhicar"/></macro>
+
+  <!-- lover -> rodar, agrumelar/arromerar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="lover"/><with-param v="rodar"/><with-param v="agrumelar"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="lover"/><with-param v="rodar"/><with-param v="arromerar"/></macro>
+
+  <!-- rouler -> rotlar, voludar/esbrohir, engarçar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="rouler"/><with-param v="rotlar"/><with-param v="voludar"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="rouler"/><with-param v="rotlar"/><with-param v="esbrohir"/></macro>
+  <rule weight="1.2">
+    <match lemma="rouler" tags="vblex.*"><select lemma="engarçar"/></match>
+    <match tags="det.*"/>
+    <or>
+      <seq n="personne"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="rouler" tags="vblex.*"><select lemma="engarçar"/></match>
+    <match lemma="quelqu'un" tags="prn.*"/>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p1.*.sg"/>
+    <match lemma="faire" tags="vblex.*.p1.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p2.*.sg"/>
+    <match lemma="faire" tags="vblex.*.p2.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p1.*.pl"/>
+    <match lemma="faire" tags="vblex.*.p1.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p2.*.pl"/>
+    <match lemma="faire" tags="vblex.*.p2.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.ref.p3.*.sp"/>
+    <or>
+      <match lemma="faire" tags="vblex.*.p3.sg"/>
+      <match lemma="faire" tags="vblex.*.p3.pl"/>
+      <match lemma="faire" tags="vblex.inf"/>
+      <match lemma="faire" tags="vblex.ger"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+
+  <rule weight="2.0">
+    <match tags="prn.pro.p1.*.sg"/>
+    <match tags="vbser.*.p1.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="faire" tags="vblex.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p2.*.sg"/>
+    <match tags="vbser.*.p2.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="faire" tags="vblex.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p1.*.pl"/>
+    <match tags="vbser.*.p1.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="faire" tags="vblex.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.p2.*.pl"/>
+    <match tags="vbser.*.p2.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="faire" tags="vblex.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.ref.p3.*.sp"/>
+    <or>
+      <match tags="vbser.*.p3.sg"/>
+      <match tags="vbser.*.p3.pl"/>
+      <match tags="vbser.inf"/>
+      <match tags="vbser.ger"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="faire" tags="vblex.pp.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="rouler" tags="vblex.inf"><select lemma="engarçar"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="rouler" tags="vblex.*" v="oci"><select lemma="virar"/></match>
+    <match lemma="rouler" tags="vblex.*" v="oci@gascon"><select lemma="har# virar"/></match>
+    <match tags="det.*"/>
+    <match lemma="œil" tags="n.*"/>
+  </rule>
+
+  <!-- affaler -> afalar, espatarrar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="affaler"/><with-param v="afalar"/><with-param v="espatarrar"/></macro>
 
   <!-- dessaisir -> despossedir, desprene/despréner -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="dessaisir"/><with-param v="despossedir"/><with-param v="desprene"/></macro>

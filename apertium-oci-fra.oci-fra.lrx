@@ -11266,6 +11266,26 @@
 
 <!-- **************** N **************** -->
 
+  <!-- parladissa >> causerie, discours -->
+  <rule weight="0.8">
+    <match lemma="parladissa" tags="n.*"><select lemma="causerie"/></match>
+  </rule>
+
+  <!-- parladís >> causerie, discours -->
+  <rule weight="0.8">
+    <match lemma="parladís" tags="n.*"><select lemma="causerie"/></match>
+  </rule>
+
+  <!-- charradissa >> causerie, discours -->
+  <rule weight="0.8" v="oci">
+    <match lemma="charradissa" tags="n.*"><select lemma="causerie"/></match>
+  </rule>
+
+  <!-- cara >> visage, mine -->
+  <rule weight="0.8">
+    <match lemma="cara" tags="n.*"><select lemma="visage"/></match>
+  </rule>
+
   <!-- cara >> visage, mine -->
   <rule weight="0.8">
     <match lemma="cara" tags="n.*"><select lemma="visage"/></match>
@@ -15966,6 +15986,30 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- afortir >> renforcer, affirmer -->
+  <rule weight="0.8">
+    <match lemma="afortir" tags="vblex.*"><select lemma="renforcer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="afortir" tags="vblex.*"><select lemma="affirmer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"/>
+  </rule>
+
+  <!-- assolidar >> consolider, affirmer -->
+  <rule weight="0.8">
+    <match lemma="assolidar" tags="vblex.*"><select lemma="consolider"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="assolidar" tags="vblex.*"><select lemma="affirmer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="que" tags="cnjsub"/>
+  </rule>
+
   <!-- amassar >> amasser, réunir -->
   <rule weight="0.8">
     <match lemma="amassar" tags="vblex.*"><select lemma="amasser"/></match>
@@ -16024,6 +16068,107 @@
       <match tags="np.cog.*"/>
     </or>
   </rule>
+
+  <!-- avisar >> aviser, rendre# compte (de), occuper (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="avisar"/><with-param v="aviser"/><with-param v="rendre# compte"/><with-param v="de"/></macro>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="avisar" tags="vblex.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avisar" tags="vblex,pp.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+
+  <!-- trachar >> apercevoir, rendre# compte (de), occuper (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="trachar"/><with-param v="apercevoir"/><with-param v="rendre# compte"/><with-param v="de"/></macro>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="trachar" tags="vblex.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="trachar" tags="vblex,pp.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+
+  <!-- entrevar >> informer, occuper (de) -->
+  <rule weight="0.8">
+    <match lemma="entrevar" tags="vblex.*"><select lemma="informer"/></match>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="entrevar" tags="vblex.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="2.0">
+    <match tags="prn.pro.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="entrevar" tags="vblex,pp.*"><select lemma="occuper"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+
+  <!-- cuentejar >> affairer, occuper (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="cuentejar"/><with-param v="affairer"/><with-param v="occuper"/><with-param v="de"/></macro>
+
+  <!-- emplegar >> affairer, occuper (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="emplegar"/><with-param v="employer"/><with-param v="occuper"/><with-param v="de"/></macro>
 
   <!-- estar >> être, être (nopron) -->
   <macro n="verb_nopron_pron_prep" v="oci@gascon"><with-param v="estar"/><with-param v="être"/><with-param v="nopron_être"/><with-param v="a"/></macro>
@@ -17379,6 +17524,27 @@
     <match tags="det.*"/>
     <match tags="n.*"/>
   </rule>
+
+  <!-- acaravar >> chevaucher, enfourcher -->
+  <macro n="verb_nopron_pron"><with-param v="acaravar"/><with-param v="chevaucher"/><with-param v="enfourcher"/></macro>
+
+  <!-- amonhacar >> friper, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="amonhacar"/><with-param v="friper"/><with-param v="pelotonner"/></macro>
+
+  <!-- amonhocar >> friper, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="amonhocar"/><with-param v="bouchonner"/><with-param v="pelotonner"/></macro>
+
+  <!-- anhocar >> agglutiner, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="anhocar"/><with-param v="agglutiner"/><with-param v="pelotonner"/></macro>
+
+  <!-- arromerar >> chicaner, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="arromerar"/><with-param v="chicaner"/><with-param v="pelotonner"/></macro>
+
+  <!-- redolar >> dégringoler, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="redolar"/><with-param v="dégringoler"/><with-param v="pelotonner"/></macro>
+
+  <!-- arredolar >> dégringoler, pelotonner -->
+  <macro n="verb_nopron_pron"><with-param v="arredolar"/><with-param v="dégringoler"/><with-param v="pelotonner"/></macro>
 
   <!-- bandar >> bander, enivrer -->
   <macro n="verb_nopron_pron"><with-param v="bandar"/><with-param v="bander"/><with-param v="enivrer"/></macro>
