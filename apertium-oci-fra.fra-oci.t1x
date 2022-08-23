@@ -111,6 +111,18 @@
       <cat-item lemma="plus" tags="adv"/>
       <cat-item lemma="moins" tags="adv"/>
       <cat-item lemma="mieux" tags="adv"/>
+      <cat-item lemma="beaucoup plus" tags="adv"/>
+      <cat-item lemma="beaucoup moins" tags="adv"/>
+      <cat-item lemma="beaucoup mieux" tags="adv"/>
+      <cat-item lemma="bien plus" tags="adv"/>
+      <cat-item lemma="bien moins" tags="adv"/>
+      <cat-item lemma="bien mieux" tags="adv"/>
+      <cat-item lemma="assez plus" tags="adv"/>
+      <cat-item lemma="assez moins" tags="adv"/>
+      <cat-item lemma="assez mieux" tags="adv"/>
+      <cat-item lemma="un peu plus" tags="adv"/>
+      <cat-item lemma="un peu moins" tags="adv"/>
+      <cat-item lemma="un peu mieux" tags="adv"/>
     </def-cat>
 
     <def-cat n="prn">
@@ -183,6 +195,13 @@
       <cat-item tags="num"/>
       <cat-item tags="num.*"/>
     </def-cat>
+
+    <def-cat n="un_num">
+      <cat-item lemma="un" tags="det.ind.*"/>
+      <cat-item tags="num"/>
+      <cat-item tags="num.*"/>
+    </def-cat>
+
 
     <def-cat n="num_premier"> <!-- per datas -->
       <cat-item tags="num"/>
@@ -8770,6 +8789,76 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: il y a COMPADV DE NUM temps > fa COMPADV DE NUM temps (il y a plus d'un an > fa mai d'un an)" v="oci">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+		<pattern-item n="compadv"/>
+        <pattern-item n="deprep"/>
+        <pattern-item n="un_num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="set_vbfar"></call-macro>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="7"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <var n="v_vbfar"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <clip pos="3" side="tl" part="temps"/>
+              <clip pos="3" side="tl" part="pers"/>
+              <clip pos="3" side="tl" part="nbr"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+            <b pos="5"/>
+            <lu>
+              <clip pos="6" side="tl" part="lemh"/>
+              <clip pos="6" side="tl" part="tags"/>
+              <clip pos="6" side="tl" part="lemq"/>
+            </lu>
+            <b pos="6"/>
+            <lu>
+              <clip pos="7" side="tl" part="lemh"/>
+              <clip pos="7" side="tl" part="tags"/>
+              <clip pos="7" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: il y a longtemps > fa temps" v="oci">
       <pattern>
         <pattern-item n="il"/>
@@ -8912,6 +9001,73 @@
               <clip pos="5" side="tl" part="lemq"/>
             </lu>
             <b pos="4"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: il y a COMPADV DE NUM temps > COMPADV DE NUM temps a (il y a plus d'un a > mei d'un an a)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="il"/>
+        <pattern-item n="y"/>
+        <pattern-item n="vbhaver"/>
+		<pattern-item n="compadv"/>
+        <pattern-item n="deprep"/>
+        <pattern-item n="un_num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="tipus_verb">
+         <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="7"/>
+          <with-param pos="6"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_bcond">
+          <with-param pos="2"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="temps">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="4" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="6" side="tl" part="lemh"/>
+              <clip pos="6" side="tl" part="tags"/>
+              <clip pos="6" side="tl" part="lemq"/>
+            </lu>
+            <b pos="5"/>
+            <lu>
+              <clip pos="7" side="tl" part="lemh"/>
+              <clip pos="7" side="tl" part="tags"/>
+              <clip pos="7" side="tl" part="lemq"/>
+            </lu>
+            <b pos="6"/>
             <lu>
               <clip pos="3" side="tl" part="lemh"/>
               <clip pos="3" side="tl" part="tags"/>

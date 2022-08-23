@@ -76,7 +76,25 @@
       <cat-item lemma="mensh" tags="adv"/>
       <cat-item lemma="mai plan" tags="adv"/>
       <cat-item lemma="mei plan" tags="adv"/>
+      <cat-item lemma="un pòc mai" tags="adv"/>
+      <cat-item lemma="fòrça mai" tags="adv"/>
+      <cat-item lemma="un pauc mai" tags="adv"/>
+      <cat-item lemma="un pauc meus" tags="adv"/>
+      <cat-item lemma="drin mei" tags="adv"/>
+      <cat-item lemma="drin mensh" tags="adv"/>
+      <cat-item lemma="un chic mai" tags="adv"/>
+      <cat-item lemma="un chic mei" tags="adv"/>
+      <cat-item lemma="un chic mens" tags="adv"/>
+      <cat-item lemma="un chic mensh" tags="adv"/>
+      <cat-item lemma="un bricon mai" tags="adv"/>
+      <cat-item lemma="un bricon mens" tags="adv"/>
+      <cat-item lemma="un pè mes" tags="adv"/>
+      <cat-item lemma="fòrça mai" tags="adv"/>
+      <cat-item lemma="hèra mei" tags="adv"/>
+      <cat-item lemma="fòrça mens" tags="adv"/>
+      <cat-item lemma="hèra menhs" tags="adv"/>
     </def-cat>
+
     <def-cat n="enon">
       <cat-item tags="adv.enon"/>
     </def-cat>
@@ -455,6 +473,12 @@
 
     <def-cat n="num_strict">
       <cat-item tags="num"/>
+    </def-cat>
+
+    <def-cat n="un_num">
+      <cat-item lemma="un" tags="det.ind.*"/>
+      <cat-item tags="num"/>
+      <cat-item tags="num.*"/>
     </def-cat>
 
     <def-cat n="num_premier"> <!-- per datas -->
@@ -6930,6 +6954,83 @@
     </rule>
 
 
+    <rule comment="RÈGLA: fa COMPADV DE NUM temps > il y a COMPADV DE NUM temps (fa mai d'un an > il y a plus d'un an)">
+      <pattern>
+        <pattern-item n="fa"/>
+        <pattern-item n="compadv"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="un_num"/>
+        <pattern-item n="unite_temps"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk name="v" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vblex"/></tag>
+              <tag><clip pos="1" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="normal"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="il"/>
+              </get-case-from>
+              <lit-tag v="prn.tn.p3.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="y"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="avoir"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <lit-tag v="3"/>
+              <clip pos="1" side="tl" part="pers"/>
+              <clip pos="1" side="tl" part="nbr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="5" side="tl" part="lemh"/>
+              <clip pos="5" side="tl" part="tags"/>
+              <clip pos="5" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
     <rule comment="RÈGLA: NUM temps a > il y a NUM temps">
       <pattern>
         <pattern-item n="num"/>
@@ -7215,6 +7316,85 @@
               <clip pos="3" side="tl" part="lemh"/>
               <clip pos="3" side="tl" part="tags"/>
               <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+
+    <rule comment="RÈGLA: COMPADV DE NUM temps a > il y a COMPADV DE NUM temps">
+      <pattern>
+        <pattern-item n="compadv"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="un_num"/>
+        <pattern-item n="unite_temps"/>
+        <pattern-item n="a_p3sg"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk name="v" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vblex"/></tag>
+              <tag><clip pos="5" side="tl" part="temps"/></tag>
+              <tag><lit-tag v="normal"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                 <lit v="il"/>
+              </get-case-from>
+              <lit-tag v="prn.tn.p3.m.sg"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="y"/>
+              </get-case-from>
+              <lit-tag v="prn.pro.adv"/>
+            </lu>
+            <b/>
+            <lu>
+              <get-case-from pos="3">
+                 <lit v="avoir"/>
+              </get-case-from>
+              <lit-tag v="vblex"/>
+              <lit-tag v="3"/>
+              <clip pos="5" side="tl" part="pers"/>
+              <clip pos="5" side="tl" part="nbr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <clip pos="1" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="4"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
