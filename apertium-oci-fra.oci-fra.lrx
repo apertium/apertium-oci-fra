@@ -7656,7 +7656,7 @@
     <match lemma="ac" tags="prn.enc.*"/>
   </rule>
 
-  <!-- aquel/aqueth -> celui, celui-là -->
+  <!-- aquel/aqueth >> celui, celui-là -->
   <rule weight="0.8">
     <match lemma="aquel" tags="prn.*" v="oci"><select lemma="celui-là"/></match>
     <match lemma="aqueth" tags="prn.*" v="oci@gascon"><select lemma="celui-là"/></match>
@@ -8496,8 +8496,18 @@
       <match lemma="aquerò" tags="prn.*"/>
     </or>
   </rule>
+  <rule weight="1.0">
+    <match lemma="un" tags="prn.*"/>
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match lemma="un" tags="prn.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="num.*"/>
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match tags="num.*"/>
+  </rule>
 
-  <!-- tà çò de -> chez, en ce qui concerne -->
+  <!-- tà çò de >> chez, en ce qui concerne -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="tà çò de" tags="pr"><select lemma="en ce qui concerne"/></match>
   </rule>
@@ -11394,7 +11404,7 @@
     <match lemma="franc" tags="adj.*"><select lemma="franc_peuple"/></match>
   </rule>
 
-  <!-- nòu -> nouveau, neuf -->
+  <!-- nòu >> nouveau, neuf -->
   <rule weight="0.8" v="oci">
     <match lemma="nòu" tags="adj.*"><select lemma="nouveau"/></match>
   </rule>
@@ -11430,7 +11440,7 @@
     <match lemma="nòu" tags="adj.*"><select lemma="neuf"/></match>
   </rule>
 
-  <!-- viu -> vivant, vif -->
+  <!-- viu >> vivant, vif -->
   <rule weight="0.8">
     <match lemma="viu" tags="adj.*"><select lemma="vivant"/></match>
   </rule>
@@ -11679,7 +11689,7 @@
     <match lemma="viu" tags="adj.*"><select lemma="vif"/></match>
   </rule>
 
-  <!-- acostumat -> habitué/habituel -->
+  <!-- acostumat >> habitué/habituel -->
   <rule weight="0.8">
     <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
   </rule>
@@ -11698,7 +11708,7 @@
     <match lemma="acostumat" tags="adj.*"><select lemma="habituel"/></match>
   </rule>
 
-  <!-- pebrat -> poivré, grivois -->
+  <!-- pebrat >> poivré, grivois -->
   <rule weight="0.8" v="oci">
     <match lemma="pebrat" tags="adj.*"><select lemma="poivré"/></match>
   </rule>
@@ -11710,18 +11720,18 @@
     <match lemma="pebrat" tags="adj.*"><select lemma="grivois"/></match>
   </rule>
 
-  <!-- espandit -> étendu, répandu -->
+  <!-- espandit >> étendu, répandu -->
   <rule weight="0.8">
     <match lemma="espandit" tags="adj.*"><select lemma="répandu"/></match>
   </rule>
 
-  <!-- parcial/parciau -> partial, partiel -->
+  <!-- parcial/parciau >> partial, partiel -->
   <rule weight="0.8">
     <match lemma="parcial" tags="adj.*" v="oci"><select lemma="partiel"/></match>
     <match lemma="parciau" tags="adj.*" v="oci@gascon"><select lemma="partiel"/></match>
   </rule>
 
-  <!-- sadol/hart -> repu, saoûl -->
+  <!-- sadol/hart >> repu, saoûl -->
   <rule weight="0.8">
     <match lemma="sadol" tags="adj.*" v="oci"><select lemma="repu"/></match>
     <match lemma="hart" tags="adj.*" v="oci@gascon"><select lemma="repu"/></match>
@@ -12756,7 +12766,7 @@
     <match lemma="òsca" tags="n.f.sg"><select lemma="course"/></match>
   </rule>
 
-  <!-- dauneta -> dame, maître -->
+  <!-- dauneta >> dame, maître -->
   <rule weight="0.8">
     <match lemma="dauneta" tags="n.*"><select lemma="dame"/></match>
   </rule>
@@ -12765,7 +12775,7 @@
     <match lemma="dauneta" tags="n.*"><select lemma="maître"/></match>
   </rule>
 
-  <!-- daunina -> dame, maître -->
+  <!-- daunina >> dame, maître -->
   <rule weight="0.8">
     <match lemma="daunina" tags="n.*"><select lemma="dame"/></match>
   </rule>
@@ -12774,7 +12784,7 @@
     <match lemma="daunina" tags="n.*"><select lemma="maître"/></match>
   </rule>
 
-  <!-- paishèra -> digue, barrage -->
+  <!-- paishèra >> digue, barrage -->
   <rule weight="0.8">
     <match lemma="paishèra" tags="n.*"><select lemma="digue"/></match>
   </rule>
@@ -12790,7 +12800,7 @@
     </or>
   </rule>
 
-  <!-- talent -> talent, faim -->
+  <!-- talent >> talent, faim -->
   <rule weight="0.8">
     <match lemma="talent" tags="n.*"><select lemma="talent"/></match>
   </rule>
@@ -12835,17 +12845,17 @@
     <match lemma="talent" tags="n.*.sg"><select lemma="faim"/></match>
   </rule>
 
-  <!-- mainatgièr n.f -> ménager, fermier -->
+  <!-- mainatgièr n.f >> ménager, fermier -->
   <rule weight="0.8">
     <match lemma="mainatgièr" tags="n.f.*"><select lemma="ménager"/></match>
   </rule>
 
-  <!-- ostalièr n.f -> ménager, hôtelier -->
+  <!-- ostalièr n.f >> ménager, hôtelier -->
   <rule weight="0.8">
     <match lemma="ostalièr" tags="n.f.*"><select lemma="ménager"/></match>
   </rule>
 
-  <!-- part -> part, partie -->
+  <!-- part >> part, partie -->
   <rule weight="0.8">
     <match lemma="part" tags="n.*"><select lemma="part"/></match>
   </rule>
@@ -12855,12 +12865,12 @@
     <match lemma="de" tags="pr"/>
   </rule>
 
-  <!-- barde -> barde, argile -->
+  <!-- barde >> barde, argile -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="barde" tags="n.*"><select lemma="barde"/></match>
   </rule>
 
-  <!-- sansònha -> rengaine, cornemuse -->
+  <!-- sansònha >> rengaine, cornemuse -->
   <rule weight="0.8">
     <match lemma="sansònha" tags="n.*"><select lemma="rengaine"/></match>
   </rule>
@@ -12889,7 +12899,7 @@
     <match lemma="sansònha" tags="n.*"><select lemma="cornemuse"/></match>
   </rule>
 
-  <!-- dintrada -> entrée, rentrée -->
+  <!-- dintrada >> entrée, rentrée -->
   <rule weight="0.8" v="oci">
     <match lemma="dintrada" tags="n.*"><select lemma="entrée"/></match>
   </rule>
@@ -16820,7 +16830,7 @@
       <match lemma="espleit" tags="n.*"><select lemma="exploit"/></match>
   </rule>
 
-  <!-- fenestron/finestron -> fenêtre, télévision -->
+  <!-- fenestron/finestron >> fenêtre, télévision -->
   <rule weight="0.8">
       <match lemma="fenestron" tags="n.*"><select lemma="fenêtre"/></match>
   </rule>
@@ -16850,7 +16860,7 @@
       <match lemma="finestron" tags="n.m.sg"><select lemma="télévision"/></match>
   </rule>
 
-  <!-- flamenc -> flamand, flamant -->
+  <!-- flamenc >> flamand, flamant -->
   <rule weight="0.8">
       <match lemma="flamenc" tags="n.*"><select lemma="flamand"/></match>
   </rule>
@@ -16862,7 +16872,7 @@
       </or>
   </rule>
 
-  <!-- gras -> gras, degré -->
+  <!-- gras >> gras, degré -->
   <rule weight="0.8" v="oci">
       <match lemma="gras" tags="n.*"><select lemma="degré"/></match>
   </rule>
@@ -16871,7 +16881,7 @@
       <match lemma="gras" tags="n.*"><select lemma="degré"/></match>
   </rule>
 
-  <!-- lana -> laine, lande -->
+  <!-- lana >> laine, lande -->
   <rule weight="0.8" v="oci@gascon">
       <match lemma="lana" tags="n.*"><select lemma="laine"/></match>
   </rule>
@@ -16906,12 +16916,12 @@
       </or>
   </rule>
 
-  <!-- lira -> lire, lyre -->
+  <!-- lira >> lire, lyre -->
   <rule weight="0.8" v="oci@gascon">
       <match lemma="lira" tags="n.*"><select lemma="lire"/></match>
   </rule>
 
-  <!-- material/materiau -> matériel, matériau -->
+  <!-- material/materiau >> matériel, matériau -->
   <rule weight="0.8">
       <match lemma="materiau" tags="n.*" v="oci@gascon"><select lemma="matériel"/></match>
       <match lemma="material" tags="n.*" v="oci"><select lemma="matériel"/></match>
@@ -16964,7 +16974,7 @@
       </or>
   </rule>
 
-  <!-- mèca -> morve, mèche -->
+  <!-- mèca >> morve, mèche -->
   <rule weight="0.8" v="oci">
       <match lemma="mèca" tags="n.*"><select lemma="morve"/></match>
   </rule>
@@ -16973,7 +16983,7 @@
       <match lemma="de" tags="pr"/>
   </rule>
 
-  <!-- mèl -> e-mail, miel -->
+  <!-- mèl >> e-mail, miel -->
   <rule weight="0.8" v="oci">
       <match lemma="mèl" tags="n.*"><select lemma="miel"/></match>
   </rule>
@@ -17028,7 +17038,7 @@
       <match lemma="mèl" tags="n.*"><select lemma="miel"/></match>
   </rule>
 
-  <!-- niu -> nid, nuage -->
+  <!-- niu >> nid, nuage -->
   <rule weight="0.8" v="oci">
       <match lemma="niu" tags="n.*"><select lemma="nid"/></match>
   </rule>
@@ -17036,7 +17046,7 @@
       <match lemma="niu" tags="n.m.pl"><select lemma="nuage"/></match>
   </rule>
 
-  <!-- obrador -> atelier, chantier -->
+  <!-- obrador >> atelier, chantier -->
   <rule weight="0.8">
       <match lemma="obrador" tags="n.*"><select lemma="chantier"/></match>
   </rule>
@@ -17049,7 +17059,7 @@
       <match lemma="obrador" tags="n.*"><select lemma="atelier"/></match>
   </rule>
 
-  <!-- ostaleria -> hôtel, hôtellerie -->
+  <!-- ostaleria >> hôtel, hôtellerie -->
   <rule weight="0.8" v="oci@gascon">
       <match lemma="ostaleria" tags="n.*"><select lemma="hôtel"/></match>
   </rule>
@@ -17081,7 +17091,7 @@
       <match lemma="ostaleria" tags="n.*"><select lemma="hôtellerie"/></match>
   </rule>
 
-  <!-- pel/peu -> cheveu, poil -->
+  <!-- pel/peu >> cheveu, poil -->
   <rule weight="0.8" >
       <match lemma="pel" tags="n.*" v="oci"><select lemma="cheveu"/></match>
       <match lemma="peu" tags="n.*" v="oci@gascon"><select lemma="cheveu"/></match>
@@ -17099,7 +17109,7 @@
       <match lemma="peu" tags="n.*" v="oci@gascon"><select lemma="poil"/></match>
   </rule>
 
-  <!-- pietat -> pitié, piété -->
+  <!-- pietat >> pitié, piété -->
   <rule weight="0.8">
       <match lemma="pietat" tags="n.*"><select lemma="pitié"/></match>
   </rule>
@@ -17128,27 +17138,27 @@
       <match lemma="pietat" tags="n.*"><select lemma="piété"/></match>
   </rule>
 
-  <!-- primor -> minceur, primeur -->
+  <!-- primor >> minceur, primeur -->
   <rule weight="0.8">
       <match lemma="primor" tags="n.*"><select lemma="primeur"/></match>
   </rule>
 
-  <!-- procès -> procès, processus -->
+  <!-- procès >> procès, processus -->
   <rule weight="0.8">
       <match lemma="procès" tags="n.*"><select lemma="procès"/></match>
   </rule>
 
-  <!-- roman -> roman, romain -->
+  <!-- roman >> roman, romain -->
   <rule weight="0.8">
       <match lemma="roman" tags="n.m.*"><select lemma="roman"/></match>
   </rule>
 
-  <!-- rondalejaire -> randonneur, rôdeur -->
+  <!-- rondalejaire >> randonneur, rôdeur -->
   <rule weight="0.8" v="oci@gascon">
       <match lemma="rondalejaire" tags="n.*"><select lemma="rôdeur"/></match>
   </rule>
 
-  <!-- som -> sommet, sommeil -->
+  <!-- som >> sommet, sommeil -->
   <rule weight="0.8" v="oci@gascon">
       <match lemma="som" tags="n.*"><select lemma="sommet"/></match>
   </rule>
@@ -19107,7 +19117,7 @@
     </or>
   </rule>
 
-  <!-- deishar >> laisser ; deishar de -> arrêter de -->
+  <!-- deishar >> laisser ; deishar de >> arrêter de -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="deishar" tags="vblex.*"><select lemma="laisser"/></match>
   </rule>
