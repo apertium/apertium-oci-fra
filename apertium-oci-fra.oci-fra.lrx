@@ -999,9 +999,14 @@
             <match tags="prn.pro.*"/>
           </or>
         </repeat>
-        <match tags="vblex.*.p3.pl"/>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
       </rule>
-      <rule weight="1.0">
+
+      <rule weight="3.0">
         <or>
           <match tags="n.*.pl"/>
           <match tags="adj.*.pl"/>
@@ -1009,6 +1014,58 @@
           <match tags="prn.tn.*.pl"/>
           <match tags="num"/>
         </or>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+
+      <rule weight="3.2">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="det.*"/>
+            <match tags="num"/>
+            <match tags="num.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+        </or>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
         <repeat from="0" upto="1">
           <or>
             <match tags="cm"/>
@@ -1024,10 +1081,142 @@
           </or>
         </repeat>
         <or>
+          <match tags="vblex.*.p3.pl"/>
           <match tags="vbhaver.*.p3.pl"/>
           <match tags="vbmod.*.p3.pl"/>
         </or>
       </rule>
+
+      <rule weight="3.2">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="det.*"/>
+            <match tags="num"/>
+            <match tags="num.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+        </or>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+
+      <rule weight="3.4">
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="det.*"/>
+            <match tags="num"/>
+            <match tags="num.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+        </or>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="det.*"/>
+            <match tags="num"/>
+            <match tags="num.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="n.*"/>
+          <match tags="np.*"/>
+        </or>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="cm"/>
+            <match lemma="«" tags="lpar"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select lemma="que"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+
 
       <rule weight="1.0">
         <or>
