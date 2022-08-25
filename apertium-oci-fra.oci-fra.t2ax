@@ -110,7 +110,17 @@
       <cat-item tags="SAdv.itg"/>
       <cat-item tags="SAdv.itg.*"/>
       <cat-item lemma="qu'est-ce que" tags="SPron.itg.*"/>
+      <cat-item lemma="où" tags="rel"/>
+      <cat-item lemma="où" tags="rel.*"/>
+      <cat-item lemma="dont" tags="rel"/>
+      <cat-item lemma="dont" tags="rel.*"/>
+      <cat-item lemma="quand" tags="rel"/>
+      <cat-item lemma="quand" tags="rel.*"/>
+      <cat-item lemma="combien" tags="rel"/>
+      <cat-item lemma="combien" tags="rel.*"/>
+      <cat-item lemma="combien" tags="SPron.itg.*"/>
     </def-cat>
+
     <def-cat n="co_que">
       <cat-item lemma="celui que" tags="rel.*"/>
       <cat-item lemma="celui qui" tags="rel.*"/>
@@ -475,14 +485,16 @@
       <cat-item lemma="que" tags="cnjadv.*"/>
     </def-cat>
 
+<!--	s'utiliza pas
     <def-cat n="cnjsub_adv">
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjsub.*"/>
       <cat-item tags="cnjadv"/>
       <cat-item tags="cnjadv.*"/>
     </def-cat>
+-->
 
-    <def-cat n="cnjsub_adv_que_rel">
+    <def-cat n="cnjsub_adv_que_rel">	<!-- per generar "ce" -->
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjsub.*"/>
       <cat-item tags="cnjadv"/>
@@ -1124,6 +1136,22 @@
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
       </action>
     </rule>
 
