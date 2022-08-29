@@ -1697,6 +1697,8 @@
 		  <match lemma="viure" tags="vblex.*.p3.*"/>
 		  <match lemma="víver" tags="vblex.*.p3.*"/>
 		  <match lemma="víuer" tags="vblex.*.p3.*"/>
+		  <match lemma="morir" tags="vblex.*.p3.*"/>
+		  <match lemma="defuntar" tags="vblex.*.p3.*"/>
 		  <match lemma="trabalhar" tags="vblex.*.p3.*"/>
 		  <match lemma="trebalhar" tags="vblex.*.p3.*"/>
 		  <match lemma="tribalhar" tags="vblex.*.p3.*"/>
@@ -1739,6 +1741,8 @@
 		  <match lemma="viure" tags="vblex.pp.*"/>
 		  <match lemma="víver" tags="vblex.pp.*"/>
 		  <match lemma="víuer" tags="vblex.pp.*"/>
+		  <match lemma="morir" tags="vblex.*.p3.*"/>
+		  <match lemma="defuntar" tags="vblex.*.p3.*"/>
 		  <match lemma="trabalhar" tags="vblex.pp.*"/>
 		  <match lemma="trebalhar" tags="vblex.pp.*"/>
 		  <match lemma="tribalhar" tags="vblex.pp.*"/>
@@ -3946,6 +3950,8 @@
 	   <match lemma="viure" tags="vblex.*"/>
 	   <match lemma="víver" tags="vblex.*"/>
 	   <match lemma="víuer" tags="vblex.*"/>
+       <match lemma="morir" tags="vblex.*"/>
+       <match lemma="defuntar" tags="vblex.*"/>
 	   <match lemma="prevaler" tags="vblex.*"/>
 	   <match lemma="equivaler" tags="vblex.*"/>
 	   <match lemma="protestar" tags="vblex.*"/>
@@ -17412,6 +17418,11 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- morir >> mourir, mourir non-pron -->
+  <rule weight="0.8">
+    <match lemma="morir" tags="vblex.*"><select lemma="mourir" tags="vblex.non-pron.*"/></match>
+  </rule>
 
   <!-- afortir >> renforcer, affirmer -->
   <rule weight="0.8">
