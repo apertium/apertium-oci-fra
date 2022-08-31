@@ -6306,6 +6306,9 @@
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <or>
       <match lemma="parlar" tags="vblex.*"/>
+      <match lemma="conclure" tags="vblex.*"/>
+      <match lemma="concludir" tags="vblex.*"/>
+      <match lemma="conclusir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -6314,6 +6317,26 @@
       </or>
     </repeat>
     <match lemma="de"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="començar" tags="vblex.*"/>
+      <match lemma="acabar" tags="vblex.*"/>
+      <match lemma="finir" tags="vblex.*"/>
+      <match lemma="fenir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="de"/>
+    <repeat from="0" upto="2">
+      <match tags="tn.pro.*"/>
+    </repeat>
+    <match lemma="*.inf"/>
   </rule>
   <rule weight="1.0">
     <match tags="sent"/>
@@ -12635,6 +12658,15 @@
 
 <!-- **************** N **************** -->
 
+  <!-- nau >> nef, vaisseau -->
+  <rule weight="0.8">
+    <match lemma="nau" tags="n.*"><select lemma="nef"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="nau" tags="n.*"><select lemma="vaisseau"/></match>
+    <match lemma="espacial" tags="adj.*"/>
+  </rule>
+
   <!-- afar >> affaire, afar -->
   <rule weight="0.8">
     <match lemma="afar" tags="n.*"><select lemma="affaire"/></match>
@@ -18540,14 +18572,109 @@
     <match lemma="tirar" tags="vblex.*"><select lemma="tirer"/></match>
   </rule>
 
-  <!-- menar/miar >> mener, conduire -->
+  <!-- menar/miar >> mener, conduire, amener -->
   <rule weight="0.8">
     <or>
       <match lemma="menar" tags="vblex.*"><select lemma="mener"/></match>
       <match lemma="miar" tags="vblex.*" v="oci@gascon"><select lemma="mener"/></match>
     </or>
   </rule>
+
+<!--
   <rule weight="1.0">
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="amener"/></match>
+      <match lemma="miar" tags="vblex.*" v="oci@gascon"><select lemma="amener"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+-->
+  <rule weight="1.0">
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="amener"/></match>
+      <match lemma="miar" tags="vblex.*" v="oci@gascon"><select lemma="amener"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+      <match lemma="ostal" tags="n.*"/>
+      <match lemma="ostau" tags="n.*"/>
+      <match lemma="dintrada" tags="n.*"/>
+      <match lemma="intrada" tags="n.*"/>
+      <match lemma="entrada" tags="n.*"/>
+      <match lemma="sortida" tags="n.*"/>
+      <match lemma="salhida" tags="n.*"/>
+      <match lemma="gessuda" tags="n.*"/>
+      <match lemma="luna" tags="n.*"/>
+      <match lemma="lua" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="menar" tags="vblex.*"><select lemma="amener"/></match>
+      <match lemma="miar" tags="vblex.*" v="oci@gascon"><select lemma="amener"/></match>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match lemma="de" tags="pr" v="oci"/>
+    </or>
+	<or>
+	  <seq n="personas"/>
+	</or>
+    <repeat from="0" upto="2">
+	  <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+	  </or>
+    </repeat>
+    <match lemma="a" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+      <match lemma="ostal" tags="n.*"/>
+      <match lemma="ostau" tags="n.*"/>
+      <match lemma="dintrada" tags="n.*"/>
+      <match lemma="intrada" tags="n.*"/>
+      <match lemma="entrada" tags="n.*"/>
+      <match lemma="sortida" tags="n.*"/>
+      <match lemma="salhida" tags="n.*"/>
+      <match lemma="gessuda" tags="n.*"/>
+      <match lemma="luna" tags="n.*"/>
+      <match lemma="lua" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="0.3">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <or>
+      <match lemma="menar" tags="vblex.pp.*"><select lemma="mener"/></match>
+      <match lemma="miar" tags="vblex.pp.*" v="oci@gascon"><select lemma="mener"/></match>
+    </or>
+  </rule>
+
+  <rule weight="1.2">
     <or>
       <match lemma="menar" tags="vblex.*"><select lemma="conduire"/></match>
       <match lemma="miar" tags="vblex.*" v="oci@gascon"><select lemma="conduire"/></match>
@@ -18583,7 +18710,7 @@
       <match lemma="motocicleta" tags="n.*"/>
     </or>
   </rule>
-  <rule weight="1.0">
+  <rule weight="1.2">
     <or>
       <match lemma="veïcule" tags="n.*"/>
       <match lemma="veitura" tags="n.*"/>
