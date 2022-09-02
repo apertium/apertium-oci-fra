@@ -1191,11 +1191,13 @@
     <match lemma="à" tags="pr"><select lemma="a"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="comencer" tags="vblex.*"/>
+    <or>
+      <match lemma="commencer" tags="vblex.*"/>
+      <match lemma="répugner" tags="vblex.*"/>
+    </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
-    <match tags="*.inf"/>
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <repeat from="0" upto="3">
       <or>
