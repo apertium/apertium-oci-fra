@@ -1939,6 +1939,28 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- sacré >> sacrat, sacre -->
+  <rule weight="0.8">
+    <match lemma="sacré" tags="adj.*"><select lemma="sacrat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sacré" tags="adj.*"><select lemma="sacre"/></match>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="sacré" tags="adj.*"><select lemma="sacrat"/></match>
+    <or>
+      <match lemma="cœur" tags="n.*"/>
+      <match lemma="congrégation" tags="n.*"/>
+      <match lemma="collège" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match tags="det.def.*"/>
+    <match lemma="Sacré" tags="adj.*"><select lemma="sacrat"/></match>
+    <match lemma="Famille" tags="n.*"/>
+  </rule>
+
   <!-- tigré >> tigrat, tigrinha -->
   <rule weight="0.8">
     <match lemma="tigré" tags="adj.*"><select lemma="tigrat"/></match>
@@ -4281,6 +4303,32 @@
   <rule weight="0.8" v="oci">
     <match lemma="sabot" tags="n.*"><select lemma="esclòp"/></match>
   </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="sabot" tags="n.*"><select lemma="bata"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="bétail"/>
+      <seq n="animaux_non_bétail"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <or>
+      <seq n="bétail"/>
+      <seq n="animaux_non_bétail"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="sabot" tags="n.*"><select lemma="bata"/></match>
+  </rule>
 
   <!-- tampon >> sagèl, tampon, tap -->
   <rule weight="0.8">
@@ -4653,7 +4701,10 @@
     <match lemma="génie" tags="n.*"><select lemma="gèni"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="idée" tags="n.*"/>
+    <or>
+      <match lemma="coup" tags="n.*"/>
+      <match lemma="idée" tags="n.*"/>
+    </or>
     <match lemma="de" tags="pr"/>
     <match lemma="génie" tags="n.*"><select lemma="gèni"/></match>
   </rule>
