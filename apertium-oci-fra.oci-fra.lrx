@@ -13732,94 +13732,61 @@
   <rule weight="0.8">
     <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
   </rule>
-  <rule weight="0.9">
+  <rule weight="1.0">
     <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
     <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
   </rule>
-  <rule weight="1">
-      <or>
-          <match lemma="copa" tags="n.*"/>
-          <match lemma="meravilha" tags="n.*"/>
-          <match lemma="misèria" tags="n.*"/>
-          <match lemma="canton" tags="n.*"/>
-          <match lemma="cap" tags="n.*"/>
-          <match lemma="fin" tags="n.*"/>
-          <match lemma="país" tags="n.*"/>
-          <match lemma="torn" tags="n.*"/>
-          <match lemma="region" tags="n.*"/>
-          <match lemma="causa" tags="n.*"/>
-          <match lemma="origina" tags="n.*"/>
-          <match lemma="pòble" tags="n.*"/>
-          <match lemma="debuta" tags="n.*"/>
-          <match lemma="començament" tags="n.*"/>
-          <match lemma="començar" tags="n.*"/>
-          <match lemma="centre" tags="n.*"/>
-          <match lemma="embonilh" tags="n.*"/>
-          <match lemma="melic" tags="n.*"/>
-          <match lemma="monilh" tags="n.*"/>
-          <match lemma="omelic" tags="n.*"/>
-          <match lemma="bonic" tags="n.*"/>
-          <match lemma="embonic" tags="n.*"/>
-          <match lemma="creacion" tags="n.*"/>
-      </or>
-      <or>
-          <match lemma="deu"/>
-          <match lemma="del"/>
-          <match lemma="deth"/>
-      </or>
-    <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
-  </rule>
-  <rule weight="1">
-      <or>
-          <match lemma="mei" tags="adv"/>
-          <match lemma="mes" tags="adv"/>
-          <match lemma="mai" tags="adv"/>
-          <match lemma="mas" tags="adv"/>
-      </or>
-      <match tags="adj.*"/>
-      <repeat from="0" upto="1">
-          <match tags="n.*"/>
-      </repeat>
-      <or>
-          <match lemma="deu"/>
-          <match lemma="del"/>
-          <match lemma="deth"/>
-      </or>
-    <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
-  </rule>
-  <rule weight="1">
-      <or>
-          <match lemma="melhor" tags="adv"/>
-          <match lemma="miélher" tags="adv"/>
-      </or>
+  <rule weight="1.0">
+    <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
+    <match lemma="que" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="1">
-          <match tags="n.*"/>
+      <match tags="adv"/>
     </repeat>
+    <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
+    <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
+    <repeat from="0" upto="1">
       <or>
-          <match lemma="deu"/>
-          <match lemma="del"/>
-          <match lemma="deth"/>
+        <match lemma="quan" tags="rel.*"/>
+        <match lemma="quand" tags="rel.*"/>
+        <match lemma="ont" tags="rel.*"/>
+        <match lemma="on" tags="rel.*"/>
       </or>
+    </repeat>
+    <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="monde" tags="n.m.pl"><select lemma="monde"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
     <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
   </rule>
-  <rule weight="1">
-      <match lemma="tot" tags="predet"/>
-      <match tags="det.*"/>
-      <match tags="n.*"/>
-      <or>
-          <match lemma="deu"/>
-          <match lemma="del"/>
-          <match lemma="deth"/>
-      </or>
-    <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
-  </rule>
-  <rule weight="1">
-      <match lemma="tot" tags="predet"/>
-      <or>
-        <match lemma="le" tags="det.*"/>
-        <match lemma="lo" tags="det.*"/>
-        <match lemma="eth" tags="det.*"/>
-      </or>
+  <rule weight="1.2">
+    <or>
+      <match lemma="en" tags="pr"/>
+      <match lemma="dins" tags="pr"/>
+    </or>
+    <match tags="det.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
     <match lemma="monde" tags="n.*"><select lemma="monde"/></match>
   </rule>
 
@@ -14043,9 +14010,10 @@
     <match lemma="subrepèsca" tags="n.*"/>
     <match lemma="suberpèsca" tags="n.*"/>
     <or>
-      <match lemma="deu"/>
-      <match lemma="au"/>
+      <match lemma="de" tags="pr"/>
+      <match lemma="à" tags="pr"/>
     </or>
+    <match tags="det.def.*"/>
     <match lemma="ton" tags="n.*"><select lemma="thon"/></match>
   </rule>
   <rule weight="1.0">
@@ -14557,14 +14525,10 @@
     <match lemma="òc" tags="n.m.pl"><select lemma="oc"/></match>
   </rule>
 
-  <!-- vèspre/vrèspe >> après-midi, soir -->
+  <!-- vèspre >> après-midi, soir -->
   <rule weight="0.8">
     <match lemma="vèspre" tags="n.*"><select lemma="après-midi"/></match>
   </rule>
-  <rule weight="0.8">
-    <match lemma="vrèspre" tags="n.*"><select lemma="après-midi"/></match>
-  </rule>
-
   <rule weight="1.0">
     <or>
       <match lemma="sèt" tags="num.*"/>
@@ -14581,10 +14545,38 @@
       <match lemma="òra" tags="num.*"/>
     </or>
     <or>
-      <match lemma="deu"/>
-      <match lemma="del"/>
+      <match lemma="de" tags="pr"/>
+      <match lemma="à" tags="pr"/>
     </or>
+    <match tags="det.def.*"/>
     <match lemma="vèspre" tags="n.*"><select lemma="soir"/></match>
+  </rule>
+
+  <!-- vrèspe >> après-midi, soir -->
+  <rule weight="0.8">
+    <match lemma="vrèspre" tags="n.*"><select lemma="après-midi"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="sèt" tags="num.*"/>
+      <match lemma="ueit" tags="num.*"/>
+      <match lemma="uèit" tags="num.*"/>
+      <match lemma="uèch" tags="num.*"/>
+      <match lemma="nòu" tags="num.*"/>
+      <match lemma="nau" tags="num.*"/>
+      <match lemma="dètz" tags="num.*"/>
+      <match lemma="onze" tags="num.*"/>
+    </or>
+    <or>
+      <match lemma="ora" tags="num.*"/>
+      <match lemma="òra" tags="num.*"/>
+    </or>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match lemma="à" tags="pr"/>
+    </or>
+    <match tags="det.def.*"/>
+    <match lemma="vrèspre" tags="n.*"><select lemma="soir"/></match>
   </rule>
 
 
