@@ -977,6 +977,35 @@
 		</or>
 	  </rule>
 
+<!--
+	  <rule weight="1.0">
+		<or>
+		  <match tags="n.*.sg"/>
+		  <match tags="adj.*.sg"/>
+		  <match tags="np.*.sg"/>
+		  <match tags="prn.tn.*.sg"/>
+		</or>
+		<repeat from="0" upto="1">
+		  <or>
+			<match tags="cm"/>
+			<match lemma="«" tags="lpar"/>
+		  </or>
+		</repeat>
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="3">
+		  <or>
+			<match tags="adv"/>
+			<match tags="adv.enon"/>
+			<match tags="prn.pro.*"/>
+		  </or>
+		</repeat>
+		<or>
+		  <match tags="vblex.*.p3.sg"/>
+		  <match tags="vbhaver.*.p3.sg"/>
+		  <match tags="vbmod.*.p3.sg"/>
+		</or>
+	  </rule>
+-->
 	  <rule weight="1.0">
 		<or>
 		  <match tags="n.*.pl"/>
@@ -4121,6 +4150,9 @@
 	   <match lemma="pèthmudar" tags="vblex.*"/>
 	   <match lemma="peumudar" tags="vblex.*"/>
 	   <match lemma="servir" tags="vblex.*"/>
+	   <match lemma="avançar" tags="vblex.*"/>
+	   <match lemma="recular" tags="vblex.*"/>
+	   <match lemma="recuolar" tags="vblex.*"/>
 	   <match lemma="dòler# de" tags="vblex.*"/>
 	   <match lemma="metre# son veto" tags="vblex.*"/>
 	   <match lemma="méter# son veto" tags="vblex.*"/>
@@ -8126,6 +8158,19 @@
       <match lemma="efièit" tags="n.*"/>
       <match lemma="efèit" tags="n.*"/>
       <match lemma="efècte" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="cambra" tags="n.*"/>
+      <match lemma="cramba" tags="n.*"/>
+      <match lemma="crampa" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <or>
+      <match lemma="aire" tags="n.*"/>
+      <match lemma="combustion" tags="n.*"/>
+      <match lemma="gas" tags="n.*"/>
     </or>
   </rule>
 
