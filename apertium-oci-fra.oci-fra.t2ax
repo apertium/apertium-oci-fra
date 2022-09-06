@@ -453,6 +453,29 @@
       <cat-item tags="Det.*.pl.*"/>
     </def-cat>
 
+    <def-cat n="DET_DETSN">
+      <cat-item tags="Det"/>
+      <cat-item tags="Det.*"/>
+      <cat-item lemma="d_n" tags="SN.*"/>
+    </def-cat>
+    <def-cat n="DETsg_DETSNsg">
+      <cat-item tags="Det.*.sg"/>
+      <cat-item tags="Det.*.sg.*"/>
+      <cat-item lemma="d_n" tags="SN.*.sg.*"/>
+    </def-cat>
+    <def-cat n="DETsg_NPsg_DETSNsg">
+      <cat-item tags="Det.*.sg"/>
+      <cat-item tags="Det.*.sg.*"/>
+      <cat-item tags="SN.np.*.sg.*"/>
+      <cat-item tags="SN.np.cog.*"/>
+      <cat-item lemma="d_n" tags="SN.*.sg.*"/>
+    </def-cat>
+    <def-cat n="DETpl_DETSNpl">
+      <cat-item tags="Det.*.pl"/>
+      <cat-item tags="Det.*.pl.*"/>
+      <cat-item lemma="d_n" tags="SN.*.pl.*"/>
+    </def-cat>
+
     <def-cat n="Num">
       <cat-item tags="Num"/>
       <cat-item tags="Num.*"/>
@@ -3742,7 +3765,7 @@
       <pattern>
         <pattern-item n="SAdv_itg"/>
         <pattern-item n="SV_p3"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <out>
@@ -3803,7 +3826,7 @@
         <pattern-item n="SAdv_itg"/>
         <pattern-item n="SV_aux_p3"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <out>
@@ -3878,7 +3901,7 @@
         <pattern-item n="SV_aux_p3"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <out>
@@ -3966,7 +3989,7 @@
         <pattern-item n="SV_aux_p3"/>
         <pattern-item n="PP"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <out>
@@ -4052,7 +4075,7 @@
       <pattern>
         <pattern-item n="co_que"/>
         <pattern-item n="SV_p3sg"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -4082,7 +4105,7 @@
       <pattern>
         <pattern-item n="co_que"/>
         <pattern-item n="SV_p3pl"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -4113,7 +4136,7 @@
         <pattern-item n="co_que"/>
         <pattern-item n="SV_aux_p3sg"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -4150,7 +4173,7 @@
         <pattern-item n="co_que"/>
         <pattern-item n="SV_aux_p3pl"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -4188,7 +4211,7 @@
         <pattern-item n="SV_aux_p3sg"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -4232,7 +4255,7 @@
         <pattern-item n="SV_aux_p3pl"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="PP"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -4276,7 +4299,7 @@
         <pattern-item n="SV_aux_p3sg"/>
         <pattern-item n="PP"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -4320,7 +4343,7 @@
         <pattern-item n="SV_aux_p3pl"/>
         <pattern-item n="PP"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -6787,7 +6810,7 @@
     <rule comment="RÈGLA: SV_vbser_p3 DET > ce SV_vbser_p3 DET: èra un ostal > c'était une maison ; son las soas politicas > ce sont ses politiques">
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
@@ -6812,7 +6835,7 @@
       <pattern>
         <pattern-item n="SV_vbhaver_p3"/>
         <pattern-item n="PP_vbser"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
@@ -6837,7 +6860,7 @@
       <pattern>
         <pattern-item n="SV_vbser_p3"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
@@ -6869,7 +6892,7 @@
         <pattern-item n="SV_vbhaver_p3"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="PP_vbser"/>
-        <pattern-item n="DET"/>
+        <pattern-item n="DET_DETSN"/>
       </pattern>
       <action>
         <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
@@ -9319,7 +9342,7 @@
       <pattern>
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="verbs_expression_p3sg"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9350,7 +9373,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="verbs_expression_p3sg"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9387,7 +9410,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="verbs_expression_p3sg"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9425,7 +9448,7 @@
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="verbs_expression_p3sg"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9469,7 +9492,7 @@
         <pattern-item n="verbs_expression_p3sg"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9511,7 +9534,7 @@
       <pattern>
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="verbs_expression_p3pl"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9542,7 +9565,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="verbs_expression_p3pl"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9579,7 +9602,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="verbs_expression_p3pl"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9617,7 +9640,7 @@
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="verbs_expression_p3pl"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9661,7 +9684,7 @@
         <pattern-item n="verbs_expression_p3pl"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9704,7 +9727,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="SV_vbhaver_p3sg"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9742,7 +9765,7 @@
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="SV_vbhaver_p3sg"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9786,7 +9809,7 @@
         <pattern-item n="SV_vbhaver_p3sg"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9831,7 +9854,7 @@
         <pattern-item n="SV_vbhaver_p3sg"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9882,7 +9905,7 @@
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETsg_NPsg"/>
+        <pattern-item n="DETsg_NPsg_DETSNsg"/>
       </pattern>
       <action>
         <out>
@@ -9931,7 +9954,7 @@
         <pattern-item n="que_rel_CM"/>
         <pattern-item n="SV_vbhaver_p3pl"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -9969,7 +9992,7 @@
         <pattern-item n="SAdv_SPron_pro"/>
         <pattern-item n="SV_vbhaver_p3pl"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -10013,7 +10036,7 @@
         <pattern-item n="SV_vbhaver_p3pl"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -10058,7 +10081,7 @@
         <pattern-item n="SV_vbhaver_p3pl"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
@@ -10109,7 +10132,7 @@
         <pattern-item n="SAdv"/>
         <pattern-item n="SAdv"/>
         <pattern-item n="verbs_expression_pp"/>
-        <pattern-item n="DETpl"/>
+        <pattern-item n="DETpl_DETSNpl"/>
       </pattern>
       <action>
         <out>
