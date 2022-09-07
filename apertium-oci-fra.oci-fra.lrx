@@ -2387,6 +2387,52 @@
 		</or>
 	  </rule>
 	</def-macro>
+
+    <!-- al ser >> ce soir, soir -->
+    <def-macro n="al_ser" npar="3">
+      <rule weight="0.8">
+        <match plemma="1" tags="adv"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <seq n="jorns"/>
+        </or>
+        <repeat from="0" upto="1">
+          <or><match tags="num"/><match tags="num.*"/></or>
+        </repeat>
+        <match plemma="1" tags="adv"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+	      <match lemma="uèi" tags="adv"/>
+	      <match lemma="uei" tags="adv"/>
+	      <match lemma="ué" tags="adv"/>
+	      <match lemma="aué" tags="adv"/>
+	      <match lemma="auèi" tags="adv"/>
+	      <match lemma="uòi" tags="adv"/>
+	      <match lemma="ager" tags="adv"/>
+	      <match lemma="ièr" tags="adv"/>
+	      <match lemma="ier" tags="adv"/>
+	      <match lemma="ger" tags="adv"/>
+	      <match lemma="ager" tags="adv"/>
+	      <match lemma="deman" tags="adv"/>
+	      <match lemma="doman" tags="adv"/>
+	      <match lemma="passat ièr" tags="adv"/>
+	      <match lemma="passat ier" tags="adv"/>
+	      <match lemma="abans-ger" tags="adv"/>
+	      <match lemma="davant-ger" tags="adv"/>
+	      <match lemma="davant-ièr" tags="adv"/>
+	      <match lemma="davant-ier" tags="adv"/>
+	      <match lemma="ièr delà" tags="adv"/>
+	      <match lemma="ier delà" tags="adv"/>
+	      <match lemma="ièr delai" tags="adv"/>
+	      <match lemma="ier delai" tags="adv"/>
+	      <match lemma="deman passat" tags="adv"/>
+	      <match lemma="doman passat" tags="adv"/>
+        </or>
+        <match plemma="1" tags="adv"><select plemma="3"/></match>
+      </rule>
+	</def-macro>
   </def-macros>
 
   <def-seqs>
@@ -12550,33 +12596,18 @@
     <match lemma="davant d'òra" tags="adv"><select lemma="avant l'heure"/></match>
   </rule>
 
+  <!-- a ser >> ce soir, soir -->
   <!-- al ser >> ce soir, soir -->
-  <rule weight="0.8">
-    <match lemma="al ser" tags="adv"><select lemma="ce soir"/></match>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <seq n="jorns"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or><match tags="num"/><match tags="num.*"/></or>
-    </repeat>
-    <match lemma="al ser" tags="adv"><select lemma="soir"/></match>
-  </rule>
+  <!-- de ser >> ce soir, le soir, soir -->
+  <!-- de sera >> ce soir, le soir, soir -->
+  <macro n="al_ser"><with-param v="a ser"/><with-param v="ce soir"/><with-param v="soir"/></macro>
+  <macro n="al_ser"><with-param v="al ser"/><with-param v="ce soir"/><with-param v="soir"/></macro>
+  <macro n="al_ser"><with-param v="de ser"/><with-param v="ce soir"/><with-param v="soir"/></macro>
+  <macro n="al_ser"><with-param v="de sera"/><with-param v="ce soir"/><with-param v="soir"/></macro>
 
-  <!-- de ser >> ce soir, soir -->
-  <rule weight="0.8">
-    <match lemma="de ser" tags="adv"><select lemma="ce soir"/></match>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <seq n="jorns"/>
-    </or>
-    <repeat from="0" upto="1">
-      <or><match tags="num"/><match tags="num.*"/></or>
-    </repeat>
-    <match lemma="de ser" tags="adv"><select lemma="soir"/></match>
-  </rule>
+  <!-- de matin >> le matin, matin -->
+  <macro n="al_ser"><with-param v="de matin"/><with-param v="le matin"/><with-param v="matin"/></macro>
+
 
   <!-- mai >> plus (adv), plus (adv.pas_neg) -->
   <rule weight="0.8">

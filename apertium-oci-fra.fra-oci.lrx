@@ -1948,6 +1948,43 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- laborieux >> penós, trabalhaire -->
+  <rule weight="0.8">
+    <match lemma="laborieux" tags="adj.*"><select lemma="penós"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="laborieux" tags="adj.*"><select lemma="trabalhaire"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+    </or>
+    <or>
+      <match tags="vbser.*"/>
+      <match lemma="paréisser" tags="vblex.*"/>
+      <match lemma="paréisher" tags="vblex.*"/>
+      <match lemma="semblar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="laborieux" tags="adj.*"><select lemma="trabalhaire"/></match>
+  </rule>
+
   <!-- sacré >> sacrat, sacre -->
   <rule weight="0.8">
     <match lemma="sacré" tags="adj.*"><select lemma="sacrat"/></match>
@@ -5436,6 +5473,9 @@
     <match lemma="démettre" tags="vblex.*" v="oci"><select lemma="desmetre"/></match>
     <match lemma="démettre" tags="vblex.*" v="oci@gascon"><select lemma="desméter"/></match>
   </rule>
+
+  <!-- chagriner -> laguiar, lanhar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="chagriner"/><with-param v="laguiar"/><with-param v="lanhar"/></macro>
 
   <!-- dresser -> dreçar, quilhar -->
   <macro n="verb_nopron_pron"><with-param v="dresser"/><with-param v="dreçar"/><with-param v="quilhar"/></macro>
