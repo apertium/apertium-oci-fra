@@ -11766,6 +11766,30 @@
     <match lemma="miei" tags="adj.*"><select lemma="moyen"/></match>
   </rule>
 
+  <!-- plegadís >> souple, pliant -->
+  <rule weight="0.8">
+    <match lemma="plegadís" tags="adj.*"><select lemma="souple"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="sèti" tags="n.*"/>
+      <match lemma="cadièra" tags="n.*"/>
+    </or>
+    <match lemma="plegadís" tags="adj.*"><select lemma="pliant"/></match>
+  </rule>
+
+  <!-- plegable >> pliable, pliant -->
+  <rule weight="0.8">
+    <match lemma="plegable" tags="adj.*"><select lemma="pliable"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="sèti" tags="n.*"/>
+      <match lemma="cadièra" tags="n.*"/>
+    </or>
+    <match lemma="plegable" tags="adj.*"><select lemma="pliant"/></match>
+  </rule>
+
   <!-- brave >> gentil, bon/gros -->
   <rule weight="0.8">
     <match lemma="brave" tags="adj.*"><select lemma="gentil"/></match>
@@ -17866,6 +17890,12 @@
       <match tags="np.cog.*"/>
     </or>
   </rule>
+
+  <!-- avergonhar >> faire# honte, avoir# honte -->
+  <macro n="verb_nopron_pron"><with-param v="avergonhar"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>
+
+  <!-- avergonhir >> faire# honte, avoir# honte -->
+  <macro n="verb_nopron_pron"><with-param v="avergonhir"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>
 
   <!-- tarridar >> plaisanter, faire# du souci -->
   <macro n="verb_nopron_pron"><with-param v="tarridar"/><with-param v="plaisanter"/><with-param v="faire# du souci"/></macro>

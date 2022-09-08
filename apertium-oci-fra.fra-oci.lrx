@@ -1948,6 +1948,15 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- enflé >> confle, ampolat -->
+  <rule weight="0.8" v="oci">
+    <match lemma="enflé" tags="adj.*"><select lemma="confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="style" tags="n.*"/>
+    <match lemma="enflé" tags="adj.*"><select lemma="ampolat"/></match>
+  </rule>
+
   <!-- laborieux >> penós, trabalhaire -->
   <rule weight="0.8">
     <match lemma="laborieux" tags="adj.*"><select lemma="penós"/></match>
@@ -5174,6 +5183,61 @@
     </repeat>
     <match tags="prn.pro.*"/>
     <match lemma="écrouler" tags="vblex.inf"><select lemma="espatarrar"/></match>
+  </rule>
+
+  <!-- avoir# jusque-là >> aver# son confle, aver# mon confle, etc. -->
+  <rule weight="0.8" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*"><select lemma="aver# son confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*.p1.sg"><select lemma="aver# mon confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*.p2.sg"><select lemma="aver# ton confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*.p1.pl"><select lemma="aver# nòstre confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*.p2.pl"><select lemma="aver# vòstre confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir# jusque-là" tags="vblex.*.p3.pl"><select lemma="aver# lor confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p1.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avoir# jusque-là" tags="vblex.pp.*"><select lemma="aver# mon confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p2.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avoir# jusque-là" tags="vblex.pp.*"><select lemma="aver# ton confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p1.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avoir# jusque-là" tags="vblex.pp.*"><select lemma="aver# nòstre confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p2.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avoir# jusque-là" tags="vblex.pp.*"><select lemma="aver# vòstre confle"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match tags="vbhaver.*.p3.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="avoir# jusque-là" tags="vblex.pp.*"><select lemma="aver# lor confle"/></match>
   </rule>
 
   <!-- déchanter >> quitar# sos espèrs, quitar# mos espèrs, etc. -->
