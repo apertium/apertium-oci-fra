@@ -14795,27 +14795,132 @@
   </rule>
 
   <!-- causa >> chose, cause -->
-  <rule weight="0.7">
+  <rule weight="0.8">
       <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
   </rule>
-  <rule weight="0.8">
-      <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
-      <match lemma="de" tags="pr"/>
+  <rule weight="1.2">
+    <match lemma="causa" tags="n.*.pl"><select lemma="chose"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
     <match tags="adj.*"/>
   </rule>
-  <rule weight="0.9">
-      <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
-      <match lemma="de" tags="pr"/>
-      <repeat from="0" upto="1">
-        <or>
-          <match tags="adv"/>
-          <match tags="preadv"/>
-        </or>
-      </repeat>
-      <match tags="adj.*"/>
+  <rule weight="3.0">
+    <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="3.2">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*"/>
+  </rule>
+  <rule weight="3.2">
+    <or>
+      <match lemma="fòrça" tags="det.*"/>
+      <match lemma="hèra" tags="det.*"/>
+      <match lemma="fòrça de" tags="det.*"/>
+      <match lemma="hèra de" tags="det.*"/>
+      <match lemma="bisçanta" tags="det.*"/>
+      <match lemma="bissanta" tags="det.*"/>
+      <match lemma="bravament de" tags="det.*"/>
+      <match lemma="plan de" tags="det.*"/>
+      <match lemma="de bisçantenas de" tags="det.*"/>
+      <match lemma="hòrt de" tags="det.*"/>
+    </or>
+    <match lemma="causa" tags="n.*.pl"><select lemma="chose"/></match>
+  </rule>
+  <rule weight="3.2">
+    <or>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="det.*"/>
+        <match tags="adv"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+  </rule>
+  <rule weight="3.2">
+	<or>
+      <match lemma="parlar" tags="vblex.*"/>
+      <match lemma="discutir" tags="vblex.*"/>
+      <match tags="vblex.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+  </rule>
+  <rule weight="3.2">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="díder" tags="vblex.*"/>
+      <match lemma="manjar" tags="vblex.*"/>
+      <match lemma="minjar" tags="vblex.*"/>
+      <match lemma="beure" tags="vblex.*"/>
+      <match lemma="béver" tags="vblex.*"/>
+      <match lemma="béuer" tags="vblex.*"/>
+      <match lemma="parlar" tags="vblex.*"/>
+      <match tags="vblex.inf"/>
+    </or>
+  </rule>
+  <rule weight="3.2">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <or>
+        <match lemma="autre" tags="adj.*"/>
+        <match lemma="altre" tags="adj.*"/>
+        <match lemma="aute" tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="manièra" tags="n.*"/>
+      <match lemma="faiçon" tags="n.*"/>
+      <match lemma="biais" tags="n.*"/>
+      <match lemma="biaish" tags="n.*"/>
+      <match lemma="sòrta" tags="n.*"/>
+      <match lemma="mena" tags="n.*"/>
+      <match lemma="costat" tags="n.*"/>
+      <match lemma="ponch" tags="n.*"/>
+      <match lemma="punt" tags="n.*"/>
+      <match lemma="ponch# de vista" tags="n.*"/>
+      <match lemma="punt# de vista" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="3.2">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+    <match lemma="de" tags="pr"/>
+	<or>
+      <match lemma="ben" tags="n.*"/>
+      <match lemma="mal" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="3.2">
+    <match lemma="causa" tags="n.*"><select lemma="chose"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.*"/>
+	<or>
+      <match lemma="vida" tags="n.*"/>
+      <match lemma="vita" tags="n.*"/>
+    </or>
   </rule>
 <!--
   <rule weight="1.0">
@@ -14873,7 +14978,7 @@
       </repeat>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="3.0">
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
       <or>
         <match lemma="primièr" tags="adj.*"/>
@@ -14883,20 +14988,20 @@
         <match lemma="principal" tags="adj.*"/>
         <match lemma="principau" tags="adj.*"/>
         <match lemma="màger" tags="adj.*"/>
-        <match lemma="accidentau" tags="adj.*"/>
         <match lemma="accidental" tags="adj.*"/>
+        <match lemma="accidentau" tags="adj.*"/>
         <match lemma="determinant" tags="adj.*"/>
-        <match lemma="iniciala" tags="adj.*"/>
+        <match lemma="inicial" tags="adj.*"/>
         <match lemma="iniciau" tags="adj.*"/>
         <match lemma="involontari" tags="adj.*"/>
+        <match lemma="juste" tags="adj.*"/>
+        <match lemma="comun" tags="adj.*"/>
       </or>
   </rule>
-  <rule weight="1.0">
+  <rule weight="3.0">
       <match lemma="en" tags="prn.*"/>
       <or>
-        <match lemma="estar" tags="vbser.*"/>
-        <match lemma="èsser" tags="vbser.*"/>
-        <match lemma="èstre" tags="vbser.*"/>
+        <match tags="vbser.*"/>
         <match lemma="estar" tags="vblex.*"/>
         <match lemma="èsser" tags="vblex.*"/>
         <match lemma="èstre" tags="vblex.*"/>
@@ -14904,6 +15009,9 @@
         <match lemma="trapar" tags="vblex.*"/>
         <match lemma="cercar" tags="vblex.*"/>
       </or>
+    <repeat from="0" upto="2">
+        <match tags="adv"/>
+    </repeat>
       <match tags="det.*"/>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
   </rule>
@@ -14922,8 +15030,6 @@
       <or>
         <match lemma="rejónher" tags="vblex.*"/>
         <match lemma="rejúnher" tags="vblex.*"/>
-        <match lemma="arrejúnher" tags="vblex.*"/>
-        <match lemma="arrejónher" tags="vblex.*"/>
       </or>
       <match tags="det.*"/>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
@@ -14945,11 +15051,10 @@
         <match lemma="botar" tags="vblex.*"/>
         <match lemma="méter" tags="vblex.*"/>
       </or>
-      <or>
-        <match lemma="en" tags="pr"/>
-        <match lemma="en" tags="adv"/>
-        <match lemma="en" tags="prn.*"/>
-      </or>
+    <repeat from="0" upto="2">
+        <match tags="adv"/>
+    </repeat>
+      <match lemma="en" tags="pr"/>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
   </rule>
   <rule weight="1.0">
@@ -14958,23 +15063,17 @@
         <match lemma="tà" tags="pr"/>
         <match lemma="entà" tags="pr"/>
       </or>
-      <or>
-        <match lemma="le" tags="det.*"/>
-        <match lemma="lo" tags="det.*"/>
-        <match lemma="eth" tags="det.*"/>
-      </or>
+      <match tags="det.*"/>
+    <repeat from="0" upto="2">
       <match lemma="bon" tags="adj.*"/>
+    </repeat>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
   </rule>
   <rule weight="1.0">
-      <match lemma="tot" tags="n.*"/>
+      <match lemma="tot" tags="det.*"/>
       <match lemma="estat" tags="n.*"/>
       <match lemma="de" tags="pr"/>
       <match lemma="causa" tags="n.*"><select lemma="cause"/></match>
-  </rule>
-
-  <rule weight="1.2">
-    <match lemma="causa" tags="n.*.pl"><select lemma="chose"/></match>
   </rule>
 
   <rule weight="1.2">
