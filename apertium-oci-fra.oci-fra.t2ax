@@ -99,12 +99,20 @@
       <cat-item lemma="eux" tags="SPron.tn.*"/>
       <cat-item lemma="il" tags="SPron.tn.f.pl"/>
     </def-cat>
+    <def-cat n="SPron_on">
+      <cat-item lemma="on" tags="SPron.tn"/>
+      <cat-item lemma="on" tags="SPron.tn.*"/>
+    </def-cat>
     <def-cat n="SPron_tous">
       <cat-item lemma="tout" tags="SPron.tn.*.pl"/>
     </def-cat>
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.*"/>
+    </def-cat>
+    <def-cat n="SAdv_ne">
+      <cat-item lemma="ne" tags="SAdv"/>
+      <cat-item lemma="ne" tags="SAdv.*"/>
     </def-cat>
     <def-cat n="SAdv_itg">
       <cat-item tags="SAdv.itg"/>
@@ -4428,6 +4436,81 @@
             <clip pos="3" part="lem"/>
             <clip pos="3" part="tags"/>
             <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_ne SPron_on SV > SPron_on SAdv_ne SV (non se pòt > on ne peut)">
+      <pattern>
+        <pattern-item n="SAdv_ne"/>
+        <pattern-item n="SPron_on"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_ne SPron_on SPron_pro SV > SPron_on SAdv_ne SPron_pro SV (non s'i pòt > on n'y peut)">
+      <pattern>
+        <pattern-item n="SAdv_ne"/>
+        <pattern-item n="SPron_on"/>
+        <pattern-item n="SPron_pro"/>
+        <pattern-item n="SV"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="1" part="lem"/>
+            </get-case-from>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
