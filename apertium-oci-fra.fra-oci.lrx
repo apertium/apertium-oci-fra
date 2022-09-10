@@ -1052,6 +1052,7 @@
       <match lemma="melon" tags="n.*"/>
       <match lemma="pastèque" tags="n.*"/>
       <match lemma="raisin" tags="n.*"/>
+      <match lemma="grenade" tags="n.*"/>
       <match lemma="figue" tags="n.*"/>
       <match lemma="datte" tags="n.*"/>
       <match lemma="banane" tags="n.*"/>
@@ -1068,8 +1069,52 @@
       <match lemma="prune" tags="n.*"/>
       <match lemma="cerise" tags="n.*"/>
       <match lemma="olive" tags="n.*"/>
-      <match lemma="amande" tags="n.*"/>
       <match lemma="datte" tags="n.*"/>
+      <match lemma="amande" tags="n.*"/>
+      <match lemma="noisette" tags="n.*"/>
+    </or></def-seq>
+
+    <def-seq n="arbre_fruitier"><or>
+      <match lemma="abricotier" tags="n.*"/>
+      <match lemma="amandier" tags="n.*"/>
+      <match lemma="brugnonier" tags="n.*"/>
+      <match lemma="caroubier" tags="n.*"/>
+      <match lemma="cédratier" tags="n.*"/>
+      <match lemma="cerisier" tags="n.*"/>
+      <match lemma="citronnier" tags="n.*"/>
+      <match lemma="clémentinier" tags="n.*"/>
+      <match lemma="cocotier" tags="n.*"/>
+      <match lemma="cognassier" tags="n.*"/>
+      <match lemma="dattier" tags="n.*"/>
+      <match lemma="figuier" tags="n.*"/>
+      <match lemma="goyavier" tags="n.*"/>
+      <match lemma="grenadier" tags="n.*"/>
+      <match lemma="jamelonier" tags="n.*"/>
+      <match lemma="limettier" tags="n.*"/>
+      <match lemma="mandarinier" tags="n.*"/>
+      <match lemma="mangoustanier" tags="n.*"/>
+      <match lemma="manguier" tags="n.*"/>
+      <match lemma="mirabellier" tags="n.*"/>
+      <match lemma="nectarinier" tags="n.*"/>
+      <match lemma="néflier" tags="n.*"/>
+      <match lemma="noisetier" tags="n.*"/>
+      <match lemma="noyer" tags="n.*"/>
+      <match lemma="oranger" tags="n.*"/>
+      <match lemma="palmier-dattier" tags="n.*"/>
+      <match lemma="papayer" tags="n.*"/>
+      <match lemma="pécanier" tags="n.*"/>
+      <match lemma="pêcher" tags="n.*"/>
+      <match lemma="pistachier" tags="n.*"/>
+      <match lemma="plaqueminier" tags="n.*"/>
+      <match lemma="poirier" tags="n.*"/>
+      <match lemma="pommier" tags="n.*"/>
+      <match lemma="prunellier" tags="n.*"/>
+      <match lemma="prunier" tags="n.*"/>
+      <match lemma="rollinier" tags="n.*"/>
+      <match lemma="safoutier" tags="n.*"/>
+      <match lemma="sapotier" tags="n.*"/>
+      <match lemma="sapotillier" tags="n.*"/>
+      <match lemma="tamarinier" tags="n.*"/>
     </or></def-seq>
 
     <def-seq n="navire"><or>
@@ -2266,6 +2311,102 @@
       <match lemma="bronze" tags="n.*"/>
       <match lemma="fer" tags="n.*"/>
     </or>
+  </rule>
+
+  <!-- grenadier >> granadièr/granadèr, edat -->
+  <rule weight="0.8">
+    <match lemma="grenadier" tags="n.*" v="oci"><select lemma="granadièr"/></match>
+    <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="granadèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="planter" tags="vblex.*"/>
+      <match lemma="arracher" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="grenadier" tags="n.*" v="oci"><select lemma="miugranièr"/></match>
+    <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="miugranèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="grenadier" tags="n.*" v="oci"><select lemma="miugranièr"/></match>
+    <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="miugranèr"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="arbre_fruitier"/>
+      <seq n="fruit"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="arbre_fruitier"/>
+      <seq n="fruit"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="grenadier" tags="n.*" v="oci"><select lemma="miugranièr"/></match>
+    <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="miugranèr"/></match>
+  </rule>
+
+  <!-- grenade >> granada, miugrana -->
+  <rule weight="0.8">
+    <match lemma="grenade" tags="n.*"><select lemma="granada"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="manger" tags="vblex.*"/>
+      <match lemma="aimer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="grenade" tags="n.*"><select lemma="miugrana"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="grenade" tags="n.*"><select lemma="miugrana"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="fruit"/>
+      <seq n="arbre_fruitier"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="fruit"/>
+      <seq n="arbre_fruitier"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="grenade" tags="n.*"><select lemma="miugrana"/></match>
   </rule>
 
   <!-- pige >> linha, an/candela -->
