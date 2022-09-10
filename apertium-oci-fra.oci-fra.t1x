@@ -24,7 +24,7 @@
       <cat-item tags="np.loc"/>
     </def-cat>
     <def-cat n="npant">
-      <cat-item tags="np.ant"/>
+      <cat-item tags="adjp.ant"/>
       <cat-item tags="np.ant.*"/>
     </def-cat>
     <def-cat n="npantcog">
@@ -163,6 +163,9 @@
     <def-cat n="prnenc">
       <cat-item tags="prn.enc.*"/>
     </def-cat>
+    <def-cat n="prnpro_se">
+      <cat-item lemma="se" tags="prn.pro.*"/>
+    </def-cat>
     <def-cat n="prnpro_ref">
       <cat-item lemma="me" tags="prn.pro.*"/>
       <cat-item lemma="te" tags="prn.pro.*"/>
@@ -285,6 +288,10 @@
       <cat-item tags="vblex.*"/>
       <cat-item tags="vbhaver.*"/>
       <cat-item tags="vbmod.*"/>
+    </def-cat>
+
+    <def-cat n="vbmod_poder_p3pl">
+      <cat-item lemma="poder" tags="vbmod.*.p3.pl"/>
     </def-cat>
 
     <def-cat n="vbnoser_conj">
@@ -17051,6 +17058,91 @@
 
     <!-- AUTRAS RÈGLAS VERBALAS -->
 
+    <rule comment="RÈGLA: SE vbmod_poder_p3pl (se pòden > on peut)">
+       <pattern>
+         <pattern-item n="prnpro_se"/>
+         <pattern-item n="vbmod_poder_p3pl"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_canvis_temps">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SPron"/></tag>
+              <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lem"/>
+              <lit-tag v="prn"/>
+              <clip pos="1" side="tl" part="a_pron_long"/>
+              <clip pos="1" side="tl" part="pers"/>
+              <lit-tag v="3"/>
+              <lit-tag v="4"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="1" side="tl" part="lem"/><lit v="on"/></equal>
+            </test>
+            <out>
+              <chunk name="v">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="2" side="tl" part="temps"/></tag>
+                  <tag><clip pos="2" side="tl" part="pers"/></tag>
+                  <tag><lit-tag v="sg"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="a_verb"/>
+                  <lit-tag v="4"/>
+                  <clip pos="2" side="tl" part="pers"/>
+                  <lit-tag v="sg"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="v">
+                <tags>
+                  <tag><lit-tag v="SV"/></tag>
+                  <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                  <tag><var n="tipusverb"/></tag>
+                  <tag><clip pos="2" side="tl" part="temps"/></tag>
+                  <tag><clip pos="2" side="tl" part="pers"/></tag>
+                  <tag><clip pos="2" side="tl" part="nbr"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="a_verb"/>
+                  <lit-tag v="4"/>
+                  <clip pos="2" side="tl" part="pers"/>
+                  <clip pos="2" side="tl" part="nbr"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+       </action>
+    </rule>
+
     <rule comment="RÈGLA: IMP PRNENC">
        <pattern>
          <pattern-item n="imp"/>
@@ -17256,6 +17348,7 @@
        </action>
     </rule>
 
+xxxx
     <rule comment="INF/GER + ENCLITIC (pensar-o > le penser; estremvirà's > faire volte-face)">
       <pattern>
         <pattern-item n="infger"/>
