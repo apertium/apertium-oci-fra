@@ -6541,6 +6541,55 @@
       <match lemma="poder" tags="vbmod.*"/>
     </or>
   </rule>
+  <rule weight="1.0">
+    <match tags="sent"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <or>
+      <match lemma="poder" tags="vbmod.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match tags="sent"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"><select lemma="se"/></match>
+    <or>
+      <match lemma="poder" tags="vbmod.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="cnjadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="enganar" tags="vblex.inf"/>
+      <match lemma="trompar" tags="vblex.inf"/>
+      <match lemma="embullar" tags="vblex.inf"/>
+      <match lemma="enamorar" tags="vblex.inf"/>
+      <match lemma="enlairar" tags="vblex.inf"/>
+      <match lemma="escàder" tags="vblex.inf"/>
+      <match lemma="mauescàder" tags="vblex.inf"/>
+      <match lemma="morir" tags="vblex.inf"/>
+      <match lemma="revenjar" tags="vblex.inf"/>
+      <match lemma="avergonhar" tags="vblex.inf"/>
+      <match lemma="avergonhir" tags="vblex.inf"/>
+      <match lemma="virar# l'esquina" tags="vblex.inf"/>
+      <match lemma="virar# d'esquia" tags="vblex.inf"/>
+    </or>
+  </rule>
   <rule weight="3.0">
     <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
@@ -11933,6 +11982,7 @@
       <match lemma="vila" tags="n.*"/>
       <match lemma="pòrta" tags="n.*"/>
       <match lemma="material" tags="n.*"/>
+      <match lemma="materiau" tags="n.*"/>
     </or>
     <match lemma="nòu" tags="adj.*"><select lemma="neuf"/></match>
   </rule>
@@ -17532,6 +17582,10 @@
       <match lemma="material" tags="n.*" v="oci"><select lemma="matériel"/></match>
   </rule>
   <rule weight="1.0">
+      <match lemma="materiau" tags="n.m.pl" v="oci@gascon"><select lemma="matériau"/></match>
+      <match lemma="material" tags="n.m.pl" v="oci"><select lemma="matériau"/></match>
+  </rule>
+  <rule weight="1.0">
       <match lemma="en" tags="pr"/>
       <match lemma="materiau" tags="n.*" v="oci@gascon"><select lemma="matériau"/></match>
       <match lemma="material" tags="n.*" v="oci"><select lemma="matériau"/></match>
@@ -17564,10 +17618,6 @@
           <match lemma="òbra" tags="n.*"/>
           <match lemma="bastison" tags="n.*"/>
       </or>
-  </rule>
-  <rule weight="1.0">
-      <match lemma="materiau" tags="n.m.pl" v="oci@gascon"><select lemma="matériau"/></match>
-      <match lemma="material" tags="n.m.pl" v="oci"><select lemma="matériau"/></match>
   </rule>
   <rule weight="1.0">
       <match lemma="materiau" tags="n.*" v="oci@gascon"><select lemma="matériau"/></match>
