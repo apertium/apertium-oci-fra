@@ -125,6 +125,10 @@
       <cat-item lemma="quitament pas" tags="adv"/>
       <cat-item lemma="pas quitament" tags="adv"/>
     </def-cat>
+    <def-cat n="non_adv">
+      <cat-item lemma="non" tags="adv"/>
+      <cat-item lemma="non" tags="adv.enon"/>
+    </def-cat>
     <def-cat n="tot_adv">
       <cat-item lemma="tot" tags="adv"/>
     </def-cat>
@@ -17348,7 +17352,6 @@
        </action>
     </rule>
 
-xxxx
     <rule comment="INF/GER + ENCLITIC (pensar-o > le penser; estremvirà's > faire volte-face)">
       <pattern>
         <pattern-item n="infger"/>
@@ -18706,6 +18709,95 @@ xxxx
 
 
     <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: QUE NON PAS PREP > QUE PREP (que non pas dab > qu'avec)">
+      <pattern>
+        <pattern-item n="que_rel"/>
+        <pattern-item n="non_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="rel"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <call-macro n="firstWord">
+          <with-param pos="4"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="4" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: QUE NON PAS PREP > QUE PREP (que non pas dab > qu'avec)">
+      <pattern>
+        <pattern-item n="cnjsub"/>
+        <pattern-item n="non_adv"/>
+        <pattern-item n="pas_adv"/>
+        <pattern-item n="pr"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="cnjsub"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <call-macro n="firstWord">
+          <with-param pos="4"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="4" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="PREP"/></tag>
+            </tags>
+            <lu>
+              <clip pos="4" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: DE FAIÇON ADJ > DE FAÇON ADJ (SAdv per evitar la generacion de l'article partitiu)">
       <pattern>
