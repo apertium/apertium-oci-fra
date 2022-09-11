@@ -977,7 +977,6 @@
 		</or>
 	  </rule>
 
-<!--
 	  <rule weight="1.0">
 		<or>
 		  <match tags="n.*.sg"/>
@@ -996,16 +995,60 @@
 		  <or>
 			<match tags="adv"/>
 			<match tags="adv.enon"/>
-			<match tags="prn.pro.*"/>
+			<match tags="prn.pro.p1.*"/>
+			<match tags="prn.pro.p2.*"/>
+			<match tags="prn.pro.p3.*"/>
+			<match tags="prn.pro.adv"/>
+		  </or>
+		</repeat>
+		<or>
+		  <match lemma="parlar" tags="vblex.*.p3.sg"/>
+		  <match lemma="garantir" tags="vblex.*.p3.sg"/>
+		  <match lemma="guarantir" tags="vblex.*.p3.sg"/>
+		  <match lemma="assegurar" tags="vblex.*.p3.sg"/>
+		  <match lemma="organisar" tags="vblex.*.p3.sg"/>
+		</or>
+	  </rule>
+	  <rule weight="1.0">
+		<or>
+		  <match tags="n.*.sg"/>
+		  <match tags="adj.*.sg"/>
+		  <match tags="np.*.sg"/>
+		  <match tags="prn.tn.*.sg"/>
+		</or>
+		<repeat from="0" upto="1">
+		  <or>
+			<match tags="cm"/>
+			<match lemma="«" tags="lpar"/>
+		  </or>
+		</repeat>
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="3">
+		  <or>
+			<match tags="adv"/>
+			<match tags="adv.enon"/>
+			<match tags="prn.pro.p1.*"/>
+			<match tags="prn.pro.p2.*"/>
+			<match tags="prn.pro.p3.*"/>
+			<match tags="prn.pro.adv"/>
 		  </or>
 		</repeat>
 		<or>
 		  <match tags="vblex.*.p3.sg"/>
-		  <match tags="vbhaver.*.p3.sg"/>
 		  <match tags="vbmod.*.p3.sg"/>
 		</or>
+		<repeat from="0" upto="2">
+          <match tags="adv"/>
+		</repeat>
+		<or>
+		  <match lemma="parlar" tags="vblex.*"/>
+		  <match lemma="garantir" tags="vblex.*"/>
+		  <match lemma="guarantir" tags="vblex.*"/>
+		  <match lemma="assegurar" tags="vblex.*"/>
+		  <match lemma="organisar" tags="vblex.*"/>
+		</or>
 	  </rule>
--->
+
 	  <rule weight="1.0">
 		<or>
 		  <match tags="n.*.pl"/>
@@ -4471,6 +4514,8 @@
 	   <match lemma="precisar" tags="vblex.*"/>
 	   <match lemma="avançar" tags="vblex.*"/>
 	   <match lemma="afirmar" tags="vblex.*"/>
+	   <match lemma="garantir" tags="vblex.*"/>
+	   <match lemma="guarantir" tags="vblex.*"/>
 	   <match lemma="afortir" tags="vblex.*"/>
 	   <match lemma="ahortir" tags="vblex.*"/>
 	   <match lemma="allegar" tags="vblex.*"/>
@@ -4539,6 +4584,8 @@
 	   <match lemma="afirmar" tags="vblex.*.p3.sg"/>
 	   <match lemma="afortir" tags="vblex.*.p3.sg"/>
 	   <match lemma="ahortir" tags="vblex.*.p3.sg"/>
+	   <match lemma="garantir" tags="vblex.*.p3.sg"/>
+	   <match lemma="guarantir" tags="vblex.*.p3.sg"/>
 	   <match lemma="allegar" tags="vblex.*.p3.sg"/>
 	   <match lemma="assegurar" tags="vblex.*.p3.sg"/>
 	   <match lemma="explicitar" tags="vblex.*.p3.sg"/>
@@ -4605,6 +4652,8 @@
 	   <match lemma="afirmar" tags="vblex.*.p3.pl"/>
 	   <match lemma="afortir" tags="vblex.*.p3.pl"/>
 	   <match lemma="ahortir" tags="vblex.*.p3.pl"/>
+	   <match lemma="garantir" tags="vblex.*.p3.pl"/>
+	   <match lemma="guarantir" tags="vblex.*.p3.pl"/>
 	   <match lemma="allegar" tags="vblex.*.p3.pl"/>
 	   <match lemma="assegurar" tags="vblex.*.p3.pl"/>
 	   <match lemma="explicitar" tags="vblex.*.p3.pl"/>
@@ -4671,6 +4720,8 @@
 	   <match lemma="afirmar" tags="vblex.pp.*"/>
 	   <match lemma="afortir" tags="vblex.pp.*"/>
 	   <match lemma="ahortir" tags="vblex.pp.*"/>
+	   <match lemma="garantir" tags="vblex.pp.*"/>
+	   <match lemma="guarantir" tags="vblex.pp.*"/>
 	   <match lemma="allegar" tags="vblex.pp.*"/>
 	   <match lemma="assegurar" tags="vblex.pp.*"/>
 	   <match lemma="explicitar" tags="vblex.pp.*"/>
@@ -6404,10 +6455,13 @@
       <match lemma="remarcar" tags="vblex.*"/>
       <match lemma="remercar" tags="vblex.*"/>
       <match lemma="verificar" tags="vblex.*"/>
+	  <match lemma="garantir" tags="vblex.*"/>
+	  <match lemma="guarantir" tags="vblex.*"/>
       <match lemma="demandar" tags="vblex.*"/>
       <match lemma="demanar" tags="vblex.*"/>
       <match lemma="exiger" tags="vblex.*"/>
       <match lemma="reclamar" tags="vblex.*"/>
+      <match lemma="comptar" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -6442,6 +6496,8 @@
       <match lemma="remarcar" tags="vblex.*"/>
       <match lemma="remercar" tags="vblex.*"/>
       <match lemma="verificar" tags="vblex.*"/>
+	  <match lemma="garantir" tags="vblex.*"/>
+	  <match lemma="guarantir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -6459,6 +6515,8 @@
       <match lemma="hèr" tags="vblex.*.p3.pl"/>
       <match lemma="afirmar" tags="vblex.*"/>
       <match lemma="reafirmar" tags="vblex.*"/>
+	  <match lemma="garantir" tags="vblex.*"/>
+	  <match lemma="guarantir" tags="vblex.*"/>
       <match lemma="creire" tags="vblex.*"/>
       <match lemma="créder" tags="vblex.*"/>
       <match lemma="créser" tags="vblex.*"/>
@@ -6474,6 +6532,8 @@
       <match lemma="remarcar" tags="vblex.*"/>
       <match lemma="remercar" tags="vblex.*"/>
       <match lemma="verificar" tags="vblex.*"/>
+	  <match lemma="garantir" tags="vblex.*"/>
+	  <match lemma="guarantir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -8818,6 +8878,13 @@
       <match lemma="escrich"/>
       <match lemma="escrit"/>
       <match lemma="escriut"/>
+
+      <match lemma="manca" tags="n.*"/>
+      <match lemma="mancança" tags="n.*"/>
+      <match lemma="excès" tags="n.*"/>
+      <match lemma="demai" tags="n.*"/>
+      <match lemma="demei" tags="n.*"/>
+      <match lemma="sobrada" tags="n.*"/>
     </or>
   </rule>
   <rule weight="1.2">
@@ -17956,6 +18023,57 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- trepejar >> piétiner, fouler -->
+  <rule weight="0.8">
+    <match lemma="trepejar" tags="vblex.*"><select lemma="piétiner"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="trepejar" tags="vblex.*"><select lemma="fouler"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="tèrra" tags="n.*"/>
+      <match lemma="bòsc" tags="n.*"/>
+      <match lemma="forèst" tags="n.*"/>
+      <match lemma="selva" tags="n.*"/>
+      <match lemma="sèlva" tags="n.*"/>
+      <match lemma="seuva" tags="n.*"/>
+      <match lemma="sèuva" tags="n.*"/>
+      <match lemma="illa" tags="n.*"/>
+      <match lemma="ilha" tags="n.*"/>
+      <match lemma="isla" tags="n.*"/>
+      <match lemma="iscla" tags="n.*"/>
+      <match lemma="ièrla" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="tèrra" tags="n.*"/>
+      <match lemma="bòsc" tags="n.*"/>
+      <match lemma="forèst" tags="n.*"/>
+      <match lemma="selva" tags="n.*"/>
+      <match lemma="sèlva" tags="n.*"/>
+      <match lemma="seuva" tags="n.*"/>
+      <match lemma="sèuva" tags="n.*"/>
+      <match lemma="illa" tags="n.*"/>
+      <match lemma="ilha" tags="n.*"/>
+      <match lemma="isla" tags="n.*"/>
+      <match lemma="iscla" tags="n.*"/>
+      <match lemma="ièrla" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="trepejar" tags="vblex.*"><select lemma="fouler"/></match>
+  </rule>
+
   <!-- morir >> mourir, mourir non-pron -->
   <rule weight="0.8">
     <match lemma="morir" tags="vblex.*"><select lemma="mourir" tags="vblex.non-pron.*"/></match>
@@ -18045,6 +18163,15 @@
       <match tags="np.cog.*"/>
     </or>
   </rule>
+
+  <!-- alludir >> faire# allusion, avoir# allusion à -->
+  <macro n="verb_intrans_trans"><with-param v="alludir"/><with-param v="faire# allusion"/><with-param v="faire# allusion à"/></macro>
+
+  <!-- priorizar >> donner# la priorité, donner# la priorité à -->
+  <macro n="verb_intrans_trans"><with-param v="priorizar"/><with-param v="donner# la priorité"/><with-param v="donner# la priorité à"/></macro>
+
+  <!-- vetar >> mettre# son veto, mettre# son veto à -->
+  <macro n="verb_intrans_trans"><with-param v="vetar"/><with-param v="mettre# son veto"/><with-param v="mettre# son veto à"/></macro>
 
   <!-- avergonhar >> faire# honte, avoir# honte -->
   <macro n="verb_nopron_pron"><with-param v="avergonhar"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>

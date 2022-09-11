@@ -1587,6 +1587,37 @@
     </or>
   </rule>
 
+  <!-- lui prn.pro >> li, lo prn.pro.p3.*.sg (lengadocian) -->
+  <rule weight="0.8" v="oci">
+    <match lemma="lui" tags="prn.pro.*"><select lemma="li"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.sg"/></match>
+    <or>
+      <match lemma="rendre# visite" tags="vblex.*"/>
+      <match lemma="faire# face" tags="vblex.*"/>
+      <match lemma="décerner# un prix" tags="vblex.*"/>
+      <match lemma="donner# la priorité" tags="vblex.*"/>
+      <match lemma="mettre# son veto" tags="vblex.*"/>
+      <match lemma="mettre# son véto" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.sg"/></match>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="rendre# visite" tags="vblex.*"/>
+      <match lemma="faire# face" tags="vblex.*"/>
+      <match lemma="décerner# un prix" tags="vblex.*"/>
+      <match lemma="donner# la priorité" tags="vblex.*"/>
+      <match lemma="mettre# son veto" tags="vblex.*"/>
+      <match lemma="mettre# son véto" tags="vblex.*"/>
+    </or>
+  </rule>
+
   <!-- lui prn.pro >> lo prn.pro.p3.m.sg, lo prn.pro.p3.f.sg, ac (Gascon) -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.sg"/></match>
@@ -1594,6 +1625,37 @@
   <rule weight="1.0" v="oci@gascon">
     <match lemma="le" tags="prn.pro.*"/>
     <match lemma="lui" tags="prn.pro.*"><select lemma="ac" tags="prn.pro.*"/></match>
+  </rule>
+
+  <!-- leur prn.pro >> li, lo prn.pro.p3.*.pl (lengadocian) -->
+  <rule weight="0.8" v="oci">
+    <match lemma="leur" tags="prn.pro.*"><select lemma="li"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="leur" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.pl"/></match>
+    <or>
+      <match lemma="rendre# visite" tags="vblex.*"/>
+      <match lemma="faire# face" tags="vblex.*"/>
+      <match lemma="décerner# un prix" tags="vblex.*"/>
+      <match lemma="donner# la priorité" tags="vblex.*"/>
+      <match lemma="mettre# son veto" tags="vblex.*"/>
+      <match lemma="mettre# son véto" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="lui" tags="prn.pro.*"><select lemma="lo" tags="prn.pro.p3.m.pl"/></match>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="rendre# visite" tags="vblex.*"/>
+      <match lemma="faire# face" tags="vblex.*"/>
+      <match lemma="décerner# un prix" tags="vblex.*"/>
+      <match lemma="donner# la priorité" tags="vblex.*"/>
+      <match lemma="mettre# son veto" tags="vblex.*"/>
+      <match lemma="mettre# son véto" tags="vblex.*"/>
+    </or>
   </rule>
 
   <!-- leur prn.pro >> lo prn.pro.p3.mf.pl, prn.pro.p3.f, ac (Gascon) -->
@@ -6503,6 +6565,10 @@
       <match lemma="divaguer" tags="vblex.*" v="oci@gascon"><select lemma="chabraquejar"/></match>
   </rule>
 
+
+  <!-- fouler >> caucar/traupir, tòrcer/virar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="fouler"/><with-param v="caucar"/><with-param v="tòrcer"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="fouler"/><with-param v="traupir"/><with-param v="virar"/></macro>
 
   <!-- replier >> tornar plegar, replegar/aplegar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="replier"/><with-param v="tornar# plegar"/><with-param v="replegar"/></macro>
