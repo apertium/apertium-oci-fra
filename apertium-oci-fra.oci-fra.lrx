@@ -196,6 +196,9 @@
       </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <or>
           <match tags="det.*"/>
           <match tags="np.*"/>
@@ -203,24 +206,56 @@
       </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <or>
           <match tags="num.*"/>
           <match tags="num"/>
         </or>
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
         <match tags="n.*"/>
       </rule>
-      <rule weight="1.0">
+      <rule weight="1.0" v="oci">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
-        <or>
-          <match tags="num.*"/>
-          <match tags="num"/>
-        </or>
-        <match tags="adj.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*.pl"/>
+      </rule>
+      <rule weight="1.0" v="oci@gascon">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
         <match tags="n.*"/>
       </rule>
       <rule weight="1.0">
         <match lemma="le" tags="prn.pro.*"/>
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
       </rule>
       <rule weight="1.0">
         <or>

@@ -211,6 +211,9 @@
       </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <or>
           <match tags="det.*"/>
           <match tags="np.*"/>
@@ -218,24 +221,50 @@
       </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
         <or>
           <match tags="num.*"/>
           <match tags="num"/>
         </or>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
         <match tags="n.*"/>
       </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
-        <or>
-          <match tags="num.*"/>
-          <match tags="num"/>
-        </or>
-        <match tags="adj.*"/>
-        <match tags="n.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*"/>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*.pl"/>
       </rule>
       <rule weight="1.0">
         <match lemma="le" tags="prn.pro.*"/>
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
       </rule>
       <rule weight="1.0">
         <or>
@@ -6287,6 +6316,10 @@
 
   <!-- gronder >> bronzir, cridar -->
   <macro n="verb_intrans_trans"><with-param v="gronder"/><with-param v="bronzir"/><with-param v="cridar"/></macro>
+
+  <!-- virer >> virar, botar# dehòra -->
+  <macro n="verb_intrans_trans" v="oci"><with-param v="virer"/><with-param v="virar"/><with-param v="botar# defòra"/></macro>
+  <macro n="verb_intrans_trans" v="oci@gascon"><with-param v="virer"/><with-param v="virar"/><with-param v="botar# dehòra"/></macro>
 
   <!-- mêler >> mesclar, mainar/aucupar -->
   <macro n="verb_nopron_pron_prep" v="oci"><with-param v="mêler"/><with-param v="mesclar"/><with-param v="mainar"/><with-param v="de"/></macro>
