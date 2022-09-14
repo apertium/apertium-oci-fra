@@ -2454,6 +2454,26 @@
     <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="miugranèr"/></match>
   </rule>
 
+  <!-- hôtel >> ostalariá/ostaleria, ostal/ostau -->
+  <rule weight="0.8">
+    <match lemma="hôtel" tags="n.*" v="oci"><select lemma="ostalariá"/></match>
+    <match lemma="hôtel" tags="n.*" v="oci@gascon"><select lemma="ostaleria"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="Hôtel" tags="n.*" v="oci"><select lemma="ostal"/></match>
+    <match lemma="Hôtel" tags="n.*" v="oci@gascon"><select lemma="ostau"/></match>
+    <match tags="np.cog.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="hôtel" tags="n.*" v="oci"><select lemma="ostalariá"/></match>
+    <match lemma="hôtel" tags="n.*" v="oci@gascon"><select lemma="ostaleria"/></match>
+    <or>
+      <match lemma="Ritz" tags="np.cog.*"/>
+      <match lemma="Clemenceau" tags="np.cog.*"/>
+      <match lemma="Trump" tags="np.cog.*"/>
+    </or>
+  </rule>
+
   <!-- grenade >> granada, miugrana -->
   <rule weight="0.8">
     <match lemma="grenade" tags="n.*"><select lemma="granada"/></match>
