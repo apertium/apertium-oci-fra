@@ -4252,6 +4252,13 @@
     </or>
     <match lemma="bois" tags="n.*"><select lemma="bòsc"/></match>
   </rule>
+  <rule weight="1.1">
+    <match lemma="bois" tags="n.*"><select lemma="bòsc"/></match>
+    <or>
+      <match tags="adj.*.pl"/>
+      <match tags="vblex.pp.*.pl"/>
+    </or>
+  </rule>
 
   <rule weight="1.1">
     <match lemma="bois" tags="n.*"><select lemma="bòsc"/></match>
@@ -4383,6 +4390,27 @@
 
   <rule weight="1.4">
     <or>
+      <match lemma="morceau" tags="n.*"/>
+      <match lemma="bout" tags="n.*"/>
+      <match lemma="pointe" tags="n.*"/>
+      <match lemma="charpente" tags="n.*"/>
+      <match lemma="pièce" tags="n.*"/>
+      <match lemma="cheval" tags="n.*"/>
+      <match lemma="jouet" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="bois" tags="n.*" v="oci"><select lemma="fusta"/></match>
+    <match lemma="bois" tags="n.*" v="oci@gascon"><select lemma="husta"/></match>
+  </rule>
+
+  <rule weight="1.4">
+    <match lemma="charbon" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="bois" tags="n.*"><select lemma="lenha"/></match>
+  </rule>
+
+  <rule weight="1.4">
+    <or>
       <match lemma="bâtir" tags="vblex.*"/>
       <match lemma="construire" tags="vblex.*"/>
       <match lemma="reconstruire" tags="vblex.*"/>
@@ -4391,6 +4419,21 @@
       <match lemma="faire" tags="vblex.*"/>
     </or>
     <match lemma="de" tags="pr"/>
+    <match lemma="bois" tags="n.*" v="oci"><select lemma="fusta"/></match>
+    <match lemma="bois" tags="n.*" v="oci@gascon"><select lemma="husta"/></match>
+  </rule>
+
+  <rule weight="1.4">
+    <or>
+      <match lemma="sculpter" tags="vblex.*"/>
+      <match lemma="ciseler" tags="vblex.*"/>
+      <match lemma="tailler" tags="vblex.*"/>
+      <match lemma="travailler" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.def.*"/>
     <match lemma="bois" tags="n.*" v="oci"><select lemma="fusta"/></match>
     <match lemma="bois" tags="n.*" v="oci@gascon"><select lemma="husta"/></match>
   </rule>
@@ -4424,6 +4467,12 @@
     <or>
       <match lemma="intermittent" tags="n.*"/>
       <match lemma="artiste" tags="n.*"/>
+      <match lemma="chanteur" tags="n.*"/>
+      <match lemma="cantatrice" tags="n.*"/>
+      <match lemma="comédien" tags="n.*"/>
+      <match lemma="acteur" tags="n.*"/>
+      <match lemma="écrivain" tags="n.*"/>
+      <match lemma="présentateur" tags="n.*"/>
       <match lemma="technicien" tags="n.*"/>
     </or>
     <repeat from="0" upto="4">
@@ -4445,6 +4494,12 @@
     <or>
       <match lemma="intermittent" tags="n.*"/>
       <match lemma="artiste" tags="n.*"/>
+      <match lemma="chanteur" tags="n.*"/>
+      <match lemma="cantatrice" tags="n.*"/>
+      <match lemma="comédien" tags="n.*"/>
+      <match lemma="acteur" tags="n.*"/>
+      <match lemma="écrivain" tags="n.*"/>
+      <match lemma="présentateur" tags="n.*"/>
       <match lemma="technicien" tags="n.*"/>
     </or>
   </rule>
