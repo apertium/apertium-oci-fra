@@ -319,6 +319,20 @@
       <cat-item lemma="être nécessaire" tags="SA.pp.*"/>
     </def-cat>
 
+    <def-cat n="arriver_venir_p3sg">
+       <cat-item lemma="arriver" tags="SV.*.p3.sg"/>
+       <cat-item lemma="venir" tags="SV.*.p3.sg"/>
+       <cat-item lemma="sortir" tags="SV.*.p3.sg"/>
+       <cat-item lemma="partir" tags="SV.*.p3.sg"/>
+    </def-cat>
+
+    <def-cat n="arriver_venir_p3pl">
+       <cat-item lemma="arriver" tags="SV.*.p3.pl"/>
+       <cat-item lemma="venir" tags="SV.*.p3.pl"/>
+       <cat-item lemma="sortir" tags="SV.*.p3.pl"/>
+       <cat-item lemma="partir" tags="SV.*.p3.pl"/>
+    </def-cat>
+
     <def-cat n="verbs_expression_p3sg">
        <cat-item lemma="dire" tags="SV.*.p3.sg"/>
        <cat-item lemma="répondre" tags="SV.*.p3.sg"/>
@@ -4406,6 +4420,112 @@
             <clip pos="1" part="lem"/>
             <clip pos="1" part="tags"/>
             <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: arrive/vient DETsg (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="arriver_venir_p3sg"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: arrivent/viennent DETpl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="arriver_venir_p3pl"/>
+        <pattern-item n="DETpl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: arrive/vient SAdv DETsg (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="arriver_venir_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DETsg_NPsg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: arrivent/viennent SAdv DETpl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="arriver_venir_p3pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DETpl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
