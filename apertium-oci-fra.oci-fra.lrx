@@ -19538,8 +19538,7 @@
     </or>
   </rule>
 
-
-  <rule weight="1.0">
+  <rule weight="1.2">
     <or>
       <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
       <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
@@ -19590,7 +19589,6 @@
     </repeat>
     <match tags="n.*"/>
   </rule>
-
 
   <rule weight="1.2">
     <or>
@@ -19695,8 +19693,6 @@
     </or>
   </rule>
 
-
-
   <rule weight="1.2">
     <or>
       <seq n="jorns"/>
@@ -19760,6 +19756,7 @@
     <or>
       <match lemma="ont"/>
       <match lemma="on"/>
+      <match lemma="d'on"/>
       <match lemma="aquí" tags="adv"/>
       <match lemma="ací" tags="adv"/>
       <match lemma="ailà" tags="adv"/>
@@ -19800,6 +19797,7 @@
     <or>
       <match lemma="ont"/>
       <match lemma="on"/>
+      <match lemma="d'on"/>
       <match lemma="aquí" tags="adv"/>
       <match lemma="ací" tags="adv"/>
       <match lemma="ailà" tags="adv"/>
@@ -19812,32 +19810,21 @@
     </or>
   </rule>
 
-
-  <rule weight="1.2">
-    <match lemma="d'on" tags="pr"/>
-    <repeat from="0" upto="4">
-      <or>
-        <match tags=""/>
-        <match tags="*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
-      <match lemma="viéner" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="vier" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="vénguer" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-    </or>
-  </rule>
-
   <rule weight="1.2">
     <or>
-      <match lemma="Venguèt" tags="vblex.*" v="oci"><select lemma="venir"/></match>
-      <match lemma="Vienó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="Viengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="Vengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Venir" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+      <match lemma="Viéner" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Vier" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match lemma="Vénguer" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
     </or>
-    <match tags="det.*"/>
-    <match tags="n.*"/>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
   </rule>
 
   <rule weight="1.2">
@@ -19847,19 +19834,14 @@
       <match lemma="vier" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
       <match lemma="vénguer" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
     </or>
-    <match tags="det.*"/>
-    <match tags="n.*"/>
-  </rule>
-
-  <rule weight="1.2">
     <or>
-      <match lemma="Venguèt" tags="vblex.*" v="oci"><select lemma="venir"/></match>
-      <match lemma="Vienó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="Viengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
-      <match lemma="Vengó" tags="vblex.*" v="oci@gascon"><select lemma="venir"/></match>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
     </or>
-    <match tags="det.*"/>
-    <match tags="n.*"/>
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
   </rule>
 
   <rule weight="1.2">
@@ -19880,9 +19862,16 @@
       <match lemma="vier" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
       <match lemma="vénguer" tags="vblex.ifi.p3.*" v="oci@gascon"><select lemma="venir"/></match>
     </or>
-    <match tags="det.*"/>
-    <match tags="n.*"/>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
   </rule>
+
 
   <!-- acaravar >> chevaucher, enfourcher -->
   <macro n="verb_nopron_pron"><with-param v="acaravar"/><with-param v="chevaucher"/><with-param v="enfourcher"/></macro>
