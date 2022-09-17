@@ -8814,9 +8814,20 @@
     </or>
   </rule>
 
-  <!-- per >> pour, par -->
+  <!-- per >> pour, par, de -->
   <rule weight="0.8">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="mercé"/>
+      <match lemma="mercés"/>
+    </or>
+    <match lemma="per" tags="pr"><select lemma="de"/></match>
+    <repeat from="0" upto="3">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
   </rule>
   <rule weight="1.0">
     <match tags="*.pp.*"/>
@@ -13060,6 +13071,11 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- benvengut >> bienvenu, bien venu -->
+  <rule weight="0.8">
+    <match lemma="benvengut" tags="n.*"><select lemma="bienvenu"/></match>
+  </rule>
 
   <!-- nau >> nef, vaisseau -->
   <rule weight="0.8">
@@ -18057,6 +18073,115 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- téner >> tenir, tendre -->
+  <rule weight="0.8">
+    <match lemma="téner" tags="vblex.*"><select lemma="tenir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="téner" tags="vblex.*"><select lemma="tendre"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match lemma="de" tags="pr" v="oci"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="tenda" tags="n.*"/>
+      <match lemma="trapèla" tags="n.*"/>
+      <match lemma="tracanard" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- armar >> armer, tendre -->
+  <rule weight="0.8">
+    <match lemma="armar" tags="vblex.*"><select lemma="armer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="armar" tags="vblex.*"><select lemma="tendre"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match lemma="de" tags="pr" v="oci"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="tenda" tags="n.*"/>
+      <match lemma="trapèla" tags="n.*"/>
+      <match lemma="tracanard" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- preparar >> préparer, tendre -->
+  <rule weight="0.8">
+    <match lemma="preparar" tags="vblex.*"><select lemma="préparer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="preparar" tags="vblex.*"><select lemma="tendre"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match lemma="de" tags="pr" v="oci"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="emboscada" tags="n.*"/>
+      <match lemma="embuscada" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- parar >> parer, tendre -->
+  <rule weight="0.8">
+    <match lemma="parar" tags="vblex.*"><select lemma="parer"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="parar" tags="vblex.*"><select lemma="tendre"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.def.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <or>
+      <match lemma="aurelha" tags="n.*"/>
+      <match lemma="man" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- aparar >> parer, tendre -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="aparar" tags="vblex.*"><select lemma="parer"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="aparar" tags="vblex.*"><select lemma="tendre"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.def.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <or>
+      <match lemma="aurelha" tags="n.*"/>
+      <match lemma="man" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- trepejar >> piétiner, fouler -->
   <rule weight="0.8">

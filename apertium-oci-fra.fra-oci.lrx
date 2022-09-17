@@ -5172,6 +5172,56 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- tendre >> tibar, parar, armar/tiéner, preparar -->
+  <rule weight="0.8">
+    <match lemma="tendre" tags="vblex.*"><select lemma="tibar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tendre" tags="vblex.*"><select lemma="parar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.def.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <or>
+      <match lemma="oreille" tags="n.*"/>
+      <match lemma="main" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tendre" tags="vblex.*" v="oci"><select lemma="armar"/></match>
+    <match lemma="tendre" tags="vblex.*" v="oci@gascon"><select lemma="tiéner"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="piège" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tendre" tags="vblex.*"><select lemma="preparar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="embuscade" tags="n.*"/>
+  </rule>
+
   <!-- mourir >> morir, morir pron -->
   <rule weight="0.8">
     <match lemma="mourir" tags="vblex.*"><select lemma="morir" tags="vblex.pron.*"/></match>
