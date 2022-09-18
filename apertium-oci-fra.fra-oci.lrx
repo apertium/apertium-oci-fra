@@ -1470,14 +1470,46 @@
 
 <!-- **************** REL **************** -->
 
-  <!-- qui rel >> que -->
+  <!-- qui rel >> que, qui -->
   <rule weight="0.8">
-    <match lemma="qui" tags="rel.*"><select lemma="que"/></match>
+    <match lemma="qui" tags="rel.*" v="oci"><select lemma="que"/></match>
+    <match lemma="qui" tags="rel.*" v="oci@gascon"><select lemma="qui"/></match>
   </rule>
 
-  <!-- celui qui >> lo que -->
+  <!-- celui que >> lo que, lo qui -->
   <rule weight="0.8">
-    <match lemma="celui qui" tags="rel.*"><select lemma="lo que"/></match>
+    <match lemma="celui que" tags="rel.*" v="oci"><select lemma="lo que"/></match>
+    <match lemma="celui que" tags="rel.*" v="oci@gascon"><select lemma="lo qui"/></match>
+  </rule>
+
+  <!-- celui qui >> lo que, lo qui -->
+  <rule weight="0.8">
+    <match lemma="celui qui" tags="rel.*" v="oci"><select lemma="lo que"/></match>
+    <match lemma="celui qui" tags="rel.*" v="oci@gascon"><select lemma="lo qui"/></match>
+  </rule>
+
+  <!-- ceux et celles que >> los e las que, los e las qui -->
+  <rule weight="0.8">
+    <match lemma="ceux et celles que" tags="rel.*" v="oci"><select lemma="los e las que"/></match>
+    <match lemma="ceux et celles que" tags="rel.*" v="oci@gascon"><select lemma="los e las qui"/></match>
+  </rule>
+
+  <!-- celles et ceux que >> la e lo que, las e los qui -->
+  <rule weight="0.8">
+    <match lemma="celles et ceux que" tags="rel.*" v="oci"><select lemma="las e los que"/></match>
+    <match lemma="celles et ceux que" tags="rel.*" v="oci@gascon"><select lemma="las e los qui"/></match>
+  </rule>
+
+  <!-- ceux et celles qui >> los e las que, los e las qui -->
+  <rule weight="0.8">
+    <match lemma="ceux et celles qui" tags="rel.*" v="oci"><select lemma="los e las que"/></match>
+    <match lemma="ceux et celles qui" tags="rel.*" v="oci@gascon"><select lemma="los e las qui"/></match>
+  </rule>
+
+  <!-- celles et ceux qui >> las e los que, las e los qui -->
+  <rule weight="0.8">
+    <match lemma="celles et ceux qui" tags="rel.*" v="oci"><select lemma="las e los que"/></match>
+    <match lemma="celles et ceux qui" tags="rel.*" v="oci@gascon"><select lemma="las e los qui"/></match>
   </rule>
 
 

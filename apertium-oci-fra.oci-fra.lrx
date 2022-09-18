@@ -2466,6 +2466,290 @@
 	  </rule>
 	</def-macro>
 
+    <!-- lo que >> celui que, celui qui -->
+    <!-- lo qui >> celui que, celui qui -->
+    <def-macro n="gen_lo_que_qui" npar="3">
+      <rule weight="0.8">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match lemma="caler" tags="vbmod.*"/>
+          <match lemma="faler" tags="vbmod.*"/>
+        </or>
+      </rule>
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+            <match tags="vbhaver.*"/>
+            <match tags="vbmod.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match lemma="far# besonh" tags="vblex.*"/>
+          <match lemma="har# besonh" tags="vblex.*"/>
+          <match lemma="hèr# besonh" tags="vblex.*"/>
+          <match lemma="far# mestièr" tags="vblex.*"/>
+          <match lemma="har# hrèita" tags="vblex.*"/>
+          <match lemma="hèr# hrèita" tags="vblex.*"/>
+        </or>
+        <match tags="det.*"/>
+      </rule>
+      <rule weight="1.0" v="oci">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <match lemma="far# mestièr" tags="vblex.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+      </rule>
+      <rule weight="5.0">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <or>
+          <match lemma="far# besonh" tags="vblex.*"/>
+          <match lemma="har# besonh" tags="vblex.*"/>
+          <match lemma="hèr# besonh" tags="vblex.*"/>
+          <match lemma="far# mestièr" tags="vblex.*"/>
+          <match lemma="har# hrèita" tags="vblex.*"/>
+          <match lemma="hèr# hrèita" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="n.*.pl"/>
+          <match tags="adj.*.pl"/>
+        </or>
+      </rule>
+    
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <or>
+          <seq n="verb_dat2nom_conj"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="rel.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="prn_ci"/>
+        </or>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verb_dat2nom_pp"/>
+        </or>
+      </rule>
+    
+      <rule weight="2.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="verbs_intrans"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <match plemma="1" tags="rel.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <match tags="vbhaver.*.p3.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verbs_intrans"/>
+        </or>
+      </rule>
+    
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*.sg"><select plemma="3"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*.nt"><select plemma="3"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.sg"/>
+          <match tags="vbser.*.p3.sg"/>
+          <match tags="vbhaver.*.p3.sg"/>
+          <match tags="vbmod.*.p3.sg"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="rel.*.pl"><select plemma="3"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="vblex.*.p3.pl"/>
+          <match tags="vbser.*.p3.pl"/>
+          <match tags="vbhaver.*.p3.pl"/>
+          <match tags="vbmod.*.p3.pl"/>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*.nt"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="verbs_expression_p3sg"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="det.*.sg"/>
+          <match tags="np.ant.*"/>
+          <match tags="np.cog.*"/>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*.nt"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+        <or>
+          <seq n="verbs_expression_p3pl"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*.pl"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*.nt"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+       <match tags="vbhaver.*.p3.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verbs_expression_pp"/>
+        </or>
+        <or>
+          <match tags="det.*.sg"/>
+          <match tags="np.ant.*"/>
+          <match tags="np.cog.*"/>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="rel.*.nt"><select plemma="2"/></match>
+        <repeat from="0" upto="3">
+          <or>
+            <match tags="adv"/>
+            <match tags="adv.enon"/>
+            <match tags="prn.pro.*"/>
+          </or>
+        </repeat>
+       <match tags="vbhaver.*.p3.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <seq n="verbs_expression_pp"/>
+        </or>
+        <match tags="det.*.pl"/>
+      </rule>
+	</def-macro>
+
     <!-- al ser >> ce soir, soir -->
     <def-macro n="al_ser" npar="3">
       <rule weight="0.8">
@@ -6453,10 +6737,34 @@
     </or>
   </rule>
 -->
+  <rule weight="1.0">
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="se" tags="prn.pro.*"><remove tags="prn.pro.*"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="prn.pro.*"/>
+        <match tags="vbser.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="pensar" tags="vblex.*"/>
+    <match lemma="que"/>
+  </rule>
   <rule weight="1.0"> <!-- verbs intrasitius -->
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <or>
       <match lemma="insistir" tags="vblex.*"/>
+      <match lemma="demandar" tags="vblex.*"/>
+      <match lemma="demanar" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -6497,6 +6805,7 @@
       <match lemma="exiger" tags="vblex.*"/>
       <match lemma="reclamar" tags="vblex.*"/>
       <match lemma="comptar" tags="vblex.*"/>
+      <match lemma="pregar" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <or>
@@ -9119,6 +9428,58 @@
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
   </rule>
   <rule weight="1.2">
+    <or>
+      <match lemma="votar" tags="vblex.*"/>
+	  <match lemma="trabalhar" tags="vblex.*"/>
+	  <match lemma="trebalhar" tags="vblex.*"/>
+	  <match lemma="tribalhar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="per" tags="pr"><select lemma="pour"/></match>
+    <or>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="det.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match lemma="votar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="deputat" tags="n.*"/>
+      <match lemma="eurodeputat" tags="n.*"/>
+      <match lemma="representant" tags="n.*"/>
+      <match lemma="parlament" tags="n.*"/>
+      <match lemma="cambra" tags="n.*"/>
+      <match lemma="cramba" tags="n.*"/>
+      <match lemma="senat" tags="n.*"/>
+      <match lemma="conselh" tags="n.*"/>
+      <match lemma="amassada" tags="n.*"/>
+      <match lemma="assemblada" tags="n.*"/>
+      <match lemma="assamblea" tags="n.*"/>
+      <match lemma="acamp" tags="n.*"/>
+      <match lemma="governament" tags="n.*"/>
+      <match lemma="govèrn" tags="n.*"/>
+      <match lemma="pòble" tags="n.*"/>
+      <match lemma="nacion" tags="n.*"/>
+      <match lemma="ciutadan" tags="n.*"/>
+      <match lemma="monde" tags="n.*"/>
+      <match tags="n.acr.*"/>
+      <match lemma="ONU" tags="np.*"/>
+      <match lemma="EU" tags="np.*"/>
+      <match lemma="Nacions Unidas" tags="np.*"/>
+      <match lemma="Union Europèa" tags="np.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
     <or>
       <match lemma="aquò" tags="prn.*"/>
@@ -9198,1648 +9559,21 @@
   <macro n="gen_que_qui"><with-param v="qui"/></macro>
 
   <!-- lo que >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="lo que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="lo que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="lo que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="lo que" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="lo que" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
-
   <!-- lo qui >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="lo qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="lo qui" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="lo qui" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="lo qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
-
   <!-- aquel que >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aquel que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="aquel que" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aquel que" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aquel que" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
-
   <!-- aquel qui >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aquel qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="aquel qui" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aquel qui" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aquel qui" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aquel qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
-
   <!-- aqueth que >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aqueth que" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="aqueth que" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aqueth que" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aqueth que" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth que" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
-
   <!-- aqueth qui >> celui que, celui qui -->
-  <rule weight="0.8">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="caler" tags="vbmod.*"/>
-      <match lemma="faler" tags="vbmod.*"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-        <match tags="vbhaver.*"/>
-        <match tags="vbmod.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <match tags="det.*"/>
-  </rule>
-  <rule weight="1.0" v="oci">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <match lemma="far# mestièr" tags="vblex.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-  <rule weight="5.0">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <match lemma="far# besonh" tags="vblex.*"/>
-      <match lemma="har# besonh" tags="vblex.*"/>
-      <match lemma="hèr# besonh" tags="vblex.*"/>
-      <match lemma="far# mestièr" tags="vblex.*"/>
-      <match lemma="har# hrèita" tags="vblex.*"/>
-      <match lemma="hèr# hrèita" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="de" tags="pr"/>
-    <or>
-      <match tags="n.*.pl"/>
-      <match tags="adj.*.pl"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <or>
-      <seq n="verb_dat2nom_conj"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui que"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="prn_ci"/>
-    </or>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verb_dat2nom_pp"/>
-    </or>
-  </rule>
-
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-  <rule weight="2.0">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="aqueth qui" tags="rel.*"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="2">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <match tags="vbhaver.*.p3.*"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_intrans"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0">
-    <match lemma="aqueth qui" tags="rel.*.sg"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aqueth qui" tags="rel.*.nt"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.sg"/>
-      <match tags="vbser.*.p3.sg"/>
-      <match tags="vbhaver.*.p3.sg"/>
-      <match tags="vbmod.*.p3.sg"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="aqueth qui" tags="rel.*.pl"><select lemma="celui qui"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.*.p3.pl"/>
-      <match tags="vbser.*.p3.pl"/>
-      <match tags="vbhaver.*.p3.pl"/>
-      <match tags="vbmod.*.p3.pl"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3sg"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_p3pl"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.sg"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <or>
-      <match tags="det.*.sg"/>
-      <match tags="np.ant.*"/>
-      <match tags="np.cog.*"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="aqueth qui" tags="rel.*.nt"><select lemma="celui que"/></match>
-    <repeat from="0" upto="3">
-      <or>
-        <match tags="adv"/>
-        <match tags="adv.enon"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-   <match tags="vbhaver.*.p3.pl"/>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <or>
-      <seq n="verbs_expression_pp"/>
-    </or>
-    <match tags="det.*.pl"/>
-  </rule>
+  <macro n="gen_lo_que_qui"><with-param v="lo que"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="los e las que"/><with-param v="ceux et celles que"/><with-param v="ceux et celles qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="las e los que"/><with-param v="celles et ceux que"/><with-param v="celles et ceux qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="eths e eras que"/><with-param v="ceux et celles que"/><with-param v="ceux et celles qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="eras e eths que"/><with-param v="celles et ceux que"/><with-param v="celles et ceux qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="lo qui"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="aquel que"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="aquel qui"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="aqueth que"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
+  <macro n="gen_lo_que_qui"><with-param v="aqueth qui"/><with-param v="celui que"/><with-param v="celui qui"/></macro>
 
 
 <!-- **************** NUM **************** -->
@@ -14011,6 +12745,9 @@
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
     <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
   </rule>
   <rule weight="1.0">
@@ -14019,6 +12756,9 @@
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
     <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
   </rule>
   <rule weight="1.0">
@@ -14026,6 +12766,9 @@
     <match lemma="qui" tags="rel.*"><select lemma="qui"/></match>
     <repeat from="0" upto="1">
       <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
     </repeat>
     <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
   </rule>
@@ -14038,6 +12781,9 @@
         <match lemma="ont" tags="rel.*"/>
         <match lemma="on" tags="rel.*"/>
       </or>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
     </repeat>
     <or><match tags="vblex.*.pl"/><match tags="vbser.*.pl"/><match tags="vbhaver.*.pl"/><match tags="vbmod.*.pl"/></or>
   </rule>
