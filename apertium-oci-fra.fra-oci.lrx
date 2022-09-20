@@ -179,7 +179,7 @@
       </rule>
     </def-macro>
 
-    <!-- p1 verb fra, p2 verb cat estandard, p3 prep fra, p3 verb cat alternatiufra -->
+    <!-- p1 verb fra, p2 verb oci estandard, p3 prep fra, p3 verb oci alternatiu -->
      <!-- <macro n="verb_prep"><with-param v="chasser"/><with-param v="caçar"/><with-param v="de"/><with-param v="expulsar"/></macro> -->
     <def-macro n="verb_prep" npar="4">
       <rule weight="0.6">
@@ -203,7 +203,7 @@
     </def-macro>
 
     <!-- Aquesta macro tria el verb p2 si p1 és intransitiu i p3 si p1 és transitiu -->
-    <!-- p1 = verb fra, p2 = verb cat intransitiu, p3 = verb cat transitiu -->
+    <!-- p1 = verb fra, p2 = verb oci intransitiu, p3 = verb oci transitiu -->
     <!-- la manera de veure que el verb és transitiu és molt barroera -->
     <def-macro n="verb_intrans_trans" npar="3">
       <rule weight="0.8">
@@ -273,6 +273,80 @@
           <match tags="vblex.pp.*"/>
         </or>
         <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+    </def-macro>
+
+    <!-- Aquesta macro tria el verb p2 pronominal si p1 és intransitiu i p2 no pronominal si p1 és transitiu -->
+    <!-- p1 = verb fra, p2 = verb oci (intransitiu > pronominal, transitiu > no pronominal) -->
+    <!-- la manera de veure que el verb és transitiu és molt barroera -->
+    <def-macro n="verb_intrans_trans-pron_nopron" npar="2">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2" tags="vblex.pron.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="2" tags="vblex.nopron.*"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="det.*"/>
+          <match tags="np.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="2" tags="vblex.nopron.*"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="num.*"/>
+          <match tags="num"/>
+        </or>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="2" tags="vblex.nopron.*"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*"/>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="le" tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*"><select plemma="2" tags="vblex.nopron.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="2" tags="vblex.nopron.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="vblex.pp.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="2" tags="vblex.nopron.*"/></match>
       </rule>
     </def-macro>
 
@@ -507,6 +581,46 @@
         </repeat>
         <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
         <match plemma="4" tags="pr"/>
+      </rule>
+    </def-macro>
+
+    <!-- p1 = verb fra, p2 = verb oci amb adj en masc sg, p3 = verb oci amb adj en fem sg, p2 = verb oci amb adj en masc pl, p3 = verb oci amb adj en fem pl -->
+    <def-macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <match tags="det.*.f.sg"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="4"/></match>
+        <match tags="det.*.pl"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*"><select plemma="5"/></match>
+        <match tags="det.*.f.pl"/>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.m.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
       </rule>
     </def-macro>
   </def-macros>
@@ -2434,6 +2548,12 @@
       <match lemma="bronze" tags="n.*"/>
       <match lemma="fer" tags="n.*"/>
     </or>
+  </rule>
+
+  <!-- deux-pièces >> lotjament# de doas cambras/duas-crambas, vestit# de doas pèças/duas-pèças -->
+  <rule weight="0.8">
+    <match lemma="deux-pièces" tags="n.*" v="oci"><select lemma="lotjament# de doas cambras"/></match>
+    <match lemma="deux-pièces" tags="n.*" v="oci@gascon"><select lemma="duas-crambas"/></match>
   </rule>
 
   <!-- grenadier >> granadièr/granadèr, edat -->
@@ -5325,6 +5445,11 @@
     </or>
   </rule>
 
+  <!-- être# en proie à >> èsser# pres de, èsser# presa de, etc. -->
+  <!-- être# en proie à >> estar# secutat per, estar# secutada per, etc. -->
+  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci"><with-param v="être# en proie à"/><with-param v="èsser# pres de"/><with-param v="èsser# presa de"/><with-param v="èsser# preses de"/><with-param v="èsser# presas de"/></macro>
+  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci@gascon"><with-param v="être# en proie à"/><with-param v="estar# secutat per"/><with-param v="estar# secutada per"/><with-param v="estar# secutats per"/><with-param v="estar# secutadas per"/></macro>
+
   <!-- être# bidon >> èsser# fals, èsser# falsa, etc., desirar -->
   <!-- être# bidon >> estar# faus, estar# faussa, etc., desirar -->
   <rule weight="0.8">
@@ -6470,6 +6595,13 @@
 
   <!-- déplafonner >> arrestar# la limitacion, arrestar# la limitacion de -->
   <macro n="verb_intrans_trans"><with-param v="déplafonner"/><with-param v="arrestar# la limitacion"/><with-param v="arrestar# la limitacion de"/></macro>
+
+  <!-- enrager >> s'enrabiar, enrabiar -->
+  <!-- enrager >> amainadar, har# amainadar -->
+  <macro n="verb_intrans_trans-pron_nopron" v="oci"><with-param v="enrager"/><with-param v="enrabiar"/></macro>
+<!--
+  <macro n="verb_intrans_trans" v="oci@gascon"><with-param v="enrager"/><with-param v="amainadar"/><with-param v="har# amainadar"/></macro>
+-->
 
   <!-- gronder >> bronzir, cridar -->
   <macro n="verb_intrans_trans"><with-param v="gronder"/><with-param v="bronzir"/><with-param v="cridar"/></macro>

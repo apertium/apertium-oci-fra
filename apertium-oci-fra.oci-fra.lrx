@@ -602,6 +602,46 @@
       </rule>
     </def-macro>
 
+    <!-- p1 = verb oci, p2 = verb fra amb adj en masc sg, p3 = verb fra amb adj en fem sg, p2 = verb fra amb adj en masc pl, p3 = verb fra amb adj en fem pl -->
+    <def-macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <match tags="det.*.f.sg"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="4"/></match>
+        <match tags="det.*.pl"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*"><select plemma="5"/></match>
+        <match tags="det.*.f.pl"/>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.m.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
+      </rule>
+    </def-macro>
+
     <!-- (rel) que >> que, qui -->
     <!-- (rel) qui >> que, qui -->
     <def-macro n="gen_que_qui" npar="1">
@@ -18059,42 +18099,7 @@
   </rule>
 
   <!-- illegalizar >> rendre# illégal, rendre# illégaux, etc. -->
-  <rule weight="0.8">
-    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégal"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégale"/></match>
-    <match tags="det.*.f.sg"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégaux"/></match>
-    <match tags="det.*.pl"/>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="illegalizar" tags="vblex.*"><select lemma="rendre# illégales"/></match>
-    <match tags="det.*.f.pl"/>
-  </rule>
-  <rule weight="1.4">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <match lemma="illegalizar" tags="vblex.pp.f.sg"><select lemma="rendre# illégale"/></match>
-  </rule>
-  <rule weight="1.4">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <match lemma="illegalizar" tags="vblex.pp.m.pl"><select lemma="rendre# illégaux"/></match>
-  </rule>
-  <rule weight="1.4">
-    <or>
-      <match tags="n.*"/>
-      <match tags="adj.*"/>
-    </or>
-    <match lemma="illegalizar" tags="vblex.pp.f.pl"><select lemma="rendre# illégales"/></match>
-  </rule>
+  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="illegalizar"/><with-param v="rendre# illégal"/><with-param v="rendre# illégale"/><with-param v="rendre# illégaux"/><with-param v="rendre# illégales"/></macro>
 
   <!-- agilizar >> rendre# agile, rendre# agiles -->
   <rule weight="0.8">
