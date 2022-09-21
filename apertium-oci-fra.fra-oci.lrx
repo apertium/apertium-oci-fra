@@ -1345,6 +1345,59 @@
       <match lemma="capuche" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="matériel"><or>
+       <match lemma="coton" tags="n.*"/>
+       <match lemma="laine" tags="n.*"/>
+       <match lemma="soie" tags="n.*"/>
+       <match lemma="cuir" tags="n.*"/>
+       <match lemma="velours" tags="n.*"/>
+       <match lemma="sparte" tags="n.*"/>
+       <match lemma="spart" tags="n.*"/>
+       <match lemma="fil" tags="n.*"/>
+       <match lemma="papier" tags="n.*"/>
+       <match lemma="drap" tags="n.*"/>
+       <match lemma="robe" tags="n.*"/>
+       <match lemma="plastique" tags="n.*"/>
+       <match lemma="polyester" tags="n.*"/>
+       <match lemma="nylon" tags="n.*"/>
+       <match lemma="céramique" tags="n.*"/>
+       <match lemma="porcelaine" tags="n.*"/>
+       <match lemma="bambou" tags="n.*"/>
+       <match lemma="boue" tags="n.*"/>
+       <match lemma="paille" tags="n.*"/>
+       <match lemma="argile" tags="n.*"/>
+       <match lemma="brique" tags="n.*"/>
+       <match lemma="ciment" tags="n.*"/>
+       <match lemma="béton" tags="n.*"/>
+       <match lemma="pierre" tags="n.*"/>
+       <match lemma="marbre" tags="n.*"/>
+       <match lemma="ardoise" tags="n.*"/>
+       <match lemma="plâtre" tags="n.*"/>
+       <match lemma="gypse" tags="n.*"/>
+
+       <match lemma="métal" tags="n.*"/>
+       <match lemma="fer" tags="n.*"/>
+       <match lemma="acier" tags="n.*"/>
+       <match lemma="nickel" tags="n.*"/>
+       <match lemma="aluminium" tags="n.*"/>
+       <match lemma="or" tags="n.*"/>
+       <match lemma="argent" tags="n.*"/>
+       <match lemma="bronze" tags="n.*"/>
+       <match lemma="diamant" tags="n.*"/>
+       <match lemma="rubis" tags="n.*"/>
+       <match lemma="émeraude" tags="n.*"/>
+       <match lemma="ivoire" tags="n.*"/>
+
+       <match lemma="bois" tags="n.*"/>
+       <match lemma="chêne" tags="n.*"/>
+       <match lemma="hêtre" tags="n.*"/>
+       <match lemma="pin" tags="n.*"/>
+       <match lemma="bouleau" tags="n.*"/>
+       <match lemma="châtaignier" tags="n.*"/>
+       <match lemma="noyer" tags="n.*"/>
+       <match lemma="ébène" tags="n.*"/>
+    </or></def-seq>
+
     <def-seq n="adj_ord"><or>
       <match lemma="premier" tags="adj.*"/>
       <match lemma="second" tags="adj.*"/>
@@ -1455,6 +1508,27 @@
     <match lemma="tout" tags="predet.*"/>
     <match lemma="le" tags="det.*"/>
     <match tags="np.top.*"/>
+  </rule>
+
+  <!-- en >> en, de -->
+  <rule weight="0.8">
+    <match lemma="en" tags="pr"><select lemma="en"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="en" tags="pr"><select lemma="de"/></match>
+    <or>
+      <seq n="matériel"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="riche" tags="adj.*"/>
+      <match lemma="pauvre" tags="adj.*"/>
+    </or>
+    <match lemma="en" tags="pr"><select lemma="en"/></match>
+    <or>
+      <seq n="matériel"/>
+    </or>
   </rule>
 
   <!-- pour >> per/entà -->
@@ -2263,9 +2337,8 @@
     </or>
     <or>
       <match tags="vbser.*"/>
-      <match lemma="paréisser" tags="vblex.*"/>
-      <match lemma="paréisher" tags="vblex.*"/>
-      <match lemma="semblar" tags="vblex.*"/>
+      <match lemma="paraître" tags="vblex.*"/>
+      <match lemma="sembler" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="3">
       <or>
@@ -5323,6 +5396,49 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- ravir >> encantar, raubar/arpar -->
+  <rule weight="0.8">
+    <match lemma="ravir" tags="vblex.*"><select lemma="encantar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nous" tags="prn.pro.*"/>
+      <match lemma="vous" tags="prn.pro.*"/>
+    </or>
+    <match lemma="ravir" tags="vblex.*"><select lemma="encantar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lui" tags="prn.pro.*"/>
+      <match lemma="leur" tags="prn.pro.*"/>
+    </or>
+    <match lemma="ravir" tags="vblex.*" v="oci"><select lemma="raubar"/></match>
+    <match lemma="ravir" tags="vblex.*" v="oci@gascon"><select lemma="arpar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="ravir" tags="vblex.*" v="oci"><select lemma="raubar"/></match>
+    <match lemma="ravir" tags="vblex.*" v="oci@gascon"><select lemma="arpar"/></match>
+    <or>
+      <match lemma="à" tags="pr"/>
+      <match lemma="de" tags="pr"/>
+      <match lemma="un" tags="det.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="vbser.*"/>
+      <match lemma="paraître" tags="vblex.*"/>
+      <match lemma="sembler" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="ravir" tags="vblex.pp.*"><select lemma="encantar"/></match>
+  </rule>
 
   <!-- tendre >> tibar, parar, armar/tiéner, preparar -->
   <rule weight="0.8">
