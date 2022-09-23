@@ -5524,6 +5524,7 @@
 	  <match lemma="caporau" tags="n.*"/>
 	  <match lemma="sordat" tags="n.*"/>
 	  <match lemma="soldat" tags="n.*"/>
+      <match lemma="crosat" tags="n.*"/>
 	  <match lemma="marin" tags="n.*"/>
 	  <match lemma="marinèr" tags="n.*"/>
 	  <match lemma="marinièr" tags="n.*"/>
@@ -19154,6 +19155,7 @@
     <or>
         <match lemma="sordat" tags="n.*"/>
         <match lemma="soldat" tags="n.*"/>
+        <match lemma="crosat" tags="n.*"/>
         <match lemma="marin" tags="n.*"/>
         <match lemma="marinèr" tags="n.*"/>
         <match lemma="marinièr" tags="n.*"/>
@@ -20326,6 +20328,15 @@
 
 
 <!-- **************** NP **************** -->
+
+  <!-- Cap d'An >> le jour de l'an, jour de l'an -->
+  <rule weight="0.8">
+    <match lemma="Cap d'An" tags="np.al.*"><select lemma="le jour de l'an"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.*"/>
+    <match lemma="Cap d'An" tags="np.al.*"><select lemma="jour de l'an"/></match>
+  </rule>
 
   <macro n="ant_antcog"><with-param v="Abraam"/><with-param v="Abraham"/></macro>
   <macro n="ant_antcog"><with-param v="Adrian"/><with-param v="Hadrien"/></macro>
