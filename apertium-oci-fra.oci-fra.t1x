@@ -135,6 +135,12 @@
     <def-cat n="tot_det">
       <cat-item lemma="tot" tags="det.*"/>
     </def-cat>
+    <def-cat n="tot_detsg">
+      <cat-item lemma="tot" tags="det.*.sg"/>
+    </def-cat>
+    <def-cat n="cada_det">
+      <cat-item lemma="cada" tags="det.*"/>
+    </def-cat>
     <def-cat n="det">
       <cat-item tags="det.*"/>
       <cat-item tags="predet.*"/>
@@ -8723,6 +8729,98 @@
             </lu>
           </chunk>
         </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: TOT temps (tot dissabte > tous les samedis)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="tot_detsg"/>
+        <pattern-item n="unitat_temps_mes_et_al"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="2" side="tl" part="nbr"/><lit-tag v="sg"/></equal>
+            </test>
+            <let><clip pos="2" side="tl" part="nbr"/><lit-tag v="pl"/></let>
+          </when>
+        </choose>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="tout"/>
+              </get-case-from>
+              <lit-tag v="predet"/>
+              <clip pos="2" side="tl" part="gen"/>
+              <lit-tag v="pl"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <lit v="le"/>
+              </get-case-from>
+              <lit-tag v="det.def.mf.pl"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+   <rule comment="RÈGLA: CADA NUM temps (cada tres jorns > tous les trois jours)">
+      <pattern>
+        <pattern-item n="cada_det"/>
+        <pattern-item n="num"/>
+        <pattern-item n="unitat_temps_mes_et_al"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="data">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <lit v="tout"/>
+              </get-case-from>
+              <lit-tag v="predet"/>
+              <clip pos="3" side="tl" part="gen"/>
+              <lit-tag v="pl"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="3">
+                <lit v="le"/>
+              </get-case-from>
+              <lit-tag v="det.def.mf.pl"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="whole"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="whole"/>
+            </lu>
+          </chunk>
+        </out>
+         <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
       </action>
     </rule>
 
