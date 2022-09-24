@@ -1496,6 +1496,26 @@
     </or>
   </rule>
   <rule weight="1.0">
+    <match lemma="chasse" tags="n.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0">
     <match lemma="à" tags="pr"><select lemma="en"/></match>
     <or>
       <match lemma="bicyclette" tags="n.*"/>
@@ -5619,11 +5639,8 @@
       <match lemma="Hercule" tags="np.*"/>
       <match lemma="aiguille" tags="n.*"/>
       <match lemma="saison" tags="n.*"/>
+      <match lemma="recherche" tags="n.*"/>
     </or>
-  </rule>
-  
-  <rule weight="1.2">
-    <match lemma="travail" tags="n.m.pl"><select lemma="òbra"/></match>
   </rule>
   
   <rule weight="1.2">

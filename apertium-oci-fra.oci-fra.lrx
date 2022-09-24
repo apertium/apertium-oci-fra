@@ -4677,6 +4677,8 @@
 	   <match lemma="avançar" tags="vblex.*"/>
 	   <match lemma="recular" tags="vblex.*"/>
 	   <match lemma="recuolar" tags="vblex.*"/>
+	   <match lemma="pacientar" tags="vblex.*"/>
+	   <match lemma="desconar" tags="vblex.*"/>
 	   <match lemma="dòler# de" tags="vblex.*"/>
 	   <match lemma="metre# son veto" tags="vblex.*"/>
 	   <match lemma="méter# son veto" tags="vblex.*"/>
@@ -8858,6 +8860,24 @@
     <match tags="*.inf"/>
   </rule>
   <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="difacile" tags="adj.*"/>
+      <match lemma="mauaisit" tags="adj.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0">
     <match lemma="molin" tags="n.*"/>
     <match lemma="de" tags="pr"><select lemma="à"/></match>
     <or>
@@ -8909,6 +8929,11 @@
       <match lemma="combustion" tags="n.*"/>
       <match lemma="gas" tags="n.*"/>
     </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="caça" tags="n.*"/>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <match tags="det.*"/>
   </rule>
 
   <!-- entà >> à, pour, vers -->
@@ -12044,6 +12069,7 @@
 
 <!-- **************** N **************** -->
 
+<<<<<<< HEAD
   <!-- an >> an, année -->
   <rule weight="0.8">
     <match lemma="an" tags="n.*"><select lemma="an"/></match>
@@ -12051,6 +12077,62 @@
   <rule weight="1.0">
     <match lemma="cada" tags="det.*"/>
     <match lemma="an" tags="n.*"><select lemma="année"/></match>
+=======
+  <!-- cap >> chef n.GD, chef n.m -->
+  <rule weight="0.8">
+    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.m.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="det.*.f.*"/>
+      <match tags="adj.*.f.*"/>
+    </or>
+    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="adj.*.f.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="np.ant.f.*"/>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="np.ant.*"/>
+        <match tags="np.cog.*"/>
+        <match tags="" case="Aa"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="cm"/>
+    </repeat>
+    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
+    <repeat from="0" upto="10">
+      <or>
+        <match tags="pr"/>
+        <match tags="det.*"/>
+        <match tags="n.*"/>
+        <match tags="adj.*"/>
+        <match tags="np.top.*"/>
+        <match tags="np.al.*"/>
+        <match tags="" case="Aa"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="cm"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="" case="Aa"/>
+    </repeat>
+    <match tags="np.ant.f.*"/>
   </rule>
 
   <!-- benvengut >> bienvenu, bien venu -->
