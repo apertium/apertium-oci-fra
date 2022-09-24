@@ -2835,6 +2835,65 @@
         <match plemma="1" tags="adv"><select plemma="3"/></match>
       </rule>
 	</def-macro>
+
+    <!-- generar 'chef', p.ex.: cap >> chef n.GD, chef n.m -->
+    <def-macro n="gen_chef" npar="2">
+      <rule weight="0.8">
+        <match plemma="1" tags="n.*"><select plemma="2" tags="n.m.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="det.*.f.*"/>
+          <match tags="adj.*.f.*"/>
+        </or>
+        <match plemma="1" tags="n.*"><select plemma="2" tags="n.GD.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="n.*"><select plemma="2" tags="n.GD.*"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+          </or>
+        </repeat>
+        <match tags="adj.*.f.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="np.ant.f.*"/>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="np.ant.*"/>
+            <match tags="np.cog.*"/>
+            <match tags="" case="Aa"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <match plemma="1" tags="n.*"><select plemma="2" tags="n.GD.*"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="n.*"><select plemma="2" tags="n.GD.*"/></match>
+        <repeat from="0" upto="10">
+          <or>
+            <match tags="pr"/>
+            <match tags="det.*"/>
+            <match tags="n.*"/>
+            <match tags="adj.*"/>
+            <match tags="np.top.*"/>
+            <match tags="np.al.*"/>
+            <match tags="" case="Aa"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="1">
+          <match tags="cm"/>
+        </repeat>
+        <repeat from="0" upto="1">
+          <match tags="" case="Aa"/>
+        </repeat>
+        <match tags="np.ant.f.*"/>
+      </rule>
+	</def-macro>
   </def-macros>
 
   <def-seqs>
@@ -12069,7 +12128,6 @@
 
 <!-- **************** N **************** -->
 
-<<<<<<< HEAD
   <!-- an >> an, année -->
   <rule weight="0.8">
     <match lemma="an" tags="n.*"><select lemma="an"/></match>
@@ -12077,63 +12135,16 @@
   <rule weight="1.0">
     <match lemma="cada" tags="det.*"/>
     <match lemma="an" tags="n.*"><select lemma="année"/></match>
-=======
+  </rule>
+
   <!-- cap >> chef n.GD, chef n.m -->
-  <rule weight="0.8">
-    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.m.*"/></match>
-  </rule>
-  <rule weight="1.0">
-    <or>
-      <match tags="det.*.f.*"/>
-      <match tags="adj.*.f.*"/>
-    </or>
-    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="preadv"/>
-        <match tags="adv"/>
-      </or>
-    </repeat>
-    <match tags="adj.*.f.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match tags="np.ant.f.*"/>
-    <repeat from="0" upto="1">
-      <or>
-        <match tags="np.ant.*"/>
-        <match tags="np.cog.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="cap" tags="n.*"><select lemma="chef" tags="n.GD.*"/></match>
-    <repeat from="0" upto="10">
-      <or>
-        <match tags="pr"/>
-        <match tags="det.*"/>
-        <match tags="n.*"/>
-        <match tags="adj.*"/>
-        <match tags="np.top.*"/>
-        <match tags="np.al.*"/>
-        <match tags="" case="Aa"/>
-      </or>
-    </repeat>
-    <repeat from="0" upto="1">
-      <match tags="cm"/>
-    </repeat>
-    <repeat from="0" upto="1">
-      <match tags="" case="Aa"/>
-    </repeat>
-    <match tags="np.ant.f.*"/>
-  </rule>
+  <macro n="gen_chef"><with-param v="cap"/><with-param v="chef"/></macro>
+
+  <!-- capdau >> chef n.GD, chef n.m -->
+  <macro n="gen_chef"><with-param v="capdau"/><with-param v="chef"/></macro>
+
+  <!-- cap# d'Estat >> chef# d'État n.GD, chef# d'État n.m -->
+  <macro n="gen_chef"><with-param v="cap# d'Estat"/><with-param v="chef# d'État"/></macro>
 
   <!-- benvengut >> bienvenu, bien venu -->
   <rule weight="0.8">
