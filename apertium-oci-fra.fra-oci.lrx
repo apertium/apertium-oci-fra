@@ -2727,6 +2727,19 @@
     </or>
   </rule>
 
+  <!-- carte >> carta, mapa -->
+  <rule weight="0.8">
+    <match lemma="carte" tags="n.*"><select lemma="carta"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="carte" tags="n.*"><select lemma="carta"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <match tags="np.top.*"/>
+  </rule>
+
   <!-- grenade >> granada, miugrana -->
   <rule weight="0.8">
     <match lemma="grenade" tags="n.*"><select lemma="granada"/></match>
@@ -3470,7 +3483,7 @@
         <match tags="adj.*"/>
       </or>
     </repeat>
-    <match tags="det"/>
+    <match tags="det.*"/>
     <match lemma="mairie" tags="n.*"><select lemma="maison comuna"/></match>
   </rule>
   <rule weight="1.0">
@@ -3492,7 +3505,7 @@
         <match tags="adj.*"/>
       </or>
     </repeat>
-    <match tags="det"/>
+    <match tags="det.*"/>
     <match lemma="mairie" tags="n.*"><select lemma="maison comuna"/></match>
   </rule>
 
