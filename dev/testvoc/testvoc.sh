@@ -1,4 +1,4 @@
-echo "==Languedocien French->Occitan==========================";
+echo "==French->Languedocien Occitan==========================";
 bash inconsistency.sh fra-oci ../../../apertium-fra/.deps/fra.dix > /tmp/fra-oci.testvoc; bash inconsistency-summary.sh /tmp/fra-oci.testvoc fra-oci
 echo ""
 echo "==French->Gascon Occitan==========================";
