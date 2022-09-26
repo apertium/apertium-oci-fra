@@ -2633,6 +2633,41 @@
     <match lemma="louable" tags="adj.*" v="oci@gascon"><select lemma="laudable"/></match>
   </rule>
 
+  <!-- moelleux -> mofle, doux -->
+  <rule weight="0.8">
+    <match lemma="moelleux" tags="adj.*"><select lemma="mofle"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <or>
+      <match lemma="vin" tags="n.*"/>
+      <match lemma="Jurançon" tags="n.*"/>
+      <match lemma="Bordeaux" tags="n.*"/>
+      <match lemma="muscat" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match lemma="blanc" tags="adj.*"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="moelleux" tags="adj.*"><select lemma="doç"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="sec" tags="adj.*"/>
+    <or>
+      <match lemma="ou" tags="cnjcoo"/>
+      <match lemma="et" tags="cnjcoo"/>
+    </or>
+    <match lemma="moelleux" tags="adj.*"><select lemma="doç"/></match>
+  </rule>
+
 
 <!-- **************** N **************** -->
 
@@ -3420,6 +3455,14 @@
       </or>
     </repeat>
     <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="parler" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="le" tags="det.*"/>
+    <match lemma="croissant" tags="n.*" v="oci"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci@gascon"><select lemma="creishent"/></match>
   </rule>
 
   <!-- langue >> lenga, lengua, etc. -->
