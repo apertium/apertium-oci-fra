@@ -8,6 +8,8 @@
       <cat-item name="v"/>
       <cat-item name="vbser"/>
       <cat-item name="vbser_pp"/>
+      <cat-item name="èsser"/>
+      <cat-item name="estar"/>
       <cat-item name="vbser_adv_pp"/>
       <cat-item name="verb"/>
       <cat-item name="pro-verb"/>
@@ -22,6 +24,21 @@
   </section-def-cats>
 
   <section-def-attrs>
+    <def-attr n="gen">
+      <attr-item tags="m"/>
+      <attr-item tags="f"/>
+      <attr-item tags="mf"/>
+      <attr-item tags="nt"/>
+      <attr-item tags="GD"/>
+    </def-attr>
+
+    <def-attr n="nbr">
+      <attr-item tags="sg"/>
+      <attr-item tags="pl"/>
+      <attr-item tags="sp"/>
+      <attr-item tags="ND"/>
+    </def-attr>
+
     <def-attr n="case">
       <attr-item tags="aa"/>
       <attr-item tags="Aa"/>
@@ -34,6 +51,17 @@
   </section-def-vars>
 
   <section-def-macros>
+    <def-macro n="GD2m" npar="1">
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" part="gen"/><lit-tag v="GD"/></equal>
+          </test>
+          <let><clip pos="1" part="gen"/><lit-tag v="m"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
     <def-macro n="change_case" npar="1">
       <choose>
         <when>
@@ -59,7 +87,6 @@
   </section-def-macros>
 
   <section-rules>
-
     <rule comment="CHUNK: enon (changing case)">
       <pattern>
         <pattern-item n="enon"/>
@@ -80,6 +107,7 @@
       </pattern>
       <action>
         <call-macro n="change_case"><with-param pos="1"/></call-macro>
+        <call-macro n="GD2m"><with-param pos="1"/></call-macro>
         <out>
           <lu>
             <clip pos="1" part="whole"/>
@@ -91,6 +119,7 @@
             <test>
               <equal><lu-count/><lit v="2"/></equal>
             </test>
+            <call-macro n="GD2m"><with-param pos="2"/></call-macro>
             <out>
               <b pos="1"/>
               <lu>
@@ -102,6 +131,8 @@
             <test>
               <equal><lu-count/><lit v="3"/></equal>
             </test>
+            <call-macro n="GD2m"><with-param pos="2"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="3"/></call-macro>
             <out>
               <b pos="1"/>
               <lu>
@@ -117,6 +148,9 @@
             <test>
               <equal><lu-count/><lit v="4"/></equal>
             </test>
+            <call-macro n="GD2m"><with-param pos="2"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="3"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="4"/></call-macro>
             <out>
               <b pos="1"/>
               <lu>
@@ -136,6 +170,10 @@
             <test>
               <equal><lu-count/><lit v="5"/></equal>
             </test>
+            <call-macro n="GD2m"><with-param pos="2"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="3"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="4"/></call-macro>
+            <call-macro n="GD2m"><with-param pos="5"/></call-macro>
             <out>
               <b pos="1"/>
               <lu>
@@ -198,4 +236,3 @@ Resources:
     https://wiki.apertium.org/wiki/A_long_introduction_to_transfer_rules
     https://wiki.apertium.org/wiki/Transfer#Adding_structural_transfer_.28grammar.29_rules
 -->
-
