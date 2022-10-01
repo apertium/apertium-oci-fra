@@ -4821,6 +4821,8 @@
 	   <match lemma="en sàber# mau" tags="vblex.*"/>
 	   <match lemma="en assaber# mau" tags="vblex.*"/>
 	   <match lemma="en assàber# mau" tags="vblex.*"/>
+	   <match lemma="batre# la retirada" tags="vblex.*"/>
+	   <match lemma="copar# palhas" tags="vblex.*"/>
 
 	   <match lemma="tornar# agradar" tags="vblex.*"/>
 	   <match lemma="tornar# anar" tags="vblex.*"/>
@@ -12134,6 +12136,34 @@
 
 <!-- **************** N **************** -->
 
+  <!-- batent >> battant, volet -->
+  <rule weight="0.8">
+    <match lemma="batent" tags="n.*" v="oci"><select lemma="battant"/></match>
+    <match lemma="batent" tags="n.*" v="oci@gascon"><select lemma="volet"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="batent" tags="n.*"><select lemma="volet"/></match>
+    <or>
+      <match lemma="economic" tags="adj.*"/>
+      <match lemma="politic" tags="adj.*"/>
+      <match lemma="social" tags="adj.*"/>
+      <match lemma="sociau" tags="adj.*"/>
+      <match lemma="cultural" tags="adj.*"/>
+      <match lemma="culturau" tags="adj.*"/>
+      <match lemma="sindical" tags="adj.*"/>
+      <match lemma="sindicau" tags="adj.*"/>
+      <match lemma="administratiu" tags="adj.*"/>
+      <match lemma="diplomatic" tags="adj.*"/>
+      <match lemma="militar" tags="adj.*"/>
+      <match lemma="militari" tags="adj.*"/>
+      <match lemma="religiós" tags="adj.*"/>
+      <match lemma="judicial" tags="adj.*"/>
+      <match lemma="judiciau" tags="adj.*"/>
+      <match lemma="penal" tags="adj.*"/>
+      <match lemma="penau" tags="adj.*"/>
+    </or>
+  </rule>
+
   <!-- an >> an, année -->
   <rule weight="0.8">
     <match lemma="an" tags="n.*"><select lemma="an"/></match>
@@ -17220,6 +17250,65 @@
       <match lemma="tenda" tags="n.*"/>
       <match lemma="trapèla" tags="n.*"/>
       <match lemma="tracanard" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- embolhar -> embrouiller, brouiller -->
+  <rule weight="0.8">
+    <match lemma="embolhar" tags="vblex.*" v="oci"><select lemma="embrouiller"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="embolhar" tags="vblex.*" v="oci"><select lemma="brouiller"/></match>
+    <repeat from="1" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="emission" tags="n.*"/>
+      <match lemma="transmission" tags="n.*"/>
+      <match lemma="comunicacion" tags="n.*"/>
+      <match lemma="messatge" tags="n.*"/>
+      <match lemma="senhal" tags="n.*"/>
+      <match lemma="senhau" tags="n.*"/>
+      <match lemma="radar" tags="n.*"/>
+      <match lemma="telefòne" tags="n.*"/>
+      <match lemma="telefon" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- trebolar -> troubler, brouiller -->
+  <rule weight="0.8">
+    <match lemma="trebolar" tags="vblex.*" v="oci@gascon"><select lemma="troubler"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="trebolar" tags="vblex.*" v="oci@gascon"><select lemma="brouiller"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="emission" tags="n.*"/>
+      <match lemma="transmission" tags="n.*"/>
+      <match lemma="comunicacion" tags="n.*"/>
+      <match lemma="messatge" tags="n.*"/>
+      <match lemma="senhal" tags="n.*"/>
+      <match lemma="senhau" tags="n.*"/>
+      <match lemma="radar" tags="n.*"/>
+      <match lemma="telefòne" tags="n.*"/>
+      <match lemma="telefon" tags="n.*"/>
     </or>
   </rule>
 

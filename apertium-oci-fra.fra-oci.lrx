@@ -2683,6 +2683,70 @@
 
 <!-- **************** N **************** -->
 
+  <!-- volet >> contravent, batent -->
+  <rule weight="0.8">
+    <match lemma="volet" tags="n.*"><select lemma="contravent"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="volet" tags="n.*"><select lemma="batent"/></match>
+    <or>
+      <match lemma="économique" tags="adj.*"/>
+      <match lemma="politique" tags="adj.*"/>
+      <match lemma="syndical" tags="adj.*"/>
+      <match lemma="social" tags="adj.*"/>
+      <match lemma="culturel" tags="adj.*"/>
+      <match lemma="administratif" tags="adj.*"/>
+      <match lemma="diplomatique" tags="adj.*"/>
+      <match lemma="militaire" tags="adj.*"/>
+      <match lemma="religieux" tags="adj.*"/>
+      <match lemma="judiciaire" tags="adj.*"/>
+      <match lemma="pénal" tags="adj.*"/>
+    </or>
+  </rule>
+
+  <!-- poids lourd >> camion, pes pesant -->
+  <rule weight="0.8">
+    <match lemma="poids lourd" tags="n.*"><select lemma="camion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="poids lourd" tags="n.*"><select lemma="pes pesant"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="champion" tags="n.*"/>
+      <match lemma="championnat" tags="n.*"/>
+      <match lemma="boxe" tags="n.*"/>
+      <match lemma="boxeur" tags="n.*"/>
+      <match lemma="judo" tags="n.*"/>
+      <match lemma="judoka" tags="n.*"/>
+      <match lemma="karaté" tags="n.*"/>
+      <match lemma="karatéka" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="champion" tags="n.*"/>
+      <match lemma="championnat" tags="n.*"/>
+      <match lemma="boxe" tags="n.*"/>
+      <match lemma="boxeur" tags="n.*"/>
+      <match lemma="judo" tags="n.*"/>
+      <match lemma="judoka" tags="n.*"/>
+      <match lemma="karaté" tags="n.*"/>
+      <match lemma="karatéka" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="poids lourd" tags="n.*"><select lemma="pes pesant"/></match>
+  </rule>
+
   <!-- âge >> atge, edat -->
   <rule weight="0.8" v="oci@gascon">
     <match lemma="âge" tags="n.*"><select lemma="atge"/></match>
@@ -5754,6 +5818,42 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- refouler >> alunhar/recussar, reténer/retiéner -->
+  <rule weight="0.8">
+    <match lemma="refouler" tags="vblex.*" v="oci"><select lemma="alunhar"/></match>
+    <match lemma="refouler" tags="vblex.*" v="oci@gascon"><select lemma="recussar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="refouler" tags="vblex.*" v="oci"><select lemma="reténer"/></match>
+    <match lemma="refouler" tags="vblex.*" v="oci@gascon"><select lemma="retiéner"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="3">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="sentiment" tags="n.*"/>
+      <match lemma="émotion" tags="n.*"/>
+      <match lemma="désir" tags="n.*"/>
+      <match lemma="joie" tags="n.*"/>
+      <match lemma="satisfaction" tags="n.*"/>
+      <match lemma="dégoût" tags="n.*"/>
+      <match lemma="répulsion" tags="n.*"/>
+<!--
+      <match lemma="idée" tags="n.*"/>
+      <match lemma="pensée" tags="n.*"/>
+      <match lemma="préjudice" tags="n.*"/>
+      <match lemma="souvenir" tags="n.*"/>
+      <match lemma="traumatisme" tags="n.*"/>
+-->
+    </or>
+  </rule>
+
   <!-- ravir >> encantar, raubar/arpar -->
   <rule weight="0.8">
     <match lemma="ravir" tags="vblex.*"><select lemma="encantar"/></match>
@@ -6516,6 +6616,34 @@
       <match lemma="arrière-grand-père" tags="n.*"/>
       <match lemma="oncle" tags="n.*"/>
       <match lemma="tante" tags="n.*"/>
+    </or>
+  </rule>
+
+  <!-- brouiller -> mesclar, embolhar/trebolar, desavenir/desaviéner -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="brouiller"/><with-param v="mesclar"/><with-param v="desavenir"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="brouiller"/><with-param v="mesclar"/><with-param v="desaviéner"/></macro>
+  <rule weight="0.9">
+    <match lemma="brouiller" tags="vblex.*" v="oci"><select lemma="embolhar"/></match>
+    <match lemma="brouiller" tags="vblex.*" v="oci@gascon"><select lemma="trebolar"/></match>
+    <repeat from="1" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="émission" tags="n.*"/>
+      <match lemma="transmission" tags="n.*"/>
+      <match lemma="communication" tags="n.*"/>
+      <match lemma="message" tags="n.*"/>
+      <match lemma="signal" tags="n.*"/>
+      <match lemma="radar" tags="n.*"/>
+      <match lemma="téléphone" tags="n.*"/>
     </or>
   </rule>
 
