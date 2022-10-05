@@ -17207,7 +17207,6 @@
   </rule>
 
 
-
 <!-- **************** VBSER **************** -->
 
   <!-- vbser >> être, avoir -->
@@ -17226,6 +17225,34 @@
       <match lemma="estar" tags="vblex.pp.*"/>
     </or>
   </rule>
+
+
+<!-- **************** VBMOD **************** -->
+
+  <!-- soler >> avoir# l'habitude de, avoir# l'habitude -->
+  <rule weight="0.8" v="oci@gascon">
+    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
+  <!-- sòler >> avoir# l'habitude de, avoir# l'habitude -->
+  <rule weight="0.8">
+    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+
 
 <!-- **************** VBLEX **************** -->
 
@@ -19724,11 +19751,11 @@
       </or>
     </repeat>
     <or>
-        <match lemma="uelh" tags="vblex.*"/>
-        <match lemma="uelh" tags="vbmod.*"/>
-        <match lemma="uelh" tags="vbhaver.*"/>
+        <match tags="vblex.*"/>
+        <match tags="vbmod.*"/>
+        <match tags="vbhaver.*"/>
     </or>
-    <repeat from="0" upto="4">
+    <repeat from="0" upto="2">
       <or>
        <match tags="preadv"/>
        <match tags="adv"/>
