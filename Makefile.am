@@ -37,6 +37,9 @@ TARGETS_COMMON =		\
 	$(PREFIX1b).t1x			\
 	$(PREFIX1).t2x_temps.bin	\
 	$(PREFIX1).t2ax.bin	\
+	$(PREFIX1b).t2ax.bin	\
+	$(PREFIX1).t2ax			\
+	$(PREFIX1b).t2ax			\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1b).t2bx.bin	\
 	$(PREFIX1).t2bx			\
@@ -253,7 +256,17 @@ $(PREFIX1).t2x_temps.bin: $(BASENAME).$(PREFIX1).t2x_temps
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
-$(PREFIX1).t2ax.bin: $(BASENAME).$(PREFIX1).t2ax
+$(PREFIX1).t2ax: $(BASENAME).$(PREFIX1).t2ax
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t2ax >$@
+
+$(PREFIX1b).t2ax: $(BASENAME).$(PREFIX1).t2ax
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t2ax >$@
+
+$(PREFIX1).t2ax.bin: $(PREFIX1).t2ax
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX1b).t2ax.bin: $(PREFIX1b).t2ax
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 

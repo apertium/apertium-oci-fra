@@ -3422,6 +3422,131 @@
       </action>
     </rule>
 
+    <!-- subjècte après lo vèrb (possiblement) -->
+
+<!--
+xxxxx
+-->
+    <rule comment="RÈGLA: SV_vbser_p3pl PPpl PREP_de SN_pl: accord en genre entre suject et attribut: son causits d'ostals > sont choisies des maisons">
+      <pattern>
+        <pattern-item n="SV_vbser_p3pl"/>
+        <pattern-item n="PPpl"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_pl"/>
+      </pattern>
+      <action>
+      <choose>
+      <!-- il y a deux cas :
+        * le sujet a changé de genre, ce qui cause que l'attribut doit le faire aussi (pos1: m + sl_f, f + sl_m)
+        * l'attribut dans la langue cible peut prendre les deux genres (pos3: sl_mf), mais on a choisit a t1x le mauvais (cela arrive plus souvent quand on a un sujet complexe du type SN (PREP SN)+, ce qui se gère dans les règles qui suivent)
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="gen"/><lit-tag v="m"/></equal>
+              <equal><clip pos="2" part="gen"/><lit-tag v="f"/></equal>
+              <or>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_f"/></equal>
+                <equal><clip pos="2" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="2" part="gen"/><lit-tag v="m"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="gen"/><lit-tag v="f"/></equal>
+              <equal><clip pos="2" part="gen"/><lit-tag v="m"/></equal>
+              <or>
+                <equal><clip pos="4" part="sl_gen"/><lit-tag v="sl_m"/></equal>
+                <equal><clip pos="2" part="sl_gen"/><lit-tag v="sl_mf"/></equal>
+              </or>
+            </and>
+          </test>
+          <let><clip pos="2" part="gen"/><lit-tag v="f"/></let>
+        </when>
+      </choose>
+      <choose>
+      <!-- cas :
+        * le sujet a changé de nombre, ce qui cause que le verbe copulatif et l'attribut doivent le faire aussi
+      -->
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+          <let><clip pos="2" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_pl"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" part="nbr"/><lit-tag v="pl"/></let>
+          <let><clip pos="2" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+        <when>
+          <test>
+            <and>
+              <equal><clip pos="4" part="nbr"/><lit-tag v="pl"/></equal>
+              <equal><clip pos="1" part="nbr"/><lit-tag v="sg"/></equal>
+              <equal><clip pos="2" part="nbr"/><lit-tag v="sp"/></equal>
+              <equal><clip pos="4" part="sl_nbr"/><lit-tag v="sl_sg"/></equal>
+            </and>
+          </test>
+          <let><clip pos="1" part="nbr"/><lit-tag v="pl"/></let>
+        </when>
+      </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <!-- FIN RÈGLAS accord en genre entre sujet et attribut -->
 
     <!-- RÈGLAS inclusion del pronòm subjècte -->
