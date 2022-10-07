@@ -2683,6 +2683,78 @@
 
 <!-- **************** N **************** -->
 
+  <!-- bout >> cap, fin, tròç -->
+  <rule weight="0.8">
+    <match lemma="bout" tags="n.*"><select lemma="cap"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bout" tags="n.*"><select lemma="tròç"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="pan" tags="n.*"/>
+      <match lemma="fromage" tags="n.*"/>
+      <match lemma="saucisson" tags="n.*"/>
+      <match lemma="chemin" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="connaître" tags="vblex.*"/>
+    <match lemma="un" tags="det.*"/>
+    <match lemma="bout" tags="n.*"><select lemma="tròç"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire" tags="vblex.*"/>
+    <repeat from="1" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match lemma="pr" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="bout" tags="n.*"><select lemma="tròç"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bout" tags="n.*"><select lemma="fin"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="période" tags="n.*"/>
+      <match lemma="jour" tags="n.*"/>
+      <match lemma="journée" tags="n.*"/>
+      <match lemma="nuit" tags="n.*"/>
+      <match lemma="matin" tags="n.*"/>
+      <match lemma="matinée" tags="n.*"/>
+      <match lemma="après-midi" tags="n.*"/>
+      <match lemma="soir" tags="n.*"/>
+      <match lemma="soirée" tags="n.*"/>
+      <match lemma="week-end" tags="n.*"/>
+      <match lemma="semaine" tags="n.*"/>
+      <match lemma="mois" tags="n.*"/>
+      <match lemma="année" tags="n.*"/>
+      <match lemma="lustre" tags="n.*"/>
+      <match lemma="décennie" tags="n.*"/>
+      <match lemma="siècle" tags="n.*"/>
+      <match lemma="vacances" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- volet >> contravent, batent -->
   <rule weight="0.8">
     <match lemma="volet" tags="n.*"><select lemma="contravent"/></match>
@@ -5817,6 +5889,42 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- relever >> relevar/relhevar, dependre/depénder, remetre/remétre -->
+  <rule weight="0.8">
+    <match lemma="relever" tags="vblex.*" v="oci"><select lemma="relevar"/></match>
+    <match lemma="relever" tags="vblex.*" v="oci@gascon"><select lemma="relhevar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="relever" tags="vblex.*.p3.*" v="oci"><select lemma="dependre"/></match>
+    <match lemma="relever" tags="vblex.*.p3.*" v="oci@gascon"><select lemma="depénder"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.*.sg"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="relever" tags="vblex.*" v="oci"><select lemma="remetre"/></match>
+    <match lemma="relever" tags="vblex.*" v="oci@gascon"><select lemma="reméter"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="maladie" tags="n.*"/>
+      <match lemma="opération" tags="n.*"/>
+      <match lemma="infection" tags="n.*"/>
+      <match lemma="covid"/>
+      <match lemma="Covid"/>
+      <match lemma="bronchite" tags="n.*"/>
+      <match lemma="pneumonie" tags="n.*"/>
+      <match lemma="infarctus" tags="n.*"/>
+      <match lemma="grippe" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- refouler >> alunhar/recussar, reténer/retiéner -->
   <rule weight="0.8">
