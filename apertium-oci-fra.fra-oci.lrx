@@ -1994,6 +1994,21 @@
     </or>
   </rule>
 
+  <!-- il fait beau >> que hè beròi temps, hè beròi temps -->
+  <rule weight="0.8">
+    <match lemma="il fait beau" tags="adv"><select lemma="que hè beròi temps"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="cnjsub"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="cm"/>
+      </or>
+    </repeat>
+    <match lemma="il fait beau" tags="adv"><select lemma="hè beròi temps"/></match>
+  </rule>
+
   <!-- chez moi, toi, lui... après préposition -->
   <rule weight="0.8">
     <match lemma="chez moi" tags="adv" v="oci"><select lemma="en çò mieu"/></match>
@@ -6909,6 +6924,10 @@
     <match tags="det.*"/>
     <match lemma="œil" tags="n.*"/>
   </rule>
+
+  <!-- ruer -> petnar/reguitnar, ronçar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="ruer"/><with-param v="petnar"/><with-param v="ronçar"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="ruer"/><with-param v="reguitnar"/><with-param v="ronçar"/></macro>
 
   <!-- affaler -> afalar, espatarrar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="affaler"/><with-param v="afalar"/><with-param v="espatarrar"/></macro>
