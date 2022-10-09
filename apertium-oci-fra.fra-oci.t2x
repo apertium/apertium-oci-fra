@@ -195,6 +195,11 @@
       <cat-item tags="unknown.*"/>
     </def-cat>
 
+    <def-cat n="E_O">
+      <cat-item lemma="e" tags="cnjcoo"/>
+      <cat-item lemma="o" tags="cnjcoo"/>
+    </def-cat>
+
     <def-cat n="CM">
       <cat-item tags="CM"/>
     </def-cat>
@@ -2526,6 +2531,8 @@
 
     <!-- RÈGLAS PEL PARTITIU -->
 
+    <!-- 1. après lo vèrb -->
+
     <rule comment="RÈGLA: SV PR_de DET_def SN: Je veux de l'eau > Vòli d'aiga" v="oci">
       <pattern>
         <pattern-item n="SV_partitiu"/>
@@ -3182,6 +3189,8 @@
       </action>
     </rule>
 
+    <!-- 2. davant lo vèrb -->
+
     <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN: avec des amis > amb d'amics" v="oci">
       <pattern>
         <pattern-item n="SENT_PREP_CNJ_REL"/>
@@ -3235,7 +3244,9 @@
         <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
         <out>
           <chunk>
-            <clip pos="4" part="lem"/>
+            <get-case-from pos="2">
+              <clip pos="4" part="lem"/>
+            </get-case-from>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
           </chunk>
@@ -3360,7 +3371,224 @@
       </action>
     </rule>
 
-    <!-- cases ambe pronòm (se lo vèrb es reflexiu o a ja un complement dirècte, i a pas de partitiu) -->
+    <!-- cases amb cnjcoo -->
+
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN E_O PR_de DET_def SN: avec des amis et des amies > amb d'amics e d'amigas" v="oci">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN E_O PR_de DET_def SN: avec des amis et des amies > dab amics e amigas" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="4" part="lem"/>
+            </get-case-from>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="6"/><with-param pos="7"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN CM PR_de DET_def SNE_O PR_de DET_def SN: avec des chiens, des chats et des chameaux > amb de cans, de gats e de camèls" v="oci">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="CM"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="whole"/>
+          </chunk>
+          <b pos="9"/>
+          <chunk>
+            <clip pos="10" part="whole"/>
+          </chunk>
+          <b pos="10"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="11"/><with-param pos="12"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="12" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_PREP_CNJ_REL PR_de DET_def SN CM PR_de DET_def SNE_O PR_de DET_def SN: avec des chiens, des chats et des chameaux > dab cans, gats e camèus" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SENT_PREP_CNJ_REL"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="CM"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="2">
+              <clip pos="4" part="lem"/>
+            </get-case-from>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="6"/><with-param pos="7"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+          <b pos="8"/>
+          <chunk>
+            <clip pos="9" part="whole"/>
+          </chunk>
+          <b pos="9"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="10"/><with-param pos="11"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="11"/><with-param pos="12"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="12" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <!-- 3. cases ambe pronòm (se lo vèrb es reflexiu o a ja un complement dirècte, i a pas de partitiu) -->
 
     <rule comment="RÈGLA: PRNPRO SV PR_de DET_def SN: s'éloigne de la gauche > s'aluènha de l'esquèrra ; mets des chaussettes > me cargui de caucetas" v="oci">
       <pattern>
