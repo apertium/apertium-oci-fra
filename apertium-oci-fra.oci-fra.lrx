@@ -6930,6 +6930,12 @@
       <match tags="n.*"/>
       <match tags="adj.*"/>
     </or>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+      </or>
+    </repeat>
     <match lemma="se" tags="prn.pro.*"><remove tags="prn.pro.*"/></match>
     <repeat from="0" upto="3">
       <or>
@@ -13139,7 +13145,10 @@
   <rule weight="1.0">
     <match lemma="monde" tags="n.*"><select lemma="gens"/></match>
     <repeat from="0" upto="1">
-      <match tags="adv"/>
+      <or>
+        <match tags="adv"/>
+        <match tags="adv.enon"/>
+      </or>
     </repeat>
     <repeat from="0" upto="2">
       <match tags="prn.pro.*"/>
@@ -18363,53 +18372,9 @@
   </rule>
   <rule weight="1.0">
     <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
-    <match lemma="que" tags="cnjsub"/>
-    <repeat from="0" upto="10">
-      <or>
-        <match tags="det.*"/>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-        <match tags="pr"/>
-        <match tags="prn.tn.*"/>
-        <match tags="prn.pro.*"/>
-      </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
     </repeat>
-    <or>
-      <match tags="vblex.fti.*"/>
-      <match tags="vblex.prs.*"/>
-      <match tags="vblex.cni.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
-    <match tags="adv"/>
-    <match lemma="que" tags="cnjsub"/>
-    <repeat from="0" upto="10">
-      <or>
-        <match tags="det.*"/>
-        <match tags="n.*"/>
-        <match tags="np.*"/>
-        <match tags="adj.*"/>
-        <match tags="adv"/>
-        <match tags="preadv"/>
-        <match tags="pr"/>
-        <match tags="prn.tn.*"/>
-        <match tags="prn.pro.*"/>
-      </or>
-    </repeat>
-    <or>
-      <match tags="vblex.fti.*"/>
-      <match tags="vblex.prs.*"/>
-      <match tags="vblex.cni.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="esperar" tags="vblex.*"><select lemma="espérer"/></match>
-    <match tags="adv"/>
-    <match tags="adv"/>
     <match lemma="que" tags="cnjsub"/>
     <repeat from="0" upto="10">
       <or>
@@ -18560,6 +18525,9 @@
     </or>
     <match lemma="revirar" tags="vblex.pp.*"><select lemma="traduire"/></match>
   </rule>
+
+  <!-- amudir >> rendre# muet, rendre# muets, etc. -->
+  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="amudir"/><with-param v="rendre# muet"/><with-param v="rendre# muette"/><with-param v="rendre# muets"/><with-param v="rendre# muettes"/></macro>
 
   <!-- illegalizar >> rendre# illégal, rendre# illégaux, etc. -->
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="illegalizar"/><with-param v="rendre# illégal"/><with-param v="rendre# illégale"/><with-param v="rendre# illégaux"/><with-param v="rendre# illégales"/></macro>
@@ -19237,6 +19205,12 @@
 
   <!-- arredolar >> dégringoler, pelotonner -->
   <macro n="verb_nopron_pron"><with-param v="arredolar"/><with-param v="dégringoler"/><with-param v="pelotonner"/></macro>
+
+  <!-- avanir >> estourbir, évanouir -->
+  <macro n="verb_nopron_pron"><with-param v="avanir"/><with-param v="estourbir"/><with-param v="évanouir"/></macro>
+
+  <!-- eishavanir >> stupéfier, évanouir -->
+  <macro n="verb_nopron_pron"><with-param v="eishavanir"/><with-param v="stupéfier"/><with-param v="évanouir"/></macro>
 
   <!-- bandar >> bander, enivrer -->
   <macro n="verb_nopron_pron"><with-param v="bandar"/><with-param v="bander"/><with-param v="enivrer"/></macro>
