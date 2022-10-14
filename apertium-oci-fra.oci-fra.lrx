@@ -15031,6 +15031,17 @@
     <match lemma="cosina" tags="n.f.pl"><select lemma="cousin"/></match>
   </rule>
   <rule weight="1.0" >
+    <match tags="det.pos.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="cosina" tags="n.*"><select lemma="cousin"/></match>
+  </rule>
+  <rule weight="1.0" >
     <or>
           <match lemma="permèr" tags="adj.*"/>
           <match lemma="premièr" tags="adj.*"/>
