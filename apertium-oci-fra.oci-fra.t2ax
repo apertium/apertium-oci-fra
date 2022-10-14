@@ -5,6 +5,10 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SN_sg">
+      <cat-item tags="SN.*.sg"/>
+      <cat-item tags="SN.*.sg.*"/>
+    </def-cat>
     <def-cat n="SN_pl">
       <cat-item tags="SN.*.pl"/>
       <cat-item tags="SN.*.pl.*"/>
@@ -9545,6 +9549,316 @@
             <clip pos="4" part="lem"/>
             <clip pos="4" part="tags"/>
             <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- i a -->
+
+    <rule comment="RÈGLA: SN_sg SPron_i SV_vbhaver_p3sg (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SN_sg"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver_p3sg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_pl SPron_i SV_vbhaver_p3pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SN_pl"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_sg SAdv SPron_i SV_vbhaver_p3sg (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SN_sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver_p3sg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_pl SAdv SPron_i SV_vbhaver_p3pl (aquela règla es per empachar la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="SN_pl"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver_p3pl"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP SN SPron_i SV_vbhaver_p3 (aquela règla es per permetre la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="gen_subj2">
+          <with-param pos="4"/>
+          <with-param pos="3"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP DET SN SPron_i SV_vbhaver_p3 (aquela règla es per permetre la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <call-macro n="gen_subj2">
+          <with-param pos="5"/>
+          <with-param pos="4"/>
+        </call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP SN SAdv SPron_i SV_vbhaver_p3 (aquela règla es per permetre la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="3" part="lem"/><lit v="ne"/></equal>
+            </test>
+            <call-macro n="gen_subj2">
+              <with-param pos="5"/>
+              <with-param pos="4"/>
+            </call-macro>
+            <out>
+              <chunk>
+                <clip pos="3" part="whole"/>
+              </chunk>
+              <b pos="3"/>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="3" part="whole"/>
+              </chunk>
+              <b pos="3"/>
+            </out>
+            <call-macro n="gen_subj2">
+              <with-param pos="5"/>
+              <with-param pos="4"/>
+            </call-macro>
+          </otherwise>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PREP DET SAdv SN SPron_i SV_vbhaver_p3 (aquela règla es per permetre la generacion prn.tn)">
+      <pattern>
+        <pattern-item n="PREP"/>
+        <pattern-item n="DET"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SPron_i"/>
+        <pattern-item n="SV_vbhaver"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="4" part="lem"/><lit v="ne"/></equal>
+            </test>
+            <call-macro n="gen_subj2">
+              <with-param pos="6"/>
+              <with-param pos="5"/>
+            </call-macro>
+            <out>
+              <chunk>
+                <clip pos="4" part="whole"/>
+              </chunk>
+              <b pos="4"/>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk>
+                <clip pos="4" part="whole"/>
+              </chunk>
+              <b pos="4"/>
+            </out>
+            <call-macro n="gen_subj2">
+              <with-param pos="6"/>
+              <with-param pos="5"/>
+            </call-macro>
+          </otherwise>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
           </chunk>
         </out>
         <let><var n="finfrasa"/><lit v="no"/></let>
