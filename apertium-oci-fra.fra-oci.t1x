@@ -9683,7 +9683,7 @@
 
     <!-- RÈGLAS MÊME -->
 
-    <rule comment="RÈGLA: MÊME DET NOM">
+    <rule comment="RÈGLA: MÊME DET NOM > DET QUITE NOM">
       <pattern>
         <pattern-item n="meme_adv"/>
         <pattern-item n="det"/>
@@ -9753,7 +9753,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: MÊME NUM NOM">
+    <rule comment="RÈGLA: MÊME NUM NOM > NUM QUITE NOM">
       <pattern>
         <pattern-item n="meme_adv"/>
         <pattern-item n="num"/>
@@ -9766,6 +9766,68 @@
         </call-macro>
         <call-macro n="f_concord2">
           <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="num_a_n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="2" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <lit v="quite"/>
+              </get-case-from>
+              <lit-tag v="adj"/>
+              <var n="genero_m_f"/>
+              <lit-tag v="pl"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: MÊME DET NOM ADJ > DET QUITE NOM ADJ">
+      <pattern>
+        <pattern-item n="meme_adv"/>
+        <pattern-item n="det"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_genre_m_f">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
           <with-param pos="2"/>
         </call-macro>
         <call-macro n="f_maj_gentilici">
@@ -9796,7 +9858,7 @@
             </lu>
           </chunk>
           <b pos="1"/>
-          <chunk name="a_n">
+          <chunk name="a_n_a">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="3" side="tl" part="gen"/></tag>
@@ -9810,6 +9872,74 @@
               </get-case-from>
               <lit-tag v="adj"/>
               <var n="genero_m_f"/>
+              <clip pos="2" side="tl" part="nbr"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: MÊME NUM NOM ADJ > NUM QUITE NOM ADJ">
+      <pattern>
+        <pattern-item n="meme_adv"/>
+        <pattern-item n="num"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="adj"/>
+      </pattern>
+      <action>
+        <call-macro n="f_genre_m_f">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_concord3">
+          <with-param pos="3"/>
+          <with-param pos="4"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n_a_n_a">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="3" side="tl" part="gen"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <get-case-from pos="1">
+                <clip pos="2" side="tl" part="lemh"/>
+              </get-case-from>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <get-case-from pos="2">
+                <lit v="quite"/>
+              </get-case-from>
+              <lit-tag v="adj"/>
+              <var n="genero_m_f"/>
               <lit-tag v="pl"/>
             </lu>
             <b pos="2"/>
@@ -9817,6 +9947,12 @@
               <clip pos="3" side="tl" part="lemh"/>
               <clip pos="3" side="tl" part="tags"/>
               <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+            <b pos="3"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
             </lu>
           </chunk>
         </out>
