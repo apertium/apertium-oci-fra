@@ -1456,6 +1456,14 @@
     <match tags="*.inf"/>
   </rule>
   <rule weight="1.0">
+    <match lemma="machine" tags="n.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <or>
+      <match tags="*.inf"/>
+      <match tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
     <match lemma="moulin" tags="n.*"/>
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <or>
@@ -3570,23 +3578,19 @@
     <match lemma="char" tags="n.*"><select lemma="carri"/></match>
   </rule>
 
-  <!-- croissant >> còrna/còrn, carro -->
+  <!-- croissant >> còrna/còrn, creissent/creishent -->
   <rule weight="0.8">
-    <match lemma="croissant" tags="n.*"><select lemma="còrna"/></match>
-  </rule>
-  <rule weight="0.8">
-    <match lemma="croissant" tags="n.*"><select lemma="còrn"/></match>
+    <match lemma="croissant" tags="n.*" v="oci"><select lemma="còrna"/></match>
+    <match lemma="croissant" tags="n.*" v="oci@gascon"><select lemma="còrn"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci@gascon"><select lemma="creishent"/></match>
     <match lemma="rouge" tags="adj.*"/>
   </rule>
   <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
-    <match lemma="rouge" tags="adj.*"/>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci@gascon"><select lemma="creishent"/></match>
     <repeat from="0" upto="6">
       <or>
         <match tags="*"/>
@@ -3594,25 +3598,14 @@
       </or>
     </repeat>
     <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0">
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <or>
+      <match lemma="nuit" tags="n.*"/>
       <match lemma="lune" tags="n.*"/>
       <match lemma="lunaire" tags="adj.*"/>
     </or>
   </rule>
   <rule weight="1.0">
     <or>
+      <match lemma="nuit" tags="n.*"/>
       <match lemma="lune" tags="n.*"/>
       <match lemma="lunaire" tags="adj.*"/>
     </or>
@@ -3622,22 +3615,9 @@
         <match tags=""/>
       </or>
     </repeat>
-    <match lemma="croissant" tags="n.*"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci"><select lemma="creissent"/></match>
+    <match lemma="croissant" tags="n.*" v="oci@gascon"><select lemma="creishent"/></match>
   </rule>
-  <rule weight="1.0">
-    <or>
-      <match lemma="lune" tags="n.*"/>
-      <match lemma="lunaire" tags="adj.*"/>
-    </or>
-    <repeat from="0" upto="6">
-      <or>
-        <match tags="*"/>
-        <match tags=""/>
-      </or>
-    </repeat>
-    <match lemma="croissant" tags="n.*"><select lemma="creishent"/></match>
-  </rule>
-
   <rule weight="1.0">
     <match lemma="parler" tags="n.*"/>
     <match lemma="de" tags="pr"/>
