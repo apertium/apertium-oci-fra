@@ -676,6 +676,26 @@
       <cat-item lemma="manièra" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="gleisa_n">
+      <cat-item lemma="glèisa" tags="n.*"/>
+      <cat-item lemma="catedrala" tags="n.*"/>
+      <cat-item lemma="catedrau" tags="n.*"/>
+<!--
+      <cat-item lemma="monastèri" tags="n.*"/>
+      <cat-item lemma="monastièr" tags="n.*"/>
+      <cat-item lemma="mostièr" tags="n.*"/>
+      <cat-item lemma="mongia" tags="n.*"/>
+      <cat-item lemma="abadiá" tags="n.*"/>
+      <cat-item lemma="abadia" tags="n.*"/>
+      <cat-item lemma="capèla" tags="n.*"/>
+      <cat-item lemma="capèra" tags="n.*"/>
+      <cat-item lemma="priorat" tags="n.*"/>
+      <cat-item lemma="chartrosa" tags="n.*"/>
+      <cat-item lemma="parròquia" tags="n.*"/>
+      <cat-item lemma="parròpia" tags="n.*"/>
+-->
+    </def-cat>
+
     <def-cat n="illa_n">
       <cat-item lemma="illa" tags="n.*"/>
       <cat-item lemma="ilha" tags="n.*"/>
@@ -2516,6 +2536,7 @@
       <list-item v="Adour"/>
       <list-item v="Allier"/>
       <list-item v="Ardèche"/>
+      <list-item v="Aspe"/>
       <list-item v="Aude"/>
       <list-item v="Aveyron"/>
       <list-item v="Corrèze"/>
@@ -21154,6 +21175,127 @@
 
 
     <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: GLEISA DE AL > GLEISA AL">
+      <pattern>
+        <pattern-item n="gleisa_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="npal"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <modify-case><var n="lemma"/><lit v="aa"/></modify-case>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><lit-tag v="n"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET GLEISA DE AL > DET GLEISA AL">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="gleisa_n"/>
+        <pattern-item n="depr"/>
+        <pattern-item n="npal"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="firstWord">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="n" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="4" side="tl" part="lemh"/>
+              <clip pos="4" side="tl" part="tags"/>
+              <clip pos="4" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: QUE NON PAS PREP > QUE PREP (que non pas dab > qu'avec)">
       <pattern>
