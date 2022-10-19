@@ -568,6 +568,17 @@
       <cat-item lemma="fin" tags="n.*"/>
     </def-cat>
 
+    <def-cat n="eglise_n">
+      <cat-item lemma="église" tags="n.*"/>
+      <cat-item lemma="cathédrale" tags="n.*"/>
+      <cat-item lemma="monastère" tags="n.*"/>
+      <cat-item lemma="abbaye" tags="n.*"/>
+      <cat-item lemma="prieuré" tags="n.*"/>
+      <cat-item lemma="chartreuse" tags="n.*"/>
+      <cat-item lemma="chapelle" tags="n.*"/>
+      <cat-item lemma="paroisse" tags="n.*"/>
+    </def-cat>
+
     <def-cat n="mal_n">
       <cat-item lemma="mal" tags="n.*"/>
     </def-cat>
@@ -2032,6 +2043,7 @@
       <list-item v="Adour"/>
       <list-item v="Allier"/>
       <list-item v="Ardèche"/>
+      <list-item v="Aspe"/>
       <list-item v="Aude"/>
       <list-item v="Aveyron"/>
       <list-item v="Corrèze"/>
@@ -25802,6 +25814,118 @@
 
 
   <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: EGLISE AL > ESGLESIA DE AL">
+      <pattern>
+        <pattern-item n="eglise_n"/>
+        <pattern-item n="npal"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="1"/>
+        </call-macro>
+        <out>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="1" side="tl" part="gen"/></tag>
+              <tag><clip pos="1" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET EGLISE AL > DET ESGLESIA DE AL">
+      <pattern>
+        <pattern-item n="det"/>
+        <pattern-item n="eglise_n"/>
+        <pattern-item n="npal"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord2">
+          <with-param pos="2"/>
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord_mantun2">
+          <with-param pos="1"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_maj_gentilici">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_det">
+          <with-param pos="1"/>
+        </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+        <out>
+          <chunk namefrom="lemma">
+            <tags>
+              <tag><lit-tag v="Det"/></tag>
+              <tag><var n="tipusdet"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="1"/>
+          <chunk name="n">
+            <tags>
+              <tag><lit-tag v="SN"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <lit v="de"/>
+              <lit-tag v="pr"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: EST-CE QUE > 0">
        <pattern>
