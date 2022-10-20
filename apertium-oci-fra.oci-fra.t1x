@@ -1352,6 +1352,19 @@
       <list-item v="décembre"/>
     </def-list>
 
+    <def-list n="jorn">
+      <list-item v="diluns"/>
+      <list-item v="dimars"/>
+      <list-item v="dimècres"/>
+      <list-item v="dimèrcs"/>
+      <list-item v="dijòus"/>
+      <list-item v="dijaus"/>
+      <list-item v="divendres"/>
+      <list-item v="divés"/>
+      <list-item v="dissabte"/>
+      <list-item v="dimenge"/>
+    </def-list>
+
     <def-list n="jour">
       <list-item v="lundi"/>
       <list-item v="mardi"/>
@@ -2836,6 +2849,15 @@
             </equal>
           </test>
           <choose>
+            <when>
+              <test>
+                <in caseless="yes"><clip pos="1" side="sl" part="lem"/><list n="jorn"/></in>
+              </test>
+              <let>
+                <clip pos="1" side="tl" part="nbr"/>
+                <lit-tag v="sg"/>
+              </let>
+            </when>
             <when>
               <test>
                 <equal>
@@ -9460,8 +9482,8 @@
                 <in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="adj_pre"/></in>
                 <and>
                   <equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="prochain"/></equal>
-                  <not><in caseless="yes"><clip pos="2" side="sl" part="lem"/><list n="mois"/></in></not>
-                  <not><in caseless="yes"><clip pos="2" side="sl" part="lem"/><list n="jour"/></in></not>
+                  <not><in caseless="yes"><clip pos="2" side="tl" part="lem"/><list n="mois"/></in></not>
+                  <not><in caseless="yes"><clip pos="2" side="tl" part="lem"/><list n="jour"/></in></not>
                   <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="semaine"/></equal></not>
                   <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="mois"/></equal></not>
                   <not><equal caseless="yes"><clip pos="2" side="tl" part="lem"/><lit v="année"/></equal></not>
@@ -12827,8 +12849,8 @@
                 <in caseless="yes"><clip pos="4" side="sl" part="lem"/><list n="adj_pre"/></in>
                 <and>
                   <equal caseless="yes"><clip pos="4" side="tl" part="lem"/><lit v="prochain"/></equal>
-                  <not><in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="mois"/></in></not>
-                  <not><in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="jour"/></in></not>
+                  <not><in caseless="yes"><clip pos="3" side="tl" part="lem"/><list n="mois"/></in></not>
+                  <not><in caseless="yes"><clip pos="3" side="tl" part="lem"/><list n="jour"/></in></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="semaine"/></equal></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="mois"/></equal></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="année"/></equal></not>
@@ -13049,8 +13071,8 @@
                 <in caseless="yes"><clip pos="5" side="sl" part="lem"/><list n="adj_pre"/></in>
                 <and>
                   <equal caseless="yes"><clip pos="5" side="tl" part="lem"/><lit v="prochain"/></equal>
-                  <not><in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="mois"/></in></not>
-                  <not><in caseless="yes"><clip pos="3" side="sl" part="lem"/><list n="jour"/></in></not>
+                  <not><in caseless="yes"><clip pos="3" side="tl" part="lem"/><list n="mois"/></in></not>
+                  <not><in caseless="yes"><clip pos="3" side="tl" part="lem"/><list n="jour"/></in></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="semaine"/></equal></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="mois"/></equal></not>
                   <not><equal caseless="yes"><clip pos="3" side="tl" part="lem"/><lit v="année"/></equal></not>
@@ -20868,6 +20890,34 @@
             </lu>
           </chunk>
         </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="amb"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="ambe"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="ambé"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="damb"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="tamb"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="dab"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="tab"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="dambe"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="emb"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="embe"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="de"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="per"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="sus"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="sobre"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="subre"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="jos"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="devath"/></equal>
+                <equal caseless="yes"><clip pos="1" side="sl" part="lem"/><lit v="sota"/></equal>
+              </or>
+            </test>
+            <let><var n="genero"/><lit-tag v="m"/></let>
+            <let><var n="numero"/><lit-tag v="sg"/></let>
+          </when>
+        </choose>
       </action>
     </rule>
 
