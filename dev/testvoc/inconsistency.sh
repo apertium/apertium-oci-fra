@@ -55,7 +55,7 @@ elif [[ $1 = "fra-oci_gascon" ]]; then
 lt-expand $2 | grep -v REGEX | grep -v '<prn><enc>' | sed 's/:>:/%/g' | grep -v ':<:' | sed 's/:/%/g' | cut -f2 -d'%' |  sed 's/^/^/g' | sed 's/$/$ ^.<sent>$/g' | tee $TMPDIR/tmp_testvoc1.txt |\
         apertium-pretransfer|\
         lt-proc -b ../../fra-oci@gascon.autobil.bin |\
-        lrx-proc -m ../../fra-oci.autolex.bin |\
+        lrx-proc -m ../../fra-oci@gascon.autolex.bin |\
         apertium-transfer -b ../../fra-oci@gascon.t1x  ../../fra-oci@gascon.t1x.bin  |\
         apertium-interchunk ../../fra-oci@gascon.t2x  ../../fra-oci@gascon.t2x.bin  |\
         apertium-interchunk ../../apertium-oci-fra.fra-oci.t2x_pas  ../../fra-oci.t2x_pas.bin  |\
