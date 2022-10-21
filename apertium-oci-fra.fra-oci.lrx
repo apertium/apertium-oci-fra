@@ -165,6 +165,334 @@
       </rule>
     </def-macro>
 
+    <def-macro n="noms_propres_m" npar="2">
+      <rule weight="0.6">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="1"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+        <repeat from="0" upto="5">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="np.top.*"/>
+          <match lemma="Bourbon" tags="np.cog.*"/>
+          <match lemma="Bourbon-Parme" tags="np.cog.*"/>
+          <match lemma="Bourbon-Siciles" tags="np.cog.*"/>
+          <match tags="np.loc"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <or>
+          <match tags="num.*"/>
+          <match lemma="Ier" tags="adj.*"/>
+          <match lemma="I" tags="adj.*"/>
+          <match lemma="II" tags="adj.*"/>
+          <match lemma="III" tags="adj.*"/>
+          <match lemma="IV" tags="adj.*"/>
+          <match lemma="V" tags="adj.*"/>
+          <match lemma="VI" tags="adj.*"/>
+          <match lemma="VII" tags="adj.*"/>
+          <match lemma="VIII" tags="adj.*"/>
+          <match lemma="IX" tags="adj.*"/>
+          <match lemma="X" tags="adj.*"/>
+          <match lemma="XI" tags="adj.*"/>
+          <match lemma="XII" tags="adj.*"/>
+          <match lemma="XIII" tags="adj.*"/>
+          <match lemma="XIV" tags="adj.*"/>
+          <match lemma="XV" tags="adj.*"/>
+          <match lemma="XVI" tags="adj.*"/>
+          <match lemma="XVII" tags="adj.*"/>
+          <match lemma="XVIII" tags="adj.*"/>
+          <match lemma="XIX" tags="adj.*"/>
+          <match lemma="XX" tags="adj.*"/>
+          <match lemma="XXI" tags="adj.*"/>
+          <match lemma="XXII" tags="adj.*"/>
+          <match lemma="XXIII" tags="adj.*"/>
+          <match lemma="XXIV" tags="adj.*"/>
+          <match lemma="XXV" tags="adj.*"/>
+          <match lemma="XXVI" tags="adj.*"/>
+          <match lemma="XXVII" tags="adj.*"/>
+          <match lemma="XXVIII" tags="adj.*"/>
+          <match lemma="XXIX" tags="adj.*"/>
+          <match lemma="XXX" tags="adj.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match lemma="pape" tags="n.*"/>
+          <match lemma="évêque" tags="n.*"/>
+          <match lemma="archevêque" tags="n.*"/>
+          <match lemma="saint" tags="n.*"/>
+          <match lemma="saint" tags="adj.*"/>
+          <match lemma="apôtre" tags="n.*"/>
+          <match lemma="vierge" tags="n.*"/>
+          <match lemma="empereur" tags="n.*"/>
+          <match lemma="roi" tags="n.*"/>
+          <match lemma="tsar" tags="n.*"/>
+          <match lemma="tsarine" tags="n.*"/>
+          <match lemma="tsarévitch" tags="n.*"/>
+          <match lemma="vice-roi" tags="n.*"/>
+          <match lemma="prince" tags="n.*"/>
+          <match lemma="coprince" tags="n.*"/>
+          <match lemma="co-prince" tags="n.*"/>
+          <match lemma="infant" tags="n.*"/>
+          <match lemma="dauphin" tags="n.*"/>
+          <match lemma="comte" tags="n.*"/>
+          <match lemma="comtesse" tags="n.*"/>
+          <match lemma="vicomte" tags="n.*"/>
+          <match lemma="vicomtesse" tags="n.*"/>
+          <match lemma="duc" tags="n.*"/>
+          <match lemma="duchesse" tags="n.*"/>
+          <match lemma="archiduc" tags="n.*"/>
+          <match lemma="archiduchesse" tags="n.*"/>
+          <match lemma="grand-duc" tags="n.*"/>
+          <match lemma="grande-duchesse" tags="n.*"/>
+          <match lemma="marquis" tags="n.*"/>
+          <match lemma="baron" tags="n.*"/>
+        </or>
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match tags="cm"/>
+        <or>
+          <match lemma="pape" tags="n.*"/>
+          <match lemma="évêque" tags="n.*"/>
+          <match lemma="archevêque" tags="n.*"/>
+          <match lemma="saint" tags="n.*"/>
+          <match lemma="saint" tags="adj.*"/>
+          <match lemma="apôtre" tags="n.*"/>
+          <match lemma="vierge" tags="n.*"/>
+          <match lemma="empereur" tags="n.*"/>
+          <match lemma="roi" tags="n.*"/>
+          <match lemma="tsar" tags="n.*"/>
+          <match lemma="tsarine" tags="n.*"/>
+          <match lemma="tsarévitch" tags="n.*"/>
+          <match lemma="vice-roi" tags="n.*"/>
+          <match lemma="prince" tags="n.*"/>
+          <match lemma="coprince" tags="n.*"/>
+          <match lemma="co-prince" tags="n.*"/>
+          <match lemma="infant" tags="n.*"/>
+          <match lemma="dauphin" tags="n.*"/>
+          <match lemma="comte" tags="n.*"/>
+          <match lemma="comtesse" tags="n.*"/>
+          <match lemma="vicomte" tags="n.*"/>
+          <match lemma="vicomtesse" tags="n.*"/>
+          <match lemma="duc" tags="n.*"/>
+          <match lemma="duchesse" tags="n.*"/>
+          <match lemma="archiduc" tags="n.*"/>
+          <match lemma="archiduchesse" tags="n.*"/>
+          <match lemma="grand-duc" tags="n.*"/>
+          <match lemma="grande-duchesse" tags="n.*"/>
+          <match lemma="marquis" tags="n.*"/>
+          <match lemma="baron" tags="n.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match lemma="papauté" tags="n.*"/>
+          <match lemma="pontificat" tags="n.*"/>
+          <match lemma="empire" tags="n.*"/>
+          <match lemma="règne" tags="n.*"/>
+          <match lemma="régence" tags="n.*"/>
+          <match lemma="vice-royauté" tags="n.*"/>
+        </or>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.m.*"><select plemma="2"/></match>
+        <or>
+          <match lemma="régner" tags="vblex.*"/>
+          <match lemma="gouverner" tags="vblex.*"/>
+        </or>
+      </rule>
+    </def-macro>
+
+    <def-macro n="noms_propres_f" npar="2">
+      <rule weight="0.6">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="1"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+        <repeat from="0" upto="5">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <or>
+          <match tags="np.top.*"/>
+          <match lemma="Bourbon" tags="np.cog.*"/>
+          <match lemma="Bourbon-Parme" tags="np.cog.*"/>
+          <match lemma="Bourbon-Siciles" tags="np.cog.*"/>
+          <match tags="np.loc"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <or>
+          <match tags="num.*"/>
+          <match lemma="Ier" tags="adj.*"/>
+          <match lemma="I" tags="adj.*"/>
+          <match lemma="II" tags="adj.*"/>
+          <match lemma="III" tags="adj.*"/>
+          <match lemma="IV" tags="adj.*"/>
+          <match lemma="V" tags="adj.*"/>
+          <match lemma="VI" tags="adj.*"/>
+          <match lemma="VII" tags="adj.*"/>
+          <match lemma="VIII" tags="adj.*"/>
+          <match lemma="IX" tags="adj.*"/>
+          <match lemma="X" tags="adj.*"/>
+          <match lemma="XI" tags="adj.*"/>
+          <match lemma="XII" tags="adj.*"/>
+          <match lemma="XIII" tags="adj.*"/>
+          <match lemma="XIV" tags="adj.*"/>
+          <match lemma="XV" tags="adj.*"/>
+          <match lemma="XVI" tags="adj.*"/>
+          <match lemma="XVII" tags="adj.*"/>
+          <match lemma="XVIII" tags="adj.*"/>
+          <match lemma="XIX" tags="adj.*"/>
+          <match lemma="XX" tags="adj.*"/>
+          <match lemma="XXI" tags="adj.*"/>
+          <match lemma="XXII" tags="adj.*"/>
+          <match lemma="XXIII" tags="adj.*"/>
+          <match lemma="XXIV" tags="adj.*"/>
+          <match lemma="XXV" tags="adj.*"/>
+          <match lemma="XXVI" tags="adj.*"/>
+          <match lemma="XXVII" tags="adj.*"/>
+          <match lemma="XXVIII" tags="adj.*"/>
+          <match lemma="XXIX" tags="adj.*"/>
+          <match lemma="XXX" tags="adj.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match lemma="pape" tags="n.*"/>
+          <match lemma="évêque" tags="n.*"/>
+          <match lemma="archevêque" tags="n.*"/>
+          <match lemma="saint" tags="n.*"/>
+          <match lemma="saint" tags="adj.*"/>
+          <match lemma="apôtre" tags="n.*"/>
+          <match lemma="vierge" tags="n.*"/>
+          <match lemma="empereur" tags="n.*"/>
+          <match lemma="roi" tags="n.*"/>
+          <match lemma="tsar" tags="n.*"/>
+          <match lemma="tsarine" tags="n.*"/>
+          <match lemma="tsarévitch" tags="n.*"/>
+          <match lemma="vice-roi" tags="n.*"/>
+          <match lemma="prince" tags="n.*"/>
+          <match lemma="coprince" tags="n.*"/>
+          <match lemma="co-prince" tags="n.*"/>
+          <match lemma="infant" tags="n.*"/>
+          <match lemma="dauphin" tags="n.*"/>
+          <match lemma="comte" tags="n.*"/>
+          <match lemma="comtesse" tags="n.*"/>
+          <match lemma="vicomte" tags="n.*"/>
+          <match lemma="vicomtesse" tags="n.*"/>
+          <match lemma="duc" tags="n.*"/>
+          <match lemma="duchesse" tags="n.*"/>
+          <match lemma="archiduc" tags="n.*"/>
+          <match lemma="archiduchesse" tags="n.*"/>
+          <match lemma="grand-duc" tags="n.*"/>
+          <match lemma="grande-duchesse" tags="n.*"/>
+          <match lemma="marquis" tags="n.*"/>
+          <match lemma="baron" tags="n.*"/>
+        </or>
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match tags="cm"/>
+        <or>
+          <match lemma="pape" tags="n.*"/>
+          <match lemma="évêque" tags="n.*"/>
+          <match lemma="archevêque" tags="n.*"/>
+          <match lemma="saint" tags="n.*"/>
+          <match lemma="saint" tags="adj.*"/>
+          <match lemma="apôtre" tags="n.*"/>
+          <match lemma="vierge" tags="n.*"/>
+          <match lemma="empereur" tags="n.*"/>
+          <match lemma="roi" tags="n.*"/>
+          <match lemma="tsar" tags="n.*"/>
+          <match lemma="tsarine" tags="n.*"/>
+          <match lemma="tsarévitch" tags="n.*"/>
+          <match lemma="vice-roi" tags="n.*"/>
+          <match lemma="prince" tags="n.*"/>
+          <match lemma="coprince" tags="n.*"/>
+          <match lemma="co-prince" tags="n.*"/>
+          <match lemma="infant" tags="n.*"/>
+          <match lemma="dauphin" tags="n.*"/>
+          <match lemma="comte" tags="n.*"/>
+          <match lemma="comtesse" tags="n.*"/>
+          <match lemma="vicomte" tags="n.*"/>
+          <match lemma="vicomtesse" tags="n.*"/>
+          <match lemma="duc" tags="n.*"/>
+          <match lemma="duchesse" tags="n.*"/>
+          <match lemma="archiduc" tags="n.*"/>
+          <match lemma="archiduchesse" tags="n.*"/>
+          <match lemma="grand-duc" tags="n.*"/>
+          <match lemma="grande-duchesse" tags="n.*"/>
+          <match lemma="marquis" tags="n.*"/>
+          <match lemma="baron" tags="n.*"/>
+        </or>
+      </rule>
+      <rule weight="2.0">
+        <or>
+          <match lemma="papauté" tags="n.*"/>
+          <match lemma="pontificat" tags="n.*"/>
+          <match lemma="empire" tags="n.*"/>
+          <match lemma="règne" tags="n.*"/>
+          <match lemma="régence" tags="n.*"/>
+          <match lemma="vice-royauté" tags="n.*"/>
+        </or>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="2">
+           <match tags="np.ant.*"/>
+        </repeat>
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="2.0">
+        <match plemma="1" tags="np.ant.f.*"><select plemma="2"/></match>
+        <or>
+          <match lemma="régner" tags="vblex.*"/>
+          <match lemma="gouverner" tags="vblex.*"/>
+        </or>
+      </rule>
+    </def-macro>
+
     <!-- Aquesta macro tria el verb p2 per traduir el prenom p1, però manté p1 si va seguit de cognom (o paraula desconeguda) -->
     <def-macro n="ant_antcog" npar="2">
       <rule weight="0.6">
@@ -1456,7 +1784,10 @@
     <match tags="*.inf"/>
   </rule>
   <rule weight="1.0">
-    <match lemma="machine" tags="n.*"/>
+    <or>
+      <match lemma="machine" tags="n.*"/>
+      <match lemma="pompe" tags="n.*"/>
+    </or>
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <or>
       <match tags="*.inf"/>
@@ -7656,7 +7987,6 @@
   <macro n="ant_antcog"><with-param v="Abraham"/><with-param v="Abraam"/></macro>
   <macro n="ant_antcog"><with-param v="Achille"/><with-param v="Aquilles"/></macro>
   <macro n="ant_antcog"><with-param v="Auguste"/><with-param v="August"/></macro>
-  <macro n="ant_antcog"><with-param v="Augustin"/><with-param v="Agustin"/></macro>
   <macro n="ant_antcog"><with-param v="Aurélien"/><with-param v="Aurelian"/></macro>
   <macro n="ant_antcog"><with-param v="César"/><with-param v="Cesar"/></macro>
   <macro n="ant_antcog"><with-param v="Cornelius"/><with-param v="Cornèli"/></macro>
@@ -7686,6 +8016,7 @@
   <macro n="noms_propres"><with-param v="Antoinette"/><with-param v="Antonieta"/></macro>
   <macro n="noms_propres"><with-param v="Ariane"/><with-param v="Ariana"/></macro>
   <macro n="noms_propres"><with-param v="Arnaud"/><with-param v="Arnau"/></macro>
+  <macro n="noms_propres"><with-param v="Augustin"/><with-param v="Agustin"/></macro>
   <macro n="noms_propres"><with-param v="Baudouin"/><with-param v="Baudoïn"/></macro>
   <macro n="noms_propres"><with-param v="Béatrice"/><with-param v="Beatritz"/></macro>
   <macro n="noms_propres" v="oci"><with-param v="Benoît"/><with-param v="Benesech"/></macro>
@@ -7702,6 +8033,8 @@
   <macro n="noms_propres"><with-param v="Christophe"/><with-param v="Cristòl"/></macro>
   <macro n="noms_propres"><with-param v="Claire"/><with-param v="Clara"/></macro>
   <macro n="noms_propres"><with-param v="Clément"/><with-param v="Clamenç"/></macro>
+  <macro n="noms_propres_m"><with-param v="Constance"/><with-param v="Constanç"/></macro>
+  <macro n="noms_propres_f"><with-param v="Constance"/><with-param v="Constança"/></macro>
   <macro n="noms_propres"><with-param v="Daniel"/><with-param v="Danièl"/></macro>
   <macro n="noms_propres"><with-param v="David"/><with-param v="Dàvid"/></macro>
   <macro n="noms_propres"><with-param v="Denis"/><with-param v="Danís"/></macro>
