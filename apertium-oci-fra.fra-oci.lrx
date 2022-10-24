@@ -7831,7 +7831,7 @@
   <!-- découper >> destacar, copar -->
   <macro n="verb_nopron_pron"><with-param v="découper"/><with-param v="copar"/><with-param v="destacar"/></macro>
 
-  <!-- rendre >> tornar, aller, far venir/har vàder -->
+  <!-- rendre >> tornar, aller, far venir/har vàder, venir/vàder -->
   <rule weight="0.8">
       <match lemma="rendre" tags="vblex.*"><select lemma="tornar"/></match>
   </rule>
@@ -7896,16 +7896,33 @@
   <rule weight="1.2">
     <match lemma="rendre" tags="vblex.*" v="oci"><select lemma="rendre"/></match>
     <match lemma="rendre" tags="vblex.*" v="oci@gascon"><select lemma="har"/></match>
-    <repeat from="0" upto="1">
+    <repeat from="0" upto="2">
       <or>
         <match lemma="plus" tags="adv"/>
         <match lemma="moins" tags="adv"/>
         <match lemma="aussi" tags="adv"/>
+        <match tags="adv"/>
         <match tags="preadv"/>
       </or>
     </repeat>
     <or>
         <match tags="adj.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="rendre" tags="vblex.*" v="oci"><select lemma="venir"/></match>
+    <match lemma="rendre" tags="vblex.*" v="oci@gascon"><select lemma="vàder"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj,*"/>
+      </or>
+    </repeat>
+    <or>
+        <match lemma="maître" tags="n.*"/>
     </or>
   </rule>
 
