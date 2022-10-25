@@ -12183,6 +12183,99 @@
 
 <!-- **************** N **************** -->
 
+  <!-- degalh >> gaspillage, dégât, déchet -->
+  <rule weight="0.8">
+    <match lemma="degalh" tags="n.*"><select lemma="gaspillage"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="degalh" tags="n.m.pl"><select lemma="dégât"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="degalh" tags="n.m.pl"><select lemma="déchet"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="degalh" tags="n.m.pl"><select lemma="déchet"/></match>
+    <or>
+      <match lemma="toxic" tags="adj.*"/>
+      <match lemma="perilhós" tags="adj.*"/>
+      <match lemma="dangerós" tags="adj.*"/>
+      <match lemma="dangierós" tags="adj.*"/>
+      <match lemma="organic" tags="adj.*"/>
+      <match lemma="animal"/>
+      <match lemma="animau"/>
+      <match lemma="vegetal" tags="adj.*"/>
+      <match lemma="vegetau" tags="adj.*"/>
+      <match lemma="alimentari" tags="adj.*"/>
+      <match lemma="electronic" tags="adj.*"/>
+      <match lemma="reciclable" tags="adj.*"/>
+      <match lemma="reciclader" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="reciclatge" tags="n.*"/>
+      <match lemma="tria" tags="n.*"/>
+      <match lemma="compostatge" tags="n.*"/>
+      <match lemma="tractament" tags="n.*"/>
+      <match lemma="gestion" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match lemma="degalh" tags="n.m.pl"><select lemma="déchet"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="zèro"/>
+    <match lemma="degalh" tags="n.*"><select lemma="déchet"/></match>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="degalh" tags="n.m.pl"><select lemma="dégât"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="tèrratrem" tags="n.*"/>
+      <match lemma="tèrratremol" tags="n.*"/>
+      <match lemma="terratremol" tags="n.*"/>
+      <match lemma="tèrratremble" tags="n.*"/>
+      <match lemma="tsunami" tags="n.*"/>
+      <match lemma="auragan" tags="n.*"/>
+      <match lemma="aurassa" tags="n.*"/>
+      <match lemma="auratge" tags="n.*"/>
+      <match lemma="esglàs" tags="n.*"/>
+      <match lemma="incendi" tags="n.*"/>
+      <match lemma="cremada" tags="n.*"/>
+      <match lemma="inondacion" tags="n.*"/>
+      <match lemma="aigat" tags="n.*"/>
+      <match lemma="catastròfa" tags="n.*"/>
+      <match lemma="accident" tags="n.*"/>
+      <match lemma="pana" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="degalh" tags="n.m.pl"><select lemma="déchet"/></match>
+    <or>
+      <match lemma="causar" tags="vblex.*"/>
+      <match lemma="produire" tags="vblex.*"/>
+      <match lemma="produsir" tags="vblex.*"/>
+    </or>
+    <match lemma="per" tags="pr"/>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="mina" tags="n.*"/>
+      <match lemma="espleitacion" tags="n.*"/>
+      <match lemma="expleitacion" tags="n.*"/>
+      <match lemma="espleita" tags="n.*"/>
+      <match lemma="espleitada" tags="n.*"/>
+      <match lemma="explotacion" tags="n.*"/>
+      <match lemma="extraccion" tags="n.*"/>
+      <match lemma="industria" tags="n.*"/>
+      <match lemma="centrala" tags="n.*"/>
+      <match lemma="consumerisme" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- batent >> battant, volet -->
   <rule weight="0.8">
     <match lemma="batent" tags="n.*" v="oci"><select lemma="battant"/></match>
