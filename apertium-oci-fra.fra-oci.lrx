@@ -912,6 +912,194 @@
       </rule>
     </def-macro>
 
+    <!-- p1 = verb fra, p2 = verb oci intrans, p3 = verb oci trans, p4 = verb oci pron -->
+    <def-macro n="verb_intrans_trans_pron" npar="4">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="det.*"/>
+          <match tags="np.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <or>
+          <match tags="num.*"/>
+          <match tags="num"/>
+        </or>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*"/>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match lemma="de" tags="pr"/>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*"/>
+        </repeat>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match tags="n.*.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="le" tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="vblex.pp.*"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+        <match tags="prn.enc.p1.*.sg"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+        <match tags="prn.enc.p2.*.sg"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <match tags="prn.pro.*"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+        <match tags="prn.enc.ref.p3.*.sp"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+        <match tags="prn.enc.p1.*.pl"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+        <match tags="prn.enc.p2.*.pl"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p3.*"/>
+        <match plemma="1" tags="vblex.*.p3.*"><select plemma="4"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="np.ant"/>
+          <match tags="np.ant.*"/>
+          <match tags="np.cog.*"/>
+        </or>
+      </rule>
+      <rule weight="1.2">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="n.*"/>
+        <repeat from="0" upto="1">
+          <match tags="adj.*"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <or>
+          <match tags="cm"/>
+          <match tags="lpar"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="4"/></match>
+      </rule>
+    </def-macro>
+
     <!-- p1 = verb fra, p2 = verb oci amb adj en masc sg, p3 = verb oci amb adj en fem sg, p2 = verb oci amb adj en masc pl, p3 = verb oci amb adj en fem pl -->
     <def-macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
       <rule weight="0.8">
@@ -3036,6 +3224,105 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- milieu >> mièg/miei, ambient -->
+  <rule weight="0.8">
+    <match lemma="milieu" v="oci" tags="n.*"><select lemma="mièg"/></match>
+    <match lemma="milieu" v="oci@gascon" tags="n.*"><select lemma="miei"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="milieu" tags="n.*"><select lemma="ambient"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="social" tags="adj.*"/>
+      <match lemma="familial" tags="adj.*"/>
+      <match lemma="naturel" tags="adj.*"/>
+      <match lemma="urbain" tags="adj.*"/>
+      <match lemma="rural" tags="adj.*"/>
+      <match lemma="terrestre" tags="adj.*"/>
+      <match lemma="maritime" tags="adj.*"/>
+      <match lemma="solide" tags="adj.*"/>
+      <match lemma="liquide" tags="adj.*"/>
+      <match lemma="gazeux" tags="adj.*"/>
+      <match lemma="acide" tags="adj.*"/>
+      <match lemma="basique" tags="adj.*"/>
+      <match lemma="alcalin" tags="adj.*"/>
+      <match lemma="sportif" tags="adj.*"/>
+      <match lemma="neutre" tags="adj.*"/>
+      <match lemma="intellectuel" tags="adj.*"/>
+      <match lemma="politique" tags="adj.*"/>
+      <match lemma="syndical" tags="adj.*"/>
+      <match lemma="conservateur" tags="adj.*"/>
+      <match lemma="progressiste" tags="adj.*"/>
+      <match lemma="engagé" tags="adj.*"/>
+      <match lemma="engager" tags="vblex.pp.*"/>
+      <match lemma="radical" tags="adj.*"/>
+      <match lemma="extremiste" tags="adj.*"/>
+      <match lemma="nationaliste" tags="adj.*"/>
+      <match lemma="indépendantiste" tags="adj.*"/>
+      <match lemma="unioniste" tags="adj.*"/>
+      <match lemma="républicain" tags="adj.*"/>
+      <match lemma="royaliste" tags="adj.*"/>
+      <match lemma="loyaliste" tags="adj.*"/>
+      <match lemma="libéral" tags="adj.*"/>
+      <match lemma="néolibéral" tags="adj.*"/>
+      <match lemma="néo-libéral" tags="adj.*"/>
+      <match lemma="fasciste" tags="adj.*"/>
+      <match lemma="néo-fasciste" tags="adj.*"/>
+      <match lemma="néofasciste" tags="adj.*"/>
+      <match lemma="cristiano-démocrate" tags="adj.*"/>
+      <match lemma="social-démocrate" tags="adj.*"/>
+      <match lemma="socialiste" tags="adj.*"/>
+      <match lemma="communiste" tags="adj.*"/>
+      <match lemma="anarchiste" tags="adj.*"/>
+      <match lemma="criminel" tags="adj.*"/>
+      <match lemma="mafieux" tags="adj.*"/>
+      <match lemma="carcéral" tags="adj.*"/>
+      <match lemma="informé" tags="adj.*"/>
+      <match lemma="informer" tags="vblex.pp.*"/>
+      <match lemma="radicaliser" tags="vblex.pp.*"/>
+      <match lemma="dangereux" tags="adj.*"/>
+      <match lemma="étouffant" tags="adj.*"/>
+      <match lemma="toxique" tags="adj.*"/>
+      <match lemma="corrosif" tags="adj.*"/>
+      <match lemma="inflamable" tags="adj.*"/>
+      <match lemma="sélectif" tags="adj.*"/>
+      <match lemma="compétitif" tags="adj.*"/>
+      <match lemma="hostile" tags="adj.*"/>
+      <match lemma="aisé" tags="adj.*"/>
+      <match lemma="professionnel" tags="adj.*"/>
+      <match lemma="juridique" tags="adj.*"/>
+      <match lemma="terrestre" tags="adj.*"/>
+      <match lemma="lunaire" tags="adj.*"/>
+      <match lemma="martien" tags="adj.*"/>
+      <match lemma="vénusien" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="milieu" tags="n.*"><select lemma="ambient"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <or>
+      <match lemma="droite" tags="n.*"/>
+      <match lemma="gauche" tags="n.*"/>
+      <match lemma="gouvernement" tags="n.*"/>
+      <match lemma="opposition" tags="n.*"/>
+      <match lemma="curie" tags="n.*"/>
+      <match lemma="parti" tags="n.*"/>
+      <match lemma="affaire" tags="n.*"/>
+      <match lemma="travailleur" tags="n.*"/>
+      <match lemma="assalarié" tags="n.*"/>
+      <match lemma="étudiant" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- bout >> cap, fin, tròç -->
   <rule weight="0.8">
@@ -7944,12 +8231,8 @@
 
 
   <!-- traîner >> longanhejar/longuejar, tirassar/arossegar, pron rebalar/arossegar -->
-  <macro n="verb_nopron_pron" v="oci"><with-param v="traîner"/><with-param v="tirassar"/><with-param v="rebalar"/></macro>
-  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="traîner"/><with-param v="arossegar"/><with-param v="arossegar"/></macro>
-  <rule weight="0.8">
-      <match lemma="rendre" tags="vblex.*" v="oci"><select lemma="tirassar"/></match>
-      <match lemma="rendre" tags="vblex.*" v="oci@gascon"><select lemma="arossegar"/></match>
-  </rule>
+  <macro n="verb_intrans_trans_pron" v="oci"><with-param v="traîner"/><with-param v="longanhejar"/><with-param v="tirassar"/><with-param v="rebalar"/></macro>
+  <macro n="verb_intrans_trans_pron" v="oci@gascon"><with-param v="traîner"/><with-param v="longuejar"/><with-param v="arossegar"/><with-param v="arossegar"/></macro>
 
 
   <!-- viser >> mirar, visar -->
