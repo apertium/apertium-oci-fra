@@ -240,6 +240,10 @@
     <def-cat n="enprep">
       <cat-item lemma="en" tags="pr"/>
     </def-cat>
+    <def-cat n="en_debut_de">
+      <cat-item lemma="en début de" tags="pr"/>
+      <cat-item lemma="en début" tags="pr"/>
+    </def-cat>
 
     <def-cat n="cnjcoo">
       <cat-item tags="cnjcoo"/>
@@ -25826,6 +25830,73 @@
 
 
   <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: en début de nom_mois_an > en debuta de nom_mois_an">
+      <pattern>
+        <pattern-item n="en_debut_de"/>
+        <pattern-item n="nom_mois_an"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: en début de NOM > en debuta de DET NOM">
+      <pattern>
+        <pattern-item n="en_debut_de"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="adv">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+              <clip pos="1" side="tl" part="lemh"/>
+              <clip pos="1" side="tl" part="tags"/>
+              <clip pos="1" side="tl" part="lemq"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <lit v="lo"/>
+              <lit-tag v="det.def"/>
+              <var n="genero"/>
+              <var n="numero"/>
+            </lu>
+            <b/>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="tags"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: EGLISE AL > ESGLESIA DE AL">
       <pattern>
