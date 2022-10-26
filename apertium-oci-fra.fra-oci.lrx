@@ -3239,6 +3239,8 @@
       </or>
     </repeat>
     <or>
+      <match tags="adj.*"/>
+<!--
       <match lemma="social" tags="adj.*"/>
       <match lemma="familial" tags="adj.*"/>
       <match lemma="naturel" tags="adj.*"/>
@@ -3265,6 +3267,7 @@
       <match lemma="extremiste" tags="adj.*"/>
       <match lemma="nationaliste" tags="adj.*"/>
       <match lemma="indépendantiste" tags="adj.*"/>
+      <match lemma="régionaliste" tags="adj.*"/>
       <match lemma="unioniste" tags="adj.*"/>
       <match lemma="républicain" tags="adj.*"/>
       <match lemma="royaliste" tags="adj.*"/>
@@ -3279,12 +3282,14 @@
       <match lemma="social-démocrate" tags="adj.*"/>
       <match lemma="socialiste" tags="adj.*"/>
       <match lemma="communiste" tags="adj.*"/>
+      <match lemma="marxiste" tags="adj.*"/>
       <match lemma="anarchiste" tags="adj.*"/>
       <match lemma="criminel" tags="adj.*"/>
       <match lemma="mafieux" tags="adj.*"/>
       <match lemma="carcéral" tags="adj.*"/>
       <match lemma="informé" tags="adj.*"/>
       <match lemma="informer" tags="vblex.pp.*"/>
+      <match lemma="renseigner" tags="vblex.pp.*"/>
       <match lemma="radicaliser" tags="vblex.pp.*"/>
       <match lemma="dangereux" tags="adj.*"/>
       <match lemma="étouffant" tags="adj.*"/>
@@ -3297,10 +3302,28 @@
       <match lemma="aisé" tags="adj.*"/>
       <match lemma="professionnel" tags="adj.*"/>
       <match lemma="juridique" tags="adj.*"/>
+      <match lemma="financier" tags="adj.*"/>
       <match lemma="terrestre" tags="adj.*"/>
       <match lemma="lunaire" tags="adj.*"/>
       <match lemma="martien" tags="adj.*"/>
       <match lemma="vénusien" tags="adj.*"/>
+-->
+    </or>
+  </rule>
+  <rule weight="1.2"> <!-- joueur -->
+    <match lemma="milieu" v="oci" tags="n.*"><select lemma="mièg"/></match>
+    <match lemma="milieu" v="oci@gascon" tags="n.*"><select lemma="miei"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="attaquant" tags="adj.*"/>
+      <match lemma="défensif" tags="adj.*"/>
+      <match lemma="droit" tags="adj.*"/>
+      <match lemma="gauche" tags="adj.*"/>
     </or>
   </rule>
   <rule weight="1.0">
@@ -3315,6 +3338,9 @@
       <match lemma="gauche" tags="n.*"/>
       <match lemma="gouvernement" tags="n.*"/>
       <match lemma="opposition" tags="n.*"/>
+      <match lemma="patron" tags="n.*"/>
+      <match lemma="travailleur" tags="n.*"/>
+      <match lemma="gréviste" tags="n.*"/>
       <match lemma="curie" tags="n.*"/>
       <match lemma="parti" tags="n.*"/>
       <match lemma="affaire" tags="n.*"/>
