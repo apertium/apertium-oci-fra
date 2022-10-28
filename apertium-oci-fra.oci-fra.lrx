@@ -14132,9 +14132,9 @@
   </rule>
 
 
-  <!-- canton >> côté, canton -->
+  <!-- canton >> coin, canton -->
   <rule weight="0.8">
-    <match lemma="canton" tags="n.*"><select lemma="côté"/></match>
+    <match lemma="canton" tags="n.*"><select lemma="coin"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="Canton" tags="n.*"><select lemma="canton"/></match>
@@ -14142,11 +14142,17 @@
   <rule weight="1.0">
     <match lemma="canton" tags="n.*"><select lemma="canton"/></match>
     <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
       <match lemma="de" tags="pr"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
     </repeat>
     <or>
       <match tags="np.*"/>
-      <match tags=""/>
+      <match tags="" case="Aa"/>
     </or>
   </rule>
 
@@ -20726,6 +20732,15 @@
 
 
 <!-- **************** NP **************** -->
+
+  <!-- Comminge >> pays de Comminges, Comminges -->
+  <rule weight="0.8">
+    <match lemma="Comenge" tags="np.top.*"><select lemma="pays de Comminges"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="adj.*"/>
+    <match lemma="Comenge" tags="np.top.*"><select lemma="Comminges"/></match>
+  </rule>
 
   <!-- Cap d'An >> le jour de l'an, jour de l'an -->
   <rule weight="0.8">
