@@ -5022,9 +5022,11 @@
   </rule>
   <rule weight="1.0">
     <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
-    <match lemma="avoir"/>
     <repeat from="0" upto="1">
       <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="prn.pro.ref.*"/>
     </repeat>
     <or>
       <match lemma="hausser"/>
@@ -5040,12 +5042,18 @@
       <match lemma="diminuer"/>
       <match lemma="rabaisser"/>
       <match lemma="minorer"/>
+      <match lemma="flamber"/>
     </or>
   </rule>
   <rule weight="1.0">
     <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
-    <match tags="adv"/>
-    <match lemma="avoir"/>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="avoir"/>
+      <match lemma="être"/>
+    </or>
     <repeat from="0" upto="1">
       <match tags="adv"/>
     </repeat>
@@ -5067,25 +5075,76 @@
   </rule>
   <rule weight="1.0">
     <or>
-      <match lemma="hausse"/>
-      <match lemma="montée"/>
-      <match lemma="baisse"/>
-      <match lemma="chute"/>
-      <match lemma="augmentation"/>
-      <match lemma="réduction"/>
-      <match lemma="diminution"/>
+      <match lemma="hausse" tags="n.*"/>
+      <match lemma="montée" tags="n.*"/>
+      <match lemma="flambée" tags="n.*"/>
+      <match lemma="baisse" tags="n.*"/>
+      <match lemma="chute" tags="n.*"/>
+      <match lemma="augmentation" tags="n.*"/>
+      <match lemma="diminution" tags="n.*"/>
+      <match lemma="réduction" tags="n.*"/>
+      <match lemma="stagnation" tags="n.*"/>
+      <match lemma="relève" tags="n.*"/>
+      <match lemma="accroissement" tags="n.*"/>
+      <match lemma="croissance" tags="n.*"/>
+      <match lemma="décroissance" tags="n.*"/>
+      <match lemma="majoration" tags="n.*"/>
+      <match lemma="minoration" tags="n.*"/>
+      <match lemma="relève" tags="n.*"/>
+      <match lemma="rabaisse" tags="n.*"/>
     </or>
-    <repeat from="0" upto="1">
-      <match tags="adj.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="de" tags="pr"/>
-    <match tags="det.*"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
     <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="en" tags="pr"/>
+    <or>
+      <match lemma="hausse" tags="n.*"/>
+      <match lemma="montée" tags="n.*"/>
+      <match lemma="flambée" tags="n.*"/>
+      <match lemma="baisse" tags="n.*"/>
+      <match lemma="chute" tags="n.*"/>
+      <match lemma="augmentation" tags="n.*"/>
+      <match lemma="diminution" tags="n.*"/>
+      <match lemma="réduction" tags="n.*"/>
+      <match lemma="stagnation" tags="n.*"/>
+      <match lemma="relève" tags="n.*"/>
+      <match lemma="accroissement" tags="n.*"/>
+      <match lemma="croissance" tags="n.*"/>
+      <match lemma="décroissance" tags="n.*"/>
+      <match lemma="majoration" tags="n.*"/>
+      <match lemma="minoration" tags="n.*"/>
+      <match lemma="relève" tags="n.*"/>
+      <match lemma="rabaisse" tags="n.*"/>
+    </or>
   </rule>
 
   <rule weight="1.2">
     <match lemma="juste" tags="adj.*"/>
     <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="prix" tags="n.*"><select lemma="prètz"/></match>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="consommation" tags="n.*"/>
   </rule>
 
   <!-- siège >> sèti, sètge, banc -->
@@ -5130,8 +5189,8 @@
     <match lemma="avoir" tags="vblex.*"/>
     <repeat from="0" upto="2">
       <or>
-        <match tags="preadv.*"/>
-        <match tags="adv.*"/>
+        <match tags="preadv"/>
+        <match tags="adv"/>
       </or>
     </repeat>
     <match lemma="son" tags="det.*"/>
