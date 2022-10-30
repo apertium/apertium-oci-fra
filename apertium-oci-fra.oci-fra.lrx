@@ -4607,6 +4607,7 @@
 	   <match lemma="aparéisher" tags="vblex.*"/>
 	   <match lemma="parir" tags="vblex.*"/>
 	   <match lemma="pàrer" tags="vblex.*"/>
+	   <match lemma="capitular" tags="vblex.*"/>
 	   <match lemma="trabalhar" tags="vblex.*"/>
 	   <match lemma="trebalhar" tags="vblex.*"/>
 	   <match lemma="tribalhar" tags="vblex.*"/>
@@ -4620,6 +4621,9 @@
 	   <match lemma="desparir" tags="vblex.*"/>
 	   <match lemma="trescolar" tags="vblex.*"/>
 	   <match lemma="caminar" tags="vblex.*"/>
+	   <match lemma="córrer" tags="vblex.*"/>
+	   <match lemma="galaupar" tags="vblex.*"/>
+	   <match lemma="galopar" tags="vblex.*"/>
 	   <match lemma="marchar" tags="vblex.*"/>
 	   <match lemma="foncionar" tags="vblex.*"/>
 	   <match lemma="profechar" tags="vblex.*"/>
@@ -6967,6 +6971,9 @@
   </rule>
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.pro.*"/>
+    </repeat>
     <or>
       <match lemma="afirmar" tags="vblex.*"/>
       <match lemma="reafirmar" tags="vblex.*"/>
@@ -7006,6 +7013,41 @@
     </repeat>
     <match lemma="que"/>
   </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match lemma="en" tags="prn.pro.*"/>
+    <or>
+      <match lemma="afirmar" tags="vblex.*"/>
+      <match lemma="reafirmar" tags="vblex.*"/>
+      <match lemma="creire" tags="vblex.*"/>
+      <match lemma="créder" tags="vblex.*"/>
+      <match lemma="créser" tags="vblex.*"/>
+      <match lemma="creir" tags="vblex.*"/>
+      <match lemma="decidir" tags="vblex.*"/>
+      <match lemma="declarar" tags="vblex.*"/>
+      <match lemma="dire" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="díser" tags="vblex.*"/>
+      <match lemma="insinuar" tags="vblex.*"/>
+      <match lemma="interdíser" tags="vblex.*"/>
+      <match lemma="proïbir" tags="vblex.*"/>
+      <match lemma="defendre" tags="vblex.*"/>
+      <match lemma="defénder" tags="vblex.*"/>
+      <match lemma="enebir" tags="vblex.*"/>
+      <match lemma="pensar" tags="vblex.*"/>
+      <match lemma="remarcar" tags="vblex.*"/>
+      <match lemma="remercar" tags="vblex.*"/>
+      <match lemma="verificar" tags="vblex.*"/>
+	  <match lemma="garantir" tags="vblex.*"/>
+	  <match lemma="guarantir" tags="vblex.*"/>
+      <match lemma="demandar" tags="vblex.*"/>
+      <match lemma="demanar" tags="vblex.*"/>
+      <match lemma="exiger" tags="vblex.*"/>
+      <match lemma="reclamar" tags="vblex.*"/>
+      <match lemma="comptar" tags="vblex.*"/>
+      <match lemma="pregar" tags="vblex.*"/>
+    </or>
+  </rule>
   <rule weight="1.2">
     <or>
       <match tags="prn.*"/>
@@ -7044,6 +7086,9 @@
   </rule>
   <rule weight="1.0"> 
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.pro.*"/>
+    </repeat>
     <or>
       <match lemma="far" tags="vblex.*.p3.pl"/>
       <match lemma="har" tags="vblex.*.p3.pl"/>
@@ -7087,6 +7132,9 @@
   </rule>
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.pro.*"/>
+    </repeat>
     <or>
       <match lemma="parlar" tags="vblex.*"/>
       <match lemma="conclure" tags="vblex.*"/>
@@ -7100,6 +7148,16 @@
       </or>
     </repeat>
     <match lemma="de"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
+    <match lemma="en" tags="prn.pro.*"/>
+    <or>
+      <match lemma="parlar" tags="vblex.*"/>
+      <match lemma="conclure" tags="vblex.*"/>
+      <match lemma="concludir" tags="vblex.*"/>
+      <match lemma="conclusir" tags="vblex.*"/>
+    </or>
   </rule>
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
@@ -8716,6 +8774,20 @@
   <rule weight="1.0" v="oci@gascon">
     <match lemma="lo" tags="prn.enc.*.pl"><select lemma="leur"/></match>
     <match lemma="ac" tags="prn.enc.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.enc.*.sg"><select lemma="lui"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="cnjsub"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.enc.*.pl"><select lemma="leur"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="cnjsub"/>
   </rule>
 
   <!-- aquel/aqueth >> celui, celui-là -->
@@ -17757,6 +17829,12 @@
 
   <!-- avergonhir >> faire# honte, avoir# honte -->
   <macro n="verb_nopron_pron"><with-param v="avergonhir"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>
+
+  <!-- espossar >> crever, épuiser -->
+  <macro n="verb_nopron_pron"><with-param v="espossar"/><with-param v="crever"/><with-param v="épuiser"/></macro>
+
+  <!-- sietar >> siéger, asseoir -->
+  <macro n="verb_nopron_pron"><with-param v="sietar"/><with-param v="siéger"/><with-param v="asseoir"/></macro>
 
   <!-- tarridar >> plaisanter, faire# du souci -->
   <macro n="verb_nopron_pron"><with-param v="tarridar"/><with-param v="plaisanter"/><with-param v="faire# du souci"/></macro>
