@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 
-AC_INIT([Apertium Occitan-French], [0.3.0], [apertium-stuff@lists.sourceforge.net], [apertium-oci-fra], [https://wiki.apertium.org/wiki/Apertium-oci-fra])
+AC_INIT([Apertium Occitan-French], [1.0.0], [apertium-stuff@lists.sourceforge.net], [apertium-oci-fra], [https://wiki.apertium.org/wiki/Apertium-oci-fra])
 AM_INIT_AUTOMAKE
 
 AC_PROG_AWK
@@ -15,8 +15,8 @@ AS_IF([test x$ZCAT = xfalse], [AC_MSG_ERROR([You don't have zcat nor gzcat insta
 
 m4_ifdef([AP_CHECK_LING],[],[AC_MSG_ERROR([AP_CHECK_LING not defined, is apertium.m4 in ACLOCAL_PATH? See: https://wiki.apertium.org/wiki/Installation_troubleshooting])])
 
-AP_CHECK_LING([1], [apertium-oci], [0.2.0])
-AP_CHECK_LING([2], [apertium-fra], [1.7.0])
+AP_CHECK_LING([1], [apertium-oci], [1.0.0])
+AP_CHECK_LING([2], [apertium-fra], [1.12.0])
 
 PKG_CHECK_MODULES(REGTEST, apertium-regtest >= 0.0.1, [],
                   [AC_MSG_WARN([Running tests requires apertium-regtest])])
