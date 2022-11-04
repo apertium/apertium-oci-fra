@@ -1156,6 +1156,7 @@
 
     <def-seq n="personne"><or>
       <match lemma="personne" tags="n.*"/>
+      <match lemma="gens" tags="n.m.pl"/>
       <match lemma="homme" tags="n.*"/>
       <match lemma="femme" tags="n.*"/>
       <match lemma="jeune homme" tags="n.*"/>
@@ -6850,6 +6851,45 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- choquer >> trucar, butar -->
+  <rule weight="0.8">
+    <match lemma="choquer" tags="vblex.*"><select lemma="trucar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="le" tags="prn.pro.*"/>
+      <match lemma="nous" tags="prn.pro.*"/>
+      <match lemma="vous" tags="prn.pro.*"/>
+    </or>
+    <match lemma="choquer" tags="vblex.*"><select lemma="butar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="ça" tags="prn.*"/>
+      <match lemma="cela" tags="prn.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match lemma="choquer" tags="vblex.*"><select lemma="butar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="choquer" tags="vblex.*"><select lemma="butar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <or>
+      <seq n="personne"/>
+      <match lemma="famille" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- apprendre >> aprene/apréner, assabentar, ensenhar -->
   <rule weight="0.8">

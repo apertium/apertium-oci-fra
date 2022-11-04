@@ -17481,26 +17481,32 @@
 
   <!-- soler >> avoir# l'habitude de, avoir# l'habitude -->
   <rule weight="0.8" v="oci@gascon">
-    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
   </rule>
   <rule weight="1.0" v="oci@gascon">
-    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
+    <match lemma="soler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
     </repeat>
-    <match lemma="de" tags="pr"/>
+    <match tags="*.inf"/>
   </rule>
 
   <!-- sòler >> avoir# l'habitude de, avoir# l'habitude -->
   <rule weight="0.8">
-    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude"/></match>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
+    <match lemma="sòler" tags="vbmod.*"><select lemma="avoir# l'habitude de"/></match>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
     </repeat>
-    <match lemma="de" tags="pr"/>
+    <match tags="*.inf"/>
   </rule>
 
 
@@ -17724,6 +17730,13 @@
     </repeat>
     <match lemma="trepejar" tags="vblex.*"><select lemma="fouler"/></match>
   </rule>
+
+  <!-- esberrocar >> bramer, égosiller -->
+  <macro n="verb_nopron_pron"><with-param v="esberrocar"/><with-param v="bramer"/><with-param v="égosiller"/></macro>
+
+  <!-- escridassar >> huer, égosiller/écrier -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="escridassar"/><with-param v="huer"/><with-param v="égosiller"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="escridassar"/><with-param v="huer"/><with-param v="écrier"/></macro>
 
   <!-- morir >> mourir, mourir non-pron -->
   <rule weight="0.8">
