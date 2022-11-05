@@ -3782,6 +3782,176 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: SV PR_de SN_adj_nom_pl E_O PR_de DET_def SN: Je veux de bons vins et de la bière > Vòli de bons vins e de cervesa" v="oci">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="6"/><with-param pos="7"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV PR_de SN_adj_nom_pl E_O PR_de DET_def SN: Je veux de bons vins et de la bière > Vòli bons vins e cervesa" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="2"/><with-param pos="3"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="5"/><with-param pos="6"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="6"/><with-param pos="7"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="7" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_haver PP_partitiu PR_de SN_adj_nom_pl E_O PR_de DET_def SN: J'ai bu de bons vins e de la bière > Ai begut de bons vins e de cervesa" v="oci">
+      <pattern>
+        <pattern-item n="SV_haver"/>
+        <pattern-item n="PP_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="whole"/>
+          </chunk>
+          <b pos="6"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SV_haver PP_partitiu PR_de SN_adj_nom_pl E_O PR_de DET_def SN: J'ai bu de bons vins e de la bière > Èi bevut bons vins e cervesa" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SV_haver"/>
+        <pattern-item n="PP_partitiu"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_adj_nom_pl"/>
+        <pattern-item n="E_O"/>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="DET_def"/>
+        <pattern-item n="SN_SA_UNK"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+          <b pos="5"/>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="6"/><with-param pos="7"/></call-macro>
+        <call-macro n="f_bcond"><with-param pos="7"/><with-param pos="8"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="8" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
 
     <!-- 2. davant lo vèrb -->
 
