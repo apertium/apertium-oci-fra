@@ -451,6 +451,12 @@
       <cat-item lemma="esclacassar# d'arríder" tags="vblex.*.p1.*"/>
       <cat-item lemma="esclacassar# d'arríder" tags="vblex.*.p2.*"/>
       <cat-item lemma="esclacassar# d'arríder" tags="vblex.*.p3.*"/>
+      <cat-item lemma="esclacassar" tags="vblex.*.p1.*" v="oci@gascon"/>
+      <cat-item lemma="esclacassar" tags="vblex.*.p2.*" v="oci@gascon"/>
+      <cat-item lemma="esclacassar" tags="vblex.*.p3.*" v="oci@gascon"/>
+      <cat-item lemma="escarcanhar" tags="vblex.*.p1.*" v="oci@gascon"/>
+      <cat-item lemma="escarcanhar" tags="vblex.*.p2.*" v="oci@gascon"/>
+      <cat-item lemma="escarcanhar" tags="vblex.*.p3.*" v="oci@gascon"/>
       <cat-item lemma="desenmalir" tags="vblex.*.p1.*" v="oci@gascon"/>
       <cat-item lemma="desenmalir" tags="vblex.*.p2.*" v="oci@gascon"/>
       <cat-item lemma="desenmalir" tags="vblex.*.p3.*" v="oci@gascon"/>
@@ -491,11 +497,45 @@
       <cat-item lemma="escacalassar# de ríder" tags="vblex.pp.*"/>
       <cat-item lemma="esclacassar# de ríder" tags="vblex.pp.*"/>
       <cat-item lemma="esclacassar# d'arríder" tags="vblex.pp.*"/>
+      <cat-item lemma="esclacassar" tags="vblex.pp.*" v="oci@gascon"/>
+      <cat-item lemma="escarcanhar" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="desenmalir" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="desenmaliciar" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="descolerar" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="gahar# malícia" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="desgargalhar" tags="vblex.pp.*" v="oci@gascon"/>
+    </def-cat>
+    <def-cat n="verb_pron-nopron_inf">
+      <cat-item lemma="acochar" tags="vblex.inf"/>
+      <cat-item lemma="ajaçar" tags="vblex.inf"/>
+      <cat-item lemma="ajaire" tags="vblex.inf"/>
+      <cat-item lemma="cargar" tags="vblex.inf" v="oci"/>
+      <cat-item lemma="lengatravar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="passar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="enamorar" tags="vblex.inf"/>
+      <cat-item lemma="enlairar" tags="vblex.inf"/>
+      <cat-item lemma="escàder" tags="vblex.inf"/>
+      <cat-item lemma="mau escàder" tags="vblex.inf"/>
+      <cat-item lemma="i escàder" tags="vblex.inf"/>
+      <cat-item lemma="i mau escàder" tags="vblex.inf"/>
+      <cat-item lemma="dòler# de" tags="vblex.inf"/>
+      <cat-item lemma="estar" tags="vblex.inf"/>
+      <cat-item lemma="estremvirar" tags="vblex.inf"/>
+      <cat-item lemma="morir" tags="vblex.inf"/>
+      <cat-item lemma="revenjar" tags="vblex.inf"/>
+      <cat-item lemma="avergonhar" tags="vblex.inf"/>
+      <cat-item lemma="avergonhir" tags="vblex.inf"/>
+      <cat-item lemma="enrabiar" tags="vblex.inf"/>
+      <cat-item lemma="escacalassar# de ríder" tags="vblex.inf"/>
+      <cat-item lemma="esclacassar# de ríder" tags="vblex.inf"/>
+      <cat-item lemma="esclacassar# d'arríder" tags="vblex.inf"/>
+      <cat-item lemma="esclacassar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="escarcanhar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="desenmalir" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="desenmaliciar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="descolerar" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="gahar# malícia" tags="vblex.inf" v="oci@gascon"/>
+      <cat-item lemma="desgargalhar" tags="vblex.inf" v="oci@gascon"/>
     </def-cat>
 
     <def-cat n="verb_dat2nom_conj">	<!-- em hè dòu > je regrette -->
@@ -18800,6 +18840,92 @@
                    <lit-tag v="4"/>
                    <clip pos="2" side="tl" part="pers"/>
                    <clip pos="2" side="tl" part="nbr"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                 </lu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
+       </action>
+    </rule>
+
+    <rule comment="RÈGLA: PRNPRO_REF VERB_PRON-NOPRON_INF (s'enlairar > décoler)">
+       <pattern>
+         <pattern-item n="prnpro_ref"/>
+         <pattern-item n="verb_pron-nopron_inf"/>
+       </pattern>
+       <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="2"/>
+        </call-macro>
+         <choose>
+           <when>
+             <test>
+               <equal><clip pos="2" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+             </test>
+             <call-macro n="f_vchunk_name">
+               <with-param pos="2"/>
+             </call-macro>
+             <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+             <out>
+               <chunk namefrom="chunkname" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                   <tag><clip pos="2" side="tl" part="temps"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="a_verb"/>
+                   <clip pos="2" side="tl" part="temps"/>
+                   <clip pos="2" side="tl" part="lemq"/>
+                  </lu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
+             <out>
+               <chunk namefrom="lemma" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SPron"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_prn"/></tag>
+                   <tag><clip pos="1" side="tl" part="gen"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="1" side="tl" part="lem"/>
+                   <lit-tag v="prn"/>
+                   <clip pos="1" side="tl" part="a_pron_long"/>
+                   <clip pos="1" side="tl" part="pers"/>
+                   <clip pos="1" side="tl" part="gen"/>
+                   <clip pos="1" side="tl" part="nbr"/>
+                 </lu>
+               </chunk>
+             </out>
+             <call-macro n="firstWord">
+               <with-param pos="2"/>
+             </call-macro>
+             <call-macro n="f_vchunk_name">
+               <with-param pos="2"/>
+             </call-macro>
+             <out>
+               <b pos="1"/>
+               <chunk namefrom="chunkname" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="2" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                   <tag><clip pos="2" side="tl" part="temps"/></tag>
+                 </tags>
+                 <lu>
+                   <clip pos="2" side="tl" part="lemh"/>
+                   <clip pos="2" side="tl" part="a_verb"/>
+                   <clip pos="2" side="tl" part="temps"/>
                    <clip pos="2" side="tl" part="lemq"/>
                  </lu>
                </chunk>
