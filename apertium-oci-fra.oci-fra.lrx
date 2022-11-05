@@ -7387,6 +7387,7 @@
         <match lemma="tad" tags="pr"/>
         <match lemma="entà" tags="pr"/>
         <match lemma="entad" tags="pr"/>
+        <match lemma="enta" tags="pr"/>
         <match lemma="en per'mor de" tags="pr"/>
         <match lemma="entà per'mor de" tags="pr"/>
         <match lemma="per'mor de" tags="pr"/>
@@ -13255,6 +13256,9 @@
       <match lemma="hens" tags="pr"/>
       <match lemma="davant" tags="pr"/>
       <match lemma="devant" tags="pr"/>
+      <match lemma="tà" tags="pr"/>
+      <match lemma="entà" tags="pr"/>
+      <match lemma="enta" tags="pr"/>
     </or>
     <repeat from="0" upto="3">
       <or>
@@ -13287,6 +13291,19 @@
   <rule weight="1.0" v="oci@gascon">
     <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
     <match tags="adj.pos.*"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="casa" tags="n.*"><select lemma="maison"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.2" v="oci@gascon">
+    <match lemma="casa" tags="n.*"><select lemma="case"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="partença" tags="n.*"/>
+      <match lemma="sortida" tags="n.*"/>
+      <match lemma="arribada" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- estatjant >> habitant, locataire -->
@@ -14551,6 +14568,7 @@
         <match lemma="per" tags="pr"/>
         <match lemma="tà" tags="pr"/>
         <match lemma="entà" tags="pr"/>
+        <match lemma="enta" tags="pr"/>
       </or>
       <match tags="det.*"/>
     <repeat from="0" upto="2">
@@ -17734,6 +17752,9 @@
   <!-- esberrocar >> bramer, égosiller -->
   <macro n="verb_nopron_pron"><with-param v="esberrocar"/><with-param v="bramer"/><with-param v="égosiller"/></macro>
 
+  <!-- terrar >> colmater, terrer -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="terrar"/><with-param v="colmater"/><with-param v="terrer"/></macro>
+
   <!-- escridassar >> huer, égosiller/écrier -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="escridassar"/><with-param v="huer"/><with-param v="égosiller"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="escridassar"/><with-param v="huer"/><with-param v="écrier"/></macro>
@@ -17828,8 +17849,34 @@
     </or>
   </rule>
 
+  <!-- ahumar >> enfumer, irriter -->
+  <macro n="verb_intrans_trans"><with-param v="ahumar"/><with-param v="enfumer"/><with-param v="irriter"/></macro>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="ahumar" tags="vblex.pp.*"><select lemma="enfumer"/></match>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <seq n="personas"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="ahumar" tags="vblex.pp.*"><select lemma="irriter"/></match>
+  </rule>
+
   <!-- alludir >> faire# allusion, avoir# allusion à -->
   <macro n="verb_intrans_trans"><with-param v="alludir"/><with-param v="faire# allusion"/><with-param v="faire# allusion à"/></macro>
+
+  <!-- en·horatar >> blouser, terrer -->
+  <macro n="verb_intrans_trans"><with-param v="en·horatar"/><with-param v="blouser"/><with-param v="terrer"/></macro>
 
   <!-- priorizar >> donner# la priorité, donner# la priorité à -->
   <macro n="verb_intrans_trans"><with-param v="priorizar"/><with-param v="donner# la priorité"/><with-param v="donner# la priorité à"/></macro>
@@ -17842,6 +17889,9 @@
 
   <!-- avergonhir >> faire# honte, avoir# honte -->
   <macro n="verb_nopron_pron"><with-param v="avergonhir"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>
+
+  <!-- eishorrisclar >> rire# aux éclats, bidonner -->
+  <macro n="verb_nopron_pron"><with-param v="eishorrisclar"/><with-param v="rire# aux éclats"/><with-param v="bidonner"/></macro>
 
   <!-- espossar >> crever, épuiser -->
   <macro n="verb_nopron_pron"><with-param v="espossar"/><with-param v="crever"/><with-param v="épuiser"/></macro>
@@ -19543,6 +19593,7 @@
       <match tags="n.*"/>
       <match tags="np.*"/>
       <match tags="" case="Aa"/>
+      <match lemma="«" tags="lpar"/>
     </or>
   </rule>
   <rule weight="1.4">
@@ -19559,6 +19610,7 @@
       <match tags="n.*"/>
       <match tags="np.*"/>
       <match tags="" case="Aa"/>
+      <match lemma="«" tags="lpar"/>
     </or>
   </rule>
   <rule weight="1.4">
@@ -19571,6 +19623,7 @@
       <match tags="n.*"/>
       <match tags="np.*"/>
       <match tags="" case="Aa"/>
+      <match lemma="«" tags="lpar"/>
     </or>
   </rule>
   <rule weight="1.4">
@@ -19583,8 +19636,85 @@
       <match tags="n.*"/>
       <match tags="np.*"/>
       <match tags="" case="Aa"/>
+      <match lemma="«" tags="lpar"/>
     </or>
   </rule>
+  <rule weight="1.4">
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+    <or>
+      <seq n="personas"/>
+      <match lemma="familha" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr" v="oci"/>
+    <or>
+      <seq n="personas"/>
+      <match lemma="familha" tags="n.*.pl"/>
+    </or>
+  </rule>
+  <rule weight="1.4">
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="«" tags="lpar"/>
+  </rule>
+<!--[
+  <rule weight="1.4">
+    <or>
+      <seq n="personas"/>
+      <match lemma="familha" tags="n.*"/>
+    </or>
+    <or>
+      <match lemma="que" tags="rel.*"/>
+      <match lemma="qui" tags="rel.*"/>
+    </or>
+    <repeat from="0" upto="5">
+      <match tags="predet.*"/>
+      <match tags="det.*"/>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+      <match tags="pr"/>
+      <match tags="adv"/>
+      <match tags="preadv"/>
+    </repeat>
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+  </rule>
+-->
 
   <!-- aterrar >> atterrer, atterrir -->
   <rule weight="0.8">
@@ -19623,6 +19753,7 @@
         <match lemma="per" tags="pr"/>
         <match lemma="tà" tags="pr"/>
         <match lemma="entà" tags="pr"/>
+        <match lemma="enta" tags="pr"/>
     </or>
     <repeat from="0" upto="3">
       <or>
