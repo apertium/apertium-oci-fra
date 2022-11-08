@@ -7726,7 +7726,17 @@
         <pattern-item n="cnjsub"/>
       </pattern>
       <action>
-        <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+        <choose>
+          <when>
+            <test>
+              <equal caseless="yes"><clip pos="2" part="lem"/><lit v="d'accord"/></equal>
+            </test>
+            <call-macro n="gen_subj1"><with-param pos="1"/></call-macro>
+          </when>
+          <otherwise>
+            <call-macro n="gen_ce_incond"><with-param pos="1"/></call-macro>
+          </otherwise>
+        </choose>
         <out>
           <chunk>
             <clip pos="1" part="lem"/>
