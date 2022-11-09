@@ -1022,6 +1022,21 @@
 		</or>
 	  </rule>
 
+	  <rule weight="1.0" v="oci">
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="2">
+		  <or>
+			<match tags="adv"/>
+			<match tags="adv.enon"/>
+		  </or>
+		</repeat>
+		<match lemma="lo" tags="prn.pro.*"/>
+		<repeat from="0" upto="1">
+          <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="vblex.*.p3.*"/>
+	  </rule>
+
 	  <rule weight="1.0"> <!-- Suposicion: lo SN que seguís es un CD e lo pronom relatiu es lo subjècte -->
 		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
 		<repeat from="0" upto="2">
@@ -5370,6 +5385,61 @@
 	  <match lemma="dragaire" tags="n.*"/>
 	</or></def-seq>
 
+	<def-seq n="minerals"><or>
+	  <match lemma="mineral" tags="n.*"/>
+	  <match lemma="minerau" tags="n.*"/>
+	  <match lemma="aur" tags="n.*"/>
+	  <match lemma="òr" tags="n.*"/>
+	  <match lemma="argent" tags="n.*"/>
+	  <match lemma="coire" tags="n.*"/>
+	  <match lemma="fèr" tags="n.*"/>
+	  <match lemma="fèrre" tags="n.*"/>
+	  <match lemma="hèr" tags="n.*"/>
+	  <match lemma="fosfat" tags="n.*"/>
+	  <match lemma="silicat" tags="n.*"/>
+	  <match lemma="silici" tags="n.*"/>
+	  <match lemma="calcari" tags="n.*"/>
+	  <match lemma="calci" tags="n.*"/>
+	  <match lemma="magnèsi" tags="n.*"/>
+	  <match lemma="liti" tags="n.*"/>
+	  <match lemma="cesi" tags="n.*"/>
+	  <match lemma="tòri" tags="n.*"/>
+	  <match lemma="selèni" tags="n.*"/>
+	  <match lemma="berili" tags="n.*"/>
+	  <match lemma="rubidi" tags="n.*"/>
+	  <match lemma="iridi" tags="n.*"/>
+	  <match lemma="escandi" tags="n.*"/>
+	  <match lemma="germani" tags="n.*"/>
+	  <match lemma="niòbi" tags="n.*"/>
+	  <match lemma="palli" tags="n.*"/>
+	  <match lemma="talli" tags="n.*"/>
+	  <match lemma="vanadi" tags="n.*"/>
+	  <match lemma="zircòni" tags="n.*"/>
+	  <match lemma="indi" tags="n.*"/>
+	  <match lemma="nobèli" tags="n.*"/>
+	  <match lemma="afni" tags="n.*"/>
+	  <match lemma="ceri" tags="n.*"/>
+	  <match lemma="cesi" tags="n.*"/>
+	  <match lemma="itri" tags="n.*"/>
+	  <match lemma="iterbi" tags="n.*"/>
+	  <match lemma="mendelèvi" tags="n.*"/>
+	  <match lemma="cadmi" tags="n.*"/>
+	  <match lemma="estrònci" tags="n.*"/>
+	  <match lemma="galli" tags="n.*"/>
+	  <match lemma="urani" tags="n.*"/>
+	  <match lemma="radi" tags="n.*"/>
+      <match lemma="talc" tags="n.*"/>
+      <match lemma="gip" tags="n.*"/>
+      <match lemma="calcita" tags="n.*"/>
+      <match lemma="fluorita" tags="n.*"/>
+      <match lemma="apatita" tags="n.*"/>
+      <match lemma="feldspat" tags="n.*"/>
+      <match lemma="qüars" tags="n.*"/>
+      <match lemma="topazi" tags="n.*"/>
+      <match lemma="coridon" tags="n.*"/>
+      <match lemma="diamant" tags="n.*"/>
+	</or></def-seq>
+
 	<def-seq n="legums"><or>
 	  <match lemma="legume" tags="n.*"/>
 	  <match lemma="tomata" tags="n.*"/>
@@ -5446,6 +5516,7 @@
 	  <match lemma="recercaire" tags="n.*"/>
 	  <match lemma="militant" tags="n.*"/>
 	  <match lemma="defensor" tags="n.*"/>
+	  <match lemma="blogaire" tags="n.*"/>
 
 	  <match lemma="crestian" tags="n.*"/>
 	  <match lemma="catolic" tags="n.*"/>
@@ -9946,6 +10017,23 @@
     </repeat>
     <match tags="*.inf"/>
   </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="acceptar" tags="vblex.*"/>
+      <match lemma="validar" tags="vblex.*"/>
+      <match lemma="aprovar" tags="vblex.*"/>
+      <match lemma="desaprovar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="per" tags="pr"><select lemma="per"/></match>
+    <or>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="det.*"/>
+    </or>
+  </rule>
   <rule weight="1.2">
     <or>
       <match lemma="prevéder" tags="vblex.*"/>
@@ -12416,6 +12504,63 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- jaç >> couche, gisement-->
+  <rule weight="0.8">
+    <match lemma="jaç" tags="n.*"><select lemma="couche"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="jaç" tags="n.*"><select lemma="gisement"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="jaç" tags="n.*"><select lemma="gisement"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <seq n="minerals"/>
+	  <match lemma="carbon" tags="n.*"/>
+	  <match lemma="antracita" tags="n.*"/>
+	  <match lemma="lignit" tags="n.*"/>
+	  <match lemma="esquiste" tags="n.*"/>
+	  <match lemma="sistre" tags="n.*"/>
+	  <match lemma="petròli" tags="n.*"/>
+	  <match lemma="gaz" tags="n.*"/>
+	  <match lemma="metan" tags="n.*"/>
+      <match lemma="sal" tags="n.*"/>
+      <match lemma="ambre" tags="n.*"/>
+      <match lemma="fossile" tags="n.*"/>
+      <match lemma="dinosaure" tags="n.*"/>
+      <match lemma="œuf" tags="n.*"/>
+      <match lemma="silex" tags="n.*"/>
+      <match lemma="silèx" tags="n.*"/>
+      <match lemma="selze" tags="n.*"/>
+      <match lemma="pèirahuec" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="jaç" tags="n.*"><select lemma="gisement"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match lemma="matèria" tags="n.*"/>
+    <or>
+      <match lemma="primièr" tags="adj.*"/>
+    </or>
+  </rule>
 
   <!-- degalh >> gaspillage, dégât, déchet -->
   <rule weight="0.8">
