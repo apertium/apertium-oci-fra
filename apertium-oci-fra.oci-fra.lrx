@@ -9307,6 +9307,51 @@
     <match tags="vblex.inf"/>
   </rule>
   <rule weight="1.0">
+    <or>
+      <match lemma="tren" tags="n.*"/>
+      <match lemma="trin" tags="n.*"/>
+      <match lemma="traïn" tags="n.*"/>
+      <match lemma="avion" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="tren" tags="n.*"/>
+      <match lemma="trin" tags="n.*"/>
+      <match lemma="traïn" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="de"/></match>
+    <or>
+      <match lemma="vida" tags="n.*"/>
+      <match lemma="vita" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="motor" tags="n.*"/>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="motor" tags="n.*"/>
+    <match lemma="de" tags="pr"><select lemma="de"/></match>
+    <or>
+      <match lemma="traduccion" tags="n.*"/>
+      <match lemma="revirada" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
     <match lemma="de" tags="pr"><select lemma="à"/></match>
     <or>
       <match lemma="fragmentacion" tags="n.*"/>

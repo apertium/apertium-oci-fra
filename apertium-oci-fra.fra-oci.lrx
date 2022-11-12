@@ -2202,6 +2202,29 @@
     <match tags="vblex.inf"/>
   </rule>
   <rule weight="1.0">
+    <or>
+      <match lemma="train" tags="n.*"/>
+      <match lemma="avion" tags="n.*"/>
+    </or>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="moteur" tags="n.*"/>
+    <match lemma="à" tags="pr"><select lemma="de"/></match>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+      </or>
+    </repeat>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
     <match lemma="à" tags="pr"><select lemma="de"/></match>
     <or>
       <match lemma="fragmentation" tags="n.*"/>
