@@ -4762,6 +4762,15 @@
 	   <match lemma="recuolar" tags="vblex.*"/>
 	   <match lemma="pacientar" tags="vblex.*"/>
 	   <match lemma="desconar" tags="vblex.*"/>
+	   <match lemma="contunhar" tags="vblex.*"/>
+	   <match lemma="continuar" tags="vblex.*"/>
+	   <match lemma="apartenir" tags="vblex.*"/>
+	   <match lemma="aparténguer" tags="vblex.*"/>
+	   <match lemma="aparténer" tags="vblex.*"/>
+	   <match lemma="apartiéner" tags="vblex.*"/>
+	   <match lemma="apartier" tags="vblex.*"/>
+	   <match lemma="apertier" tags="vblex.*"/>
+	   <match lemma="pertànher" tags="vblex.*"/>
 	   <match lemma="dòler# de" tags="vblex.*"/>
 	   <match lemma="metre# son veto" tags="vblex.*"/>
 	   <match lemma="méter# son veto" tags="vblex.*"/>
@@ -18055,6 +18064,34 @@
     <match lemma="trepejar" tags="vblex.*"><select lemma="fouler"/></match>
   </rule>
 
+  <!-- aprigondir >> approfondir, creuser -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="aprigondir"/><with-param v="approfondir"/><with-param v="creuser"/></macro>
+
+  <!-- apregondir >> approfondir, creuser -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="apregondir"/><with-param v="approfondir"/><with-param v="creuser"/></macro>
+
+  <!-- apregonir >> approfondir, creuser -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="apregonir"/><with-param v="approfondir"/><with-param v="creuser"/></macro>
+
+  <!-- conviéner >> convenir, plaire -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="conviéner"/><with-param v="convenir"/><with-param v="plaire"/></macro>
+  <rule weight="1.2" v="oci@gascon">
+    <match lemma="conviéner" tags="vblex.*.sg"><select lemma="convenir"/></match>
+  </rule>
+  <rule weight="1.2" v="oci@gascon">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+    </or>
+    <match lemma="conviéner" tags="vblex.pp.*"><select lemma="convenir"/></match>
+  </rule>
+
+  <!-- despatolhar >> dépatouiller, débrouiller -->
+  <macro n="verb_nopron_pron"><with-param v="despatolhar"/><with-param v="dépatouiller"/><with-param v="débrouiller"/></macro>
+
+  <!-- engenhar >> machiner, débrouiller -->
+  <macro n="verb_nopron_pron"><with-param v="engenhar"/><with-param v="machiner"/><with-param v="débrouiller"/></macro>
+
   <!-- esberrocar >> bramer, égosiller -->
   <macro n="verb_nopron_pron"><with-param v="esberrocar"/><with-param v="bramer"/><with-param v="égosiller"/></macro>
 
@@ -21242,7 +21279,10 @@
     <match lemma="estar" tags="vblex.*"><select lemma="convenir"/></match>
   </rule>
 
+  <!-- devirar >> tourner, devenir -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="devirar"/><with-param v="tourner"/><with-param v="devenir"/></macro>
   <!-- devirar >> tourner, retourner, passer -->
+<!--
   <rule weight="0.8">
     <match lemma="devirar" tags="vblex.*"><select lemma="tourner"/></match>
   </rule>
@@ -21259,6 +21299,7 @@
     <match lemma="en" tags="prn.pro.adv"/>
     <match lemma="devirar" tags="vblex.*"><select lemma="retourner"/></match>
   </rule>
+-->
 
   <!-- sortir >> sortir, venir -->
   <rule weight="0.8" v="oci@gascon">
