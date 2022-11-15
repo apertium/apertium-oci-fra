@@ -38,8 +38,12 @@ TARGETS_COMMON =		\
 	$(PREFIX1).t2x_temps.bin	\
 	$(PREFIX1).t2ax.bin	\
 	$(PREFIX1b).t2ax.bin	\
+	$(PREFIX1).t2ax2.bin	\
+	$(PREFIX1b).t2ax2.bin	\
 	$(PREFIX1).t2ax			\
 	$(PREFIX1b).t2ax			\
+	$(PREFIX1).t2ax2			\
+	$(PREFIX1b).t2ax2			\
 	$(PREFIX1).t2bx.bin	\
 	$(PREFIX1b).t2bx.bin	\
 	$(PREFIX1).t2bx			\
@@ -270,6 +274,20 @@ $(PREFIX1b).t2ax.bin: $(PREFIX1b).t2ax
 	apertium-validate-interchunk $<
 	apertium-preprocess-transfer $< $@
 
+$(PREFIX1).t2ax2: $(BASENAME).$(PREFIX1).t2ax2
+	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t2ax2 >$@
+
+$(PREFIX1b).t2ax2: $(BASENAME).$(PREFIX1).t2ax2
+	apertium-filter-rules oci@gascon $(BASENAME).$(PREFIX1).t2ax2 >$@
+
+$(PREFIX1).t2ax2.bin: $(PREFIX1).t2ax2
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
+$(PREFIX1b).t2ax2.bin: $(PREFIX1b).t2ax2
+	apertium-validate-interchunk $<
+	apertium-preprocess-transfer $< $@
+
 $(PREFIX1).t2bx: $(BASENAME).$(PREFIX1).t2bx
 	apertium-filter-rules oci $(BASENAME).$(PREFIX1).t2bx >$@
 
@@ -424,6 +442,7 @@ EXTRA_DIST=					\
 		$(BASENAME).$(PREFIX1).t1x	\
 		$(BASENAME).$(PREFIX1).t2x_temps	\
 		$(BASENAME).$(PREFIX1).t2ax	\
+		$(BASENAME).$(PREFIX1).t2ax2	\
 		$(BASENAME).$(PREFIX1).t2bx	\
 		$(BASENAME).$(PREFIX1).t2cx	\
 		$(BASENAME).$(PREFIX1).t2dx	\
@@ -455,6 +474,7 @@ apertium_oci_fra_DATA=	\
 	$(BASENAME).$(PREFIX1).t1x			\
 	$(BASENAME).$(PREFIX1).t2x_temps			\
 	$(BASENAME).$(PREFIX1).t2ax			\
+	$(BASENAME).$(PREFIX1).t2ax2			\
 	$(BASENAME).$(PREFIX1).t2bx			\
 	$(BASENAME).$(PREFIX1).t2cx			\
 	$(BASENAME).$(PREFIX1).t2dx			\
