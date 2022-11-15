@@ -204,6 +204,49 @@
           <match tags="np.*"/>
         </or>
       </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*"/>
+        <or>
+          <seq n="jorns"/>
+          <seq n="meses"/>
+          <seq n="sasons"/>
+          <seq n="parts_jorn"/>
+          <match lemma="velha" tags="n.*"/>
+          <match lemma="vegelha" tags="n.*"/>
+          <match lemma="vigília" tags="n.*"/>
+          <match lemma="dimenjada" tags="n.*"/>
+          <match tags="num"/>
+        </or>
+      </rule>
+      <rule weight="1.4">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*"/>
+        <or>
+          <seq n="jorns"/>
+          <seq n="meses"/>
+          <seq n="sasons"/>
+          <seq n="parts_jorn"/>
+          <match lemma="velha" tags="n.*"/>
+          <match lemma="vegelha" tags="n.*"/>
+          <match lemma="vigília" tags="n.*"/>
+          <match lemma="dimenjada" tags="n.*"/>
+          <match tags="num"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="adj.*"/>
+        </repeat>
+        <or>
+          <match tags="det.*"/>
+          <match tags="np.*"/>
+        </or>
+      </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
         <repeat from="0" upto="2">
@@ -246,8 +289,13 @@
         </repeat>
         <match tags="n.*"/>
       </rule>
-      <rule weight="1.0">
-        <match lemma="le" tags="prn.pro.*"/>
+      <rule weight="1.0" v="oci">
+        <match lemma="lo" tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0" v="oci">
+        <match lemma="lo" tags="prn.pro.*"/>
+        <match tags="prn.pro.*"/>
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
       </rule>
       <rule weight="1.0">
@@ -2983,6 +3031,43 @@
 	  <match lemma="deceme" tags="n.*"/>
 	</or></def-seq>
 
+	<def-seq n="sasons"><or>
+      <match lemma="prima" tags="n.*"/>
+      <match lemma="primtemps" tags="n.*"/>
+      <match lemma="primavèra" tags="n.*"/>
+      <match lemma="estiu" tags="n.*"/>
+      <match lemma="auton" tags="n.*"/>
+      <match lemma="abòr" tags="n.*"/>
+      <match lemma="davalada" tags="n.*"/>
+      <match lemma="tardor" tags="n.*"/>
+      <match lemma="agòr" tags="n.*"/>
+      <match lemma="gòrra" tags="n.*"/>
+      <match lemma="ivèrn" tags="n.*"/>
+	</or></def-seq>
+
+	<def-seq n="parts_jorn"><or>
+      <match lemma="matin" tags="n.*"/>
+      <match lemma="maitin" tags="n.*"/>
+      <match lemma="matinada" tags="n.*"/>
+      <match lemma="matiada" tags="n.*"/>
+      <match lemma="aprèp-miègjorn" tags="n.*"/>
+      <match lemma="aprèp-dinnada" tags="n.*"/>
+      <match lemma="après-miègjorn" tags="n.*"/>
+      <match lemma="après-dinnada" tags="n.*"/>
+      <match lemma="vèspre" tags="n.*"/>
+      <match lemma="vrèspe" tags="n.*"/>
+      <match lemma="vesprada" tags="n.*"/>
+      <match lemma="ser" tags="n.*"/>
+      <match lemma="sera" tags="n.*"/>
+      <match lemma="nuèch" tags="n.*"/>
+      <match lemma="nuech" tags="n.*"/>
+      <match lemma="nuòch" tags="n.*"/>
+      <match lemma="nueit" tags="n.*"/>
+      <match lemma="nuèit" tags="n.*"/>
+      <match lemma="neit" tags="n.*"/>
+      <match lemma="net" tags="n.*"/>
+	</or></def-seq>
+
 	<def-seq n="instruments_musicals"><or>
 	   <match lemma="piano" tags="n.*"/>
 	   <match lemma="violon" tags="n.*"/>
@@ -5115,6 +5200,7 @@
 	   <match lemma="precisar" tags="vblex.*.p3.sg"/>
 	   <match lemma="avançar" tags="vblex.*.p3.sg"/>
 	   <match lemma="afirmar" tags="vblex.*.p3.sg"/>
+	   <match lemma="assegurar" tags="vblex.*.p3.sg"/>
 	   <match lemma="afortir" tags="vblex.*.p3.sg"/>
 	   <match lemma="ahortir" tags="vblex.*.p3.sg"/>
 	   <match lemma="garantir" tags="vblex.*.p3.sg"/>
@@ -5125,6 +5211,8 @@
 	   <match lemma="indicar" tags="vblex.*.p3.sg"/>
 	   <match lemma="signalar" tags="vblex.*.p3.sg"/>
 	   <match lemma="significar" tags="vblex.*.p3.sg"/>
+	   <match lemma="opinar" tags="vblex.*.p3.sg"/>
+	   <match lemma="pensar" tags="vblex.*.p3.sg"/>
 	   <match lemma="escriure" tags="vblex.*.p3.sg"/>
 	   <match lemma="escríver" tags="vblex.*.p3.sg"/>
 	   <match lemma="assegurar" tags="vblex.*.p3.sg"/>
@@ -5183,6 +5271,7 @@
 	   <match lemma="precisar" tags="vblex.*.p3.pl"/>
 	   <match lemma="avançar" tags="vblex.*.p3.pl"/>
 	   <match lemma="afirmar" tags="vblex.*.p3.pl"/>
+	   <match lemma="assegurar" tags="vblex.*.p3.pl"/>
 	   <match lemma="afortir" tags="vblex.*.p3.pl"/>
 	   <match lemma="ahortir" tags="vblex.*.p3.pl"/>
 	   <match lemma="garantir" tags="vblex.*.p3.pl"/>
@@ -5193,6 +5282,8 @@
 	   <match lemma="indicar" tags="vblex.*.p3.pl"/>
 	   <match lemma="signalar" tags="vblex.*.p3.pl"/>
 	   <match lemma="significar" tags="vblex.*.p3.pl"/>
+	   <match lemma="opinar" tags="vblex.*.p3.pl"/>
+	   <match lemma="pensar" tags="vblex.*.p3.pl"/>
 	   <match lemma="escriure" tags="vblex.*.p3.pl"/>
 	   <match lemma="escríver" tags="vblex.*.p3.pl"/>
 	   <match lemma="assegurar" tags="vblex.*.p3.pl"/>
@@ -11458,10 +11549,7 @@
       <seq n="temps"/>
       <seq n="jorns"/>
       <seq n="meses"/>
-      <match lemma="prima" tags="n.*"/>
-      <match lemma="estiu" tags="n.*"/>
-      <match lemma="auton" tags="n.*"/>
-      <match lemma="ivèrn" tags="n.*"/>
+      <seq n="sasons"/>
       <match lemma="dimenjada" tags="n.*"/>
       <match lemma="còp" tags="n.*"><select lemma="fois"/></match>
     </or>
@@ -18272,6 +18360,60 @@
   <!-- vetar >> mettre# son veto, mettre# son veto à -->
   <macro n="verb_intrans_trans"><with-param v="vetar"/><with-param v="mettre# son veto"/><with-param v="mettre# son veto à"/></macro>
 
+  <!-- tombar >> tomber, faire# tomber -->
+  <macro n="verb_intrans_trans"><with-param v="tombar"/><with-param v="tomber"/><with-param v="faire# tomber"/></macro>
+  <rule weight="1.2">
+    <or>
+      <match tags="vbser.*"/>
+      <match lemma="semblar" tags="vblex.*"/>
+      <match lemma="paréisser" tags="vblex.*"/>
+      <match lemma="paréisher" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tombar" tags="vblex.pp.*"><select lemma="tomber"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="vbser.*"/>
+      <match lemma="daissar" tags="vblex.*"/>
+      <match lemma="laissar" tags="vblex.*"/>
+      <match lemma="deishar" tags="vblex.*"/>
+      <match lemma="leishar" tags="vblex.*"/>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+      <match lemma="hèser" tags="vblex.*"/>
+      <match lemma="faire" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tombar" tags="vblex.inf"><select lemma="tomber"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tombar" tags="vblex.pp.*"><select lemma="faire# tomber"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="n.*"/>
+      <match tags="adj.*"/>
+      <match tags="vblex.pp.*"/>
+    </or>
+    <repeat from="0" upto="2">
+	  <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+	  </or>
+    </repeat>
+    <match lemma="tombar" tags="vblex.pp.*"><select lemma="tomber"/></match>
+  </rule>
+
   <!-- avergonhar >> faire# honte, avoir# honte -->
   <macro n="verb_nopron_pron"><with-param v="avergonhar"/><with-param v="faire# honte"/><with-param v="avoir# honte"/></macro>
 
@@ -19646,37 +19788,8 @@
     <or>
       <seq n="jorns"/>
       <seq n="meses"/>
-      <match lemma="prima" tags="n.*"/>
-      <match lemma="primtemps" tags="n.*"/>
-      <match lemma="primavèra" tags="n.*"/>
-      <match lemma="estiu" tags="n.*"/>
-      <match lemma="auton" tags="n.*"/>
-      <match lemma="abòr" tags="n.*"/>
-      <match lemma="davalada" tags="n.*"/>
-      <match lemma="tardor" tags="n.*"/>
-      <match lemma="agòr" tags="n.*"/>
-      <match lemma="gòrra" tags="n.*"/>
-      <match lemma="ivèrn" tags="n.*"/>
-      <match lemma="matin" tags="n.*"/>
-      <match lemma="maitin" tags="n.*"/>
-      <match lemma="matinada" tags="n.*"/>
-      <match lemma="matiada" tags="n.*"/>
-      <match lemma="aprèp-miègjorn" tags="n.*"/>
-      <match lemma="aprèp-dinnada" tags="n.*"/>
-      <match lemma="après-miègjorn" tags="n.*"/>
-      <match lemma="après-dinnada" tags="n.*"/>
-      <match lemma="vèspre" tags="n.*"/>
-      <match lemma="vrèspe" tags="n.*"/>
-      <match lemma="vesprada" tags="n.*"/>
-      <match lemma="ser" tags="n.*"/>
-      <match lemma="sera" tags="n.*"/>
-      <match lemma="nuèch" tags="n.*"/>
-      <match lemma="nuech" tags="n.*"/>
-      <match lemma="nuòch" tags="n.*"/>
-      <match lemma="nueit" tags="n.*"/>
-      <match lemma="nuèit" tags="n.*"/>
-      <match lemma="neit" tags="n.*"/>
-      <match lemma="net" tags="n.*"/>
+      <seq n="sasons"/>
+      <seq n="parts_jorn"/>
       <match lemma="moment" tags="n.*"/>
       <match lemma="temps" tags="n.*"/>
       <match lemma="setmana" tags="n.*"/>
@@ -19694,37 +19807,8 @@
     <or>
       <seq n="jorns"/>
       <seq n="meses"/>
-      <match lemma="prima" tags="n.*"/>
-      <match lemma="primtemps" tags="n.*"/>
-      <match lemma="primavèra" tags="n.*"/>
-      <match lemma="estiu" tags="n.*"/>
-      <match lemma="auton" tags="n.*"/>
-      <match lemma="abòr" tags="n.*"/>
-      <match lemma="davalada" tags="n.*"/>
-      <match lemma="tardor" tags="n.*"/>
-      <match lemma="agòr" tags="n.*"/>
-      <match lemma="gòrra" tags="n.*"/>
-      <match lemma="ivèrn" tags="n.*"/>
-      <match lemma="matin" tags="n.*"/>
-      <match lemma="maitin" tags="n.*"/>
-      <match lemma="matinada" tags="n.*"/>
-      <match lemma="matiada" tags="n.*"/>
-      <match lemma="aprèp-miègjorn" tags="n.*"/>
-      <match lemma="aprèp-dinnada" tags="n.*"/>
-      <match lemma="après-miègjorn" tags="n.*"/>
-      <match lemma="après-dinnada" tags="n.*"/>
-      <match lemma="vèspre" tags="n.*"/>
-      <match lemma="vrèspe" tags="n.*"/>
-      <match lemma="vesprada" tags="n.*"/>
-      <match lemma="ser" tags="n.*"/>
-      <match lemma="sera" tags="n.*"/>
-      <match lemma="nuèch" tags="n.*"/>
-      <match lemma="nuech" tags="n.*"/>
-      <match lemma="nuòch" tags="n.*"/>
-      <match lemma="nueit" tags="n.*"/>
-      <match lemma="nuèit" tags="n.*"/>
-      <match lemma="neit" tags="n.*"/>
-      <match lemma="net" tags="n.*"/>
+      <seq n="sasons"/>
+      <seq n="parts_jorn"/>
       <match lemma="moment" tags="n.*"/>
       <match lemma="temps" tags="n.*"/>
       <match lemma="setmana" tags="n.*"/>

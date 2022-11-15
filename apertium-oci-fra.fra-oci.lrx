@@ -547,6 +547,72 @@
           <match tags="np.*"/>
         </or>
       </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*"/>
+        <repeat from="0" upto="1">
+          <match tags="adj.*"/>
+        </repeat>
+        <or>
+          <match lemma="jour" tags="n.*"/>
+          <match lemma="journée" tags="n.*"/>
+          <match lemma="veille" tags="n.*"/>
+          <match lemma="veille" tags="n.*"/>
+          <match lemma="nuit" tags="n.*"/>
+          <match lemma="matin" tags="n.*"/>
+          <match lemma="matinée" tags="n.*"/>
+          <match lemma="après-midi" tags="n.*"/>
+          <match lemma="soir" tags="n.*"/>
+          <match lemma="soirée" tags="n.*"/>
+          <match lemma="week-end" tags="n.*"/>
+          <match lemma="weekend" tags="n.*"/>
+          <match lemma="semaine" tags="n.*"/>
+          <match lemma="mois" tags="n.*"/>
+          <match lemma="année" tags="n.*"/>
+          <match lemma="lustre" tags="n.*"/>
+          <match lemma="décennie" tags="n.*"/>
+          <match lemma="siècle" tags="n.*"/>
+          <match lemma="vacances" tags="n.*"/>
+        </or>
+      </rule>
+      <rule weight="1.4">
+        <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match tags="det.*"/>
+        <repeat from="0" upto="1">
+          <match tags="adj.*"/>
+        </repeat>
+        <or>
+          <match lemma="jour" tags="n.*"/>
+          <match lemma="journée" tags="n.*"/>
+          <match lemma="veille" tags="n.*"/>
+          <match lemma="veille" tags="n.*"/>
+          <match lemma="nuit" tags="n.*"/>
+          <match lemma="matin" tags="n.*"/>
+          <match lemma="matinée" tags="n.*"/>
+          <match lemma="après-midi" tags="n.*"/>
+          <match lemma="soir" tags="n.*"/>
+          <match lemma="soirée" tags="n.*"/>
+          <match lemma="week-end" tags="n.*"/>
+          <match lemma="weekend" tags="n.*"/>
+          <match lemma="semaine" tags="n.*"/>
+          <match lemma="mois" tags="n.*"/>
+          <match lemma="année" tags="n.*"/>
+          <match lemma="lustre" tags="n.*"/>
+          <match lemma="décennie" tags="n.*"/>
+          <match lemma="siècle" tags="n.*"/>
+          <match lemma="vacances" tags="n.*"/>
+        </or>
+        <or>
+          <match tags="det.*"/>
+          <match tags="np.*"/>
+        </or>
+      </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
         <repeat from="0" upto="2">
@@ -2719,6 +2785,125 @@
     <match lemma="pas" tags="adv"><select lemma="pas"/></match>
   </rule>
 
+  <!-- bouche bée >> bocabadat, bocabadada, bocabadats, bocabadades -->
+  <rule weight="0.8" v="oci">
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadat"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <or>
+      <match tags="vbser.*.pl"/>
+      <match tags="vblex.*.pl"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadats"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match tags="*.pp.f.sg"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadada"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match tags="*.pp.f.pl"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadadas"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <or>
+      <match tags="prn.tn.f.*"/>
+      <match tags="prn.tn..*.f.*"/>
+      <match tags="n.*.f.*"/>
+      <match tags="adj.*.f.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.sg"/>
+      <match tags="vbser.*.sg"/>
+      <match tags="vbmod.*.sg"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadada"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <or>
+      <match tags="prn.tn.f.*"/>
+      <match tags="prn.tn..*.f.*"/>
+      <match tags="n.*.f.*"/>
+      <match tags="adj.*.f.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vblex.*.pl"/>
+      <match tags="vbser.*.pl"/>
+      <match tags="vbmod.*.pl"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadadas"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <or>
+      <match tags="prn.tn.f.*"/>
+      <match tags="prn.tn..*.f.*"/>
+      <match tags="n.*.f.*"/>
+      <match tags="adj.*.f.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or>
+      <match tags="vbhaver.*.sg"/>
+      <match tags="vbmod.*.sg"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="vblex.*"/>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadada"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <or>
+      <match tags="prn.tn.f.*"/>
+      <match tags="prn.tn..*.f.*"/>
+      <match tags="n.*.f.*"/>
+      <match tags="adj.*.f.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or>
+      <match tags="vbhaver.*.pl"/>
+      <match tags="vbmod.*.pl"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match tags="vblex.*"/>
+    <match lemma="bouche bée" tags="adv"><select lemma="bocabadadas"/></match>
+  </rule>
+
   <!-- lourdement >> pesugament, de bèth tròç -->
   <rule weight="0.8">
     <match lemma="lourdement" tags="adv"><select lemma="pesugament"/></match>
@@ -3667,6 +3852,7 @@
       <match lemma="soir" tags="n.*"/>
       <match lemma="soirée" tags="n.*"/>
       <match lemma="week-end" tags="n.*"/>
+      <match lemma="weekend" tags="n.*"/>
       <match lemma="semaine" tags="n.*"/>
       <match lemma="mois" tags="n.*"/>
       <match lemma="année" tags="n.*"/>
@@ -6874,6 +7060,43 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- fléchir >> plegar, flechir -->
+  <rule weight="0.8">
+    <match lemma="fléchir" tags="vblex.*"><select lemma="plegar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="fléchir" tags="vblex.*"><select lemma="flechir"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <or>
+      <match lemma="mot" tags="n.*"/>
+      <match lemma="forme" tags="n.*"/>
+      <match lemma="nom" tags="n.*"/>
+      <match lemma="adjectif" tags="n.*"/>
+      <match lemma="pronom" tags="n.*"/>
+      <match lemma="verbe" tags="n.*"/>
+      <match lemma="participe" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.*"/>
+    <or>
+      <match lemma="mot" tags="n.*"/>
+      <match lemma="forme" tags="n.*"/>
+      <match lemma="nom" tags="n.*"/>
+      <match lemma="adjectif" tags="n.*"/>
+      <match lemma="pronom" tags="n.*"/>
+      <match lemma="verbe" tags="n.*"/>
+      <match lemma="participe" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="fléchir" tags="vblex.pp.*"><select lemma="flechir"/></match>
+  </rule>
 
   <!-- choquer >> trucar, butar -->
   <rule weight="0.8">
