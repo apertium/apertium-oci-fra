@@ -7099,7 +7099,7 @@
     </or>
   </rule>
 -->
-  <rule weight="1.0">
+  <rule weight="1.2">
     <or>
       <match tags="np.ant.*"/>
       <match tags="np.cog.*"/>
@@ -7145,7 +7145,7 @@
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <repeat from="0" upto="1">
-      <match lemma="y" tags="prn.pro.*"/>
+      <match lemma="i" tags="prn.pro.*"/>
     </repeat>
     <or>
       <match lemma="afirmar" tags="vblex.*"/>
@@ -7260,7 +7260,7 @@
   <rule weight="1.0"> 
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <repeat from="0" upto="1">
-      <match lemma="y" tags="prn.pro.*"/>
+      <match lemma="i" tags="prn.pro.*"/>
     </repeat>
     <or>
       <match lemma="far" tags="vblex.*.p3.pl"/>
@@ -7306,7 +7306,7 @@
   <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <repeat from="0" upto="1">
-      <match lemma="y" tags="prn.pro.*"/>
+      <match lemma="i" tags="prn.pro.*"/>
     </repeat>
     <or>
       <match lemma="parlar" tags="vblex.*"/>
@@ -7999,7 +7999,7 @@
     <match lemma="ac" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
 
-  <!-- lo >> le, lui -->
+  <!-- lo >> le, lui, en -->
   <rule weight="0.8">
     <match lemma="lo" tags="prn.pro.*"><select lemma="le"/></match>
   </rule>
@@ -8932,6 +8932,25 @@
     </or>
   </rule>
 
+  <rule weight="1.0" v="oci@gascon">
+    <match lemma="lo" tags="prn.pro.*.sg"><select lemma="en"/></match>
+    <repeat from="0" upto="1">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <or>
+      <match lemma="tirar# deu puisheu" tags="vblex.*"/>
+      <match lemma="tirar# deu puishèu" tags="vblex.*"/>
+      <match lemma="tirar# deu poishiu" tags="vblex.*"/>
+      <match lemma="tirar# deth puisheu" tags="vblex.*"/>
+      <match lemma="tirar# deth puishèu" tags="vblex.*"/>
+      <match lemma="tirar# deth poishiu" tags="vblex.*"/>
+      <match lemma="tirar# deu torn" tags="vblex.*"/>
+      <match lemma="tirar# deth torn" tags="vblex.*"/>
+      <match lemma="tirar# de l'empach" tags="vblex.*"/>
+      <match lemma="tirar# de la halha" tags="vblex.*"/>
+    </or>
+  </rule>
+
   <!-- ac (prn.enc) >> le, lui, leur -->
   <rule weight="0.8">
     <match lemma="ac" tags="prn.enc.*"><select lemma="le"/></match>
@@ -9479,9 +9498,9 @@
     <match tags="det.*"/>
   </rule>
 
-  <!-- entà >> à, pour, vers -->
-  <!-- tà >> à, pour, vers -->
-  <!-- enta >> à, pour, vers -->
+  <!-- entà >> à, pour, vers, [remove] -->
+  <!-- tà >> à, pour, vers, [remove] -->
+  <!-- enta >> à, pour, vers, [remove] -->
   <rule weight="0.6">
     <match lemma="entà" tags="pr"><select lemma="à"/></match>
   </rule>
@@ -9503,6 +9522,9 @@
 
   <rule weight="1.0" v="oci@gascon">
     <match lemma="entà" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
     <or>
       <match tags="np.top.*"/>
       <match tags="" case="Aa"/>
@@ -9510,6 +9532,9 @@
   </rule>
   <rule weight="1.0" v="oci@gascon">
     <match lemma="tà" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
     <or>
       <match tags="np.top.*"/>
       <match tags="" case="Aa"/>
@@ -9517,6 +9542,61 @@
   </rule>
   <rule weight="1.0" v="oci@gascon">
     <match lemma="enta" tags="pr"><select lemma="à"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="entà" tags="pr"><select lemma="pour"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="enta" tags="pr"><select lemma="pour"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
     <or>
       <match tags="np.top.*"/>
       <match tags="" case="Aa"/>
@@ -9527,12 +9607,13 @@
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
       <match lemma="bracar" tags="vblex.*"/>
       <match lemma="sortir" tags="vblex.*"/>
       <match lemma="gésser" tags="vblex.*"/>
       <match lemma="arribar" tags="vblex.*"/>
       <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -9543,12 +9624,13 @@
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
       <match lemma="bracar" tags="vblex.*"/>
       <match lemma="sortir" tags="vblex.*"/>
       <match lemma="gésser" tags="vblex.*"/>
       <match lemma="arribar" tags="vblex.*"/>
       <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -9559,17 +9641,82 @@
     <or>
       <match lemma="anar" tags="vblex.*"/>
       <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
       <match lemma="bracar" tags="vblex.*"/>
       <match lemma="sortir" tags="vblex.*"/>
       <match lemma="gésser" tags="vblex.*"/>
       <match lemma="arribar" tags="vblex.*"/>
       <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
     </or>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match lemma="enta" tags="pr"><select lemma="à"/></match>
+  </rule>
+
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="entà" tags="pr"><remove tags="pr"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tà" tags="pr"><remove tags="pr"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+  <rule weight="2.2" v="oci@gascon">
+    <or>
+      <match lemma="anar" tags="vblex.*"/>
+      <match lemma="viatjar" tags="vblex.*"/>
+      <match lemma="bracar" tags="vblex.*"/>
+      <match lemma="sortir" tags="vblex.*"/>
+      <match lemma="gésser" tags="vblex.*"/>
+      <match lemma="arribar" tags="vblex.*"/>
+      <match lemma="tornar" tags="vblex.*"/>
+      <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="enta" tags="pr"><remove tags="pr"/></match>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
   </rule>
 
   <!-- pendent >> pendant, lors de -->
@@ -10348,6 +10495,7 @@
       <match lemma="seguir" tags="vblex.*"/>
       <match lemma="segre" tags="vblex.*"/>
       <match lemma="partir" tags="vblex.*"/>
+      <match lemma="tornar# partir" tags="vblex.*"/>
       <match lemma="passar" tags="vblex.*"/>
       <match lemma="dirigir" tags="vblex.*"/>
       <match lemma="venir" tags="vblex.*"/>
@@ -16109,6 +16257,7 @@
   <rule weight="1.0">
     <or>
         <match lemma="partir" tags="vblex.*"/>
+        <match lemma="tornar# partir" tags="vblex.*"/>
         <match lemma="anar" tags="vblex.*"/>
     </or>
     <match lemma="en" tags="pr"/>
@@ -16117,6 +16266,7 @@
   <rule weight="1.0">
     <or>
         <match lemma="partir" tags="vblex.*"/>
+        <match lemma="tornar# partir" tags="vblex.*"/>
         <match lemma="anar" tags="vblex.*"/>
     </or>
     <match lemma="en" tags="pr"/>
@@ -18434,6 +18584,12 @@
 
   <!-- tartucar >> hésiter, faire# du souci -->
   <macro n="verb_nopron_pron"><with-param v="tartucar"/><with-param v="hésiter"/><with-param v="faire# du souci"/></macro>
+
+  <!-- des·har >> défaire, débarrasser (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="des·har"/><with-param v="défaire"/><with-param v="débarrasser"/><with-param v="de"/></macro>
+
+  <!-- des·hèr >> défaire, débarrasser (de) -->
+  <macro n="verb_nopron_pron_prep"><with-param v="des·hèr"/><with-param v="défaire"/><with-param v="débarrasser"/><with-param v="de"/></macro>
 
   <!-- avisar >> aviser, rendre# compte (de), occuper (de) -->
   <macro n="verb_nopron_pron_prep"><with-param v="avisar"/><with-param v="aviser"/><with-param v="rendre# compte"/><with-param v="de"/></macro>
