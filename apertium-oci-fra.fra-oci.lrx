@@ -3282,6 +3282,40 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- pressant >> insistent, urgent -->
+  <rule weight="0.8">
+    <match lemma="pressant" tags="adj.*"><select lemma="insistent"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="affaire" tags="n.*"/>
+      <match lemma="question" tags="n.*"/>
+      <match lemma="demande" tags="n.*"/>
+      <match lemma="besoin" tags="n.*"/>
+      <match lemma="nécessité" tags="n.*"/>
+      <match lemma="défi" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="rel.*"/>
+    </repeat>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="vbser.*"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="cm"/>
+        <match tags="cnjcoo"/>
+      </or>
+    </repeat>
+    <match lemma="pressant" tags="adj.*"><select lemma="urgent"/></match>
+  </rule>
+
   <!-- enflé >> confle, ampolat -->
   <rule weight="0.8" v="oci">
     <match lemma="enflé" tags="adj.*"><select lemma="confle"/></match>
