@@ -1208,6 +1208,35 @@
   </def-macros>
 
   <def-seqs>
+    <def-seq n="lettre_maj"><or>
+      <match lemma="A"/>
+      <match lemma="B"/>
+      <match lemma="C"/>
+      <match lemma="D"/>
+      <match lemma="E"/>
+      <match lemma="F"/>
+      <match lemma="G"/>
+      <match lemma="H"/>
+      <match lemma="I"/>
+      <match lemma="J"/>
+      <match lemma="K"/>
+      <match lemma="L"/>
+      <match lemma="M"/>
+      <match lemma="N"/>
+      <match lemma="O"/>
+      <match lemma="P"/>
+      <match lemma="Q"/>
+      <match lemma="R"/>
+      <match lemma="S"/>
+      <match lemma="T"/>
+      <match lemma="U"/>
+      <match lemma="V"/>
+      <match lemma="W"/>
+      <match lemma="X"/>
+      <match lemma="Y"/>
+      <match lemma="Z"/>
+    </or></def-seq>
+
     <def-seq n="prn_moi"><or>
       <match lemma="moi" tags="prn.tn.*"/>
       <match lemma="toi" tags="prn.tn.*"/>
@@ -5050,15 +5079,30 @@
       <match tags="*"/>
     </repeat>
     <match lemma="pour" tags="pr"/>
-    <match tags="np.top.*"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
   </rule>
   <rule weight="1.0">
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
-    <match tags="np.top.*"/>
+    <repeat from="0" upto="1">
+      <match tags="adj.*"/>
+    </repeat>
+    <match lemma="en" tags="pr"/>
+    <match lemma="direction" tags="n.*"/>
   </rule>
   <rule weight="1.0">
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
-    <match tags="num"/>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+      <match tags="num"/>
+      <seq n="lettre_maj"/>
+    </or>
   </rule>
   <rule weight="1.0">
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
@@ -5076,7 +5120,18 @@
       <match lemma="spatial" tags="adj.*"/>
       <match lemma="habité" tags="adj.*"/>
       <match lemma="habiter" tags="vblex.pp.*"/>
+      <match lemma="inhabité" tags="adj.*"/>
+      <match lemma="long" tags="adj.*"/>
+      <match lemma="court" tags="adj.*"/>
+      <match lemma="libre" tags="adj.*"/>
     </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="long" tags="adj.*"/>
+      <match lemma="court" tags="adj.*"/>
+    </or>
+    <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="vol" tags="n.*"><select lemma="vòl"/></match>
@@ -5109,6 +5164,7 @@
       <match lemma="chasseur-bombardier" tags="n.*"/>
       <match lemma="ballon" tags="n.*"/>
       <match lemma="ballon dirigeable" tags="n.*"/>
+      <match lemma="dirigeable" tags="n.*"/>
       <match lemma="zeppelin" tags="n.*"/>
       <match lemma="mongolfière" tags="n.*"/>
       <match lemma="aéroport" tags="n.*"/>
@@ -5172,6 +5228,7 @@
       <match lemma="drone" tags="n.*"/>
       <match lemma="ballon" tags="n.*"/>
       <match lemma="ballon dirigeable" tags="n.*"/>
+      <match lemma="dirigeable" tags="n.*"/>
       <match lemma="zeppelin" tags="n.*"/>
       <match lemma="mongolfière" tags="n.*"/>
       <match lemma="aéroport" tags="n.*"/>
