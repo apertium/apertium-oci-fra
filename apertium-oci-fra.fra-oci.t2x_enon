@@ -202,6 +202,26 @@
       <attr-item tags="negation"/>
     </def-attr>
 
+    <def-attr n="itg">
+      <attr-item tags="itg"/>
+    </def-attr>
+
+    <def-attr n="excl">
+      <attr-item tags="excl"/>
+    </def-attr>
+
+    <def-attr n="cnjsub">
+      <attr-item tags="cnjsub"/>
+    </def-attr>
+
+    <def-attr n="cnjadv">
+      <attr-item tags="cnjadv"/>
+    </def-attr>
+
+    <def-attr n="rel">
+      <attr-item tags="rel"/>
+    </def-attr>
+
     <def-attr n="a_sent">
       <attr-item tags="quest"/>
       <attr-item tags="excl"/>
@@ -213,6 +233,9 @@
   <section-def-vars>
     <def-var n="set_enonciatiu"/>
     <def-var n="inici" v="&lt;oc&gt;"/> <!-- indica si és la primera frase que es tradueix -->
+    <def-var n="interrogacion" v="&lt;non&gt;"/> <!-- indica si i a un interrogatiu -->
+    <def-var n="conjoncion" v="&lt;non&gt;"/> <!-- indica si i a una conjoncion -->
+    <def-var n="relatiu" v="&lt;non&gt;"/> <!-- indica si i a un relatiu -->
   </section-def-vars>
 
   <section-def-macros>
@@ -381,6 +404,9 @@
               <equal><clip pos="1" part="temps"/><lit-tag v="ger"/></equal>
               <equal><clip pos="1" part="temps"/><lit-tag v="pp"/></equal>
               <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
+              <equal><var n="interrogacion"/><lit v="oc"/></equal>
+              <equal><var n="conjoncion"/><lit v="oc"/></equal>
+              <equal><var n="relatiu"/><lit v="oc"/></equal>
             </or>
           </test>
           <let><var n="set_enonciatiu"/><lit v="non"/></let>
@@ -390,6 +416,9 @@
           <call-macro n="escriure_enonciatiu3"><with-param pos="1"/><with-param pos="2"/><with-param pos="3"/></call-macro>
         </otherwise>
       </choose>
+      <let><var n="interrogacion"/><lit v="non"/></let> <!-- l'interrogacion practivament a acabat (se non è vero...) -->
+      <let><var n="conjoncion"/><lit v="non"/></let> <!-- la subordinada practicament a acabat (se non è vero...) -->
+      <let><var n="relatiu"/><lit v="non"/></let> <!-- la subordinada relativa practicament a acabat (se non è vero...) -->
     </def-macro>
 
     <def-macro n="apondre_enonciatiu2" npar="2"><!-- par1 = vèrb, par2 = mot que seguís lo possible enonciatiu (per la gestion de las majusculas) -->
@@ -413,6 +442,9 @@
               <equal><clip pos="1" part="temps"/><lit-tag v="ger"/></equal>
               <equal><clip pos="1" part="temps"/><lit-tag v="pp"/></equal>
               <equal><clip pos="1" part="temps"/><lit-tag v="imp"/></equal>
+              <equal><var n="interrogacion"/><lit v="oc"/></equal>
+              <equal><var n="conjoncion"/><lit v="oc"/></equal>
+              <equal><var n="relatiu"/><lit v="oc"/></equal>
             </or>
           </test>
           <let><var n="set_enonciatiu"/><lit v="non"/></let>
@@ -422,6 +454,9 @@
           <call-macro n="escriure_enonciatiu2"><with-param pos="1"/><with-param pos="2"/></call-macro>
         </otherwise>
       </choose>
+      <let><var n="interrogacion"/><lit v="non"/></let> <!-- l'interrogacion practivament a acabat (se non è vero...) -->
+      <let><var n="conjoncion"/><lit v="non"/></let> <!-- la subordinada practicament a acabat (se non è vero...) -->
+      <let><var n="relatiu"/><lit v="non"/></let> <!-- la subordinada relativa practicament a acabat (se non è vero...) -->
     </def-macro>
 
   </section-def-macros>
@@ -443,6 +478,38 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" part="itg"/><lit-tag v="itg"/></equal>
+            </test>
+            <let><var n="interrogacion"/><lit v="oc"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" part="excl"/><lit-tag v="excl"/></equal>
+            </test>
+            <let><var n="interrogacion"/><lit v="oc"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" part="cnjsub"/><lit-tag v="cnjsub"/></equal>
+            </test>
+            <let><var n="conjoncion"/><lit v="oc"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" part="cnjadv"/><lit-tag v="cnjadv"/></equal>
+            </test>
+            <let><var n="conjoncion"/><lit v="oc"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" part="rel"/><lit-tag v="rel"/></equal>
+            </test>
+            <let><var n="relatiu"/><lit v="oc"/></let>
+          </when>
+        </choose>
       </action>
     </rule>
 
@@ -459,6 +526,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="oc"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -489,8 +559,8 @@
         <pattern-item n="SV"/>
       </pattern>
       <action>
-        <call-macro n="apondre_enonciatiu2"><with-param pos="2"/><with-param pos="1"/></call-macro>
-        <out>
+	  <call-macro n="apondre_enonciatiu2"><with-param pos="2"/><with-param pos="1"/></call-macro>
+	  <out>
           <chunk>
             <clip pos="1" part="lem"/>
             <clip pos="1" part="tags"/>
@@ -687,6 +757,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -730,6 +803,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -780,6 +856,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -830,6 +909,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -887,6 +969,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -944,6 +1029,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -977,6 +1065,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1027,6 +1118,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1084,6 +1178,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1141,6 +1238,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1205,6 +1305,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1281,6 +1384,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1333,6 +1439,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1390,6 +1499,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1466,6 +1578,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1542,6 +1657,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1613,6 +1731,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
@@ -1696,6 +1817,9 @@
           </chunk>
         </out>
         <let><var n="inici"/><lit-tag v="non"/></let>
+        <let><var n="interrogacion"/><lit v="non"/></let>
+        <let><var n="conjoncion"/><lit v="non"/></let>
+        <let><var n="relatiu"/><lit v="non"/></let>
       </action>
     </rule>
 
