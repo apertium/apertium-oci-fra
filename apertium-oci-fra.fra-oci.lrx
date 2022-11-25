@@ -2073,6 +2073,38 @@
       <match lemma="tamarinier" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="jours"><or>
+      <match lemma="lundi" tags="n.*"/>
+      <match lemma="mardi" tags="n.*"/>
+      <match lemma="mercredi" tags="n.*"/>
+      <match lemma="jeudi" tags="n.*"/>
+      <match lemma="vendredi" tags="n.*"/>
+      <match lemma="samedi" tags="n.*"/>
+      <match lemma="lundi" tags="n.*"/>
+    </or></def-seq>
+
+    <def-seq n="mois"><or>
+      <match lemma="janvier" tags="n.*"/>
+      <match lemma="février" tags="n.*"/>
+      <match lemma="mars" tags="n.*"/>
+      <match lemma="avril" tags="n.*"/>
+      <match lemma="mai" tags="n.*"/>
+      <match lemma="juin" tags="n.*"/>
+      <match lemma="juillet" tags="n.*"/>
+      <match lemma="août" tags="n.*"/>
+      <match lemma="septembre" tags="n.*"/>
+      <match lemma="octobre" tags="n.*"/>
+      <match lemma="novembre" tags="n.*"/>
+      <match lemma="décembre" tags="n.*"/>
+    </or></def-seq>
+
+    <def-seq n="saisons"><or>
+      <match lemma="printemps" tags="n.*"/>
+      <match lemma="été" tags="n.*"/>
+      <match lemma="automne" tags="n.*"/>
+      <match lemma="hiver" tags="n.*"/>
+    </or></def-seq>
+
     <def-seq n="navire"><or>
       <match lemma="navire" tags="n.*"/>
       <match lemma="bateau" tags="n.*"/>
@@ -3310,6 +3342,40 @@
 
 
 <!-- **************** ADJ **************** -->
+
+  <!-- dernier >> darrièr/darrèr, passat -->
+  <rule weight="0.8">
+    <match lemma="dernier" tags="adj.*" v="oci"><select lemma="darrièr"/></match>
+    <match lemma="dernier" tags="adj.*" v="oci@gascon"><select lemma="darrèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="jours"/>
+      <seq n="mois"/>
+      <seq n="saisons"/>
+      <match lemma="jour" tags="n.*"/>
+      <match lemma="journée" tags="n.*"/>
+      <match lemma="veille" tags="n.*"/>
+      <match lemma="veille" tags="n.*"/>
+      <match lemma="nuit" tags="n.*"/>
+      <match lemma="matin" tags="n.*"/>
+      <match lemma="matinée" tags="n.*"/>
+      <match lemma="après-midi" tags="n.*"/>
+      <match lemma="soir" tags="n.*"/>
+      <match lemma="soirée" tags="n.*"/>
+      <match lemma="week-end" tags="n.*"/>
+      <match lemma="weekend" tags="n.*"/>
+      <match lemma="semaine" tags="n.*"/>
+      <match lemma="mois" tags="n.*"/>
+      <match lemma="année" tags="n.*"/>
+      <match lemma="lustre" tags="n.*"/>
+      <match lemma="décennie" tags="n.*"/>
+      <match lemma="siècle" tags="n.*"/>
+      <match lemma="vacances" tags="n.*"/>
+      <match lemma="fois" tags="n.*"/>
+    </or>
+    <match lemma="dernier" tags="adj.*"><select lemma="passat"/></match>
+  </rule>
 
   <!-- pressant >> insistent, urgent -->
   <rule weight="0.8">
