@@ -4607,7 +4607,7 @@
     <match lemma="plongeur" tags="n.*"><select lemma="cabussaire"/></match>
   </rule>
 
-  <!-- but >> tòca/mira, ponch/punt -->
+  <!-- but >> tòca/mira, ponch/punt, gàbia, barras -->
   <rule weight="0.8" v="oci">
     <match lemma="but" tags="n.*" v="oci"><select lemma="tòca"/></match>
     <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="mira"/></match>
@@ -4668,6 +4668,67 @@
     </repeat>
     <match lemma="but" tags="n.*" v="oci"><select lemma="tòca"/></match>
     <match lemma="but" tags="n.*" v="oci@gascon"><select lemma="mira"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="poteau" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="but" tags="n.*"><select lemma="gàbia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="tir" tags="n.*"/>
+      <match lemma="lancement" tags="n.*"/>
+    </or>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="but" tags="n.*"><select lemma="gàbia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="garder" tags="vblex.*"/>
+      <match lemma="protéger" tags="vblex.*"/>
+      <match lemma="défendre" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.def.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <match lemma="but" tags="n.*"><select lemma="gàbia"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lancer" tags="vblex.*"/>
+      <match lemma="tirer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="sur" tags="pr"/>
+      <match lemma="dans" tags="pr"/>
+      <match lemma="vers" tags="pr"/>
+      <match lemma="au-dessus de" tags="pr"/>
+      <match lemma="en dessus de" tags="pr"/>
+      <match lemma="à côté de" tags="pr"/>
+    </or>
+    <or>
+      <match tags="det.def.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <match lemma="but" tags="n.*"><select lemma="gàbia"/></match>
   </rule>
 
   <!-- entretien >> entreten, etc. -->
@@ -8484,6 +8545,45 @@
   <!-- bidonner -> farlabicar, escarcanhar# de ríder -->
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="bidonner"/><with-param v="farlabicar"/><with-param v="escarcanhar# de ríder"/></macro>
 
+  <!-- buter -> trabucar/trebucar, obstinar, butar, tuar -->
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="buter"/><with-param v="trabucar"/><with-param v="obstinar"/></macro>
+  <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="buter"/><with-param v="trebucar"/><with-param v="obstinar"/></macro>
+  <rule weight="0.9">
+    <match lemma="buter" tags="vblex.*"><select lemma="butar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="sur" tags="pr"/>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="buter" tags="vblex.*"><select lemma="tuar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <match lemma="monsieur" tags="n.*"/>
+      <match lemma="madame" tags="n.*"/>
+      <match lemma="monseigneur" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="0.9">
+    <match lemma="buter" tags="vblex.*"><select lemma="tuar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+      <match tags="num"/>
+    </or>
+    <or>
+      <seq n="personne"/>
+    </or>
+  </rule>
+
   <!-- terrer -> cauçar/terrar, amagar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="terrer"/><with-param v="cauçar"/><with-param v="amagar"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="terrer"/><with-param v="terrar"/><with-param v="amagar"/></macro>
@@ -9129,6 +9229,19 @@
 
   <!-- gronder >> bronzir, cridar -->
   <macro n="verb_intrans_trans"><with-param v="gronder"/><with-param v="bronzir"/><with-param v="cridar"/></macro>
+  <rule weight="1.2">
+    <or>
+      <seq n="personne"/>
+      <seq n="parent"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match lemma="gronder" tags="vblex.*"><select lemma="cridar"/></match>
+  </rule>
 
   <!-- virer >> virar, botar# dehòra -->
   <macro n="verb_intrans_trans" v="oci"><with-param v="virer"/><with-param v="virar"/><with-param v="botar# defòra"/></macro>
