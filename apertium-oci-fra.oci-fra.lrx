@@ -15616,9 +15616,12 @@
   </rule>
   <rule weight="1.0">
     <or>
-        <match lemma="assubjectit"/>
-        <match lemma="astrenhut"/>
-        <match lemma="somés"/>
+        <match lemma="assubjectir"/>
+        <match lemma="astrénher"/>
+        <match lemma="sometre"/>
+        <match lemma="sométer"/>
+        <match lemma="sosméter"/>
+        <match lemma="sotméter"/>
         <match lemma="aumentar"/>
         <match lemma="establir"/>
         <match lemma="cobrar"/>
@@ -15658,14 +15661,75 @@
 
   <!-- tòca >> touche, but -->
   <rule weight="0.8">
+    <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="num"/>
+    <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="linha" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="rugbi" tags="n.*"/>
+      <match lemma="jogaire" tags="n.*"/>
+      <match lemma="jogador" tags="n.*"/>
+      <match lemma="jogaire# de rugbi" tags="n.*"/>
+      <match lemma="jogador# de rugbi" tags="n.*"/>
+      <match lemma="arrièr" tags="n.*"/>
+      <match lemma="arrèr" tags="n.*"/>
+      <match lemma="pilar" tags="n.*"/>
+      <match lemma="pielar" tags="n.*"/>
+      <match lemma="avant" tags="n.*"/>
+      <match lemma="bala" tags="n.*"/>
+      <match lemma="oval" tags="n.*"/>
+      <match lemma="oval" tags="adj.*"/>
+      <match lemma="ovau" tags="n.*"/>
+      <match lemma="ovau" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="rugbi" tags="n.*"/>
+      <match lemma="arrièr" tags="n.*"/>
+      <match lemma="arrèr" tags="n.*"/>
+      <match lemma="pilar" tags="n.*"/>
+      <match lemma="pielar" tags="n.*"/>
+      <match lemma="avant" tags="n.*"/>
+      <match lemma="bala" tags="n.*"/>
+      <match lemma="oval" tags="n.*"/>
+      <match lemma="oval" tags="adj.*"/>
+      <match lemma="ovau" tags="n.*"/>
+      <match lemma="ovau" tags="adj.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
     <match lemma="tòca" tags="n.*"><select lemma="touche"/></match>
   </rule>
 
+<!--
   <rule weight="1.0">
     <or>
       <match lemma="aver" tags="vblex.*"/>
       <match lemma="auer" tags="vblex.*"/>
     </or>
+    <repeat from="0" upto="2">
+        <match tags="adv"/>
+    </repeat>
     <or>
       <match lemma="per" tags="pr"/>
       <match lemma="coma" tags="cnjadv"/>
@@ -15696,6 +15760,7 @@
       <match lemma="aute" tags="adj.*"/>
       <match lemma="autre" tags="adj.*"/>
       <match lemma="doble" tags="adj.*"/>
+       <seq n="ordinals"/>
     </or>
     <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
   </rule>
@@ -15738,7 +15803,7 @@
   </rule>
 
   <rule weight="1.0">
-    <match lemma="lo.*" tags="det.*"/>
+    <match lemma="lo" tags="det.*"/>
     <match lemma="tòca" tags="n.*"><select lemma="but"/></match>
     <repeat from="0" upto="3">
       <or>
@@ -15756,6 +15821,7 @@
     </repeat>
     <match lemma="de" tags="pr"/>
   </rule>
+-->
 
   <!-- laca >> laque, lac -->
   <rule weight="0.8">
