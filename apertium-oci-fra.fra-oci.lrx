@@ -4416,6 +4416,46 @@
     <match tags="det.*"/>
     <match lemma="course" tags="n.f.pl"><select lemma="crompa"/></match>
   </rule>
+  <rule weight="1.0">
+    <match lemma="course" tags="n.f.pl"><select lemma="crompa"/></match>
+    <match lemma="ménager" tags="adj.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="course" tags="n.f.pl"><select lemma="crompa"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="marché" tags="n.*"/>
+      <match lemma="supermarché" tags="n.*"/>
+      <match lemma="supérette" tags="n.*"/>
+      <match lemma="hypermarché" tags="n.*"/>
+      <match lemma="épicerie" tags="n.*"/>
+      <match lemma="Auchan" tags="np.*"/>
+      <match lemma="Carrefour" tags="np.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="marché" tags="n.*"/>
+      <match lemma="supermarché" tags="n.*"/>
+      <match lemma="supérette" tags="n.*"/>
+      <match lemma="hypermarché" tags="n.*"/>
+      <match lemma="épicerie" tags="n.*"/>
+      <match lemma="Auchan" tags="np.*"/>
+      <match lemma="Carrefour" tags="np.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="course" tags="n.f.pl"><select lemma="crompa"/></match>
+  </rule>
 
   <!-- apanage >> apanatge, prejudici -->
   <rule weight="0.8">
