@@ -20901,7 +20901,17 @@
           <with-param pos="1"/>
         </call-macro>
         <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
-        <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <not><equal><clip pos="1" side="tl" part="lem"/><lit v="ap. J.-C."/></equal></not>
+                <not><equal><clip pos="1" side="tl" part="lem"/><lit v="av. J.-C."/></equal></not>
+              </and>
+            </test>
+            <modify-case><clip pos="1" side="tl" part="lem"/><lit v="aa"/></modify-case>
+          </when>
+        </choose>
         <out>
           <chunk namefrom="lemma" case="caseFirstWord">
             <tags>
