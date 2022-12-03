@@ -1056,8 +1056,11 @@
       <cat-item lemma="sénher" tags="n.*"/>
       <cat-item lemma="monsen" tags="n.*"/>
       <cat-item lemma="monsur" tags="n.*"/>
-      <cat-item lemma="mossenh" tags="n.*"/>
       <cat-item lemma="mossur" tags="n.*"/>
+      <cat-item lemma="mossenh" tags="n.*"/>
+      <cat-item lemma="dauna" tags="n.*"/>
+      <cat-item lemma="dama" tags="n.*"/>
+      <cat-item lemma="dòna" tags="n.*"/>
     </def-cat>
 
     <def-cat n="nom_ora">
@@ -21885,7 +21888,7 @@
         </call-macro>
         <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
         <out>
-          <chunk name="n" case="caseFirstWord">
+          <chunk name="monsieur" case="caseFirstWord">
             <tags>
               <tag><lit-tag v="SN"/></tag>
               <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -21907,6 +21910,104 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: sénher NOM > monsieur le NOM">
+      <pattern>
+        <pattern-item n="nom_senher"/>
+        <pattern-item n="nom"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord1">
+          <with-param pos="1"/>
+        </call-macro>
+        <choose>
+          <when>
+            <test>
+              <or> <!-- iniciala -->
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="A"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="B"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="C"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="D"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="E"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="F"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="G"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="H"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="I"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="J"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="K"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="L"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="M"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="N"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="O"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="P"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="Q"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="R"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="S"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="T"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="U"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="V"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="W"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="X"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="Y"/></equal>
+                <equal><clip pos="2" side="sl" part="lem"/><lit v="Z"/></equal>
+			  </or>
+            </test>
+            <out>
+              <chunk name="monsieur" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </when>
+          <otherwise>
+            <out>
+              <chunk name="monsieur" case="caseFirstWord">
+                <tags>
+                  <tag><lit-tag v="SN"/></tag>
+                  <tag><clip pos="1" side="tl" part="gen"/></tag>
+                  <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                </tags>
+                <lu>
+                  <clip pos="1" side="tl" part="lemh"/>
+                  <clip pos="1" side="tl" part="tags"/>
+                  <clip pos="1" side="tl" part="lemq"/>
+                </lu>
+                <b pos="1"/>
+                <lu>
+                  <lit v="le"/>
+                  <lit-tag v="det.def"/>
+                  <clip pos="1" side="tl" part="gen"/>
+                  <clip pos="1" side="tl" part="nbr"/>
+                </lu>
+                <b/>
+                <lu>
+                  <clip pos="2" side="tl" part="lemh"/>
+                  <clip pos="2" side="tl" part="tags"/>
+                  <clip pos="2" side="tl" part="lemq"/>
+                </lu>
+              </chunk>
+            </out>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: lo sénher NOM > monsieur le NOM">
       <pattern>
         <pattern-item n="detdef"/>
@@ -21917,8 +22018,9 @@
         <call-macro n="firstWord">
           <with-param pos="1"/>
         </call-macro>
-        <call-macro n="f_concord1">
+        <call-macro n="f_concord2">
           <with-param pos="2"/>
+          <with-param pos="1"/>
         </call-macro>
         <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
         <choose>
@@ -21954,7 +22056,7 @@
 			  </or>
             </test>
             <out>
-              <chunk name="n" case="caseFirstWord">
+              <chunk name="monsieur" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>
@@ -21976,7 +22078,7 @@
           </when>
           <otherwise>
             <out>
-              <chunk name="n" case="caseFirstWord">
+              <chunk name="monsieur" case="caseFirstWord">
                 <tags>
                   <tag><lit-tag v="SN"/></tag>
                   <tag><clip pos="2" side="tl" part="gen"/></tag>

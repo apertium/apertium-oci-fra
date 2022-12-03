@@ -2964,6 +2964,35 @@
   </def-macros>
 
   <def-seqs>
+    <def-seq n="letra_maj"><or>
+      <match lemma="A"/>
+      <match lemma="B"/>
+      <match lemma="C"/>
+      <match lemma="D"/>
+      <match lemma="E"/>
+      <match lemma="F"/>
+      <match lemma="G"/>
+      <match lemma="H"/>
+      <match lemma="I"/>
+      <match lemma="J"/>
+      <match lemma="K"/>
+      <match lemma="L"/>
+      <match lemma="M"/>
+      <match lemma="N"/>
+      <match lemma="O"/>
+      <match lemma="P"/>
+      <match lemma="Q"/>
+      <match lemma="R"/>
+      <match lemma="S"/>
+      <match lemma="T"/>
+      <match lemma="U"/>
+      <match lemma="V"/>
+      <match lemma="W"/>
+      <match lemma="X"/>
+      <match lemma="Y"/>
+      <match lemma="Z"/>
+    </or></def-seq>
+
 	<def-seq n="temps"><or>
 	  <match lemma="segonda" tags="n.*"/>
 	  <match lemma="minuta" tags="n.*"/>
@@ -10519,9 +10548,11 @@
       <match tags="det.def.*"/>
     </repeat>
     <or>
-      <match lemma="mossu" tags="n.*"/>
+      <match lemma="mossur" tags="n.*"/>
       <match lemma="monsur" tags="n.*"/>
       <match lemma="sénher" tags="n.*"/>
+      <match lemma="monsen" tags="n.*"/>
+      <match lemma="mossenh" tags="n.*"/>
       <match lemma="dauna" tags="n.*"/>
       <match lemma="dama" tags="n.*"/>
       <match lemma="dòna" tags="n.*"/>
@@ -13372,6 +13403,75 @@
       </or>
     </repeat>
     <match lemma="popa" tags="n.*"><select lemma="poupe"/></match>
+  </rule>
+
+  <!-- dauna >> dame, madame -->
+  <rule weight="0.8">
+    <match lemma="dauna" tags="n.*"><select lemma="dame"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dauna" tags="n.*"><select lemma="madame"/></match>
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <seq n="letra_maj"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dauna" tags="n.*"><select lemma="madame"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personas"/>
+    </or>
+  </rule>
+
+  <!-- dama >> dame, madame -->
+  <rule weight="0.8">
+    <match lemma="dama" tags="n.*"><select lemma="dame"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dama" tags="n.*"><select lemma="madame"/></match>
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <seq n="letra_maj"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dama" tags="n.*"><select lemma="madame"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personas"/>
+    </or>
+  </rule>
+
+  <!-- dòna >> dame, madame -->
+  <rule weight="0.8">
+    <match lemma="dòna" tags="n.*"><select lemma="dame"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dòna" tags="n.*"><select lemma="madame"/></match>
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+      <seq n="letra_maj"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dòna" tags="n.*"><select lemma="madame"/></match>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personas"/>
+    </or>
   </rule>
 
   <!-- crompa >> achat, course -->
