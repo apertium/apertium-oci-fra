@@ -16,6 +16,8 @@
           <match lemma="Borbon" tags="np.cog.*"/>
           <match lemma="Borbon-Parma" tags="np.cog.*"/>
           <match lemma="Borbon-Sicílias" tags="np.cog.*"/>
+          <match lemma="Medicis" tags="np.cog.*"/>
+          <match lemma="Medici" tags="np.cog.*"/>
           <match tags="np.loc"/>
         </or>
       </rule>
@@ -14007,6 +14009,12 @@
       <match lemma="tà" tags="pr"/>
       <match lemma="entà" tags="pr"/>
       <match lemma="enta" tags="pr"/>
+      <match lemma="delà" tags="pr"/>
+      <match lemma="delà de" tags="pr"/>
+      <match lemma="au delà de" tags="pr"/>
+      <match lemma="enlà de" tags="pr"/>
+      <match lemma="ençà de" tags="pr"/>
+      <match lemma="en deçà de" tags="pr"/>
     </or>
     <repeat from="0" upto="3">
       <or>
@@ -20436,6 +20444,13 @@
   <!-- sonar >> sonner, appeler -->
   <macro n="verb_nopron_pron"><with-param v="sonar"/><with-param v="sonner"/><with-param v="appeler"/></macro>
   <rule weight="1.4">
+    <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="«" tags="lpar"/>
+  </rule>
+  <rule weight="1.4">
     <match lemma="lo" tags="prn.pro.*"/>
     <match lemma="sonar" tags="vblex.*"><select lemma="appeler"/></match>
     <repeat from="0" upto="2">
@@ -20496,7 +20511,7 @@
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
-    <repeat from="0" upto="2">
+    <repeat from="0" upto="1">
       <match tags="det.def.*"/>
     </repeat>
     <or>
