@@ -3475,6 +3475,8 @@
        <match lemma="beton" tags="n.*.sg"/>
        <match lemma="pèira" tags="n.*.sg"/>
        <match lemma="marme" tags="n.*.sg"/>
+       <match lemma="marbre" tags="n.*.sg"/>
+       <match lemma="marbe" tags="n.*.sg"/>
        <match lemma="lausa" tags="n.*.sg"/>
        <match lemma="plastre" tags="n.*.sg"/>
        <match lemma="gip" tags="n.*.sg"/>
@@ -5964,6 +5966,16 @@
       <match lemma="rèrhilh" tags="n.*"/>
       <match lemma="rèire-felen" tags="n.*"/>
       <match lemma="rèirefelen" tags="n.*"/>
+      <match lemma="arrèr-arrèrhilh" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="reiregrand" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="regranpair" tags="n.*"/>
+      <match lemma="arrèrmairana" tags="n.*"/>
+      <match lemma="regranmair" tags="n.*"/>
 
       <match lemma="amic" tags="n.*"/>
       <match lemma="enemic" tags="n.*"/>
@@ -9486,6 +9498,19 @@
   </rule>
   <rule weight="1.0">
     <or>
+      <match lemma="prova" tags="n.*"/>
+      <match lemma="polvera" tags="n.*"/>
+      <match lemma="prova" tags="n.*"/>
+      <match lemma="porla" tags="n.*"/>
+      <match lemma="pov" tags="n.*"/>
+      <match lemma="podra" tags="n.*"/>
+      <match lemma="polsa" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"><select lemma="à"/></match>
+    <match lemma="canon" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <or>
       <match lemma="maquina" tags="n.*"/>
       <match lemma="machina" tags="n.*"/>
       <match lemma="pompa" tags="n.*"/>
@@ -11851,9 +11876,20 @@
     <match lemma="vertadèr" tags="adj.*" v="oci@gascon"><select lemma="vrai"/></match>
   </rule>
 
-  <!-- màger >> plus grand, majeur -->
+  <!-- màger >> plus grand, majeur, important -->
   <rule weight="0.8">
     <match lemma="màger" tags="adj.*"><select lemma="majeur"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="preadv"/>
+    <match lemma="màger" tags="adj.*"><select lemma="important"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.*"/>
+    <match tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="màger" tags="adj.*.pl"><select lemma="important"/></match>
   </rule>
 
   <!-- nòu >> nouveau, neuf -->
@@ -15996,7 +16032,7 @@
     <match lemma="det.pos.*"/>
     <match lemma="grand" tags="n.*"><select lemma="grand-père"/></match>
   </rule>
-  <rule weight="1.2">
+  <rule weight="1.4">
     <match lemma="det.pos.*"/>
     <match lemma="grand" tags="n.*"><select lemma="grand"/></match>
     <or>
@@ -16005,6 +16041,188 @@
       <match lemma="mair" tags="n.*"/>
       <match lemma="maire" tags="n.*"/>
     </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="grand" tags="n.*"><select lemma="grand-père"/></match>
+    <repeat from="1" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="paire" tags="n.*"/>
+      <match lemma="pair" tags="n.*"/>
+      <match lemma="maire" tags="n.*"/>
+      <match lemma="mair" tags="n.*"/>
+      <match lemma="parent" tags="n.*"/>
+      <match lemma="fraire" tags="n.*"/>
+      <match lemma="hrair" tags="n.*"/>
+      <match lemma="sòrre" tags="n.*"/>
+      <match lemma="sòr" tags="n.*"/>
+      <match lemma="cosin" tags="n.*"/>
+      <match lemma="oncle" tags="n.*"/>
+      <match lemma="tanta" tags="n.*"/>
+      <match lemma="nebot" tags="n.*"/>
+      <match lemma="grand" tags="n.*"/>
+      <match lemma="papà" tags="n.*"/>
+      <match lemma="papin" tags="n.*"/>
+      <match lemma="pepin" tags="n.*"/>
+      <match lemma="pairbon" tags="n.*"/>
+      <match lemma="mamà" tags="n.*"/>
+      <match lemma="pairan" tags="n.*"/>
+      <match lemma="pairin" tags="n.*"/>
+      <match lemma="papeta" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="menina" tags="n.*"/>
+      <match lemma="mairbona" tags="n.*"/>
+      <match lemma="mamet" tags="n.*"/>
+      <match lemma="mairina" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="arrèrmairana" tags="n.*"/>
+      <match lemma="remenina" tags="n.*"/>
+      <match lemma="maircheta" tags="n.*"/>
+      <match lemma="tonton" tags="n.*"/>
+      <match lemma="onco" tags="n.*"/>
+      <match lemma="oncon" tags="n.*"/>
+      <match lemma="granonco" tags="n.*"/>
+      <match lemma="arrèroncle" tags="n.*"/>
+      <match lemma="arrèrtanta" tags="n.*"/>
+      <match lemma="tatina" tags="n.*"/>
+      <match lemma="tantina" tags="n.*"/>
+      <match lemma="toton" tags="n.*"/>
+      <match lemma="monone" tags="n.*"/>
+      <match lemma="cocon" tags="n.*"/>
+      <match lemma="gra" tags="n.*"/>
+      <match lemma="grau" tags="n.*"/>
+      <match lemma="grad" tags="n.*"/>
+      <match lemma="papet" tags="n.*"/>
+      <match lemma="papeta" tags="n.*"/>
+      <match lemma="pepin" tags="n.*"/>
+      <match lemma="mamet" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="menina" tags="n.*"/>
+      <match lemma="mairegrand" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="felen" tags="n.*"/>
+      <match lemma="rèire-filh" tags="n.*"/>
+      <match lemma="rèirefilh" tags="n.*"/>
+      <match lemma="rèrhilh" tags="n.*"/>
+      <match lemma="rèire-felen" tags="n.*"/>
+      <match lemma="rèirefelen" tags="n.*"/>
+      <match lemma="arrèr-arrèrhilh" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="reiregrand" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="regranpair" tags="n.*"/>
+      <match lemma="arrèrmairana" tags="n.*"/>
+      <match lemma="regranmair" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="paire" tags="n.*"/>
+      <match lemma="pair" tags="n.*"/>
+      <match lemma="maire" tags="n.*"/>
+      <match lemma="mair" tags="n.*"/>
+      <match lemma="parent" tags="n.*"/>
+      <match lemma="fraire" tags="n.*"/>
+      <match lemma="hrair" tags="n.*"/>
+      <match lemma="sòrre" tags="n.*"/>
+      <match lemma="sòr" tags="n.*"/>
+      <match lemma="cosin" tags="n.*"/>
+      <match lemma="oncle" tags="n.*"/>
+      <match lemma="tanta" tags="n.*"/>
+      <match lemma="nebot" tags="n.*"/>
+      <match lemma="grand" tags="n.*"/>
+      <match lemma="papà" tags="n.*"/>
+      <match lemma="papin" tags="n.*"/>
+      <match lemma="pepin" tags="n.*"/>
+      <match lemma="pairbon" tags="n.*"/>
+      <match lemma="mamà" tags="n.*"/>
+      <match lemma="pairan" tags="n.*"/>
+      <match lemma="pairin" tags="n.*"/>
+      <match lemma="papeta" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="menina" tags="n.*"/>
+      <match lemma="mairbona" tags="n.*"/>
+      <match lemma="mamet" tags="n.*"/>
+      <match lemma="mairina" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="arrèrmairana" tags="n.*"/>
+      <match lemma="remenina" tags="n.*"/>
+      <match lemma="maircheta" tags="n.*"/>
+      <match lemma="tonton" tags="n.*"/>
+      <match lemma="onco" tags="n.*"/>
+      <match lemma="oncon" tags="n.*"/>
+      <match lemma="granonco" tags="n.*"/>
+      <match lemma="arrèroncle" tags="n.*"/>
+      <match lemma="arrèrtanta" tags="n.*"/>
+      <match lemma="tatina" tags="n.*"/>
+      <match lemma="tantina" tags="n.*"/>
+      <match lemma="toton" tags="n.*"/>
+      <match lemma="monone" tags="n.*"/>
+      <match lemma="cocon" tags="n.*"/>
+      <match lemma="gra" tags="n.*"/>
+      <match lemma="grau" tags="n.*"/>
+      <match lemma="grad" tags="n.*"/>
+      <match lemma="papet" tags="n.*"/>
+      <match lemma="papeta" tags="n.*"/>
+      <match lemma="pepin" tags="n.*"/>
+      <match lemma="mamet" tags="n.*"/>
+      <match lemma="mameta" tags="n.*"/>
+      <match lemma="menina" tags="n.*"/>
+      <match lemma="mairegrand" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="felen" tags="n.*"/>
+      <match lemma="rèire-filh" tags="n.*"/>
+      <match lemma="rèirefilh" tags="n.*"/>
+      <match lemma="rèrhilh" tags="n.*"/>
+      <match lemma="rèire-felen" tags="n.*"/>
+      <match lemma="rèirefelen" tags="n.*"/>
+      <match lemma="arrèr-arrèrhilh" tags="n.*"/>
+      <match lemma="rèiregrand" tags="n.*"/>
+      <match lemma="reiregrand" tags="n.*"/>
+      <match lemma="rèirepepin" tags="n.*"/>
+      <match lemma="rèiremenina" tags="n.*"/>
+      <match lemma="arrèrpairan" tags="n.*"/>
+      <match lemma="repepin" tags="n.*"/>
+      <match lemma="regranpair" tags="n.*"/>
+      <match lemma="arrèrmairana" tags="n.*"/>
+      <match lemma="regranmair" tags="n.*"/>
+    </or>
+    <repeat from="1" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="grand" tags="n.*"><select lemma="grand-père"/></match>
   </rule>
 
   <!-- galant >> galant/amant -->
