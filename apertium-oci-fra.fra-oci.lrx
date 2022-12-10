@@ -3777,6 +3777,111 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- glace >> glaça, glaç, miralh, veire/vitra -->
+  <rule weight="0.8">
+    <match lemma="glace" tags="n.*"><select lemma="glaça"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="de" tags="pr"/>
+    <match lemma="glace" tags="n.*"><select lemma="glaç"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="verre" tags="n.*"/>
+      <match lemma="coupe" tags="n.*"/>
+      <match lemma="table" tags="n.*"/>
+      <match lemma="mur" tags="n.*"/>
+      <match lemma="surface" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="glace" tags="n.*" v="oci"><select lemma="veire"/></match>
+    <match lemma="glace" tags="n.*" v="oci@gascon"><select lemma="vitra"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="dans" tags="pr"/>
+      <match lemma="devant" tags="pr"/>
+    </or>
+    <match tags="det.*"/>
+    <match lemma="glace" tags="n.*"><select lemma="miralh"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="regarder" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match tags="det.*"/>
+    <match lemma="glace" tags="n.*"><select lemma="miralh"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="glace" tags="n.*"><select lemma="miralh"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="armoire" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="armoire" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="glace" tags="n.*"><select lemma="miralh"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="glace" tags="n.*" v="oci"><select lemma="veire"/></match>
+    <match lemma="glace" tags="n.*" v="oci@gascon"><select lemma="vitra"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="voiture" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobile" tags="n.*"/>
+      <match lemma="montre" tags="n.*"/>
+      <match lemma="saphir" tags="n.*"/>
+      <match lemma="céramique" tags="n.*"/>
+      <match lemma="reflet" tags="n.*"/>
+      <match lemma="casser" tags="vblex.*"/>
+      <match lemma="briser" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="voiture" tags="n.*"/>
+      <match lemma="auto" tags="n.*"/>
+      <match lemma="automobile" tags="n.*"/>
+      <match lemma="montre" tags="n.*"/>
+      <match lemma="saphir" tags="n.*"/>
+      <match lemma="céramique" tags="n.*"/>
+      <match lemma="reflet" tags="n.*"/>
+      <match lemma="casser" tags="vblex.*"/>
+      <match lemma="briser" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="glace" tags="n.*" v="oci"><select lemma="veire"/></match>
+    <match lemma="glace" tags="n.*" v="oci@gascon"><select lemma="vitra"/></match>
+  </rule>
+
   <!-- parquet >> postam/taulat, ministèri public -->
   <rule weight="0.8">
     <match lemma="parquet" tags="n.*" v="oci"><select lemma="postam"/></match>
@@ -8004,6 +8109,9 @@
     </repeat>
     <match lemma="embuscade" tags="n.*"/>
   </rule>
+
+  <!-- arc-bouter -> ancolar, arquetar -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="arc-bouter"/><with-param v="ancolar"/><with-param v="arquetar"/></macro>
 
   <!-- creuser -> cavar, aprigondir/apregondir -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="creuser"/><with-param v="cavar"/><with-param v="aprigondir"/></macro>

@@ -4805,6 +4805,8 @@
 	   <match lemma="desobedir" tags="vblex.*"/>
 	   <match lemma="desobeïr" tags="vblex.*"/>
 	   <match lemma="desobesir" tags="vblex.*"/>
+	   <match lemma="luchar" tags="vblex.*"/>
+	   <match lemma="lutar" tags="vblex.*"/>
 	   <match lemma="gemir" tags="vblex.*"/>
 	   <match lemma="dormir" tags="vblex.*"/>
 	   <match lemma="dromir" tags="vblex.*"/>
@@ -13725,6 +13727,34 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- glacet >> glaçon, glace-->
+  <rule weight="0.8">
+    <match lemma="glacet" tags="n.*"><select lemma="glaçon"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="manjar" tags="vblex.*"/>
+      <match lemma="minjar" tags="vblex.*"/>
+      <match lemma="galapar" tags="vblex.*"/>
+      <match lemma="galavardejar" tags="vblex.*"/>
+      <match lemma="glotonejar" tags="vblex.*"/>
+      <match lemma="lecar" tags="vblex.*"/>
+      <match lemma="lepar" tags="vblex.*"/>
+      <match lemma="lafrar" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match lemma="de" tags="pr" v="oci"/>
+      </or>
+    </repeat>
+    <match lemma="glacet" tags="n.*"><select lemma="glace"/></match>
+  </rule>
 
   <!-- jaç >> couche, gisement-->
   <rule weight="0.8">
