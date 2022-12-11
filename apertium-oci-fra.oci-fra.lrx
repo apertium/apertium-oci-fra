@@ -4717,6 +4717,10 @@
 
 	<def-seq n="verbs_intrans"><or>
 	   <match lemma="agradar" tags="vblex.*"/>
+	   <match lemma="plaire" tags="vblex.*"/>
+	   <match lemma="plàser" tags="vblex.*"/>
+	   <match lemma="shautar" tags="vblex.*"/>
+	   <match lemma="conviéner" tags="vblex.*"/>
 	   <match lemma="anar" tags="vblex.*"/>
 	   <match lemma="enanar" tags="vblex.*"/>
 	   <match lemma="har# enlà" tags="vblex.*"/>
@@ -4976,6 +4980,33 @@
 	   <match lemma="prene# garda" tags="vblex.*"/>
 	   <match lemma="préner# garda" tags="vblex.*"/>
 	   <match lemma="petar# de paur" tags="vblex.*"/>
+	   <match lemma="har# dòu" tags="vblex.*"/>
+	   <match lemma="har# degrau" tags="vblex.*"/>
+	   <match lemma="har# gòi" tags="vblex.*"/>
+	   <match lemma="har# gai" tags="vblex.*"/>
+	   <match lemma="har# part" tags="vblex.*"/>
+	   <match lemma="har# lo morre" tags="vblex.*"/>
+	   <match lemma="har# lo mus" tags="vblex.*"/>
+	   <match lemma="har# lo pòt" tags="vblex.*"/>
+	   <match lemma="har# lo poton" tags="vblex.*"/>
+	   <match lemma="har# lo dehens" tags="vblex.*"/>
+	   <match lemma="har# lo recapte" tags="vblex.*"/>
+	   <match lemma="har# lo netei" tags="vblex.*"/>
+	   <match lemma="har# l'estruç" tags="vblex.*"/>
+	   <match lemma="hèr# dòu" tags="vblex.*"/>
+	   <match lemma="hèr# degrau" tags="vblex.*"/>
+	   <match lemma="hèr# gòi" tags="vblex.*"/>
+	   <match lemma="hèr# gai" tags="vblex.*"/>
+	   <match lemma="hèr# part" tags="vblex.*"/>
+	   <match lemma="hèr# lo morre" tags="vblex.*"/>
+	   <match lemma="hèr# lo mus" tags="vblex.*"/>
+	   <match lemma="hèr# lo pòt" tags="vblex.*"/>
+	   <match lemma="hèr# lo poton" tags="vblex.*"/>
+	   <match lemma="hèr# lo dehens" tags="vblex.*"/>
+	   <match lemma="hèr# lo recapte" tags="vblex.*"/>
+	   <match lemma="hèr# lo netei" tags="vblex.*"/>
+	   <match lemma="hèr# l'estruç" tags="vblex.*"/>
+	   <match lemma="far# partida" tags="vblex.*"/>
 	   <match lemma="far# atencion" tags="vblex.*"/>
 	   <match lemma="har# atencion" tags="vblex.*"/>
 	   <match lemma="hèr# atencion" tags="vblex.*"/>
@@ -10353,6 +10384,9 @@
       <match lemma="demei" tags="n.*"/>
       <match lemma="sobrada" tags="n.*"/>
 
+      <match lemma="mejan" tags="n.*"/>
+      <match lemma="mèdi" tags="n.*"/>
+
       <match lemma="cent" tags="num.*"/>
       <match lemma="cent" tags="n.*"/>
       <match lemma="mil" tags="num.*"/>
@@ -13727,6 +13761,20 @@
 
 
 <!-- **************** N **************** -->
+
+  <!-- escalfament >> échauffement, réchauffement-->
+  <rule weight="0.8">
+    <match lemma="escalfament" tags="n.*"><select lemma="échauffement"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="escalfament" tags="n.*"><select lemma="réchauffement"/></match>
+    <or>
+      <match lemma="mondial" tags="adj.*"/>
+      <match lemma="global" tags="adj.*"/>
+      <match lemma="planetari" tags="adj.*"/>
+      <match lemma="climatic" tags="adj.*"/>
+    </or>
+  </rule>
 
   <!-- glacet >> glaçon, glace-->
   <rule weight="0.8">
