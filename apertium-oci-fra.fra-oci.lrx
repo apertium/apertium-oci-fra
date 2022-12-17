@@ -1251,6 +1251,30 @@
       <match lemma="il" tags="prn.tn.p3.f.pl"/>
     </or></def-seq>
 
+	<def-seq n="prn_ref"><or>
+	  <match lemma="me" tags="prn.pro.*"/>
+	  <match lemma="te" tags="prn.pro.*"/>
+	  <match lemma="se" tags="prn.pro.*"/>
+	  <match lemma="nous" tags="prn.pro.*"/>
+	  <match lemma="vous" tags="prn.pro.*"/>
+	</or></def-seq>
+
+	<def-seq n="prn_cd"><or>
+	  <match lemma="me" tags="prn.pro.*"/>
+	  <match lemma="te" tags="prn.pro.*"/>
+	  <match lemma="le" tags="prn.pro.*"/>
+	  <match lemma="nous" tags="prn.pro.*"/>
+	  <match lemma="vous" tags="prn.pro.*"/>
+	</or></def-seq>
+
+	<def-seq n="prn_ci"><or>
+	  <match lemma="me" tags="prn.pro.*"/>
+	  <match lemma="te" tags="prn.pro.*"/>
+	  <match lemma="lui" tags="prn.pro.*"/>
+	  <match lemma="nous" tags="prn.pro.*"/>
+	  <match lemma="vous" tags="prn.pro.*"/>
+	</or></def-seq>
+
     <def-seq n="personne"><or>
       <match lemma="personne" tags="n.*"/>
       <match lemma="gens" tags="n.m.pl"/>
@@ -3777,6 +3801,107 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- détournement >> desviacion, malversacion -->
+  <rule weight="0.8">
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="desviacion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="malversacion"/></match>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="desviacion"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pour" tags="pr"/>
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="malversacion"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="malversacion"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="fraude" tags="n.*"/>
+      <match lemma="corruption" tags="n.*"/>
+      <match lemma="fonds" tags="n.*"/>
+      <match lemma="capital" tags="n.*"/>
+      <match lemma="aide" tags="n.*"/>
+      <match lemma="richesse" tags="n.*"/>
+      <match lemma="ressource" tags="n.*"/>
+      <match lemma="juge" tags="n.*"/>
+      <match lemma="jugement" tags="n.*"/>
+      <match lemma="tribunal" tags="n.*"/>
+      <match lemma="cassation" tags="n.*"/>
+      <match lemma="police" tags="n.*"/>
+      <match lemma="coupable" tags="n.*"/>
+      <match lemma="million" tags="n.*"/>
+      <match lemma="milliard" tags="n.*"/>
+      <match lemma="député" tags="n.*"/>
+      <match lemma="maire" tags="n.*"/>
+      <match lemma="président" tags="n.*"/>
+      <match lemma="secretaire" tags="n.*"/>
+      <match lemma="ambassadeur" tags="n.*"/>
+      <match lemma="accuser" tags="vblex.*"/>
+      <match lemma="dénoncer" tags="vblex.*"/>
+      <match lemma="arrêter" tags="vblex.*"/>
+      <match lemma="incriminer" tags="vblex.*"/>
+      <match lemma="inculper" tags="vblex.*"/>
+      <match lemma="reconnaître" tags="vblex.*"/>
+      <match lemma="avouer" tags="vblex.*"/>
+      <match lemma="admettre" tags="vblex.*"/>
+      <match lemma="rechercher" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="fraude" tags="n.*"/>
+      <match lemma="corruption" tags="n.*"/>
+      <match lemma="fonds" tags="n.*"/>
+      <match lemma="capital" tags="n.*"/>
+      <match lemma="aide" tags="n.*"/>
+      <match lemma="richesse" tags="n.*"/>
+      <match lemma="ressource" tags="n.*"/>
+      <match lemma="juge" tags="n.*"/>
+      <match lemma="jugement" tags="n.*"/>
+      <match lemma="tribunal" tags="n.*"/>
+      <match lemma="cassation" tags="n.*"/>
+      <match lemma="police" tags="n.*"/>
+      <match lemma="coupable" tags="n.*"/>
+      <match lemma="million" tags="n.*"/>
+      <match lemma="milliard" tags="n.*"/>
+      <match lemma="député" tags="n.*"/>
+      <match lemma="maire" tags="n.*"/>
+      <match lemma="président" tags="n.*"/>
+      <match lemma="secretaire" tags="n.*"/>
+      <match lemma="ambassadeur" tags="n.*"/>
+      <match lemma="accuser" tags="vblex.*"/>
+      <match lemma="dénoncer" tags="vblex.*"/>
+      <match lemma="arrêter" tags="vblex.*"/>
+      <match lemma="incriminer" tags="vblex.*"/>
+      <match lemma="inculper" tags="vblex.*"/>
+      <match lemma="reconnaître" tags="vblex.*"/>
+      <match lemma="avouer" tags="vblex.*"/>
+      <match lemma="admettre" tags="vblex.*"/>
+      <match lemma="rechercher" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="détournement" tags="n.*" v="oci"><select lemma="malversacion"/></match>
+  </rule>
+
   <!-- glace >> glaça, glaç, miralh, veire/vitra -->
   <rule weight="0.8">
     <match lemma="glace" tags="n.*"><select lemma="glaça"/></match>
@@ -4304,6 +4429,7 @@
       <or>
         <match tags="adv"/>
         <match tags="det.*"/>
+        <match tags="num.*"/>
         <match tags="adj.*"/>
         <match lemma="de" tags="pr"/>
       </or>
@@ -7641,6 +7767,33 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- épingler >> espillar/esplingar, prene/gahar -->
+  <rule weight="0.8">
+    <match lemma="épingler" tags="vblex.*" v="oci"><select lemma="espillar"/></match>
+    <match lemma="épingler" tags="vblex.*" v="oci@gascon"><select lemma="esplingar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="épingler" tags="vblex.*" v="oci"><select lemma="prene"/></match>
+    <match lemma="épingler" tags="vblex.*" v="oci@gascon"><select lemma="gahar"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="personne"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <seq n="prn_cd"/>
+    <match lemma="épingler" tags="vblex.*" v="oci"><select lemma="prene"/></match>
+    <match lemma="épingler" tags="vblex.*" v="oci@gascon"><select lemma="gahar"/></match>
+  </rule>
 
   <!-- fléchir >> plegar, flechir -->
   <rule weight="0.8">
