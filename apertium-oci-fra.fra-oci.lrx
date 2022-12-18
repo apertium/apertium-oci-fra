@@ -3801,6 +3801,168 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- campagne >> campanha, campèstre -->
+  <rule weight="0.8">
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="à" tags="pr"/>
+      <match lemma="vers" tags="pr"/>
+    </or>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campèstre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+    <or>
+      <match tags="np.al.*"/>
+      <match tags="*" case="Aa"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="aller" tags="vblex.*"/>
+    <match lemma="à" tags="pr"><select lemma="per"/></match>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"/>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match lemma="aller" tags="vblex.*"/>
+    <match lemma="à" tags="pr"><select lemma="a"/></match>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="participer" tags="vblex.*"/>
+      <match lemma="joindre" tags="vblex.*"/>
+      <match lemma="adhérer" tags="vblex.*"/>
+      <match lemma="inscrire" tags="vblex.*"/>
+      <match lemma="allier" tags="vblex.*"/>
+      <match lemma="rallier" tags="vblex.*"/>
+      <match lemma="participer" tags="vblex.*"/>
+      <match lemma="coûter" tags="vblex.*"/>
+      <match lemma="couter" tags="vblex.*"/>
+      <match lemma="unir" tags="vblex.*"/>
+      <match lemma="affecter" tags="vblex.*"/>
+      <match lemma="contribuer" tags="vblex.*"/>
+      <match lemma="attribuer" tags="vblex.*"/>
+      <match lemma="correspondre" tags="vblex.*"/>
+      <match lemma="consacrer" tags="vblex.*"/>
+      <match lemma="dédier" tags="vblex.*"/>
+      <match lemma="allouer" tags="vblex.*"/>
+      <match lemma="donner" tags="vblex.*"/>
+      <match lemma="apporter" tags="vblex.*"/>
+      <match lemma="associer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="n.*"/>
+        <match tags="adj.*"/>
+        <match tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="adhésion" tags="n.*"/>
+      <match lemma="appui" tags="n.*"/>
+      <match lemma="soutien" tags="n.*"/>
+      <match lemma="contribution" tags="n.*"/>
+      <match lemma="participation" tags="n.*"/>
+      <match lemma="contribution" tags="n.*"/>
+      <match lemma="union" tags="n.*"/>
+      <match lemma="affectation" tags="n.*"/>
+      <match lemma="contribution" tags="n.*"/>
+      <match lemma="donation" tags="n.*"/>
+      <match lemma="apportation" tags="n.*"/>
+      <match lemma="ralliement" tags="n.*"/>
+      <match lemma="association" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match lemma="favorable" tags="adj.*"/>
+      <match lemma="contraire" tags="adj.*"/>
+      <match lemma="relatif" tags="adj.*"/>
+    </or>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="campagne" tags="n.*"><select lemma="campanha"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="mener" tags="vblex.pp.*"/>
+      <match lemma="guider" tags="vblex.pp.*"/>
+      <match lemma="diriger" tags="vblex.pp.*"/>
+      <match lemma="présider" tags="vblex.pp.*"/>
+      <match lemma="favorable" tags="adj.*"/>
+      <match lemma="relatif" tags="adj.*"/>
+      <match lemma="diffamatoire" tags="adj.*"/>
+      <match lemma="contraire" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="campagne" tags="n.*"><select lemma="campèstre"/></match>
+    <match lemma="environnant" tags="adj.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="vue" tags="n.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="sur" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campèstre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="vue" tags="n.*"/>
+    <match lemma="de" tags="pr"/>
+    <match tags="n.*"/>
+    <match lemma="sur" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="campagne" tags="n.*"><select lemma="campèstre"/></match>
+  </rule>
+
   <!-- détournement >> desviacion, malversacion -->
   <rule weight="0.8">
     <match lemma="détournement" tags="n.*" v="oci"><select lemma="desviacion"/></match>
@@ -10125,6 +10287,7 @@
   <macro n="noms_propres"><with-param v="Romaine"/><with-param v="Romana"/></macro>
   <macro n="noms_propres"><with-param v="Rosine"/><with-param v="Rosina"/></macro>
   <macro n="noms_propres"><with-param v="Samuel"/><with-param v="Samuèl"/></macro>
+  <macro n="noms_propres"><with-param v="Sébastien"/><with-param v="Sebastian"/></macro>
   <macro n="noms_propres"><with-param v="Serge"/><with-param v="Sèrgi"/></macro>
   <macro n="noms_propres"><with-param v="Sophie"/><with-param v="Sofia"/></macro>
   <macro n="noms_propres"><with-param v="Stéphanie"/><with-param v="Estefania"/></macro>

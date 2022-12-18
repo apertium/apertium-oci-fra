@@ -4785,6 +4785,8 @@
 	   <match lemma="galaupar" tags="vblex.*"/>
 	   <match lemma="galopar" tags="vblex.*"/>
 	   <match lemma="marchar" tags="vblex.*"/>
+	   <match lemma="correspondre" tags="vblex.*"/>
+	   <match lemma="correspóner" tags="vblex.*"/>
 	   <match lemma="foncionar" tags="vblex.*"/>
 	   <match lemma="profechar" tags="vblex.*"/>
 	   <match lemma="profeichar" tags="vblex.*"/>
@@ -10266,7 +10268,7 @@
     </or>
   </rule>
 
-  <!-- per >> pour, par, de -->
+  <!-- per >> pour, par, de, à -->
   <rule weight="0.8">
     <match lemma="per" tags="pr"><select lemma="pour"/></match>
   </rule>
@@ -10280,6 +10282,12 @@
       <match tags="prn.pro.*"/>
     </repeat>
     <match tags="*.inf"/>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="anar" tags="vblex.*"/>
+    <match lemma="per" tags="pr"><select lemma="à"/></match>
+    <match tags="det.def.*"/>
+    <match lemma="campèstre" tags="n.*"/>
   </rule>
   <rule weight="1.0">
     <match tags="*.pp.*"/>
@@ -23274,6 +23282,7 @@
   <macro n="noms_propres"><with-param v="Rosina"/><with-param v="Rosine"/></macro>
   <macro n="noms_propres"><with-param v="Rotland"/><with-param v="Roland"/></macro>
   <macro n="noms_propres"><with-param v="Samuèl"/><with-param v="Samuel"/></macro>
+  <macro n="noms_propres"><with-param v="Sebastian"/><with-param v="Sébastien"/></macro>
   <macro n="noms_propres"><with-param v="Sèrgi"/><with-param v="Serge"/></macro>
   <macro n="noms_propres"><with-param v="Silvèstre"/><with-param v="Sylvestre"/></macro>
   <macro n="noms_propres"><with-param v="Sílvia"/><with-param v="Sylvie"/></macro>
