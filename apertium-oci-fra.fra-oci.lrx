@@ -3286,7 +3286,7 @@
     <match lemma="seulement" tags="adv"><select lemma="sonque"/></match>
   </rule>
 
-  <!-- aussi >> tanben, tant -->
+  <!-- aussi >> tanben, tant, per mai/per tant -->
   <rule weight="0.8">
     <match lemma="aussi" tags="adv"><select lemma="tanben"/></match>
   </rule>
@@ -3300,6 +3300,44 @@
   <rule weight="1.0">
     <match lemma="pas" tags="adv"/>
     <match lemma="aussi" tags="preadv"><select lemma="tant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aussi" tags="adv" v="oci"><select lemma="per mai"/></match>
+    <match lemma="aussi" tags="adv" v="oci@gascon"><select lemma="per mei"/></match>
+    <match tags="adj.*"/>
+    <match lemma="que"/>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="prn.*"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="n.*"/>
+        <match tags="np.*"/>
+        <match tags="adj.*"/>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="pr"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match tags="vbser.prs.*"/>
+      <match tags="vbhaver.prs.*"/>
+      <match tags="vbmod.prs.*"/>
+      <match tags="vblex.prs.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="aussi" tags="adv" v="oci"><select lemma="per mai"/></match>
+    <match lemma="aussi" tags="adv" v="oci@gascon"><select lemma="per mei"/></match>
+    <match tags="adj.*"/>
+    <or>
+      <match tags="vbser.prs.*"/>
+      <match tags="vbhaver.prs.*"/>
+      <match tags="vbmod.prs.*"/>
+      <match tags="vblex.prs.*"/>
+    </or>
+    <match lemma="il" tags="prn.tn.*"/>
   </rule>
 
   <!-- proprement >> pròp(r)iament/netament -->
@@ -3325,16 +3363,20 @@
     <match lemma="tantôt" tags="adv" v="oci@gascon"><select lemma="un còp"/></match>
     <match lemma="tantôt" tags="adv" v="oci"><select lemma="quora"/></match>
     <repeat from="0" upto="4">
+      <or>
         <match tags="*"/>
         <match tags=""/>
+      </or>
     </repeat>
     <match lemma="tantôt" tags="adv"/>
   </rule>
   <rule weight="1.0">
     <match lemma="tantôt" tags="adv"/>
     <repeat from="0" upto="4">
+      <or>
         <match tags="*"/>
         <match tags=""/>
+      </or>
     </repeat>
     <match lemma="tantôt" tags="adv" v="oci@gascon"><select lemma="un còp"/></match>
     <match lemma="tantôt" tags="adv" v="oci"><select lemma="quora"/></match>
@@ -10044,7 +10086,7 @@
       </or>
     </repeat>
     <match lemma="rendre" tags="vblex.*"><select lemma="anar"/></match>
-     <match lemma="en" tags="pr"/>
+    <match lemma="en" tags="pr"/>
     <or>
         <match tags="np.top.*"/>
         <match tags="" case="Aa"/>
