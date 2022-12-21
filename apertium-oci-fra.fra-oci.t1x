@@ -96,6 +96,9 @@
       <cat-item lemma="pas" tags="adv"/>
       <cat-item lemma="même pas" tags="adv"/>
     </def-cat>
+    <def-cat n="aussi">
+      <cat-item lemma="aussi" tags="adv"/>
+    </def-cat>
     <def-cat n="longtemps">
       <cat-item lemma="longtemps" tags="adv"/>
     </def-cat>
@@ -167,6 +170,12 @@
       <cat-item lemma="nous" tags="prn.tn.p1.mf.pl"/>
       <cat-item lemma="vous" tags="prn.tn.p2.mf.pl"/>
       <cat-item lemma="eux" tags="prn.tn.p3.m.pl"/>
+      <cat-item lemma="il" tags="prn.tn.p3.f.pl"/>
+    </def-cat>
+    <def-cat n="prnsubjp3">
+      <cat-item lemma="il" tags="prn.tn.p3.m.sg"/>
+      <cat-item lemma="il" tags="prn.tn.p3.f.sg"/>
+      <cat-item lemma="il" tags="prn.tn.p3.m.pl"/>
       <cat-item lemma="il" tags="prn.tn.p3.f.pl"/>
     </def-cat>
     <def-cat n="il">
@@ -317,6 +326,9 @@
     </def-cat>
     <def-cat n="vbserp3sg">
       <cat-item tags="vbser.*.p3.sg"/>
+    </def-cat>
+    <def-cat n="vbserprsp3">
+      <cat-item tags="vbser.prs.p3.*"/>
     </def-cat>
 
     <def-cat n="vbser_pp">
@@ -20786,7 +20798,7 @@
   <!-- FIN RÈGLAS ELISION SUBJECTE -->
 
 
-  <!-- FIN RÈGLAS ON -->
+  <!-- RÈGLAS ON -->
 
     <rule comment="RÈGLA: ON VERBP3 (on peut: se pòt)">
       <pattern>
@@ -26162,6 +26174,77 @@
 
 
   <!-- AUTRAS RÈGLAS -->
+
+    <rule comment="RÈGLA: aussi ADJ SER_PRS_P3 IL > per mai ADJ que SER_PRS_P3">
+      <pattern>
+        <pattern-item n="aussi"/>
+        <pattern-item n="adjec"/>
+        <pattern-item n="vbserprsp3"/>
+        <pattern-item n="prnsubjp3"/>
+      </pattern>
+      <action>
+        <call-macro n="f_concord1">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="f_chunk_tags">
+          <with-param pos="2"/>
+        </call-macro>
+        <call-macro n="tipus_verb">
+          <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="escriure_SAdv"><with-param pos="1"/></call-macro>
+        <out>
+          <b pos="1"/>
+          <chunk name="a">
+            <tags>
+              <tag><lit-tag v="SA"/></tag>
+              <tag><clip pos="2" side="tl" part="gen"/></tag>
+              <tag><clip pos="2" side="tl" part="nbr"/></tag>
+              <tag><var n="genero_sl"/></tag>
+              <tag><var n="numero_sl"/></tag>
+              <tag><var n="v_itg"/></tag>
+            </tags>
+            <lu>
+              <clip pos="2" side="tl" part="lemh"/>
+              <clip pos="2" side="tl" part="a_adj"/>
+              <lit-tag v="2"/>
+              <lit-tag v="3"/>
+              <clip pos="2" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+          <b pos="2"/>
+          <chunk name="que">
+            <tags>
+              <tag><lit-tag v="cnjsub"/></tag>
+            </tags>
+            <lu>
+              <lit v="que"/>
+              <lit-tag v="cnjsub"/>
+            </lu>
+          </chunk>
+          <b/>
+          <b/>	<!-- extra blank because of bug -->
+          <chunk name="vbser">
+            <tags>
+              <tag><lit-tag v="SV"/></tag>
+              <tag><lit-tag v="vbser"/></tag>
+              <tag><clip pos="3" side="tl" part="temps"/></tag>
+              <tag><clip pos="3" side="tl" part="pers"/></tag>
+              <tag><clip pos="3" side="tl" part="nbr"/></tag>
+              <tag><var n="tipusverb"/></tag>
+            </tags>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="a_verb"/>
+              <lit-tag v="3"/>
+              <lit-tag v="4"/>
+              <lit-tag v="5"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+      </action>
+    </rule>
 
     <rule comment="RÈGLA: en début de nom_mois_an > en debuta de nom_mois_an">
       <pattern>
