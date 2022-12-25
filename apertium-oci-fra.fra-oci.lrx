@@ -7981,6 +7981,37 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- essuyer >> eissugar/eishugar, patir -->
+  <rule weight="0.8">
+    <match lemma="essuyer" tags="vblex.*" v="oci"><select lemma="eissugar"/></match>
+    <match lemma="essuyer" tags="vblex.*" v="oci@gascon"><select lemma="eishugar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="essuyer" tags="vblex.*"><select lemma="patir"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="défaite" tags="n.*"/>
+      <match lemma="échec" tags="n.*"/>
+      <match lemma="perte" tags="n.*"/>
+      <match lemma="revers" tags="n.*"/>
+      <match lemma="refus" tags="n.*"/>
+      <match lemma="affront" tags="n.*"/>
+      <match lemma="attaque" tags="n.*"/>
+      <match lemma="assaut" tags="n.*"/>
+      <match lemma="feu" tags="n.*"/>
+      <match lemma="coup" tags="n.*"/>
+      <match lemma="critique" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- épingler >> espillar/esplingar, prene/gahar -->
   <rule weight="0.8">
     <match lemma="épingler" tags="vblex.*" v="oci"><select lemma="espillar"/></match>
