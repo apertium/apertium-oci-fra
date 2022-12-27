@@ -7981,6 +7981,132 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- produire >> produire/produsir, mostrar/amushar -->
+  <rule weight="0.8">
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="produire"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="produsir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+    <match lemma="sur" tags="pr"/>
+    <match lemma="scène" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+    <match lemma="sur" tags="pr"/>
+    <match tags="det.def.*"/>
+    <or>
+      <match lemma="scène" tags="n.*"/>
+      <match lemma="théâtre" tags="n.*"/>
+      <match lemma="opéra" tags="n.*"/>
+      <match lemma="odéon" tags="n.*"/>
+      <match lemma="salle" tags="n.*"/>
+      <match lemma="arène" tags="n.*"/>
+      <match tags="np.al.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <or>
+      <match lemma="Olympia" tags="np.*"/>
+      <match lemma="Bolchoï" tags="np.*"/>
+      <match lemma="Mariinski" tags="np.*"/>
+      <match lemma="Mariinsky" tags="np.*"/>
+      <match lemma="Metropolitan" tags="np.*"/>
+      <match lemma="Madison Square Garden" tags="np.*"/>
+      <match lemma="Albert Hall" tags="np.*"/>
+      <match lemma="Concertgebouw" tags="np.*"/>
+      <match lemma="Arkéa Arena" tags="np.*"/>
+      <match lemma="Sud de France Arena" tags="np.*"/>
+      <match lemma="Zénith" tags="np.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="personne"/>
+      <match lemma="groupe" tags="n.*"/>
+      <match lemma="orchestre" tags="n.*"/>
+      <match lemma="chœur" tags="n.*"/>
+      <match lemma="Beatles" tags="np.al.*"/>
+      <match lemma="Nadau" tags="np.al.*"/>
+    </or>
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="orchestre" tags="n.*"/>
+      <match lemma="chœur" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <or>
+        <match tags="np.*"/>
+        <match tags="" case="Aa"/>
+      </or>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="np.ant.*"/>
+        <match tags="np.cog.*"/>
+        <match tags="" case="Aa"/>
+      </or>
+    </repeat>
+    <match lemma="se" tags="prn.pro.*"/>
+    <repeat from="0" upto="1">
+      <match lemma="y" tags="prn.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <match lemma="produire" tags="vblex.*" v="oci"><select lemma="mostrar"/></match>
+    <match lemma="produire" tags="vblex.*" v="oci@gascon"><select lemma="amuishar"/></match>
+  </rule>
+
   <!-- essuyer >> eissugar/eishugar, patir -->
   <rule weight="0.8">
     <match lemma="essuyer" tags="vblex.*" v="oci"><select lemma="eissugar"/></match>
