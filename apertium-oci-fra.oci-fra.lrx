@@ -800,6 +800,88 @@
 		</or>
 	  </rule>
 
+<!--
+	  <rule weight="1.0">
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="vblex.*.p3.*"/>
+		<repeat from="0" upto="2">
+		  <match tags="adv"/>
+		</repeat>
+		<match lemma="de" tags="pr"/>
+		<repeat from="0" upto="1">
+		  <match tags="adv"/>
+		</repeat>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="*.inf"/>
+	  </rule>
+	  <rule weight="1.0">
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<or>
+		  <match tags="vbhaver.*.p3.*"/>
+		  <match tags="vbser.*.p3.*"/>
+		</or>
+		<repeat from="0" upto="2">
+		  <match tags="adv"/>
+		</repeat>
+		<match tags="vblex.pp.*"/>
+		<match lemma="de" tags="pr"/>
+		<repeat from="0" upto="1">
+		  <match tags="adv"/>
+		</repeat>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="*.inf"/>
+	  </rule>
+	  <rule weight="1.0">
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="vbmod.*.p3.*"/>
+		<repeat from="0" upto="2">
+		  <match tags="adv"/>
+		</repeat>
+		<match tags="vblex.inf"/>
+		<match lemma="de" tags="pr"/>
+		<repeat from="0" upto="1">
+		  <match tags="adv"/>
+		</repeat>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="*.inf"/>
+	  </rule>
+	  <rule weight="1.0">
+		<match plemma="1" tags="rel.*"><select lemma="qui"/></match>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="vbhaver.*.p3.*"/>
+		<repeat from="0" upto="2">
+		  <match tags="adv"/>
+		</repeat>
+		<match tags="vbmod.pp.*"/>
+		<match tags="vblex.inf"/>
+		<match lemma="de" tags="pr"/>
+		<repeat from="0" upto="1">
+		  <match tags="adv"/>
+		</repeat>
+		<repeat from="0" upto="2">
+		  <match tags="prn.pro.*"/>
+		</repeat>
+		<match tags="*.inf"/>
+	  </rule>
+-->
+
 	  <rule weight="3.0">
 		<or>
 		  <seq n="personas"/>
@@ -7739,7 +7821,7 @@
   <rule weight="0.8"> <!-- 'que' es pas causit per evitar la necessitat d'invertir lo subjècte -->
     <match lemma="qué" tags="prn.itg.*"><select lemma="qu'est-ce que"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="1.2">
     <match tags="pr"/>
     <match lemma="qué" tags="prn.itg.*"><select lemma="quoi"/></match>
   </rule>
@@ -7751,6 +7833,10 @@
     <match tags="cm"/>
     <match lemma="qué" tags="prn.itg.*"><select lemma="quoi"/></match>
     <match tags="cm"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="qué" tags="prn.itg.*"><select lemma="que"/></match>
+    <match tags="*.inf"/>
   </rule>
 
   <!-- aquò >> cela, ce -->
@@ -10367,6 +10453,8 @@
       <seq n="temps"/>
       <match lemma="eurò" tags="n.*"/>
       <match lemma="euro" tags="n.*"/>
+      <match lemma="dolar" tags="n.*"/>
+      <match lemma="dòlar" tags="n.*"/>
       <match lemma="persona" tags="n.*"/>
       <match lemma="abitant" tags="n.*"/>
       <match lemma="cap" tags="n.*"/>
@@ -10445,6 +10533,7 @@
       <match lemma="mejan" tags="n.*"/>
       <match lemma="mèdi" tags="n.*"/>
 
+      <match lemma="unitat" tags="n.*"/>
       <match lemma="cent" tags="num.*"/>
       <match lemma="cent" tags="n.*"/>
       <match lemma="mil" tags="num.*"/>
