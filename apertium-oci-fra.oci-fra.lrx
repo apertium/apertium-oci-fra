@@ -2985,7 +2985,23 @@
         </or>
         <match plemma="1" tags="adv"><select plemma="3"/></match>
       </rule>
-	</def-macro>
+    </def-macro>
+
+    <!-- generar "un demi-(siècle, tour, etc.)" o "demi-(siècle, tour, etc.)" -->
+    <def-macro n="mieg-demi" npar="3">
+      <rule weight="0.8">
+        <match plemma="1" tags="n.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="det.*"/>
+          <match tags="num.*"/>
+          <match tags="num"/>
+          <match tags="adj.*"/>
+        </or>
+        <match plemma="1" tags="n.*"><select plemma="3"/></match>
+      </rule>
+    </def-macro>
 
     <!-- generar 'chef', p.ex.: cap >> chef n.GD, chef n.m -->
     <def-macro n="gen_chef" npar="2">
@@ -14176,6 +14192,66 @@
       <match lemma="quatre-vingt-dix" tags="num.*"/>
     </or>
   </rule>
+
+  <!-- mièg sècle >> un demi-siècle, demi-siècle -->
+  <!-- miei sècle >> un demi-siècle, demi-siècle -->
+  <macro n="mieg-demi"><with-param v="mièg sècle"/><with-param v="un demi-siècle"/><with-param v="demi-siècle"/></macro>
+  <macro n="mieg-demi"><with-param v="miei sècle"/><with-param v="un demi-siècle"/><with-param v="demi-siècle"/></macro>
+
+  <!-- mièg millenari >> un demi-millénaire, demi-millénaire -->
+  <!-- miei millenari >> un demi-millénaire, demi-millénaire -->
+  <macro n="mieg-demi"><with-param v="mièg millenari"/><with-param v="un demi-millénaire"/><with-param v="demi-millénaire"/></macro>
+  <macro n="mieg-demi"><with-param v="miei millenari"/><with-param v="un demi-millénaire"/><with-param v="demi-millénaire"/></macro>
+
+  <!-- mièg milion >> un demi-million, demi-million -->
+  <!-- miei milion >> un demi-million, demi-million -->
+  <macro n="mieg-demi"><with-param v="mièg milion"/><with-param v="un demi-million"/><with-param v="demi-million"/></macro>
+  <macro n="mieg-demi"><with-param v="miei milion"/><with-param v="un demi-million"/><with-param v="demi-million"/></macro>
+
+  <!-- mièg million >> un demi-million, demi-million -->
+  <!-- miei million >> un demi-million, demi-million -->
+  <macro n="mieg-demi"><with-param v="mièg million"/><with-param v="un demi-million"/><with-param v="demi-million"/></macro>
+  <macro n="mieg-demi"><with-param v="miei million"/><with-param v="un demi-million"/><with-param v="demi-million"/></macro>
+
+  <!-- mièg miliard >> un demi-milliard, demi-milliard -->
+  <!-- miei miliard >> un demi-milliard, demi-milliard -->
+  <macro n="mieg-demi"><with-param v="mièg miliard"/><with-param v="un demi-milliard"/><with-param v="demi-milliard"/></macro>
+  <macro n="mieg-demi"><with-param v="miei miliard"/><with-param v="un demi-milliard"/><with-param v="demi-milliard"/></macro>
+
+  <!-- mièg torn >> un demi-tour, demi-tour -->
+  <!-- miei torn >> un demi-tour, demi-tour -->
+  <macro n="mieg-demi"><with-param v="mièg torn"/><with-param v="un demi-tour"/><with-param v="demi-tour"/></macro>
+  <macro n="mieg-demi"><with-param v="miei torn"/><with-param v="un demi-tour"/><with-param v="demi-tour"/></macro>
+
+  <!-- mièg litre >> un demi-litre, demi-litre -->
+  <!-- miei litre >> un demi-litre, demi-litre -->
+  <macro n="mieg-demi"><with-param v="mièg litre"/><with-param v="un demi-litre"/><with-param v="demi-litre"/></macro>
+  <macro n="mieg-demi"><with-param v="miei litre"/><with-param v="un demi-litre"/><with-param v="demi-litre"/></macro>
+
+  <!-- mièg mètre >> un demi-mètre, demi-mètre -->
+  <!-- miei mètre >> un demi-mètre, demi-mètre -->
+  <macro n="mieg-demi"><with-param v="mièg mètre"/><with-param v="un demi-mètre"/><with-param v="demi-mètre"/></macro>
+  <macro n="mieg-demi"><with-param v="miei mètre"/><with-param v="un demi-mètre"/><with-param v="demi-mètre"/></macro>
+
+  <!-- mièja òra >> une demi-heure, demi-heure -->
+  <!-- mieja òra >> une demi-heure, demi-heure -->
+  <macro n="mieg-demi"><with-param v="mièja òra"/><with-param v="une demi-heure"/><with-param v="demi-heure"/></macro>
+  <macro n="mieg-demi"><with-param v="mieja òra"/><with-param v="une demi-heure"/><with-param v="demi-heure"/></macro>
+
+  <!-- mièja jornada >> une demi-journée, demi-journée -->
+  <!-- mieja jornada >> une demi-journée, demi-journée -->
+  <macro n="mieg-demi"><with-param v="mièja jornada"/><with-param v="une demi-journée"/><with-param v="demi-journée"/></macro>
+  <macro n="mieg-demi"><with-param v="mieja jornada"/><with-param v="une demi-journée"/><with-param v="demi-journée"/></macro>
+
+  <!-- mièja etapa >> une demi-étape, demi-étape -->
+  <!-- mieja etapa >> une demi-étape, demi-étape -->
+  <macro n="mieg-demi"><with-param v="mièja etapa"/><with-param v="une demi-étape"/><with-param v="demi-étape"/></macro>
+  <macro n="mieg-demi"><with-param v="mieja etapa"/><with-param v="une demi-étape"/><with-param v="demi-étape"/></macro>
+
+  <!-- mièja luna >> une demi-lune, demi-lune -->
+  <!-- mieja lua >> une demi-lune, demi-lune -->
+  <macro n="mieg-demi"><with-param v="mièja luna"/><with-param v="une demi-lune"/><with-param v="demi-lune"/></macro>
+  <macro n="mieg-demi"><with-param v="mieja lua"/><with-param v="une demi-lune"/><with-param v="demi-lune"/></macro>
 
   <!-- cap >> chef n.GD, chef n.m -->
   <macro n="gen_chef"><with-param v="cap"/><with-param v="chef"/></macro>
