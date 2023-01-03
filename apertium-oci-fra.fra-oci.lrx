@@ -9434,7 +9434,7 @@
   <macro n="verb_nopron_pron" v="oci"><with-param v="terrer"/><with-param v="cauçar"/><with-param v="amagar"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="terrer"/><with-param v="terrar"/><with-param v="amagar"/></macro>
 
-  <!-- brouiller -> mesclar, embolhar/trebolar, desavenir/desaviéner -->
+  <!-- brouiller -> mesclar, embolhar/trebolar, desavenir/desaviéner trebolar/embrumar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="brouiller"/><with-param v="mesclar"/><with-param v="desavenir"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="brouiller"/><with-param v="mesclar"/><with-param v="desaviéner"/></macro>
   <rule weight="0.9">
@@ -9458,8 +9458,45 @@
       <match lemma="message" tags="n.*"/>
       <match lemma="signal" tags="n.*"/>
       <match lemma="radar" tags="n.*"/>
+      <match lemma="radio" tags="n.*"/>
       <match lemma="téléphone" tags="n.*"/>
     </or>
+  </rule>
+  <rule weight="0.9">
+    <or>
+      <match lemma="émission" tags="n.*"/>
+      <match lemma="transmission" tags="n.*"/>
+      <match lemma="communication" tags="n.*"/>
+      <match lemma="message" tags="n.*"/>
+      <match lemma="signal" tags="n.*"/>
+      <match lemma="radar" tags="n.*"/>
+      <match lemma="radio" tags="n.*"/>
+      <match lemma="téléphone" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="adv"/>
+        <match tags="preadv"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match tags="adj.*"/>
+        <match lemma="de" tags="pr"/>
+        <match tags="vbser.*"/>
+      </or>
+    </repeat>
+    <match lemma="brouiller" tags="vblex.pp.*" v="oci"><select lemma="embolhar"/></match>
+    <match lemma="brouiller" tags="vblex.pp.*" v="oci@gascon"><select lemma="trebolar"/></match>
+  </rule>
+  <rule weight="1.4">
+    <or>
+      <match lemma="temps" tags="n.*"/>
+      <match lemma="ciel" tags="n.*"/>
+      <match lemma="jour" tags="n.*"/>
+    </or>
+    <match tags="prn.pro.ref.p3.*.sp"/>
+    <match lemma="brouiller" tags="vblex.*" v="oci"><select lemma="trebolar"/></match>
+    <match lemma="brouiller" tags="vblex.*" v="oci@gascon"><select lemma="embrumar"/></match>
   </rule>
 
   <!-- démettre >> desmetre/desméter, deslogar -->
