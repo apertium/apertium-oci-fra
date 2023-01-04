@@ -238,6 +238,9 @@
       <cat-item tags="SV.vbser.*.p3.pl"/>
       <cat-item tags="SV.vbhaver.*.p3.pl"/>
     </def-cat>
+    <def-cat n="SV_vbmod_p3">
+      <cat-item tags="SV.vbmod.*.p3.*"/>
+    </def-cat>
     <def-cat n="SV_copulatiu">
       <cat-item tags="SV.vbser"/>
       <cat-item tags="SV.vbser.*"/>
@@ -4871,6 +4874,8 @@
       </action>
     </rule>
 
+    <!-- Règlas per empachar la generacion prn.tn amb SAdv_itg -->
+
     <rule comment="RÈGLA: SAdv_itg SV_p3 DET (aquela règla es per empachar la generacion prn.tn): Cossí trabalha lo grop > Comment travaille le groupe ; qué fa lo grop > qu'est-ce que fait le groupe">
       <pattern>
         <pattern-item n="SAdv_itg"/>
@@ -4931,7 +4936,81 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 PP DET (aquela règla es per empachar la generacion prn.tn): Cossí es nascut lo grop > Comment est né le groupe ; qué a fach lo grop > qu'est-ce qu'a fait lo groupe">
+    <rule comment="RÈGLA: SAdv_itg SV_p3 SAdv DET (aquela règla es per empachar la generacion prn.tn): Cossí trabalha donc lo grop > Comment travaille donc le groupe ; qué fa donc lo grop > qu'est-ce que fait donc le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SV_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SV_p3 SAdv NP (aquela règla es per empachar la generacion prn.tn): Cossí trabalha donc Joan > Comment travaille donc Joan ; qué fa donc Joan > qu'est-ce que fait donc Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SV_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 PP DET (aquela règla es per empachar la generacion prn.tn): Cossí es nascut lo grop > Comment est né le groupe ; qué a fach lo grop > qu'est-ce qu'a fait le groupe">
       <pattern>
         <pattern-item n="SAdv_itg"/>
         <pattern-item n="SV_aux_p3"/>
@@ -5005,7 +5084,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 SAdv PP DET (aquela règla es per empachar la generacion prn.tn): Cossí es aicí nascut lo grop > Comment est ici né le groupe ; qué a aicí fach lo grop > qu'est-ce qu'a ici fait lo groupe">
+    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 SAdv PP DET (aquela règla es per empachar la generacion prn.tn): Cossí es aicí nascut lo grop > Comment est ici né le groupe ; qué a aicí fach lo grop > qu'est-ce qu'a ici fait le groupe">
       <pattern>
         <pattern-item n="SAdv_itg"/>
         <pattern-item n="SV_aux_p3"/>
@@ -5093,7 +5172,7 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 PP SAdv DET (aquela règla es per empachar la generacion prn.tn): Cossí es nascut aicí lo grop > Comment est né ici le groupe ; qué a fach aicí lo grop > qu'est-ce qu'a fait ici lo groupe">
+    <rule comment="RÈGLA: SAdv_itg SV_aux_p3 PP SAdv DET (aquela règla es per empachar la generacion prn.tn): Cossí es nascut aicí lo grop > Comment est né ici le groupe ; qué a fach aicí lo grop > qu'est-ce qu'a fait ici le groupe">
       <pattern>
         <pattern-item n="SAdv_itg"/>
         <pattern-item n="SV_aux_p3"/>
@@ -5446,6 +5525,564 @@
         <let><var n="finfrasa"/><lit v="no"/></let>
       </action>
     </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_p3 DET (aquela règla es per empachar la generacion prn.tn): qué li fa lo grop > qu'est-ce que lui fait le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_p3"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_p3 NP (aquela règla es per empachar la generacion prn.tn): qué li fa Joan > qu'est-ce que lui fait Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_p3"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_aux_p3 PP DET (aquela règla es per empachar la generacion prn.tn): qué li a fach lo grop > qu'est-ce que lui a fait le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_aux_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_p3 PP NP (aquela règla es per empachar la generacion prn.tn): qué li a fach Joan > qu'est-ce que lui a fait Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_aux_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_aux_p3 SAdv PP DET (aquela règla es per empachar la generacion prn.tn): qué li a aicí fach lo grop > qu'est-ce que lui a ici fait le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_aux_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_p3 SAdv PP NP (aquela règla es per empachar la generacion prn.tn): qué li a aicí fach Joan > qu'est-ce que lui a ici fait Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_aux_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SV_vbmod_p3 INF DET (aquela règla es per empachar la generacion prn.tn): Qué pòt far lo grop > qu'est-ce que peut faire le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SV_vbmod_p3"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SV_vbmod_p3 INF NP (aquela règla es per empachar la generacion prn.tn): Qué pòt far Joan > qu'est-ce que peut faire Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SV_vbmod_p3"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_vbhaver_p3 SV_vbmod_pp INF DET (aquela règla es per empachar la generacion prn.tn): qué li a pogut far lo grop > qu'est-ce que lui a pu faire le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_vbhaver_p3 SV_vbmod_pp INF NP (aquela règla es per empachar la generacion prn.tn): qué li a pogut far Joan > qu'est-ce que lui a pu faire Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_vbhaver_p3 SAdv SV_vbmod_pp INF DET (aquela règla es per empachar la generacion prn.tn): qué li a aicí pogut far lo grop > qu'est-ce que lui a ici pu faire le groupe">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="DET_DETSN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SAdv_itg SAdv_SPron_pro SV_vbhaver_p3 SAdv SV_vbmod_pp INF NP (aquela règla es per empachar la generacion prn.tn): qué li a aicí pogut far Joan > qu'est-ce que lui a ici pu faire Joan">
+      <pattern>
+        <pattern-item n="SAdv_itg"/>
+        <pattern-item n="SAdv_SPron_pro"/>
+        <pattern-item n="SV_vbhaver_p3"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+        <pattern-item n="SV_inf"/>
+        <pattern-item n="NP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="lem"/>
+            <clip pos="3" part="tags"/>
+            <clip pos="3" part="chcontent"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="lem"/>
+            <clip pos="4" part="tags"/>
+            <clip pos="4" part="chcontent"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="lem"/>
+            <clip pos="5" part="tags"/>
+            <clip pos="5" part="chcontent"/>
+          </chunk>
+          <b pos="5"/>
+          <chunk>
+            <clip pos="6" part="lem"/>
+            <clip pos="6" part="tags"/>
+            <clip pos="6" part="chcontent"/>
+          </chunk>
+          <b pos="6"/>
+          <chunk>
+            <clip pos="7" part="lem"/>
+            <clip pos="7" part="tags"/>
+            <clip pos="7" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <!-- Fin règlas per empachar la generacion prn.tn amb SAdv_itg -->
 
     <rule comment="RÈGLA: ÇÒ_QUE SV_aux_p3pl SAdv PP DETpl (aquela règla es per empachar la generacion prn.tn): çò qu'an dit ara los grops > ce qu'ont dit maintenant les groupes">
       <pattern>
