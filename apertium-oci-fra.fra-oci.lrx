@@ -2100,6 +2100,28 @@
       <match lemma="tamarinier" tags="n.*"/>
     </or></def-seq>
 
+    <def-seq n="temps"><or>
+      <match lemma="seconde" tags="n.*"/>
+      <match lemma="minute" tags="n.*"/>
+      <match lemma="heure" tags="n.*"/>
+      <match lemma="jour" tags="n.*"/>
+      <match lemma="journée" tags="n.*"/>
+      <match lemma="weekend" tags="n.*"/>
+      <match lemma="week-end" tags="n.*"/>
+      <match lemma="semaine" tags="n.*"/>
+      <match lemma="mois" tags="n.*"/>
+      <match lemma="trimestre" tags="n.*"/>
+      <match lemma="semestre" tags="n.*"/>
+      <match lemma="an" tags="n.*"/>
+      <match lemma="année" tags="n.*"/>
+      <match lemma="lustre" tags="n.*"/>
+      <match lemma="quinquennat" tags="n.*"/>
+      <match lemma="septennat" tags="n.*"/>
+      <match lemma="décennie" tags="n.*"/>
+      <match lemma="siècle" tags="n.*"/>
+      <match lemma="millénaire" tags="n.*"/>
+    </or></def-seq>
+
     <def-seq n="jours"><or>
       <match lemma="lundi" tags="n.*"/>
       <match lemma="mardi" tags="n.*"/>
@@ -3856,9 +3878,118 @@
 
 <!-- **************** N **************** -->
 
+  <!-- andada >> vague, promenade -->
+  <rule weight="0.8">
+    <match lemma="andada" tags="n.*"><select lemma="vague"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dar" tags="vblex.*"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <match lemma="andada" tags="n.*"><select lemma="promenade"/></match>
+  </rule>
+
   <!-- emballement >> embalament, estrambòrd -->
   <rule weight="0.8">
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
+  </rule>
+
+  <!-- marche >> marcha, grasa/gradèr, camin -->
+  <rule weight="0.8">
+    <match lemma="marche" tags="n.*"><select lemma="marcha"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="temps"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <match lemma="marche" tags="n.*"><select lemma="camin"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <seq n="adj_ord"/>
+    </or>
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="chaque" tags="det.*"/>
+    </or>
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="monter" tags="vblex.*"/>
+      <match lemma="descendre" tags="vblex.*"/>
+      <match lemma="gravir" tags="vblex.*"/>
+      <match lemma="franchir" tags="vblex.*"/>
+      <match lemma="réparer" tags="vblex.*"/>
+      <match lemma="casser" tags="vblex.*"/>
+      <match lemma="sur" tags="pr"/>
+    </or>
+    <repeat from="1" upto="3">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="num.*"/>
+        <match tags="num"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="det.*"/>
+        <match tags="adj.*"/>
+        <match tags="n.*"/>
+      </or>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match tags="vbser.*"/>
+    </repeat>
+    <or>
+      <match lemma="gravir" tags="vblex.pp.*"/>
+      <match lemma="franchir" tags="vblex.pp.*"/>
+      <match lemma="réparer" tags="vblex.pp.*"/>
+      <match lemma="casser" tags="vblex.pp.*"/>
+      <match lemma="bouger" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="escalier" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="escalier" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="marche" tags="n.*" v="oci"><select lemma="grasa"/></match>
+    <match lemma="marche" tags="n.*" v="oci@gascon"><select lemma="gradèr"/></match>
   </rule>
 
   <!-- campagne >> campanha, campèstre -->
