@@ -4725,24 +4725,21 @@
     <match lemma="grenadier" tags="n.*" v="oci@gascon"><select lemma="miugranèr"/></match>
   </rule>
 
-  <!-- hôtel >> ostalariá/ostaleria, ostal/ostau -->
+  <!-- hôtel >> ostalariá/ostaleria, ostal -->
   <rule weight="0.8">
     <match lemma="hôtel" tags="n.*" v="oci"><select lemma="ostalariá"/></match>
     <match lemma="hôtel" tags="n.*" v="oci@gascon"><select lemma="ostaleria"/></match>
   </rule>
   <rule weight="1.0">
-    <match lemma="hôtel" tags="n.*" v="oci"><select lemma="ostal"/></match>
-    <match lemma="hôtel" tags="n.*" v="oci@gascon"><select lemma="ostau"/></match>
+    <match lemma="hôtel" tags="n.*"><select lemma="ostal"/></match>
     <match lemma="particulier" tags="adj.*"/>
   </rule>
   <rule weight="1.0">
-    <match lemma="Hôtel" tags="n.*" v="oci"><select lemma="ostal"/></match>
-    <match lemma="Hôtel" tags="n.*" v="oci@gascon"><select lemma="ostau"/></match>
+    <match lemma="hôtel" tags="n.*"><select lemma="ostal"/></match>
     <match tags="np.cog.*"/>
   </rule>
   <rule weight="1.0">
-    <match lemma="Hôtel" tags="n.*" v="oci"><select lemma="ostal"/></match>
-    <match lemma="Hôtel" tags="n.*" v="oci@gascon"><select lemma="ostau"/></match>
+    <match lemma="hôtel" tags="n.*"><select lemma="ostal"/></match>
     <match lemma="de" tags="pr"/>
     <match lemma="Évreux" tags="np.top.*"/>
   </rule>
@@ -5444,11 +5441,9 @@
   <rule weight="1.0">
     <match lemma="assemblée" tags="n.*"><select lemma="assemblada"/></match>
     <or>
-          <match lemma="nacionau"/>
           <match lemma="nacional"/>
           <match lemma="legislatiu"/>
           <match lemma="constitucional"/>
-          <match lemma="constitucionau"/>
           <match lemma="constituent"/>
     </or>
   </rule>
@@ -6651,7 +6646,7 @@
   </rule>
   <rule weight="1.0">
     <match lemma="à" tags="pr"/>
-    <match lemma="la" tags="det.*"/>
+    <match tags="det.def.*"/>
     <match lemma="broche" tags="n.*"><select lemma="ast"/></match>
   </rule>
 
@@ -6662,18 +6657,17 @@
   </rule>
   <rule weight="1.0">
     <match lemma="bulle" tags="n.*"><select lemma="ast"/></match>
-    <or>
-      <match lemma="papau" tags="adj.*"/>
-      <match lemma="papal" tags="adj.*"/>
-    </or>
+    <match lemma="papal" tags="adj.*"/>
   </rule>
   <rule weight="1.0">
     <match lemma="bulle" tags="n.*"><select lemma="ast"/></match>
     <match lemma="de" tags="pr"/>
     <match lemma="le" tags="det.*"/>
     <repeat from="0" upto="2">
-      <match tags="adv"/>
-      <match tags="adj.*"/>
+      <or>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
     <match lemma="pape" tags="n.*"/>
   </rule>
