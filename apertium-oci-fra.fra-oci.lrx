@@ -3895,6 +3895,35 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- égard >> esgard, atencion -->
+  <rule weight="0.8">
+    <match lemma="égard" tags="n.*"><select lemma="esgard"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="avoir" tags="vblex.*"/>
+    <repeat from="1" upto="2">
+      <or>
+        <match tags="predet.*"/>
+        <match tags="det.*"/>
+        <match lemma="de" tags="pr"/>
+      </or>
+    </repeat>
+    <match lemma="égard" tags="n.*"><select lemma="atencion"/></match>
+  </rule>
+
+  <!-- truc >> truc, daquòs/dequerò -->
+  <rule weight="0.8">
+    <match lemma="truc" tags="n.*"><select lemma="truc"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match tags="det.dem.*"/>
+      <match tags="det.pos.*"/>
+    </or>
+    <match lemma="truc" tags="n.*" v="oci"><select lemma="daquòs"/></match>
+    <match lemma="truc" tags="n.*" v="oci@gascon"><select lemma="dequerò"/></match>
+  </rule>
+
   <!-- marche >> marcha, grasa/gradèr, camin -->
   <rule weight="0.8">
     <match lemma="marche" tags="n.*"><select lemma="marcha"/></match>
