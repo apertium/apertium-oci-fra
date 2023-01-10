@@ -19,16 +19,22 @@ TARGETS_COMMON =		\
 	$(PREFIX1).rlx.bin	\
 	$(PREFIX1).autobil.bin	\
 	$(PREFIX1b).autobil.bin	\
-	$(PREFIX1).autolex.bin	\
-	$(PREFIX1b).autolex.bin	\
-        $(PREFIX1).autosep1.bin \
-        $(PREFIX1b).autosep1.bin \
-        $(PREFIX1).autosep2.bin \
-        $(PREFIX1b).autosep2.bin \
-        $(PREFIX2).autosep1.bin \
-        $(PREFIX2b).autosep1.bin \
-        $(PREFIX2).autosep2.bin \
-        $(PREFIX2b).autosep2.bin \
+	$(PREFIX1).n_a_adv.autolex.bin	\
+	$(PREFIX1b).n_a_adv.autolex.bin	\
+	$(PREFIX1).np.autolex.bin	\
+	$(PREFIX1b).np.autolex.bin	\
+	$(PREFIX1).v.autolex.bin	\
+	$(PREFIX1b).v.autolex.bin	\
+	$(PREFIX1).other.autolex.bin	\
+	$(PREFIX1b).other.autolex.bin	\
+	$(PREFIX1).autosep1.bin \
+	$(PREFIX1b).autosep1.bin \
+	$(PREFIX1).autosep2.bin \
+	$(PREFIX1b).autosep2.bin \
+	$(PREFIX2).autosep1.bin \
+	$(PREFIX2b).autosep1.bin \
+	$(PREFIX2).autosep2.bin \
+	$(PREFIX2b).autosep2.bin \
 	$(PREFIX1).autogen.bin	\
 	$(PREFIX1).autopgen.bin	\
 	$(PREFIX1).t1x.bin	\
@@ -65,8 +71,14 @@ TARGETS_COMMON =		\
 	$(PREFIX2).rlx.bin	\
 	$(PREFIX2).autobil.bin	\
 	$(PREFIX2b).autobil.bin	\
-	$(PREFIX2).autolex.bin	\
-	$(PREFIX2b).autolex.bin	\
+	$(PREFIX2).n_a_adv.autolex.bin	\
+	$(PREFIX2b).n_a_adv.autolex.bin	\
+	$(PREFIX2).np.autolex.bin	\
+	$(PREFIX2b).np.autolex.bin	\
+	$(PREFIX2).v.autolex.bin	\
+	$(PREFIX2b).v.autolex.bin	\
+	$(PREFIX2).other.autolex.bin	\
+	$(PREFIX2b).other.autolex.bin	\
 	$(PREFIX2).autogen.bin	\
 	$(PREFIX2b).autogen.bin	\
 	$(PREFIX2).autopgen.bin	\
@@ -210,31 +222,115 @@ $(PREFIX2b).autobil.bin: .deps/$(PREFIX2b).dix .deps/.d
 ## Lexical selection rules
 ###############################################################################
 
-.deps/$(PREFIX1).lrx: $(BASENAME).$(PREFIX1).lrx .deps/.d
+.deps/$(PREFIX1).n_a_adv.lrx: $(BASENAME).$(PREFIX1).n_a_adv.lrx .deps/.d
 	apertium-filter-rules oci $< >$@
 
-.deps/$(PREFIX1b).lrx: $(BASENAME).$(PREFIX1).lrx .deps/.d
+.deps/$(PREFIX1b).n_a_adv.lrx: $(BASENAME).$(PREFIX1).n_a_adv.lrx .deps/.d
 	apertium-filter-rules oci@gascon $< >$@
 
-.deps/$(PREFIX2).lrx: $(BASENAME).$(PREFIX2).lrx .deps/.d
+.deps/$(PREFIX1).np.lrx: $(BASENAME).$(PREFIX1).np.lrx .deps/.d
 	apertium-filter-rules oci $< >$@
 
-.deps/$(PREFIX2b).lrx: $(BASENAME).$(PREFIX2).lrx .deps/.d
+.deps/$(PREFIX1b).np.lrx: $(BASENAME).$(PREFIX1).np.lrx .deps/.d
 	apertium-filter-rules oci@gascon $< >$@
 
-$(PREFIX1).autolex.bin: .deps/$(PREFIX1).lrx
+.deps/$(PREFIX1).v.lrx: $(BASENAME).$(PREFIX1).v.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX1b).v.lrx: $(BASENAME).$(PREFIX1).v.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+.deps/$(PREFIX1).other.lrx: $(BASENAME).$(PREFIX1).other.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX1b).other.lrx: $(BASENAME).$(PREFIX1).other.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+.deps/$(PREFIX2).n_a_adv.lrx: $(BASENAME).$(PREFIX2).n_a_adv.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX2b).n_a_adv.lrx: $(BASENAME).$(PREFIX2).n_a_adv.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+.deps/$(PREFIX2).np.lrx: $(BASENAME).$(PREFIX2).np.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX2b).np.lrx: $(BASENAME).$(PREFIX2).np.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+.deps/$(PREFIX2).v.lrx: $(BASENAME).$(PREFIX2).v.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX2b).v.lrx: $(BASENAME).$(PREFIX2).v.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+.deps/$(PREFIX2).other.lrx: $(BASENAME).$(PREFIX2).other.lrx .deps/.d
+	apertium-filter-rules oci $< >$@
+
+.deps/$(PREFIX2b).other.lrx: $(BASENAME).$(PREFIX2).other.lrx .deps/.d
+	apertium-filter-rules oci@gascon $< >$@
+
+$(PREFIX1).n_a_adv.autolex.bin: .deps/$(PREFIX1).n_a_adv.lrx
 	apertium-validate-lrx $<
 	lrx-comp $< $@
 
-$(PREFIX1b).autolex.bin: .deps/$(PREFIX1b).lrx
+$(PREFIX1b).n_a_adv.autolex.bin: .deps/$(PREFIX1b).n_a_adv.lrx
 	apertium-validate-lrx $<
 	lrx-comp $< $@
 
-$(PREFIX2).autolex.bin: .deps/$(PREFIX2).lrx
+$(PREFIX1).np.autolex.bin: .deps/$(PREFIX1).np.lrx
 	apertium-validate-lrx $<
 	lrx-comp $< $@
 
-$(PREFIX2b).autolex.bin: .deps/$(PREFIX2b).lrx
+$(PREFIX1b).np.autolex.bin: .deps/$(PREFIX1b).np.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX1).v.autolex.bin: .deps/$(PREFIX1).v.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX1b).v.autolex.bin: .deps/$(PREFIX1b).v.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX1).other.autolex.bin: .deps/$(PREFIX1).other.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX1b).other.autolex.bin: .deps/$(PREFIX1b).other.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2).n_a_adv.autolex.bin: .deps/$(PREFIX2).n_a_adv.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2b).n_a_adv.autolex.bin: .deps/$(PREFIX2b).n_a_adv.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2).np.autolex.bin: .deps/$(PREFIX2).np.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2b).np.autolex.bin: .deps/$(PREFIX2b).np.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2).v.autolex.bin: .deps/$(PREFIX2).v.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2b).v.autolex.bin: .deps/$(PREFIX2b).v.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2).other.autolex.bin: .deps/$(PREFIX2).other.lrx
+	apertium-validate-lrx $<
+	lrx-comp $< $@
+
+$(PREFIX2b).other.autolex.bin: .deps/$(PREFIX2b).other.lrx
 	apertium-validate-lrx $<
 	lrx-comp $< $@
 
