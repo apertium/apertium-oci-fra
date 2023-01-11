@@ -9,6 +9,10 @@
       <cat-item tags="SN"/>
       <cat-item tags="SN.*"/>
     </def-cat>
+    <def-cat n="SN_sg">
+      <cat-item tags="SN.*.sg"/>
+      <cat-item tags="SN.*.sg.*"/>
+    </def-cat>
     <def-cat n="SN_pl">
       <cat-item tags="SN.*.pl"/>
       <cat-item tags="SN.*.pl.*"/>
@@ -136,6 +140,17 @@
     <def-cat n="SV_aver_p3sg">
       <cat-item lemma="avoir" tags="SV.*.p3.sg"/>
     </def-cat>
+    <def-cat n="SV_faire_voir">
+      <cat-item lemma="faire" tags="SV.*"/>
+      <cat-item lemma="voir" tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_considerer_voir">
+      <cat-item lemma="considérer" tags="SV.*"/>
+      <cat-item lemma="voir" tags="SV.*"/>
+    </def-cat>
+    <def-cat n="SV_inf">
+      <cat-item tags="SV.*.inf"/>
+    </def-cat>
     <def-cat n="SV_partitiu">
       <cat-item tags="SV.vbser.partitiu.*"/>
       <cat-item tags="SV.vbhaver.partitiu.*"/>
@@ -252,8 +267,10 @@
     <def-cat n="et_ou">
       <cat-item lemma="et" tags="cnjcoo"/>
       <cat-item lemma="ou" tags="cnjcoo"/>
+      <cat-item lemma="ni" tags="cnjcoo"/>
       <cat-item lemma="et" tags="cnjcoo.*"/>
       <cat-item lemma="ou" tags="cnjcoo.*"/>
+      <cat-item lemma="ni" tags="cnjcoo.*"/>
     </def-cat>
 
     <def-cat n="cm">
@@ -325,6 +342,14 @@
     <def-cat n="SENT">
       <cat-item tags="sent"/>
     </def-cat>
+    <def-cat n="SENT_CNJ_REL">
+      <cat-item tags="sent"/>
+      <cat-item tags="cnjsub"/>
+      <cat-item tags="cnjadv"/>
+      <cat-item tags="cnjcoo"/>
+      <cat-item tags="rel"/>
+      <cat-item tags="rel.*"/>
+    </def-cat>
     <def-cat n="SENT_PREP_CNJ_REL">
       <cat-item tags="sent"/>
       <cat-item tags="PREP"/>
@@ -334,8 +359,24 @@
       <cat-item tags="rel"/>
       <cat-item tags="rel.*"/>
     </def-cat>
+    <def-cat n="SAdv_CNJCOO">
+      <cat-item tags="SAdv"/>
+      <cat-item tags="SAdv.*"/>
+      <cat-item tags="cnjcoo"/>
+      <cat-item lemma="donc" tags="cnjadv"/>
+      <cat-item lemma="cependant" tags="cnjadv"/>
+      <cat-item lemma="néanmoins" tags="cnjadv"/>
+      <cat-item lemma="nonobstant" tags="cnjadv"/>
+      <cat-item lemma="tout de même" tags="cnjadv"/>
+      <cat-item lemma="toutefois" tags="cnjadv"/>
+    </def-cat>
+
     <def-cat n="ij">
       <cat-item tags="ij"/>
+    </def-cat>
+
+    <def-cat n="quel">
+      <cat-item lemma="quel" tags="SPron.itg.*"/>
     </def-cat>
 
     <def-cat n="SN_personne_pl">
@@ -1087,13 +1128,22 @@
   </section-def-attrs>
 
   <section-def-vars>
-    <def-var n="number"/>
+    <def-var n="verb"/>
     <def-var n="is_expression"/>
     <def-var n="is_net"/>
     <def-var n="es_pot_gen_part" v="yes"/>
+    <def-var n="BOS" v="yes"/>	<!-- begin of sentence -->
   </section-def-vars>
 
   <section-def-lists>
+    <def-list n="v_movement">
+      <list-item v="arriver"/>
+      <list-item v="venir"/>
+      <list-item v="sortir"/>
+      <list-item v="partir"/>
+      <list-item v="apparaître"/>
+    </def-list>
+
     <def-list n="adv_sens_det">
       <list-item v="pas"/>
       <list-item v="même pas"/>
@@ -1109,6 +1159,7 @@
       <list-item v="plus de tout"/>
       <list-item v="peu"/>
       <list-item v="guère"/>
+      <list-item v="tellement"/>
     </def-list>
 
     <def-list n="pr_de">
@@ -1658,6 +1709,21 @@
    </out>
  </def-macro>
 
+ <def-macro n="generate_De" npar="0">
+    <!-- ^De<PREP>{^de<pr>$}$ -->
+   <out>
+     <chunk>
+       <lit v="De"/>
+       <lit-tag v="PREP"/>
+       <lit v="{^"/>
+       <lit v="de"/>
+       <lit-tag v="pr"/>
+       <lit v="$}"/>
+     </chunk>
+     <b/>
+   </out>
+ </def-macro>
+
  <def-macro n="generate_detdef1" npar="1"> <!-- par1 = SN -->
    <choose>
      <when>
@@ -1681,6 +1747,7 @@
            <equal caseless="yes"><clip pos="1" part="lem"/><lit v="adv_a_n_a"/></equal>
            <equal caseless="yes"><clip pos="1" part="lem"/><lit v="a_a_n"/></equal>
            <equal caseless="yes"><clip pos="1" part="lem"/><lit v="a_a_n_a"/></equal>
+           <equal caseless="yes"><clip pos="1" part="lem"/><lit v="braves gens"/></equal>
          </or>
        </test>
        <!-- pas de generacion -->
@@ -1879,6 +1946,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1908,11 +1976,13 @@
               </and>
             </test>
             <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
           </when>
           <otherwise>
             <let><var n="es_pot_gen_part"/><lit v="no"/></let>
           </otherwise>
         </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1937,11 +2007,14 @@
               </or>
             </test>
             <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+            <let><var n="verb"/><clip pos="1" part="lem"/></let>
           </when>
           <otherwise>
             <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+            <let><var n="verb"/><lit v=""/></let>
           </otherwise>
         </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1958,6 +2031,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -1974,10 +2048,44 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
-    <rule comment="RÈGLA: SN">
+    <rule comment="RÈGLA: LPAR">
+      <pattern>
+        <pattern-item n="LPAR"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" part="lem"/><lit v="("/></equal>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </when>
+        </choose>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" part="lem"/><lit v="«"/></equal>
+            </test>
+          </when>
+          <otherwise>
+            <let><var n="BOS"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN" v="oci">
       <pattern>
         <pattern-item n="SN"/>
       </pattern>
@@ -1990,10 +2098,320 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
-<!--
+    <rule comment="RÈGLA: SN_n" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <choose>
+              <when>
+                <test>
+                  <equal><var n="BOS"/><lit v="yes"/></equal>
+                </test>
+                <call-macro n="generate_De"/>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
+              </when>
+              <otherwise>
+                <call-macro n="generate_de"/>
+              </otherwise>
+            </choose>
+            <call-macro n="generate_detdef1">
+              <with-param pos="1"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_n CM (per empachar la generacion del partitiu si possible vocatiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SN_n"/>
+        <pattern-item n="CM"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+                <not><equal><var n="BOS"/><lit v="yes"/></equal></not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <out>  <!-- space problems -->
+              <b/>
+            </out>
+            <call-macro n="generate_detdef1">
+              <with-param pos="1"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <!-- <let><var n="es_pot_gen_part"/><lit v="no"/></let> -->
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_n et_ou SN_n" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SN_n"/>
+        <pattern-item n="et_ou"/>
+        <pattern-item n="SN_n"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <choose>
+              <when>
+                <test>
+                  <equal><var n="BOS"/><lit v="yes"/></equal>
+                </test>
+                <call-macro n="generate_De"/>
+                <modify-case><clip pos="1" part="lem"/><lit v="aa"/></modify-case>
+              </when>
+              <otherwise>
+                <call-macro n="generate_de"/>
+              </otherwise>
+            </choose>
+            <call-macro n="generate_detdef1">
+              <with-param pos="1"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SN_n et_ou SN_n CM (per empachar la generacion del partitiu si possible vocatiu: 'Amis et amies,')" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SN_n"/>
+        <pattern-item n="et_ou"/>
+        <pattern-item n="SN_n"/>
+        <pattern-item n="CM"/>
+      </pattern>
+      <action>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="1" part="nbr"/><lit-tag v="pl"/></equal>
+                <not><equal><var n="BOS"/><lit v="yes"/></equal></not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <call-macro n="generate_detdef1">
+              <with-param pos="1"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <b/>  <!-- space problems -->
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <b/>  <!-- space problems -->
+        </out>
+        <choose>
+          <when>
+            <test>
+              <and>
+                <equal><var n="es_pot_gen_part"/><lit v="yes"/></equal>
+                <equal><clip pos="3" part="nbr"/><lit-tag v="pl"/></equal>
+                <not><equal><var n="BOS"/><lit v="yes"/></equal></not>
+              </and>
+            </test>
+            <call-macro n="generate_de"/>
+            <out>  <!-- space problems -->
+              <b/>
+            </out>
+            <call-macro n="generate_detdef1">
+              <with-param pos="3"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: QUEL SN (pas de generacion del partitiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="quel"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT IJ SN (pas de generacion del partitiu: probablement es un vocatiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SENT"/>
+        <pattern-item n="ij"/>
+        <pattern-item n="SN"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT IJ CM SN CM (pas de generacion del partitiu: probablement es un vocatiu)" v="oci@gascon">
+      <pattern>
+        <pattern-item n="SENT"/>
+        <pattern-item n="ij"/>
+        <pattern-item n="CM"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="CM"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SAdv">
       <pattern>
         <pattern-item n="SAdv"/>
@@ -2006,6 +2424,7 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2021,6 +2440,7 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2036,9 +2456,9 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
--->
 
     <rule comment="RÈGLA: cnjsub">
       <pattern>
@@ -2053,6 +2473,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2069,6 +2490,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2085,11 +2507,11 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
-<!--
-    <rule comment="RÈGLA: ij">
+    <rule comment="RÈGLA: IJ">
       <pattern>
         <pattern-item n="ij"/>
       </pattern>
@@ -2101,6 +2523,8 @@
             <clip pos="1" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2114,10 +2538,9 @@
             <clip pos="1" part="whole"/>
           </chunk>
         </out>
-        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
--->
 
     <rule comment="RÈGLA: SENT">
       <pattern>
@@ -2130,6 +2553,398 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <choose>
+          <when>
+            <test>
+              <equal><clip pos="1" part="lem"/><lit v="."/></equal>
+            </test>
+            <let><var n="BOS"/><lit v="yes"/></let>
+          </when>
+          <when>
+            <test>
+              <equal><clip pos="1" part="lem"/><lit v="—"/></equal>
+            </test>
+          </when>
+          <otherwise>
+            <let><var n="BOS"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: FAIRE INF">
+      <pattern>
+        <pattern-item n="SV_faire_voir"/>
+        <pattern-item n="SV_inf"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="verb"/><clip pos="2" part="lem"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: CONSIDERER PP (veire sancionats d'articles > voir sanctionnés des articles)">
+      <pattern>
+        <pattern-item n="SV_considerer_voir"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="verb"/><clip pos="2" part="lem"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: HAVER PP">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="2" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: HAVER SAdv PP">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="2" part="a_pron_pas_neg"/><lit-tag v="pas_neg"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="pas"/></equal>
+                <in caseless="yes"><clip pos="2" part="lem"/><list n="adv_sens_det"/></in>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="3" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: HAVER SAdv SAdv PP">
+      <pattern>
+        <pattern-item n="SV_vbhaver"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="2" part="a_pron_pas_neg"/><lit-tag v="pas_neg"/></equal>
+                <equal caseless="yes"><clip pos="2" part="lem"/><lit v="pas"/></equal>
+                <in caseless="yes"><clip pos="2" part="lem"/><list n="adv_sens_det"/></in>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="4" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_CNJ_REL SER PP (. Son causits de sites > . Sont choisis des sites)">
+      <pattern>
+        <pattern-item n="SENT_CNJ_REL"/>
+        <pattern-item n="SV_ser"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="3" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <in caseless="yes"><clip pos="3" part="lem"/><list n="v_movement"/></in>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_CNJ_REL SAdv_CNJCOO SER PP (. Sovent son causits de sites > . Souvent sont choisis des sites)">
+      <pattern>
+        <pattern-item n="SENT_CNJ_REL"/>
+        <pattern-item n="SAdv_CNJCOO"/>
+        <pattern-item n="SV_ser"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="4" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <in caseless="yes"><clip pos="4" part="lem"/><list n="v_movement"/></in>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_CNJ_REL SAdv_CNJCOO SAdv_CNJCOO SER PP (. Mas sovent son causits de sites > . Mais souvent sont choisis des sites)">
+      <pattern>
+        <pattern-item n="SENT_CNJ_REL"/>
+        <pattern-item n="SAdv_CNJCOO"/>
+        <pattern-item n="SAdv_CNJCOO"/>
+        <pattern-item n="SV_ser"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="5" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <in caseless="yes"><clip pos="5" part="lem"/><list n="v_movement"/></in>
+                <equal caseless="yes"><clip pos="5" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="5" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="5" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: SENT_CNJ_REL SER SAdv PP (. Son sovent causits de sites > . Sont souvent choisis des sites)">
+      <pattern>
+        <pattern-item n="SENT_CNJ_REL"/>
+        <pattern-item n="SV_ser"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="PP"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <choose>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="3" part="a_pron_pas_neg"/><lit-tag v="pas_neg"/></equal>
+                <equal caseless="yes"><clip pos="3" part="lem"/><lit v="pas"/></equal>
+                <in caseless="yes"><clip pos="3" part="lem"/><list n="adv_sens_det"/></in>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </when>
+          <when>
+            <test>
+              <or>
+                <equal><clip pos="4" part="a_part"/><lit-tag v="partitiu"/></equal>
+                <in caseless="yes"><clip pos="4" part="lem"/><list n="v_movement"/></in>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="avoir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="falloir"/></equal>
+                <equal caseless="yes"><clip pos="4" part="lem"/><lit v="être"/></equal>
+              </or>
+            </test>
+            <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+          </when>
+          <otherwise>
+            <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+          </otherwise>
+        </choose>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2203,6 +3018,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2270,6 +3086,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2299,6 +3116,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2324,6 +3142,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2375,6 +3194,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2419,6 +3239,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2491,6 +3312,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2555,6 +3377,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2649,6 +3472,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2729,6 +3553,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2763,6 +3588,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2802,6 +3628,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2841,6 +3668,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2885,6 +3713,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -2948,6 +3777,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3016,6 +3846,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3089,6 +3920,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3168,6 +4000,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3242,6 +4075,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3289,6 +4123,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3336,6 +4171,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3380,6 +4216,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3431,6 +4268,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3508,6 +4346,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3580,6 +4419,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3665,6 +4505,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3745,6 +4586,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3821,6 +4663,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3892,6 +4735,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -3976,6 +4820,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4055,6 +4900,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4147,6 +4993,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4234,6 +5081,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4326,6 +5174,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4413,6 +5262,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4460,6 +5310,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4499,6 +5350,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4528,6 +5380,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4557,6 +5410,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4612,6 +5466,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 -->
@@ -4667,11 +5522,89 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="yes"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PR_de SN_sg" v="oci">
+      <pattern>
+        <pattern-item n="PREP_de"/>
+        <pattern-item n="SN_sg"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="lem"/>
+            <clip pos="1" part="tags"/>
+            <clip pos="1" part="chcontent"/>
+          </chunk>
+          <b pos="1"/>
+        </out>
+        <choose>
+          <when>
+            <test>
+             <equal><var n="es_pot_gen_part"/><lit v="no"/></equal>
+            </test>
+          </when>
+          <when>
+            <test>
+              <or>
+                <and>
+                  <equal caseless="yes"><var n="verb"/><lit v="perdre"/></equal>
+                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="valeur"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><var n="verb"/><lit v="prendre"/></equal>
+                  <equal caseless="yes"><clip pos="2" part="lem"/><lit v="retard"/></equal>
+                </and>
+                <and>
+                  <equal caseless="yes"><var n="verb"/><lit v="jouer"/></equal>
+                  <or>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="musique"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="piano"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="violon"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="alto"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="violoncelle"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="contrebasse"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="flûte"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="hautbois"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="clarinette"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="trompette"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="trombone"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="saxo"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="saxophone"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="harpe"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="guitare"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="basse"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="clavier"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="clavecin"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="clavicorde"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="organe"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="cornemuse"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="fifre"/></equal>
+                    <equal caseless="yes"><clip pos="2" part="lem"/><lit v="n_a"/></equal>
+                  </or>
+                </and>
+              </or>
+            </test>
+            <call-macro n="generate_detdef1">
+              <with-param pos="2"/>
+            </call-macro>
+          </when>
+        </choose>
+        <out>
+          <chunk>
+            <clip pos="2" part="lem"/>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
     <rule comment="RÈGLA: PR_de SN_pl" v="oci">
-<!-- xxxxxx -->
       <pattern>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl"/>
@@ -4703,6 +5636,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4744,6 +5678,7 @@
             <clip pos="3" part="whole"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4777,6 +5712,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4808,6 +5744,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4844,6 +5781,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4887,6 +5825,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4927,6 +5866,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -4995,6 +5935,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5039,6 +5980,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5101,6 +6043,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5152,6 +6095,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5221,6 +6165,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5258,6 +6203,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5302,6 +6248,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5339,6 +6286,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5377,6 +6325,7 @@
           </chunk>
         </out>
         <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 -->
@@ -5405,6 +6354,7 @@
           </chunk>
         </out>
         <call-macro n="generate_il"><with-param pos="2"/></call-macro>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5431,6 +6381,7 @@
           </chunk>
         </out>
         <call-macro n="generate_il"><with-param pos="3"/></call-macro>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5459,6 +6410,7 @@
             <clip pos="3" part="whole"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5492,6 +6444,7 @@
             <clip pos="4" part="whole"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5523,6 +6476,7 @@
             <lit v="$}"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5557,6 +6511,7 @@
             <lit v="$}"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5591,6 +6546,7 @@
             <clip pos="3" part="whole"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5630,6 +6586,7 @@
             <clip pos="4" part="whole"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5658,6 +6615,7 @@
             <clip pos="3" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5691,6 +6649,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5729,6 +6688,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5762,6 +6722,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5802,6 +6763,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5847,6 +6809,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5880,6 +6843,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5920,6 +6884,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -5965,6 +6930,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6005,6 +6971,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6052,6 +7019,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6104,6 +7072,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6137,6 +7106,7 @@
             <clip pos="4" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6177,6 +7147,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6222,6 +7193,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6262,6 +7234,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6309,6 +7282,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6361,6 +7335,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6401,6 +7376,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6441,6 +7417,7 @@
             <clip pos="5" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6488,6 +7465,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6535,6 +7513,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6582,6 +7561,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6634,6 +7614,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6681,6 +7662,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
@@ -6733,6 +7715,7 @@
             <clip pos="6" part="chcontent"/>
           </chunk>
         </out>
+        <let><var n="BOS"/><lit v="no"/></let>
       </action>
     </rule>
 
