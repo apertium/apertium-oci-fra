@@ -6200,8 +6200,9 @@
         <call-macro n="firstWord">
           <with-param pos="2"/>
         </call-macro>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="lpar">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="LPAR"/></tag>
             </tags>
@@ -23821,8 +23822,9 @@
         <pattern-item n="lpar"/>
       </pattern>
       <action>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="lpar">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="LPAR"/></tag>
             </tags>
@@ -23896,8 +23898,9 @@
             <let><var n="EOS"/><lit v="true"/></let>
           </when>
         </choose>
+        <let><var n="lemma"/><clip pos="1" side="tl" part="lem"/></let>
         <out>
-          <chunk name="sent">
+          <chunk namefrom="lemma">
             <tags>
               <tag><lit-tag v="sent"/></tag>
             </tags>
