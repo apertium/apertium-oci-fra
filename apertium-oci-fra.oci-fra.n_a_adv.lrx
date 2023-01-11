@@ -5389,6 +5389,18 @@
 
 <!-- **************** N **************** -->
 
+  <!-- andada >> vague, promenade -->
+  <rule weight="0.8">
+    <match lemma="andada" tags="n.*"><select lemma="vague"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="dar" tags="vblex.*"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <match lemma="andada" tags="n.*"><select lemma="promenade"/></match>
+  </rule>
+
   <!-- escalfament >> échauffement, réchauffement-->
   <rule weight="0.8">
     <match lemma="escalfament" tags="n.*"><select lemma="échauffement"/></match>
@@ -7799,6 +7811,34 @@
       <match tags="adj.*"/>
       <match tags="preadv"/>
       <match tags="adv"/>
+    </repeat>
+    <match lemma="canton" tags="n.*"><select lemma="canton"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="canton" tags="n.*"><select lemma="canton"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="departament" tags="n.*"/>
+      <match lemma="departamental" tags="adj.*"/>
+      <match lemma="interdepartamental" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="departament" tags="n.*"/>
+      <match lemma="departamental" tags="adj.*"/>
+      <match lemma="interdepartamental" tags="adj.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <match lemma="canton" tags="n.*"><select lemma="canton"/></match>
   </rule>
