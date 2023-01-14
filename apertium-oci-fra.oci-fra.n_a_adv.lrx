@@ -9220,13 +9220,20 @@
     <or><match tags="np.top.*"/><match tags="np.loc"/></or>
   </rule>
   <rule weight="1.0">
+    <match tags="num.*"/>
     <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
-    <match lemma="de" tags="pr"/>
-    <repeat from="0" upto="1">
-      <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
     </repeat>
     <or>
       <match lemma="glèisa" tags="n.*"/>
+      <match lemma="basilica" tags="n.*"/>
       <match lemma="catedrala" tags="n.*"/>
       <match lemma="catedrau" tags="n.*"/>
       <match lemma="abadiá" tags="n.*"/>
@@ -9234,7 +9241,20 @@
     </or>
   </rule>
   <rule weight="1.0">
-    <match tags="num.*"/>
+    <or>
+      <match lemma="glèisa" tags="n.*"/>
+      <match lemma="basilica" tags="n.*"/>
+      <match lemma="catedrala" tags="n.*"/>
+      <match lemma="catedrau" tags="n.*"/>
+      <match lemma="abadiá" tags="n.*"/>
+      <match lemma="abadia" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
     <match lemma="còr" tags="n.*"><select lemma="chœur"/></match>
   </rule>
 

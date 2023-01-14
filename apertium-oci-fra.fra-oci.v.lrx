@@ -660,7 +660,7 @@
       </rule>
     </def-macro>
 
-    <!-- p1 = verb fra, p2 = verb oci amb adj en masc sg, p3 = verb oci amb adj en fem sg, p2 = verb oci amb adj en masc pl, p3 = verb oci amb adj en fem pl -->
+    <!-- p1 = verb fra, p2 = verb oci amb adj en masc sg, p3 = verb oci amb adj en fem sg, p4 = verb oci amb adj en masc pl, p5 = verb oci amb adj en fem pl -->
     <def-macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
       <rule weight="0.8">
         <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
@@ -1827,6 +1827,27 @@
   </rule>
 
 <!-- **************** VBLEX **************** -->
+
+  <!-- poindre >> ponchar/pónher, puntejar -->
+  <rule weight="0.8">
+    <match lemma="poindre" tags="vblex.*" v="oci"><select lemma="ponchar"/></match>
+    <match lemma="poindre" tags="vblex.*" v="oci@gascon"><select lemma="pónher"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="poindre" tags="vblex.*"><select lemma="puntejar"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="soleil" tags="n.*"/>
+      <match lemma="aube" tags="n.*"/>
+      <match lemma="jour" tags="n.*"/>
+      <match lemma="matin" tags="n.*"/>
+    </or>
+  </rule>
 
   <!-- produire >> produire/produsir, mostrar/amushar -->
   <rule weight="0.8">

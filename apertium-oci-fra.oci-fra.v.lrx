@@ -464,7 +464,7 @@
       </rule>
     </def-macro>
 
-    <!-- p1 = verb oci, p2 = verb fra amb adj en masc sg, p3 = verb fra amb adj en fem sg, p2 = verb fra amb adj en masc pl, p3 = verb fra amb adj en fem pl -->
+    <!-- p1 = verb oci, p2 = verb fra amb adj en masc sg, p3 = verb fra amb adj en fem sg, p4 = verb fra amb adj en masc pl, p5 = verb fra amb adj en fem pl -->
     <def-macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
       <rule weight="0.8">
         <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
@@ -501,6 +501,28 @@
           <match tags="adj.*"/>
         </or>
         <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
+      </rule>
+    </def-macro>
+
+    <!-- p1 = verb oci, p2 = verb fra per p1.sg, p3 = verb fra per p2.sg, p4 = verb fra per p3.sg, p5 = verb fra per p1.pl, ... -->
+    <def-macro n="verb_p1sg_p2sg_p3sg_p1pl_p2pl_p3pl" npar="7">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="5"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="6"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p3.pl"><select plemma="7"/></match>
       </rule>
     </def-macro>
   </def-macros>
@@ -2827,6 +2849,33 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- esguitar >> jaillir, poindre -->
+  <rule weight="0.8">
+    <match lemma="esguitar" tags="vblex.*"><select lemma="jaillir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="esguitar" tags="vblex.*"><select lemma="poindre"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="solelh" tags="n.*"/>
+      <match lemma="sorelh" tags="n.*"/>
+      <match lemma="solei" tags="n.*"/>
+      <match lemma="só" tags="n.*"/>
+      <match lemma="sóu" tags="n.*"/>
+      <match lemma="alba" tags="n.*"/>
+      <match lemma="auba" tags="n.*"/>
+      <match lemma="primalba" tags="n.*"/>
+      <match lemma="jorn" tags="n.*"/>
+      <match lemma="dia" tags="n.*"/>
+      <match lemma="matin" tags="n.*"/>
+    </or>
+  </rule>
+
   <!-- téner >> tenir, tendre -->
   <rule weight="0.8">
     <match lemma="téner" tags="vblex.*"><select lemma="tenir"/></match>
@@ -4280,11 +4329,28 @@
     <match lemma="revirar" tags="vblex.pp.*"><select lemma="traduire"/></match>
   </rule>
 
+  <!-- (se) faire# vieux >> venir# vielh, venir# vielhs -->
+  <rule weight="0.8">
+    <match lemma="faire# vieux" tags="vblex.*"><select lemma="venir# vielh"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="faire# vieux" tags="vblex.*.pl"><select lemma="venir# vielhs"/></match>
+  </rule>
+
   <!-- amudir >> rendre# muet, rendre# muets, etc. -->
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="amudir"/><with-param v="rendre# muet"/><with-param v="rendre# muette"/><with-param v="rendre# muets"/><with-param v="rendre# muettes"/></macro>
 
   <!-- illegalizar >> rendre# illégal, rendre# illégaux, etc. -->
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="illegalizar"/><with-param v="rendre# illégal"/><with-param v="rendre# illégale"/><with-param v="rendre# illégaux"/><with-param v="rendre# illégales"/></macro>
+
+  <!-- ganhar# la vida >> gagner# ma vie, gagner# ta vie, etc. -->
+  <macro n="verb_p1sg_p2sg_p3sg_p1pl_p2pl_p3pl"><with-param v="ganhar# la vida"/><with-param v="gagner# ma vie"/><with-param v="gagner# ta vie"/><with-param v="gagner# sa vie"/><with-param v="gagner# notre vie"/><with-param v="gagner# votre vie"/><with-param v="gagner# leur vie"/></macro>
+
+  <!-- ganhar# lo víver >> gagner# ma vie, gagner# ta vie, etc. -->
+  <macro n="verb_p1sg_p2sg_p3sg_p1pl_p2pl_p3pl"><with-param v="ganhar# lo víver"/><with-param v="gagner# ma vie"/><with-param v="gagner# ta vie"/><with-param v="gagner# sa vie"/><with-param v="gagner# notre vie"/><with-param v="gagner# votre vie"/><with-param v="gagner# leur vie"/></macro>
+
+  <!-- ganhar# la viòca >> gagner# ma vie, gagner# ta vie, etc. -->
+  <macro n="verb_p1sg_p2sg_p3sg_p1pl_p2pl_p3pl"><with-param v="ganhar# la viòca"/><with-param v="gagner# ma vie"/><with-param v="gagner# ta vie"/><with-param v="gagner# sa vie"/><with-param v="gagner# notre vie"/><with-param v="gagner# votre vie"/><with-param v="gagner# leur vie"/></macro>
 
   <!-- agilizar >> rendre# agile, rendre# agiles -->
   <rule weight="0.8">

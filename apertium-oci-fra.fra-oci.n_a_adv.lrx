@@ -2031,6 +2031,65 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- chaire >> cadièra, presicadoira/predicadera  -->
+  <rule weight="0.8">
+    <match lemma="chaire" tags="n.*"><select lemma="cadièra"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="chaire" tags="n.*" v="oci"><select lemma="presicadoira"/></match>
+    <match lemma="chaire" tags="n.*" v="oci@gascon"><select lemma="predicadera"/></match>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="curé" tags="n.*"/>
+      <match lemma="pape" tags="n.*"/>
+      <match lemma="évêque" tags="n.*"/>
+      <match lemma="archevêque" tags="n.*"/>
+      <match lemma="église" tags="n.*"/>
+      <match lemma="cathédrale" tags="n.*"/>
+      <match lemma="basilique" tags="n.*"/>
+      <match lemma="abbaye" tags="n.*"/>
+      <match lemma="chœur" tags="n.*"/>
+      <match lemma="nef" tags="n.*"/>
+      <match lemma="transept" tags="n.*"/>
+      <match lemma="prêche" tags="n.*"/>
+      <match lemma="sermon" tags="n.*"/>
+      <match lemma="prêcher" tags="vblex.*"/>
+      <match lemma="fidèle" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="curé" tags="n.*"/>
+      <match lemma="pape" tags="n.*"/>
+      <match lemma="évêque" tags="n.*"/>
+      <match lemma="archevêque" tags="n.*"/>
+      <match lemma="église" tags="n.*"/>
+      <match lemma="cathédrale" tags="n.*"/>
+      <match lemma="basilique" tags="n.*"/>
+      <match lemma="abbaye" tags="n.*"/>
+      <match lemma="chœur" tags="n.*"/>
+      <match lemma="nef" tags="n.*"/>
+      <match lemma="transept" tags="n.*"/>
+      <match lemma="prêche" tags="n.*"/>
+      <match lemma="sermon" tags="n.*"/>
+      <match lemma="prêcher" tags="vblex.*"/>
+      <match lemma="fidèle" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="8">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="chaire" tags="n.*" v="oci"><select lemma="presicadoira"/></match>
+    <match lemma="chaire" tags="n.*" v="oci@gascon"><select lemma="predicadera"/></match>
+  </rule>
+
   <!-- égard >> esgard, atencion -->
   <rule weight="0.8">
     <match lemma="égard" tags="n.*"><select lemma="esgard"/></match>
