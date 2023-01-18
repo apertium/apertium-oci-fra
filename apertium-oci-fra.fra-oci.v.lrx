@@ -1828,6 +1828,25 @@
 
 <!-- **************** VBLEX **************** -->
 
+  <!-- empresser >> afanar, preissar -->
+  <rule weight="0.8" v="oci">
+    <match lemma="empresser" tags="vblex.*"><select lemma="afanar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="empresser" tags="vblex.*"><select lemma="preissar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="3">
+      <or>
+        <match tags="adv"/>
+        <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+
   <!-- poindre >> ponchar/pónher, puntejar -->
   <rule weight="0.8">
     <match lemma="poindre" tags="vblex.*" v="oci"><select lemma="ponchar"/></match>

@@ -2039,7 +2039,7 @@
           <match tags="adj.*.pl"/>
         </or>
       </rule>
-    
+
       <rule weight="2.0">
         <match plemma="1" tags="rel.*"><select plemma="2"/></match>
         <repeat from="0" upto="2">
@@ -2074,7 +2074,7 @@
           <seq n="verb_dat2nom_pp"/>
         </or>
       </rule>
-    
+
       <rule weight="2.0">
         <or>
           <match tags="n.*"/>
@@ -2121,7 +2121,7 @@
 		  <match lemma="venir" tags="vblex.*"/>
         </or>
       </rule>
-    
+
       <rule weight="1.0">
         <match plemma="1" tags="rel.*.sg"><select plemma="3"/></match>
         <repeat from="0" upto="3">
@@ -2290,6 +2290,127 @@
         <match tags="pr"/>
         <match tags="det.*"/>
         <match plemma="1" tags="num.*"><select plemma="2" tags="adj.*"/></match>
+      </rule>
+	</def-macro>
+
+    <!-- entà >> à, pour, vers, de, [remove] -->
+    <!-- tà >> à, pour, vers, de, [remove] -->
+    <!-- enta >> à, pour, vers, de, [remove] -->
+    <def-macro n="enta_et_sim" npar="5">
+      <rule weight="0.6">
+        <match plemma="1" tags="pr"><select plemma="2"/></match>
+      </rule>
+
+      <rule weight="0.8" v="oci@gascon">
+        <match plemma="1" tags="pr"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0" v="oci@gascon">
+        <match plemma="1" tags="pr"><select plemma="4"/></match>
+        <or>
+          <match lemma="dehòra" tags="adv"/>
+          <match lemma="endehòra" tags="adv"/>
+          <match lemma="dehòra" tags="n.*"/>
+          <match lemma="dens" tags="adv"/>
+          <match lemma="deguens" tags="adv"/>
+          <match lemma="dehens" tags="n.*"/>
+          <match lemma="endehens" tags="n.*"/>
+          <match lemma="deguens" tags="n.*"/>
+          <match lemma="on" tags="adv.*"/>
+          <match lemma="on" tags="rel.*"/>
+          <match lemma="ont" tags="adv.*"/>
+          <match lemma="ont" tags="rel.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0" v="oci@gascon">
+        <match plemma="1" tags="pr"><select plemma="2"/></match>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*"/>
+        </repeat>
+        <or>
+          <match tags="np.top.*"/>
+          <match tags="" case="Aa"/>
+        </or>
+      </rule>
+      <rule weight="2.2" v="oci@gascon">
+        <or>
+          <match lemma="partir" tags="vblex.*"/>
+          <match lemma="tornar# partir" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="pr"><select plemma="3"/></match>
+        <repeat from="0" upto="1">
+          <match tags="det.def.*"/>
+        </repeat>
+        <or>
+          <match tags="np.top.*"/>
+          <match tags="" case="Aa"/>
+        </or>
+      </rule>
+      <rule weight="1.0" v="oci@gascon">
+        <or>
+          <match lemma="anar" tags="vblex.*"/>
+          <match lemma="viatjar" tags="vblex.*"/>
+          <match lemma="bracar" tags="vblex.*"/>
+          <match lemma="sortir" tags="vblex.*"/>
+          <match lemma="gésser" tags="vblex.*"/>
+          <match lemma="arribar" tags="vblex.*"/>
+          <match lemma="tornar" tags="vblex.*"/>
+          <match lemma="partir" tags="vblex.*"/>
+          <match lemma="tornar# partir" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="pr"><select plemma="2"/></match>
+      </rule>
+      <rule weight="2.2" v="oci@gascon">
+        <or>
+          <match lemma="anar" tags="vblex.*"/>
+          <match lemma="viatjar" tags="vblex.*"/>
+          <match lemma="bracar" tags="vblex.*"/>
+          <match lemma="sortir" tags="vblex.*"/>
+          <match lemma="gésser" tags="vblex.*"/>
+          <match lemma="arribar" tags="vblex.*"/>
+          <match lemma="tornar" tags="vblex.*"/>
+          <match lemma="partir" tags="vblex.*"/>
+          <match lemma="tornar# partir" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="pr"><remove tags="pr"/></match>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <match tags="*.inf"/>
+      </rule>
+      <rule weight="1.0" v="oci@gascon">
+        <or>
+          <match lemma="amanejar" tags="vblex.*"/>
+          <match lemma="pressar" tags="vblex.*"/>
+          <match lemma="empressar" tags="vblex.*"/>
+          <match lemma="esdeburar" tags="vblex.*"/>
+          <match lemma="encuentar" tags="vblex.*"/>
+          <match lemma="afanar" tags="vblex.*"/>
+          <match lemma="ahanar" tags="vblex.*"/>
+          <match lemma="cochar" tags="vblex.*"/>
+        </or>
+        <repeat from="0" upto="1">
+          <match tags="prn.enc.*"/>
+        </repeat>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="pr"><select plemma="5"/></match>
+        <repeat from="0" upto="1">
+          <match tags="adv"/>
+        </repeat>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <match tags="*.inf"/>
       </rule>
 	</def-macro>
   </def-macros>
@@ -4782,7 +4903,7 @@
     </repeat>
     <match lemma="que"/>
   </rule>
-  <rule weight="1.0"> 
+  <rule weight="1.0">
     <match lemma="se" tags="prn.pro.*"><select lemma="on"/></match>
     <repeat from="0" upto="1">
       <match lemma="i" tags="prn.pro.*"/>
@@ -7050,278 +7171,12 @@
     <match tags="det.*"/>
   </rule>
 
-  <!-- entà >> à, pour, vers, [remove] -->
-  <!-- tà >> à, pour, vers, [remove] -->
-  <!-- enta >> à, pour, vers, [remove] -->
-  <rule weight="0.6">
-    <match lemma="entà" tags="pr"><select lemma="à"/></match>
-  </rule>
-  <rule weight="0.6">
-    <match lemma="enta" tags="pr"><select lemma="à"/></match>
-  </rule>
-  <rule weight="0.6">
-    <match lemma="tà" tags="pr"><select lemma="à"/></match>
-  </rule>
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="entà" tags="pr"><select lemma="pour"/></match>
-  </rule>
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="enta" tags="pr"><select lemma="pour"/></match>
-  </rule>
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
-  </rule>
-
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="entà" tags="pr"><select lemma="vers"/></match>
-    <or>
-      <match lemma="dehòra" tags="adv"/>
-      <match lemma="endehòra" tags="adv"/>
-      <match lemma="dehòra" tags="n.*"/>
-      <match lemma="dens" tags="adv"/>
-      <match lemma="deguens" tags="adv"/>
-      <match lemma="dehens" tags="n.*"/>
-      <match lemma="endehens" tags="n.*"/>
-      <match lemma="deguens" tags="n.*"/>
-      <match lemma="on" tags="adv.*"/>
-      <match lemma="on" tags="rel.*"/>
-      <match lemma="ont" tags="adv.*"/>
-      <match lemma="ont" tags="rel.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="enta" tags="pr"><select lemma="vers"/></match>
-    <or>
-      <match lemma="dehòra" tags="adv"/>
-      <match lemma="endehòra" tags="adv"/>
-      <match lemma="dehòra" tags="n.*"/>
-      <match lemma="dens" tags="adv"/>
-      <match lemma="deguens" tags="adv"/>
-      <match lemma="dehens" tags="n.*"/>
-      <match lemma="endehens" tags="n.*"/>
-      <match lemma="deguens" tags="n.*"/>
-      <match lemma="on" tags="adv.*"/>
-      <match lemma="on" tags="rel.*"/>
-      <match lemma="ont" tags="adv.*"/>
-      <match lemma="ont" tags="rel.*"/>
-    </or>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="tà" tags="pr"><select lemma="vers"/></match>
-    <or>
-      <match lemma="dehòra" tags="adv"/>
-      <match lemma="endehòra" tags="adv"/>
-      <match lemma="dehòra" tags="n.*"/>
-      <match lemma="dens" tags="adv"/>
-      <match lemma="deguens" tags="adv"/>
-      <match lemma="dehens" tags="n.*"/>
-      <match lemma="endehens" tags="n.*"/>
-      <match lemma="deguens" tags="n.*"/>
-      <match lemma="on" tags="adv.*"/>
-      <match lemma="on" tags="rel.*"/>
-      <match lemma="ont" tags="adv.*"/>
-      <match lemma="ont" tags="rel.*"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="entà" tags="pr"><select lemma="à"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="tà" tags="pr"><select lemma="à"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <match lemma="enta" tags="pr"><select lemma="à"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="entà" tags="pr"><select lemma="pour"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="tà" tags="pr"><select lemma="pour"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="enta" tags="pr"><select lemma="pour"/></match>
-    <repeat from="0" upto="1">
-      <match tags="det.def.*"/>
-    </repeat>
-    <or>
-      <match tags="np.top.*"/>
-      <match tags="" case="Aa"/>
-    </or>
-  </rule>
-
-  <rule weight="1.0" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="entà" tags="pr"><select lemma="à"/></match>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="tà" tags="pr"><select lemma="à"/></match>
-  </rule>
-  <rule weight="1.0" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="enta" tags="pr"><select lemma="à"/></match>
-  </rule>
-
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="entà" tags="pr"><remove tags="pr"/></match>
-    <repeat from="0" upto="2">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <match tags="*.inf"/>
-  </rule>
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="tà" tags="pr"><remove tags="pr"/></match>
-    <repeat from="0" upto="2">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <match tags="*.inf"/>
-  </rule>
-  <rule weight="2.2" v="oci@gascon">
-    <or>
-      <match lemma="anar" tags="vblex.*"/>
-      <match lemma="viatjar" tags="vblex.*"/>
-      <match lemma="bracar" tags="vblex.*"/>
-      <match lemma="sortir" tags="vblex.*"/>
-      <match lemma="gésser" tags="vblex.*"/>
-      <match lemma="arribar" tags="vblex.*"/>
-      <match lemma="tornar" tags="vblex.*"/>
-      <match lemma="partir" tags="vblex.*"/>
-      <match lemma="tornar# partir" tags="vblex.*"/>
-    </or>
-    <repeat from="0" upto="2">
-      <match tags="adv"/>
-    </repeat>
-    <match lemma="enta" tags="pr"><remove tags="pr"/></match>
-    <repeat from="0" upto="2">
-      <match tags="prn.pro.*"/>
-    </repeat>
-    <match tags="*.inf"/>
-  </rule>
+  <!-- entà >> à, pour, vers, de, [remove] -->
+  <!-- tà >> à, pour, vers, de, [remove] -->
+  <!-- enta >> à, pour, vers, de, [remove] -->
+  <macro n="enta_et_sim"><with-param v="entà"/><with-param v="à"/><with-param v="pour"/><with-param v="vers"/><with-param v="de"/></macro>
+  <macro n="enta_et_sim"><with-param v="tà"/><with-param v="à"/><with-param v="pour"/><with-param v="vers"/><with-param v="de"/></macro>
+  <macro n="enta_et_sim"><with-param v="enta"/><with-param v="à"/><with-param v="pour"/><with-param v="vers"/><with-param v="de"/></macro>
 
   <!-- pendent >> pendant, lors de -->
   <rule weight="0.8">

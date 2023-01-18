@@ -415,6 +415,277 @@
 -->
     </def-macro>
 
+    <!-- p1 = verb oci, p2 = verb fra no pron, p3 = verb fra pron, p4 = verb fra pron si seguit de la preposicion p5 -->
+    <def-macro n="verb_nopron_pron_pronprep" npar="5">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="3"/></match>
+        <match tags="prn.enc.p1.*.sg"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="3"/></match>
+        <match tags="prn.enc.p2.*.sg"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="3"/></match>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <match tags="prn.pro.*"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="3"/></match>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="3"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="3"/></match>
+        </or>
+        <match tags="prn.enc.ref.p3.*.sp"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="3"/></match>
+        <match tags="prn.enc.p1.*.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="3"/></match>
+        <match tags="prn.enc.p2.*.pl"/>
+      </rule>
+      <rule weight="1.0">
+        <match tags="prn.pro.p3.*"/>
+        <match plemma="1" tags="vblex.*.p3.*"><select plemma="3"/></match>
+        <repeat from="0" upto="1">
+          <or>
+            <match tags="adv"/>
+            <match tags="preadv"/>
+          </or>
+        </repeat>
+        <or>
+          <match tags="np.ant"/>
+          <match tags="np.ant.*"/>
+          <match tags="np.cog.*"/>
+        </or>
+      </rule>
+      <rule weight="1.0">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="n.*"/>
+        <repeat from="0" upto="1">
+          <match tags="adj.*"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <or>
+          <match tags="cm"/>
+          <match tags="lpar"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="3"/></match>
+      </rule>
+
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p1.sg"><select plemma="4"/></match>
+        <match tags="prn.enc.p1.*.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.sg"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p2.sg"><select plemma="4"/></match>
+        <match tags="prn.enc.p2.*.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.ref.p3.*.sp"/>
+        <match tags="prn.pro.*"/>
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <or>
+          <match plemma="1" tags="vblex.*.p3.sg"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.*.p3.pl"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.inf"><select plemma="4"/></match>
+          <match plemma="1" tags="vblex.ger"><select plemma="4"/></match>
+        </or>
+        <match tags="prn.enc.ref.p3.*.sp"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p1.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p1.pl"><select plemma="4"/></match>
+        <match tags="prn.enc.p1.*.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="prn.pro.p2.*.pl"/>
+        <match tags="prn.pro.*"/>
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match plemma="1" tags="vblex.*.p2.pl"><select plemma="4"/></match>
+        <match tags="prn.enc.p2.*.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+      <rule weight="1.2">
+        <match tags="vbser.*"/>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="1" tags="vblex.pp.*"><select plemma="4"/></match>
+        <repeat from="0" upto="2">
+          <match tags="adv"/>
+        </repeat>
+        <match plemma="5"/>
+      </rule>
+    </def-macro>
+
     <!-- p1 = verb oci, p2 = verb fra no pron, p3 = verb fra amb pronom ci (li vaga) -->
     <def-macro n="verb_nopron_pronci" npar="3">
       <rule weight="0.8">
@@ -3510,6 +3781,12 @@
   <!-- estar >> être, être (nopron) -->
   <macro n="verb_nopron_pron_prep" v="oci@gascon"><with-param v="estar"/><with-param v="être"/><with-param v="nopron_être"/><with-param v="a"/></macro>
 
+  <!-- amanejar >> occuper, affairer -->
+  <macro n="verb_nopron_pron_prep" v="oci@gascon"><with-param v="amanejar"/><with-param v="affairer"/><with-param v="empresser"/><with-param v="de"/></macro>
+
+  <!-- encuentar >> occuper, empresser -->
+  <macro n="verb_nopron_pron_prep" v="oci@gascon"><with-param v="encuentar"/><with-param v="occuper"/><with-param v="empresser"/><with-param v="de"/></macro>
+
   <!-- provar >> prouver, essayer -->
   <rule weight="0.8">
     <match lemma="provar" tags="vblex.*"><select lemma="prouver"/></match>
@@ -5024,9 +5301,54 @@
   <!-- lançar >> foncer, lancer -->
   <macro n="verb_nopron_pron"><with-param v="lançar"/><with-param v="foncer"/><with-param v="lancer"/></macro>
 
-  <!-- cochar >> chasser/coucher, presser -->
+  <!-- pressar >> presser, empresser -->
+  <rule weight="0.8">
+    <match lemma="pressar" tags="vblex.*"><select lemma="presser"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="pressar" tags="vblex.*"><select lemma="empresser"/></match>
+    <repeat from="0" upto="2">
+     <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match lemma="entà" tags="pr"/>
+      <match lemma="enta" tags="pr"/>
+      <match lemma="tà" tags="pr"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
+
+  <!-- cochar >> chasser/coucher, presser, empresser (de) -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="cochar"/><with-param v="chasser"/><with-param v="presser"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="cochar"/><with-param v="coucher"/><with-param v="presser"/></macro>
+  <rule weight="3.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="cochar" tags="vblex.*"><select lemma="empresser"/></match>
+    <repeat from="0" upto="2">
+     <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="de" tags="pr"/>
+      <match lemma="entà" tags="pr"/>
+      <match lemma="enta" tags="pr"/>
+      <match lemma="tà" tags="pr"/>
+    </or>
+    <repeat from="0" upto="3">
+      <or>
+       <match tags="adv"/>
+       <match tags="prn.pro.*"/>
+      </or>
+    </repeat>
+    <match tags="vblex.inf"/>
+  </rule>
 
   <!-- mesclar >> mélanger, mêler -->
   <macro n="verb_nopron_pron"><with-param v="mesclar"/><with-param v="mélanger"/><with-param v="mêler"/></macro>
@@ -6630,7 +6952,6 @@
     </repeat>
     <match tags="vblex.inf"/>
   </rule>
-
 
 </rules>
 </lrx>

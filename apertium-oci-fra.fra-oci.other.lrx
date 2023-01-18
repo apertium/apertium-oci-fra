@@ -239,6 +239,29 @@
     <match lemma="vis-a-vis de" tags="pr" v="oci@gascon"><select lemma="au respècte de"/></match>
   </rule>
 
+  <!-- de >> de, entà -->
+  <rule weight="0.6">
+    <match lemma="de" tags="pr"><select lemma="de"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="empresser" tags="vblex.*"/>
+      <match lemma="presser" tags="vblex.*"/>
+      <match lemma="affairer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"><select lemma="entà"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="2">
+      <match tags="prn.pro.*"/>
+    </repeat>
+    <match tags="*.inf"/>
+  </rule>
+
   <!-- à >> a, en, de, [remove] -->
   <rule weight="0.6">
     <match lemma="à" tags="pr"><select lemma="a"/></match>
