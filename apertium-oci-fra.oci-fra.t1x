@@ -779,6 +779,9 @@
     <def-cat n="enpr">
       <cat-item lemma="en" tags="pr"/>
     </def-cat>
+    <def-cat n="perpr">
+      <cat-item lemma="per" tags="pr"/>
+    </def-cat>
     <def-cat n="en_jusqua_pr">
       <cat-item lemma="en" tags="pr"/>
       <cat-item lemma="denquia" tags="pr"/>
@@ -1150,6 +1153,10 @@
 
     <def-cat n="ençà">
       <cat-item lemma="ençà" tags="adv"/>
+    </def-cat>
+
+    <def-cat n="en·hòra">
+      <cat-item lemma="en·hòra" tags="adv"/>
     </def-cat>
 
     <def-cat n="estant">
@@ -15717,7 +15724,7 @@
     <!-- FIN RÈGLAS HORAS -->
 
 
-    <!-- RÈGLAS DE ... ESTANT/ENLÀ/ENÇÀ -->
+    <!-- RÈGLAS DE ... ESTANT/ENLÀ/ENÇÀ/EN·HÒRA -->
 
     <rule comment="RÈGLA: DE NOM ESTANT > DEPUIS DETDEF NOM (de casa estant > depuis la maison)">
       <pattern>
@@ -15842,6 +15849,47 @@
             </lu>
           </chunk>
         </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PER DETDEF NOM EN·HÒRA > À TRAVERS DETDEF NOM (peus arbes en·hòra > à travers les arbres)">
+      <pattern>
+        <pattern-item n="perpr"/>
+        <pattern-item n="detdef"/>
+        <pattern-item n="nom"/>
+        <pattern-item n="en·hòra"/>
+      </pattern>
+      <action>
+        <call-macro n="firstWord">
+          <with-param pos="1"/>
+        </call-macro>
+        <call-macro n="f_concord2">
+          <with-param pos="3"/>
+          <with-param pos="2"/>
+        </call-macro>
+        <out>
+          <chunk name="pr_det_nom" case="caseFirstWord">
+            <tags>
+              <tag><lit-tag v="SAdv"/></tag>
+            </tags>
+            <lu>
+               <lit v="à travers"/>
+               <lit-tag v="pr"/>
+            </lu>
+            <b pos="1"/>
+            <lu>
+              <clip pos="2" side="tl" part="lem"/>
+              <clip pos="2" side="tl" part="tags"/>
+            </lu>
+            <b pos="2"/>
+            <lu>
+              <clip pos="3" side="tl" part="lemh"/>
+              <clip pos="3" side="tl" part="tags"/>
+              <clip pos="3" side="tl" part="lemq"/>
+            </lu>
+          </chunk>
+        </out>
+        <call-macro n="f_bcond"><with-param pos="3"/><with-param pos="4"/></call-macro>
       </action>
     </rule>
 
