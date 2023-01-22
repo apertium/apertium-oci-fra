@@ -1597,6 +1597,23 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- épris >> passionat/atalentat, enamorat -->
+  <rule weight="0.8">
+    <match lemma="épris" tags="adj.*" v="oci"><select lemma="passionat"/></match>
+    <match lemma="épris" tags="adj.*" v="oci@gascon"><select lemma="atalentat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="épris" tags="adj.*"><select lemma="enamorat"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="lui" tags="prn.tn.*"/>
+      <match lemma="eux" tags="prn.tn.*"/>
+      <match lemma="il" tags="prn.tn.f.*"/>
+      <match tags="np.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+
   <!-- dernier >> darrièr/darrèr, passat -->
   <rule weight="0.8">
     <match lemma="dernier" tags="adj.*" v="oci"><select lemma="darrièr"/></match>
