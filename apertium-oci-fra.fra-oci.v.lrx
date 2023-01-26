@@ -2987,11 +2987,6 @@
     <match lemma="déchanter" tags="vblex.pp.*"><select lemma="quitar# lors espèrs"/></match>
   </rule>
 
-  <!-- ròder >> devorer, corroder -->
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="ròder" tags="vblex.*"><select lemma="devorer"/></match>
-  </rule>
-
   <!-- marcher >> marchar, foncionar -->
   <rule weight="0.8">
     <match lemma="marcher" tags="vblex.*"><select lemma="marchar"/></match>
@@ -3621,7 +3616,7 @@
   <macro n="verb_nopron_pron" v="oci"><with-param v="ficher"/><with-param v="fichar"/><with-param v="ficar"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="ficher"/><with-param v="fichar"/><with-param v="hicar"/></macro>
 
-  <rule weight="1.0">
+  <rule weight="2.0">
     <or>
       <match lemma="me" tags="prn.pro.*"/>
       <match lemma="te" tags="prn.pro.*"/>
@@ -3629,10 +3624,135 @@
       <match lemma="nous" tags="prn.pro.*"/>
       <match lemma="vous" tags="prn.pro.*"/>
     </or>
-    <match lemma="ficher" tags="vblex.*.p2.*" ><select lemma="trufar"/></match>
+    <match lemma="ficher" tags="vblex.*" ><select lemma="trufar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="se" tags="prn.pro.*"/>
+      <match lemma="nous" tags="prn.pro.*"/>
+      <match lemma="vous" tags="prn.pro.*"/>
+    </or>
+    <match tags="vbser.*" />
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="ficher" tags="vblex.*" ><select lemma="trufar"/></match>
     <match lemma="de" tags="pr"/>
   </rule>
 
+
+  <!-- filer >> filar/hilar, partir, córrer, escapar, passar/pèisher -->
+  <rule weight="0.8">
+    <match lemma="filer" tags="vblex.*" v="oci"><select lemma="filar"/></match>
+    <match lemma="filer" tags="vblex.*" v="oci@gascon"><select lemma="hilar"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="filer" tags="vblex.*"><select lemma="partir"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match lemma="filer" tags="vblex.*"><select lemma="córrer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match lemma="vers" tags="pr"/>
+      <match lemma="hors" tags="pr"/>
+      <match lemma="pour" tags="pr"/>
+    </or>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match lemma="filer" tags="vblex.*"><select lemma="córrer"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="â" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <or>
+      <match tags="np.top.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match lemma="laisser" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="filer" tags="vblex.inf"><select lemma="escapar"/></match>
+  </rule>
+  <rule weight="1.4" v="oci">
+    <match lemma="filer" tags="vblex.*"><select lemma="filar"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="laine" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <seq n="prn_ci"/>
+    </or>
+    <match lemma="filer" tags="vblex.*" v="oci"><select lemma="passar"/></match>
+    <match lemma="filer" tags="vblex.*" v="oci@gascon"><select lemma="pèisher"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <seq n="prn_ci"/>
+    </or>
+    <match lemma="filer" tags="vblex.*" v="oci"><select lemma="passar"/></match>
+    <match lemma="filer" tags="vblex.*" v="oci@gascon"><select lemma="pèisher"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.mf.pl"/>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <seq n="prn_ci"/>
+    </or>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="filer" tags="vblex.*" v="oci"><select lemma="passar"/></match>
+    <match lemma="filer" tags="vblex.*" v="oci@gascon"><select lemma="pèisher"/></match>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+  </rule>
+  <rule weight="2.0">
+    <or>
+      <seq n="prn_ci"/>
+    </or>
+    <match tags="vbhaver.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="filer" tags="vblex.*" v="oci"><select lemma="passar"/></match>
+    <match lemma="filer" tags="vblex.*" v="oci@gascon"><select lemma="pèisher"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="det.def.mf.pl"/>
+  </rule>
 
   <!-- hanter >> obsedir, frequentar -->
   <rule weight="0.8">
