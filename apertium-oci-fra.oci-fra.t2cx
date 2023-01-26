@@ -79,6 +79,7 @@
     <def-cat n="SAdv">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.pas_neg"/>
+      <cat-item lemma="ne" tags="SAdv.enon"/>
       <cat-item lemma="donc" tags="cnjadv"/>
       <cat-item lemma="cependant" tags="cnjadv"/>
       <cat-item lemma="néanmoins" tags="cnjadv"/>
@@ -89,6 +90,7 @@
     <def-cat n="SAdv_SPron_pro">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.pas_neg"/>
+      <cat-item lemma="ne" tags="SAdv.enon"/>
       <cat-item lemma="donc" tags="cnjadv"/>
       <cat-item lemma="cependant" tags="cnjadv"/>
       <cat-item lemma="néanmoins" tags="cnjadv"/>
@@ -103,6 +105,12 @@
     </def-cat>
     <def-cat n="pas_adv">
       <cat-item lemma="pas" tags="SAdv"/>
+    </def-cat>
+    <def-cat n="tellement_guere_adv">
+      <cat-item lemma="tellement" tags="SAdv"/>
+      <cat-item lemma="tellement" tags="SAdv.*"/>
+      <cat-item lemma="guère" tags="SAdv"/>
+      <cat-item lemma="guère" tags="SAdv.*"/>
     </def-cat>
     <def-cat n="SV">
       <cat-item tags="SV"/>
@@ -273,11 +281,6 @@
       <cat-item lemma="ni" tags="cnjcoo.*"/>
     </def-cat>
 
-    <def-cat n="cm">
-      <cat-item tags="cm"/>
-      <cat-item tags="CM"/>
-    </def-cat>
-
     <def-cat n="cnjsub">
       <cat-item tags="cnjsub"/>
       <cat-item tags="cnjsub.*"/>
@@ -362,6 +365,7 @@
     <def-cat n="SAdv_CNJCOO">
       <cat-item tags="SAdv"/>
       <cat-item tags="SAdv.pas_neg"/>
+      <cat-item lemma="ne" tags="SAdv.enon"/>
       <cat-item tags="cnjcoo"/>
       <cat-item lemma="donc" tags="cnjadv"/>
       <cat-item lemma="cependant" tags="cnjadv"/>
@@ -2428,6 +2432,26 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: tellement_guere_adv de (per empechar la generacion)">
+      <pattern>
+        <pattern-item n="tellement_guere_adv"/>
+        <pattern-item n="PREP_de"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="es_pot_gen_part"/><lit v="no"/></let>
+        <let><var n="BOS"/><lit v="no"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SPron">
       <pattern>
         <pattern-item n="SPron"/>
@@ -3265,12 +3289,12 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl cm PR_de SN_pl: venguèron d'espanhòls e d'italians > vinrent des Espagnols, des Italiens" v="oci">
+    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl CM PR_de SN_pl: venguèron d'espanhòls e d'italians > vinrent des Espagnols, des Italiens" v="oci">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
@@ -3317,11 +3341,11 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl: que venguèron espanhòus, italians > vinrent des Espagnols, des Italiens" v="oci@gascon">
+    <rule comment="RÈGLA: arriver_venir_p3pl SN_pl CM SN_pl: que venguèron espanhòus, italians > vinrent des Espagnols, des Italiens" v="oci@gascon">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
       <action>
@@ -3362,15 +3386,15 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl cm PR_de SN_pl cm PR_de SN_pl: venguèron d'espanhòls, de franceses, d'italians > vinrent des Espagnols, des Français, des Italiens" v="oci">
+    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl CM PR_de SN_pl CM PR_de SN_pl: venguèron d'espanhòls, de franceses, d'italians > vinrent des Espagnols, des Français, des Italiens" v="oci">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
@@ -3435,13 +3459,13 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl: que venguèron espanhòus, franceses, italians > vinrent des Espagnols, des Français, des Italiens" v="oci@gascon">
+    <rule comment="RÈGLA: arriver_venir_p3pl SN_pl CM SN_pl, SN_pl: que venguèron espanhòus, franceses, italians > vinrent des Espagnols, des Français, des Italiens" v="oci@gascon">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
       <action>
@@ -3500,18 +3524,18 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl cm PR_de SN_pl cm PR_de SN_pl cm PR_de SN_pl: venguèron d'espanhòls, de portugueses, de franceses, d'italians > vinrent des Espagnols, des Portugais, des Français, des Italiens" v="oci">
+    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl CM PR_de SN_pl CM PR_de SN_pl CM PR_de SN_pl: venguèron d'espanhòls, de portugueses, de franceses, d'italians > vinrent des Espagnols, des Portugais, des Français, des Italiens" v="oci">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="PREP_de"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
@@ -3595,15 +3619,15 @@
       </action>
     </rule>
 
-    <rule comment="RÈGLA: arriver_venir_p3pl PR_de SN_pl: que venguèron espanhòus, portugueses, franceses, italians > vinrent des Espagnols, des Français, des Italiens" v="oci@gascon">
+    <rule comment="RÈGLA: arriver_venir_p3pl SN_pl CM SN_pl CM SN_pl CM SN_pl: que venguèron espanhòus, portugueses, franceses, italians > vinrent des Espagnols, des Français, des Italiens" v="oci@gascon">
       <pattern>
         <pattern-item n="arriver_venir_p3pl"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
-        <pattern-item n="cm"/>
+        <pattern-item n="CM"/>
         <pattern-item n="SN_pl_sp"/>
       </pattern>
       <action>
