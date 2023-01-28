@@ -164,10 +164,12 @@
     <def-cat n="DET_aucun">
       <cat-item tags="Det.aucun"/>
       <cat-item tags="Det.aucun.*"/>
+      <cat-item lemma="guère de" tags="Det.*"/>
     </def-cat>
     <def-cat n="Det_Prn_pas_neg">
       <cat-item tags="Det.pas_neg"/>
       <cat-item tags="Det.aucun.*"/>
+      <cat-item lemma="guère de" tags="Det.*"/>
       <cat-item tags="SPron.*.pas_neg"/>
       <cat-item tags="SPron.*.pas_neg.*"/>
     </def-cat>
@@ -2291,6 +2293,84 @@
           <b pos="9"/>
           <chunk>
             <clip pos="9" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: DET_aucun SN SV_pers > DET_aucun SN NE SV_pers (cap de pòrta es dobèrta > aucune porte n'est ouverte)">
+      <pattern>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <get-case-from pos="3">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="3">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+        </out>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: PAS DET_aucun SN SV_pers > DET_aucun SN NE SV_pers (pas cap de pòrta es dobèrta > aucune porte n'est ouverte)">
+      <pattern>
+        <pattern-item n="pas"/>
+        <pattern-item n="DET_aucun"/>
+        <pattern-item n="SN"/>
+        <pattern-item n="SV_pers"/>
+      </pattern>
+      <action>
+        <call-macro n="f_bcond"><with-param pos="1"/><with-param pos="2"/></call-macro>
+        <out>
+          <chunk>
+            <get-case-from pos="1">
+              <clip pos="2" part="lem"/>
+            </get-case-from>
+            <clip pos="2" part="tags"/>
+            <clip pos="2" part="chcontent"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <get-case-from pos="4">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="SAdv"/>
+            <lit v="{^"/>
+            <get-case-from pos="4">
+              <lit v="ne"/>
+            </get-case-from>
+            <lit-tag v="adv"/>
+            <lit v="$}"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
           </chunk>
         </out>
       </action>
