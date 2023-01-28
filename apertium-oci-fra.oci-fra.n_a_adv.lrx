@@ -3534,6 +3534,21 @@
     <match lemma="plegable" tags="adj.*"><select lemma="pliant"/></match>
   </rule>
 
+  <!-- d'escapsa >> ouvert, habile -->
+  <rule weight="0.8">
+    <match lemma="d'escapsa" tags="adj.*"><select lemma="ouvert"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="d'escapsa" tags="adj.*"><select lemma="habile"/></match>
+  </rule>
+
   <!-- brave >> gentil, bon/gros -->
   <rule weight="0.8">
     <match lemma="brave" tags="adj.*"><select lemma="gentil"/></match>
@@ -5401,6 +5416,11 @@
     <match lemma="andada" tags="n.*"><select lemma="promenade"/></match>
   </rule>
 
+  <!-- mic >> ami, baiser -->
+  <rule weight="0.8">
+    <match lemma="mic" tags="n.*"><select lemma="ami"/></match>
+  </rule>
+
   <!-- escalfament >> échauffement, réchauffement-->
   <rule weight="0.8">
     <match lemma="escalfament" tags="n.*"><select lemma="échauffement"/></match>
@@ -6289,6 +6309,51 @@
     <match tags="det.ind.*"/>
     <match lemma="part" tags="n.*"><select lemma="partie"/></match>
     <match lemma="de" tags="pr"/>
+  </rule>
+  <rule weight="1.0" v="oci@gascon">
+    <or>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="part" tags="n.*"><select lemma="partie"/></match>
+  </rule>
+  <rule weight="1.2" v="oci@gascon">
+    <or>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="part" tags="n.*"><select lemma="part"/></match>
+    <match lemma="a" tags="pr"/>
+  </rule>
+  <rule weight="1.2" v="oci@gascon">
+    <or>
+      <match lemma="me" tags="prn.pro.*"/>
+      <match lemma="te" tags="prn.pro.*"/>
+      <match lemma="li" tags="prn.pro.*"/>
+      <match lemma="nos" tags="prn.pro.*"/>
+      <match lemma="mos" tags="prn.pro.*"/>
+      <match lemma="vos" tags="prn.pro.*"/>
+      <match lemma="lor" tags="prn.pro.*"/>
+      <match lemma="ac" tags="prn.pro.*" v="oci@gascon"/>
+      <match lemma="lo" tags="prn.pro.*" v="oci@gascon"/>
+    </or>
+    <or>
+      <match lemma="far" tags="vblex.*"/>
+      <match lemma="har" tags="vblex.*"/>
+      <match lemma="hèr" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="part" tags="n.*"><select lemma="part"/></match>
   </rule>
 
   <!-- barde >> barde, argile -->

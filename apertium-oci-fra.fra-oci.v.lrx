@@ -1674,6 +1674,7 @@
       <match lemma="chemisier" tags="n.*"/>
       <match lemma="blouson" tags="n.*"/>
       <match lemma="décolleté" tags="n.*"/>
+      <match lemma="veste" tags="n.*"/>
       <match lemma="manteau" tags="n.*"/>
       <match lemma="imperméable" tags="n.*"/>
       <match lemma="redingote" tags="n.*"/>
@@ -1845,6 +1846,121 @@
       </or>
     </repeat>
     <match tags="*.inf"/>
+  </rule>
+
+  <!-- enfiler >> enfilar/en·hilar, engulhar, (se) cargar/(se) passar, prene/engulhar -->
+  <rule weight="0.8">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="enfilar"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="en·hilar"/></match>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="engulhar"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="engulhar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <match tags="det.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="aiguille" tags="n.*"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="cargar"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="passar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="vetement"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="cargar"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="passar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <seq n="vetement"/>
+    </or>
+  </rule>
+
+  <rule weight="1.0">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="prene"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="engulhar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <repeat from="0" upto="1">
+      <match lemma="de" tags="pr"/>
+    </repeat>
+    <or>
+      <match tags="det.*"/>
+      <match tags="num.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="chemin" tags="n.*"/>
+      <match lemma="route" tags="n.*"/>
+      <match lemma="autoroute" tags="n.*"/>
+      <match lemma="corridor" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="prene"/></match>
+    <match lemma="enfiler" tags="vblex.*" v="oci@gascon"><select lemma="engulhar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="chemin" tags="n.*"/>
+      <match lemma="route" tags="n.*"/>
+      <match lemma="autoroute" tags="n.*"/>
+      <match lemma="corridor" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- poindre >> ponchar/pónher, puntejar -->
@@ -2574,10 +2690,15 @@
     </or>
   </rule>
 
-  <!-- mettre >> metre/méter, (se) cargar/passar -->
+  <!-- mettre >> metre/méter, (se) cargar/passar, hicar -->
   <rule weight="0.8">
     <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="metre"/></match>
     <match lemma="mettre" tags="vblex.*" v="oci@gascon"><select lemma="méter"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="mettre" tags="vblex.*" v="oci@gascon"><select lemma="hicar"/></match>
+    <match lemma="à l'aise" tags="adv"/>
   </rule>
   <rule weight="1.0">
     <match lemma="mettre" tags="vblex.*" v="oci"><select lemma="cargar"/></match>
@@ -2623,13 +2744,16 @@
   <!-- avoir# l'habitude de >> èsser# acostumat a, èsser# acostumada a, etc. -->
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci"><with-param v="avoir# l'habitude a"/><with-param v="èsser# acostumat a"/><with-param v="èsser# acostumada a"/><with-param v="èsser# acostumats a"/><with-param v="èsser# acostumadas a"/></macro>
 
+  <!-- être# une poudrière >> estar# ahuecadís, estar# ahuecadissa, etc. -->
+  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci@gascon"><with-param v="être# une poudrière"/><with-param v="estar# ahuecadís"/><with-param v="estar# ahuecadissa"/><with-param v="estar# ahuecadís"/><with-param v="estar# ahuecadissas"/></macro>
+
   <!-- être# en proie à >> èsser# pres de, èsser# presa de, etc. -->
   <!-- être# en proie à >> estar# secutat per, estar# secutada per, etc. -->
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci"><with-param v="être# en proie à"/><with-param v="èsser# pres de"/><with-param v="èsser# presa de"/><with-param v="èsser# preses de"/><with-param v="èsser# presas de"/></macro>
   <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl" v="oci@gascon"><with-param v="être# en proie à"/><with-param v="estar# secutat per"/><with-param v="estar# secutada per"/><with-param v="estar# secutats per"/><with-param v="estar# secutadas per"/></macro>
 
-  <!-- être# bidon >> èsser# fals, èsser# falsa, etc., desirar -->
-  <!-- être# bidon >> estar# faus, estar# faussa, etc., desirar -->
+  <!-- être# bidon >> èsser# fals, èsser# falsa, etc. -->
+  <!-- être# bidon >> estar# faus, estar# faussa, etc. -->
   <rule weight="0.8">
     <match lemma="être# bidon" tags="vblex.*" v="oci"><select lemma="èsser# fals"/></match>
     <match lemma="être# bidon" tags="vblex.*" v="oci@gascon"><select lemma="estar# faus"/></match>

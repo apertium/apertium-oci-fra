@@ -1614,6 +1614,28 @@
     </or>
   </rule>
 
+  <!-- parlant >> parlant, sonòr -->
+  <rule weight="0.8">
+    <match lemma="parlant" tags="adj.*"><select lemma="parlant"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="film" tags="n.*"/>
+      <match lemma="cinéma" tags="n.*"/>
+    </or>
+    <match lemma="parlant" tags="adj.*"><select lemma="sonòr"/></match>
+  </rule>
+
+  <!-- prenant >> esmovent/esmavent, beneficiari -->
+  <rule weight="0.8">
+    <match lemma="prenant" tags="adj.*" v="oci"><select lemma="esmovent"/></match>
+    <match lemma="prenant" tags="adj.*" v="oci@gascon"><select lemma="esmavent"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="partie" tags="n.*"/>
+    <match lemma="prenant" tags="adj.*"><select lemma="beneficiari"/></match>
+  </rule>
+
   <!-- dernier >> darrièr/darrèr, passat -->
   <rule weight="0.8">
     <match lemma="dernier" tags="adj.*" v="oci"><select lemma="darrièr"/></match>
@@ -2046,6 +2068,12 @@
   <!-- emballement >> embalament, estrambòrd -->
   <rule weight="0.8">
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
+  </rule>
+
+  <!-- cavale >> fugida/hueita, cavala -->
+  <rule weight="0.8">
+    <match lemma="cavale" tags="n.*" v="oci"><select lemma="fugida"/></match>
+    <match lemma="cavale" tags="n.*" v="oci@gascon"><select lemma="hueita"/></match>
   </rule>
 
   <!-- vieux >> vièlh, amic -->
