@@ -2070,6 +2070,91 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- connaissance >> coneissença/coneishença, amic/coneishut, amiga/coneishuda -->
+  <rule weight="0.8">
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="coneissença"/></match>
+    <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishença"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="vieil" tags="adj.*"/>
+      <match lemma="vieux" tags="adj.*"/>
+      <match lemma="ancien" tags="adj.*"/>
+    </or>
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="amic" tags="n.m.*"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="amic" tags="n.m.*"/></match>
+    <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishut" tags="n.m.*"/></match>
+    <or>
+      <match lemma="commun" tags="adj.*"/>
+      <match lemma="mutuel" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="un" tags="det.ind.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="amic" tags="n.m.*"/></match>
+    <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishut" tags="n.m.*"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="il" tags="prn.tn.p3.f.*"/>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="un" tags="det.ind.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="amic" tags="n.f.*"/></match>
+    <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishut" tags="n.f.*"/></match>
+  </rule>
+  <rule weight="1.2">
+    <or>
+      <match tags="np.ant.f.sg"/>
+      <match lemma="madame" tags="n.*"/>
+      <match lemma="mademoiselle" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="np.ant.f.sg"/>
+        <match tags="np.cog.*"/>
+        <match tags="" case="Aa"/>
+      </or>
+    </repeat>
+    <match tags="vbser.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="un" tags="det.ind.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
+    </repeat>
+    <match lemma="connaissance" tags="n.*" v="oci"><select lemma="amic" tags="n.f.*"/></match>
+    <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishut" tags="n.f.*"/></match>
+  </rule>
+
+  <!-- atteinte >> atac/ataca, prejudici -->
+  <rule weight="0.8" v="oci">
+    <match lemma="connaissance" tags="n.*"><select lemma="coneishença"/></match>
+  </rule>
+
   <!-- cavale >> fugida/hueita, cavala -->
   <rule weight="0.8">
     <match lemma="cavale" tags="n.*" v="oci"><select lemma="fugida"/></match>
