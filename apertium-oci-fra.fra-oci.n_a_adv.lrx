@@ -2070,6 +2070,64 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- étalon >> marran/salhidor, escandalh/estalon -->
+  <rule weight="0.8">
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="marran"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="salhidor"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match tags="n.*"/>
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+    <match lemma="de" tags="pr"/>
+    <match tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+    <or>
+      <match lemma="interne" tags="adj.*"/>
+      <match lemma="analytique" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="mesure" tags="n.*"/>
+      <match lemma="mesurer" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="mesure" tags="n.*"/>
+      <match lemma="mesurer" tags="vblex.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="étalon" tags="n.*" v="oci"><select lemma="escandalh"/></match>
+    <match lemma="étalon" tags="n.*" v="oci@gascon"><select lemma="estalon"/></match>
+  </rule>
+
   <!-- connaissance >> coneissença/coneishença, amic/coneishut, amiga/coneishuda -->
   <rule weight="0.8">
     <match lemma="connaissance" tags="n.*" v="oci"><select lemma="coneissença"/></match>
@@ -2150,9 +2208,21 @@
     <match lemma="connaissance" tags="n.*" v="oci@gascon"><select lemma="coneishut" tags="n.f.*"/></match>
   </rule>
 
-  <!-- atteinte >> atac/ataca, prejudici -->
-  <rule weight="0.8" v="oci">
-    <match lemma="connaissance" tags="n.*"><select lemma="coneishença"/></match>
+  <!-- grille >> grasilha, cledat -->
+  <rule weight="0.8">
+    <match lemma="grille" tags="n.*"><select lemma="grasilha"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="grille" tags="n.*"><select lemma="cledat"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="protection" tags="n.*"/>
+      <match lemma="fenêtre" tags="n.*"/>
+
+      <match lemma="lecture" tags="n.*"/>
+      <match lemma="évaluation" tags="n.*"/>
+      <match lemma="ventilation" tags="n.*"/>
+    </or>
   </rule>
 
   <!-- cavale >> fugida/hueita, cavala -->
@@ -3108,6 +3178,11 @@
   </rule>
   <rule weight="1.0">
     <match lemma="hôtel" tags="n.*"><select lemma="ostal"/></match>
+    <match lemma="de" tags="pr"/>
+    <match lemma="police" tags="n.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="hôtel" tags="n.*"><select lemma="ostal"/></match>
     <match tags="np.cog.*"/>
   </rule>
   <rule weight="1.0">
@@ -3458,10 +3533,8 @@
 
   <!-- atteinte >> atac/ataca, prejudici -->
   <rule weight="0.8" v="oci">
-    <match lemma="atteinte" tags="n.*"><select lemma="atac"/></match>
-  </rule>
-  <rule weight="0.8" v="oci@gascon">
-    <match lemma="atteinte" tags="n.*"><select lemma="ataca"/></match>
+    <match lemma="atteinte" tags="n.*" v="oci"><select lemma="atac"/></match>
+    <match lemma="atteinte" tags="n.*" v="oci@gascon"><select lemma="ataca"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="porter" tags="vblex.*"/>
@@ -3919,10 +3992,9 @@
 
   <!-- police >> polícia/policia, polissa -->
   <rule weight="0.8">
-    <match lemma="police" tags="n.*"><select lemma="polícia"/></match>
-  </rule>
-  <rule weight="0.8">
-    <match lemma="police" tags="n.*"><select lemma="policia"/></match>
+    <match lemma="police" tags="n.*" v="oci"><select lemma="polícia"/></match>
+    <match lemma="police" tags="n.*" v="oci@gascon"><select lemma="polícia"/></match>
+    <match lemma="police" tags="n.*" v="oci@aran"><select lemma="policia"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="police" tags="n.*"><select lemma="polissa"/></match>

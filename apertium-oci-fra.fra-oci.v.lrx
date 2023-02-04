@@ -1963,6 +1963,74 @@
     </or>
   </rule>
 
+  <!-- griller >> grasilhar, cremar -->
+  <rule weight="0.8">
+    <match lemma="griller" tags="vblex.*"><select lemma="grasilhar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="griller" tags="vblex.*"><select lemma="cremar"/></match>
+    <repeat from="0" upto="1">
+      <match tags="adv"/>
+    </repeat>
+    <or>
+      <seq n="personne"/>
+      <match lemma="personne" tags="prn.*"/>
+      <match tags="np.ant.*"/>
+      <match tags="np.cog.*"/>
+      <match tags="" case="Aa"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="griller" tags="vblex.*"><select lemma="cremar"/></match>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="lampe" tags="n.*"/>
+      <match lemma="ampoule" tags="n.*"/>
+      <match lemma="résistance" tags="n.*"/>
+      <match lemma="circuit" tags="n.*"/>
+      <match lemma="appareil" tags="n.*"/>
+      <match lemma="équipe" tags="n.*"/>
+      <match lemma="court-circuit" tags="n.*"/>
+      <match lemma="ordinateur" tags="n.*"/>
+      <match lemma="ordi" tags="n.*"/>
+      <match lemma="fusible" tags="n.*"/>
+      <match lemma="moteur" tags="n.*"/>
+      <match lemma="palier" tags="n.*"/>
+      <match lemma="compresseur" tags="n.*"/>
+      <match lemma="machine" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lampe" tags="n.*"/>
+      <match lemma="ampoule" tags="n.*"/>
+      <match lemma="résistance" tags="n.*"/>
+      <match lemma="circuit" tags="n.*"/>
+      <match lemma="appareil" tags="n.*"/>
+      <match lemma="équipe" tags="n.*"/>
+      <match lemma="court-circuit" tags="n.*"/>
+      <match lemma="ordinateur" tags="n.*"/>
+      <match lemma="ordi" tags="n.*"/>
+      <match lemma="fusible" tags="n.*"/>
+      <match lemma="moteur" tags="n.*"/>
+      <match lemma="palier" tags="n.*"/>
+      <match lemma="compresseur" tags="n.*"/>
+      <match lemma="machine" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="4">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="griller" tags="vblex.pp.*"><select lemma="cremar"/></match>
+  </rule>
+
   <!-- poindre >> ponchar/pónher, puntejar -->
   <rule weight="0.8">
     <match lemma="poindre" tags="vblex.*" v="oci"><select lemma="ponchar"/></match>
