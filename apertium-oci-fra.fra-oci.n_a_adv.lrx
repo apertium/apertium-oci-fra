@@ -2313,7 +2313,7 @@
     <match lemma="chaire" tags="n.*" v="oci@gascon"><select lemma="predicadera"/></match>
   </rule>
 
-  <!-- égard >> esgard, atencion -->
+  <!-- égard >> esgard, atencion, cas -->
   <rule weight="0.8">
     <match lemma="égard" tags="n.*"><select lemma="esgard"/></match>
   </rule>
@@ -2327,6 +2327,16 @@
       </or>
     </repeat>
     <match lemma="égard" tags="n.*"><select lemma="atencion"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="à" tags="pr"><select lemma="dins"/></match>
+    <match tags="det.*"/>
+    <match lemma="égard" tags="n.*"><select lemma="cas"/></match>
+  </rule>
+  <rule weight="1.2" v="oci">
+    <match lemma="à" tags="pr"><select lemma="a"/></match>
+    <match tags="det.pos.*"/>
+    <match lemma="égard" tags="n.*"><select lemma="esgard"/></match>
   </rule>
 
   <!-- truc >> truc, daquòs/dequerò -->
