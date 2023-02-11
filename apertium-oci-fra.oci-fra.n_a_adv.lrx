@@ -5415,6 +5415,26 @@
   </rule>
 -->
 
+  <!-- copadura >> copadura, faille -->
+  <rule weight="0.8">
+    <match lemma="copadura" tags="n.*"><select lemma="coupure"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="copadura" tags="n.*"><select lemma="faille"/></match>
+    <or>
+      <match lemma="geologic" tags="adj.*"/>
+      <match lemma="tectonic" tags="adj.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="copadura" tags="n.*"><select lemma="faille"/></match>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <match tags="" case="Aa"/>
+  </rule>
+
   <!-- andada >> vague, promenade -->
   <rule weight="0.8">
     <match lemma="andada" tags="n.*"><select lemma="vague"/></match>
