@@ -1848,6 +1848,65 @@
     <match tags="*.inf"/>
   </rule>
 
+  <!-- piocher >> fotjar/hotjar, pescar -->
+  <rule weight="0.8">
+    <match lemma="piocher" tags="vblex.*" v="oci"><select lemma="fotjar"/></match>
+    <match lemma="piocher" tags="vblex.*" v="oci@gascon"><select lemma="hotjar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="piocher" tags="vblex.*"><select lemma="pescar"/></match>
+    <repeat from="0" upto="5">
+      <or>
+        <match lemma="de" tags="pr"/>
+        <match tags="det.*"/>
+        <match tags="num.*"/>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+        <match tags="adj.*"/>
+        <match tags="n.*"/>
+      </or>
+    </repeat>
+    <match lemma="dans" tags="pr"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="piocher" tags="vblex.*"><select lemma="pescar"/></match>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="carte" tags="n.*"/>
+      <match lemma="roi" tags="n.*"/>
+      <match lemma="dame" tags="n.*"/>
+      <match lemma="valet" tags="n.*"/>
+      <match lemma="as" tags="n.*"/>
+      <match lemma="pique" tags="n.*"/>
+      <match lemma="trèfle" tags="n.*"/>
+      <match lemma="carreau" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="carte" tags="n.*"/>
+      <match lemma="roi" tags="n.*"/>
+      <match lemma="dame" tags="n.*"/>
+      <match lemma="valet" tags="n.*"/>
+      <match lemma="as" tags="n.*"/>
+      <match lemma="pique" tags="n.*"/>
+      <match lemma="trèfle" tags="n.*"/>
+      <match lemma="carreau" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags="*"/>
+        <match tags=""/>
+      </or>
+    </repeat>
+    <match lemma="piocher" tags="vblex.*"><select lemma="pescar"/></match>
+  </rule>
+
   <!-- enfiler >> enfilar/en·hilar, engulhar, (se) cargar/(se) passar, prene/engulhar -->
   <rule weight="0.8">
     <match lemma="enfiler" tags="vblex.*" v="oci"><select lemma="enfilar"/></match>

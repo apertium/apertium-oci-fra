@@ -1597,6 +1597,25 @@
 
 <!-- **************** ADJ **************** -->
 
+  <!-- criard >> cridaire/cridassèr, que tira l'uèlh/qui tira los uèlhs -->
+  <rule weight="0.8">
+    <match lemma="criard" tags="adj.*" v="oci"><select lemma="cridaire"/></match>
+    <match lemma="criard" tags="adj.*" v="oci@gascon"><select lemma="cridassèr"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="couleur"/>
+      <match lemma="rouge"/>
+      <match lemma="verd"/>
+      <match lemma="bleu"/>
+      <match lemma="jaune"/>
+      <match lemma="orange"/>
+      <match lemma="violet"/>
+    </or>
+    <match lemma="criard" tags="adj.*" v="oci"><select lemma="que tira l'uèlh"/></match>
+    <match lemma="criard" tags="adj.*" v="oci@gascon"><select lemma="qui tira los uelhs"/></match>
+  </rule>
+
   <!-- épris >> passionat/atalentat, enamorat -->
   <rule weight="0.8">
     <match lemma="épris" tags="adj.*" v="oci"><select lemma="passionat"/></match>
