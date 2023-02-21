@@ -3934,12 +3934,21 @@
       <match tags="" case="Aa"/>
     </or>
   </rule>
-  <rule weight="1.2" v="oci">
+  <rule weight="1.2">
     <match lemma="laisser" tags="vblex.*"/>
     <repeat from="0" upto="2">
       <match tags="adv"/>
     </repeat>
     <match lemma="filer" tags="vblex.inf"><select lemma="escapar"/></match>
+  </rule>
+  <rule weight="1.2">
+    <match lemma="filer" tags="vblex.inf"><select lemma="escapar"/></match>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="entre" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="doigt" tags="n.m.pl"/>
   </rule>
   <rule weight="1.4" v="oci">
     <match lemma="filer" tags="vblex.*"><select lemma="filar"/></match>
