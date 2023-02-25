@@ -740,6 +740,85 @@
       <rule weight="0.8">
         <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
       </rule>
+      <rule weight="0.9">
+        <match plemma="1" tags="vblex.*.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="il" tags="prn.tn.*.f.sg"/>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="il" tags="prn.tn.*.m.pl"/>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match lemma="il" tags="prn.tn.*.f.pl"/>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="5"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="np.ant.*.f.sg"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="np.cog.*"/>
+            <match tags="" case="Aa"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="n.f.*"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="n.f.*"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <match plemma="1" tags="vblex.*.pl"><select plemma="5"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="preadv"/>
+          <match tags="adv"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="preadv"/>
+          <match tags="adv"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.m.pl"><select plemma="4"/></match>
+      </rule>
+      <rule weight="1.4">
+        <or>
+          <match tags="n.*"/>
+          <match tags="adj.*"/>
+          <match tags="preadv"/>
+          <match tags="adv"/>
+        </or>
+        <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
+      </rule>
+    </def-macro>
+
+    <!-- p1 = verb oci (amb complement predicatiu), p2 = verb fra amb adj en masc sg, p3 = verb fra amb adj en fem sg, p4 = verb fra amb adj en masc pl, p5 = verb fra amb adj en fem pl -->
+    <def-macro n="verb-predicatiu_adjmsg_adjfsg_adjmpl_adjfpl" npar="5">
+      <rule weight="0.8">
+        <match plemma="1" tags="vblex.*"><select plemma="2"/></match>
+      </rule>
       <rule weight="1.0">
         <match plemma="1" tags="vblex.*"><select plemma="3"/></match>
         <match tags="det.*.f.sg"/>
@@ -753,24 +832,12 @@
         <match tags="det.*.f.pl"/>
       </rule>
       <rule weight="1.4">
-        <or>
-          <match tags="n.*"/>
-          <match tags="adj.*"/>
-        </or>
         <match plemma="1" tags="vblex.pp.f.sg"><select plemma="3"/></match>
       </rule>
       <rule weight="1.4">
-        <or>
-          <match tags="n.*"/>
-          <match tags="adj.*"/>
-        </or>
         <match plemma="1" tags="vblex.pp.m.pl"><select plemma="4"/></match>
       </rule>
       <rule weight="1.4">
-        <or>
-          <match tags="n.*"/>
-          <match tags="adj.*"/>
-        </or>
         <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
       </rule>
     </def-macro>
@@ -4642,10 +4709,10 @@
   </rule>
 
   <!-- amudir >> rendre# muet, rendre# muets, etc. -->
-  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="amudir"/><with-param v="rendre# muet"/><with-param v="rendre# muette"/><with-param v="rendre# muets"/><with-param v="rendre# muettes"/></macro>
+  <macro n="verb-predicatiu_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="amudir"/><with-param v="rendre# muet"/><with-param v="rendre# muette"/><with-param v="rendre# muets"/><with-param v="rendre# muettes"/></macro>
 
   <!-- illegalizar >> rendre# illégal, rendre# illégaux, etc. -->
-  <macro n="verb_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="illegalizar"/><with-param v="rendre# illégal"/><with-param v="rendre# illégale"/><with-param v="rendre# illégaux"/><with-param v="rendre# illégales"/></macro>
+  <macro n="verb-predicatiu_adjmsg_adjfsg_adjmpl_adjfpl"><with-param v="illegalizar"/><with-param v="rendre# illégal"/><with-param v="rendre# illégale"/><with-param v="rendre# illégaux"/><with-param v="rendre# illégales"/></macro>
 
   <!-- ganhar# la vida >> gagner# ma vie, gagner# ta vie, etc. -->
   <macro n="verb_p1sg_p2sg_p3sg_p1pl_p2pl_p3pl"><with-param v="ganhar# la vida"/><with-param v="gagner# ma vie"/><with-param v="gagner# ta vie"/><with-param v="gagner# sa vie"/><with-param v="gagner# notre vie"/><with-param v="gagner# votre vie"/><with-param v="gagner# leur vie"/></macro>
