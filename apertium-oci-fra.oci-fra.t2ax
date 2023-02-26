@@ -6871,6 +6871,71 @@
       </action>
     </rule>
 
+    <rule comment="RÈGLA: ne SV_vbser_p3sg SAdv cnjsub_adv_que_rel > ce ne SV_vbser_p3sg SAdv cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
+    <rule comment="RÈGLA: ne SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel > ce ne SV_vbser_p3sg SAdv SAdv cnjsub_adv_que_rel">
+      <pattern>
+        <pattern-item n="ne_adv"/>
+        <pattern-item n="SV_vbser_p3sg"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="SAdv"/>
+        <pattern-item n="cnjsub_adv_que_rel"/>
+      </pattern>
+      <action>
+        <call-macro n="gen_ce"><with-param pos="1"/></call-macro>
+        <out>
+          <chunk>
+            <clip pos="1" part="whole"/>
+          </chunk>
+          <b pos="1"/>
+          <chunk>
+            <clip pos="2" part="whole"/>
+          </chunk>
+          <b pos="2"/>
+          <chunk>
+            <clip pos="3" part="whole"/>
+          </chunk>
+          <b pos="3"/>
+          <chunk>
+            <clip pos="4" part="whole"/>
+          </chunk>
+          <b pos="4"/>
+          <chunk>
+            <clip pos="5" part="whole"/>
+          </chunk>
+        </out>
+        <let><var n="finfrasa"/><lit v="yes"/></let>
+      </action>
+    </rule>
+
     <rule comment="RÈGLA: SV_vbhaver_p3sg PP_vbser cnjsub_adv_que_rel > ce SV_vbhaver_p3sg PP_vbser cnjsub_adv_que_rel">
       <pattern>
         <pattern-item n="SV_vbhaver_p3sg"/>
