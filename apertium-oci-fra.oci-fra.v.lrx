@@ -4570,11 +4570,28 @@
     </or>
   </rule>
 
-  <!-- mancar >> manquer, rater, faillir -->
-  <rule weight="0.8">
+  <!-- mancar >> manquer, rater, faillir, brouiller, falloir -->
+  <macro n="verb_nopron_pron" v="oci"><with-param v="mancar"/><with-param v="manquer"/><with-param v="brouiller"/></macro>
+  <rule weight="0.8" v="oci@gascon">
     <match lemma="mancar" tags="vblex.*"><select lemma="manquer"/></match>
   </rule>
-  <rule weight="1.0">
+  <rule weight="2.0" v="oci">
+    <match tags="n.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="adj.*"/>
+        <match tags="preadv"/>
+        <match tags="adv"/>
+      </or>
+    </repeat>
+    <match lemma="mancar" tags="vblex.pp.*"><select lemma="manquer"/></match>
+  </rule>
+  <rule weight="2.0" v="oci">
+    <match lemma="se" tags="prn.pro.*"/>
+    <match lemma="ne" tags="prn.pro.*"/>
+    <match lemma="mancar" tags="vblex.*"><select lemma="falloir"/></match>
+  </rule>
+  <rule weight="2.0">
     <match lemma="mancar" tags="vblex.*"><select lemma="rater"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
@@ -4582,7 +4599,7 @@
     <match lemma="de" tags="pr"/>
     <or><match tags="vblex.inf"/><match tags="vblex.tv.inf"/><match tags="vbser.inf"/><match tags="vbhaver.inf"/><match tags="vbmod.inf"/></or>
   </rule>
-  <rule weight="1.0">
+  <rule weight="2.0">
     <match lemma="mancar" tags="vblex.*"><select lemma="rater"/></match>
     <repeat from="0" upto="2">
       <match tags="adv"/>
