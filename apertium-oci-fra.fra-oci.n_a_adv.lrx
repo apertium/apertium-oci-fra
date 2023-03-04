@@ -2094,6 +2094,35 @@
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
   </rule>
 
+  <!-- bol >> bòl, bolat, astre -->
+  <rule weight="0.8">
+    <match lemma="bol" tags="n.*"><select lemma="bòl"/></match>
+  </rule>
+  <rule weight="1.0" v="oci">
+    <match lemma="bol" tags="n.*"><select lemma="bolat"/></match>
+    <match lemma="de" tags="pr"/>
+    <or>
+      <match lemma="soupe" tags="n.*"/>
+      <match lemma="riz" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="avoir" tags="vblex.*"/>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.def.*"/>
+    </repeat>
+    <match lemma="bol" tags="n.*"><select lemma="astre"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="pas" tags="adv"/>
+    <match lemma="de" tags="pr"/>
+    <match lemma="bol" tags="n.*"><select lemma="astre"/></match>
+  </rule>
+
   <!-- rattrapage >> ajustament, sosten/sostien-->
   <rule weight="0.8">
     <match lemma="rattrapage" tags="n.*"><select lemma="ajustament"/></match>
