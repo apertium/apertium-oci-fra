@@ -2089,9 +2089,30 @@
 
 <!-- **************** N **************** -->
 
+  <!-- échec >> malescaduda/mauescaduda, escac -->
+  <rule weight="0.8">
+    <match lemma="échec" tags="n.*" v="oci"><select lemma="malescaduda"/></match>
+    <match lemma="échec" tags="n.*" v="oci@gascon"><select lemma="mauescaduda"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="échec" tags="n.*"><select lemma="escac"/></match>
+    <match lemma="à" tags="pr"/>
+    <match tags="det.def.*"/>
+    <match lemma="roi" tags="n.*"/>
+  </rule>
+
   <!-- emballement >> embalament, estrambòrd -->
   <rule weight="0.8">
     <match lemma="emballement" tags="n.*"><select lemma="embalament"/></match>
+  </rule>
+
+  <!-- tailleur >> ensemble talhat, sartre, peirièr/peirèr -->
+  <rule weight="0.8">
+    <match lemma="tailleur" tags="n.*"><select lemma="ensemble talhat"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="maître"/>
+    <match lemma="tailleur" tags="n.*"><select lemma="sartre"/></match>
   </rule>
 
   <!-- bol >> bòl, bolat, astre -->
