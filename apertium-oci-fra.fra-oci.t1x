@@ -2309,6 +2309,17 @@
           </let>
     </def-macro>
 
+    <def-macro n="set_sg" npar="1">
+      <choose>
+        <when>
+          <test>
+            <equal><clip pos="1" side="tl" part="nbr"/><lit-tag v="pl"/></equal>
+          </test>
+          <let><clip pos="1" side="tl" part="nbr"/><lit-tag v="sg"/></let>
+        </when>
+      </choose>
+    </def-macro>
+
     <def-macro n="f_concord_bricolatge2" npar="2">
 <!--Pedaç ad-hoc per solucionar problemes amb l'assignació del nombre a "nombreux prix" et sim. -->
       <choose>
@@ -8619,6 +8630,9 @@
                 <list n="mois"/>
               </in>
             </test>
+            <call-macro n="set_sg">
+              <with-param pos="2"/>
+            </call-macro>
             <out>
               <chunk name="data">
                 <tags>
@@ -12008,10 +12022,14 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord3">
           <with-param pos="2"/>
           <with-param pos="1"/>
           <with-param pos="3"/>
+        </call-macro>
+        <call-macro n="set_sg">
+          <with-param pos="2"/>
         </call-macro>
         <out>
           <chunk name="data">
@@ -12116,6 +12134,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="1"/>
         </call-macro>
@@ -13029,6 +13048,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13073,6 +13093,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13118,6 +13139,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
@@ -13160,6 +13182,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
@@ -13201,6 +13224,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13246,6 +13270,7 @@
         <pattern-item n="nom_mois_an"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
@@ -13288,6 +13313,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13342,6 +13368,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13397,6 +13424,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
@@ -13449,6 +13477,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
@@ -13500,6 +13529,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="2"/>
         </call-macro>
@@ -13555,6 +13585,7 @@
         <pattern-item n="num"/>
       </pattern>
       <action>
+        <let><var n="numero"/><lit-tag v="sg"/></let>
         <call-macro n="f_concord1">
           <with-param pos="3"/>
         </call-macro>
