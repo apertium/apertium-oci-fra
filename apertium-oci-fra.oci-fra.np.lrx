@@ -414,6 +414,47 @@
     <match lemma="Totsants" tags="np.al.*"><select lemma="Toussaint"/></match>
   </rule>
 
+  <!-- Giza >> Giza, Gizeh -->
+  <rule weight="0.8">
+    <match lemma="Giza" tags="np.top.*"><select lemma="Giza"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="Giza" tags="np.top.*"><select lemma="Gizeh"/></match>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="Egipte" tags="np.*"/>
+      <match lemma="piramida" tags="n.*"/>
+      <match lemma="piramide" tags="n.*"/>
+      <match lemma="egipcian" tags="n.*"/>
+      <match lemma="egipcian" tags="adj.*"/>
+      <match lemma="egiptològue" tags="n.*"/>
+      <match lemma="egiptologia" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="Egipte" tags="np.*"/>
+      <match lemma="piramida" tags="n.*"/>
+      <match lemma="piramide" tags="n.*"/>
+      <match lemma="egipcian" tags="n.*"/>
+      <match lemma="egipcian" tags="adj.*"/>
+      <match lemma="egiptològue" tags="n.*"/>
+      <match lemma="egiptologia" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="6">
+      <or>
+        <match tags=""/>
+        <match tags="*"/>
+      </or>
+    </repeat>
+    <match lemma="Giza" tags="np.top.*"><select lemma="Gizeh"/></match>
+  </rule>
+
   <!-- Artés >> Artois, Arthez -->
   <rule weight="0.8">
     <match lemma="Artés" tags="np.top.*"><select lemma="Artois"/></match>
