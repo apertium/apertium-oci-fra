@@ -68,6 +68,7 @@
 
     <def-seq n="personne"><or>
       <match lemma="personne" tags="n.*"/>
+      <match lemma="personnage" tags="n.*"/>
       <match lemma="gens" tags="n.m.pl"/>
       <match lemma="homme" tags="n.*"/>
       <match lemma="femme" tags="n.*"/>
@@ -180,6 +181,7 @@
       <match lemma="flic" tags="n.*"/>
       <match lemma="criminel" tags="n.*"/>
       <match lemma="délinquant" tags="n.*"/>
+      <match lemma="malfaiteur" tags="n.*"/>
       <match lemma="escroc" tags="n.*"/>
       <match lemma="arnaqueur" tags="n.*"/>
       <match lemma="complice" tags="n.*"/>
@@ -282,6 +284,8 @@
       <match lemma="actionnaire" tags="n.*"/>
       <match lemma="spéculateur" tags="n.*"/>
       <match lemma="travailleur" tags="n.*"/>
+      <match lemma="smicard" tags="n.*"/>
+      <match lemma="proletaire" tags="n.*"/>
       <match lemma="gréviste" tags="n.*"/>
       <match lemma="casseur" tags="n.*"/>
       <match lemma="leader" tags="n.*"/>
@@ -2099,6 +2103,44 @@
     <match lemma="à" tags="pr"/>
     <match tags="det.def.*"/>
     <match lemma="roi" tags="n.*"/>
+  </rule>
+
+  <!-- bande >> benda, banda -->
+  <rule weight="0.8">
+    <match lemma="bande" tags="n.*"><select lemma="benda"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bande" tags="n.*"><select lemma="banda"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="vblex.pp.*"/>
+      </or>
+    </repeat>
+    <or>
+      <match lemma="organisé" tags="adj.*"/>
+      <match lemma="organiser" tags="vblex.pp.*"/>
+      <match lemma="terroriste" tags="n.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="bande" tags="n.*"><select lemma="banda"/></match>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+        <match tags="vblex.pp.*"/>
+      </or>
+    </repeat>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <match tags="det.*"/>
+    </repeat>
+    <or>
+      <seq n="personne"/>
+      <seq n="parent"/>
+    </or>
   </rule>
 
   <!-- emballement >> embalament, estrambòrd -->
@@ -4795,19 +4837,12 @@
   <rule weight="1.2">
     <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
     <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
-    <match lemma="de" tags="pr"/>
-    <repeat from="0" upto="1">
-      <match tags="det.*"/>
+    <repeat from="0" upto="2">
+      <or>
+        <match tags="preadv"/>
+        <match tags="adj.*"/>
+      </or>
     </repeat>
-    <or>
-      <seq n="personne"/>
-      <seq n="parent"/>
-    </or>
-  </rule>
-  <rule weight="1.2">
-    <match lemma="fille" tags="n.*" v="oci"><select lemma="filh"/></match>
-    <match lemma="fille" tags="n.*" v="oci@gascon"><select lemma="hilh"/></match>
-    <match tags="adj.*"/>
     <match lemma="de" tags="pr"/>
     <repeat from="0" upto="1">
       <match tags="det.*"/>
