@@ -24821,30 +24821,66 @@
          <call-macro n="tipus_verb">
           <with-param pos="1"/>
          </call-macro>
-         <out>
-           <chunk namefrom="chunkname">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-               <tag><clip pos="1" side="tl" part="temps"/></tag>
-               <tag><var n="tipusverb"/></tag>
-             </tags>
-             <mlu>
-               <lu>
-                 <clip pos="1" side="tl" part="lemh"/>
-                 <clip pos="1" side="tl" part="a_verb"/>
-                 <clip pos="1" side="tl" part="temps"/>
-                 <clip pos="1" side="tl" part="pers"/>
-                 <clip pos="1" side="tl" part="nbr"/>
-               </lu>
-               <lu>
-                 <clip pos="2" side="tl" part="lemh"/>
-                 <clip pos="2" side="tl" part="tags"/>
-                 <clip pos="1" side="tl" part="lemq"/>
-               </lu>
-             </mlu>
-           </chunk>
-         </out>
+         <choose>
+           <when>
+             <test>
+               <and>
+                 <equal><clip pos="1" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+                 <equal><clip pos="2" side="sl" part="pers"/><clip pos="2" side="sl" part="pers"/></equal>
+                 <or>
+                   <equal><clip pos="1" side="sl" part="nbr"/><clip pos="2" side="sl" part="nbr"/></equal>
+                   <equal><clip pos="2" side="sl" part="a_pron_long"/><lit-tag v="pro.ref"/></equal>
+                 </or>
+               </and>
+             </test>
+             <out>
+               <chunk namefrom="chunkname">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="1" side="tl" part="temps"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <mlu>
+                   <lu>
+                     <clip pos="1" side="tl" part="lemh"/>
+                     <clip pos="1" side="tl" part="a_verb"/>
+                     <clip pos="1" side="tl" part="temps"/>
+                     <clip pos="1" side="tl" part="pers"/>
+                     <clip pos="1" side="tl" part="nbr"/>
+                     <clip pos="1" side="tl" part="lemq"/>
+                   </lu>
+                 </mlu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <out>
+               <chunk namefrom="chunkname">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                   <tag><clip pos="1" side="tl" part="temps"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                 </tags>
+                 <mlu>
+                   <lu>
+                     <clip pos="1" side="tl" part="lemh"/>
+                     <clip pos="1" side="tl" part="a_verb"/>
+                     <clip pos="1" side="tl" part="temps"/>
+                     <clip pos="1" side="tl" part="pers"/>
+                     <clip pos="1" side="tl" part="nbr"/>
+                   </lu>
+                   <lu>
+                     <clip pos="2" side="tl" part="lemh"/>
+                     <clip pos="2" side="tl" part="tags"/>
+                     <clip pos="1" side="tl" part="lemq"/>
+                   </lu>
+                 </mlu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
        </action>
     </rule>
 

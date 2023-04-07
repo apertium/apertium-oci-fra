@@ -406,6 +406,9 @@
       <cat-item lemma="cargar" tags="vblex.*.p1.*" v="oci"/>
       <cat-item lemma="cargar" tags="vblex.*.p2.*" v="oci"/>
       <cat-item lemma="cargar" tags="vblex.*.p3.*" v="oci"/>
+      <cat-item lemma="causir" tags="vblex.*.p1.*" v="oci@gascon"/>
+      <cat-item lemma="causir" tags="vblex.*.p2.*" v="oci@gascon"/>
+      <cat-item lemma="causir" tags="vblex.*.p3.*" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.*.p1.*" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.*.p2.*" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.*.p3.*" v="oci@gascon"/>
@@ -545,6 +548,7 @@
       <cat-item lemma="ajaire" tags="vblex.pp.*"/>
       <cat-item lemma="aviar" tags="vblex.pp.*"/>
       <cat-item lemma="cargar" tags="vblex.pp.*" v="oci"/>
+      <cat-item lemma="causir" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="passar" tags="vblex.pp.*" v="oci@gascon"/>
       <cat-item lemma="enamorar" tags="vblex.pp.*"/>
@@ -596,6 +600,7 @@
       <cat-item lemma="ajaire" tags="vblex.inf"/>
       <cat-item lemma="aviar" tags="vblex.inf"/>
       <cat-item lemma="cargar" tags="vblex.inf" v="oci"/>
+      <cat-item lemma="causir" tags="vblex.inf" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.inf" v="oci@gascon"/>
       <cat-item lemma="passar" tags="vblex.inf" v="oci@gascon"/>
       <cat-item lemma="enamorar" tags="vblex.inf"/>
@@ -643,6 +648,7 @@
       <cat-item lemma="ajaire" tags="vblex.ger"/>
       <cat-item lemma="aviar" tags="vblex.ger"/>
       <cat-item lemma="cargar" tags="vblex.ger" v="oci"/>
+      <cat-item lemma="causir" tags="vblex.ger" v="oci@gascon"/>
       <cat-item lemma="lengatravar" tags="vblex.ger" v="oci@gascon"/>
       <cat-item lemma="passar" tags="vblex.ger" v="oci@gascon"/>
       <cat-item lemma="enamorar" tags="vblex.ger"/>
@@ -21301,41 +21307,79 @@
          <pattern-item n="prnenc"/>
        </pattern>
        <action>
-        <call-macro n="firstWord">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="tipus_verb">
-          <with-param pos="1"/>
-        </call-macro>
-        <call-macro n="f_canvis_temps">
-          <with-param pos="1"/>
-        </call-macro>
-         <out>
-           <chunk name="v_enc" case="caseFirstWord">
-             <tags>
-               <tag><lit-tag v="SV"/></tag>
-               <tag><clip pos="1" side="tl" part="a_verb"/></tag>
-               <tag><var n="tipusverb"/></tag>
-               <tag><clip pos="1" side="tl" part="temps"/></tag>
-               <tag><clip pos="1" side="tl" part="pers"/></tag>
-               <tag><clip pos="1" side="tl" part="nbr"/></tag>
-             </tags>
-             <mlu>
-               <lu>
-                 <clip pos="1" side="tl" part="lemh"/>
-                 <clip pos="1" side="tl" part="a_verb"/>
-                 <lit-tag v="4"/>
-                 <clip pos="1" side="tl" part="pers"/>
-                 <clip pos="1" side="tl" part="nbr"/>
-                </lu>
-                <lu>
-                 <clip pos="2" side="tl" part="lem"/>
-                 <clip pos="2" side="tl" part="tags"/>
-                 <clip pos="1" side="tl" part="lemq"/>
-               </lu>
-             </mlu>
-           </chunk>
-         </out>
+         <call-macro n="firstWord">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="tipus_verb">
+           <with-param pos="1"/>
+         </call-macro>
+         <call-macro n="f_canvis_temps">
+           <with-param pos="1"/>
+         </call-macro>
+         <choose>
+           <when>
+             <test>
+               <and>
+                 <equal><clip pos="1" side="tl" part="a_non-pron"/><lit-tag v="non-pron"/></equal>
+                 <equal><clip pos="2" side="sl" part="pers"/><clip pos="2" side="sl" part="pers"/></equal>
+                 <or>
+                   <equal><clip pos="1" side="sl" part="nbr"/><clip pos="2" side="sl" part="nbr"/></equal>
+                   <equal><clip pos="2" side="sl" part="a_pron_long"/><lit-tag v="pro.ref"/></equal>
+                 </or>
+               </and>
+             </test>
+             <out>
+               <chunk name="v_enc" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                   <tag><clip pos="1" side="tl" part="temps"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <mlu>
+                   <lu>
+                     <clip pos="1" side="tl" part="lemh"/>
+                     <clip pos="1" side="tl" part="a_verb"/>
+                     <lit-tag v="4"/>
+                     <clip pos="1" side="tl" part="pers"/>
+                     <clip pos="1" side="tl" part="nbr"/>
+                     <clip pos="1" side="tl" part="lemq"/>
+                   </lu>
+                 </mlu>
+               </chunk>
+             </out>
+           </when>
+           <otherwise>
+             <out>
+               <chunk name="v_enc" case="caseFirstWord">
+                 <tags>
+                   <tag><lit-tag v="SV"/></tag>
+                   <tag><clip pos="1" side="tl" part="a_verb"/></tag>
+                   <tag><var n="tipusverb"/></tag>
+                   <tag><clip pos="1" side="tl" part="temps"/></tag>
+                   <tag><clip pos="1" side="tl" part="pers"/></tag>
+                   <tag><clip pos="1" side="tl" part="nbr"/></tag>
+                 </tags>
+                 <mlu>
+                   <lu>
+                     <clip pos="1" side="tl" part="lemh"/>
+                     <clip pos="1" side="tl" part="a_verb"/>
+                     <lit-tag v="4"/>
+                     <clip pos="1" side="tl" part="pers"/>
+                     <clip pos="1" side="tl" part="nbr"/>
+                    </lu>
+                    <lu>
+                     <clip pos="2" side="tl" part="lem"/>
+                     <clip pos="2" side="tl" part="tags"/>
+                     <clip pos="1" side="tl" part="lemq"/>
+                   </lu>
+                 </mlu>
+               </chunk>
+             </out>
+           </otherwise>
+         </choose>
        </action>
     </rule>
 
