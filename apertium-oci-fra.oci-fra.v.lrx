@@ -3552,6 +3552,11 @@
   <macro n="verb_nopron_pron" v="oci"><with-param v="gandir"/><with-param v="préserver"/><with-param v="prémunir"/></macro>
   <macro n="verb_nopron_pron" v="oci@gascon"><with-param v="gandir"/><with-param v="garantir"/><with-param v="prémunir"/></macro>
 
+  <!-- causir >> choisir, choisir non-pron -->
+  <rule weight="0.8">
+    <match lemma="causir" tags="vblex.*" v="oci@gascon"><select lemma="choisir" tags="vblex.non-pron.*"/></match>
+  </rule>
+
   <!-- morir >> mourir, mourir non-pron -->
   <rule weight="0.8">
     <match lemma="morir" tags="vblex.*"><select lemma="mourir" tags="vblex.non-pron.*"/></match>
