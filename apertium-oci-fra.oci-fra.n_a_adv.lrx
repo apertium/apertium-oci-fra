@@ -5908,7 +5908,7 @@
   </rule>
   <rule weight="1.2" v="oci@gascon">
     <match lemma="sòu" tags="n.*"><select lemma="sou"/></match>
-    <match lemma="per" tags="pr"><select lemma="par"/></match>
+    <match lemma="per" tags="pr"></match>
     <match lemma="sòu" tags="n.*"><select lemma="sou"/></match>
   </rule>
 
@@ -11432,6 +11432,110 @@
   </rule>
   <rule weight="1.0">
     <match lemma="valon" tags="n.m.pl"><select lemma="wallon"/></match>
+  </rule>
+
+  <!-- davalada >> descente, automne -->
+  <rule weight="0.8">
+    <match lemma="davalada" tags="n.f.*"><select lemma="descente"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="a" tags="pr"/>
+      <match lemma="per" tags="pr"/>
+      <match lemma="a partir de" tags="pr"/>
+      <match lemma="a comptar de" tags="pr"/>
+      <match lemma="pendent" tags="pr"/>
+      <match lemma="dinc a" tags="pr"/>
+      <match lemma="duscas a" tags="pr"/>
+      <match lemma="tre" tags="pr"/>
+      <match lemma="a la debuta de" tags="pr"/>
+      <match lemma="a la fin de" tags="pr"/>
+      <match lemma="al mièg de" tags="pr"/>
+      <match lemma="al començament de" tags="pr"/>
+      <match lemma="al mitan de" tags="pr"/>
+      <match lemma="al debut de" tags="pr"/>
+    </or>
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match tags="det.dem.*"/>
+    </or>
+    <match lemma="davalada" tags="n.f.*"><select lemma="automne"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match tags="det.dem.*"/>
+    </or>
+    <match lemma="davalada" tags="n.f.sg"><select lemma="automne"/></match>
+    <repeat from="0" upto="1">
+       <match tags="rel.*"/>
+    </repeat>
+    <repeat from="0" upto="1">
+       <match tags="prn.pro.*"/>
+    </repeat>
+    <or>
+        <match lemma="arribar" tags="vblex.*"/>
+        <match lemma="venir" tags="vblex.*"/>
+        <match lemma="ponhar" tags="vblex.*"/>
+        <match lemma="trigar" tags="vblex.*"/>
+        <match lemma="tornar" tags="vblex.*"/>
+        <match lemma="aprochar" tags="vblex.*"/>
+        <match lemma="sarrar" tags="vblex.*"/>
+        <match lemma="apropiar" tags="vblex.*"/>
+        <match lemma="raprochar" tags="vblex.*"/>
+        <match lemma="acabar" tags="vblex.*"/>
+        <match lemma="finir" tags="vblex.*"/>
+        <match lemma="començar" tags="vblex.*"/>
+    </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="arribar" tags="vblex.*"/>
+        <match lemma="venir" tags="vblex.*"/>
+        <match lemma="ponhar" tags="vblex.*"/>
+        <match lemma="trigar" tags="vblex.*"/>
+        <match lemma="tornar" tags="vblex.*"/>
+        <match lemma="aprochar" tags="vblex.*"/>
+        <match lemma="sarrar" tags="vblex.*"/>
+        <match lemma="apropiar" tags="vblex.*"/>
+        <match lemma="raprochar" tags="vblex.*"/>
+        <match lemma="acabar" tags="vblex.*"/>
+        <match lemma="finir" tags="vblex.*"/>
+        <match lemma="començar" tags="vblex.*"/>
+    </or>
+    <or>
+      <match lemma="lo" tags="det.*"/>
+      <match tags="det.dem.*"/>
+    </or>
+    <match lemma="davalada" tags="n.f.sg"><select lemma="automne"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="davalada" tags="n.f.*"><select lemma="automne"/></match>
+    <match lemma="de" tags="pr"/>
+    <or><match tags="num"/><match tags="num.*"/></or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+        <match lemma="debuta" tags="n.*"/>
+        <match lemma="debut" tags="n.*"/>
+        <match lemma="fin" tags="n.*"/>
+        <match lemma="començament" tags="n.*"/>
+        <match lemma="començar" tags="n.*"/>
+        <match lemma="mitan" tags="n.*"/>
+        <match lemma="miei" tags="n.*"/>
+        <match lemma="mièg" tags="n.*"/>
+        <match lemma="data" tags="vblex.*"/>
+        <match lemma="virada" tags="n.*"/>
+    </or>
+    <match lemma="de" tags="pr"/>
+    <repeat from="0" upto="1">
+      <or>
+        <match lemma="lo" tags="det.*"/>
+        <match tags="det.dem.*"/>
+      </or>
+    </repeat>
+    <match lemma="davalada" tags="n.f.*"><select lemma="automne"/></match>
+    <or><match tags="num"/><match tags="num.*"/></or>
   </rule>
 
 </rules>

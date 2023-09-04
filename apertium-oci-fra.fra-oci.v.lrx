@@ -4790,6 +4790,24 @@
       <match lemma="divaguer" tags="vblex.*" v="oci@gascon"><select lemma="chabraquejar"/></match>
   </rule>
 
+  <!-- gronder ->  cridar, bronzir/bronir-->
+  <rule weight="0.8">
+    <match lemma="gronder" tags="vblex.*" v="oci"><select lemma="bronzir"/></match>
+    <match lemma="gronder" tags="vblex.*" v="oci@gascon"><select lemma="bronir"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="prn.pro.*"/>
+    <match lemma="gronder" tags="vblex.*"><select lemma="cridar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="gronder" tags="vblex.*"><select lemma="cridar"/></match>
+    <match tags="det.*"/>
+  </rule>
+  <rule weight="1.0">
+    <match lemma="gronder" tags="vblex.*"><select lemma="cridar"/></match>
+    <match tags="np.*"/>
+  </rule>
+
 
   <!-- fouler >> caucar/traupir, tòrcer/virar -->
   <macro n="verb_nopron_pron" v="oci"><with-param v="fouler"/><with-param v="caucar"/><with-param v="tòrcer"/></macro>

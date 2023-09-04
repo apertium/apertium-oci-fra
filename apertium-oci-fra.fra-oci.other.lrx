@@ -818,6 +818,23 @@
     <match lemma="celles et ceux qui" tags="rel.*" v="oci@gascon"><select lemma="las e los qui"/></match>
   </rule>
 
+  <!-- où -> où, que -->
+  <rule weight="0.8">
+    <match lemma="où" tags="rel.*" v="oci"><select lemma="ont"/></match>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="heure"/>
+      <match lemma="moment"/>
+      <match lemma="jour"/>
+      <match lemma="année"/>
+      <match lemma="mois"/>
+      <match lemma="minute"/>
+      <match lemma="instant"/>
+    </or>
+    <match lemma="où" tags="rel.*" v="oci"><select lemma="que"/></match>
+  </rule>
+
 
 <!-- **************** CNJSUB **************** -->
 
