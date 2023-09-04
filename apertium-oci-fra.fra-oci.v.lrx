@@ -2793,7 +2793,39 @@
     <or>
       <match lemma="oreille" tags="n.*"/>
       <match lemma="main" tags="n.*"/>
+      <match lemma="verre" tags="n.*"/>
+      <match lemma="dos" tags="n.*"/>
+      <match lemma="joue" tags="n.*"/>
+      <match lemma="sac" tags="n.*"/>
+      <match lemma="assiette" tags="n.*"/>
+      <match lemma="sébille" tags="n.*"/>
+      <match lemma="stylo" tags="n.*"/>
+      <match lemma="bras" tags="n.*"/>
+      <match lemma="cou" tags="n.*"/>
+      <match lemma="lèvres" tags="n.*"/>
+      <match lemma="billet" tags="n.*"/>
     </or>
+  </rule>
+  <rule weight="1.0">
+    <or>
+      <match lemma="oreille" tags="n.*"/>
+      <match lemma="main" tags="n.*"/>
+      <match lemma="verre" tags="n.*"/>
+      <match lemma="dos" tags="n.*"/>
+      <match lemma="joue" tags="n.*"/>
+      <match lemma="sac" tags="n.*"/>
+      <match lemma="assiette" tags="n.*"/>
+      <match lemma="sébille" tags="n.*"/>
+      <match lemma="stylo" tags="n.*"/>
+      <match lemma="bras" tags="n.*"/>
+      <match lemma="cou" tags="n.*"/>
+      <match lemma="lèvres" tags="n.*"/>
+      <match lemma="billet" tags="n.*"/>
+    </or>
+    <repeat from="0" upto="2">
+      <match tags="adv"/>
+    </repeat>
+    <match lemma="tendre" tags="vblex.pp*"><select lemma="parar"/></match>
   </rule>
   <rule weight="1.0">
     <match lemma="tendre" tags="vblex.*" v="oci"><select lemma="armar"/></match>
@@ -2825,6 +2857,16 @@
       </or>
     </repeat>
     <match lemma="embuscade" tags="n.*"/>
+  </rule>
+
+  <!-- cribler >> crivelar/crierar, cargar -->
+  <rule weight="0.8">
+    <match lemma="cribler" tags="vblex.*" v="oci"><select lemma="crivelar"/></match>
+    <match lemma="cribler" tags="vblex.*" v="oci@gascon"><select lemma="crierar"/></match>
+  </rule>
+  <rule weight="1.0">
+    <match tags="vbser.*"/>
+    <match lemma="cribler" tags="vblex.pp.*"><select lemma="cargar"/></match>
   </rule>
 
   <!-- arc-bouter -> ancolar, arquetar -->
