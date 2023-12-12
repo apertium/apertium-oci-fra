@@ -670,14 +670,23 @@
       </rule>
       <rule weight="1.0">
         <match lemma="il" tags="prn.tn.*.f.sg"/>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
       </rule>
       <rule weight="1.0">
         <match lemma="il" tags="prn.tn.*.m.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.*.sg"><select plemma="4"/></match>
       </rule>
       <rule weight="1.0">
         <match lemma="il" tags="prn.tn.*.f.pl"/>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.*.sg"><select plemma="5"/></match>
       </rule>
       <rule weight="1.0">
@@ -688,15 +697,8 @@
             <match tags="" case="Aa"/>
           </or>
         </repeat>
-        <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
-      </rule>
-      <rule weight="1.0">
-        <match tags="n.f.*"/>
         <repeat from="0" upto="2">
-          <or>
-            <match tags="preadv"/>
-            <match tags="adj.*"/>
-          </or>
+          <match tags="prn.pro.*"/>
         </repeat>
         <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
       </rule>
@@ -707,6 +709,22 @@
             <match tags="preadv"/>
             <match tags="adj.*"/>
           </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
+        <match plemma="1" tags="vblex.*.sg"><select plemma="3"/></match>
+      </rule>
+      <rule weight="1.0">
+        <match tags="n.f.*"/>
+        <repeat from="0" upto="2">
+          <or>
+            <match tags="preadv"/>
+            <match tags="adj.*"/>
+          </or>
+        </repeat>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
         </repeat>
         <match plemma="1" tags="vblex.*.pl"><select plemma="5"/></match>
       </rule>
@@ -717,6 +735,9 @@
           <match tags="preadv"/>
           <match tags="adv"/>
         </or>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.pp.f.sg"><select plemma="3"/></match>
       </rule>
       <rule weight="1.4">
@@ -726,6 +747,9 @@
           <match tags="preadv"/>
           <match tags="adv"/>
         </or>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.pp.m.pl"><select plemma="4"/></match>
       </rule>
       <rule weight="1.4">
@@ -735,6 +759,9 @@
           <match tags="preadv"/>
           <match tags="adv"/>
         </or>
+        <repeat from="0" upto="2">
+          <match tags="prn.pro.*"/>
+        </repeat>
         <match plemma="1" tags="vblex.pp.f.pl"><select plemma="5"/></match>
       </rule>
     </def-macro>
